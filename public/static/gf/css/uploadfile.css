@@ -1,0 +1,68 @@
+#filelist{
+	width: 95%;
+	margin-left: 10px;
+	margin-top: 45px;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 45px;
+	/*border: solid 1px gray;*/
+}
+#list{
+	/*border: solid 1px red;*/
+}
+.hr{
+	margin:10px 30px 4px 0;
+	border: 1px solid #9E9E9E;
+}
+.files{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+#add{
+	float: right;
+	margin-right: 35px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+#submit, #reset{
+	margin-top: 35px;
+	margin-left: 20px;
+	width: 120px;
+	height: 35px;
+	background: grey;
+	color: white;
+	cursor: pointer;
+}
+.waiting{
+	float: right;
+	margin-right: 30px;
+	margin-top: 8px;
+	color: grey;
+}
+#progress{
+	margin-top: 20px;
+	width: 80%;
+	height: 20px;
+	border: 1px solid green;
+	margin-left: 30px;
+}
+#bar{
+	width: 0%;
+	height: 100%;
+	background: green;
+}
+#per{
+	float: left;
+}
+#test{
+	float: right;
+	font-size: 10pt;
+	color: red;
+	margin-right: 25pt;
+}
+#type{
+	/*float: right;*/
+	font-size: 10pt;
+	color: red;
+	margin-right: 25pt;
+}
