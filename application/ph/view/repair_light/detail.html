@@ -1,0 +1,91 @@
+<form id="detailForm" style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋编号：</label>
+    </div>
+     <label class="p_style houseAddress">010203040506</label>
+  </div>
+
+  {include file="application/ph/view/form/small_repair_form.html" /}
+
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-3">
+      <label class="label_style">勘察照片：</label>
+    </div>
+     <img style="width:200px;height:100px;border:1px solid red;" src="" />
+  </div>
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-3">
+      <label class="label_style">维修后照片：</label>
+    </div>
+     <img style="width:200px;height:100px;border:1px solid red;" src="" />
+  </div>
+
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-6">
+      <label>审批状态：</label>
+    </div>
+  </div>
+  <div id="approveState" class="am-u-md-12" style="padding-left:3rem;">
+<!--       <span class="process_style process_style_active">房管员</span><span class="line_style">——></span>
+      <span class="process_style">房调员</span><span>——></span>
+      <span class="process_style">所长</span><span>——></span>
+      <span class="process_style">总公司科长</span><span>——></span>
+      <span class="process_style">经管副总</span> -->
+  </div>
+<!--   <div class="am-form-group am-u-md-12 record">
+      <label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>
+      <label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>
+  </div> -->
+  </div>
+</form>
+
+<form id="repairForm" style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋编号：</label>
+    </div>
+     <label class="p_style houseAddress">010203040506</label>
+  </div>
+
+  {include file="application/ph/view/form/small_repair_form.html" /}
+
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-3">
+      <label>上传勘察照片：</label>
+    </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="survey" type="file" name="survey" multiple>
+        </div>
+        <div id="surveyShow" class="am-u-md-12"></div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-3">
+      <label>上传维修后照片：</label>
+    </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="afterHandle" type="file" name="afterHandle" multiple>
+        </div>
+        <div id="afterHandleShow" class="am-u-md-12"></div>
+  </div>
+
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-6">
+      <label>审批状态：</label>
+    </div>
+  </div>
+  <div id="approveState" class="am-u-md-12" style="padding-left:3rem;">
+<!--       <span class="process_style process_style_active">房管员</span><span class="line_style">——></span>
+      <span class="process_style">房调员</span><span>——></span>
+      <span class="process_style">所长</span><span>——></span>
+      <span class="process_style">总公司科长</span><span>——></span>
+      <span class="process_style">经管副总</span> -->
+  </div>
+<!--   <div class="am-form-group am-u-md-12 record">
+      <label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>
+      <label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>
+  </div> -->
+  </div>
+</form>

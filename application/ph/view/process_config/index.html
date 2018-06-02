@@ -1,0 +1,108 @@
+{extend name="layout" /}
+{block name="title"}<title>流程配置</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> > <small class="am-text-primary">流程配置</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+            <button type="button" id="addProcess" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-plus"></span> 新增流程</button>
+            <button type="button" id="modifiProcess" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-edit"></span> 修改流程</button>
+            <button type="button" id="delProcess" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-trash-o"></span> 删除流程</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-scrollable-horizontal">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                <th class="table-check"></th>
+        				<th class="table-id">#</th>
+        				<th class="table-type">流程名称</th>
+        				<th class="table-author am-hide-sm-only">创建人</th>
+        				<th class="table-date am-hide-sm-only">创建时间</th>
+        				<th class="table-set" style="width:220px;">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+		  <!--查询开始-->
+		    <!--<tr class="am-form-group am-form-inline">-->
+              <!--<td></td>-->
+              <!--<td></td>-->
+              <!--<td>-->
+        				<!--<div class="am-input-group am-input-group-sm">-->
+        				  <!--<input type="text" class="am-form-field">-->
+        				<!--</div>-->
+        			  <!--</td>-->
+              <!--<td>-->
+        				<!--<div class="am-input-group am-input-group-sm">-->
+        				  <!--<input type="text" class="am-form-field">-->
+        				<!--</div>-->
+        			<!--</td>-->
+              <!--<td>-->
+        				<!--<div class="am-input-group am-input-group-sm" style="width:210px;">-->
+        				  <!--<div class="am-u-sm-6" style="padding:0;">-->
+                        <!--<input style="width:100px;" name="CreateTime[0]" type="text" class="am-form-field" data-am-datepicker value="">-->
+                  <!--</div>-->
+                  <!--<div class="am-u-sm-6" style="padding:0;">-->
+                        <!--<input style="width:100px;" name="CreateTime[1]" type="text" class="am-form-field" data-am-datepicker value="">-->
+                  <!--</div>-->
+        				<!--</div>-->
+        			<!--</td>-->
+              <!--<td>-->
+                <!--<div class="am-btn-group am-btn-group-xs" style="width:114px;">-->
+                  <!--<button type="submit" class="am-btn am-btn-xs am-text-secondary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>-->
+                  <!--<a class="am-btn am-btn-xs am-text-secondary ABtn" href="/ph/ProcessConfig/index.html"><span class="ResetIcon"></span>重置</a>-->
+                <!--</div>-->
+              <!--</td>-->
+            <!--</tr>-->
+		<!---查询结束-->
+
+<?php foreach($processLst as $k => $v){ ; ?>
+            <tr class="check001">
+                <td>
+                  <span class="piaochecked">
+                    <input class="checkId radioclass" type="radio" name="choose" value="<?php echo $v['id']; ?>" />
+                  </span>
+                </td>
+                <td class="am-hide-sm-only"><?php echo ++$k; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Title']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CreateUser']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
+                <td>
+                    <div class="am-btn-group am-btn-group-xs">
+                      <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only proDetail" value="<?php echo $v['id']; ?>">明细</button>
+                    </div>
+                </td>
+            </tr>
+<?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+            共{$processLstObj->total()}条记录
+          <div class="am-fr">
+              {$processLstObj->render()}
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- content end -->
+  {include file="application/ph/view/process_config/form.html" /}
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/process_config.js"></script>
+{/block}

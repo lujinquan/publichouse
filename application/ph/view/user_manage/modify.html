@@ -1,0 +1,95 @@
+<form action="{:url('TenantInfo/edit')}" method="post" id="UserModifyForm" class="am-form" data-am-validator style="display:none;margin-top:1.6rem;">
+
+
+	<fieldset >
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-u-sm-12">
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-vld-email-2" class="label_style">用户编号：</label>
+				<div class="am-u-sm-8">
+					<input type="text" name="Number" id="Number" onfocus=this.blur() placeholder="用户编号" required/>
+				</div>
+			</div>
+
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-vld-email-2" class="label_style">登录账号：</label>
+				<div class="am-u-sm-8">
+					<input type="text" name="UserName" id="UserName" placeholder="登录账号" required/>
+				</div>
+			</div>
+
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">用户类型：</label>
+				<div class="am-u-sm-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="CateID" checked="checked" required> 职能部门
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="2" name="CateID"> 管理部门
+					</label>
+				</div>
+			</div>
+
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">真实姓名：</label>
+				<div class="am-u-sm-8">
+					<input type="text" name="RealName" id="RealName" placeholder="真实姓名" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">机构：</label>
+				<div class="am-u-md-8" style="float:left;">
+					<select name="InstitutionID" id="InstitutionID" required>
+						<option  value="" style="display:none">请选择</option>
+						<?php foreach($instLst as $k4 =>$v4){;?>
+						<option value="<?php echo $v4['id']; ?>"><?php echo $v4['Institution']; ?></option>
+						<?php }; ?>
+					</select>
+				</div>
+			</div>
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">职务：</label>
+				<div class="am-u-md-8" style="float:left;">
+					<select name="PostID" id="PostID" required>
+						<option  value="" style="display:none">请选择</option>
+						<?php foreach($postLst as $k5 =>$v5){;?>
+						<option value="<?php echo $v5['PostID']; ?>"><?php echo $v5['PostName']; ?></option>
+						<?php }; ?>
+					</select>
+				</div>
+			</div>
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">性别：</label>
+				<div class="am-u-sm-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="Sex" checked="checked" required> 男
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="0" name="Sex"> 女
+					</label>
+				</div>
+			</div>
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">联系电话：</label>
+				<div class="am-u-sm-8">
+					<input type="text" name="Tel" id="Tel" placeholder="联系电话" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-sm-12">
+				<label for="doc-select-8" class="label_style">有效性：</label>
+				<div class="am-u-sm-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="Status" checked="checked" required>有效
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="0" name="Status"> 无效
+					</label>
+				</div>
+			</div>
+		</div>
+
+<!-- 		<div class="am-u-sm-12" style="text-align:center;margin-top:2rem;">
+			<button class="am-btn am-btn-secondary btn_big" type="submit">提交</button>
+		</div> -->
+	</fieldset>
+</form>

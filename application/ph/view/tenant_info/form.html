@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
+<form  id="TenantForm" class="am-form" data-am-validator style="display:none;margin-top:1.6rem;">
+
+	  <fieldset id="InputForm" style="width:780px;">
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+				<label class="label_style">联系电话：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="TenantTel" placeholder=""/>
+				</div>
+			</div>	
+				
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">年龄：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="TenantAge" placeholder="" />
+				</div>
+			</div>	
+
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">微信号：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantWeChat" placeholder="" />
+				</div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">身份证：</label>
+				<div class="am-u-md-8" >
+					<input type="text" name="TenantNumber" id="IDCard" placeholder="" />
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">银行卡号：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="BankID" placeholder="" />
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">欠租金额：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="ArrearRent" value="0.00" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">租户姓名：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantName" placeholder="" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label class="label_style">账户余额：</label>
+				<div class="am-u-md-8" data-am-validator>
+					<input type="number" name="TenantBalance" value="0.00" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">性别：</label>
+				<div class="am-u-md-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="TenantSex" checked="checked" required> 男
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="0" name="TenantSex"> 女
+					</label>
+				</div>
+			</div>
+
+			<!--新加-->
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">QQ号：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TenantQQ" placeholder=""/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">银行机构：</label>
+				<div class="am-u-md-8" >
+					<input type="text" name="BankName" placeholder=""/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">诚信值：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantValue" value="100" placeholder=""/>
+				</div>
+			</div>
+		</div>
+	  </fieldset>
+  </form>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>

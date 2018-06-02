@@ -1,0 +1,70 @@
+<div id="repairDetail" class="am-form" style="display:none;margin-top:1.6rem;">
+	  <fieldset style="width:600px;">
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-form-group am-u-md-12">
+		  <label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
+		  <div class="am-u-md-8">
+			<input id="middleApplyBanID" type="text" name="middleApplyBanID" />
+		  </div>
+		</div><br/><br/>
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-2" class="label_style">房屋地址：</label>
+			  <div class="am-u-md-7" style="float:left;">
+					<p class="detail_p_style" id="TubulationID">加载中</p>
+			  </div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">使用性质：</label>
+			  <div class="am-u-md-7" style="float:left;">
+					<p class="detail_p_style" id="ReformIf">加载中</p>
+			  </div>
+			</div>	
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">房屋类型：</label>
+			  <div class="am-u-md-7" style="float:left;">
+					<p class="detail_p_style" id="BanLandID">加载中</p>
+			  </div>
+			</div>			
+		</div>
+
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-2" class="label_style">建筑面积：</label>
+			  <div class="am-u-md-7" style="float:left;">
+					<p class="detail_p_style" id="TubulationID">加载中</p>
+			  </div>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-4" class="label_style">完损等级：</label>
+			  <div  class="am-u-md-7" style="float:left;">
+					<p class="detail_p_style" id="DamageGrade">加载中</p>
+			  </div>
+			</div>		
+		</div>
+		<div class="am-form-group am-u-md-12">
+			<div class=" am-u-md-12">
+			  <label for="doc-select-2" class="label_style">维修内容：</label>
+			  <div class="am-u-md-7" style="float:left;">
+					<textarea id="RepairContent" name="RepairContent" style="width: 350px;height: 200px"></textarea>
+			  </div>
+			</div>		
+		</div>
+	  </fieldset>
+  </div>
+
+  <form id="SRepair" class="am-form" style="display:none;margin-top:1.6rem;">
+	  <fieldset style="width:1000px;">
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-form-group am-u-md-12">
+		  <label for="doc-vld-email-2" class="label_style">房屋编号：</label>
+		  <div class="am-u-md-8">
+			<input id="HouseID" type="text" name="HouseID" />
+		  </div>
+		</div>
+		{include file="application/ph/view/form/small_repair_form.html" /}
+	  </fieldset>
+  </form>

@@ -1,0 +1,127 @@
+{extend name="layout" /}
+{block name="title"}<title>月租金报表</title>{/block}
+{block name="content"}
+<style>.am-table {
+    margin-bottom: 0;
+}</style>
+<div class="admin-content">
+    <div class="am-cf am-padding am-print-hide">
+        <div class="am-fl am-cf">
+            <small class="am-text-sm">统计报表</small> >
+            <small class="am-text-primary">月租金报表</small>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-md-12">
+            <h2 style="text-align:center;">武汉市房地局经管月租金报表</h2>
+        </div>
+        <form action="{:url('RentReport/index')}" method="post" class="am-form am-print-hide am-u-md-12"
+              style="margin-bottom:20px;">
+            <div class="am-u-md-12">
+                <div class="label_style">产别：</div>
+                <div class="am-u-md-2">
+                    <select name="OwnerType" id="OwnerType">
+                        <option value="1" style="display:none">市属</option>
+                        <?php foreach($owerLst as $k1 =>$v1){ $select =($ownerType == $k1)?'selected':''; ?>
+                        <option value="{$k1}" {$select}>{$v1}</option>
+                        <?php }; ?>
+                    </select>
+                </div>
+
+                <?php if(session('user_base_info.institution_level')!=3){; ?>
+                <div class="label_style">机构：</div>
+                <div class="am-u-md-2">
+                    <select name="TubulationID" id="TubulationID">
+                        <option value="<?php echo session('user_base_info.institution_id'); ?>"
+                                style="display:none"><?php echo session('user_base_info.institution_name'); ?></option>
+                        <?php if(session('user_base_info.institution_level')==1){
+                                foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){
+                                $select =($rentReportOption != array() && $rentReportOption['TubulationID'] == $v10['id'])?'selected':'';
+                        ?>
+                        <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+                        <?php }}}elseif(session('user_base_info.institution_level')==2){
+                                foreach($instLst as $k12 => $v12){
+                                $select =($rentReportOption != array() && $rentReportOption['TubulationID'] == $v12['id'])?'selected':'';
+                        ?>
+                        <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+                        <?php }} ; ?>
+                    </select>
+                </div>
+                <?php }; ?>
+                <div class="label_style">查询月份:</div>
+                <div class="am-u-md-2">
+                    <input type="text" name="month" class="am-u-md-8"
+                           data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}"
+                           value="{$month}" placeholder="日历组件" data-am-datepicker readonly/>
+                </div>
+<!--                 <button type="button" id="postData" class="am-btn am-btn-xs am-btn-secondary">
+                    <span class="am-icon-check"></span> 提交
+                </button> -->
+                <button type="submit" class="am-btn am-btn-xs d-btn-1188F0 am-radius">
+                    <span class="am-icon-search"></span> 查询
+                </button>
+                <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius" href="/ph/RentReport/index.html"><span class="am-icon-reply"></span> 重置</a>
+                <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印
+                </button>
+                <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius" id="propertycache"><span
+                        class="am-icon-file-o"></span>
+                    缓存报表
+                </a>
+            </div>
+        </form>
+        <div style="padding:2% 3% 2% 1%;">
+            {include file="application/ph/view/form/rent_report.html" /}
+            {include file="application/ph/view/form/rent_report_show.html" /}
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript">
+    $('#printForm').click(function () {
+        window.print();
+    });
+    $('#propertycache').click(function () {
+        $.ajax({
+            url: "/ph/SystemLog/RentReportCache", success: function (result) {
+                var results = jQuery.parseJSON(result);
+                layer.msg(results.msg);
+            }
+        });
+    });
+
+    var flag = false;
+    if (flag == false) {
+        $('#postDataForm').show();
+        $('#dataShow').hide();
+    } else {
+        $('#postDataForm').hide();
+        $('#dataShow').show();
+    }
+    //月租金报表自管产、代管、托管的报表样式，没有其中一其中二
+    var owner_type = $('#OwnerType').val();
+    console.log(owner_type);
+    if (owner_type == 3 || owner_type == 5 || owner_type == 7) {
+        $('.once_hide').hide();
+        for(var i = 4;i <= 9;i++){
+            $('.some_hide').eq(i).hide();
+            $('.some_hide_1').eq(i).hide();
+            $('.some_hide_2').eq(i).hide();
+            $('.some_hide_3').eq(i).hide();
+            $('.some_hide_4').eq(i).hide();
+            $('.some_hide_5').eq(i).hide();
+            $('.some_hide_6').eq(i).hide();
+            $('.some_hide_7').eq(i).hide();
+            $('.some_hide_8').eq(i).hide();
+            $('.some_hide_9').eq(i).hide();
+            $('.some_hide_10').eq(i).hide();
+            $('.some_hide_11').eq(i).hide();
+            $('.some_hide_12').eq(i).hide();
+            $('.some_hide_13').eq(i).hide();
+            $('.some_hide_14').eq(i).hide();
+            $('.some_hide_15').eq(i).hide();
+        }
+    }
+</script>
+{/block}

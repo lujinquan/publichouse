@@ -1,0 +1,58 @@
+<?php if($arr){ ; ?>
+<div style="display:inline-block;width:30%">填报单位：{$inst}</div>
+<div style="display:inline-block;width:30%">单位：元/平方米</div>
+<table class="am-table am-table-bordered am-table-centered" id="PropertyForm">
+        <tbody>
+            <tr>
+                <th rowspan="2" colspan="1" class="am-text-middle">序号</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">管段</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">账号</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">业主姓名</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">房屋地址</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">建筑面积</th>
+                <th rowspan="1" colspan="2" class="am-text-middle">收入</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">支出</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">金额</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">备注</th>
+            </tr>
+            <tr>
+                <th rowspan="1" colspan="1" class="am-text-middle">房租</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">其中：企</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">房产税</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">修理费</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">管理费</th>
+            </tr>
+            <?php foreach($arr as $k1 => $v1){ ; ?>
+            <tr>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo ++$k1; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['Institution']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['TenantName']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['BanAddress']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['HouseArea']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['HousePrerent']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['RepairCost']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['HandlerCost']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v1['Cost']; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"></td>
+            </tr>
+            <?php }; ?>
+        </tbody>
+</table>
+<div style="display:inline-block;width:100%">
+    <div style="display:inline-block;width:24%;text-align:center;">单位主管：</div>
+    <div style="display:inline-block;width:24%;text-align:center;">财会：</div>
+    <div style="display:inline-block;width:24%;text-align:center;">经办人：</div>
+    <div style="display:inline-block;width:24%;text-align:center;"><?php echo date('Y年m月',strtotime($month)); ?></div>
+</div>
+<div class="am-cf">
+    共{$plist->total()}条记录
+    <div class="am-fr">
+        {$plist->render()}
+    </div>
+</div>
+<?php }else{
+    echo '<h2 align="center">暂无数据</h2>';
+}; ?>

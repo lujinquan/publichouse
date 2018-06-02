@@ -1,0 +1,272 @@
+{extend name="layout" /}
+{block name="title"}<title>房间确认</title>{/block}
+{block name="content"}
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <small class="am-text-sm">数据确认管理</small> >  
+            <small class="am-text-primary">房间确认</small>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group-xs">
+                    <?php if(in_array(512,$threeMenu)){ ; ?>
+                    <button type="button" id="reviseRoom" class="am-btn d-btn-1188F0 am-radius"><span
+                            class="am-icon-edit"></span> 修改房间
+                    </button>
+                    <?php }; ?>
+                    <?php if(in_array(513,$threeMenu)){ ; ?>
+                    <button type="button" id="deleteRoom" class="am-btn d-btn-1188F0 am-radius"><span
+                            class="am-icon-trash-o"></span> 删除房间
+                    </button>
+                    <?php }; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-scrollable-horizontal">
+            <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+                <thead>
+                <tr>
+                    <th class="table-check"></th>
+                    <th class="table-id">#</th>
+                    <th class="table-title">房间编号</th>
+                    <th class="table-author am-hide-sm-only">楼栋编号</th>
+                    <th class="table-author am-hide-sm-only">楼栋地址</th>
+                    <th class="table-date am-hide-sm-only">房间类型</th>
+                    <th class="table-date am-hide-sm-only">房间间号</th>
+                    <th class="table-set">单元号</th>
+                    <th class="table-set">层次</th>
+                    <th class="table-set">使用面积</th>
+                    <th class="table-set">计租面积</th>
+                    <th class="table-set">规定月租金</th>
+                    <th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--查询-->
+                <form action="{:url('ConfirmRoom/index')}" method="post" id="queryForm" autocomplete="off">
+                    <tr class="am-form-group am-form-inline am-form">
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                        if($roomOption != array()){
+                            $RoomID = $roomOption['RoomID'];
+                        }else{
+                            $RoomID = '';
+                        }
+                     ?>
+                                <input name="RoomID" type="text" class="am-form-field" value="{$RoomID}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                        if(isset($roomOption['BanID'])){
+                            $BanID = $roomOption['BanID'];
+                        }else{
+                            $BanID = '';
+                        }
+                     ?>
+                                <input name="BanID" type="text" class="am-form-field" value="{$BanID}">
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                                    if(isset($roomOption['BanAddress'])){
+                                        $BanAddress = $roomOption['BanAddress'];
+                                    }else{
+                                        $BanAddress = '';
+                                    }
+                                 ?>
+                                <input name="BanAddress" type="text" class="am-form-field" value="{$BanAddress}">
+                            </div>
+                        </td>
+                        <td>
+                           <div class="am-input-group am-input-group-sm" style="width:70px;">
+                                <select name="RoomType" id="doc-select-5">
+                                    <option value="" style="display:none">请选择</option>
+                                    <?php foreach($roomTypeData as $k3 =>$v3){;?>
+
+                                    <?php
+
+                                if(isset($roomOption['RoomType'])){
+
+                                    if($roomOption['RoomType'] == $v3['id']){
+
+                                        $select ='selected';
+                                    }else{
+
+                                        $select ='';
+                                    }
+                                }else{
+
+                                    $select ='';
+                                }
+
+                                ?>
+
+                                    <option value="<?php echo $v3['id']; ?>"
+                                            {$select}><?php echo $v3['RoomTypeName']; ?></option>
+                                    <?php }; ?>
+                                </select>
+
+                            </div>
+                        </td>
+                        <td>
+                            
+                             <div class="am-input-group am-input-group-sm">
+                                <?php
+                                    if(isset($roomOption['RoomNumber'])){
+                                        $RoomNumber = $roomOption['RoomNumber'];
+                                    }else{
+                                        $RoomNumber = '';
+                                    }
+                                 ?>
+                                <input name="RoomNumber" type="text" class="am-form-field" value="{$RoomNumber}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                                    if(isset($roomOption['UnitID'])){
+                                        $UnitID = $roomOption['UnitID'];
+                                    }else{
+                                        $UnitID = '';
+                                    }
+                                 ?>
+                                <input name="UnitID" type="text" class="am-form-field" value="{$UnitID}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                                    if(isset($roomOption['FloorID'])){
+                                        $FloorID = $roomOption['FloorID'];
+                                    }else{
+                                        $FloorID = '';
+                                    }
+                                 ?>
+                                <input name="FloorID" type="text" class="am-form-field" value="{$FloorID}">
+                            </div>
+                        </td>
+                        <td><div style="width:70px;"></div></td>
+                        <td><div style="width:70px;"></div></td>
+                        <td><div style="width:70px;"></div></td>
+
+                        <td>
+                            <div class="am-btn-group am-btn-group-xs" style="width:114px;">
+                              <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                              <a id="clearBanInfo" class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/ConfirmRoom/index.html"><span class="ResetIcon"></span>重置</a>
+                            </div>
+                        </td>
+                    </tr>
+                </form>
+                <!---查询-->
+
+                <?php foreach($roomDataLst as $k9 => $v9){ ; ?>
+                <tr class="check001">
+                    <td>
+                        <span class="piaochecked">
+                            <input class="checkId radioclass" type="radio" name='choose' value="<?php echo $v9['RoomID']; ?>"/>
+                        </span>
+                    </td>
+                    <td><?php echo ++$k9; ?></td>
+                    <td><?php echo $v9['RoomID']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['BanID']; ?></td>
+                    <td class="am-hide-sm-only">
+                        <p style="height:18px;margin:10px 0 0;padding:0;line-height:18px;"><?php echo $v9['BanAddress']; ?></p>
+                    </td>
+                    <td class="am-hide-sm-only"><?php echo $v9['RoomTypeName']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['RoomNumber']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['UnitID']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['FloorID']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['UseArea']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['LeasedArea']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v9['RoomRentMonth']; ?></td>
+                    <td>
+                        <div class="am-btn-group am-btn-group-xs">
+                            <?php if(in_array(66,$threeMenu)){ ; ?>
+                            <button class="am-btn am-btn-default am-text-primary am-btn-xs details" value="<?php echo $v9['RoomID']; ?>"> 明细</button>
+                            <?php }; ?>
+                            <?php if(in_array(516,$threeMenu)){ ; ?>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary ConfirmRoomBtn" value="<?php echo $v9['RoomID']; ?>"> 确认</button>
+                            <?php }; ?>
+                        </div>
+                    </td>
+                </tr>
+                <?php }; ?>
+
+                </tbody>
+            </table>
+            <div class="am-cf">
+                共{$roomDataObj->total()}条记录
+                <div class="am-fr">
+                    {$roomDataObj->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 基价折减表 -->
+<form id="PriceForm" style="display:none">
+    <table class="am-table am-table-bordered am-table-radius">
+        <tbody>
+
+        <?php foreach($rentPoint as $k => $v){ ; ?>
+        <tr>
+            <td><input type="checkbox" name="PriceBox" value="<?php echo $v['id']; ?>"></td>
+            <td><?php echo $v['id']; ?></td>
+            <td><?php echo $v['Item']; ?></td>
+            <td class="PriceValue"><?php echo 100 * $v['Point']; ?></td>
+        </tr>
+        <?php }; ?>
+
+        </tbody>
+    </table>
+</form>
+<!--- 基价折减表 -->
+<!-- content end -->
+    <!-- 删除类型选择 -->
+    <div id="deleteChoose" style="display:none; text-align: center; margin: 20px;">
+      <button id="HouseChange" class="am-btn am-btn-secondary " value="10" name="roomDeleteType" style="background: #0086ff;border:none">房改</button>
+      <button id="HouseRemove" class="am-btn am-btn-secondary" value="11" name="roomDeleteType" style="background: #0086ff;border:none">拆迁，已注销</button>
+      <button id="DateTogther" class="am-btn am-btn-secondary" value="12"  name="roomDeleteType"style="background: #0086ff;border:none">数据合并</button>
+      <button id="DateLose" class="am-btn am-btn-secondary" value="13"  name="roomDeleteType"style="background: #0086ff;border:none">数据作废</button>
+  </div>
+<!--    <div id="deleteChoose" style="display:none;text-align: center;">
+      <span class="piaochecked" style="float:none;">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="2">
+      </span>
+      <span>房改</span>
+      <span class="piaochecked" style="float:none;">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="3">
+      </span>
+      <span>拆迁，已注销</span>
+      <span class="piaochecked" style="float:none;">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="4">
+      </span>
+      <span>数据合并</span>
+      <span class="piaochecked" style="float:none;">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="5">
+      </span>
+      <span>数据作废</span>
+  </div> -->
+{include file="application/ph/view/confirm_room/form.html" /}
+{include file="application/ph/view/confirm_room/detail.html" /}
+{include file="application/ph/view/confirm_room/modify.html" /}
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/js/validation.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/confirm_room.js"></script>
+{/block}

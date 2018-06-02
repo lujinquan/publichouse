@@ -1,0 +1,150 @@
+{extend name="layout" /}
+{block name="title"}<title>系统日志</title>{/block}
+{block name="content"}
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> >
+            <small class="am-text-primary">系统日志</small>
+        </div>
+    </div>
+
+    <!--     <div class="am-g">
+          <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+              <div class="am-btn-group am-btn-group-xs">
+                <button type="button" id="deleteTenant" class="am-btn am-btn-default"><span class="am-icon-area-chart"></span> 分析</button>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+                <thead>
+                <tr>
+                    <th class="table-check"></th>
+                    <th class="table-title">#</th>
+                    <th class="table-author am-hide-sm-only">操作人员编号</th>
+                    <th class="table-date am-hide-sm-only">行为类别</th>
+                    <th class="table-set">操作内容</th>
+                    <th class="table-set">操作时间</th>
+                    <th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--查询-->
+                <form  action="{:url('SystemLog/index')}" method="post" id="queryForm">
+                    <tr class="am-form-group am-form-inline am-form">
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                                   $UserID = isset($LogOption['UserID'])?$LogOption['UserID']:'';
+                                ?>
+                                <input name="UserID" type="text" class="am-form-field" value="{$UserID}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm">
+                                <select style="width:70px;"  name="ActionType" id="doc-select-8">
+                                    <option value="" style="display:none"></option>
+                                    <?php foreach($allTypes as $k =>$v){;?>
+                                    <?php
+                                if($LogOption != array() && isset($LogOption['ActionType'])){
+                                    if($LogOption['ActionType'] == $k){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                                    <option value="<?php echo $k; ?>" {$select}><?php echo $v; ?></option>
+                                    <?php }; ?>
+                                </select>
+
+                            </div>
+                        </td>
+                        <td>
+                            <!--<div class="am-input-group am-input-group-sm">-->
+                            <!--<input name="CreateTime" type="text" class="am-form-field">-->
+                            <!--</div>-->
+                        </td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm" style="width:210px;">
+                                <div class="am-u-sm-6" style="padding:0;">
+                                    <?php
+
+                                   $DateStart = isset($LogOption['DateStart'])?$LogOption['DateStart']:'';
+
+                                ?>
+                                    <input style="width:100px;" name="DateStart" type="text" class="am-form-field"
+                                           data-am-datepicker value="{$DateStart}">
+                                </div>
+                                <div class="am-u-sm-6" style="padding:0;">
+                                    <?php
+
+                                   $DateEnd = isset($LogOption['DateEnd'])?$LogOption['DateEnd']:'';
+
+                                ?>
+                                    <input style="width:100px;" name="DateEnd" type="text" class="am-form-field"
+                                           data-am-datepicker value="{$DateEnd}">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="am-btn-group am-btn-group-xs" style="width:114px;">
+                                <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                                <a id="clearBanInfo" class="am-btn am-btn-xs am-text-primary ABtn"
+                                   href="/ph/SystemLog/index.html"><span class="ResetIcon"></span>重置</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                </form>
+                <!---查询-->
+
+                <?php foreach($LogsLst as $k1 => $v1){; ?>
+                <tr class="check001">
+                    <td>
+                  <span class="piaochecked">
+                      <input class="checkId radioclass" type="radio" name='choose' value="{$v1['id']}"/>
+                  </span>
+                    </td>
+                    <td><?php echo ++$k1; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['UserID']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['ActionType']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['Remark']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['CreateTime']; ?></td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary details SystemDetailBtn"  value="{$v1['id']}"> 明细
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <?php }; ?>
+
+                </tbody>
+            </table>
+            <div class="am-cf">
+                共{$LogsLstObj->total()}条记录
+                <div class="am-fr">
+                    {$LogsLstObj->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- content end -->
+{include file="application/ph/view/system_log/detail.html" /}
+
+{/block}
+{block name="JsFile"}
+<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/system_log.js"></script>
+{/block}

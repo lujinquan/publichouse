@@ -1,0 +1,48 @@
+<form id="addForm" class="am-form " style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-3">
+      <label>审批流程：</label>
+    </div>
+    <div class="am-u-md-6 am-form am-u-end">
+        <!--<input type="text" name="ProcessTitle">-->
+        <select name="ProcessTitle">
+            <option  value="" style="display:none">请选择</option>
+
+        <?php foreach($changes as $k0 => $v0){ ; ?>
+            <option value="<?php echo $v0['id']; ?>"><?php echo $v0['ChangeType']; ?></option>
+        <?php }; ?>
+        </select>
+    </div>
+  </div>
+  <div class="am-form-group am-u-md-6" style="text-align:center;margin-top:20px;">
+     <h2>步骤名称</h2>
+  </div>
+  <div class="am-form-group am-u-md-5" style="text-align:center;margin-top:20px;">
+     <h2>执行角色</h2>
+  </div>
+  <div id="step" class="am-form-group am-u-md-12">
+      <div class="step am-form-group am-u-md-12">
+          <div class="am-form-group am-u-md-6">
+            <input name="Title[0]" type="text" />
+          </div>
+          <div class="am-form-group am-u-md-5">
+
+              <select name="RoleID[0]">
+
+                  <option  value="" style="display:none">请选择</option>
+                  <?php foreach($roles as $k1 => $v1){ ;?>
+                <option value="<?php echo $v1['id']; ?>"><?php echo $v1['RoleName']; ?></option>
+                  <?php }; ?>
+
+              </select>
+
+          </div>
+          <div class="am-form-group am-u-md-1 delete">
+              <span class="am-icon-trash-o"></span>
+          </div>
+      </div>
+  </div>
+  <div class="am-u-md-12" style="margin-top:30px;">
+      <div id="addStep" style="text-align:center;"><span class="am-icon-plus"></span> 添加审批步骤</div>
+  </div>
+</form>

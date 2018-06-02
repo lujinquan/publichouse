@@ -1,0 +1,96 @@
+<?php if($data){; ?>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">产别：{$owner}</div>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">填报单位：{$inst}</div>
+<div style="display:inline-block;width:30%" class="time fontSize_12">填报时间：{$year}年</div>
+<table class="am-table am-table-bordered am-table-centered" id="PropertyForm">
+        <thead>
+            <tr>
+                <th rowspan="4" colspan="2" class="am-text-middle">产权基本情况</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">房屋总计</th>
+                <th rowspan="1" colspan="9" class="am-text-middle">其中：</th>
+            </tr>
+            <tr>
+                <td rowspan="2" colspan="1" >栋</td>
+                <td rowspan="2" colspan="2" >建筑面积</td>
+                <td rowspan="1" colspan="3" >代管房屋</td>
+                <td rowspan="1" colspan="3" >托管房屋</td>
+                <td rowspan="1" colspan="3" >与私房、区直共有房屋</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >栋</td>
+                <td rowspan="1" colspan="2" >建筑面积（㎡）</td>
+                <td rowspan="1" colspan="1" >栋</td>
+                <td rowspan="1" colspan="2" >建筑面积（㎡）</td>
+                <td rowspan="1" colspan="1" >栋</td>
+                <td rowspan="1" colspan="2" >建筑面积</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['totalNum']; ?></td>
+                <td rowspan="1" colspan="2" ><?php echo $data[0]['totalAreas']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['daiNum']; ?></td>
+                <td rowspan="1" colspan="2" ><?php echo $data[0]['daiAreas']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['tuoNum']; ?></td>
+                <td rowspan="1" colspan="2" ><?php echo $data[0]['tuoAreas']; ?></td>
+                <td rowspan="1" colspan="1" ></td>
+                <td rowspan="1" colspan="2" ></td>
+            </tr>
+            <tr>
+                <td rowspan="4" colspan="2" class="am-text-middle">本期房屋增减</td>
+                <td rowspan="1" colspan="3" class="am-text-middle">年房屋增加<span style="padding: 0 5px"><?php echo $data[1]['incNum']; ?></span>栋，建筑面积<span style="padding: 0 5px"></span><?php echo $data[1]['incAreas']; ?>㎡</td>
+                <td rowspan="1" colspan="9" class="am-text-middle">年度房减少<span style="padding: 0 5px"><?php echo $data[1]['decNum']; ?></span>栋，建筑面积<span style="padding: 0 5px"></span><?php echo $data[1]['decAreas']; ?>㎡</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >接管</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['jieguanNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['jieguanArea']; ?></td>
+                <td rowspan="1" colspan="1" >合建</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['hejianNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['hejianArea']; ?></td>
+                <td rowspan="1" colspan="1" >公房出售</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['chushouNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['chushouArea']; ?></td>
+                <td rowspan="1" colspan="1" >自然灭失</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['mieshiNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['mieshiArea']; ?></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >危改还建</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['huanjianNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['huanjianArea']; ?></td>
+                <td rowspan="1" colspan="1" >加改扩</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['jiagaiNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['jiagaiArea']; ?></td>
+                <td rowspan="1" colspan="1" >危改拆除</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['chaichuNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['chaichuArea']; ?></td>
+                <td rowspan="1" colspan="1" >房屋划转</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['huazhuanNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[3]['huazhuanArea']; ?></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >新建</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['xinjianNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['xinjianArea']; ?></td>
+                <td rowspan="1" colspan="1" >其他</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['qitaOneNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['qitaOneArea']; ?></td>
+                <td rowspan="1" colspan="1" >落私发还</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['fahuanNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['fahuanArea']; ?></td>
+                <td rowspan="1" colspan="1" >其他</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['qitaTwoNum']; ?>栋</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[4]['qitaTwoArea']; ?></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3" class="am-text-middle">已登记房屋</td>
+                <td rowspan="1" colspan="2" class="am-text-middle"><?php echo $data[5]['dengjiNum']; ?>栋</td>
+                <td rowspan="1" colspan="4" class="am-text-middle">建筑面积<span style="padding: 0 5px"></span><?php echo $data[5]['dengjiArea']; ?>㎡</td>
+                <td rowspan="1" colspan="5" class="am-text-middle">备注：<span style="padding: 0 5px"></span></td>
+            </tr>
+
+            </thead>
+
+</table>
+<?php }else{
+    echo '<h2 align="center">暂无数据</h2>';
+} ?>

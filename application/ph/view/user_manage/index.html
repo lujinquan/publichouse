@@ -1,0 +1,157 @@
+{extend name="layout" /}
+{block name="title"}<title>用户管理</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">权限管理</small> > <small class="am-text-primary">用户管理</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+              <?php if(in_array(211,$threeMenu)){ ; ?>
+              <button type="button" id="addUser" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增用户</button>
+              <?php }; ?>
+              <?php if(in_array(212,$threeMenu)){ ; ?>
+              <button type="button" id="reviseUser" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改用户</button>
+              <?php }; ?>
+              <?php if(in_array(213,$threeMenu)){ ; ?>
+              <button type="button" id="deleteUser" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 删除用户</button>
+              <?php }; ?>
+              <?php if(in_array(218,$threeMenu)){ ; ?>
+              <button type="button" id="assignRole" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-share"></span> 分配角色</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                <th class="table-check"></th>
+        				<th class="table-id">#</th>
+        				<th class="table-title">用户编号</th>
+        				<th class="table-type">登录账户</th>
+        				<th class="table-author am-hide-sm-only">用户类别</th>
+        				<th class="table-date am-hide-sm-only">姓名</th>
+        				<th class="table-set">机构名称</th>
+        				<th class="table-set">职务</th>
+                <th class="table-set">系统角色</th>
+        				<th class="table-set">性别</th>
+        				<th class="table-set">联系电话</th>
+        				<th class="table-set">有效性</th>
+              </tr>
+          </thead>
+          <tbody>
+            <form action="{:url('UserManage/index')}" method="post" id="queryForm">
+                <tr class="am-form-group am-form-inline am-form">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="am-input-group am-input-group-sm">
+                            <?php
+                                if($userOption != array()){
+                                    $UserName = $userOption['UserName'];
+                                }else{
+                                    $UserName = '';
+                                }
+                            ?>
+                            <input style="width:100px;" name="UserName" type="text" value="{$UserName}"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="am-input-group am-input-group-sm">
+                            <select name="InstitutionID" >
+                                <option  value="" style="display:none">请选择</option>
+                                <?php foreach($instLst as $k4 =>$v4){;?>
+                                    <?php
+                                    if($userOption != array() && $userOption['InstitutionID'] == $v4['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                    ?>
+                                <option value="<?php echo $v4['id']; ?>" {$select}><?php echo $v4['Institution']; ?></option>
+                                <?php }; ?>
+                            </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="am-input-group am-input-group-sm">
+                            <select name="PostID" >
+                                <option  value="" style="display:none">请选择</option>
+                                <?php foreach($postLst as $k5 =>$v5){;?>
+                                <?php
+                                    if($userOption != array() && $userOption['PostID'] == $v5['PostID']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                    ?>
+                                <option value="<?php echo $v5['PostID']; ?>" {$select}><?php echo $v5['PostName']; ?></option>
+                                <?php }; ?>
+                            </select>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="am-btn-group am-btn-group-xs" style="width:114px;">
+                            <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                            <a id="clearUserApplyInfo" class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/UserManage/index.html"><span class="ResetIcon"></span>重置</a>
+                        </div>
+                    </td>
+                </tr>
+            </form>
+          <?php foreach($userLst as $k => $v){ ;?>
+            <tr class="check001">
+                <td>
+                    <span class="piaochecked">
+                        <input class="checkId radioclass" name="choose" type="radio" value="<?php echo $v['id']; ?>" />
+                    </span>
+                </td>
+                <td><?php echo ++$k; ?></td>
+                <td><?php echo $v['Number']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['UserName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CateID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['RealName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['InstitutionID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['PostID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Role']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Sex']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Tel']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+            </tr>
+
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+		  共{$userLstObj->total()}条记录
+		  <div class="am-fr">
+              {$userLstObj->render()}
+		  </div>
+		</div>
+      </div>
+    </div>
+  </div>
+
+
+  {include file="application/ph/view/user_manage/form.html" /}
+  {include file="application/ph/view/user_manage/modify.html" /}
+  {include file="application/ph/view/user_manage/detail.html" /}
+  <!-- content end -->
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/user_manage.js"></script>
+{/block}

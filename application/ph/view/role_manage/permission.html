@@ -1,0 +1,38 @@
+<form id="permissionForm" class="am-form" style="display:none;margin-top:1.6rem;">
+
+    <fieldset style="width:580px;">
+        <div class="am-panel-group" id="accordion">
+            <input type="hidden" id="Role" name="Role" value=""/>
+
+
+
+            <?php foreach($treeMenu as $k1 => $v1){ if($v1['Level'] == 1){ ; ?>
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd">
+                    <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-<?php echo $v1['id']; ?>'}">
+                    	<input name="id[]" value="<?php echo $v1['id']; ?>" type="checkbox" hidden />
+                        <?php echo $v1['Title']; ?>
+                    </h4>
+                </div>
+                <div id="do-not-say-<?php echo $v1['id']; ?>" class="am-panel-collapse am-collapse <?php if($k1==0){echo 'am-in';};?>">
+                    <?php foreach($treeMenu as $k2 => $v2){ if($v2['pid'] == $v1['id']){ ; ?>
+                    <div class="am-panel-bd am-g second_level">
+                        <h3><input class="FatherName" name="id[]" type="checkbox" value="<?php echo $v2['id']; ?>"><?php echo $v2['Title']; ?></h3>
+                        <!-- <hr data-am-widget="divider" style="" class="am-divider am-divider-default"/> -->
+                        <ul class="am-u-sm-12">
+                            <?php foreach($treeMenu as $k3 => $v3){ if($v3['pid'] == $v2['id']){ ;?>
+                                <li class="am-u-sm-6 li_style"><input name="id[]" type="checkbox" value="<?php echo $v3['id']; ?>"/>
+                                    <label>
+                                        <?php echo $v3['Title']; ?>
+                                    </label>
+                                </li>
+                            <?php }}; ?>
+                        </ul>
+                    </div>
+                    <?php }}; ?>
+                </div>
+            </div>
+            <?php }}; ?>
+        </div>
+    </fieldset>
+</form>

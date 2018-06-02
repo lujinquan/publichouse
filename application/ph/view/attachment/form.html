@@ -1,0 +1,46 @@
+<!-- <form id="attachmentForm" class="am-form" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12 breaks">
+    <div class="am-form-group am-u-sm-3">
+      <label>上传文件：</label>
+    </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="ID" type="file" name="ID" multiple>
+        </div>
+        <div style="margin-bottom: 20px" id="IDShow" class="am-u-md-12"></div>
+  </div>
+    <div class="am-form-group am-u-md-12">
+        <label for="doc-select-8" class="label_style">附件标题：</label>
+        <div class="am-u-md-8">
+            <input type="number" name="ImageTitle" id="doc-vld-email-3" placeholder="" required/>
+        </div>
+    </div>
+</form> -->
+
+<div id="filelist" hidden="hidden">
+  <span id="type">文件类型限制：.doc、.docx、.xls、.xlsx、.mp4、.ppt、.wps、.txt、.dwg、.png、.jpg、.jpeg、.gif、.bmp、.tiff、.tga、.rar、.zip、.pdf</span>
+
+  <p>文件列表：</p>
+  <!-- <form id="form" name="form" method="post" action="" enctype="multipart/form-data"> -->
+    <hr class="hr">
+  <div id="list">
+    <input style="display:inline-block;" type="file" class="files" onchange="preg(this)" name="files[]">
+    <input type="text" class="replace_title" placeholder="请输入标题" name=""/>
+    <span class="waiting" name="witing[]">待上传</span>
+    <hr class="hr">
+    <span style="text-decoration: none;color:#3bb4f2;" id="add" onclick="addfilelist()">添加+</span>
+  </div>
+    <!-- <center><input type="submit" name="submit" id="submit" value="上传"></center> -->
+    <center>
+      <input style="background:#0084FF;border-radius:4px;outline:none;border:none;" 
+      type="button" onclick="upfiles()" id="submit" value="上传">
+      <input style="background:#FFF;color:#3bb4f2;border-radius:4px;outline:none;border:1px solid #d9d9d9;"
+       type="button" onclick="reset()" id="reset" value="重置">
+    </center>
+    <!-- <div id="progress">
+      <div id="bar"><span id="per">0%</span></div>
+    </div> -->
+  <!-- </form> -->
+  <span id="test">文件大小限制为50M</span><br/>
+</div>
+

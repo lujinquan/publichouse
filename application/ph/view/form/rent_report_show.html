@@ -1,0 +1,466 @@
+<style>
+    .td_input{
+        width:50px;
+        border:none;
+        border-bottom:1px solid #ccc;
+        outline:none;
+    }
+</style>
+<form id="dataShow" style="display:none;">
+<table class="am-table am-table-bordered am-table-centered" >
+        <tbody>
+            <tr>
+                <th rowspan="2" colspan="2" class="am-text-middle">租金月报</th>
+                <th rowspan="2" colspan="1" class="am-text-middle">合计</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">(一)工商企事业用房</th>
+                <th rowspan="1" colspan="3" class="am-text-middle once_hide">其中(一)</th>
+                <th rowspan="1" colspan="3" class="am-text-middle once_hide">其中(二)</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">(二)党政群机关用房</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">(三)民用住宅用房</th>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1">本月份</td>
+                <td rowspan="1" colspan="1">以前月份</td>
+                <td rowspan="1" colspan="1">以前年度</td>
+                <td rowspan="1" colspan="1" class="once_hide">本月份</td>
+                <td rowspan="1" colspan="1" class="once_hide">以前月份</td>
+                <td rowspan="1" colspan="1" class="once_hide">以前年度</td>
+                <td rowspan="1" colspan="1" class="once_hide">本月份</td>
+                <td rowspan="1" colspan="1" class="once_hide">以前月份</td>
+                <td rowspan="1" colspan="1" class="once_hide">以前年度</td>
+                <td rowspan="1" colspan="1">本月份</td>
+                <td rowspan="1" colspan="1">以前月份</td>
+                <td rowspan="1" colspan="1">以前年度</td>
+                <td rowspan="1" colspan="1">本月份</td>
+                <td rowspan="1" colspan="1">以前月份</td>
+                <td rowspan="1" colspan="1">以前年度</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">上期结转</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="7" colspan="1"  class="am-text-middle">基数增减</td>
+                <td rowspan="1" colspan="2">计</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">新发租</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">调整</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">注销</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">租差</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">公房出售</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">管段调整</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">规定租金</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="8" colspan="1"  class="am-text-middle">非基数增减</td>
+                <td rowspan="1" colspan="2">计</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">减免</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">空租</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">暂停计租</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">文化室</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">政策折减</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2">陈欠核销</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2"></td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">应收租金</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">实收租金</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">实收累计</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="3">结欠租金</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1">0</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide">42</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide">7836</td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1">78</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1">45</td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+            </tr>
+        </tbody>
+</table>
+</form>
+<!-- <div style="display:inline-block;width:100%" class="fontSize_12">
+    <div style="display:inline-block;width:8%">说明：</div>
+    <div style="display:inline-block;width:25%">上项空栏：按使用性质填报的应填写：</div>
+    <div style="display:inline-block;width:20%">（一）企事业用房租金收入，</div>
+    <div style="display:inline-block;width:20%">（二）党政群机关用房租金收入，</div>
+    <div style="display:inline-block;width:20%">（三）民用住宅租金收入，</div>
+</div>
+<div style="display:inline-block;width:100%" class="fontSize_12">
+    <div style="display:inline-block;width:8%">补充资料：</div>
+    <div style="display:inline-block;width:25%">本月份实有户数：企事业
+        <span style="display:inline-block;width:20%"></span>户，
+    </div>
+    <div style="display:inline-block;width:15%">机关
+        <span style="display:inline-block;width:40%"></span>户，
+    </div>
+    <div style="display:inline-block;width:15%">民用
+        <span style="display:inline-block;width:40%"></span>户，
+    </div>
+</div>
+<div style="display:inline-block;width:100%" class="fontSize_12">
+    <div style="display:inline-block;width:8%"></div>
+    <div style="display:inline-block;width:30%">单位负责人：<span id="below_com">区房产公司</span></div>
+    <div style="display:inline-block;width:30%">制表人：</div>
+    <div style="display:inline-block;width:30%">报出日期：<span class="time"></span></div>
+</div> -->

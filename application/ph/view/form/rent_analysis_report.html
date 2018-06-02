@@ -1,0 +1,96 @@
+<?php if($data){ ; ?>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">产别：{$owner}</div>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">填报单位：{$inst}</div>
+<div style="display:inline-block;width:30%" class="time fontSize_12">填报时间：{$month}</div>
+<table class="am-table am-table-bordered am-table-centered" id="PropertyForm">
+        <thead>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th rowspan="4" colspan="2" class="am-text-middle">单位</th>
+                <th rowspan="2" colspan="6" class="am-text-middle">年计划完成情况</th>
+                <th rowspan="1" colspan="12" class="am-text-middle">租金收入主要情况</th>
+            </tr>
+            <tr>
+                <th rowspan="1" colspan="2" class="am-text-middle">规定租金</th>
+                <th rowspan="1" colspan="5" class="am-text-middle">实收租金</th>
+                <th rowspan="1" colspan="3" class="am-text-middle">损失租金</th>
+                <th rowspan="1" colspan="2" class="am-text-middle">结欠租金</th>
+            </tr>
+            <tr>
+                <th rowspan="1" colspan="1" class="am-text-middle">年计划数</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">实收累计</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">占年计划%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">企业占年计划%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">机关占年计划%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">民用占年计划%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">金额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">收缴率%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">本年度金额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">回收率%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">以前年度金额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">其中：在册陈欠</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">回收率%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">金额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">其中：企事业折减额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">损失率%</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">金额</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">其中：本年结欠</th>
+            </tr>
+
+            <tr>
+                <th rowspan="1" colspan="1" class="am-text-middle">1</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">2</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">3</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">4</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">5</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">6</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">7</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">8</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">9</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">10</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">11</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">12</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">13</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">14</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">15</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">16</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">17</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">18</th>
+            </tr>
+            <?php
+            if(!is_array($data[0])){
+              $datas[0]  = $data;
+            }else{
+                $datas = $data;
+            }
+            foreach($datas as $k => $v){;?>
+            <tr>
+                <td rowspan="1" colspan="2" class="am-text-middle"><?php echo $v[0]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[1]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[2]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[3]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[4]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[5]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[6]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[7]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[8]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[9]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[10]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[11]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[12]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[13]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[14]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[15]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[16]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[17]; ?></td>
+                <td rowspan="1" colspan="1" class="am-text-middle"><?php echo $v[18]; ?></td>
+            </tr>
+            <?php }; ?>
+
+        </tbody>
+</table>
+<?php }else{
+    echo '<h2 align="center">暂无数据</h2>';
+} ?>

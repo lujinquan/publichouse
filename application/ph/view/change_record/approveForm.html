@@ -1,0 +1,451 @@
+<form id="approveForm" style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-2">
+      <label class="label_style">房屋编号：</label>
+    </div>
+     <label class="p_style APhouseId"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋编号：</label>
+    </div>
+     <label class="p_style APhouseAddress"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">房屋地址：</label>
+    </div>
+     <label class="p_style APhouseAddress"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼层：</label>
+    </div>
+     <label class="p_style"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">承租人：</label>
+    </div>
+     <label class="p_style APtenantName"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">联系电话：</label>
+    </div>
+     <label class="p_style APtenantTel"></label>
+  </div>
+    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">身份证号：</label>
+    </div>
+     <label class="p_style APtenantNumber"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">备案时间：</label>
+    </div>
+     <label class="p_style APcreateTime"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">使用面积：</label>
+    </div>
+     <label class="p_style APhouseArea"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">计租面积：</label>
+    </div>
+     <label class="p_style APleasedArea"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">减免时长：</label>
+    </div>
+     <label class="p_style MuchMonth"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">减免金额：</label>
+    </div>
+     <label class="p_style RemitRent"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-12" id="breakType">
+    <div class="am-u-md-2">
+      <label class="label_style">减免类型：</label>
+    </div>
+     <label>低保户</label>
+  </div>
+
+  <div class="am-form-group am-u-md-12" id="IDNumber">
+    <div class="am-u-md-2">
+      <label class="label_style">证件号：</label>
+    </div>
+     <label>2512542100</label>
+  </div>
+
+  <div class="am-form-group am-u-md-12" id="validity">
+    <div class="am-u-md-2">
+      <label class="label_style">证件有效期：</label>
+    </div>
+     <label>12个月</label>
+  </div>
+
+  <div class="am-form-group am-u-md-12" id="pauseType">
+    <div class="am-u-md-2">
+      <label class="label_style">暂停类型：</label>
+    </div>
+     <label>按户暂停</label>
+  </div>
+
+  <div class="am-form-group am-u-md-12" id="cancelReason">
+    <div class="am-u-md-2">
+      <label class="label_style">注销原因：</label>
+    </div>
+     <label>拆迁注销</label>
+  </div>
+
+  <div class="am-u-md-12" style="padding-left:0;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>查看附件：</label>
+      </div>
+      <div id="layer-photos-demo" class="am-u-md-12">
+
+      </div>
+    </div>
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+    <div id="approveState" class="am-u-md-12" style="padding-left:3rem;">
+
+    </div>
+
+  </div>
+</form>
+<form id="RentAdjust" class="am-form" style="display:none;margin-top:20px;">
+    <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
+      <label  class="label_style">房屋编号：</label><label id="AdjustHouseNum"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label>楼栋编号：</label><label id="AdjustBanID"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>房屋地址：</label><label id="AdjustBanAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="AdjustFloorID"></label>
+    </div>
+<!--     <div class="am-form-group am-u-sm-4">
+      <label>房型：</label><label id="">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-4">
+      <label>承租人：</label><label id="AdjustTenantName"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>联系电话：</label><label id="AdjustTenantTel"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="AdjustTenantNumber"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="AdjustCreateTime"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>使用面积：</label><label id="AdjustHouseArea"></label>
+    </div>
+    
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="AdjustLeasedArea"></label>
+    </div>
+    <div class="am-u-md-12">
+      <div class="am-form-group am-u-sm-4 pd0">
+      <label>产别：</label><label class="AdjustOwnType"></label>
+      </div>
+      <div class="am-form-group am-u-sm-8 mr0">
+        <label>原租金：</label><label id="AdjustPrice"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4 pd0">
+        <label>产别：</label><label class="AdjustOwnTypeA"></label>
+      </div>
+      <div class="am-form-group am-u-sm-8">
+        <label>原租金：</label><label id="AdjustPriceA"></label>
+      </div>
+    </div>
+    <div class="am-u-md-12">
+      <div class="am-form-group am-u-sm-4 pd0">
+      <label>产别：</label><label class="AdjustOwnType"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4 mr0" style="float:left">
+        <label class="am-u-sm-3"  style="padding:0">原租金：</label><label id="AdjustNewPrice"></label>
+      </div>
+      </div>
+      <div class="am-u-md-12">
+      <div class="am-form-group am-u-sm-4 pd0">
+        <label>产别：</label><label class="AdjustOwnTypeA"></label>
+      </div>
+       <div class="am-form-group am-u-sm-4 mr0" style="float:left">
+        <label class="am-u-sm-3"  style="padding:0">原租金：</label><label id="AdjustNewPriceA"></label>
+      </div>
+    </div>
+  </div><!--房屋编号-->
+   <div class="am-u-md-12" style="padding-left:0;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>查看附件：</label>
+      </div>
+      <div id="AddRentAdjust" class="am-u-md-12"></div>
+    </div>
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+    <div id="AddRentState" class="am-u-md-12" style="padding-left:3rem;"></div>
+  </div>
+</form>
+<!--租金调整 -->
+<!--分户 -->
+ <form id="SplitHouse" class="am-form" style="display:none;margin-top:20px;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6"  style="font-weight:bold">
+      分户原始房屋
+    </div>
+    </div>
+    <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-12">
+      <label  class="label_style">房屋编号：</label><label id="SplitHouseID"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12 mr0">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label>楼栋编号：</label><label id="SplitBanID"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>房屋地址：</label><label id="SplitBanAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="SplitFloorID"></label>
+    </div>
+<!--     <div class="am-form-group am-u-sm-4">
+      <label>房型：</label><label id="">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-4">
+      <label>承租人：</label><label id="SplitTenantName"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>联系电话：</label><label id="SplitTenantTel"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="SplitTenantNumber"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="SplitCreateTime"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>使用面积：</label><label id="SplitHouseArea"></label>
+    </div>
+    
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="SplitLeasedArea"></label>
+    </div> 
+    <div class="am-form-group am-u-sm-12 am-u-end">
+      <label class="fl">房间间号：</label>
+      <ul class="SplitRoom">
+        
+      </ul>
+    </div>
+    
+  </div><!--房屋编号-->
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6"  style="font-weight:bold">
+      分户新增房屋
+    </div>
+    </div>
+    <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-12">
+      <label  class="label_style">房屋编号：</label><label id="SplitAddNum"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12 mr0">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label>楼栋编号：</label><label id="SplitAddID"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>房屋地址：</label><label id="SplitAddAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="SplitAddFloor"></label>
+    </div>
+<!--     <div class="am-form-group am-u-sm-4">
+      <label>房型：</label><label id="">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-4">
+      <label>承租人：</label><label id="SplitAddName"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>联系电话：</label><label id="SplitAddTel"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="SplitAddNumber"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="SplitAddTime"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>使用面积：</label><label id="SplitAddArea"></label>
+    </div>
+    
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="SplitAddLeased"></label>
+    </div>  
+     <div class="am-form-group am-u-sm-12 am-u-end">
+      <label class="fl">房间间号：</label>
+      <ul class="SplitRoom2">
+       
+      </ul>
+    </div>
+  </div>
+   <div class="am-u-md-12" style="padding-left:0;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>查看附件：</label>
+      </div>
+      <div id="SplitFile" class="am-u-md-12"></div>
+    </div>
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+    <div id="SplitFileState" class="am-u-md-12" style="padding-left:3rem;"></div>
+  </div>
+</form>
+<!--并户-->
+<form id="HouseHolds" class="am-form" style="display:none;margin-top:20px;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6"  style="font-weight:bold">
+      并户保留房屋
+    </div>
+    </div>
+    <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-12">
+      <label  class="label_style">房屋编号：</label><label id="HoldsHouseNum"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12 mr0">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label>楼栋编号：</label><label id="HoldsBanID"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>房屋地址：</label><label id="HoldsBanAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="HoldsFloorID"></label>
+    </div>
+<!--     <div class="am-form-group am-u-sm-4">
+      <label>房型：</label><label id="">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-4">
+      <label>承租人：</label><label id="HoldsTenantName"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>联系电话：</label><label id="HoldsTenantTel"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="HoldsTenantNumber"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="HoldsCreateTime"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>使用面积：</label><label id="HoldsHouseArea"></label>
+    </div>
+    
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="HoldsLeasedArea"></label>
+    </div>  
+    <div class="am-form-group am-u-sm-12 am-u-end">
+      <label class="fl">房间间号：</label>
+      <ul class="SplitRoom2">
+       
+      </ul>
+    </div>
+  </div><!--房屋编号-->
+    <!--并户注销房屋-->
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6"  style="font-weight:bold">
+      并户注销房屋
+    </div>
+    </div>
+    <div class="am-form-group am-u-md-12">
+     <div class="am-u-md-12">
+      <label  class="label_style">房屋编号：</label><label id="CancelNum"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12 mr0">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label>楼栋编号：</label><label id="CancelID"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>房屋地址：</label><label id="CancelAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="CancelFloor"></label>
+    </div>
+<!--     <div class="am-form-group am-u-sm-4">
+      <label>房型：</label><label id="">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-4">
+      <label>承租人：</label><label id="CancelName"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>联系电话：</label><label id="CancelTel"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="CancelNumber"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="CancelTime"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>使用面积：</label><label id="CancelArea"></label>
+    </div>
+    
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="CancelLeased"></label>
+    </div>  
+    <div class="am-form-group am-u-sm-12 am-u-end">
+      <label class="fl">房间间号：</label>
+      <ul class="SplitRoom2">
+       
+      </ul>
+    </div>
+  </div>
+   <div class="am-u-md-12" style="padding-left:0;">
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>查看附件：</label>
+      </div>
+      <div id="HouseHoldsFile" class="am-u-md-12"></div>
+    </div>
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+    <div id="HouseHoldsState" class="am-u-md-12" style="padding-left:3rem;"></div>
+  </div>
+</form>
+<!--并户结束-->

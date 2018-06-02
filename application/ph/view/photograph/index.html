@@ -1,0 +1,145 @@
+{extend name="layout" /}
+{block name="title"}<title>楼栋信息</title>{/block}
+  {block name="photo"}
+
+  {/block}
+{block name="content"}
+<OBJECT ID="EloamGlobal_ID" CLASSID="CLSID:52D1E686-D8D7-4DF2-9A74-8B8F4650BF73"></OBJECT>
+<script type="text/javascript">
+var EloamGlobal;
+var DeviceMain;
+var VideoMain;
+var EloamImageTemp3;
+function load(){
+	EloamGlobal = document.getElementById("EloamGlobal_ID");
+	var ret = EloamGlobal.InitDevs();
+	DeviceMain = EloamGlobal.CreateDevice(1,0);//0表示主，1表示上面的副摄像头
+	VideoMain = DeviceMain.CreateVideo(-1,1);
+	if (VideoMain){
+		ViewMain.SelectVideo(VideoMain);
+		ViewMain.SetText("打开视频中，请等待...", 0);
+	}
+}
+
+function CloseVideoMain(){
+	if (VideoMain){
+		VideoMain.Destroy();
+		VideoMain = null;	
+		ViewMain.SetText("", 0);	
+	}
+}	
+function unLoad(){
+	if(DeviceMain){
+		DeviceMain.Destroy();
+		DeviceMain = null;
+	}
+	if (VideoMain){
+		ViewMain.SetText("", 0);
+		VideoMain.Destroy();
+		VideoMain = null;
+	}
+	EloamGlobal = null;
+}
+function GetTimeString(){
+	var date = new Date();
+	var yy = date.getFullYear().toString();
+	var mm = (date.getMonth() + 1).toString();
+	var dd = date.getDate().toString();
+	var hh = date.getHours().toString();
+	var nn = date.getMinutes().toString();
+	var ss = date.getSeconds().toString();
+	var mi = date.getMilliseconds().toString();
+	
+	var ret = yy + mm + dd + hh + nn + ss + mi;
+	return ret;
+}
+function Blend(){
+	var imageList = VideoMain.CreateImageList(0, ViewMain.GetView());
+	if (imageList){
+		ViewMain.PlayCaptureEffect();
+		if (!EloamImageTemp3){
+			EloamImageTemp3 = imageList.GetImage(0);//取第1张图片
+			//var Name = "C:\\" + GetTimeString() + ".jpg";
+			
+			// EloamImageTemp1=EloamThumbnail.GetThumbnail(0);
+			// alert("请再次点击图片合成按钮");
+		}
+		else{
+			var image = imageList.GetImage(0);//取第2张图片
+			//var Name = "C:\\" + GetTimeString() + ".jpg";
+			//image.Save(Name, 0);
+			//EloamThumbnail.Add(Name);
+			var w1 = EloamImageTemp3.GetWidth();
+			var w2 = image.GetWidth();
+			var w = w1;
+			if (w1 < w2){
+				w = w2;
+			}
+			var h1 = EloamImageTemp3.GetHeight();
+			var h2 = image.GetHeight();
+			var h = h1 + h2 + 100;
+			imageSave = EloamGlobal.CreateImage(w, h, 3);
+			if (imageSave){
+				// var date = new Date();
+				// var yy = date.getFullYear().toString();
+				// var mm = (date.getMonth() + 1).toString();
+				// var dd = date.getDate().toString();
+				// var hh = date.getHours().toString();
+				// var nn = date.getMinutes().toString();
+				// var ss = date.getSeconds().toString();
+				// var mi = date.getMilliseconds().toString();
+				// var Name = "C:\\" + yy + mm + dd + hh + nn + ss + mi + ".jpg";
+				var rcDest1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+				var rcSrc1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+				imageSave.Blend(rcDest1, EloamImageTemp3, rcSrc1, 0, 0);
+				rcDest1.Destroy();
+				rcDest1 = null;
+				rcSrc1.Destroy();
+				rcSrc1 = null;
+				
+				var rcDest2 = EloamGlobal.CreateRect(0, h1 + 100, w2, h2);
+				var rcSrc2 = EloamGlobal.CreateRect(0, 0, w2, h2);
+				 imageSave.Blend(rcDest2, image, rcSrc2, 0, 0);
+				rcDest2.Destroy();
+				rcDest2 = null;
+				rcSrc2.Destroy();
+				rcSrc2 = null;
+				
+				//imageSave.Save(Name, 0);
+				//EloamThumbnail.Add(Name);
+				//currentImageTemp = imageSave;
+				EloamImageTemp3=imageSave;
+				//imageSave.Destroy();
+				//imageSave = null;
+			}
+			
+			// EloamImageTemp1.Destroy();
+			// EloamImageTemp1 = null;
+			image.Destroy();	
+			image = null;
+		}
+	}
+	var Name = "C:\\"+$('#nameSelect').val()+'_'+GetTimeString()+'.jpg';
+	console.log(Name);
+	EloamImageTemp3.Save(Name, 0);
+	EloamThumbnail.Add(Name);
+}
+function httpLoadImg(){
+	EloamThumbnail.HttpUploadCheckImage('http://www.why-dong.com',0);
+}
+
+</script>
+<body onload="load()" onunload="unload()">
+	<OBJECT ID="ViewMain" CLASSID="CLSID:26BA9E7F-78E9-4FB8-A05C-A4185D80D759" WIDTH="350" HEIGHT="300"></OBJECT>
+	<select id="nameSelect">
+		<option value="楼栋">楼栋</option>
+		<option value="房屋">房屋</option>
+		<option value="房间">房间</option>
+	</select>
+	<div>
+		<OBJECT ID="EloamThumbnail" CLASSID="CLSID:B5535A1B-D25B-4B3C-854F-94B12E284A4E" WIDTH="700" HEIGHT="200"></OBJECT>
+	</div>
+	<input type="button" value="图片合成" onclick="Blend()" />
+	<input type="button" value="图片上传" onclick="httpLoadImg()" />
+</body>
+{/block}

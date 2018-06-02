@@ -1,0 +1,112 @@
+{extend name="layout" /}
+{block name="title"}<title>房屋统计</title>{/block}
+{block name="content"}
+<style>.am-table{margin-bottom: 0;}</style>
+<div class="admin-content">
+    <div class="am-cf am-padding am-print-hide">
+        <div class="am-fl am-cf"><small class="am-text-sm">统计报表</small> >
+            <small class="am-text-primary">房屋统计</small>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-md-12">
+            <h2 style="text-align:center;">武汉市房地局经管房产统计（<span id="DOwnerTyp">市属</span>）报表</h2>
+        </div>
+        <form  class="am-form am-print-hide am-u-md-12" style="margin-bottom:20px;">
+            <div class="am-u-md-12">
+                <div class="label_style">产别：</div>
+                <div class="am-u-md-2">
+                    <select name="OwnerType" id="OwnerTyp" >
+                        <option  value="1" style="display:none">市属</option>
+
+                        <?php foreach($owerLst as $k1 =>$v1){ $select =($propertyOption != array() && $propertyOption['OwnerType'] == $k1)?'selected':''; ?>
+                        <option value="<?php echo $k1; ?>" {$select}>{$v1}</option>
+                        <?php }; ?>
+                    </select>
+                </div>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <div class="label_style">机构：</div>
+                <?php }; ?>
+                <div class="am-u-md-2">
+                    <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                    <select name="TubulationID" id="TubulationI">
+                        <option  value="" style="display:none"><?php echo session('user_base_info.institution_name'); ?></option>
+                        <?php if(session('user_base_info.institution_level')==1){;?>
+                        <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+                        <?php
+                                if($propertyOption != array()){
+                                    if($propertyOption['TubulationID'] == $v10['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+                        <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+                        <?php foreach($instLst as $k12 => $v12){ ; ?>
+                        <?php
+                                if($propertyOption != array()){
+                                    if($propertyOption['TubulationID'] == $v12['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+                        <?php }}} ; ?>
+                    </select>
+                </div>
+
+
+            </div>
+            <div class="am-u-md-12">
+
+                <div class="label_style">查询类型:</div>
+                <div class="am-u-md-2">
+                    <select name="QueryType" id="QueryTyp" >
+                        <option  value="5" style="display:none">按房屋价值</option>
+                        <option value="1">按完损等级</option>
+                        <option value="2">按使用性质</option>
+                        <option value="3">按所属机构</option>
+                        <option value="4">按建成年份</option>
+                        <option value="5">按房屋价值</option>
+                    </select>
+                </div>
+                <div class="label_style">查询月份:</div>
+                <div class="am-u-md-2">
+                    <?php
+                        if($propertyOption != array()){
+                            $month = $propertyOption['month'];
+                        }else{
+                            $month =date('Y-m',time());
+                        }
+                    ?>
+                    <input type="text" id="timeYear" name="month" value="{$month}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" placeholder="日历组件" data-am-datepicker readonly/>
+                </div>
+                <a href="javascript:void(0);"  id="yueQuery" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span> 查询</a>
+                <a type="button" href="/ph/HouseReport/index" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-reply"></span> 重置</a>
+                <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印</button>
+                <a href="/ph/SystemLog/HouseReportCache" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-file-o"></span> 缓存报表</a>
+            </div>
+        </form>
+        <div style="margin-left:6px;padding:2% 3% 2% 2%;">
+            {include file="application/ph/view/form/House_report.html" /}
+        </div>
+    </div>
+</div>
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/house_report.js"></script>
+<script type="text/javascript">
+    $('#printForm').click(function () {
+        window.print();
+    });
+</script>
+{/block}

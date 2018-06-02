@@ -1,0 +1,292 @@
+<link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
+<form action="{:url('HouseInfo/add')}" method="post" id="houseForm" class="am-form" data-am-validator style="display:none;margin-top:1.6rem;">
+	  <fieldset id="InputForm" style="width:780px;">
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-u-md-6">
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
+				<div class="am-u-md-7">
+					<input type="text" name="BanID" id="DBanID" placeholder="楼栋编号" required/>
+				</div>
+				<a class="am-btn QBtn" id="DqueryBtn" style="padding: 5px 0">查询</a>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">单元号：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="UnitID" placeholder="单元号" required/>
+				</div>
+			</div>	
+				
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">楼层号：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="FloorID" placeholder="楼层号" required/>
+				</div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">门牌号码：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="DoorID" id="doc-vld-email-3" placeholder="例如输入302，3表示楼层" required/>
+				</div>
+			</div>
+
+			<!-- <div class="am-form-group am-u-md-12">
+			  <label for="doc-vld-email-2" class="label_style">房屋编号：</label>
+			  <div class="am-u-md-8">
+				<input type="text" name="HouseID" id="DHouseID" placeholder="房屋编号" required/>
+			  </div>
+			</div> -->
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-vld-email-2" class="label_style">房屋编号：</label>
+			  <div class="am-u-md-8">
+				<label id="DHouseID"></label>
+			  </div>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-7" class="label_style">使用性质：</label>
+				<div class="am-u-md-8" style="float:left;">
+					<select name="UseNature" id="doc-select-7" required>
+						<option  value="" style="display:none">请选择</option>
+						<?php foreach($useNatureLst as $k5 =>$v5){ ;?>
+						<option value="<?php echo $v5['id']; ?>"><?php echo $v5['UseNature'];?></option>
+						<?php }; ?>
+					</select>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="PumpCost" class="label_style">泵费：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="PumpCost" id="PumpCost" placeholder="泵费" required/>
+				</div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="RepairCost" class="label_style">维修费：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="RepairCost" id="RepairCost" placeholder="维修费" required/>
+				</div>
+			</div>
+			
+<!-- 			<div class="am-form-group am-u-md-12">
+			  <label for="HouseBase" class="label_style">房屋基数：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HouseBase" id="HouseBase" placeholder="房屋基数" required/>
+				</div>
+			</div> -->
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="OldOprice" class="label_style">计算原价：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="OldOprice" id="OldOprice" placeholder="计算原价" required/>
+				</div>
+			</div>
+			
+<!-- 			<div class="am-form-group am-u-md-12">
+			  <label for="Oprice" class="label_style">实际原价：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="Oprice" id="Oprice" placeholder="实际原价" required/>
+				</div>
+			</div> -->
+			<div class="am-form-group am-u-md-12">
+			  <label for="Name" class="label_style">租户ID：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantID" id="TenantID" placeholder="租户ID" required/>
+				</div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">是否住改非：</label>
+				<div class="am-u-md-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="NonliveIf"  required> 是
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="0" name="NonliveIf" checked="checked"> 否
+					</label>
+				</div>
+			</div>
+
+			<div class="am-form-group am-u-md-12"><label>三户共用情况：</label></div>
+			<div class="am-form-group am-u-md-12">
+				<label for="Name" class="label_style">厅堂：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="Hall" id="hall" placeholder="" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="Name" class="label_style">卫生间：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="Toilet" id="toilet" placeholder="" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="Name" class="label_style">厨房：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="Kitchen" id="kitchen" placeholder="" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="Name" class="label_style">内走道：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="InnerAisle" id="InnerAisle" placeholder="" required/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="am-u-md-6">
+			<!-- <div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">计租面积：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="LeasedArea" id="LeasedArea" placeholder="计租面积" required/>
+				</div>
+			</div> -->
+
+			<!--新加-->
+			<!--<div class="am-form-group am-u-md-12">-->
+			  <!--<label for="doc-select-8" class="label_style">房间数：</label>-->
+				<!--&lt;!&ndash;<div class="am-u-md-8">&ndash;&gt;-->
+					<!--&lt;!&ndash;<input type="text" name="Paper" id="doc-vld-email-2" placeholder="证件类型" required/>&ndash;&gt;-->
+				<!--&lt;!&ndash;</div>&ndash;&gt;-->
+				<!--<div class="am-u-md-8" style="float:left;">-->
+					<!--<input type="text" name="RoomNumber" id="doc-vld-email-10" placeholder="房间数" required/>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!-- <div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">使用面积：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HouseUsearea" id="HouseUsearea" placeholder="使用面积" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">规定租金：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HousePrerent" id="HousePrerent" placeholder="规定租金" required/>
+				</div>
+			</div>
+
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="ReceiveRent" class="label_style">应收租金：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="ReceiveRent" id="ReceiveRent" placeholder="应收租金" required/>
+				</div>
+			</div>
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="RemitRent" class="label_style">减免租金：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="RemitRent" id="RemitRent" placeholder="减免租金" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="ArrearRent" class="label_style">欠租情况：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="ArrearRent" id="ArrearRent" placeholder="欠租情况" required/>
+				</div>
+			</div> -->
+			<!--<div class="am-form-group am-u-md-12">-->
+			  <!--<label for="ArrearrentReason" class="label_style">欠租原因：</label>-->
+				<!--<div class="am-u-md-8">-->
+					<!--<input type="text" name="ArrearrentReason" id="ArrearrentReason" placeholder="欠租原因" required/>-->
+				<!--</div>-->
+			<!--</div>-->
+<!-- 			<div class="am-form-group am-u-md-12">
+			  <label for="HouseArea" class="label_style">户建面：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HouseArea" id="HouseArea" placeholder="户建面：" required/>
+				</div>
+			</div> -->
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="ComprisingArea" class="label_style">套内建面：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="ComprisingArea" id="ComprisingArea" placeholder="套内建面" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">规定租金：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HousePrerent" id="AHousePrerent" placeholder="规定租金" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<input type="checkbox" name="IfWater" value="1" /><label>无上水下水、无厕所房间</label>
+			</div>
+
+			<div class="am-form-group am-u-md-12"><label>加计租金：</label></div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style am-u-4 qb_style" style="line-height: 15px">墙布(纸)护墙板：</label>
+				<div class="am-u-md-7 qb_style2" >
+					<input type="text" name="WallpaperArea" id="wallcloth" placeholder="" required/>
+				</div>
+				<div class="yuan">m²</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style am-u-4 qb_style" style="line-height: 15px">瓷砖、马赛克、地板砖：</label>
+				<div class="am-u-md-7 qb_style2">
+					<input type="text" name="CeramicTileArea" id="FloorTile" placeholder="" required/>
+				</div>
+				<div class="yuan">m²</div>
+			</div>
+			<div class="am-form-group am-u-md-12 mb">
+			  <label for="" class="label_style am-u-4 qb_style">浴盆：</label>
+				<div class="am-u-md-7 qb_style2">
+					<input type="text" name="BathtubNum" id="bathtub" placeholder="" required/>
+				</div>
+				<div class="yuan">件</div>
+			</div>
+			<div class="am-form-group am-u-md-12 mb">
+			  <label for="" class="label_style am-u-4 qb_style">面盆：</label>
+				<div class="am-u-md-7 qb_style2">
+					<input type="text" name="BasinNum" id="basin" placeholder="" required/>
+				</div>
+				<div class="yuan">件</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style am-u-4 qb_style" style="line-height: 15px">空间1至1.7米(5㎡以下)：</label>
+				<div class="am-u-md-7 qb_style2">
+					<input type="text" name="BelowFiveNum" id="space" placeholder="" required/>
+				</div>
+				<div class="yuan">个</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style am-u-4 qb_style" style="line-height: 15px">阁楼(含1.7米)(5㎡以上)：</label>
+				<div class="am-u-md-7 qb_style2">
+					<input type="text" name="MoreFiveNum" id="attic" placeholder="" required/>
+				</div>
+				<div class="yuan">个</div>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="imgUp" class="label_style">影像资料：</label>
+				<div class="am-form-group am-form-file am-u-md-8">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input type="file" name="HouseImageIDS" id="imgUp" multiple>
+				</div>
+			</div>
+			<img class="am-form-group am-u-md-12" id="imgShow" style="width:312px;height:150px;float:left;">
+			<!--<div class="am-form-group am-u-md-12">-->
+			  <!--<label for="OPayments" class="label_style">其他应收款：</label>-->
+				<!--<div class="am-u-md-8">-->
+					<!--<input type="text" name="OPayments" id="OPayments" placeholder="其他应收款" required/>-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="am-form-group am-u-md-12">-->
+			  <!--<label for="Payment" class="label_style">金额：</label>-->
+				<!--<div class="am-u-md-8">-->
+					<!--<input type="text" name="Payment" id="Payment" placeholder="金额" required/>-->
+				<!--</div>-->
+			<!--</div>-->
+
+		</div>
+<!-- 		<div class="am-u-md-12" style="text-align:center;margin-top:2rem;">
+			<button class="am-btn am-btn-secondary btn_big" type="submit">提交</button>
+		</div> -->
+	  </fieldset>
+  </form>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>

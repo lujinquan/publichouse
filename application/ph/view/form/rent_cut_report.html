@@ -1,0 +1,58 @@
+<?php if($data){ ; ?>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">产别：{$owner}</div>
+<div style="display:inline-block;width:30%" class="DQueryType fontSize_12">填报单位：{$inst}</div>
+<div style="display:inline-block;width:30%" class="time fontSize_12">填报时间：{$month}</div>
+<table class="am-table am-table-bordered am-table-centered" id="PropertyForm">
+        <tbody>
+            <tr>
+                <th rowspan="1" colspan="1" class="am-text-middle"></th>
+                <th rowspan="1" colspan="2" class="am-text-middle">实际核减户数(户)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">使用面积(㎡)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">月规定租金(元)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">月核减租金(元)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">月实收租金(元)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">累计损失租金(元)</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">备注</th>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >上期接转</td>
+                <td rowspan="1" colspan="1" >表一</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['ids']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['HouseUseareas']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['HousePrerents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['CutRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['PaidRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[0]['LastCutRents']; ?></td>
+                <td rowspan="1" colspan="1" >注释一</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="1" >本期合计</td>
+                <td rowspan="1" colspan="1" >表一</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['ids']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['HouseUseareas']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['HousePrerents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['CutRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['PaidRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[1]['LastCutRents']; ?></td>
+                <td rowspan="1" colspan="1" >注释二</td>
+            </tr>
+            <tr>
+                <td rowspan="1" colspan="2" >累计合计</td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['ids']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['HouseUseareas']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['HousePrerents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['CutRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['PaidRents']; ?></td>
+                <td rowspan="1" colspan="1" ><?php echo $data[2]['LastCutRents']; ?></td>
+                <td rowspan="1" colspan="1" >注释三</td>
+            </tr>
+        </tbody>
+</table>
+<div style="display:inline-block;width:100%">
+    <div style="display:inline-block;width:50%">负责人：</div>
+    <div style="display:inline-block;width:40%">填报人：</div>
+</div>
+<?php }else{
+    echo '<h2 align="center">暂无数据</h2>';
+} ?>
+

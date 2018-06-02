@@ -1,0 +1,311 @@
+{extend name="layout" /}
+{block name="title"}<title>租金应缴</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">租金管理</small> > <small class="am-text-primary">租金应缴</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-8">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+            <?php if(in_array(253,$threeMenu)){ ; ?>
+            <button type="button" id="rentPayment" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cog"></span> 批量缴费</button>
+            <?php }; ?>
+            <?php if(in_array(254,$threeMenu)){ ; ?>
+            <button type="button" id="rentArrearage" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cogs"></span> 批量欠缴</button>
+              <?php }; ?>
+              <?php if(in_array(255,$threeMenu)){ ; ?>
+            <button type="button" id="generateCharging" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-crop"></span> 批量扣缴</button>
+              <?php }; ?>
+              <?php if(in_array(529,$threeMenu)){ ; ?>
+            <button type="button" id="deleteCharging" class="am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-trash-o"></span> 删除订单</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-scrollable-horizontal">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                <th class="table-check"></th>
+                <th class="table-title">#</th>
+                <th class="table-author am-hide-sm-only">订单编号</th>
+                <th class="table-date am-hide-sm-only">房屋编号</th>
+                <th class="table-set">机构名称</th>
+                <th class="table-set">产别</th>
+                <th class="table-set">租户姓名</th>
+                <th class="table-set">楼栋地址</th>
+                <th class="table-set">规定租金</th>
+                <th class="table-set">单元号</th>
+                <th class="table-set">楼层号</th>
+                <th class="table-set">门牌号</th>
+                <th class="table-set">减免租金</th>
+<!--                 <th class="table-set">泵费</th>
+                <th class="table-set">维修费</th> -->
+                <th class="table-set">应缴租金</th>
+                <th class="table-set">历史欠租</th> 
+                <th class="table-set">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+		  <!--查询-->
+      <form action="{:url('RentPayable/index')}" method="post" id="queryForm">
+		    <tr class="am-form-group am-form-inline am-form">
+              <td></td>
+              <td></td>
+              <td>
+                  <div class="am-input-group am-input-group-sm">
+                      <?php
+                        if($rentOption != array()){
+                            $RentOrderID = $rentOption['RentOrderID'];
+                        }else{
+                            $RentOrderID = '';
+                        }
+                     ?>
+                      <input style="width:152px;" name="RentOrderID" type="text" class="am-form-field" value="{$RentOrderID}">
+                  </div>
+              </td>
+              <td>
+                  <div class="am-input-group am-input-group-sm">
+                      <?php
+                        if($rentOption != array()){
+                            $HouseID = $rentOption['HouseID'];
+                        }else{
+                            $HouseID = '';
+                        }
+                     ?>
+                      <input name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
+                  </div>
+              </td>
+              <td>
+                  <div class="am-form-group search_input">
+
+
+                      <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                      <select name="TubulationID" id="doc-select-2">
+                          <option  value="" style="display:none">请选择</option>
+
+                          <?php if(session('user_base_info.institution_level')==1){;?>
+
+                          <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+
+                          <?php
+
+                                if($rentOption != array()){
+
+                                    if($rentOption['TubulationID'] == $v10['id']){
+
+                                        $select ='selected';
+                                    }else{
+
+                                        $select ='';
+                                    }
+                                }else{
+
+                                    $select ='';
+                                }
+
+                                ?>
+
+                          <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+
+                          <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+
+                          <?php foreach($instLst as $k12 => $v12){ ; ?>
+
+                          <?php
+
+                                if($rentOption != array()){
+
+                                    if($rentOption['TubulationID'] == $v12['id']){
+
+                                        $select ='selected';
+                                    }else{
+
+                                        $select ='';
+                                    }
+                                }else{
+
+                                    $select ='';
+                                }
+
+                                ?>
+
+                          <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+
+                          <?php }}} ; ?>
+
+                      </select>
+                  </div>
+              </td>
+                <td>
+                    <div class="am-form-group search_input">
+                        <select name="OwnerType" id="doc-select-5">
+                            <option  value="" style="display:none">请选择</option>
+                            <?php foreach($owerLst as $k3 =>$v3){;?>
+                            <?php
+                                if($rentOption != array()){
+                                    if($rentOption['OwnerType'] == $v3['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                            <option value="<?php echo $v3['id']; ?>" {$select}><?php echo $v3['OwnerType']; ?></option>
+                            <?php }; ?>
+                        </select>
+                    </div>
+                </td>
+              <td>
+                  <div class="am-input-group am-input-group-sm">
+                      <?php
+                        if($rentOption != array()){
+                            $TenantName = $rentOption['TenantName'];
+                        }else{
+                            $TenantName = '';
+                        }
+                     ?>
+                      <input name="TenantName" type="text" class="am-form-field" value="{$TenantName}">
+                  </div>
+              </td>
+              <td>
+                  <div class="am-input-group am-input-group-sm">
+                      <?php
+                        if($rentOption != array()){
+                            $BanAddress = $rentOption['BanAddress'];
+                        }else{
+                            $BanAddress = '';
+                        }
+                     ?>
+                      <input style="width:150px;" name="BanAddress" type="text" class="am-form-field" value="{$BanAddress}">
+                  </div>
+              </td>
+                <td>
+                    <div class="am-input-group am-input-group-sm"><?php
+                        if($rentOption != array()){
+                            $HousePrerent = $rentOption['HousePrerent'];
+                        }else{
+                            $HousePrerent = '';
+                        }
+                     ?>
+                        <input name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}">
+                    </div>
+                </td>
+                <td><div style="width:50px;"></div></td>
+                <td><div style="width:50px;"></div></td>
+                <td><div style="width:50px;"></div></td>
+                <td><div style="width:70px;"></div></td>
+                <td><div style="width:50px;"></div></td>
+                <td><div style="width:50px;"></div></td>
+              <td>
+                <div class="am-btn-group am-btn-group-xs">
+                  <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/RentPayable/index.html"><span class="ResetIcon"></span>重置</a>
+                </div>
+              </td>
+            </tr>
+      </form>
+		<!---查询-->
+		<style type="text/css">
+            		input[type='checkbox'] {
+											  display: none;
+											}
+										label {
+										  display: inline-block;
+										  width: 20px;
+										  height:20px;
+										  position: relative;
+										  background:url(/public/static/gf/icons/inputradio.png)no-repeat;
+										  background-position: -32px 0px;
+										  vertical-align: middle;
+										  /*-webkit-transition: background 0.5s linear;*/
+										}
+							input[type='checkbox']:checked+label {
+										  background-position: 0 0px;
+							}
+            	</style>
+            	
+          <?php foreach($rentLst as $k => $v){ ;?>
+            <tr class="check002 thead_width">
+                <td class="aId">               	
+                	<input  class="checkId" type="checkbox" name='choose' value="<?php echo $v['RentOrderID']; ?>"/>
+                	<label></label>
+                </td>
+                <td><?php echo ++$k; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['RentOrderID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['HouseID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['InstitutionID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['OwnerType']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['HousePrerent']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['UnitID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['FloorID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['DoorID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CutRent']; ?></td>
+<!--                 <td class="am-hide-sm-only"><?php echo $v['PumpCost']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['RepairCost']; ?></td> -->
+                <td class="am-hide-sm-only"><?php echo $v['ReceiveRent']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['HistoryUnpaidRent']; ?></td>
+      				  <td>
+      					<div class="am-btn-toolbar" style="width:140px;">
+      						<button class="am-btn am-btn-default am-btn-xs am-text-secondary details payment" value="<?php echo $v['RentOrderID']; ?>">缴费</button>
+      					</div>
+      				  </td>
+            </tr>
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+		  共{$rentLstObj->total()}条记录
+		  <div class="am-fr">
+              {$rentLstObj->render()}
+		  </div>
+		</div>
+      </div>
+    </div>
+  </div>
+<form id="details" class="am-form" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <div class="am-u-sm-4" style="padding: 0; font-size: 14px; font-weight: bold;">月租金：</div><div class="am-u-sm-8" id="HousePrerent" style="padding: 0; font-size: 14px; font-weight: bold;">0102030405</div>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <div class="am-u-sm-4" style="padding: 0; font-size: 14px; font-weight: bold;">减免租金：</div><div id="CutRent" class="am-u-sm-8" id="HousePrerent" style="padding: 0; font-size: 14px; font-weight: bold;">1</div>
+    </div>
+<!--     <div class="am-form-group am-u-sm-6">
+      <label>泵费：</label><label id="PumpCost">2</label>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label>维修费：</label><label id="RepairCost">5</label>
+    </div> -->
+    <div class="am-form-group am-u-sm-6">
+      <div class="am-u-sm-4" style="padding: 0; font-size: 14px; font-weight: bold;">应缴租金：</div><div id="ReceiveRent" class="am-u-sm-8" style="padding: 0; font-size: 14px; font-weight: bold;">3000</div>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <input id="money" type="number" placeholder="请输入金额" />
+    </div>
+  </div>
+</form>
+  <!-- content end -->
+{/block}
+{block name="JsFile"}
+<script>
+								
+            	</script>
+<script type="text/javascript" src="/public/static/gf/viewJs/rent_payable.js"></script>
+{/block}

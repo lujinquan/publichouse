@@ -1,0 +1,127 @@
+{extend name="layout" /}
+{block name="title"}<title>核减租金汇总表</title>{/block}
+{block name="content"}
+<?php
+    if($rentcutOption){
+        $owner = $owerArr[$rentcutOption['OwnerType']];
+        $inst = $insArr[$rentcutOption['TubulationID']];
+        $month = $rentcutOption['month']?$rentcutOption['month']:date('Y-m',time());
+    }else{
+        $owner = '市属';
+        $inst = session('user_base_info.institution_name');
+        $month = date('Y',time());
+    }
+?>
+<style>.am-table{margin-bottom: 0;}</style>
+<div class="admin-content">
+    <div class="am-cf am-padding am-print-hide">
+        <div class="am-fl am-cf">
+            <small class="am-text-sm">统计报表</small> >
+            <small class="am-text-primary">核减租金汇总表</small>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-md-12">
+            <h2 style="text-align:center;">核减租金汇总表</h2>
+            <h2 style="text-align:center;display:none;">核减租金汇总表</h2>
+        </div>
+        <form action="{:url('RentCutReport/index')}" method="post" class="am-form am-print-hide am-u-md-12" style="margin-bottom:20px;">
+            <div class="am-u-md-12">
+                <div class="label_style">产别：</div>
+                <div class="am-u-md-2">
+                    <select name="OwnerType" id="doc-select-7" >
+                        <option  value="1" style="display:none">市属</option>
+                        <?php foreach($owerLst as $k1 =>$v1){ ;?>
+                        <?php
+
+                        if($rentcutOption != array()){
+                        if($rentcutOption['OwnerType'] == $v1['id']){
+                        $select ='selected';
+                        }else{
+                        $select ='';
+                        }
+                        }else{
+                        $select ='';
+                        }
+
+                        ?>
+                        <option value="<?php echo $v1['id']; ?>" {$select}><?php echo $v1['OwnerType'];?></option>
+                        <?php }; ?>
+                    </select>
+                </div>
+                <div class="label_style">机构：</div>
+                <div class="am-u-md-2">
+                    <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                    <select name="TubulationID" id="doc-select-2">
+                        <option  value="<?php echo session('user_base_info.institution_id'); ?>" style="display:none"><?php echo session('user_base_info.institution_name'); ?></option>
+                        <?php if(session('user_base_info.institution_level')==1){;?>
+                        <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+                        <?php
+                                if($rentcutOption != array()){
+                                    if($rentcutOption['TubulationID'] == $v10['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+                        <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+                        <?php foreach($instLst as $k12 => $v12){ ; ?>
+                        <?php
+                                if($rentcutOption != array()){
+                                    if($rentcutOption['TubulationID'] == $v12['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+                        <?php }}} ; ?>
+                    </select>
+                </div>
+                <div class="label_style">查询月份:</div>
+                <div class="am-u-md-2">
+                    <?php
+                    if(isset($rentcutOption['month'])){
+                        $month = $rentcutOption['month'];
+                    }else{
+                        $month = date('Y-m',time());
+                    }
+                    ?>
+                    <input type="text" name="month" value="{$month}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" placeholder="日历组件" data-am-datepicker readonly/>
+                </div>
+                <button type="submit" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span> 查询</button>
+                <a type="button" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius" href="/ph/RentCutReport/index.html"><span class="am-icon-reply"></span> 重置</a>
+                <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印</button>
+                <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius"  id="propertycache"><span class="am-icon-file-o"></span>
+                    缓存报表
+                </a>
+            </div>
+        </form>
+        <div style="padding-left:6px;">
+            {include file="application/ph/view/form/rent_cut_report.html" /}
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript">
+    $('#printForm').click(function(){
+        window.print();
+    });
+    $('#propertycache').click(function () {
+        $.ajax({ url: "/ph/SystemLog/RentCutReportCache", success: function(result){
+            var results = jQuery.parseJSON(result);
+            alert(results.msg);
+        }});
+    });
+</script>
+{/block}

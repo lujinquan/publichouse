@@ -1,0 +1,313 @@
+<?php
+namespace app\ph\controller;
+
+use think\Cache;
+use think\helper\Hash;
+use app\ph\model\Menu as MenuModel;
+use think\Db;
+use think\Session;
+use think\Debug;
+
+
+use util\PageTool;
+
+class Index extends Base
+{
+    protected  $page = 5;  //代办事项中的分页每页记录数
+
+    protected $beforeActionList = [
+        'beforeIndex',
+        'index' =>  ['except'=>''],
+        //'three'  =>  ['only'=>'hello,data'],
+    ];
+
+
+    public function index()
+    {
+                
+
+                
+        $notice_list = self::get_notice_list();
+        $upload_file_list = self::get_upload_file_list();
+        $short_cut_menus_list = self::get_short_cut_menus_list();
+        // $short_cut_menus_list = '';
+        //Debug::remark('begin');
+        $get_wait_processing = self::get_wait_list();
+        //halt($get_wait_processing);
+        //Debug::remark('end');
+        //halt('调试时间：'.Debug::getRangeTime('begin', 'end') . 's');
+        $this->assign([
+            'notice_list' => $notice_list,
+            'upload_file_list' => $upload_file_list,
+            'short_cut_menus_list' => $short_cut_menus_list,
+            'wait_processing' => $get_wait_processing,
+        ]);
+
+        return $this->fetch(APP_PATH.request()->module().'/view/layout.html');
+    }
+
+    public function beforeIndex(){
+        
+    }
+
+    /**
+     * @title 查看用户详细资料
+     * @author Mr.Lu
+     * @description
+     */
+    public function  UserDetail(){
+
+        $data = model('ph/UserManage')->get_user_detail();
+
+        if($data){
+            return jsons('2000','获取成功',$data);
+        }else{
+            return jsons('4000','获取失败');
+        }
+
+    }
+
+    /**
+     * 获取代办事项
+     */
+    public function get_wait_list(){
+
+        $listAll = get_wait_processing();
+
+        if($listAll == array()) return array();
+
+        $num = count($listAll);
+
+        //$page = 5;   //设置每页记录数
+        $countnum = ($num<5)?$num:5;
+
+        for($i=0;$i<$countnum;$i++){
+
+            $list[] = $listAll[$i];
+        }
+
+        $pageTool = new PageTool($num,false,1);
+        $nav = $pageTool->show();
+
+        return array(
+            'list' => $list,
+            'nav' => $nav
+        );
+    }
+
+    /**
+     * 获取公告列表
+     */
+    public function get_notice_list(){
+        $num = Db::name('notice')->count();
+        $list = Db::name('notice')->order('UpdateTime desc')->page(1, 5)->select();
+
+        $pageTool = new PageTool($num);
+        $nav = $pageTool->show();
+
+        return array(
+            'list' => $list,
+            'nav' => $nav
+            );
+    }
+
+    /**
+     * ajax获取公告列表
+     */
+    public function noticePageList(){
+        if($this->request->isPost()){
+            $data = $this->request->post();
+            $ret = self::ajax_get_notice_list($data);
+            return jsons('2000', '查询成功', $ret);
+        }
+    }
+    public function ajax_get_notice_list($data){
+        $id = $data['id'];
+        $search = $data['search'];
+        $num = Db::name('notice')->where('Title like "%'.$search.'%"')->count();
+        if($data['id'] == '-1'){
+            $id = ceil($num/5);
+        }
+        $list = Db::name('notice')->where('Title like "%'.$search.'%"')->order('UpdateTime desc')->page($id, 5)->select();
+        $pageTool = new PageTool($num, $data['id']);
+        $nav = $pageTool->show();
+        return array(
+            'list' => $list,
+            'nav' => $nav
+            );
+    }
+
+    /**
+     * 获取文件下载列表
+     */
+    public function get_upload_file_list(){
+        $num = Db::name('file')->count();
+        $list = Db::name('file')->order('Time desc')->page(1, 5)->select();
+        $pageTool = new PageTool($num);
+        $nav = $pageTool->show();
+        return array(
+            'list' => $list,
+            'nav' => $nav
+            );
+    }
+
+    /**
+     * index获取快捷方式列表
+     */
+    public function get_short_cut_menus_list(){
+        $user = Session::get('user_base_info.name');
+        $data = Db::name('short_cut')->where('User', $user)->select();
+        $arr = array();
+        foreach ($data as $info) {
+            $tmp = explode('|', $info['Url']);
+            if(!isset($tmp[1]))
+                $tmp[1] = '';
+            $arr[] = array('url' => $tmp[0], 'icon' => $tmp[1], 'title' => $info['Title']);
+        }
+        return $arr;
+    }
+
+    /**
+     * ajax获取代办事项
+     */
+    public function waitProcessing(){
+        if($this->request->isPost()){
+            $data = $this->request->post();
+            $ret = self::ajax_get_wait_processing($data);
+            return jsons('2000', '查询成功', $ret);
+        }
+    }
+    public function ajax_get_wait_processing($data){
+
+        $listAll = get_wait_processing();
+
+        $num = count($listAll);
+
+        //halt($num);
+
+        if($data['id'] == '-1'){
+            $data['id'] = ceil($num/$this->page);
+        }
+
+        $min = ($data['id']-1)*$this->page;
+        $max = $data['id']*$this->page;
+
+        //dump($min);dump($max);exit;
+
+        for($i= $min; $i<$max; $i++){
+
+            $list[] = $listAll[$i];
+        }
+
+        //halt($list);
+
+        $pageTool = new PageTool($num,$data['id'],1);
+        $nav = $pageTool->show();
+
+        return array(
+            'list' => $list,
+            'nav' => $nav
+        );
+//        $num = Db::name('file')->count();
+//        $id = $data['id'];
+//        if($id == '-1'){
+//            $id = ceil($num / 5);
+//        }
+//        $list = Db::name('file')->order('Time desc')->page($id, 5)->select();
+//        $pageTool = new PageTool($num, $data['id']);
+//        $nav = $pageTool->show();
+//        return array(
+//            'list' => $list,
+//            'nav' => $nav
+//        );
+    }
+
+    /**
+     * ajax获取文件列表
+     */
+    public function uploadfilePageList(){
+        if($this->request->isPost()){
+            $data = $this->request->post();
+            $ret = self::ajax_get_upload_file_list($data);
+            return jsons('2000', '查询成功', $ret);
+        }
+    }
+    public function ajax_get_upload_file_list($data){
+        $id = $data['id'];
+        $search = $data['search'];
+        $num = Db::name('file')->where('Title like "%'.$search.'%"')->count();
+        if($id == '-1'){
+            $id = ceil($num / 5);
+        }
+        $list = Db::name('file')->where('Title like "%'.$search.'%"')->order('Time desc')->page($id, 5)->select();
+        $pageTool = new PageTool($num, $data['id']);
+        $nav = $pageTool->show();
+        return array(
+            'list' => $list,
+            'nav' => $nav
+            );
+    }
+
+    /**
+     * 下载文件
+     */
+    public function downloadFile(){
+        if($this->request->isGet()){
+            $data = $this->request->get();
+            self::download_by_path($data['file'], date('YmdHis', time()) . substr($data['file'], strrpos($data['file'], '.')));
+        }
+    }
+    function download_by_path($path_name, $save_name){
+       ob_end_clean();
+       $path_name = '.' . $path_name;
+       $hfile = fopen($path_name, "rb") or die("Can not find file: $path_name\n");
+       Header("Content-type: application/octet-stream");
+       Header("Content-Transfer-Encoding: binary");
+       Header("Accept-Ranges: bytes");
+       Header("Content-Length: ".filesize($path_name));
+       Header("Content-Disposition: attachment; filename=\"$save_name\"");
+       while (!feof($hfile)) {
+          echo fread($hfile, 32768);
+       }
+       fclose($hfile);
+    }
+
+    /**
+     * 获取二级菜单
+     */
+    public function secondlevelMenu(){
+
+        $tree = Session::get('left_menu_tree');
+        foreach ($tree as $info) {
+            if ($info['Title'] == '主页') {
+                continue;
+            }
+            if($info['level'] == '1')
+                $arr[] = $info;
+        }
+        return jsons('2000', '查询成功', $arr);
+    }
+
+    /**
+     * 修改快捷方式
+     */
+    public function shortCutModify(){
+
+        if($this->request->isPost()){
+            $data = $this->request->post();
+            $user = Session::get('user_base_info.name');
+            Db::name('short_cut')->where('User', $user)->delete();
+            if(isset($data['arr'])){
+                foreach ($data['arr'] as $info) {
+                    $url = $info[0];
+                    $title = $info[1];
+                    Db::name('short_cut')->insert(['Url' => $url, 'Title' => $title, 'User' => $user]);
+                }
+            }
+            return jsons('2000', '修改成功');
+        }
+    }
+
+
+
+}

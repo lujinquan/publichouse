@@ -1,0 +1,125 @@
+<link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
+
+<form id="tenantModifyForm" class="am-form" data-am-validator style="display:none;margin-top:1.6rem;">
+
+	  <fieldset id="InputForm" style="width:780px;">
+		<!--<legend>添加楼栋</legend>-->
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-vld-email-2" class="label_style">租户编号：</label>
+			  <div class="am-u-md-8">
+				<input type="number" name="TenantID" id="TenantI" required/>
+			  </div>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">联系电话：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TenantTel" id="TenantTe" required/>
+				</div>
+			</div>	
+				
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">年龄：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TenantAge" id="TenantAg" required/>
+				</div>
+			</div>	
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">微信号：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantWeChat" id="TenantWeCha" required/>
+				</div>
+			</div>
+
+<!-- 			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">证件类型：</label>
+				<div class="am-u-md-8" style="float:left;">
+					<select name="TenantPaperType" id="doc-select-7" >
+						<option value="1">身份证</option>
+						<option value="2">护照</option>
+						<option value="3">军官证</option>
+						<option value="4">工商执照扫描件</option>
+					</select>
+				</div>
+			</div> -->
+			
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">身份证：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantNumber" id="TenantNumbe" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">银行卡号：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="BankID" id="BanI" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">欠租情况：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="ArrearRent" id="ArrearRen" value="0.00" required/>
+				</div>
+			</div>
+<!-- 
+			<div class="am-form-group am-u-md-12">
+			  <label for="imgUp" class="label_style">影像资料：</label>
+				<div class="am-form-group am-form-file am-u-md-8">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input type="file" name="TenantImageIDS" id="imgUp" multiple>
+				</div>
+			</div>
+			<img class="am-form-group am-u-md-12" id="imgShow" style="width:300px;height:150px;"> -->
+		</div>
+		
+		<div class="am-u-md-6">
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">租户姓名：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantName" id="TenantNam" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">性别：</label>
+				<div class="am-u-md-8">
+					<label class="am-radio-inline">
+						<input type="radio"  value="1" name="TenantSex" checked="checked" required> 男
+					</label>
+					<label class="am-radio-inline">
+						<input type="radio" value="0" name="TenantSex"> 女
+					</label>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">余额：</label>
+				<div class="am-u-md-8" data-am-validator>
+					<input type="number" name="TenantBalance" id="TenantBalanc" value="0.00" required/>
+				</div>
+			</div>
+
+			<!--新加-->
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">QQ号：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TenantQQ" id="TenantQ" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">银行机构：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="BankName" id="BanNam" required/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">诚信值：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantValue" id="TenantValu" required/>
+				</div>
+			</div>
+		</div>
+	  </fieldset>
+</form>
+
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>

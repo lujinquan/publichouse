@@ -1,0 +1,290 @@
+<div class="am-g tableForm">
+	<div class="am-u-md-12">
+		<h2 style="text-align:center;">房屋修理单</h2>
+	</div>
+	<div class="am-u-md-2">管养段：<span><input name="Institution" value="" style="width:120px;"></span></div>
+	<div class="am-u-md-2">工程地点：<span><input name="BanAddress" value="" style="width:120px;"></span></div>
+	<div class="am-u-md-2">产别：<span><input name="OwnerType" value="" style="width:120px;"></span></div>
+	<div class="am-u-md-2">账号：<span><input name="AccountID" value="" style="width:120px;" /></span></div>
+	<div class="am-u-md-2">编号：<span><input name="Number" value="" style="width:120px;" /></span></div>
+	<div class="am-u-md-2">武汉市房地产公司</div>
+	<table class="am-table am-table-bordered am-table-centered">
+	    <thead>
+	        <tr>
+	            <th rowspan="2" colspan="1" class="am-text-middle">定额编号</th>
+	            <th rowspan="2" colspan="3" class="am-text-middle">修理项目</th>
+	            <th rowspan="2" class="am-text-middle">计量单位</th>
+	            <th rowspan="2" class="am-text-middle">工程数量</th>
+	            <th rowspan="2" class="am-text-middle">人工含量</th>
+	            <th rowspan="2" class="am-text-middle">应乘系数</th>
+	            <th rowspan="2" class="am-text-middle">定额工日</th>
+	            <th rowspan="2" class="am-text-middle">实作工日</th>
+	            <th rowspan="2" colspan="2" class="am-text-middle">材料名称</th>
+	            <th rowspan="2" class="am-text-middle">单价</th>
+	            <th rowspan="2" class="am-text-middle">单价</th>
+	            <th rowspan="1" colspan="2">定额材料</th>
+	            <th rowspan="1" colspan="4">实耗材料</th>
+	        </tr>
+	        <tr>
+	            <th rowspan="1" colspan="1">数量</th>
+	            <th rowspan="1" colspan="1">金额(元)</th>
+	            <th rowspan="1" colspan="1">数量</th>
+	            <th rowspan="1" colspan="1">金额(元)</th>
+	            <th rowspan="1" colspan="1">数量<br/>(其中旧料)</th>
+	            <th rowspan="1" colspan="1">金额(元)<br/>(其中旧料)</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td><input type="text" value="" name="QuotaNumber[0]" style="width:53px;"></td>
+	            <td colspan="3">
+	            	<select name="ItemID[0]" style="width:120px;">
+	            		<option>请选择</option>
+						<option value="1">包扎水管</option>
+						<option value="2">清洗消毒更换水箱</option>
+						<option value="3">更换水管</option>
+						<option value="4">更换水配件</option>
+						<option value="5">更换电线</option>
+						<option value="6">更换电配件</option>
+						<option value="7">更换闸刀</option>
+						<option value="8">化粪池改造</option>
+						<option value="9">沟道改进</option>
+						<option value="10">阴井改造</option>
+						<option value="11">配阴井盖</option>
+						<option value="12">更换大便器</option>
+						<option value="13">疏通化粪池</option>
+						<option value="14">疏通阴井</option>
+						<option value="15">疏通管道</option>
+						<option value="16">更换门窗</option>
+						<option value="17">简修门窗</option>
+						<option value="18">修补平顶</option>
+						<option value="19">挖补木地板</option>
+						<option value="20">加固木楼房</option>
+						<option value="21">装配玻璃</option>
+						<option value="22">更换藤条</option>
+						<option value="23">更换瓦条</option>
+						<option value="24">更换简沟</option>
+						<option value="25">平屋面洽漏</option>
+						<option value="26">布瓦更红瓦</option>
+						<option value="27">红布瓦检漏</option>
+						<option value="28">砍粉墙面</option>
+						<option value="29">挖补地坪</option>
+						<option value="30">其他维修</option>
+	            	</select>
+	            </td>
+	            <td><input type="text" value="" name="UnitOne[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ProjectNum[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PersonNum[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ratio[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreWorkdays[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealWorkdays[0]" style="width:70px;" /></td>
+	            <td colspan="2"><input type="text" value="" name="MaterialName[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitTwo[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitPrice[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialNum[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialCost[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialNum[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialCost[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialNum[0]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialCost[0]" style="width:70px;" /></td>
+	        </tr>
+	        <tr>
+	            <td><input type="text" value="" name="QuotaNumber[1]" style="width:53px;"></td>
+	            <td colspan="3">
+	            	<select name="ItemID[1]">
+	            		<option>请选择</option>
+						<option value="1">包扎水管</option>
+						<option value="2">清洗消毒更换水箱</option>
+						<option value="3">更换水管</option>
+						<option value="4">更换水配件</option>
+						<option value="5">更换电线</option>
+						<option value="6">更换电配件</option>
+						<option value="7">更换闸刀</option>
+						<option value="8">化粪池改造</option>
+						<option value="9">沟道改进</option>
+						<option value="10">阴井改造</option>
+						<option value="11">配阴井盖</option>
+						<option value="12">更换大便器</option>
+						<option value="13">疏通化粪池</option>
+						<option value="14">疏通阴井</option>
+						<option value="15">疏通管道</option>
+						<option value="16">更换门窗</option>
+						<option value="17">简修门窗</option>
+						<option value="18">修补平顶</option>
+						<option value="19">挖补木地板</option>
+						<option value="20">加固木楼房</option>
+						<option value="21">装配玻璃</option>
+						<option value="22">更换藤条</option>
+						<option value="23">更换瓦条</option>
+						<option value="24">更换简沟</option>
+						<option value="25">平屋面洽漏</option>
+						<option value="26">布瓦更红瓦</option>
+						<option value="27">红布瓦检漏</option>
+						<option value="28">砍粉墙面</option>
+						<option value="29">挖补地坪</option>
+						<option value="30">其他维修</option>
+	            	</select>
+	            </td>
+	            <td><input type="text" value="" name="UnitOne[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ProjectNum[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PersonNum[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ratio[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreWorkdays[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealWorkdays[1]" style="width:70px;" /></td>
+	            <td colspan="2"><input type="text" value="" name="MaterialName[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitTwo[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitPrice[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialNum[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialCost[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialNum[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialCost[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialNum[1]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialCost[1]" style="width:70px;" /></td>
+	        </tr>
+	        <tr>
+	            <td><input type="text" name="QuotaNumber[2]" style="width:53px;"></td>
+	            <td colspan="3">
+	            	<select name="ItemID[2]">
+	            		<option>请选择</option>
+						<option value="1">包扎水管</option>
+						<option value="2">清洗消毒更换水箱</option>
+						<option value="3">更换水管</option>
+						<option value="4">更换水配件</option>
+						<option value="5">更换电线</option>
+						<option value="6">更换电配件</option>
+						<option value="7">更换闸刀</option>
+						<option value="8">化粪池改造</option>
+						<option value="9">沟道改进</option>
+						<option value="10">阴井改造</option>
+						<option value="11">配阴井盖</option>
+						<option value="12">更换大便器</option>
+						<option value="13">疏通化粪池</option>
+						<option value="14">疏通阴井</option>
+						<option value="15">疏通管道</option>
+						<option value="16">更换门窗</option>
+						<option value="17">简修门窗</option>
+						<option value="18">修补平顶</option>
+						<option value="19">挖补木地板</option>
+						<option value="20">加固木楼房</option>
+						<option value="21">装配玻璃</option>
+						<option value="22">更换藤条</option>
+						<option value="23">更换瓦条</option>
+						<option value="24">更换简沟</option>
+						<option value="25">平屋面洽漏</option>
+						<option value="26">布瓦更红瓦</option>
+						<option value="27">红布瓦检漏</option>
+						<option value="28">砍粉墙面</option>
+						<option value="29">挖补地坪</option>
+						<option value="30">其他维修</option>
+	            	</select>
+	            </td>
+	            <td><input type="text" value="" name="UnitOne[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ProjectNum[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PersonNum[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ratio[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreWorkdays[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealWorkdays[2]" style="width:70px;" /></td>
+	            <td colspan="2"><input type="text" value="" name="MaterialName[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitTwo[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitPrice[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialNum[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialCost[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialNum[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialCost[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialNum[2]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialCost[2]" style="width:70px;" /></td>
+	        </tr>
+	        <tr>
+	            <td><input type="text" name="QuotaNumber[3]" style="width:53px;"></td>
+	            <td colspan="3">
+	            	<select name="ItemID[3]">
+	            		<option>请选择</option>
+						<option value="1">包扎水管</option>
+						<option value="2">清洗消毒更换水箱</option>
+						<option value="3">更换水管</option>
+						<option value="4">更换水配件</option>
+						<option value="5">更换电线</option>
+						<option value="6">更换电配件</option>
+						<option value="7">更换闸刀</option>
+						<option value="8">化粪池改造</option>
+						<option value="9">沟道改进</option>
+						<option value="10">阴井改造</option>
+						<option value="11">配阴井盖</option>
+						<option value="12">更换大便器</option>
+						<option value="13">疏通化粪池</option>
+						<option value="14">疏通阴井</option>
+						<option value="15">疏通管道</option>
+						<option value="16">更换门窗</option>
+						<option value="17">简修门窗</option>
+						<option value="18">修补平顶</option>
+						<option value="19">挖补木地板</option>
+						<option value="20">加固木楼房</option>
+						<option value="21">装配玻璃</option>
+						<option value="22">更换藤条</option>
+						<option value="23">更换瓦条</option>
+						<option value="24">更换简沟</option>
+						<option value="25">平屋面洽漏</option>
+						<option value="26">布瓦更红瓦</option>
+						<option value="27">红布瓦检漏</option>
+						<option value="28">砍粉墙面</option>
+						<option value="29">挖补地坪</option>
+						<option value="30">其他维修</option>
+	            	</select>
+	            </td>
+	            <td><input type="text" value="" name="UnitOne[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ProjectNum[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PersonNum[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="ratio[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreWorkdays[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealWorkdays[3]" style="width:70px;" /></td>
+	            <td colspan="2"><input type="text" value="" name="MaterialName[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitTwo[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="UnitPrice[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialNum[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="PreMaterialCost[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialNum[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="RealMaterialCost[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialNum[3]" style="width:70px;" /></td>
+	            <td><input type="text" value="" name="OldMaterialCost[3]" style="width:70px;" /></td>
+	        </tr>
+	        <tr>
+				<td colspan="4">人工费(元)<span><input type="text" name="LaborCost" /></span></td>
+				<td colspan="4">材料费(元)<span><input type="text" name="MaterialCost" /></span></td>
+				<td colspan="4">赔偿住户费(元)<span><input type="text" name="CompanyToTenant" /></span></td>
+				<td rowspan="2" colspan="4">合计<span><input type="text" name="Total" /></span></td>
+				<td rowspan="2" colspan="4">备注<span><input type="text" name="Remark" /></span></td>
+	        </tr>
+	        <tr>
+				<td colspan="4"><label class="am-u-sm-6" style="padding:0;">系数工资(元)</label><div class="am-u-sm-6" style="padding:0;"><input type="text" name="CoefficientSalary" /></div></td>
+				<td colspan="4">管理费(元)<span><input type="text" name="ManageCost" /></span></td>
+				<td colspan="4">住户赔偿费(元)<span><input type="text" name="TenantToCompany" /></span></td>
+	        </tr>
+	        <tr>
+				<td colspan="2">设备增减</td>
+				<td colspan="2"><input type="text" name="EquipmentChange"></td>
+				<td colspan="2">合计</td>
+				<td colspan="2"><input type="text" name="ECTotal"></td>
+				<td colspan="2">人工费</td>
+				<td colspan="2"><input type="text" name="ECLaborCost"></td>
+				<td colspan="2">管理费</td>
+				<td colspan="2"><input type="text" name="ECManageCost"></td>
+				<td colspan="2">材料费</td>
+				<td colspan="2"><input type="text" name="ECMaterialCost"></td>
+	        </tr>
+	        <tr>
+				<td colspan="1">修理质量</td>
+				<td colspan="5"><input type="text" name="RepairQuality" value=""></td>
+				<td colspan="1">检查记载</td>
+				<td colspan="5"><input type="text" name="InspectionRecord" value=""></td>
+				<td colspan="1">住户意见</td>
+				<td colspan="7"><input type="text" name="TenantOpinion" value=""></td>
+	        </tr>
+	    </tbody>
+	</table>
+	<div class="am-u-md-2">核算员：<input name="AccountingClerk" value="" style="width:150px"></div>
+	<div class="am-u-md-2">房管员：<input name="CreateUserName" value="" style="width:150px"></div>
+	<div class="am-u-md-2">修理员：<input name="Repairman" value="" style="width:150px"></div>
+	<div class="am-u-md-2">日期：<input name="CreateTime" value="" style="width:150px"></div>
+	<div class="am-u-md-2">承租人：<input name="TenantName" value="" style="width:150px"><input name="TenantID" value="" hidden="hidden" style="width:150px"></div>
+	<div class="am-u-md-2">联系方式：<input name="TenantTel" value="" style="width:130px"></div>
+</div>

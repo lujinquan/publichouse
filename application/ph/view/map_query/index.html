@@ -1,0 +1,160 @@
+{extend name="layout" /}
+{block name="title"}<title>地图查询</title>{/block}
+{block name="content"}
+	<link rel="stylesheet" type="text/css" href="/public/static/gf/css/map.css">
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=2xlodrKVRyFNeopCajiMTfgIOr8dnUAe"></script>
+	<!--  <script type="text/javascript" src="http://lbsyun.baidu.com/jsdemo/data/points-sample-data.js"/> -->
+
+	<title></title>
+</head>
+<body>
+    <div id="allmap" style="height:950px;"></div>
+    <div  style="position: absolute;right:60px;top: 51px;">
+		<?php if(session('user_base_info.institution_level')!=3){ ;?>
+		<select class="check" name="TubulationID" id="doc-select-2">
+			<option  value="" style="display:none" id="name2">机构名称</option>
+			<?php if(session('user_base_info.institution_level')==1){;?>
+			<?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+
+			<option value="<?php echo $v10['id']; ?>"><?php echo $v10['Institution']; ?></option>
+			<?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+			<?php foreach($instLst as $k12 => $v12){ ; ?>
+
+			<option value="<?php echo $v12['id']; ?>" ><?php echo $v12['Institution']; ?></option>
+			<?php }}} ; ?>
+		</select>
+		<select class="check" name="OwnerType" id="doc-select-5">
+			<option  value="" style="display:none">产别</option>
+			<?php foreach($owerLst as $k3 =>$v3){;?>
+			<option value="<?php echo $v3['id']; ?>"><?php echo $v3['OwnerType']; ?></option>
+			<?php }; ?>
+		</select>
+	</div><!-- 搜索  -->
+	<div class="contentM">
+		<div class="am-u-md-12 pd0 ">
+		<div class="tit">地图查询</div>
+		<div class="cha"><img src="/public/static/gf/icons/cha.png" width="100%" id="cha2"/></div>
+		</div>
+		<div class="pd10 fontS">
+		<div class="am-u-md-12" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-6 basic_msg">楼栋基本信息</label> 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">楼栋编号：</label>
+			  <div class="am-u-md-8" style="padding:7px; " id="BanID"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">楼栋地址：</label>
+			  <div class="am-u-md-8" style="padding: 7px;  " id="BanAddress"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">机构名称：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="TubulationID" id="TubulationID"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg" >产别：</label>
+			  <div class="am-u-md-8" style="padding:7px; " id="OwnerType"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg" >产权证号：</label>
+			  <div class="am-u-md-8" style="padding: 7px;" id="BanPropertyID"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg" >完损等级：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="DamageGrade"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">结构类别：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="StructureType"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">使用性质：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="UseNature"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg" >建成年份：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="BanYear"></div>
+			 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px; ">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">原价：</label>
+			  <div class="am-u-md-8" style="padding:7px; "></div>		 			
+		</div>
+		<div class="am-u-md-4" style="padding-left: 10px; ">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg" >合建面：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="TotalOprice"></div>		 			
+		</div>
+		
+		<div class="am-u-md-4" style="padding-left: 10px; float: left;">
+			  <label for="doc-select-8" class="am-u-md-4 basic_msg">产权来源：</label>
+			  <div class="am-u-md-8" style="padding: 7px; " id="PropertySource"></div>		 			
+		</div>
+		<div class="ban-btn">
+			  <input type='button' value='明细' class='f12 detail-btn' id="check_btn" />
+			 			
+		</div>
+		<div class="am-u-md-12 basic_h"></div>
+		<div class="am-u-md-12" style="padding: 0;" id="oDiv">
+			<div class="am-u-md-12" style="padding-left: 10px;">
+			  <label for="doc-select-8" class="am-u-md-6 basic_msg">房屋基本信息</label> 			
+			</div>
+			<ul style="width: 17%;" class="map_p" id="HouseID">
+				<li class="text-bold">房屋编号</li>
+				
+			</ul>
+			<ul style="width: 15%;" class="map_p" id="TenantName">
+				<li class="text-bold">租户姓名</li>
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="UseNatured">
+				<li class="text-bold">使用性质</li>
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="DoorID">
+				<li class="text-bold">门牌号码</li>
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="UnitID">
+				<li class="text-bold">单元号</li>
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="FloorID">
+				<li class="text-bold">楼层号</li>
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="UseArea">	
+				<li class="text-bold">使用面积</li>
+				
+				
+			</ul>
+			<ul style="width: 10%;" class="map_p" id="RegularPrice">
+				<li class="text-bold">规定租金</li>
+				
+				
+			</ul>
+			<ul style="width: 8%;" class="map_p" id="DetailM">
+				<li class="text-bold">操作</li>
+				
+			</ul>
+		
+		</div>
+		</div>
+	</div>
+	{include file="application/ph/view/map_query/detail.html" /}
+	{include file="application/ph/view/map_query/house_detail.html" /}
+</body>
+<script type="text/javascript" src="/public/static/gf/viewJs/mapQuery.js"></script>
+</html>
+
+{/block}
+
+
+

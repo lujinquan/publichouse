@@ -1,0 +1,83 @@
+{
+	"SubmitMaterials":[
+		{"ReBooklet":"更改姓名后户口簿"},
+		{"ReIDCard":"更改姓名后居民身份证"},
+		{"ReContract":"国有公房(民用住宅)租赁合同"},
+		//过户
+		{"CnApplicationForm":"申请书"},
+		{"CnApBooklet":"申请人户口簿"},
+		{"CnApIDCard":"申请人身份证、图章"},
+		{"CnContract":"国有公房（民用住宅）租赁合同"},
+		{"CnDeathProve":"原承租人死亡的，提交死亡证明"},
+		{"CnMigProve":"原承租人户籍迁出本市的，提交户籍注销证明"},
+		{"CnLitig":"诉讼离婚的，提交人民法院判决书或者调解书"},
+		{"CnAgreement":"协议离婚的，提交经民政部门备案的离婚协议书"},
+		{"CnDivorce":"离婚证"},
+		{"CnAttachmentOne":"附件一：公有住房指定承租人协议书（需公证）"},
+		{"CnAttachmentTwo":"附件二：公有住房过户协议书"},
+		{"CnAttachmentThr":"附件三：公有住房承租声明"},
+		{"CnAttachmentFour":"附件四：公有住房承租保证"},
+		{"CnAttachmentFive":"附件五：公有住房承租承诺书"},
+		//赠予
+		{"TrCheck":"房屋结构查验情况"},
+		{"TrApplicationForm":"申请书"},
+		{"TrApBooklet":"申请人户口簿"},
+		{"TrApIDCard":"申请人身份证、图章"},
+		{"TrContract":"国有公房（民用住宅）租赁合同"},
+		{"TrDeathProve":"原承租人死亡的，提交死亡证明"},
+		{"TrAgreementOne":"经公证的配偶及同户籍近亲同意使用权转让协议书（附件七）"},
+		{"TrAgreementTwo":"国有公房（民用住宅）使用权转让双方签订的国有公房（民用住宅）使用权转让协议书"},
+		{"TrAgreementThr":"承租人与配偶不同户籍的，结婚证"},
+		{"TrAttachmentOne":"附件六：承 诺 书"},
+		{"TrAttachmentTwo":"附件七：同意办理公有住房使用权转让或者代理转让协议书"},
+		{"TrAttachmentThr":"附件八 ：武昌区房地产公司      房管所    直管公房使用权转让备案单"},
+		{"TrAttachmentFour":"附件九：协 议 书"},
+		{"TrAttachmentFive":"附件十：同意办理公有住房使用权置换或者代理转让声明书"},
+		{"TrAttachmentSix":"附件十一：同意办理公有住房使用权置换或者代理转让声明书"}
+	],
+	"NewRentReduction":{ //新增租金减免
+		"CutType":"减免类型",
+		"IDnumber":"证件号",
+		"ID":"证件上传",
+		"validity":"证件有效期",
+		"AppForm":"租金核减审核表",
+		"AppBook":"资金核减申请书",
+		"ReBooklet":"户口簿",
+		"HouseLease":"住房租约",
+		"type":"1"
+	},
+	"MOveApply"{//异动申请
+		"NewRentReduction":{ //新增租金减免
+			"CutType":"减免类型",
+			"IDnumber":"证件号",
+			"ID":"证件上传",//附件
+			"validity":"证件有效期",
+			"AppForm":"租金核减审核表",//附件
+			"AppBook":"资金核减申请书",//附件
+			"ReBooklet":"户口簿",//附件
+			"HouseLease":"住房租约",//附件
+			"type":"1"
+		},
+		"NewEmptyRent":{ //新增空租
+			"EmptyReport":"空租报告",//附件
+			"type":"2"
+		},
+		"NewPauseRent":{ //新增暂停计租
+			"SuspendReport":"暂停计租报告"//附件
+			"type":"3"
+		},
+		"NewBreaks":{ //新增注销
+			"cancel":"注销原因",
+			"CancelReport":"新增注销材料",//附件
+			"type":"8"
+		},
+		"NewWriteOff":{ //新增陈欠核销
+			"WriteOffReport":"陈欠核销报告",//附件
+			"type":"4"
+		},
+		"homeCkeck":{
+			"homeCkeck":"房屋勘察表",
+			"type":"6"
+		}
+	}
+}

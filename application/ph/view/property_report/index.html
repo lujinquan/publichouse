@@ -1,0 +1,110 @@
+{extend name="layout" /}
+{block name="title"}<title>产权统计</title>{/block}
+{block name="content"}
+<?php
+    if($propertyOption){
+        $owner = $owerLst[$propertyOption['OwnerType']];
+        $inst = isset($propertyOption['TubulationID'])?$insArr[$propertyOption['TubulationID']]:$insArr[$institutionid];
+        $year = $propertyOption['year']?$propertyOption['year']:date('Y',time());
+    }else{
+        $owner = '市属';
+        $inst = session('user_base_info.institution_name');
+        $year = date('Y',time());
+    }
+?>
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><small class="am-text-sm">统计报表</small> >
+            <small class="am-text-primary">产权统计</small>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-md-12">
+            <h2 style="text-align:center;">武汉市房地局直管公房产权（{$owner}）情况综合统计表</h2>
+        </div>
+        <form action="{:url('PropertyReport/index')}" method="post" class="am-form am-print-hide" style="margin-bottom:20px;padding-left:6px;">
+            <div class="label_style">产别：</div>
+            <div class="am-u-md-2">
+                <select name="OwnerType">
+                    <option  value="1" style="display:none">市属</option>
+                    <?php foreach($owerLst as $k1 =>$v1){ ;?>
+                    <?php
+
+                    if($propertyOption != array()){
+                            if($propertyOption['OwnerType'] == $k1){
+                                $select ='selected';
+                            }else{
+                                $select ='';
+                            }
+                        }else{
+                            $select ='';
+                        }
+
+                    ?>
+                    <option value="<?php echo $k1; ?>" {$select}><?php echo $v1;?></option>
+                    <?php }; ?>
+                </select>
+            </div>
+
+            <?php if(session('user_base_info.institution_level')==1){ ;?>
+            <div class="label_style">机构：</div>
+            <div class="am-u-md-2">
+                <select name="TubulationID">
+                    <option  value="<?php echo session('user_base_info.institution_id'); ?>"><?php echo session('user_base_info.institution_name'); ?></option>
+                    <?php foreach($instLst as $k10 => $v10){ if($v10['level'] <2 ){; ?>
+                    <?php
+                                if($propertyOption != array()){
+                                    if($propertyOption['TubulationID'] == $v10['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                    <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+                    <?php }}; ?>
+                </select>
+                
+            </div>
+            <?php }; ?>
+
+            <div class="label_style">查询年份:</div>
+            <div class="am-u-md-2">
+                <input type="text" name="year" value="{$year}" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years',minViewMode: 'years'}" placeholder="日历组件" data-am-datepicker readonly/>
+            </div>
+            <button type="submit" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span>
+                查询
+            </button>
+            <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius" href="/ph/PropertyReport/index.html"><span class="am-icon-reply"></span>
+                重置
+            </a>
+            <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span
+                    class="am-icon-print"></span> 打印
+            </button>
+            <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius"  id="propertycache"><span class="am-icon-file-o"></span>
+                缓存报表
+            </a>
+        </form>
+        <div style="padding-left:6px;">
+            {include file="application/ph/view/form/property_right.html" /}
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript">
+    $('#printForm').click(function () {
+        window.print();
+    });
+    $('#propertycache').click(function () {
+        $.ajax({ url: "/ph/SystemLog/PropertyReportCache", success: function(result){
+            var results = jQuery.parseJSON(result);
+            alert(results.msg);
+        }});
+    });
+</script>
+{/block}

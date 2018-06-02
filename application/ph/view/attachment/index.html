@@ -1,0 +1,74 @@
+{extend name="layout" /}
+{block name="title"}<title>文件管理</title>{/block}
+{block name="css"}
+<!-- <link rel="stylesheet" href="/public/static/gf/css/lightbox.min.css"> -->
+<link rel="stylesheet" type="text/css" href="/public/static/gf/css/uploadfile.css">
+{/block}
+{block name="content"}
+<!-- content start -->
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> > <small class="am-text-primary">文件管理</small></div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group-xs">
+                    <button type="button" id="addAttachment" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 文件上传</button>
+                    <button type="button" id="deletefile" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 文件删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-scrollable-horizontal">
+            <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+                <thead>
+                <tr>
+                    <th class="table-check"></th>
+                    <th class="table-id">#</th>
+                    <th class="table-title">文件名称</th>
+                    <!-- <th class="table-author am-hide-sm-only">文件类别</th> -->
+                    <th class="table-set">上传时间</th>
+                    <th class="table-set">上传者</th>
+                </tr>
+                </thead>
+                <tbody>
+
+              <?php foreach($attachmentLst as $k0 => $v0){ ; ?>
+                <tr class="check001">
+                    <td class="am-hide-sm-only">
+                        <span class="piaochecked">
+                            <input class="checkId radioclass" type="radio" name="choose" value="<?php echo $v0['id']; ?>" />
+                        </span>
+                    </td>
+                    <td class="am-hide-sm-only"><?php echo ++$k0; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v0['Title']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v0['Time']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v0['UploadUser']; ?></td>
+                </tr>
+              <?php }; ?>
+
+                </tbody>
+            </table>
+            <div class="am-cf">
+                共{$attachmentLstObj->total()}条记录
+                <div class="am-fr">
+                    {$attachmentLstObj->render()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content end -->
+{include file="application/ph/view/attachment/form.html" /}
+{/block}
+{block name="JsFile"}
+<!-- <script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script> -->
+<script type="text/javascript" src="/public/static/gf/js/jquery-form.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/attachment.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/uploadfile.js"></script>
+<!-- <script type="text/javascript" src="/public/static/gf/js/lightbox-plus-jquery.min.js"></script> -->
+{/block}

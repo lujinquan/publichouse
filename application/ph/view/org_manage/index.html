@@ -1,0 +1,78 @@
+{extend name="layout" /}
+{block name="title"}<title>机构管理</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">权限管理</small> > <small class="am-text-primary">机构管理</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+              <?php if(in_array(208,$threeMenu)){ ; ?>
+              <button type="button" id="addOrg" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增机构</button>
+              <?php }; ?>
+              <?php if(in_array(209,$threeMenu)){ ; ?>
+              <button type="button" id="reviseOrg" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改机构</button>
+              <?php }; ?>
+              <?php if(in_array(210,$threeMenu)){ ; ?>
+              <button type="button" id="deleteOrg" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span>  删除机构</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                  <th class="table-check"></th>
+          				<th class="table-title">机构编号</th>
+          				<th class="table-type">机构名称</th>
+          				<th class="table-author am-hide-sm-only">有效性</th>
+              </tr>
+          </thead>
+
+          <tbody>
+
+          <?php foreach($orgLst as $k => $v){ ;?>
+
+            <tr class="check001">
+                <td>
+                  <span class="piaochecked">
+                    <input class="checkId radioclass" name="choose" type="radio" value="<?php echo $v['id']; ?>" />
+                  </span>
+                </td>
+                <td><?php echo $v['id']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Institution']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+            </tr>
+
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+		  共{$orgLstObj->total()}条记录
+		  <div class="am-fr">
+              <div class="am-fr">
+                  {$orgLstObj->render()}
+              </div>
+		  </div>
+		</div>
+    </div>
+  </div>
+</div>
+
+  {include file="application/ph/view/org_manage/form.html" /}
+  {include file="application/ph/view/org_manage/modify.html" /}
+  <!-- content end -->
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/org_manage.js"></script>
+{/block}

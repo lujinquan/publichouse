@@ -1,0 +1,44 @@
+{extend name="layout" /}
+{block name="title"}<title>发布公告</title>{/block}
+{block name="content"}
+<script charset="utf-8" src="/extend/kindeditor/kindeditor-all.js"></script>
+<script charset="utf-8" src="/extend/kindeditor/lang/zh-CN.js"></script>
+<div>
+<center>
+	<div>
+		<table>
+			<tr>
+				<td>标题: <input type="text" name="title"></td>
+			</tr>
+			<tr>
+				<td>机构: <input type="text" name="title"></td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="editor_id" name="content" style="width:700px;height:300px;">
+					</textarea>
+					<script>
+						var options = {
+					        width : '800px',
+					        height: '700px'
+						};
+				        KindEditor.ready(function(K) {
+			                editor = K.create('#editor_id', options);
+				        });
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="submit">提交</button>
+					<button id="reset">重置</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</center>
+</div>
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/notice_add.js"></script>
+{/block}

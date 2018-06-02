@@ -1,0 +1,38 @@
+<table class="am-table am-table-bordered am-table-centered" id="PropertyForm">
+
+    <div style="display:inline-block;width:30%" class="DQueryType fontSize_12">产别：{$owner}</div>
+    <div style="display:inline-block;width:30%" class="DQueryType fontSize_12">填报单位：{$inst}</div>
+    <div style="display:inline-block;width:30%" class="time fontSize_12">填报时间：{$month}</div>
+        <tbody>
+            <tr>
+                <th rowspan="1" colspan="1" class="am-text-middle">房屋座落</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">栋号</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">建成年份</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">层数</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">完损等级</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">机构类别</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">建筑面积</th>
+                <th rowspan="1" colspan="1" class="am-text-middle">规定租金</th>
+            </tr>
+            {volist name="plist" id="ptest"}
+            <tr>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['BanAddress']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['BanUnitNum']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['BanYear']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['BanFloorNum']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['DamageGrade']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['Institution']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['TotalArea']}</td>
+                <td rowspan="1" colspan="1" class="am-text-middle">{$ptest['PreRent']}</td>
+            </tr>
+            {/volist}
+        </tbody>
+</table>
+<div class="am-cf">
+    共{$plist->total()}条记录
+    <div class="am-fr">
+        {$plist->render()}
+    </div>
+</div>
+
+

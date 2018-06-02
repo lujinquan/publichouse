@@ -1,0 +1,84 @@
+{extend name="layout" /}
+{block name="title"}<title>职务管理</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">权限管理</small> > <small class="am-text-primary">职务管理</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+              <?php if(in_array(205,$threeMenu)){ ; ?>
+              <button type="button" id="addPost" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增职务</button>
+              <?php }; ?>
+              <?php if(in_array(206,$threeMenu)){ ; ?>
+              <button type="button" id="revisePost" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改职务</button>
+              <?php }; ?>
+              <?php if(in_array(207,$threeMenu)){ ; ?>
+              <button type="button" id="deletePost" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 删除职务</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                <th class="table-check"></th>
+        				<th class="table-id">#</th>
+        				<th class="table-title">职务编号</th>
+        				<th class="table-type">职务名称</th>
+        				<th class="table-author am-hide-sm-only">有效性</th>
+<!-- 				<th class="table-set" style="width:220px;">操作</th> -->
+              </tr>
+          </thead>
+          <tbody>
+
+          <?php foreach( $postLst as $k => $v){ ;?>
+
+            <tr class="check001">
+                <td>
+                  <span class="piaochecked">
+                    <input class="checkId radioclass" name="choose" type="radio" value="<?php echo $v['PostID']; ?>" />
+                  </span>
+                  </td>
+                <td><?php echo ++$k; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['PostID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['PostName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+<!--               <td>
+                <div class="am-btn-toolbar">
+                  <div class="am-btn-group am-btn-group-xs">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary details details_btn" value=""> 明细</button>
+                  </div>
+                </div>
+              </td> -->
+            </tr>
+
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+		  共{$postLstObj->total()}条记录
+		  <div class="am-fr">
+           {$postLstObj->render()}
+		  </div>
+		</div>
+      </div>
+    </div>
+  </div>
+  {include file="application/ph/view/post_manage/form.html" /}
+  {include file="application/ph/view/post_manage/modify.html" /}
+  <!-- content end -->
+
+{/block}
+{block name="JsFile"}
+<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/post_manage.js"></script>
+{/block}

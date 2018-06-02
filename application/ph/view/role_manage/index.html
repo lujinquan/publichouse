@@ -1,0 +1,82 @@
+{extend name="layout" /}
+{block name="title"}<title>角色管理</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">权限管理</small> > <small class="am-text-primary">角色管理</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">e
+          <div class="am-btn-group-xs">
+              <?php if(in_array(214,$threeMenu)){ ; ?>
+              <button type="button" id="addRole" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增角色</button>
+              <?php }; ?>
+              <?php if(in_array(215,$threeMenu)){ ; ?>
+              <button type="button" id="reviseRole" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改角色</button>
+              <?php }; ?>
+              <?php if(in_array(216,$threeMenu)){ ; ?>
+              <button type="button" id="deleteRole" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span>  删除角色</button>
+              <?php }; ?>
+              <?php if(in_array(219,$threeMenu)){ ; ?>
+              <button type="button" id="permission" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-share"></span> 权限分配</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                  <th class="table-check"></th>
+          				<th class="table-id">#</th>
+          				<th class="table-title">角色编号</th>
+          				<th class="table-type">角色名称</th>
+          				<th class="table-author am-hide-sm-only">是否为岗位</th>
+          				<th class="table-date am-hide-sm-only">有效性</th>
+              </tr>
+          </thead>
+          <tbody>
+
+          <?php foreach($roleLst as $k => $v){ ;?>
+
+            <tr class="check001">
+                <td>
+                  <span class="piaochecked">
+                    <input class="checkId radioclass" name="choose" type="radio" value="<?php echo $v['id']; ?>" />
+                  </span>
+                </td>
+                <td><?php echo ++$k; ?></td>
+                <td><?php echo $v['id']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['RoleName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Ifstation']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+            </tr>
+
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+		  共{$roleLstObj->total()}条记录
+		  <div class="am-fr">
+              {$roleLstObj->render()}
+		  </div>
+		</div>
+      </div>
+    </div>
+  </div>
+  {include file="application/ph/view/role_manage/form.html" /}
+  {include file="application/ph/view/role_manage/modify.html" /}
+  {include file="application/ph/view/role_manage/permission.html" /}
+  <!-- content end -->
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/role_manage.js"></script>
+{/block}

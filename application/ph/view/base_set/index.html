@@ -1,0 +1,81 @@
+{extend name="layout" /}
+{block name="title"}<title>基数设置</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> > <small class="am-text-primary">基数设置</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-8">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+            <button type="button" id="1" class="conf-class am-btn d-btn-1188F0 am-radius"><span class="am-icon-cog"></span> 各类结构住房租金基价表</button>
+            <button type="button" id="2" class="conf-class am-btn d-btn-1188F0 am-radius"><span class="am-icon-cog"></span> 住房使用面积的计算</button>
+            <button type="button" id="3" class="conf-class am-btn d-btn-1188F0 am-radius"><span class="am-icon-cog"></span> 住房租金基价折减表</button>
+            <button type="button" id="4" class="conf-class am-btn d-btn-1188F0 am-radius"><span class="am-icon-cog"></span> 楼栋层次调节率</button>
+            <button type="button" id="5" class="conf-class am-btn d-btn-1188F0 am-radius"><span class="am-icon-cog"></span> 各项加计租金</button>
+          </div>
+          <span hidden="hidden" id="conf-class-id">1</span>
+        </div>
+      </div>
+    </div>
+    <div class="am-cf am-padding-xs"></div>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-bordered am-table-centered" style="padding: 0">
+            <thead>
+              <tr id="field">
+              <?php
+              if($structure_type !== null){
+                echo '<td>序号</td><td>结构级别</td><td>现行标准</td><td>调整标准</td><td>操作</td>';
+              }
+              ?>
+              </tr><!-- 字段名称 -->
+          </thead>
+          <tbody id="tb">
+          <?php
+          if($structure_type != null){
+            foreach($structure_type as $info){
+              echo '<tr><td>' . $info['id'] . '</td><td>' . $info['StructureType'] . '</td><td>' . $info['OldPoint'] . '</td><td>' . $info['NewPoint'] . '</td>';
+              echo '<td width="20%">'.
+                   '<div class="am-btn-group am-btn-group-xs am-u-md-offset-4">'.
+                   '<button class="conf-modify am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">修改</button>'.
+                   '<button class="conf-delete am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">删除</button>'.
+                   '</div>'.
+                   '</td>';
+              echo '</tr>';
+            }
+            echo '<td></td><td></td><td></td><td></td>';
+            echo '<td width="20%"><div class="am-btn-group am-btn-group-xs am-u-md-offset-4"><button class="conf-add am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">增加</button></div></td>';
+
+          }
+          ?>
+          
+      <!--查询-->
+              <!-- 添加数据 -->
+            <!-- <tr>
+              <td>
+                  <div class="am-btn-group am-btn-group-xs am-u-md-offset-4">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-hide-sm-only">修改</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-hide-sm-only">删除</button>
+                  </div>
+              </td>
+            </tr> -->
+
+          </tbody>
+          
+        </table>
+         <!--  <hr /> -->
+      </div>
+    </div>
+  </div>
+
+{include file="application/ph/view/form/base_set_modify.html" /}
+  <!-- content end -->
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewjs/base_set.js"></script>
+{/block}

@@ -1,0 +1,1551 @@
+﻿<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8" >
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" >
+<TITLE>SDK2.0测试</TITLE>
+<OBJECT ID="EloamGlobal_ID" CLASSID="CLSID:52D1E686-D8D7-4DF2-9A74-8B8F4650BF73"></OBJECT>
+
+   
+<script language="javascript" type="text/javascript">
+	var EloamGlobal;
+	var DeviceMain;
+	var VideoMain;
+	var DeviceAssist;
+	var VideoAssist;
+	var videoCapMain;
+	var videoCapAssist;	
+	
+	var EloamImageTemp3;
+	//var currentImageTemp;
+	var imageSave;
+	
+	var Timer;
+	var EloamImageTemp1;
+	var EloamImageTemp2;
+	var bMerge;
+	var imageSave1 
+	var PicPath;
+
+	var hasLoadSuccess = 0;
+	var readIDcard = false;
+	
+	var initFaceDetectSuccess = 0;
+	
+	// var onmessage = function (event) {
+	//     var data = event.data;
+	//     var origin = event.origin;
+	//     //do someing
+	//     alert(data);
+	// };
+	// if (typeof window.addEventListener != 'undefined') {
+	//     window.addEventListener('message', onmessage, false);
+	// } else if (typeof window.attachEvent != 'undefined') {
+	//     //for ie
+	//     window.attachEvent('onmessage', onmessage);
+	// }
+
+
+	function Load()
+	{
+		EloamGlobal = document.getElementById("EloamGlobal_ID");
+	
+		var ret;
+		ret = EloamGlobal.InitDevs();
+		if(ret)
+		{
+			EloamGlobal.InitBiokey();
+			
+			if(!EloamGlobal.VideoCapInit())
+			{
+				alert("初始化录像失败");
+			}
+			
+			//进行人脸识别初始化时，视频应处于关闭状态
+			initFaceDetectSuccess = EloamGlobal.InitFaceDetect();
+
+			OpenBothVideo();
+		}
+		hasLoadSuccess = 1;
+	}
+	function AA(){
+    alert("人脸初始化失败，机型不支持！");
+	}
+
+	function Unload()
+	{
+		if (VideoMain)
+		{
+			ViewMain.SetText("", 0);
+			VideoMain.Destroy();
+			VideoMain = null;
+		}
+		if(DeviceMain)
+		{
+			DeviceMain.Destroy();
+			DeviceMain = null;
+		}
+		
+		if (VideoAssist)
+		{
+			ViewAssist.SetText("", 0);
+			VideoAssist.Destroy();
+			VideoAssist = null;
+					
+		}
+		if(DeviceAssist)
+		{
+			DeviceAssist.Destroy();
+			DeviceAssist = null;
+		}
+	
+		StopICCard();
+		StopIDCard();
+		StopMagCard();
+		
+		//进行人脸识别反初始化时，视频应处于关闭状态
+		EloamGlobal.DeinitFaceDetect();
+		
+		EloamGlobal.DeinitBiokey();
+		
+		EloamGlobal.DeinitDevs();
+		
+		EloamGlobal = null;
+	}
+	
+	function EnableDate(obj)
+	{
+		if (obj.checked)
+		{
+			var offsetx = 1000;
+			var offsety = 60;
+			
+			var font;
+			font = EloamGlobal.CreateTypeface(50, 50, 0, 0, 2, 0, 0, 0, "宋体");
+			
+			if (VideoMain)
+			{
+				var width = VideoMain.GetWidth();
+				var heigth = VideoMain.GetHeight();
+				
+				VideoMain.EnableDate( font, width - offsetx, heigth - offsety, 0xffffff, 0);
+			}
+			if (VideoAssist)
+			{
+				var width = VideoAssist.GetWidth();
+				var heigth = VideoAssist.GetHeight();	
+				
+				VideoAssist.EnableDate( font, width - offsetx, heigth - offsety, 0xffffff, 0);
+			}
+			font.Destroy();
+		}
+		else
+		{
+			if(VideoMain)
+			{
+				VideoMain.DisableDate();
+			}
+			if(VideoAssist)
+			{
+				VideoAssist.DisableDate();
+			}			
+		}
+	}
+	
+	function AddText(obj)
+	{
+		if (obj.checked)
+		{			
+			var font;
+			font = EloamGlobal.CreateTypeface(200, 200, 0, 0, 2, 0, 0, 0, "宋体");
+			
+			if (VideoMain)
+			{
+				VideoMain.EnableAddText( font, 0, 0, "文字水印", 65280, 150);
+			}
+			if (VideoAssist)
+			{
+				VideoAssist.EnableAddText( font, 0, 0, "文字水印", 65280, 150);
+			}
+			font.Destroy();
+		}
+		else
+		{
+			if (VideoMain)
+			{
+				VideoMain.DisableAddText();
+			}
+			if(VideoAssist)
+			{
+				VideoAssist.DisableAddText();
+			}
+		}		
+	}
+
+	function Property()
+	{
+		if (DeviceMain)
+			DeviceMain.ShowProperty(ViewMain.GetView());
+			
+		if (DeviceAssist)
+			DeviceAssist.ShowProperty(ViewAssist.GetView());
+	}
+	
+	function RotateLeft()
+	{
+		if (VideoMain)
+			VideoMain.RotateLeft();
+		if (VideoAssist)
+			VideoAssist.RotateLeft();	
+	}
+	
+	function RotateRight()
+	{
+		if (VideoMain)
+			VideoMain.RotateRight();
+		if (VideoAssist)
+			VideoAssist.RotateRight();	
+	}
+
+	function Mirror()
+	{
+		if (VideoMain)
+			VideoMain.Mirror();
+		if (VideoAssist)
+			VideoAssist.Mirror();	
+	}
+	
+	function Flip()
+	{
+		if (VideoMain)
+			VideoMain.Flip();
+		if (VideoAssist)
+			VideoAssist.Flip();	
+	}
+	
+	function SetGray(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableGray();
+			else
+				VideoMain.DisableGray();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableGray();
+			else
+				VideoAssist.DisableGray();
+		}
+	}
+	
+	function SetThreshold(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableThreshold(128);
+			else
+				VideoMain.DisableThreshold();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableThreshold(128);
+			else
+				VideoAssist.DisableThreshold();
+		}
+	}
+	
+	function SetDeskew(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableDeskewEx(1);
+			else
+				VideoMain.DisableDeskew();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableDeskewEx(1);
+			else
+				VideoAssist.DisableDeskew();
+		}
+	}
+	
+	function setFaceCrop(obj)
+	{
+		if(!initFaceDetectSuccess)
+		{
+			alert("人脸初始化失败，机型不支持！");
+			obj.checked = false;
+		}
+		else
+		{
+			if (VideoMain)
+			{
+				if (obj.checked)
+					EloamGlobal.EnableFaceRectCrop(VideoMain, 1);
+				else
+					EloamGlobal.DisableFaceRectCrop(VideoMain);
+			}
+			if (VideoAssist)
+			{
+				if (obj.checked)
+					EloamGlobal.EnableFaceRectCrop(VideoAssist, 1);
+				else
+					EloamGlobal.DisableFaceRectCrop(VideoAssist);
+			}
+		}
+	}
+	
+	function DelBkColor(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableDelBkColor(0);
+			else
+				VideoMain.DisableDelBkColor();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableDelBkColor(0);
+			else
+				VideoAssist.DisableDelBkColor();
+		}
+	}
+	
+	function SetReverse(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableReverse();
+			else
+				VideoMain.DisableReverse();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableReverse();
+			else
+				VideoAssist.DisableReverse();
+		}	
+	}
+	
+	function SetMoveDetec(obj)
+	{
+		if (VideoMain)
+		{
+			if (obj.checked)
+				VideoMain.EnableMoveDetec(0);
+			else
+				VideoMain.DisableMoveDetec();
+		}
+		if (VideoAssist)
+		{
+			if (obj.checked)
+				VideoAssist.EnableMoveDetec(0);
+			else
+				VideoAssist.DisableMoveDetec();
+		}	
+	}
+	
+	function SetTimer(obj)
+	{
+		if (obj.checked)
+		{
+			Timer = setInterval(Scan, 1000);
+		}
+		else
+		{
+			clearInterval(Timer);
+		}
+	}
+	
+	function SetMerge(obj)
+	{
+		if (obj.checked)
+		{
+			bMerge = 1;
+		}
+		else
+		{
+			bMerge = 0;
+		}
+	
+		if (EloamImageTemp1)
+		{
+			EloamImageTemp1.Destroy();
+			EloamImageTemp1 = null;
+		}	
+		if (EloamImageTemp2)
+		{
+			EloamImageTemp2.Destroy();
+			EloamImageTemp2 = null;
+		}
+	}
+	
+	function GetTimeString()
+	{
+		var date = new Date();
+		var yy = date.getFullYear().toString();
+		var mm = (date.getMonth() + 1).toString();
+		var dd = date.getDate().toString();
+		var hh = date.getHours().toString();
+		var nn = date.getMinutes().toString();
+		var ss = date.getSeconds().toString();
+		var mi = date.getMilliseconds().toString();
+		
+		var ret = yy + mm + dd + hh + nn + ss + mi;
+		return ret;
+	}
+	
+	function Scan1()
+	{
+		if (VideoMain)
+		{
+			var imageList = VideoMain.CreateImageList(0, ViewMain.GetView());
+			if (imageList)
+			{
+				ViewMain.PlayCaptureEffect();
+				var count = imageList.GetCount();
+				alert(count);
+				for (var i = 0; i < count; i++)
+				{	
+					var image = imageList.GetImage(i);
+					var Name = "C:\\" + GetTimeString() + ".jpg";
+					image.Save(Name, 0);
+					EloamThumbnail.Add(Name);
+					image.Destroy();
+					image = null;
+				
+					PicPath = Name;
+				}
+			}
+
+			document.getElementById("picpath").value=PicPath;
+		}
+	}
+	function Clear(){
+        // EloamThumbnail.Clear(true);
+		var count=EloamThumbnail.GetCount();
+		// alert(count);
+		
+	for (var i = count-1; i>=0 ; i--){
+			if(EloamThumbnail.GetCheck(i))
+			EloamThumbnail.Remove(i,true);
+		}	
+	}
+	function AllClear(){
+		// imageSave.Destroy();
+		// imageSave = null;
+		EloamImageTemp3.Destroy();
+		EloamImageTemp3 = null;
+		EloamThumbnail.Clear(true);
+
+	}
+
+
+	// function Delect(){
+ //      var count=EloamThumbnail.GetCount();
+	// 	for (var i = count-1; i>=0 ; i--){
+	// 	if(EloamThumbnail.GetCheck(i)
+	// 		EloamThumbnail.Remove(i,true);
+	// 	}
+	// }
+
+function Check(){
+        // EloamThumbnail.Clear(true);
+		var count=EloamThumbnail.GetCount();
+		// alert(count);
+		
+	for (var i = count-1; i>=0 ; i--){
+			if(!EloamThumbnail.GetCheck(i))
+			EloamThumbnail.SetCheck(i,true);
+		}	
+	}
+
+	function Scan2()
+	{
+		if (VideoAssist)
+		{
+			var imageList = VideoAssist.CreateImageList(0, ViewAssist.GetView());
+			if (imageList)
+			{
+				ViewAssist.PlayCaptureEffect();
+				var count = imageList.GetCount();
+				
+				for (var i = 0; i < count; i++)
+				{	
+					var image = imageList.GetImage(i);
+					
+					var Name = "C:\\" + GetTimeString() + ".jpg";
+				
+					image.Save(Name, 0);
+					EloamThumbnail.Add(Name);
+					image.Destroy();
+					image = null;
+				
+					PicPath = Name;
+				}
+			}
+		}
+	}
+	
+	
+	
+	function Scan()
+	{
+		Scan1();//主头拍照
+		Scan2();//副头拍照
+	}
+	
+	function Blend()
+	{
+		var imageList = VideoMain.CreateImageList(0, ViewMain.GetView());
+		
+		
+		if (imageList)
+		{
+			ViewMain.PlayCaptureEffect();
+			
+			if (!EloamImageTemp3)
+			{
+				EloamImageTemp3 = imageList.GetImage(0);//取第1张图片
+				//var Name = "C:\\" + GetTimeString() + ".jpg";
+				//EloamImageTemp3.Save(Name, 0);
+					//EloamThumbnail.Add(Name);
+				// EloamImageTemp1=EloamThumbnail.GetThumbnail(0);
+				// alert("请再次点击图片合成按钮");
+			}
+			else
+			{
+				var image = imageList.GetImage(0);//取第2张图片
+				var Name = "C:\\" + GetTimeString() + ".jpg";
+				//image.Save(Name, 0);
+					//EloamThumbnail.Add(Name);
+				var w1 = EloamImageTemp3.GetWidth();
+				var w2 = image.GetWidth();
+				
+				var w = w1;
+				if (w1 < w2)
+					w = w2;
+				
+				var h1 = EloamImageTemp3.GetHeight();
+				var h2 = image.GetHeight();
+				var h = h1 + h2 + 100;
+				
+				imageSave = EloamGlobal.CreateImage(w, h, 3);
+				if (imageSave)
+				{
+					var date = new Date();
+					var yy = date.getFullYear().toString();
+					var mm = (date.getMonth() + 1).toString();
+					var dd = date.getDate().toString();
+					var hh = date.getHours().toString();
+					var nn = date.getMinutes().toString();
+					var ss = date.getSeconds().toString();
+					var mi = date.getMilliseconds().toString();
+					var Name = "D:\\phpStudy/WWW/gf/public/pic/" + yy + mm + dd + hh + nn + ss + mi + ".jpg";
+				
+					var rcDest1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+					var rcSrc1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+				 imageSave.Blend(rcDest1, EloamImageTemp3, rcSrc1, 0, 0);
+					rcDest1.Destroy();
+					rcDest1 = null;
+					rcSrc1.Destroy();
+					rcSrc1 = null;
+					
+					var rcDest2 = EloamGlobal.CreateRect(0, h1 + 100, w2, h2);
+					var rcSrc2 = EloamGlobal.CreateRect(0, 0, w2, h2);
+					 imageSave.Blend(rcDest2, image, rcSrc2, 0, 0);
+					rcDest2.Destroy();
+					rcDest2 = null;
+					rcSrc2.Destroy();
+					rcSrc2 = null;
+					
+					imageSave.Save(Name, 0);
+					EloamThumbnail.Add(Name);
+					//currentImageTemp = imageSave;
+					EloamImageTemp3=imageSave;
+					//imageSave.Destroy();
+					//imageSave = null;
+					
+					//设置图片地址
+					var number = Name.indexOf('/public/');
+					var picUrl = Name.substring(number);
+					var id = window.opener.document.getElementById("currentId").value;
+					window.opener.document.getElementById(id).setAttribute("src",picUrl);
+				}
+				
+				// EloamImageTemp1.Destroy();
+				// EloamImageTemp1 = null;
+				image.Destroy();	
+				image = null;
+			}			
+		}
+	}
+	// function Blend()
+	// {
+	// 	var imageList = VideoMain.CreateImageList(0, ViewMain.GetView());
+	// 	if (imageList)
+	// 	{
+	// 		ViewMain.PlayCaptureEffect();
+			
+	// 		if (!EloamImageTemp1)
+	// 		{
+	// 			EloamImageTemp1 = imageList.GetImage(0);//取第1张图片
+	// 			alert("请再次点击图片合成按钮");
+	// 		}
+	// 		else
+	// 		{
+	// 			var image = imageList.GetImage(0);//取第2张图片
+				
+	// 			var w1 = EloamImageTemp1.GetWidth();
+	// 			var w2 = image.GetWidth();
+				
+	// 			var w = w1;
+	// 			if (w1 < w2)
+	// 				w = w2;
+				
+	// 			var h1 = EloamImageTemp1.GetHeight();
+	// 			var h2 = image.GetHeight();
+	// 			var h = h1 + h2 + 100;
+				
+	// 			var imageSave = EloamGlobal.CreateImage(w, h, 3);
+	// 			if (imageSave)
+	// 			{
+	// 				var date = new Date();
+	// 				var yy = date.getFullYear().toString();
+	// 				var mm = (date.getMonth() + 1).toString();
+	// 				var dd = date.getDate().toString();
+	// 				var hh = date.getHours().toString();
+	// 				var nn = date.getMinutes().toString();
+	// 				var ss = date.getSeconds().toString();
+	// 				var mi = date.getMilliseconds().toString();
+	// 				var Name = "C:\\" + yy + mm + dd + hh + nn + ss + mi + ".jpg";
+				
+	// 				var rcDest1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+	// 				var rcSrc1 = EloamGlobal.CreateRect(0, 0, w1, h1);
+	// 				imageSave.Blend(rcDest1, EloamImageTemp1, rcSrc1, 0, 0);
+	// 				rcDest1.Destroy();
+	// 				rcDest1 = null;
+	// 				rcSrc1.Destroy();
+	// 				rcSrc1 = null;
+					
+	// 				var rcDest2 = EloamGlobal.CreateRect(0, h1 + 100, w2, h2);
+	// 				var rcSrc2 = EloamGlobal.CreateRect(0, 0, w2, h2);
+	// 				imageSave.Blend(rcDest2, image, rcSrc2, 0, 0);
+	// 				rcDest2.Destroy();
+	// 				rcDest2 = null;
+	// 				rcSrc2.Destroy();
+	// 				rcSrc2 = null;
+					
+	// 				imageSave.Save(Name, 0);
+	// 				EloamThumbnail.Add(Name);
+	// 				imageSave.Destroy();
+	// 				imageSave = null;														
+	// 			}
+				
+	// 			EloamImageTemp1.Destroy();
+	// 			EloamImageTemp1 = null;
+	// 			image.Destroy();	
+	// 			image = null;
+	// 		}			
+	// 	}
+	// }
+		
+	function Print()
+	{
+		if (DeviceMain)
+		{
+			if (VideoMain)
+			{
+				var image = VideoMain.CreateImage(0, ViewMain.GetView());
+				if (image)
+				{
+					image.AdaptivePrintByDPI("");	
+					
+					image.Destroy();
+					image = null;
+				}	
+			}	
+		}
+	}
+	
+	function OCR()
+	{
+		if (DeviceMain)
+		{
+			if (VideoMain)
+			{
+				var image = VideoMain.CreateImage(0, ViewMain.GetView());
+				if (image)
+				{
+					var initSuccess = EloamGlobal.InitOcr();
+					
+					if(initSuccess)
+					{
+						EloamGlobal.DiscernOcr(1, image);
+						var b = EloamGlobal.WaitOcrDiscern();
+						if (b)
+						{
+							alert(EloamGlobal.GetOcrPlainText(0));
+							EloamGlobal.SaveOcr("C:\\1.doc", 0);
+						}
+						
+						EloamGlobal.DeinitOcr();
+					}
+					else
+					{
+						alert("OCR初始化失败，请检查有否已安装OCR识别数据库!");
+					}
+					
+					image.Destroy();
+					image = null;
+				}	
+			}			
+		}			
+	}
+	
+	function Barcode()
+	{
+		if (DeviceMain)
+		{
+			if (VideoMain)
+			{
+				var image = VideoMain.CreateImage(0, ViewMain.GetView());
+				if (image)
+				{
+					EloamGlobal.InitBarcode();
+					
+					var b = EloamGlobal.DiscernBarcode(image);
+					if (b)
+					{
+						var count = EloamGlobal.GetBarcodeCount();
+						var msg = "识别到" + count + "个结果\r\n";
+						for(var i = 0; i < count; i++)
+						{
+							msg += EloamGlobal.GetBarcodeData(i) + "\r\n";
+						}
+						alert(msg);
+					}
+					
+					EloamGlobal.DeinitBarcode();
+					
+					image.Destroy();
+					image = null;
+				}	
+			}	
+		}		
+	}
+	
+	function GetImgMD5()
+	{		
+		if(PicPath)
+		{
+			var img;
+			img = EloamGlobal.CreateImageFromFile(PicPath, 0);
+			var md5 = img.GetMD5(2, 0);
+			alert("图像的MD5值为：" + md5);
+			
+			img.Destroy();
+		}
+		else
+		{
+			alert("请先拍照！");
+		}
+	}
+	
+	function Upload()
+	{
+		//var http = EloamGlobal.CreateHttp("http://192.168.1.205:8086/upload.asp");//asp服务器demo地址
+		var http = EloamGlobal.CreateHttp("http://192.168.1.205:8080/FileStreamDemo/servlet/FileSteamUpload?");//java服务器demo地址
+		var ftp = EloamGlobal.CreateFtp("ftp://test:123@192.168.1.205:8090");
+		if(ftp)
+			ftp.CreateDir("/123456/");
+	
+		if (DeviceMain)
+		{
+			if (VideoMain)
+			{
+				var image = VideoMain.CreateImage(0, ViewMain.GetView());
+				if (image)
+				{
+					if(http)
+						http.UploadImage(image, 2, 0, "http.jpg");
+					
+					var path = EloamGlobal.GetTempName("jpg");
+					image.Save(path, 0);					
+					if(ftp)
+						ftp.Upload(0, path, "123456/ftp.jpg");
+					EloamGlobal.DelFile(path);
+					
+					image.Destroy();
+					image = null;
+				}	
+			}		
+		}
+		
+		if(http)
+			http.Destroy();
+		http = null;
+		
+		if(ftp)
+			ftp.Destroy();
+		ftp = null;
+	}
+	
+	function disternTempl(templPath)
+	{
+		EloamGlobal.InitTemplOcr();
+		
+		var EloamTempl = EloamGlobal.CreateTemplFromFile(templPath, 0);
+		if(EloamTempl)
+		{
+			if (VideoMain)
+			{
+				var imageList = VideoMain.CreateImageList(0, ViewAssist.GetView());
+				if (imageList)
+				{		
+					var image = imageList.GetImage(0);
+					if (image)
+					{
+						var ret = EloamGlobal.DiscernTempl(image, EloamTempl);
+						EloamGlobal.WaitTemplDiscern();
+						if(ret)
+						{
+							var result = "识别结果为：\r\n";
+							var page = EloamGlobal.GetOcrPageCount();							
+							var templ = EloamGlobal.GetTemplResult();
+							if(templ)
+							{
+								var filedNum = templ.GetFieldCount();
+								for(var i = 0; i < filedNum; i++)
+								{
+										result += templ.GetFieldName(i) + "：" + templ.GetFieldResult(i) + "\r\n";
+								}
+								alert(result);
+							}
+						}
+						else
+						{
+							alert("识别失败！");
+						}					
+						image.Destroy();
+						image = null;
+					}
+				}
+			}			
+			EloamTempl.Destroy();
+		}
+		else 	
+		{
+			alert("模板创建失败！");
+		}	
+		EloamGlobal.DeinitTemplOcr();
+	}
+	
+	//获取安装路径
+	function getAnPath(){
+		var anpath=location.href;
+		anpath=anpath.substring(anpath.lastIndexOf(':/')-1,anpath.lastIndexOf('/')+1);
+		//alert(anpath);
+		//替换所有斜杠	正则表达式 /\//g
+		//anpath=anpath.replace(/\//g,'\\\\');
+		return anpath;
+	}
+	
+	function DiscernTempl()
+	{
+		var curPath = getAnPath();
+		templPath = curPath + "/templ/" + "idcard.xml";
+		disternTempl(templPath);
+	}
+	
+	function FaceDetect()
+	{
+		var image1 = EloamGlobal.CreateImageFromFile("C:\\1.jpg", 0);
+		var image2 = EloamGlobal.CreateImageFromFile("C:\\2.jpg", 0);
+		if(image1  && image2) 
+		{
+			var ret = EloamGlobal.DiscernFaceDetect(image1, image2);
+			if(ret != -1)
+			{
+				ret += 20;
+				if(ret > 100)
+				{
+					ret = 100;
+				}
+				var msg = "识别已完成，匹配度：" + ret + "\r\n（匹配阈值为70，高于阈值则为同一人）";
+				alert(msg);
+			}
+			else
+			{
+				alert("识别失败！");
+			}
+		}
+		else
+		{
+			alert("找不到图像！");
+			return;
+		}
+		
+		image1.Destroy();
+		image2.Destroy();
+	}
+	
+	function VerifyFaceDetect()
+	{	
+		if (VideoAssist)
+		{		
+			var image = VideoAssist.CreateImage(0, ViewAssist.GetView());
+			var idcardImage = EloamGlobal.CreateImageFromFile("C:\\idcard.jpg", 0);
+			
+			if(image  && idcardImage) 
+			{
+				var ret = EloamGlobal.DiscernFaceDetect(image, idcardImage);
+				if(ret != -1)
+				{
+					ret += 20;
+					if(ret > 100)
+					{
+						ret = 100;
+					}
+					var msg = "识别已完成，匹配度：" + ret + "\r\n（匹配阈值为70，高于阈值则为同一人）";
+					alert(msg);
+				}
+				else
+				{
+					alert("识别失败！");
+				}
+			}
+			else
+			{
+				alert("获取图像失败，未识别到二代证！");
+				return;
+			}
+			
+			image.Destroy();
+			idcardImage.Destroy();
+		}
+	}
+	
+	function InitBiokey()
+	{
+		var ret = EloamGlobal.InitBiokey();
+		if(ret)
+		{
+			document.getElementById("example").value= "初始化指纹仪成功！";
+		}
+		else
+		{
+			document.getElementById("example").value= "初始化指纹仪失败！";
+		}
+	}
+	function GetBiokeyFeature()
+	{
+		var ret = EloamGlobal.GetBiokeyFeature();
+		if(ret)
+		{
+			document.getElementById("example").value= "请按压手指！";
+			document.getElementById("BiokeyImg1").src= "";
+		}
+		else
+		{
+			document.getElementById("example").value= "获取指纹特征失败！";
+		}	
+	}
+	function GetBiokeyTemplate()
+	{
+		var ret = EloamGlobal.GetBiokeyTemplate();
+		if(ret)
+		{
+			document.getElementById("example").value= "请按压手指三次完成模板采集！";
+			document.getElementById("BiokeyImg2").src= "";
+		}
+		else
+		{
+			document.getElementById("example").value= "获取指纹模板失败！";
+		}	
+	}
+
+	function BiokeyVerify()
+	{
+		var Tem = EloamGlobal.GetBiokeyTemplateData();
+		var Fea = EloamGlobal.GetBiokeyFeatureData();
+		
+		if(Tem && Fea)
+		{
+			var ret = EloamGlobal.BiokeyVerify(Tem, Fea);
+			if(ret >= 0)
+			{
+				document.getElementById("example").value = "比对成功！相似度：" + ret.toString();
+			}
+			else
+			{
+				document.getElementById("example").value = "比对失败！";
+			}
+			
+			Tem.Save("C:\\biokeyTem.dat");
+			Fea.Save("C:\\biokeyFea.dat");
+			Tem.Destroy();
+			Fea.Destroy();
+		}
+	}
+	function DeinitBiokey()
+	{
+		var ret = EloamGlobal.DeinitBiokey();
+		if(ret)
+		{
+			document.getElementById("example").value= "反初始化指纹仪成功！";
+		}
+		else
+		{
+			document.getElementById("example").value= "反初始化指纹仪失败！";
+		}	
+	}
+	function StartICCard()
+	{
+		if(EloamGlobal.InitReader())
+		{
+			var ret = EloamGlobal.ReaderStart();
+			if(ret)
+			{
+				document.getElementById("example").value= "启动IC卡阅读成功！请刷卡";
+			}
+			else
+			{
+				document.getElementById("example").value= "启动IC卡阅读失败！";
+			}
+		}
+		else
+		{
+			document.getElementById("example").value= "初始化IC卡阅读失败！";
+		}		
+	}
+	function StopICCard()
+	{
+		EloamGlobal.ReaderStop();
+		EloamGlobal.DeinitReader();
+	}
+	//******************************f二代证*******************************************/
+	function StartIDCard()
+	{	
+		if(EloamGlobal.InitIdCard())
+		{
+			var ret = EloamGlobal.DiscernIdCard();
+			if(ret)
+			{
+				readIDcard = true;
+				document.getElementById("example").value= "启动二代证阅读成功！请刷卡";
+			}
+			else
+			{
+				document.getElementById("example").value= "启动二代证阅读失败！";
+			}		
+		}
+		else
+		{
+			document.getElementById("example").value= "初始化二代证阅读失败！";
+		}
+	}	
+	
+
+	function StopIDCard()
+	{
+		EloamGlobal.StopIdCardDiscern();
+		EloamGlobal.DeinitIdCard()		
+		readIDcard = false;
+		
+		document.getElementById("example").value= "已停止";
+	}	
+	
+	function ReadIDCard()
+	{
+		if(readIDcard)
+		{
+			alert("请先停止二代证阅读");
+			return;
+		}  
+
+		if(EloamGlobal.InitIdCard())
+		{
+			var ret = EloamGlobal.ReadIdCard();
+			if(ret)
+			{
+				var str = GetTimeString() + "：";
+				var i;
+				for(i = 1; i < 17; i++ )
+				{
+					str += EloamGlobal.GetIdCardData(i);
+					str += ";";
+				}					
+				
+				document.getElementById("example").value=str;
+		
+				var image = EloamGlobal.GetIdCardImage(6);
+				image.Save("C:\\idcard.jpg", 0);
+				image.Destroy();
+			}
+			else
+			{
+				document.getElementById("example").value= "读取二代证阅读失败！";
+			}
+			
+			EloamGlobal.DeinitIdCard();
+		}
+		else
+		{
+			document.getElementById("example").value= "初始化二代证阅读失败！";
+		}
+	}	
+	//******************************f二代证*******************************************/
+		
+	function StartMagCard()
+	{
+		if(EloamGlobal.MagneticCardInit())
+		{
+			var ret = EloamGlobal.MagneticCardReaderStart();
+			if(ret)
+			{
+				document.getElementById("example").value= "启动磁条卡阅读成功！请刷卡";
+			}
+			else
+			{
+				document.getElementById("example").value= "启动磁条卡阅读失败！";
+			}
+		}
+		else
+		{
+			document.getElementById("example").value= "初始化磁条卡阅读失败！";
+		}			
+	}
+	function StopMagCard()
+	{
+		EloamGlobal.MagneticCardReaderStop();	
+		EloamGlobal.MagneticCardDeinit();
+	}
+	
+	function MainRecord()
+	{
+		if(VideoMain)
+		{
+			var videoOutputWidth = VideoMain.GetWidth();
+			var videoOutputHeight = VideoMain.GetHeight();
+			//录像时，打开视频的分辨率越低，帧率越高,一般不超过200w像素
+			//所设置的帧率应尽可能高于实际帧率，避免丢帧
+			var FrameRate = 15;//此参数可根据录像分辨率与机型实际帧率调节
+			var CheckWidth = 1600;
+			var CheckHeight = 1200;
+			//主流视频分辨率少有大于200万的，因此为节约cpu资源，当分辨率大于200w，应采用200w的配置录制
+			if (videoOutputWidth * videoOutputHeight > (CheckWidth * CheckHeight))
+			{
+				if(confirm("当前分辨率过高，切换到200万像素时，录制效果最佳！\r\n点击'确定'，手动切换到1600X1200或相近分辨率后再次尝试\r\n点击'取消'，本次录制继续"))
+				{
+					return;
+				}
+				videoOutputWidth = CheckWidth;
+				videoOutputHeight = CheckHeight;
+			}
+			
+			if(videoCapMain)
+			{
+				videoCapMain.VideoCapStop();
+				videoCapMain.Destroy();
+			}
+			
+			videoCapMain = EloamGlobal.CreatVideoCap();
+			if(null == videoCapMain)
+			{
+				alert("创建录像对象失败");
+				return;
+			}
+			
+			var selMicIdx = -1;
+			if(EloamGlobal.VideoCapGetAudioDevNum() > 0)//有麦克风
+			{
+				selMicIdx = 0;
+			}
+
+			if(!videoCapMain.VideoCapPreCap("C:\\eloamCom_main.mp4", selMicIdx, FrameRate, 1, videoOutputWidth, videoOutputHeight))
+			{
+				alert("录像设置失败");
+				return;
+			}
+			
+			if(!videoCapMain.VideoCapAddVideoSrc(VideoMain))
+			{
+				alert("添加视频源失败");
+				return;
+			}
+			
+			if(!videoCapMain.VideoCapStart())
+			{
+				alert("启动录像失败");
+				return;
+			}
+			alert("已开始录像");
+		}
+	}
+
+	function StopMainRecord()
+	{
+		if(videoCapMain.VideoCapStop())
+		{
+			videoCapMain.Destroy();
+			videoCapMain = null;
+			alert("录像结束，文件保存于C:\\eloamCom_main.mp4\r\n若录像失败请选择较小的分辨率尝试");
+		}
+		else
+		{
+			alert("停止录像失败");
+		}
+	}
+	function AssistRecord()
+	{
+		if(VideoAssist)
+		{
+			var videoOutputWidth = VideoAssist.GetWidth();
+			var videoOutputHeight = VideoAssist.GetHeight();
+			//录像时，打开视频的分辨率越低，帧率越高,一般不超过200w像素
+			//所设置的帧率应尽可能高于实际帧率，避免丢帧
+			var FrameRate = 15;//此参数可根据录像分辨率与机型实际帧率调节
+			var CheckWidth = 1600;
+			var CheckHeight = 1200;
+			//主流视频分辨率少有大于200万的，因此为节约cpu资源，当分辨率大于200w，应采用200w的配置录制
+			if (videoOutputWidth * videoOutputHeight > (CheckWidth * CheckHeight))
+			{
+				if(confirm("当前分辨率过高，切换到200万像素时，录制效果最佳！\r\n点击'确定'，手动切换到1600X1200或相近分辨率后再次尝试\r\n点击'取消'，本次录制继续"))
+				{
+					return;
+				}
+				videoOutputWidth = CheckWidth;
+				videoOutputHeight = CheckHeight;
+			}
+		
+			if(videoCapAssist)
+			{
+				videoCapAssist.VideoCapStop();
+				videoCapAssist.Destroy();
+			}
+			
+			videoCapAssist = EloamGlobal.CreatVideoCap();
+			if(null == videoCapAssist)
+			{
+				alert("创建录像对象失败");
+				return;
+			}
+			
+			var selMicIdx = -1;
+			if(EloamGlobal.VideoCapGetAudioDevNum() > 0)//有麦克风
+			{
+				selMicIdx = 0;
+			}
+				
+			if(!videoCapAssist.VideoCapPreCap("C:\\eloamCom_assist.mp4", selMicIdx, FrameRate, 1, videoOutputWidth, videoOutputHeight))
+			{
+				alert("启动录像失败");
+				return;
+			}
+			
+			if(!videoCapAssist.VideoCapAddVideoSrc(VideoAssist))
+			{
+				alert("添加视频源失败");
+				return;
+			}
+			
+			if(!videoCapAssist.VideoCapStart())
+			{
+				alert("启动录像失败");
+				return;
+			}
+			alert("已开始录像");			
+		}	
+	}
+	
+	function StopAssistRecord()
+	{
+		if(videoCapAssist.VideoCapStop())
+		{
+			videoCapAssist.Destroy();
+			videoCapAssist = null;
+			alert("录像结束，文件保存于C:\\eloamCom_assist.mp4\r\n若录像失败请选择较小的分辨率尝试");
+		}
+		else
+		{
+			alert("停止录像失败");
+		}
+	}
+	
+	function OpenVideoMain()
+	{
+		CloseVideoMain();
+	
+		if(DeviceMain)
+		{
+			var mode = document.getElementById('selMode1');
+			var modeText = mode.options[mode.options.selectedIndex].text;
+			var subtype = (modeText == "YUY2"? 1:(modeText == "MJPG"? 2:(modeText == "UYVY"? 4:-1)));
+		
+			var select1 = document.getElementById('selRes1'); 
+			var nResolution1 = select1.selectedIndex;
+			
+			VideoMain = DeviceMain.CreateVideo(nResolution1, subtype);
+			if (VideoMain)
+			{
+				ViewMain.SelectVideo(VideoMain);
+				ViewMain.SetText("打开视频中，请等待...", 0);
+			}
+		}
+	}
+	
+	function OpenVideoAssist()
+	{
+		CloseVideoAssist();
+	
+		if(DeviceAssist)
+		{
+			var mode = document.getElementById('selMode2');
+			var modeText = mode.options[mode.options.selectedIndex].text;
+			var subtype = (modeText == "YUY2"? 1:(modeText == "MJPG"? 2:(modeText == "UYVY"? 4:-1)));
+			
+			var select2 = document.getElementById('selRes2'); 
+			var nResolution2 = select2.selectedIndex;
+			
+			VideoAssist = DeviceAssist.CreateVideo(nResolution2, subtype);
+			if (VideoAssist)
+			{
+				ViewAssist.SelectVideo(VideoAssist);
+				ViewAssist.SetText("打开视频中，请等待...", 0);							
+			}
+		}
+	}
+	
+	function OpenBothVideo()
+	{	
+		OpenVideoMain();
+		OpenVideoAssist();
+	}
+	
+	function CloseVideoMain()
+	{
+		if (VideoMain)
+		{
+			VideoMain.Destroy();
+			VideoMain = null;	
+			ViewMain.SetText("", 0);	
+		}
+	}
+	
+	function CloseVideoAssist()
+	{
+		if (VideoAssist)
+		{
+			VideoAssist.Destroy();		
+			ViewAssist.SetText("", 0);				
+		}
+	}
+	
+	function CloseBothVideo()
+	{
+		CloseVideoMain();
+		CloseVideoAssist();
+	}
+	
+	
+
+</script>
+
+
+<script language="Javascript" event="DevChange(type, idx, dbt)" for="EloamGlobal_ID" type="text/JavaScript">
+//设备接入和丢失
+//type设备类型， 1 表示视频设备， 2 表示音频设备
+//idx设备索引
+//dbt设备动作类型
+	if (1 == type)
+	{
+		if (1 == dbt)//dbt 1 表示设备到达
+		{
+			var deviceType = EloamGlobal.GetEloamType(1, idx);
+			
+			if(1 == deviceType)//主摄像头
+			{
+				if(null == DeviceMain)
+				{
+					DeviceMain = EloamGlobal.CreateDevice(1, idx);
+					if (DeviceMain)
+					{
+						var label =  document.getElementById('lab1');
+						label.innerHTML = DeviceMain.GetFriendlyName();	
+						
+						var mode = document.getElementById('selMode1');
+						var subType = DeviceMain.GetSubtype();
+						if(0 != (subType & 1))
+						{
+							mode.add(new Option("YUY2"));
+						}
+						if(0 != (subType & 2))
+						{
+							mode.add(new Option("MJPG"));
+						}
+						if(0 != (subType & 4))
+						{
+							mode.add(new Option("UYVY"));
+						}
+						
+						mode.selectedIndex = 0;
+						
+						var scanSize = document.getElementById('selScanSize');
+						scanSize.add(new Option("原始尺寸"));
+						scanSize.add(new Option("中等尺寸"));
+						scanSize.add(new Option("较小尺寸"));
+						scanSize.add(new Option("自定义尺寸"));
+						scanSize.selectIndex = 0;
+						
+						changesubType1();
+				
+						if(0 != hasLoadSuccess)
+						{
+							OpenVideoMain();
+						}
+					}
+				}
+			}
+			else if(2 == deviceType || 3 == deviceType)//辅摄像头
+			{
+				if(null == DeviceAssist)
+				{
+					DeviceAssist = EloamGlobal.CreateDevice(1, idx);
+					if (DeviceAssist)
+					{
+						var label =  document.getElementById('lab2');
+						label.innerHTML = DeviceAssist.GetFriendlyName();	
+						
+						var mode = document.getElementById('selMode2');
+						var subType = DeviceAssist.GetSubtype();
+						if(0 != (subType & 1))
+						{
+							mode.add(new Option("YUY2"));
+						}
+						if(0 != (subType & 2))
+						{
+							mode.add(new Option("MJPG"));
+						}
+						if(0 != (subType & 4))
+						{
+							mode.add(new Option("UYVY"));
+						}
+						
+						//若为辅摄像头优先采用mjpg模式打开
+						if((0 != (subType & 2)) && (0 != (subType & 1)))
+						{
+							mode.selectedIndex = 1;
+						}
+						else
+						{
+							mode.selectedIndex = 0;
+						}
+						//changesubType2();
+						
+						if(0 != hasLoadSuccess)
+						{
+							OpenVideoAssist();
+						}
+					}
+				}
+			}		
+		}
+		
+		if (2 == dbt)//dbt 2 表示设备丢失
+		{
+			if (DeviceMain)
+			{
+				if(idx == DeviceMain.GetIndex())
+				{
+					if(VideoMain)
+					{
+						VideoMain.Destroy();
+						VideoMain = null;
+						
+						ViewMain.SetText("", 0);
+					}
+					DeviceMain.Destroy();
+					DeviceMain = null;
+					
+					document.getElementById('selMode1').options.length = 0; 
+					document.getElementById('selScanSize').options.length = 0; 
+					document.getElementById('selRes1').options.length = 0; 
+				}
+			}			
+			if (DeviceAssist)
+			{
+				if(idx == DeviceAssist.GetIndex())
+				{
+					if(VideoAssist)
+					{
+						VideoAssist.Destroy();
+						VideoAssist = null;
+						
+						ViewAssist.SetText("", 0);												
+					}
+					DeviceAssist.Destroy();
+					DeviceAssist = null;
+					
+					document.getElementById('selMode2').options.length = 0; 
+					document.getElementById('selRes2').options.length = 0; 
+				}
+			}		
+		}
+		
+	}
+	
+</script>
+
+
+
+</HEAD>
+<BODY onload="Load()" onunload="Unload()">
+
+<div>
+	<OBJECT ID="ViewMain" CLASSID="CLSID:26BA9E7F-78E9-4FB8-A05C-A4185D80D759" WIDTH="350" HEIGHT="300">
+	
+	</OBJECT>
+	<OBJECT ID="ViewAssist" CLASSID="CLSID:26BA9E7F-78E9-4FB8-A05C-A4185D80D759" WIDTH="350" HEIGHT="300">
+	
+	</OBJECT>
+</div>
+
+<div>
+	<OBJECT ID="EloamThumbnail" CLASSID="CLSID:B5535A1B-D25B-4B3C-854F-94B12E284A4E" WIDTH="700" HEIGHT="200">
+	 
+	</OBJECT>
+</div>
+
+<tr>
+	<td>	
+		<label id="lab1">设备1</label>
+		<select id="selMode1" style="width: 90px" name="selMode" onchange="changesubType1()"></select> 
+		<select id="selRes1" style="width: 90px" name="selRes" onchange="OpenVideoMain()"></select> 
+		<select id="selScanSize" style="width: 90px" name="selScanSize" onchange="changeScanSize()"></select> 
+		<label id="lab2">设备2</label>
+		<select id="selMode2" style="width: 90px" name="selMode" onchange="changesubType2()"></select> 
+		<select id="selRes2" style="width: 90px" name="selRes" onchange="OpenVideoAssist()"></select> 
+		<input class="submit_01" type="button" value="打开视频" onclick="OpenBothVideo()" />
+		<input class="submit_01" type="button" value="关闭视频" onclick="CloseBothVideo()" />
+		<input class="submit_01" type="button" value="拍照" onclick="Scan()" />
+		<input class="submit_01" type="button" value="图片合成" onclick="Blend()" />		
+	
+		<input type="text" id="example" size = "155"/>
+
+	</td>
+</tr>
+</BODY>
+</HTML>

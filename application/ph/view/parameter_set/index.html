@@ -1,0 +1,83 @@
+{extend name="layout" /}
+{block name="title"}<title>参数设置</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> > <small class="am-text-primary">参数设置</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs aBut">
+            <button type="button" id="1" class="conf-class am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cog"></span> 楼栋结构配置</button>
+            <button type="button" id="2" class="conf-class am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cog"></span> 楼栋产别配置</button>
+            <button type="button" id="3" class="conf-class am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cog"></span> 楼栋完损等级配置</button>
+            <button type="button" id="4" class="conf-class am-btn d-btn-1188F0 am-radius">
+              <span class="am-icon-cog"></span> 使用性质配置</button>
+          </div>
+          <span hidden="hidden" id="conf-class-id">1</span>
+        </div>
+      </div>
+    </div>
+    <div class="am-cf am-padding-xs"></div>
+    <div class="am-g">
+      <div class="am-u-sm-12 aTab">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-bordered am-table-centered" style="padding: 0">
+            <thead>
+              <tr id="field">
+                <?php 
+                if($structure_type != null) {
+                  echo '<td>编号</td><td>类别</td><td>操作</td>';
+                } 
+                ?>
+              </tr><!-- 字段名称 -->
+          </thead>
+          <tbody id="tb">
+          <?php
+          if($structure_type != null){
+            foreach($structure_type as $info){
+              echo '<tr><td>' . $info['id'] . '</td><td>' . $info['StructureType'] . '</td>';
+              echo '<td width="20%">'.
+                   '<div class="am-btn-group am-btn-group-xs am-u-md-offset-4">'.
+                   '<button class="conf-modify am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">修改</button>'.
+                   '<button class="conf-delete am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">删除</button>'.
+                   '</div>'.
+                   '</td>';
+              echo '</tr>';
+            }
+            echo '<td></td><td></td>';
+            echo '<td width="20%"><div class="am-btn-group am-btn-group-xs am-u-md-offset-4"><button class="conf-add am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only">增加</button></div></td>';
+
+          }
+          ?>
+		  <!--查询-->
+              <!-- 添加数据 -->
+            <!-- <tr>
+              <td>
+                  <div class="am-btn-group am-btn-group-xs am-u-md-offset-4">
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-hide-sm-only">修改</button>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-hide-sm-only">删除</button>
+                  </div>
+              </td>
+            </tr> -->
+
+          </tbody>
+          
+        </table>
+          <!-- <hr /> -->
+      </div>
+    </div>
+  </div>
+
+{include file="application/ph/view/form/parameter_set_modify.html" /}
+  <!-- content end -->
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewjs/parameterset.js"></script>
+{/block}

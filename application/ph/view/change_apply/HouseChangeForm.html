@@ -1,0 +1,461 @@
+<form id="HouseChange" style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-md-12">
+    <div class="am-form-group am-u-md-12">
+        <label class="label_style">房屋编号：</label>
+       <label class="label_p_style CHouseId"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+        <label class="label_style">楼栋编号：</label>
+       <label class="label_p_style CBanID"></label>
+    </div>
+    <div class="am-form-group am-u-md-8">
+      <label class="label_style">房屋地址：</label>
+      <label class="label_p_style CHouseAddress" style="width:484px"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">楼层：</label>
+      <label class="label_p_style CFloor"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">承租人：</label>
+      <label class="label_p_style CTenantName"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">联系电话：</label>
+      <label class="label_p_style CTenantTel"></label>
+    </div>
+      
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">建筑面积：</label>
+      <label class="label_p_style CArea"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">计租面积：</label>
+      <label class="label_p_style CLeasedArea"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">产别：</label>
+      <label class="label_p_style CType"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">使用性质：</label>
+      <label class="label_p_style CUseProp"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">房屋结构：</label>
+      <label class="label_p_style CHouseStructure"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">备案时间：</label>
+      <label class="label_p_style CBuiltYear"></label>
+    </div>
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">身份证号：</label>
+      <label class="label_p_style CTenantNumber"></label>
+    </div>
+    <div class="am-form-group am-u-md-4 am-u-end">
+      <label class="label_style">产别：</label>
+      <label class="label_p_style CType"></label>
+    </div>
+  </div>
+  <div class="material_1" style="padding-left:0;">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_title">提交材料：</label>
+    </div>
+    <div class="am-u-md-12">
+      <div class="am-u-md-5">
+        <p>*购买直管公有住房申请表：</p>
+      </div>
+      <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CHouseApp_1" type="file" name="CHouseApp_1" multiple>
+      </div>
+      <div id="CHouseApp_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>*武汉市房产管理局出售单元式直管公房审批表：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CApprovalForm_1" type="file" name="CApprovalForm_1" multiple>
+        </div>
+        <div id="CApprovalForm_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>*售房发票：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="InvoiceSale_1" type="file" name="InvoiceSale_1" multiple>
+        </div>
+        <div id="InvoiceSale_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>房屋使用权证（权属证明书）原件/复印件:</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CHouseUse" type="file" name="CHouseUse" multiple>
+        </div>
+        <div id="CHouseUseShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>最后一月租金发票：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CLastRentInvoice_1" type="file" name="CLastRentInvoice_1" multiple>
+        </div>
+        <div id="CLastRentInvoice_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>公共部位维修基金发票：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CPublicFundInvoice_1" type="file" name="CPublicFundInvoice_1" multiple>
+        </div>
+        <div id="CPublicFundInvoice_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>住房证复印件：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CCopyOfHouse" type="file" name="CCopyOfHouse" multiple>
+        </div>
+        <div id="CCopyOfHouseShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>房改批文：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CReApproval" type="file" name="CReApproval" multiple>
+        </div>
+        <div id="CReApprovalShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>房改交易清册（住户加盖私章）：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CTransactionList" type="file" name="CTransactionList" multiple>
+        </div>
+        <div id="CTransactionListShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>房改协议书（住户加盖私章）：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CReAgreement_1" type="file" name="CReAgreement_1" multiple>
+        </div>
+        <div id="CReAgreement_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>委托书（加住户私章）：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CAttorney" type="file" name="CAttorney" multiple>
+        </div>
+        <div id="CAttorneyShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>营业执照复印件：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CLicenseCopy" type="file" name="CLicenseCopy" multiple>
+        </div>
+        <div id="CLicenseCopyShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>具结书（公司对房地局出具）：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CAffidavit_1" type="file" name="CAffidavit_1" multiple>
+        </div>
+        <div id="CAffidavit_1Show" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>资金证明（商业银行出具的二联单）：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CProofOfFund" type="file" name="CProofOfFund" multiple>
+        </div>
+        <div id="CProofOfFundShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>房屋登记申请书：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CRegistration" type="file" name="CRegistration" multiple>
+        </div>
+        <div id="CRegistrationShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>评估单：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CAssessment" type="file" name="CAssessment" multiple>
+        </div>
+        <div id="CAssessmentShow" class="am-u-md-12"></div>
+    </div>
+    <div class="am-u-md-12">
+        <div class="am-u-md-5">
+            <p>法人代表证明：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="CLegalCertificate" type="file" name="CLegalCertificate" multiple>
+        </div>
+        <div id="CLegalCertificateShow" class="am-u-md-12"></div>
+    </div>
+  </div>
+      <!-- 样式二 -->
+      <div class="material_2" style="padding-left:0;">
+        <div class="am-form-group am-u-md-12">
+          <div class="am-u-md-6">
+            <label>提交材料：</label>
+          </div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*购买直管公有住房申请表：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CHouseApp_2" type="file" name="CHouseApp_2" multiple>
+            </div>
+            <div id="CHouseApp_2Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*武汉市房产管理局出售单元式直管公房审批表：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CApprovalForm_2" type="file" name="CApprovalForm_2" multiple>
+            </div>
+            <div id="CApprovalForm_2Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*售房发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="InvoiceSale_2" type="file" name="InvoiceSale_2" multiple>
+            </div>
+            <div id="InvoiceSale_2Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>最后一月租金发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CLastRentInvoice_2" type="file" name="CLastRentInvoice_2" multiple>
+            </div>
+            <div id="CLastRentInvoice_2Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>公共部位维修基金发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CPublicFundInvoice_2" type="file" name="CPublicFundInvoice_2" multiple>
+            </div>
+            <div id="CPublicFundInvoice_2Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>房改协议书:</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CReAgreement_2" type="file" name="CReAgreement_2" multiple>
+            </div>
+            <div id="CReAgreement_1Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>产权复印件：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CCopyOfProp" type="file" name="CCopyOfProp" multiple>
+            </div>
+            <div id="CCopyOfPropShow" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>图纸：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CPicture" type="file" name="CPicture" multiple>
+            </div>
+            <div id="CPictureShow" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>房屋信息单（房地局出具）：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CHouseInformation" type="file" name="CHouseInformation" multiple>
+            </div>
+            <div id="CHouseInformationShow" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>户口簿：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CReBooklet" type="file" name="CReBooklet" multiple>
+            </div>
+            <div id="CReBookletShow" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>身份证复印件2分（夫妻双方）：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CCopyOfCard" type="file" name="CCopyOfCard" multiple>
+            </div>
+            <div id="CCopyOfCardShow" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>工领证明材料复印件（退休证等）：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CWorkCertificate" type="file" name="CWorkCertificate" multiple>
+            </div>
+            <div id="CWorkCertificateShow" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>具结书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CAffidavit_2" type="file" name="CAffidavit_2" multiple>
+            </div>
+            <div id="CAffidavit_2Show" class="am-u-md-12"></div>
+        </div>
+      </div>
+      <!-- 样式三 -->
+      <div class="material_3" style="padding-left:0;">
+        <div class="am-form-group am-u-md-12">
+          <div class="am-u-md-6">
+            <label>提交材料：</label>
+          </div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*购买直管公有住房申请表：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CHouseApp_3" type="file" name="CHouseApp_3" multiple>
+            </div>
+            <div id="CHouseApp_3Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*武汉市房产管理局出售单元式直管公房审批表：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CApprovalForm_3" type="file" name="CApprovalForm_3" multiple>
+            </div>
+            <div id="CApprovalForm_3Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>*售房发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="InvoiceSale_3" type="file" name="InvoiceSale_3" multiple>
+            </div>
+            <div id="InvoiceSale_3Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>最后一月租金发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CLastRentInvoice_3" type="file" name="CLastRentInvoice_3" multiple>
+            </div>
+            <div id="CLastRentInvoice_3Show" class="am-u-md-12"></div>
+        </div>
+
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>公共部位维修基金发票：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="CPublicFundInvoice_3" type="file" name="CPublicFundInvoice_3" multiple>
+            </div>
+            <div id="CPublicFundInvoice_3Show" class="am-u-md-12"></div>
+        </div>
+      </div>
+
+<!--     <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+    <div id="FormState" class="am-u-md-12">
+         <span class="process_style process_style_active">房管员</span><span class="line_style">——></span>
+        <span class="process_style">房调员</span><span>——></span>
+        <span class="process_style">所长</span><span>——></span>
+        <span class="process_style">总公司科长</span><span>——></span>
+        <span class="process_style">经管副总</span>
+  </div>
+  <div class="am-form-group am-u-md-12">
+      <label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>
+  </div> -->
+</form>

@@ -1,0 +1,89 @@
+{extend name="layout" /}
+{block name="title"}<title>公告管理</title>{/block}
+{block name="content"}
+<!-- content start -->
+<script type="text/javascript" charset="utf-8" src="/extend/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/extend/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" charset="utf-8" src="/extend/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript" src="/extend/kindeditor/kindeditor-all.js"></script>
+<script type="text/javascript" src="/extend/kindeditor/lang/zh-CN.js"></script>
+
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><small class="am-text-sm">系统管理</small> > <small class="am-text-primary">公告</small></div>
+    </div>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group-xs">
+                    <button type="button" id="publish_notice" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 发布公告</button>
+                    <button type="button" id="modify_notice" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改公告</button>
+                    <button type="button" id="delete_notice" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash"></span> 删除公告</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+            <tr>
+                <th class="table-check"></th>
+                <th class="table-id">#</th>
+                <th class="table-title">标题</th>
+                <th class="table-title">发布时间</th>
+                <th class="table-author am-hide-sm-only">发布人</th>
+            </tr>
+            </thead>
+            <tbody>
+
+          <?php $k = 1; foreach($notice_list_data as $info){ ; ?>
+            <tr class="check001">
+                <td class="am-hide-sm-only">
+                <span class="piaochecked">
+                    <input class="checkId radioclass" type="radio" name="choose" value="{$info['id']}" />
+                </span>
+                    
+                </td>
+                <td class="am-hide-sm-only">{$k++}</td>
+                <td class="am-hide-sm-only"><a class="notice_info" href="javascript:void(0)">{$info['Title']}</a></td>
+                <td class="am-hide-sm-only" width="30%">{$info['UpdateTime']}</td>
+                <td class="am-hide-sm-only" width="20%">{$info['Name']}</td>
+            </tr>
+          <?php }; ?>
+
+            </tbody>
+        </table>
+        <div class="am-cf">
+            共{$notice_list_obj->total()}条记录
+            <div class="am-fr">
+                 {$notice_list_obj->render()}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{include file="application/ph/view/notice/dialog.html" /}
+{include file="application/ph/view/notice/modify.html" /}
+{include file="application/ph/view/notice/notice_info.html" /}
+
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/viewJs/notice.js"></script>
+{/block}

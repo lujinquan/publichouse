@@ -1,0 +1,13 @@
+<form id="UserAssign" class="am-form" style="display:none;margin-top:1.6rem;">
+	  <fieldset >
+		<div class="am-u-sm-12">
+			<?php foreach($allRole as $key => $value ){ ;?>
+			<div class="am-form-group am-u-sm-4">
+				<input type="checkbox" name="Role[]" value="<?php echo $value['id']; ?>" />
+			  <label for="doc-vld-email-2"><?php echo $value['RoleName']; ?></label>
+			</div>
+			<?php }; ?>
+		</div>
+		  <input type="hidden" id="id" name="id" value="" />
+	  </fieldset>
+ </form>

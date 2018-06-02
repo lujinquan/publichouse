@@ -1,0 +1,262 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
+
+return [
+
+    // +----------------------------------------------------------------------
+    // | 映射字典
+    // +----------------------------------------------------------------------
+
+    //网站信息
+    'WebSite' => 'web.gf.com',
+
+    //添加楼栋
+    'LandCertificate' => '土地证电子版',
+    'RealEstate' => '不动产电子版',
+    'BanImageIDS' => '楼栋其他影像电子版',
+
+    //添加房屋
+    'HouseImageIDS' => '房屋影像资料',
+
+    //使用权变更
+    "ReBooklet"=>"更改姓名后户口簿",
+    'ReIDCard' => '更改后居民身份证',
+    'ReContract' => '国有公房(民用住宅)租赁合同',
+
+    'CnApplicationForm' => '申请书',
+    'CnApBooklet' => '申请人户口簿',
+    'CnApIDCard' => '申请人身份证、图章',
+    'CnContract' => '国有公房（民用住宅）租赁合同',
+    'CnDeathProve' => '原承租人死亡的，提交死亡证明',
+    "CnMigProve"=>"原承租人户籍迁出本市的，提交户籍注销证明",
+    'CnLitig' => '诉讼离婚的，提交人民法院判决书或者调解书',
+    'CnAgreement' => '协议离婚的，提交经民政部门备案的离婚协议书',
+    'CnDivorce' => '离婚证',
+    'CnAttachmentOne' => '附件一：公有住房指定承租人协议书（需公证）',
+    'CnAttachmentTwo' => '附件二：公有住房过户协议书',
+    'CnAttachmentThr' => '附件三：公有住房承租声明',
+    'CnAttachmentFour' => '附件四：公有住房承租保证',
+    'CnAttachmentFive' => '附件五：公有住房承租承诺书',
+
+
+    'TrCheck' => '租金核减申请书',
+    'TrApplicationForm' => '申请书',
+    'TrApBooklet' => '申请人户口簿',
+    'TrApIDCard' => '申请人身份证、图章',
+    'TrContract' => '国有公房（民用住宅）租赁合同',
+    'TrDeathProve' => '原承租人死亡的，提交死亡证明',
+    'TrAgreementOne' => '经公证的配偶及同户籍近亲同意使用权转让协议书（附件七）',
+    'TrAgreementTwo' => '国有公房（民用住宅）使用权转让双方签订的国有公房（民用住宅）使用权转让协议书',
+    'TrAgreementThr' => '承租人与配偶不同户籍的，结婚证',
+    'TrAttachmentOne' => '附件六：承诺书',
+    'TrAttachmentTwo' => '附件七：同意办理公有住房使用权转让或者代理转让协议书',
+    'TrAttachmentThr' => '附件八 ：武昌区房地产公司，房管所，直管公房使用权转让备案单',
+    'TrAttachmentFour' => '附件九：协议书',
+    'TrAttachmentFive' => '附件十：同意办理公有住房使用权置换或者代理转让声明书',
+    'TrAttachmentSix' => '附件十一：同意办理公有住房使用权置换或者代理转让声明书',
+
+    //新增租金减免
+    'ID' => '减免证件',
+    'AppForm' => '租金核减审核表',
+    'AppBook' => '租金核减申请书',
+    'ReBooklet' => '户口薄',
+    'HouseLease' => '住房租约',
+
+    //新增空租
+    'EmptyReport' => '空租报告',
+
+    //新增暂停计租
+    'SuspendReport' => '暂停计租报告',
+
+    //新增注销
+    'CancelReport' => '新增注销材料',
+
+    //新增陈欠核销
+    'WriteOffReport' => '陈欠核销报告',
+
+    //房改
+    'CHouseApp_1' => '购买直管公有住房申请表',
+    'CApprovalForm_1' => '武汉市房产管理局出售单元式直管公房审批表',
+    'InvoiceSale_1' => '售房发票',
+    'CHouseUse' => '房屋使用权证（权属证明书）原件/复印件',
+    'CLastRentInvoice_1' => '最后一月租金发票',
+    'CPublicFundInvoice_1' => '公共部位维修基金发票',
+    'CCopyOfHouse' => '住房证复印件',
+    'CReApproval' => '房改批文',
+    'CTransactionList' => '房改交易清册（住户加盖私章）',
+    'CReAgreement_1' => '房改协议书（住户加盖私章）',
+    'CAttorney' => '委托书（加住户私章）',
+    'CLicenseCopy' => '营业执照复印件',
+    'CAffidavit_1' => '具结书（公司对房地局出具）',
+    'CProofOfFund' => '资金证明（商业银行出具的二联单）',
+    'CRegistration' => '房屋登记申请书',
+    'CAssessment' => '评估单',
+    'CLegalCertificate' => '法人代表证明',
+
+
+    'CHouseApp_2' => '购买直管公有住房申请表',
+    'CApprovalForm_2' => '武汉市房产管理局出售单元式直管公房审批表',
+    'InvoiceSale_2' => '售房发票',
+    'CLastRentInvoice_2' => '最后一月租金发票',
+    'CPublicFundInvoice_2' => '公共部位维修基金发票',
+    'CReAgreement_2' => '房改协议书',
+    'CCopyOfProp' => '产权复印件',
+    'CPicture' => '图纸',
+    'CHouseInformation' => '房屋信息单（房地局出具）',
+    'CReBooklet' => '户口簿',
+    'CCopyOfCard' => '身份证复印件2分（夫妻双方）',
+    'CWorkCertificate' => '工领证明材料复印件（退休证等）',
+    'CAffidavit_2' => '具结书',
+    'CHouseApp_3' => '购买直管公有住房申请表',
+    'CApprovalForm_3' => '武汉市房产管理局出售单元式直管公房审批表',
+    'InvoiceSale_3' => '售房发票',
+    'CLastRentInvoice_3' => '最后一月租金发票',
+    'CPublicFundInvoice_3' => '公共部位维修基金发票',
+
+
+    //新增维修异动
+    'survey' => '房屋勘察表',
+    'pic' => '房屋勘察表',
+
+
+    //新增房屋调整
+    'CancelReport' => '暂停计租报告',
+    'AdjustSurvey' => '暂停计租报告',
+    'AdjustPic' => '暂停计租报告',
+
+
+    //新增房屋调整
+    'homeCkeck' => '房屋勘察表',
+    'AdjustSurvey' => '图卡',
+
+    //管段调整
+    'PipeApplication' => '管段异动申请表',
+
+    //租金追加调整
+    'AddApplication' => '追加租金报告',
+
+    //租金调整
+    'AdjustImage' =>'租金调整报告',
+
+    // 大修中修分界线
+    'middleDevide' => 10,
+
+    // 翻修重建标准（完损等级）
+    'reformDevide' => 5,
+
+    // 新发租
+    'NLApplication' => '异动申请表',
+    'NLApplication2' => '异动申请表',
+
+    // 分户
+    'SplitApplication' => '书面申请(双方)',
+    'SplitRegister' => '户口簿',
+    'SplitCard' => '身份证(双方)',
+    'SplitRent' => '租赁合同',
+    'SplitAdvice' => '共同居住人意见书(签字)',
+
+    // 并户
+    'CancelApplication' => '并户申请书',
+
+    //库字段映射
+    'BanUnitNum' => '单元数',
+    'BanFloorNum' => '层数',
+    'AreaTwo' => '街道',
+    'AreaThree' => '社区',
+    'AreaFour' => '详细地址',
+    'BanFloorStart' => '起始楼层',
+    'InstitutionID' => '机构',
+    'TubulationID' => '管段',
+    'OwnerType' => '产别',
+    'ReformIf' => '是否改造产',
+    'BanPropertyID' => '产权证号',
+    'BanLandID' => '土地证号',
+    'BanFreeholdID' => '不动产证号',
+    'CutIf' => '产权是否分隔',
+    'BanYear' => '建造年份',
+    'DamageGrade' => '完损等级',
+    'StructureType' => '结构类别',
+    'UseNature' => '使用性质',
+    'TotalHouseholds' => '总户数',
+    'CoveredArea' => '占地面积',
+    'ActualArea' => '证载面积',
+    'HistoryIf' => '是否是优秀历史建筑',
+    'ProtectculturalIf' => '是否是文物保护单位',
+    'BanGpsX' => '经度',
+    'BanGpsY' => '纬度',
+
+    'PumpCost' => '泵费',
+    'RepairCost' => '房屋维修费',
+    'OldOprice' => '计算原价',
+    'TenantID' => '租户编号',
+    'NonliveIf' => '是否住改非',
+    'Hall' => '三户共用厅堂的个数',
+    'Toilet' => '三户共用卫生间个数',
+    'Kitchen' => '三户共用厨房个数',
+    'InnerAisle' => '三户共用室内走道个数',
+    'HouseUsearea' => '使用面积',
+    'ComprisingArea' => '套内建面',
+    'HousePrerent' => '规定租金',
+    'WallpaperArea' => '墙纸面积',
+    'CeramicTileArea' => '瓷砖的面积',
+    'BathtubNum' => '浴盆的个数',
+    'BasinNum' => '面盆的个数',
+    'BelowFiveNum' => '低于5平米的房间个数',
+    'MoreFiveNum' => '高于5米的阁楼个数',
+    'TenantName' => '租户姓名',
+    'UseArea' => '使用面积',
+    'LeasedArea' => '计租面积',
+    'IfWater' => '有无上下水',
+
+    'UnitID' => '单元号',
+    'FloorID' => '楼层号',
+
+    'RentPointIDS' => '折减率',
+    'TenantTel' => '租户电话',
+    'TenantAge' => '租户年龄',
+    'TenantWeChat' => '租户微信',
+    'TenantNumber' => '身份证号码',
+    'BankID' => '银行卡账号',
+    'ArrearRent' => '欠租情况',
+    'TenantSex' => '租户性别',
+    'TenantBalance' => '余额',
+    'TenantQQ' => '租户QQ号',
+    'BankName' => '银行名称',
+    'TenantValue' => '租户诚信值',
+    'TenantName' => '租户姓名',
+
+    'RoomRentMonth' => '月租金',
+    'RentPoint' => '基价折减率',
+    'RoomID' => '房间编号',
+    'BanID' => '楼栋编号',
+
+    'HouseID' => '房屋编号',
+    'DoorID' => '门牌号',
+    'HousePreRent' => '规定租金',
+    'ReceiveRent' => '应收租金',
+    'ArrearrentReason' => '欠租情况',
+    'HouseArea' => '建筑面积',
+    'HouseUseArea' => '使用面积',
+    'ComprisingArea' => '套内建面',
+    'DiffRent' => '租差',
+    'PlusRent' => '加计租金',
+    'ProtocolRent' => '协议租金',
+    'WallpaperArea' => '墙纸面积',
+    'CeramicTileArea' => '瓷砖的面积',
+    'BathtubNum' => '浴盆的个数',
+    'BasinNum' => '面盆的个数',
+    'BelowFiveNum' => '空间1至1.7米(5㎡以下)',
+    'MoreFiveNum' => '阁楼(含1.7米)(5㎡以上)',
+    'IfWater' => '是否有上下水',
+    'RemitRent' => '减免金额',
+
+
+];
