@@ -1,0 +1,173 @@
+[ 2018-06-02T09:36:32+08:00 ] 127.0.0.1 127.0.0.1 GET /
+[ log ] web.ph.com/ [运行时间：0.063477s][吞吐率：15.75req/s] [内存消耗：2,851.38kb] [文件加载：55]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ D:\phpStudy\WWW\ph\application\user\controller\Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-02T09:36:32+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/index/index.html
+[ log ] web.ph.com/ph/index/index.html [运行时间：0.196289s][吞吐率：5.09req/s] [内存消耗：3,478.92kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'index',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph/view/layout.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'notice_list',
+  16 => 'upload_file_list',
+  17 => 'short_cut_menus_list',
+  18 => 'wait_processing',
+) ]
+[ info ] [ RUN ] app\ph\controller\Index->index[ D:\phpStudy\WWW\ph\application\ph\controller\Index.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph/view/layout.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'notice_list',
+  16 => 'upload_file_list',
+  17 => 'short_cut_menus_list',
+  18 => 'wait_processing',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001954s ] mysql:dbname=ph20180529;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/Index/index' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid` FROM `ph_institution` WHERE  `pid` = 2 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_notice` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_notice` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_notice` ORDER BY UpdateTime desc LIMIT 0,5 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_file` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_file` LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_file` ORDER BY Time desc LIMIT 0,5 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_short_cut` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_short_cut` WHERE  `User` = '孙辉' [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_change_order` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `a`.`ChangeOrderID`,`a`.`CreateTime`,`b`.`ChangeType`,`a`.`Status` FROM `ph_change_order` `a` LEFT JOIN `ph_change_type` `b` ON `a`.`ChangeType`=`b`.`id` WHERE  `a`.`InstitutionPID` = 2 ORDER BY a.CreateTime desc LIMIT 5 [ RunTime:0.001953s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '11000718980080 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.001953s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_process_config` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10601012514610 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.001953s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10600415976633 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10600317446865' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10800106111552' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_notice` LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_notice` ORDER BY UpdateTime desc LIMIT 0,5 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_file` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_file` ORDER BY Time desc LIMIT 0,5 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_short_cut` WHERE  `User` = '孙辉' [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `a`.`ChangeOrderID`,`a`.`CreateTime`,`b`.`ChangeType`,`a`.`Status` FROM `ph_change_order` `a` LEFT JOIN `ph_change_type` `b` ON `a`.`ChangeType`=`b`.`id` WHERE  `a`.`InstitutionPID` = 2 ORDER BY a.CreateTime desc LIMIT 5 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '11000718980080 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10601012514610 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10600415976633 ' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10600317446865' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `b`.`id`,`b`.`Title`,`b`.`Total` FROM `ph_change_order` `a` LEFT JOIN `ph_process_config` `b` ON `a`.`ProcessConfigType`=`b`.`Type` WHERE  `a`.`ChangeOrderID` = '10800106111552' ORDER BY a.CreateTime desc LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `RoleID` FROM `ph_process_config` WHERE  `pid` = 68  AND `Total` = 1 LIMIT 1 [ RunTime:0.000000s ]
+
+---------------------------------------------------------------

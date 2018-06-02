@@ -1,0 +1,2086 @@
+[ 2018-05-24T22:59:30+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/ChangeApply/index
+[ log ] web.ph.com/ph/ChangeApply/index [运行时间：0.175782s][吞吐率：5.69req/s] [内存消耗：3,740.76kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'ChangeApply',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'cache-control' => 'max-age=0',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/ChangeApply/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\ChangeApply->index[ D:\phpStudy\WWW\ph\application\ph\controller\ChangeApply.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\change_apply\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'natureLst',
+  16 => 'structureLst',
+  17 => 'processLst',
+  18 => 'processLstObj',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/ChangeApply/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_process` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_process` LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`ProcessName`,`IfBaseChange`,`CreateUserID`,`CreateTime` FROM `ph_process` LIMIT 0,15 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_user` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UserName` FROM `ph_admin_user` WHERE  `Number` = 10000 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:07:48+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.405273s][吞吐率：2.47req/s] [内存消耗：3,984.80kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/ChangeApply/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HouseUseareaSum',
+  21 => 'LeasedAreaSum',
+  22 => 'HouseAreaSum',
+  23 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012695s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.032226s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:11:26+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.444336s][吞吐率：2.25req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012695s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:11:45+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.413086s][吞吐率：2.42req/s] [内存消耗：4,312.08kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.022460s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:05+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.439453s][吞吐率：2.28req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011719s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000977s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:15+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.449219s][吞吐率：2.23req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002930s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002930s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.034180s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.025390s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.026368s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.011719s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000976s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:29+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.420899s][吞吐率：2.38req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.032227s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:43+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.416015s][吞吐率：2.40req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:52+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.428711s][吞吐率：2.33req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.011719s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.033203s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000976s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:12:58+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.420898s][吞吐率：2.38req/s] [内存消耗：4,312.13kb] [文件加载：67]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.032227s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:13:07+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/HouseInfo/index.html
+[ log ] web.ph.com/ph/HouseInfo/index.html [运行时间：0.339843s][吞吐率：2.94req/s] [内存消耗：3,856.98kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '87',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+  'HouseID' => '',
+  'BanID' => '',
+  'BanAddress' => '',
+  'TenantName' => '',
+  'OwnerType' => '1',
+  'IfSuspend' => '',
+  'UseNature' => '',
+  'HousePrerent' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.022460s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.030273s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.024415s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 1 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000977s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:13:11+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/HouseInfo/index.html
+[ log ] web.ph.com/ph/HouseInfo/index.html [运行时间：0.406250s][吞吐率：2.46req/s] [内存消耗：3,989.04kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '87',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+  'HouseID' => '',
+  'BanID' => '',
+  'BanAddress' => '',
+  'TenantName' => '',
+  'OwnerType' => '2',
+  'IfSuspend' => '',
+  'UseNature' => '',
+  'HousePrerent' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001954s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.030273s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.025391s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20  AND `OwnerType` = 2 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020375795' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004537 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325811' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004553 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325810' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004556 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325809' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004558 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325808' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004557 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325807' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004554 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301020325806' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004555 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121205843' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004162 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121205842' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004163 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121195845' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004164 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121195844' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004165 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121185848' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004166 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10300121185847' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1004167 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-24T23:13:19+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/HouseInfo/index
+[ log ] web.ph.com/ph/HouseInfo/index [运行时间：0.406250s][吞吐率：2.46req/s] [内存消耗：3,986.30kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseInfo/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=8ufieoqfa9vo4kirb51g5du2q2',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\HouseInfo->index[ D:\phpStudy\WWW\ph\application\ph\controller\HouseInfo.php ]
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\house_info\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'houseidss',
+  16 => 'rentPoint',
+  17 => 'houseLst',
+  18 => 'houseLstObj',
+  19 => 'houseOption',
+  20 => 'HousePrerentSum',
+  21 => 'HouseUseareaSum',
+  22 => 'LeasedAreaSum',
+  23 => 'HouseAreaSum',
+  24 => 'ArrearRentSum',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180523;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/HouseInfo/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `HouseID` FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 ORDER BY CreateTime desc,HouseID desc LIMIT 0,15 [ RunTime:0.032227s ]
+[ sql ] [ SQL ] SELECT SUM(HousePrerent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseUsearea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT SUM(LeasedArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT SUM(HouseArea) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT SUM(ArrearRent) AS tp_sum FROM `ph_house` WHERE  `Status` BETWEEN 1 AND 9  AND `InstitutionID` = 20 LIMIT 1 [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221356445' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_tenant` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198852 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10101221546243' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198851 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10100221229235' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198850 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020635944' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198843 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10201020555972' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1198842 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435631' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001953s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000267 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721435630' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1199031 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301721265632' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000921 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221515673' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000259 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221505674' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000260 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221495675' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000261 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221485676' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000262 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221475677' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000263 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221465678' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000264 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType`,`UseNature`,`LeasedArea`,`HouseID`,`BanID`,`BanAddress`,`ArrearRent`,`TenantID`,`InstitutionID`,`DoorID`,`IfSuspend`,`UnitID`,`FloorID`,`ComprisingArea`,`HouseUsearea`,`HouseArea`,`HousePrerent`,`Oprice`,`PumpCost`,`HouseBase` FROM `ph_house` WHERE  `HouseID` = '10301221455679' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `TenantName` FROM `ph_tenant` WHERE  `TenantID` = 1000265 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `Institution` FROM `ph_institution` WHERE  `id` = 20 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_cut_point` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT * FROM `ph_rent_cut_point` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------

@@ -1,0 +1,410 @@
+[ 2018-04-26T17:36:54+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.260743s][吞吐率：3.84req/s] [内存消耗：3,574.06kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=cgcdjl4e9vrscinnb84bp0pmr3',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '1',
+  'month' => '2018-04',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.019531s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.020508s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.020508s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.020507s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-04-26T17:36:59+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.284180s][吞吐率：3.52req/s] [内存消耗：3,544.11kb] [文件加载：69]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '26',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=cgcdjl4e9vrscinnb84bp0pmr3',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '10',
+  'month' => '2018-04',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:dbname=ph;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.024415s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.019531s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+[ error ] [8]未定义数组下标: 10[D:\phpStudy\WWW\ph\runtime\temp\55a61153fc7e5dd6d4aa0e9f508bdaf2.php:204]
+
+---------------------------------------------------------------
+[ 2018-04-26T17:37:14+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/RentReport/index
+[ log ] web.ph.com/ph/RentReport/index [运行时间：0.253906s][吞吐率：3.94req/s] [内存消耗：3,573.40kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=cgcdjl4e9vrscinnb84bp0pmr3',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-04-26T17:46:11+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.272461s][吞吐率：3.67req/s] [内存消耗：3,814.23kb] [文件加载：71]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '26',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=cgcdjl4e9vrscinnb84bp0pmr3',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '10',
+  'month' => '2018-04',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.018555s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.023438s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.020508s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+[ error ] [8]未定义数组下标: 10[D:\phpStudy\WWW\ph\runtime\temp\55a61153fc7e5dd6d4aa0e9f508bdaf2.php:1523]
+
+---------------------------------------------------------------
+[ 2018-04-26T17:46:28+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/RentReport/index
+[ log ] web.ph.com/ph/RentReport/index [运行时间：0.254883s][吞吐率：3.92req/s] [内存消耗：3,573.39kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=cgcdjl4e9vrscinnb84bp0pmr3',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:dbname=ph;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.025390s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.021485s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.023437s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.021484s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------

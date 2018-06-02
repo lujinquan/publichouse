@@ -1,0 +1,878 @@
+[ 2018-05-16T21:43:26+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/Api/queryHouseReport
+[ log ] web.ph.com/ph/Api/queryHouseReport [运行时间：0.290039s][吞吐率：3.45req/s] [内存消耗：3,198.29kb] [文件加载：53]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'queryHouseReport',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '37',
+  'accept' => '*/*',
+  'origin' => 'http://web.ph.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '5',
+  'QueryType' => '5',
+  'month' => '2017-12',
+)
+[ info ] [ RUN ] app\ph\controller\Api->queryHouseReport[ D:\phpStudy\WWW\ph\application\ph\controller\Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `UseNature`,count(HouseID) as HouseIDS FROM `ph_house` WHERE  `OwnerType` = 5  AND `InstitutionID` = 23 GROUP BY UseNature [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 5  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.005860s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:43:47+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/Api/queryHouseReport
+[ log ] web.ph.com/ph/Api/queryHouseReport [运行时间：0.279297s][吞吐率：3.58req/s] [内存消耗：3,198.34kb] [文件加载：53]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'queryHouseReport',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '37',
+  'accept' => '*/*',
+  'origin' => 'http://web.ph.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '7',
+  'QueryType' => '5',
+  'month' => '2017-12',
+)
+[ info ] [ RUN ] app\ph\controller\Api->queryHouseReport[ D:\phpStudy\WWW\ph\application\ph\controller\Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000977s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `UseNature`,count(HouseID) as HouseIDS FROM `ph_house` WHERE  `OwnerType` = 7  AND `InstitutionID` = 23 GROUP BY UseNature [ RunTime:0.025391s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.005859s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:43:50+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/Api/queryHouseReport
+[ log ] web.ph.com/ph/Api/queryHouseReport [运行时间：0.361328s][吞吐率：2.77req/s] [内存消耗：3,209.30kb] [文件加载：53]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'queryHouseReport',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '37',
+  'accept' => '*/*',
+  'origin' => 'http://web.ph.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '7',
+  'QueryType' => '1',
+  'month' => '2017-12',
+)
+[ info ] [ RUN ] app\ph\controller\Api->queryHouseReport[ D:\phpStudy\WWW\ph\application\ph\controller\Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `UseNature`,count(HouseID) as HouseIDS FROM `ph_house` WHERE  `OwnerType` = 7  AND `InstitutionID` = 23 GROUP BY UseNature [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.011718s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7  AND `DamageGrade` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7  AND `DamageGrade` = 2 LIMIT 1 [ RunTime:0.004883s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7  AND `DamageGrade` = 3 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7  AND `DamageGrade` = 4 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(TotalNum) as BanIDS,sum(TotalArea) as TotalAreas,sum(EnterpriseArea) as EnterpriseAreas FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7  AND `DamageGrade` = 5 LIMIT 1 [ RunTime:0.005860s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:44:05+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/Api/queryHouseReport
+[ log ] web.ph.com/ph/Api/queryHouseReport [运行时间：0.275390s][吞吐率：3.63req/s] [内存消耗：3,198.28kb] [文件加载：53]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'queryHouseReport',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '37',
+  'accept' => '*/*',
+  'origin' => 'http://web.ph.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '7',
+  'QueryType' => '2',
+  'month' => '2017-12',
+)
+[ info ] [ RUN ] app\ph\controller\Api->queryHouseReport[ D:\phpStudy\WWW\ph\application\ph\controller\Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `UseNature`,count(HouseID) as HouseIDS FROM `ph_house` WHERE  `OwnerType` = 7  AND `InstitutionID` = 23 GROUP BY UseNature [ RunTime:0.024414s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyRent) as BanPrerents FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:44:22+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/Api/queryHouseReport
+[ log ] web.ph.com/ph/Api/queryHouseReport [运行时间：0.265625s][吞吐率：3.76req/s] [内存消耗：3,198.34kb] [文件加载：53]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'queryHouseReport',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '37',
+  'accept' => '*/*',
+  'origin' => 'http://web.ph.com',
+  'x-requested-with' => 'XMLHttpRequest',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '7',
+  'QueryType' => '5',
+  'month' => '2017-12',
+)
+[ info ] [ RUN ] app\ph\controller\Api->queryHouseReport[ D:\phpStudy\WWW\ph\application\ph\controller\Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `Level` FROM `ph_institution` WHERE  `id` = 23 LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `UseNature`,count(HouseID) as HouseIDS FROM `ph_house` WHERE  `OwnerType` = 7  AND `InstitutionID` = 23 GROUP BY UseNature [ RunTime:0.022461s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 1 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.005860s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 4 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.006835s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 5 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 6 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 3 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 2 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(EnterpriseNum) as BanIDS,sum(EnterpriseArea) as TotalAreas,sum(EnterpriseOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.005859s ]
+[ sql ] [ SQL ] SELECT sum(CivilNum) as BanIDS,sum(CivilArea) as TotalAreas,sum(BanUsearea) as  BanUseareas,sum(CivilOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT sum(PartyNum) as BanIDS,sum(PartyArea) as TotalAreas,sum(PartyOprice) as TotalOprices FROM `ph_ban` WHERE  `Status` = 1  AND `TubulationID` = 23  AND `OwnerType` = 7  AND `StructureType` = 7 LIMIT 1 [ RunTime:0.005859s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:45:08+08:00 ] 127.0.0.1 127.0.0.1 GET /ph/RentReport/index
+[ log ] web.ph.com/ph/RentReport/index [运行时间：0.145508s][吞吐率：6.87req/s] [内存消耗：3,540.88kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'upgrade-insecure-requests' => '1',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/HouseReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.010743s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:45:12+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.151367s][吞吐率：6.61req/s] [内存消耗：3,589.95kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '1',
+  'month' => '2018-01',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.002930s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000000s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:45:16+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.148437s][吞吐率：6.74req/s] [内存消耗：3,589.82kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '2',
+  'month' => '2018-01',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000976s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.006836s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000976s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:45:43+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.167968s][吞吐率：5.95req/s] [内存消耗：3,590.01kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '3',
+  'month' => '2018-01',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.010743s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:45:48+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.154297s][吞吐率：6.48req/s] [内存消耗：3,589.88kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '5',
+  'month' => '2018-01',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000976s ]
+
+---------------------------------------------------------------
+[ 2018-05-16T21:46:05+08:00 ] 127.0.0.1 127.0.0.1 POST /ph/RentReport/index.html
+[ log ] web.ph.com/ph/RentReport/index.html [运行时间：0.150390s][吞吐率：6.65req/s] [内存消耗：3,589.90kb] [文件加载：65]
+[ info ] [ LANG ] D:\phpStudy\WWW\ph\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'web.ph.com',
+  'connection' => 'keep-alive',
+  'content-length' => '25',
+  'cache-control' => 'max-age=0',
+  'origin' => 'http://web.ph.com',
+  'upgrade-insecure-requests' => '1',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'referer' => 'http://web.ph.com/ph/RentReport/index.html',
+  'accept-encoding' => 'gzip, deflate',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'cookie' => 'PHPSESSID=l7ib4fu6t3klbjvku2jimh8mn4',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '7',
+  'month' => '2018-01',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '',
+  'auto_start' => true,
+  'path' => 'D:\\phpStudy\\WWW\\ph/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ D:\phpStudy\WWW\ph\application\ph\controller\RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] D:\phpStudy\WWW\ph/application/ph\view\rent_report\index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001953s ] mysql:dbname=ph20180517;host=localhost;port=3306;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.008790s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.010742s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.007812s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.000000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.009766s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.007813s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.000976s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.000977s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.008789s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.000977s ]
+
+---------------------------------------------------------------
