@@ -1,0 +1,84 @@
+<style>
+	.am-datepicker-dropdown{
+		z-index: 1111111137;
+	}
+</style>
+<form id="details" class="am-form" style="display:none;margin-top:20px;">
+	<div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-sm-6">
+			<label>订单编号：</label><label id="RentOrderID"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>机构名称：</label><label id="InstitutionID"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>账单期：</label><label id="OrderDate"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>租户姓名：</label><label id="TenantName"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>房屋编号：</label><label id="HouseID"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>楼栋地址：</label><label id="BanAddress"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>单元号：</label><label id="UnitID"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>楼层号：</label><label id="FloorID"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>门牌号：</label><label id="DoorID"></label>
+		</div>
+<!-- 		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>余额：</label><label id="TenantBalance"></label>
+		</div> -->
+		<div class="am-form-group am-u-sm-12">
+			<hr />
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>月规定租金：</label><label id="HousePrerent"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>租金减免：</label><label id="CutRent"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>应缴租金：</label><label id="ReceiveRent"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>实缴金额：</label><label id="PaidRent"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>欠缴租金：</label><label id="UnpaidRent"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>滞纳金：</label><label id="LateRent"></label>
+		</div>
+	</div>
+</form>
+<form id="payForMoney" class="am-form" style="display:none;margin-top:20px;">
+	<div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-sm-6">
+			<label>应缴租金：</label><label id="ReceiveRents"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>滞纳金：</label><label id="LateRents"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6 am-u-end">
+			<label>实缴金额：</label><label id="PaidRents"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>欠缴租金：</label><label id="UnpaidRents"></label>
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>缴纳日期：</label>
+			<input id="CreateDate" type="text" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" placeholder="2018-5" data-am-datepicker style="width:150px;display:inline-block;" />
+		</div>
+		<div class="am-form-group am-u-sm-6">
+			<label>缴纳费用：</label>
+			<input type="number" id="money" style="width:150px;display:inline-block;" placeholder="请输入所缴费用" />
+		</div>
+	</div>
+</form>
