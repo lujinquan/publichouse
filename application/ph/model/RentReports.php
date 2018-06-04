@@ -9,9 +9,10 @@
 namespace app\ph\model;
 
 use think\Model;
+use think\Cache;
 use think\Db;
 
-class RentReport extends Model
+class RentReports extends Model
 {
     /**
      * 核减租金汇总表缓存数据
@@ -27,6 +28,8 @@ class RentReport extends Model
     {
         $cacheDate = date('Ym',time());
         $cacheDate = '201802';
+
+        $date = '201801';
 
         // 以2018年5月报表为例
         $arr1 = array('eq', $cacheDate); // 201805
@@ -100,7 +103,7 @@ class RentReport extends Model
         //从房屋表中分组获取年度欠租、租差
         $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
-            ->where('CancelType','neq',2) //房屋出售的挑出去
+            ->where('CancelType','neq',1) //房屋出售的挑出去
             ->where('CutType','neq',5) //政策减免的挑出去
             ->where($whereNowDate)
             ->where('Status',1)
@@ -110,14 +113,14 @@ class RentReport extends Model
         $changeSaleData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where($whereNowDate)
-            ->where('CancelType',2)
+            ->where('CancelType',1)
             ->where('Status',1)
             ->select();
 
             //从房屋表中分组获取年度欠租、租差
         $changeZhengceData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
-            ->where($whereNowDate)
+            ->where($whereNowDate) 
             ->where('CutType',5)
             ->where('Status',1)
             ->select();
@@ -260,7 +263,7 @@ class RentReport extends Model
                 }
             }
         }
-        //halt($rentOldTotalYearData);
+        //halt($changedata);
 
         //第一步：处理市、区、代、自、托的每一个管段的数据
         foreach ($ownertypes as $owners) { //处理市、区、代、自、托
@@ -271,9 +274,14 @@ class RentReport extends Model
     
 // }
 
-                $datas = json_decode(Cache::store('file')->get('RentReport'.$date ,''),true);
-                $result = isset($datas[$ownerType][$institutionid])?$datas[$ownerType][$institutionid]:array();
-                $result[$owners][$j][0] = $datas[$ownerType][$j][0];
+                $datas = json_decode(Cache::store('file')->get('RentReport'.$date,''),true);
+                //$res = isset($datas[$owners][$j])?$datas[$owners][$j]:array();
+
+// if(!$datas[$owners][$j][20]){
+//     halt($datas[$owners][$j][20]);
+// }
+
+                $result[$owners][$j][0] = isset($datas[$owners][$j])?$datas[$owners][$j][20]:array();
 
                 // $result[$owners][$j][0][1] = $housedata[$owners][2][$j]['HousePrerents'];
                 // $result[$owners][$j][0][2] = 0;
@@ -293,6 +301,10 @@ class RentReport extends Model
                 // array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
 
                 //新发租异动ChangeType = 7
+                // if(!$changedata[$owners][2][$j][7]['InflRents']){
+                //     halt($changedata[$owners][2][$j][7]['InflRents']);
+                // }
+            
                 $result[$owners][$j][2][1] = $changedata[$owners][2][$j][7]['InflRents'];
                 $result[$owners][$j][2][2] = 0;
                 $result[$owners][$j][2][3] = 0;
@@ -348,7 +360,7 @@ class RentReport extends Model
 
 
 
-                //公房出售
+                //公房出售 = 出售 + 房改
                 $result[$owners][$j][6][1] = $changeSaledata[$owners][2][$j]['InflRents'] + $changedata[$owners][2][$j][5]['InflRents'];
                 $result[$owners][$j][6][2] = 0;
                 $result[$owners][$j][6][3] = 0;

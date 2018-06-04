@@ -100,7 +100,7 @@ class RentReport extends Model
         //从房屋表中分组获取年度欠租、租差
         $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
-            ->where('CancelType','neq',2) //房屋出售的挑出去
+            ->where('CancelType','neq',1) //房屋出售的挑出去
             ->where('CutType','neq',5) //政策减免的挑出去
             ->where($whereNowDate)
             ->where('Status',1)
