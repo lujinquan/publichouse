@@ -40,7 +40,7 @@ class Manage extends Controller
 
             $userNumber = $UserModel->get($uid)->Number;
                 
-            return $uid?jsons('2000','登录成功！'):jsons('4000','登录失败');
+            return $uid?jsons('2000','登录成功！',['number'=>$userNumber]):jsons('4000','登录失败');
             
         } else {
 
@@ -56,12 +56,12 @@ class Manage extends Controller
     public function signout()
     {
         // 记录行为,1为登录登出标识，由于登录不在权限表中所以创建一个标识
-        $uid = session('user_base_info.uid');
-        if($uid){
-            action_log('退出系统',$uid , 6 , 1);
-        }
-        session(null);
-        Cache::clear();
+        // $uid = session('user_base_info.uid');
+        // if($uid){
+        //     action_log('退出系统',$uid , 6 , 1);
+        // }
+        // session(null);
+        // Cache::clear();
 
         //自动登录功能暂时不做
         //cookie('uid', null);
@@ -72,96 +72,119 @@ class Manage extends Controller
 
     public function getUseRecordlst(){
 
-        if(!is_signin()){
-            return jsons('5000','未登录');
-        }
-        //筛选出只属于当前机构的申请
-        
-        $currentUserInstitutionID = session('user_base_info.institution_id');
-        $currentUserLevel = session('user_base_info.institution_level');
-        if($currentUserLevel == 3){  //用户为管段级别，则直接查询
-            $where['InstitutionID'] = array('eq' ,$currentUserInstitutionID);
-        }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-            $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
-        }
+        if ($this->request->isGet()) {
 
-        $where['Status'] = array('in' ,[0,1]);
+            $data = $this->request->get();
 
-        $ChangeList['obj'] = Db::name('use_change_order')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+            if (!isset($data['number'])) {
+                 return jsons('4001', '参数缺失');
+            }
+            //筛选出只属于当前机构的申请
+            $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
 
-        $arr = $ChangeList['obj']->all();
-
-        if(!$arr){
-
-            $ChangeList['arr'] = array();
-        }
-
-        //halt($arr);
-
-        foreach($arr as $v){
-
-            $k = $this->get_one_change_info($v['id']);
-
-            if($k){
-
-                $ChangeList['arr'][] = $k;
+            if(!$findOne){
+                return jsons('4002', '参数错误');
             }
 
-            //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
-        }
+            $level = Db::name('institution')->where('id',$findOne['InstitutionID'])->column('Level');
 
-         if(isset($ChangeList['arr'])){
-            return jsons('2000','获取成功',$ChangeList['arr']);
-        }else{
-            return jsons('2000','获取成功',array());
+            
+            if($level == 3){  //用户为管段级别，则直接查询
+                $where['InstitutionID'] = array('eq' ,$level);
+            }elseif($level == 2){  //用户为所级别，则获取所有该所子管段，查询
+                $where['InstitutionPID'] = array('eq' ,$level);
+            }
+
+            $where['Status'] = array('in' ,[0,1]);
+
+            $ChangeList['obj'] = Db::name('use_change_order')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+
+            $arr = $ChangeList['obj']->all();
+
+            if(!$arr){
+
+                $ChangeList['arr'] = array();
+            }
+
+            //halt($arr);
+
+            foreach($arr as $v){
+
+                $k = $this->get_one_change_info($v['id']);
+
+                if($k){
+
+                    $ChangeList['arr'][] = $k;
+                }
+
+                //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
+            }
+
+             if(isset($ChangeList['arr'])){
+                return jsons('2000','获取成功',$ChangeList['arr']);
+            }else{
+                return jsons('2000','获取成功',array());
+            }
         }
 
     }
 
     public function getUselst(){
 
-        if(!is_signin()){
-            return jsons('5000','未登录');
-        }
-        
-        $currentUserInstitutionID = session('user_base_info.institution_id');
-        $currentUserLevel = session('user_base_info.institution_level');
-        if($currentUserLevel == 3){  //用户为管段级别，则直接查询
-            $where['InstitutionID'] = array('eq' ,$currentUserInstitutionID);
-        }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-            $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
-        }
+        if ($this->request->isGet()) {
 
-        $where['Status'] = array('not in' ,[0,1]);
+            $data = $this->request->get();
 
-        $ChangeList['obj'] = Db::name('use_change_order')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+            if (!isset($data['number'])) {
+                 return jsons('4001', '参数缺失');
+            }
+            //筛选出只属于当前机构的申请
+            $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
 
-        $arr = $ChangeList['obj']->all();
-
-        if(!$arr){
-
-            $ChangeList['arr'] = array();
-        }
-
-        foreach($arr as $v){
-
-            $k = $this->get_one_change_info($v['id']);
-
-            if($k){
-
-                $ChangeList['arr'][] = $k;
+            if(!$findOne){
+                return jsons('4002', '参数错误');
             }
 
+            $level = Db::name('institution')->where('id',$findOne['InstitutionID'])->column('Level');
+
+            
+            if($level == 3){  //用户为管段级别，则直接查询
+                $where['InstitutionID'] = array('eq' ,$level);
+            }elseif($level == 2){  //用户为所级别，则获取所有该所子管段，查询
+                $where['InstitutionPID'] = array('eq' ,$level);
+            }
+
+            $where['Status'] = array('not in' ,[0,1]);
+
+            $ChangeList['obj'] = Db::name('use_change_order')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+
+            $arr = $ChangeList['obj']->all();
+
+            if(!$arr){
+
+                $ChangeList['arr'] = array();
+            }
+
+            //halt($arr);
+
+            foreach($arr as $v){
+
+                $k = $this->get_one_change_info($v['id']);
+
+                if($k){
+
+                    $ChangeList['arr'][] = $k;
+                }
+
+                //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
+            }
+
+             if(isset($ChangeList['arr'])){
+                return jsons('2000','获取成功',$ChangeList['arr']);
+            }else{
+                return jsons('2000','获取成功',array());
+            }
         }
-
-        if(isset($ChangeList['arr'])){
-            return jsons('2000','获取成功',$ChangeList['arr']);
-        }else{
-            return jsons('2000','获取成功',array());
-        }
-
-
-        //halt($ChangeList['arr']);
         
     }
 
@@ -172,23 +195,33 @@ class Manage extends Controller
      */
     public function detail(){
 
-        if(!is_signin()){
-            return jsons('5000','未登录');
+        if ($this->request->isGet()) {
+
+            $data = $this->request->get();
+
+            if (!isset($data['number'])) {
+                 return jsons('4001', '参数缺失');
+            }
+            $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
+
+            if(!$findOne){
+                return jsons('4002', '参数错误');
+            }
+
+            $changeOrderID = input('ChangeOrderID'); //变更编号
+
+            $res['detail'] = model('ph/UserAudit')->get_change_detail_info($changeOrderID);
+
+            $res['config'] = model('ph/UserAudit')->process_status($changeOrderID);
+
+            $res['urls'] = model('ph/UserAudit')->process_imgs_url($changeOrderID);
+
+            $res['record'] = model('ph/UserAudit')->process_record($changeOrderID);
+
+            
+
+            return jsons('2000' ,'获取成功' ,$res);
         }
-
-        $changeOrderID = input('ChangeOrderID'); //变更编号
-
-        $res['detail'] = model('ph/UserAudit')->get_change_detail_info($changeOrderID);
-
-        //$res['config'] = model('ph/UserAudit')->process_status($changeOrderID);
-
-        //$res['urls'] = model('ph/UserAudit')->process_imgs_url($changeOrderID);
-
-        $res['record'] = model('ph/UserAudit')->process_record($changeOrderID);
-
-        //halt($res);
-
-        return jsons('2000' ,'获取成功' ,$res);
     }
 
     /**
@@ -197,17 +230,24 @@ class Manage extends Controller
      * @description
      */
     public function process(){
-        //halt(is_signin());
-        if(!is_signin()){
-            return jsons('5000','未登录');
-        }else{
-           defined('UID') or define('UID', is_signin()); 
-        }
-        
-        if($this->request->isPost()) {
+
+
+        if ($this->request->isPost()) {
 
             $data = $this->request->post();
 
+            if (!isset($data['number'])) {
+                 return jsons('4001', '参数缺失');
+            }
+            $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
+
+            if(!$findOne){
+                return jsons('4002', '参数错误');
+            }
+
+            defined('UID') or define('UID', $data['number']);
+
+        
             model('ph/UserAudit')->check_process($data['ChangeOrderID']);
 
             if(!isset($data['reson'])) $data['reson']='';
@@ -221,6 +261,7 @@ class Manage extends Controller
 
                 return jsons('4000' ,'审核异常');
             }
+                
             
         }
 

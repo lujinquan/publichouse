@@ -23,32 +23,38 @@ return [
 //    // 端口
 //    'hostport' => '63179',
 
-   // 公房测试服务器地址
-   'hostname' => 'sh-cdb-r8lcilx2.sql.tencentcdb.com',
-   // 数据库名
-   'database' => 'PH',
-   // 用户名
-   'username' => 'root',
-   // 密码
-   'password' => 'Wfw@ctnm0401',
-   // 端口
-   'hostport' => '63889',
+   // // 公房测试服务器地址
+   // 'hostname' => 'sh-cdb-r8lcilx2.sql.tencentcdb.com',
+   // // 数据库名
+   // 'database' => 'PH',
+   // // 用户名
+   // 'username' => 'root',
+   // // 密码
+   // 'password' => 'Wfw@ctnm0401',
+   // // 端口
+   // 'hostport' => '63889',
 
-    // // 服务器地址
-    //  'hostname'        => 'localhost',
-    //  // 数据库名
-    //  'database'        => 'ph20180529',
-    //  // 用户名
-    //  'username'        => 'root',
-    //  // 密码
-    //  'password'        => 'ctnm',
-    //  // 端口
-    //  'hostport'        => '3306',
+    // 服务器地址
+     'hostname'        => 'localhost',
+     // 数据库名
+     'database'        => 'ph20180604',
+     // 用户名
+     'username'        => 'root',
+     // 密码
+     'password'        => 'ctnm',
+     // 端口
+     'hostport'        => '3306',
 
     // 连接dsn
     'dsn' => '',
     // 数据库连接参数
-    'params' => [],
+    'params' => [
+     	PDO::ATTR_CASE              => PDO::CASE_NATURAL,
+        //PDO::ATTR_ERRMODE           => PDO::ERRMODE_EXCEPTION,
+        //PDO::ATTR_ORACLE_NULLS      => PDO::NULL_NATURAL,
+        //PDO::ATTR_STRINGIFY_FETCHES => false,
+        PDO::ATTR_EMULATE_PREPARES  => true,
+    ],
     // 数据库编码默认采用utf8
     'charset' => 'utf8',
     // 数据库表前缀

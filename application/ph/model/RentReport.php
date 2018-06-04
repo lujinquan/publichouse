@@ -110,14 +110,14 @@ class RentReport extends Model
         $changeSaleData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where($whereNowDate)
-            ->where('CancelType',2)
+            ->where('CancelType',1)
             ->where('Status',1)
             ->select();
 
             //从房屋表中分组获取年度欠租、租差
         $changeZhengceData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
-            ->where($whereNowDate)
+            ->where($whereNowDate) 
             ->where('CutType',5)
             ->where('Status',1)
             ->select();
@@ -344,7 +344,7 @@ class RentReport extends Model
 
 
 
-                //公房出售
+                //公房出售 = 出售 + 房改
                 $result[$owners][$j][6][1] = $changeSaledata[$owners][2][$j]['InflRents'] + $changedata[$owners][2][$j][5]['InflRents'];
                 $result[$owners][$j][6][2] = 0;
                 $result[$owners][$j][6][3] = 0;
