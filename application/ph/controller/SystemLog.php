@@ -15,7 +15,7 @@ class SystemLog extends Base
     protected function _initialize(){
         parent::_initialize();
         //$this->nowmonth = date('Ym',time());
-        $this->nowmonth = '201801';
+        $this->nowmonth = '201802';
     }
 
     /**
@@ -68,11 +68,11 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         //return jsons('100','测试一下');
-        $HouseReportdata = model('ph/RentReport')->index();
+        $HouseReportdata = model('ph/RentReports')->index();
 
         Debug::remark('end');
         $res = Cache::store('file')->set('RentReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
-        return $res?jsons('2000',$this->nowmonth.'月报缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
+        return $res?jsons('2000',$this->nowmonth.'月报，缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
     }
 
     /**
