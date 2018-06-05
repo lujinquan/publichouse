@@ -42,8 +42,9 @@ class RentReports extends Model
         $whereNowMonth['OldPayMonth'] = array('eq', $cacheDate);//当前月的日期
         $whereLastMonth['OldPayMonth'] = array('eq', $cacheDate - 1);//当前月的日期
         $whereLastDate['OrderDate'] = array('eq', $cacheDate);//上月的日期 strtotime('-1 month')
-        $whereNowRegionDate['OrderDate'] = array('between', [date('Y') . '00', $cacheDate]);//1月到上月的日期
-        $whereNowRegionMonth['OldPayMonth'] = array('between', [date('Y') . '00', $cacheDate]);//1月到上月的日期
+        $whereNowRegionDate['OrderDate'] = array('between', [date('Y') . '00', $cacheDate]);
+        //当月收到的以前年
+        $whereNowRegionMonth['OldPayMonth'] = array('between', [date('Y') . '00', $cacheDate - 1]);//1月到上月的日期
         $whereNowMonthRegionDate['OldPayMonth'] = array('between', [date('Y') . '00', $cacheDate + 1]);//1月到本月的日期
         $whereLastRegionDate['OrderDate'] = array('between', [date('Y') . '00', $cacheDate - 1]);//1月到上上月的日期
         $wherePastYear['OrderDate'] = array('lt', date('Y') . '00'); //以前年日期
@@ -82,6 +83,13 @@ class RentReports extends Model
             ->where('PayYear','<',date('Y'))
             ->group('UseNature,OwnerType,InstitutionID')
             ->select();
+
+        // //从往期欠租表中分组获取当月实收累计收缴到的以前年的租金
+        // $rentOldTotalYearData = Db::name('old_rent')->field('UseNature,OwnerType,InstitutionID,sum(PayRent) as PayRents')
+        //     ->where($whereNowMonthRegionDate)
+        //     ->where('PayYear','<',date('Y'))
+        //     ->group('UseNature,OwnerType,InstitutionID')
+        //     ->select();
 //halt($whereNowMonthRegionDate);
 //        if($rentOldTotalYearData){
 //            halt($rentOldTotalYearData);
@@ -639,7 +647,7 @@ class RentReports extends Model
 
                 $result[$owners][$j][19][1] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][1];
                 $result[$owners][$j][19][2] = $rentOldTotalMonthdata[$owners][2][$j]['PayRents'];
-                $result[$owners][$j][19][3] = $rentOldTotalYeardata[$owners][2][$j]['PayRents'];
+                $result[$owners][$j][19][3] = $lastMonthData[$owners][$j][18][3]+ $result[$owners][$j][18][3];
                 $result[$owners][$j][19][4] = 0.4 * $result[$owners][$j][19][1];
                 $result[$owners][$j][19][5] = 0.4 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][6] = 0.4 * $result[$owners][$j][19][3];
@@ -648,10 +656,10 @@ class RentReports extends Model
                 $result[$owners][$j][19][9] = 0.6 * $result[$owners][$j][19][3];
                 $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][10] + $result[$owners][$j][18][10];
                 $result[$owners][$j][19][11] = $rentOldTotalMonthdata[$owners][3][$j]['PayRents'];
-                $result[$owners][$j][19][12] = $rentOldTotalYeardata[$owners][3][$j]['PayRents'];
+                $result[$owners][$j][19][12] = $lastMonthData[$owners][$j][18][12]+ $result[$owners][$j][18][12];
                 $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][13] + $result[$owners][$j][18][13];
                 $result[$owners][$j][19][14] = $rentOldTotalMonthdata[$owners][1][$j]['PayRents'];
-                $result[$owners][$j][19][15] = $rentOldTotalYeardata[$owners][1][$j]['PayRents'];
+                $result[$owners][$j][19][15] = $lastMonthData[$owners][$j][18][15]+ $result[$owners][$j][18][15];
                 array_unshift($result[$owners][$j][19],array_sum($result[$owners][$j][19]) - $result[$owners][$j][19][1] - $result[$owners][$j][19][2] - $result[$owners][$j][19][3]);
 // if($owners == 2 && $j == 21){
 //     dump($result[$owners][$j][17][13]);dump($result[$owners][$j][18][13]);halt(bcsub($result[$owners][$j][17][13] , $result[$owners][$j][18][13],2));
