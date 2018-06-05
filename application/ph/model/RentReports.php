@@ -638,8 +638,8 @@ class RentReports extends Model
                 // array_unshift($result[$owners][$j][19],array_sum($result[$owners][$j][19]) - $result[$owners][$j][19][1] - $result[$owners][$j][19][2] - $result[$owners][$j][19][3]);
 
                 $result[$owners][$j][19][1] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][1];
-                $result[$owners][$j][19][2] = 0;
-                $result[$owners][$j][19][3] = 0;
+                $result[$owners][$j][19][2] = $rentOldTotalMonthdata[$owners][2][$j]['PayRents'];
+                $result[$owners][$j][19][3] = $rentOldTotalYeardata[$owners][2][$j]['PayRents'];
                 $result[$owners][$j][19][4] = 0.4 * $result[$owners][$j][19][1];
                 $result[$owners][$j][19][5] = 0.4 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][6] = 0.4 * $result[$owners][$j][19][3];
@@ -647,11 +647,11 @@ class RentReports extends Model
                 $result[$owners][$j][19][8] = 0.6 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][9] = 0.6 * $result[$owners][$j][19][3];
                 $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][10] + $result[$owners][$j][18][10];
-                $result[$owners][$j][19][11] = 0;
-                $result[$owners][$j][19][12] = 0;
+                $result[$owners][$j][19][11] = $rentOldTotalMonthdata[$owners][3][$j]['PayRents'];
+                $result[$owners][$j][19][12] = $rentOldTotalYeardata[$owners][3][$j]['PayRents'];
                 $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][13] + $result[$owners][$j][18][13];
-                $result[$owners][$j][19][14] = 0;
-                $result[$owners][$j][19][15] = 0;
+                $result[$owners][$j][19][14] = $rentOldTotalMonthdata[$owners][1][$j]['PayRents'];
+                $result[$owners][$j][19][15] = $rentOldTotalYeardata[$owners][1][$j]['PayRents'];
                 array_unshift($result[$owners][$j][19],array_sum($result[$owners][$j][19]) - $result[$owners][$j][19][1] - $result[$owners][$j][19][2] - $result[$owners][$j][19][3]);
 // if($owners == 2 && $j == 21){
 //     dump($result[$owners][$j][17][13]);dump($result[$owners][$j][18][13]);halt(bcsub($result[$owners][$j][17][13] , $result[$owners][$j][18][13],2));
