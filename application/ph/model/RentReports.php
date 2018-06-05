@@ -104,7 +104,8 @@ class RentReports extends Model
         $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where('CancelType','neq',1) //房屋出售的挑出去
-            ->where('CutType','neq',5) //政策减免的挑出去
+            //->where('CutType','neq',5) //政策减免的挑出去
+            ->where('ChangeType','neq',1) //减免的挑出去
             ->where($whereNowDate)
             ->where('Status',1)
             ->select();
@@ -120,13 +121,22 @@ class RentReports extends Model
             //从房屋表中分组获取年度欠租、租差
         $changeZhengceData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
-            ->where($whereNowDate) 
+            ->where('DateEnd','egt',$cacheDate)
             ->where('CutType',5)
             ->where('Status',1)
             ->select();
 
-// if($changeData){
-//     halt($changeData);
+        $changejianmianData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
+            ->group('UseNature,OwnerType,InstitutionID')
+            ->where('DateEnd','egt',$cacheDate)
+            ->where('ChangeType',1)
+            ->where('CutType','neq',5)
+            ->where('Status',1)
+            ->select();
+// $a = Db::name('change_order')->getLastSql();
+// halt($a);
+// if($changejianmianData){
+//     halt($changejianmianData);
 // }
 
         //重组为规定格式的租金数据
@@ -199,6 +209,13 @@ class RentReports extends Model
             ];
         }
 
+        //重组为规定格式的
+        foreach($changejianmianData as $k9 => $v9){
+            $changejianmiandata[$v9['OwnerType']][$v9['UseNature']][$v9['InstitutionID']] = [
+                'InflRents' => $v9['InflRents'],
+            ];
+        }
+
         //保证每一个产别，机构，下的每一个字段都不缺失（没有的以0来补充）
         $ownertypes = [1,2,3,5,7]; //市、区、代、自、托
         foreach ($ownertypes as $owner) {
@@ -256,6 +273,11 @@ class RentReports extends Model
                     }
                     if(!isset($changeZhengcedata[$owner][$i][$j])){
                         $changeZhengcedata[$owner][$i][$j] = [
+                            'InflRents' => 0,
+                        ];
+                    }
+                    if(!isset($changejianmiandata[$owner][$i][$j])){
+                        $changejianmiandata[$owner][$i][$j] = [
                             'InflRents' => 0,
                         ];
                     }
@@ -447,7 +469,7 @@ class RentReports extends Model
                 // array_unshift($result[$owners][$j][10],array_sum($result[$owners][$j][10]) - $result[$owners][$j][10][1] - $result[$owners][$j][10][2] - $result[$owners][$j][10][3]);
 
                 //减免，取得是异动里面的减免金额
-                $result[$owners][$j][10][1] = $changedata[$owners][2][$j][1]['InflRents'];
+                $result[$owners][$j][10][1] = $changejianmiandata[$owners][2][$j]['InflRents'];
                 $result[$owners][$j][10][2] = 0;
                 $result[$owners][$j][10][3] = 0;
                 $result[$owners][$j][10][4] = 0.4 * $result[$owners][$j][10][1];
@@ -456,10 +478,10 @@ class RentReports extends Model
                 $result[$owners][$j][10][7] = 0.6 * $result[$owners][$j][10][1];
                 $result[$owners][$j][10][8] = 0.6 * $result[$owners][$j][10][2];
                 $result[$owners][$j][10][9] = 0.6 * $result[$owners][$j][10][3];
-                $result[$owners][$j][10][10] = $changedata[$owners][3][$j][1]['InflRents'];
+                $result[$owners][$j][10][10] = $changejianmiandata[$owners][3][$j]['InflRents'];
                 $result[$owners][$j][10][11] = 0;
                 $result[$owners][$j][10][12] = 0;
-                $result[$owners][$j][10][13] = $changedata[$owners][1][$j][1]['InflRents'];
+                $result[$owners][$j][10][13] = $changejianmiandata[$owners][1][$j]['InflRents'];
                 $result[$owners][$j][10][14] = 0;
                 $result[$owners][$j][10][15] = 0;
                 array_unshift($result[$owners][$j][10],array_sum($result[$owners][$j][10]) - $result[$owners][$j][10][1] - $result[$owners][$j][10][2] - $result[$owners][$j][10][3]);
