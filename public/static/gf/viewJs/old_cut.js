@@ -29,12 +29,14 @@ $('#cutOldButton').click(function(){
             });
             $('.debt_month').off('click');
             $('.debt_month').on('click',function(){
-            	var classString = $(this).prop('class');
-            	if(classString.indexOf('debt_month_active') > -1){
-            		$(this).removeClass('debt_month_active');
-            	}else{
-            		$(this).addClass('debt_month_active');
-            	}
+            	// var classString = $(this).prop('class');
+            	// if(classString.indexOf('debt_month_active') > -1){
+            	// 	$(this).removeClass('debt_month_active');
+            	// }else{
+            	// 	$(this).addClass('debt_month_active');
+            	// }
+            	$('.debt_month').removeClass('debt_month_active');
+            	$(this).addClass('debt_month_active');
             })
 		},
 		yes:function(){
