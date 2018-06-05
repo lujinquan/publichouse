@@ -624,6 +624,11 @@ class RentReports extends Model
                 $result[$owners][$j][18][12] = $rentOldYeardata[$owners][3][$j]['PayRents'];
                 $result[$owners][$j][18][13] = bcsub($result[$owners][$j][17][13] , $rentdata[$owners][1][$j]['UnpaidRents'],2);
                 $result[$owners][$j][18][14] = $rentOldMonthdata[$owners][1][$j]['PayRents'];
+
+                if($owners == 1 && $j == 16){
+                    //halt($rentOldYeardata[$owners][1][$j]['PayRents']);
+                }
+
                 $result[$owners][$j][18][15] = $rentOldYeardata[$owners][1][$j]['PayRents'];
                 array_unshift($result[$owners][$j][18],array_sum($result[$owners][$j][18]) - $result[$owners][$j][18][1] - $result[$owners][$j][18][2] - $result[$owners][$j][18][3]);
 
