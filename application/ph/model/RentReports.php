@@ -623,10 +623,10 @@ class RentReports extends Model
                 $result[$owners][$j][19][7] = 0.6 * $result[$owners][$j][19][1];
                 $result[$owners][$j][19][8] = 0.6 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][9] = 0.6 * $result[$owners][$j][19][3];
-                $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][10];
+                $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][10] + $result[$owners][$j][18][10];
                 $result[$owners][$j][19][11] = 0;
                 $result[$owners][$j][19][12] = 0;
-                $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][13];
+                $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][13] + $result[$owners][$j][18][13];
                 $result[$owners][$j][19][14] = 0;
                 $result[$owners][$j][19][15] = 0;
                 array_unshift($result[$owners][$j][19],array_sum($result[$owners][$j][19]) - $result[$owners][$j][19][1] - $result[$owners][$j][19][2] - $result[$owners][$j][19][3]);
