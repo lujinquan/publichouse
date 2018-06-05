@@ -100,13 +100,21 @@ class RentReports extends Model
             ->where('Status',1)
             ->select();
 
-        //从房屋表中分组获取年度欠租、租差
+        //获取基数异动
         $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where('CancelType','neq',1) //房屋出售的挑出去
             //->where('CutType','neq',5) //政策减免的挑出去
             ->where('ChangeType','neq',1) //减免的挑出去
             ->where($whereNowDate)
+            ->where('Status',1)
+            ->select();
+
+        //获取非基数异动
+        $changeNoBaseData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
+            ->group('UseNature,OwnerType,InstitutionID,ChangeType')
+            ->where('CancelType','neq',1) //房屋出售的挑出去
+            ->where('ChangeType','neq',1) //减免的挑出去
             ->where('Status',1)
             ->select();
 
@@ -188,10 +196,16 @@ class RentReports extends Model
             ];
         }
 //halt($changeData);
-        //重组为规定格式的实收累计收到的以前月数据
+        //重组为规定格式的实收累计收到的以前月数据$changeNoBaseData
         foreach($changeData as $k7 => $v7){
             $changedata[$v7['OwnerType']][$v7['UseNature']][$v7['InstitutionID']][$v7['ChangeType']] = [
                 'InflRents' => $v7['InflRents'],
+            ];
+        }
+
+        foreach($changeNoBaseData as $k11 => $v11){
+            $changeNoBasedata[$v11['OwnerType']][$v11['UseNature']][$v11['InstitutionID']][$v11['ChangeType']] = [
+                'InflRents' => $v11['InflRents'],
             ];
         }
 
@@ -260,6 +274,15 @@ class RentReports extends Model
                     for($k=1;$k<13;$k++){
                         if(!isset($changedata[$owner][$i][$j][$k])){
                             $changedata[$owner][$i][$j][$k] = [ 
+                                'InflRents' => 0,
+                            ];
+                        }
+
+                    }
+
+                    for($z=1;$z<13;$z++){
+                        if(!isset($changeNoBasedata[$owner][$i][$j][$z])){
+                            $changeNoBasedata[$owner][$i][$j][$z] = [ 
                                 'InflRents' => 0,
                             ];
                         }
@@ -487,7 +510,7 @@ class RentReports extends Model
                 array_unshift($result[$owners][$j][10],array_sum($result[$owners][$j][10]) - $result[$owners][$j][10][1] - $result[$owners][$j][10][2] - $result[$owners][$j][10][3]);
 
                 //空租异动ChangeType = 2
-                $result[$owners][$j][11][1] = $changedata[$owners][2][$j][2]['InflRents'];
+                $result[$owners][$j][11][1] = $changeNoBasedata[$owners][2][$j][2]['InflRents'];
                 $result[$owners][$j][11][2] = 0;
                 $result[$owners][$j][11][3] = 0;
                 $result[$owners][$j][11][4] = 0.4 * $result[$owners][$j][11][1];
@@ -496,16 +519,16 @@ class RentReports extends Model
                 $result[$owners][$j][11][7] = 0.6 * $result[$owners][$j][11][1];
                 $result[$owners][$j][11][8] = 0.6 * $result[$owners][$j][11][2];
                 $result[$owners][$j][11][9] = 0.6 * $result[$owners][$j][11][3];
-                $result[$owners][$j][11][10] = $changedata[$owners][3][$j][2]['InflRents'];
+                $result[$owners][$j][11][10] = $changeNoBasedata[$owners][3][$j][2]['InflRents'];
                 $result[$owners][$j][11][11] = 0;
                 $result[$owners][$j][11][12] = 0;
-                $result[$owners][$j][11][13] = $changedata[$owners][1][$j][2]['InflRents'];
+                $result[$owners][$j][11][13] = $changeNoBasedata[$owners][1][$j][2]['InflRents'];
                 $result[$owners][$j][11][14] = 0;
                 $result[$owners][$j][11][15] = 0;
                 array_unshift($result[$owners][$j][11],array_sum($result[$owners][$j][11]) - $result[$owners][$j][11][1] - $result[$owners][$j][11][2] - $result[$owners][$j][11][3]);
 
                 //暂停计租异动ChangeType = 3
-                $result[$owners][$j][12][1] = $changedata[$owners][2][$j][3]['InflRents'];
+                $result[$owners][$j][12][1] = $changeNoBasedata[$owners][2][$j][3]['InflRents'];
                 $result[$owners][$j][12][2] = 0;
                 $result[$owners][$j][12][3] = 0;
                 $result[$owners][$j][12][4] = 0.4 * $result[$owners][$j][12][1];
@@ -514,10 +537,10 @@ class RentReports extends Model
                 $result[$owners][$j][12][7] = 0.6 * $result[$owners][$j][12][1];
                 $result[$owners][$j][12][8] = 0.6 * $result[$owners][$j][12][2];
                 $result[$owners][$j][12][9] = 0.6 * $result[$owners][$j][12][3];
-                $result[$owners][$j][12][10] = $changedata[$owners][3][$j][3]['InflRents'];
+                $result[$owners][$j][12][10] = $changeNoBasedata[$owners][3][$j][3]['InflRents'];
                 $result[$owners][$j][12][11] = 0;
                 $result[$owners][$j][12][12] = 0;
-                $result[$owners][$j][12][13] = $changedata[$owners][1][$j][3]['InflRents'];
+                $result[$owners][$j][12][13] = $changeNoBasedata[$owners][1][$j][3]['InflRents'];
                 $result[$owners][$j][12][14] = 0;
                 $result[$owners][$j][12][15] = 0;
                 array_unshift($result[$owners][$j][12],array_sum($result[$owners][$j][12]) - $result[$owners][$j][12][1] - $result[$owners][$j][12][2] - $result[$owners][$j][12][3]);
