@@ -72,7 +72,7 @@ class SystemLog extends Base
 
         Debug::remark('end');
         $res = Cache::store('file')->set('RentReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
-        return $res?jsons('2000','缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
+        return $res?jsons('2000',$this->nowmonth.'月报缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
     }
 
     /**
