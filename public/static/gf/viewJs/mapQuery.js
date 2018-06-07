@@ -78,11 +78,9 @@ window.onload=function(){
       this._map = map;
       var div = this._div = document.createElement("div");
       div.style.position = "absolute";
-      div.style.zIndex = 0;
-	  div.style.backgroundColor = "#2d69f9";      
+      div.style.zIndex = 0;    
       div.style.color = "white";
       div.style.width = "110px";
-      div.style.padding = "5px";
       div.style.lineHeight = "18px";
       div.style.whiteSpace = "nowrap";
       div.style.MozUserSelect = "none";
@@ -90,28 +88,31 @@ window.onload=function(){
       div.style.textAlign='center';
       div.className='aDiv';
       var span = this._span = document.createElement("span");
+      span.style.padding = "5px";
+      span.style.backgroundColor = "#2d69f9";
+      span.style.borderRadius = '4px';
       div.appendChild(span);
       span.appendChild(document.createTextNode(this._text));      
       var that = this;
-       var arrow = this._arrow = document.createElement("div");
+      var arrow = this._arrow = document.createElement("div");
       arrow.style.width = "0px";
       arrow.style.position = "relative";
       arrow.style.height = "0px";
-      arrow.style.borderLeft = "10px solid transparent";
-      arrow.style.borderRight = "10px solid transparent";
-      arrow.style.borderTop="10px solid #2d69f9" 
+      arrow.style.borderLeft = "8px solid transparent";
+      arrow.style.borderRight = "8px solid transparent";
+      arrow.style.borderTop="8px solid #2d69f9";
       arrow.style.left="17px";
-      arrow.style.top="12px";
+      arrow.style.top="2px";
       arrow.className='aR'
       div.appendChild(arrow);
       
       div.onmouseover = function(){
-        this.className='bgO';
+        this.children[0].className='bgO';
     	this.children[1].className='borderO';
     	this.style.zIndex=100;
       }
       div.onmouseout = function(){
-       	this.className='bgB';
+       	this.children[0].className='bgB';
     	this.children[1].className='borderB';
     	this.style.zIndex=0;
       }
@@ -143,202 +144,212 @@ window.onload=function(){
         async: false,  
         success : function(res) {  
            res = JSON.parse(res);
-          // console.log(res.data.point);
-
-          getM(res.data.point);
-
+           console.log(res.data.point);
+           res.data.point.sort(function(a,b){
+           	return a.BanGpsX - b.BanGpsX
+           })
+          	
 			var aDate = res.data.point.length;
+			aLabel.push(res.data.point[1]);
 			for (var i = 0; i < aDate; i++) {
-			aLabel.push(res.data.point[i]);
-		}
-		 //getM(aLabel);
-        },    
+				if(res.data.point[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
+					aLabel.push(res.data.point[i]);
+				}
+			}
+			console.log(aLabel)
+			getM(aLabel);
+        }
     }); 
-  var TubulationID=document.getElementById('doc-select-2');
-  var OwnerTyp=document.getElementById('doc-select-5');
-    mp.addEventListener("dragend", function(){
-	 bs = mp.getBounds();   //获取可视区域
-     bssw = bs.getSouthWest();   //可视区域左下角
-     bsne = bs.getNorthEast();   //可视区域右上角   
-     topLat = bsne.lat;
-     bottomLat = bssw.lat;
-     leftLng = bssw.lng;
-     rightLng = bsne.lng;
-     
-     
-     
-		});
+  	var TubulationID=document.getElementById('doc-select-2');
+  	var OwnerTyp=document.getElementById('doc-select-5');
+	mp.addEventListener("dragend", function(){
+		bs = mp.getBounds();   //获取可视区域
+	    bssw = bs.getSouthWest();   //可视区域左下角
+	    bsne = bs.getNorthEast();   //可视区域右上角   
+	    topLat = bsne.lat;
+	    bottomLat = bssw.lat;
+	    leftLng = bssw.lng;
+	    rightLng = bsne.lng;
+	});
     TubulationID.onchange=OwnerTyp.onchange=function(){
    		mp.clearOverlays();
     	var TubulationID= $('#doc-select-2').children('option:selected').val();  
         var OwnerTyp =$('#doc-select-5').children('option:selected').val();
     	$.post('/ph/Api/get_ban_map_point',{TubulationID:TubulationID,OwnerType:OwnerTyp},function(res){
     		res = JSON.parse(res);
-    		 getM(res.data.point);
-
+    		getM(res.data.point);
     		mp.addEventListener("dragend", function(){
-			 bs = mp.getBounds();   //获取可视区域
-		     bssw = bs.getSouthWest();   //可视区域左下角
-		     bsne = bs.getNorthEast();   //可视区域右上角   
-		     topLat = bsne.lat;
-		     bottomLat = bssw.lat;
-		     leftLng = bssw.lng;
-		     rightLng = bsne.lng;
-		     getM(res.data.point);
-
-				});
-			
-			})//post
+			 	bs = mp.getBounds();   //获取可视区域
+		     	bssw = bs.getSouthWest();   //可视区域左下角
+		     	bsne = bs.getNorthEast();   //可视区域右上角   
+		     	topLat = bsne.lat;
+		     	bottomLat = bssw.lat;
+		     	leftLng = bssw.lng;
+		     	rightLng = bsne.lng;
+		    	getM(res.data.point);
+			});
+		})//post
     }
-	getM(aLabel); 
-	//get	
+
+
+	//getM(aLabel); 
 	
 	function getM(a){
 		var aDate = a.length;
-		var myCompOverlay='';
-		// var points = [];
+		console.log(aDate);
+		var myCompOverlay = '';
 		mp.clearOverlays();
 		bs = mp.getBounds();   //获取可视区域
-		    bssw = bs.getSouthWest();   //可视区域左下角
-		    bsne = bs.getNorthEast();   //可视区域右上角   
-		    topLat = bsne.lat;
-		    bottomLat = bssw.lat;
-		    leftLng = bssw.lng;
-		    rightLng = bsne.lng;
-		    console.log(rightLng);
-			for (var i = 0; i < aDate; i++) {
-				if(parseFloat(a[i].BanGpsX)<rightLng &&
-					parseFloat(a[i].BanGpsX)>leftLng &&
-					parseFloat(a[i].BanGpsY)<topLat &&
-					parseFloat(a[i].BanGpsY)>bottomLat){
-					myCompOverlay = new ComplexCustomOverlay(new BMap.Point(parseFloat(a[i].BanGpsX),parseFloat(a[i].BanGpsY)),a[i].BanID);
-					mp.addOverlay(myCompOverlay);
-					//console.log(myCompOverlay);
-					var aR=$('.aR');
-    				var aDiv = $('.aDiv');
-	    			myCompOverlay.addEventListener('click',function(){
-	    				for(var i=0;i<aR.length;i++){
-		    				aR[i].className='borderB';
-		    				aDiv[i].className='bgB';
-		    				aDiv[i].onmouseout=function(){
-		    					this.className='bgB';
-						    	this.children[1].className='borderB';
-						    	this.style.zIndex=0;
-		    				}
-		    			}
-		    			$('.contentM').css('display','block')
-						this.removeClass='bgB';
-						this.children[1].removeClass='borderB';
-						this.className='bgO';
-		    			this.children[1].className='borderO';
-						this.onmouseout=function(){
-							return false;
+	    bssw = bs.getSouthWest();   //可视区域左下角
+	    bsne = bs.getNorthEast();   //可视区域右上角   
+	    topLat = bsne.lat;
+	    bottomLat = bssw.lat;
+	    leftLng = bssw.lng;
+	    rightLng = bsne.lng;
+		for (var i = 0; i < aDate; i++) {
+			if(parseFloat(a[i].BanGpsX)<rightLng &&
+				parseFloat(a[i].BanGpsX)>leftLng &&
+				parseFloat(a[i].BanGpsY)<topLat &&
+				parseFloat(a[i].BanGpsY)>bottomLat){
+				myCompOverlay = new ComplexCustomOverlay(new BMap.Point(parseFloat(a[i].BanGpsX),parseFloat(a[i].BanGpsY)),a[i].BanID);
+				mp.addOverlay(myCompOverlay);
+
+				//console.log(myCompOverlay);
+				
+				var aR=$('.aR');
+				var aDiv = $('.aDiv');
+    			myCompOverlay.addEventListener('click',function(){
+    				for(var i=0;i<aR.length;i++){
+	    				aR[i].className='borderB';
+	    				aDiv[i].children[0].className='bgB';
+	    				aDiv[i].onmouseout=function(){
+	    					this.children[0].className='bgB';
+					    	this.children[1].className='borderB';
+					    	this.style.zIndex=0;
+	    				}
+	    			}
+
+	    			$('.contentM').css('display','block')
+					this.children[0].removeClass='bgB';
+					this.children[1].removeClass='borderB';
+					this.children[0].className='bgO';
+	    			this.children[1].className='borderO';
+
+					this.onmouseout=function(){
+						return false;
+					}
+
+					var b=$(this).find('span').html().split(':')[1];
+
+					$.get('/ph/Api/get_ban_detail_info?BanID='+b,function(res){
+						res = JSON.parse(res);
+						$('#BanID').html(res.data.top.BanID);
+						$('#BanAddress').html(res.data.top.BanAddress);
+						$('#PropertySource').html(res.data.top.PropertySource);
+						$('#TubulationID').html(res.data.top.TubulationID);
+						$('#OwnerType').html(res.data.top.OwnerType);
+						$('#BanPropertyID').html(res.data.top.BanPropertyID);
+						$('#BanYear').html(res.data.top.BanYear);
+						$('#DamageGrade').html(res.data.top.DamageGrade);
+						$('#StructureType').html(res.data.top.StructureType);
+						$('#UseNature').html(res.data.top.UseNature);
+						$('#TotalArea').html(res.data.top.TotalArea);
+						$('#TotalOprice').html(res.data.top.TotalOprice);//top
+						$('#HouseID li').not(":first").remove(); 
+						$('#TenantName li').not(":first").remove(); 
+						$('#DoorID li').not(":first").remove(); 
+						$('#UnitID li').not(":first").remove(); 
+						$('#FloorID li').not(":first").remove(); 
+						$('#DetailM li').not(":first").remove(); 
+						$('#UseNatured li').not(":first").remove(); 
+						$('#RegularPrice li').not(":first").remove(); 
+						$('#UseArea li').not(":first").remove(); 
+
+						for(i=0;i<res.data.bottom.length;i++){
+							var newul=$("<li class='houseI'></li>");
+							newul.appendTo($("#HouseID"));
+							newul.html(res.data.bottom[i].HouseID);
+							var newul1=$("<li ></li>");
+							newul1.appendTo($("#TenantName"));
+							newul1.html(res.data.bottom[i].TenantName);
+							var newul2=$("<li></li>");
+							newul2.appendTo($("#DoorID"));
+							newul2.html(res.data.bottom[i].DoorID);
+							var newul3=$("<li></li>");
+							newul3.appendTo($("#UnitID"));
+							newul3.html(res.data.bottom[i].UnitID);
+							var newul4=$("<li></li>");
+							newul4.appendTo($("#FloorID"));
+							newul4.html(res.data.bottom[i].FloorID);
+							var newul6=$("<li></li>");
+							newul6.appendTo($("#UseNatured"));
+							newul6.html(res.data.bottom[i].UseNature);
+							var newul7=$("<li></li>");
+							newul7.appendTo($("#UseArea"));
+							newul7.html(res.data.bottom[i].HouseUsearea);
+							var newul8=$("<li></li>");
+							newul8.appendTo($("#RegularPrice"));
+							newul8.html(res.data.bottom[i].HousePrerent);
+							var newul5=$("<li></li>");
+							var aInp = $("<input type='button' value='明细' class='f12 house_M detail-btn' />")
+							newul5.appendTo($("#DetailM"));
+							aInp.appendTo(newul5);	
 						}
-						var b=$(this).find('span').html().split(':')[1];
-						$.get('/ph/Api/get_ban_detail_info?BanID='+b,function(res){
-							res = JSON.parse(res);
-							$('#BanID').html(res.data.top.BanID);
-							$('#BanAddress').html(res.data.top.BanAddress);
-							$('#PropertySource').html(res.data.top.PropertySource);
-							$('#TubulationID').html(res.data.top.TubulationID);
-							$('#OwnerType').html(res.data.top.OwnerType);
-							$('#BanPropertyID').html(res.data.top.BanPropertyID);
-							$('#BanYear').html(res.data.top.BanYear);
-							$('#DamageGrade').html(res.data.top.DamageGrade);
-							$('#StructureType').html(res.data.top.StructureType);
-							$('#UseNature').html(res.data.top.UseNature);
-							$('#TotalArea').html(res.data.top.TotalArea);
-							$('#TotalOprice').html(res.data.top.TotalOprice);//top
-							$('#HouseID li').not(":first").remove(); 
-							$('#TenantName li').not(":first").remove(); 
-							$('#DoorID li').not(":first").remove(); 
-							$('#UnitID li').not(":first").remove(); 
-							$('#FloorID li').not(":first").remove(); 
-							$('#DetailM li').not(":first").remove(); 
-							$('#UseNatured li').not(":first").remove(); 
-							$('#RegularPrice li').not(":first").remove(); 
-							$('#UseArea li').not(":first").remove(); 
-							for(i=0;i<res.data.bottom.length;i++){
-								var newul=$("<li class='houseI'></li>");
-								newul.appendTo($("#HouseID"));
-								newul.html(res.data.bottom[i].HouseID);
-								var newul1=$("<li ></li>");
-								newul1.appendTo($("#TenantName"));
-								newul1.html(res.data.bottom[i].TenantName);
-								var newul2=$("<li></li>");
-								newul2.appendTo($("#DoorID"));
-								newul2.html(res.data.bottom[i].DoorID);
-								var newul3=$("<li></li>");
-								newul3.appendTo($("#UnitID"));
-								newul3.html(res.data.bottom[i].UnitID);
-								var newul4=$("<li></li>");
-								newul4.appendTo($("#FloorID"));
-								newul4.html(res.data.bottom[i].FloorID);
-								var newul6=$("<li></li>");
-								newul6.appendTo($("#UseNatured"));
-								newul6.html(res.data.bottom[i].UseNature);
-								var newul7=$("<li></li>");
-								newul7.appendTo($("#UseArea"));
-								newul7.html(res.data.bottom[i].HouseUsearea);
-								var newul8=$("<li></li>");
-								newul8.appendTo($("#RegularPrice"));
-								newul8.html(res.data.bottom[i].HousePrerent);
-								var newul5=$("<li></li>");
-								var aInp = $("<input type='button' value='明细' class='f12 house_M detail-btn' />")
-								newul5.appendTo($("#DetailM"));
-								aInp.appendTo(newul5);	
-							}
-							$(".house_M").click(function(){
-								var _this=$(this).index('.house_M');
-								var HouseID = $('.houseI').eq(_this).html();
-								console.log(HouseID);
-								$.get('/ph/HouseInfo/detail/HouseID/'+HouseID,function(res){
-									res = JSON.parse(res);
-									console.log(res);
-									$('p[id=HouseID]').text(res.data.HouseID);             //房屋编号
-									$('p[id=BanID]').text(res.data.BanID);                 //楼栋编号
-									$('p[id=InstitutionID]').text(res.data.InstitutionID);       //机构
-									$('p[id=UnitID]').text(res.data.UnitID); //单元号
-									$('p[id=FloorID]').text(res.data.FloorID);             //楼层号
-									$('p[id=HousePID]').text(res.data.HousePID);     //产权证号
-									$('p[id=DoorID]').text(res.data.DoorID);         //门牌号
-									$('p[id=HouseUsearea]').text(res.data.HouseUsearea);             //使用面积
-									$('p[id=NonliveIf]').text(res.data.NonliveIf); //是否住改非
-									$('p[id=LeasedArea]').text(res.data.LeasedArea);   //计租面积
-									$('p[id=HousePrerent]').text(res.data.HousePrerent);         //规定租金
-									$('p[id=ReceiveRent]').text(res.data.ReceiveRent);     //应收租金
-									$('p[id=RemitRent]').text(res.data.RemitRent); //减免租金
-									$('p[id=UseNature]').text(res.data.UseNature); //使用性质
-									$('p[id=PumpCost]').text(res.data.PumpCost);         //泵费
-									$('p[id=RepairCost]').text(res.data.RepairCost);       //维修费
-									$('p[id=HouseBase]').text(res.data.HouseBase);         //房屋基数
-									$('p[id=OldOprice]').text(res.data.OldOprice);         //计算原价
-									$('p[id=Oprice]').text(res.data.Oprice);         //实际原价
-									$('p[id=TenantID]').text(res.data.TenantID);       //租户姓名
-									$('p[id=ArrearRent]').text(res.data.ArrearRent);                 //欠租情况
-									$('p[id=ArrearrentReason]').text(res.data.ArrearrentReason);         //欠租原因
-									$('p[id=HouseArea]').text(res.data.HouseArea);  //户建面积
-									$('p[id=ComprisingArea]').text(res.data.ComprisingArea);           //套内建面
-									$('#HouseImageIDS').attr('src',res.data.HouseImageIDS);		//图片影像
-									$('#houseDetail').css('display','block');
-									layer.open({
-										type:1,
-										area:['800px','600px'],
-										resize:false,
-										title:['房屋明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-										content:$('#houseDetail'),
-										end:function(){
-											$('#houseDetail').css('display','none');
-										}
-									});
-								})
-							});
-						})//get2
+
+						$(".house_M").click(function(){
+							var _this=$(this).index('.house_M');
+							var HouseID = $('.houseI').eq(_this).html();
+							console.log(HouseID);
+
+							$.get('/ph/HouseInfo/detail/HouseID/'+HouseID,function(res){
+								res = JSON.parse(res);
+								console.log(res);
+								$('p[id=HouseID]').text(res.data.HouseID);             //房屋编号
+								$('p[id=BanID]').text(res.data.BanID);                 //楼栋编号
+								$('p[id=InstitutionID]').text(res.data.InstitutionID);       //机构
+								$('p[id=UnitID]').text(res.data.UnitID); //单元号
+								$('p[id=FloorID]').text(res.data.FloorID);             //楼层号
+								$('p[id=HousePID]').text(res.data.HousePID);     //产权证号
+								$('p[id=DoorID]').text(res.data.DoorID);         //门牌号
+								$('p[id=HouseUsearea]').text(res.data.HouseUsearea);             //使用面积
+								$('p[id=NonliveIf]').text(res.data.NonliveIf); //是否住改非
+								$('p[id=LeasedArea]').text(res.data.LeasedArea);   //计租面积
+								$('p[id=HousePrerent]').text(res.data.HousePrerent);         //规定租金
+								$('p[id=ReceiveRent]').text(res.data.ReceiveRent);     //应收租金
+								$('p[id=RemitRent]').text(res.data.RemitRent); //减免租金
+								$('p[id=UseNature]').text(res.data.UseNature); //使用性质
+								$('p[id=PumpCost]').text(res.data.PumpCost);         //泵费
+								$('p[id=RepairCost]').text(res.data.RepairCost);       //维修费
+								$('p[id=HouseBase]').text(res.data.HouseBase);         //房屋基数
+								$('p[id=OldOprice]').text(res.data.OldOprice);         //计算原价
+								$('p[id=Oprice]').text(res.data.Oprice);         //实际原价
+								$('p[id=TenantID]').text(res.data.TenantID);       //租户姓名
+								$('p[id=ArrearRent]').text(res.data.ArrearRent);                 //欠租情况
+								$('p[id=ArrearrentReason]').text(res.data.ArrearrentReason);         //欠租原因
+								$('p[id=HouseArea]').text(res.data.HouseArea);  //户建面积
+								$('p[id=ComprisingArea]').text(res.data.ComprisingArea);           //套内建面
+								$('#HouseImageIDS').attr('src',res.data.HouseImageIDS);		//图片影像
+								$('#houseDetail').css('display','block');
+
+								layer.open({
+									type:1,
+									area:['800px','600px'],
+									resize:false,
+									title:['房屋明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
+									content:$('#houseDetail'),
+									end:function(){
+										$('#houseDetail').css('display','none');
+									}
+								});
+							})
+						})
 					})
-				}
+				})
 			}
 		}
+		
 	}
+}
 
 $("#check_btn").click(function(){
 	

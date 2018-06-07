@@ -121,14 +121,18 @@ file.prototype.fileShow = function(){
     this.button.off('change');
     this.button.on('change',function(){
         that.fileShowEvent();
+        console.log(this.value);
     });
 }
 file.prototype.fileShowEvent = function(){
     var that = this;
-    files = this.button[0].files;
+    var files = this.button[0].files;
     for(var i = 0;i < files.length;i++){
         if(files[i].size/1024 > this.size){
             layer.msg('图片过大！');
+            continue;
+        }else if(this.filesArray.some(function(data){return data.name==files[i].name})){
+            layer.msg('上传文件重复！');
             continue;
         }else{
             files[i].title = this.name;
