@@ -45,25 +45,87 @@
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">上期结转</td>
-                <?php foreach($result[0] as $v0){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide"><?php echo $v0; ?></td>
+                <?php if(isset($result[0])){ 
+                    foreach($result[0] as $v0){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_1"><?php echo $v0; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="7" colspan="1"  class="am-text-middle">基数增减</td>
                 <td rowspan="1" colspan="2">计</td>
-                <?php foreach($result[1] as $v1){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide_9"><?php echo $v1; ?></td>
+                <?php if(isset($result[1])){ 
+                    foreach($result[1] as $v1){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_2"><?php echo $v1; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">新发租</td>
-                <?php foreach($result[2] as $v2){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide_10"><?php echo $v2; ?></td>
+                <?php if(isset($result[2])){ 
+                    foreach($result[2] as $v2){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_3"><?php echo $v2; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">调整</td>
+                <?php if(isset($result[3])){ 
+                    foreach($result[3] as $v3){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_4"><?php echo $v3; ?></td>
+                <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -80,28 +142,91 @@
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
+                <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">注销</td>
-                <?php foreach($result[4] as $v4){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide_11"><?php echo $v4; ?></td>
+                <?php if(isset($result[4])){ 
+                    foreach($result[4] as $v4){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_5"><?php echo $v4; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">租差</td>
-                <?php foreach($result[5] as $v5){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_6"><?php echo $v5; ?></td>
+                <?php if(isset($result[5])){ 
+                    foreach($result[5] as $v5){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_6"><?php echo $v5; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">公房出售</td>
-                <?php foreach($result[6] as $v6){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_14"><?php echo $v6; ?></td>
+                <?php if(isset($result[6])){ 
+                    foreach($result[6] as $v6){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_7"><?php echo $v6; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             
             <tr>
                 <td rowspan="1" colspan="2">管段调整</td>
+                <?php if(isset($result[7])){ 
+                    foreach($result[7] as $v7){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_8"><?php echo $v7; ?></td>
+                <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -118,65 +243,191 @@
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
+                <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">规定租金</td>
-                <?php foreach($result[8] as $v8){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_1"><?php echo $v8; ?></td>
+                <?php if(isset($result[8])){ 
+                    foreach($result[8] as $v8){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_9"><?php echo $v8; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="8" colspan="1" class="am-text-middle">非基数增减</td>
                 <td rowspan="1" colspan="2">计</td>
-                <?php foreach($result[9] as $v9){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_7"><?php echo $v9; ?></td>
+                <?php if(isset($result[9])){ 
+                    foreach($result[9] as $v9){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_10"><?php echo $v9; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">减免</td>
-                <?php foreach($result[10] as $v10){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_8"><?php echo $v10; ?></td>
+                <?php if(isset($result[10])){ 
+                    foreach($result[10] as $v10){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_11"><?php echo $v10; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?> 
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">空租</td>
-                <?php foreach($result[11] as $v11){ ;?>
+                <?php if(isset($result[11])){ 
+                    foreach($result[11] as $v11){
+                ;?>
                 <td rowspan="1" colspan="1" class="some_hide_12"><?php echo $v11; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">暂停计租</td>
-                <?php foreach($result[12] as $v12){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide_13"><?php echo $v12; ?></td><!--13-->
+                <?php if(isset($result[12])){ 
+                    foreach($result[12] as $v12){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_13"><?php echo $v12; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">文化室</td>
+                <?php if(isset($result[13])){ 
+                    foreach($result[13] as $v13){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_14"><?php echo $v13; ?></td>
+                <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
+                <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">政策折减</td>
-                <?php foreach($result[14] as $v14){ ;?>
-                <td rowspan="1" colspan="1" class="some_hide_15"><?php echo $v14; ?></td><!--13-->
+                <?php if(isset($result[14])){ 
+                    foreach($result[14] as $v14){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_15"><?php echo $v14; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">陈欠核销</td>
+                <?php if(isset($result[15])){ 
+                    foreach($result[15] as $v15){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_16"><?php echo $v15; ?></td>
+                <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -193,9 +444,15 @@
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
+                <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="2">&nbsp;</td>
+                <?php if(isset($result[16])){ 
+                    foreach($result[16] as $v16){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_17"><?php echo $v16; ?></td>
+                <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -203,38 +460,115 @@
                 <td rowspan="1" colspan="1" class="once_hide"></td>
                 <td rowspan="1" colspan="1" class="once_hide"></td>
                 <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td> 
                 <td rowspan="1" colspan="1" class="once_hide"></td>
                 <td rowspan="1" colspan="1" class="once_hide"></td>
-                <td rowspan="1" colspan="1" class="once_hide"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
+                <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">应收租金</td>
-                <?php foreach($result[17] as $v17){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_2"><?php echo $v17; ?></td>
+                <?php if(isset($result[17])){ 
+                    foreach($result[17] as $v17){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_18"><?php echo $v17; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">实收租金</td>
-                <?php foreach($result[18] as $v18){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_3"><?php echo $v18; ?></td>
+                <?php if(isset($result[18])){ 
+                    foreach($result[18] as $v18){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_19"><?php echo $v18; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">实收累计</td>
-                <?php foreach($result[19] as $v19){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_4"><?php echo $v19; ?></td>
+                <?php if(isset($result[19])){ 
+                    foreach($result[19] as $v19){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_20"><?php echo $v19; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
             <tr>
                 <td rowspan="1" colspan="3">结欠租金</td>
-                <?php foreach($result[20] as $v20){ ;?>
-                <td rowspan="1" colspan="1"  class="some_hide_5"><?php echo $v20; ?></td>
+                <?php if(isset($result[20])){ 
+                    foreach($result[20] as $v20){
+                ;?>
+                <td rowspan="1" colspan="1" class="some_hide_21"><?php echo $v20; ?></td>
+                <?php }}else{; ?>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1" class="once_hide"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
+                <td rowspan="1" colspan="1"></td>
                 <?php }; ?>
             </tr>
         </tbody>
