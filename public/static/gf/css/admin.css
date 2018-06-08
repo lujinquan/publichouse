@@ -99,26 +99,60 @@ input[type=checkbox],input[type=radio]{
 }
 
 .admin-content-list {
-  border: 1px solid #e9ecf1;
+
   margin-top: 0;
 }
-
 .admin-content-list li {
-  border: 1px solid #e9ecf1;
-  border-width: 0 1px;
-  margin-left: -1px;
+  width:23%;
+  margin-left:2.66%;
+  padding:17px 0 12px;
+  border: 1px dashed #B7C1CE;
+  border-radius: 4px;
+  color:#333;
+  font-size:12px;
 }
-
-.admin-content-list li:first-child {
-  border-left: none;
+.admin-content-list li:first-child{
+  margin-left:0;
 }
-
-.admin-content-list li:last-child {
-  border-right: none;
+.admin-content-list .am-icon-plus{
+  margin-bottom:8px;
 }
-
 .admin-content-table a {
   color: #535353;
+}
+.add_work{
+  position:relative;
+}
+.add_work_number{
+  width:50px;
+  height:50px;
+  margin:12px auto;
+  font-size: 30px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  line-height:50px;
+  display:inline-block;
+  border-radius:50%;
+  background: rgba(0,0,0,0.10);
+  vertical-align:middle;
+}
+.add_work_name{
+  display:inline-block;
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: 0.9px;
+  vertical-align:middle;
+}
+.add_work_delete{
+  width:24px;
+  height:24px;
+  position:absolute;
+  top:-12px;
+  right:-12px;
+  border-radius:50%;
+  box-shadow: 0 5px 9px rgba(102,102,102,0.30);
+  cursor:pointer;
+  display:none;
 }
 .admin-content-file {
   margin-bottom: 0;
@@ -190,7 +224,8 @@ input[type=checkbox],input[type=radio]{
   text-align:right;
 }
 .admin-content-pagination li a {
-  padding: 4px 8px;
+  padding: 5px 10px;
+  border-radius:4px;
 }
 
 @media only screen and (min-width: 641px) {

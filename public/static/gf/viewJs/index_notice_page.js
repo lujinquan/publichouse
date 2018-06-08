@@ -96,8 +96,8 @@ $('#upload_file_pages').on('click', '.upload_file_index', function(){
 });
 
 
-$('#show_short_cut_menu').on('click', '#add_short_cut_menu', function(){
-// $('#add_short_cut_menu').click(function(){
+// $('.am-icon-plus').on('click', '.am-icon-plus', function(){
+$('.admin-content-list .am-icon-plus').click(function(){
 	$.post('/ph/Index/secondlevelMenu', function(res){
 		res = JSON.parse(res);
 		// console.log(res);
@@ -177,6 +177,12 @@ $('#show_short_cut_menu').on('click', '#add_short_cut_menu', function(){
 	});
 });
 
+$('.add_work').mouseenter(function(){
+	$(this).find('.add_work_delete').css('display','block');
+})
+$('.add_work').mouseleave(function(){
+	$(this).find('.add_work_delete').css('display','none');
+})
 /*$('#show_short_cut_menu .short-cut-hover').live('mouseenter',function(){
 	console.log('mouseenter');
 	$(this).css('width', '66px');

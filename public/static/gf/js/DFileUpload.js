@@ -125,10 +125,13 @@ file.prototype.fileShow = function(){
 }
 file.prototype.fileShowEvent = function(){
     var that = this;
-    files = this.button[0].files;
+    var files = this.button[0].files;
     for(var i = 0;i < files.length;i++){
         if(files[i].size/1024 > this.size){
             layer.msg('图片过大！');
+            continue;
+        }else if(this.filesArray.some(function(data){return data.name==files[i].name})){
+            layer.msg('上传文件重复！');
             continue;
         }else{
             files[i].title = this.name;
@@ -139,16 +142,17 @@ file.prototype.fileShowEvent = function(){
             reader.onload = function(e){
                 var newImg = $("<div style='display:inline-block;position:relative;'>\
                                     <img style='height:100px;margin:10px 5px;' src='"+this.result+"'/>\
-                                    <span style='position:absolute;top:4px;right:8px;cursor:pointer; class='img_close'>X</span>\
+                                    <img style='width:20px;position:absolute;top:0;right:-2px;cursor:pointer;box-shadow: 0 0 5px #ccc;border-radius: 50%;' src='/public/static/gf/icons/delete.png' class='img_close' />\
                                 </div>");
                 that.show.append(newImg);
-                that.show.find('span').off('click');
-                that.show.find('span').on('click',function(){
+                that.show.find('.img_close').off('click');
+                that.show.find('.img_close').on('click',function(){
                     that.remove($(this).parent().index(),$(this).index('.img_close'));
                 });
             }
         }
     }
+    this.button.val('');
     console.log(this.filesArray);
 }
 file.prototype.upload = function(){
