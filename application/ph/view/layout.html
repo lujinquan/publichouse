@@ -124,7 +124,7 @@
       }
       ?>
 <!--       <li><a id="add_short_cut_menu" href="javascript:void(0)" style="color:#333;"><span class="am-icon-btn am-icon-bars"></span><br/>添加</a></li> -->
-      <li>
+<!--       <li>
         <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
           <span class="am-icon-btn am-success am-icon-plus" style="background: #80CC5A;
             box-shadow: 0 8px 16px rgba(128,204,90,0.50);"></span><br/>
@@ -181,7 +181,7 @@
             <span class="add_work_name">地图查询</span>
         </a>
         <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
-      </li>
+      </li> -->
     </ul>
 
 
@@ -538,23 +538,23 @@ $('.am-scrollable-horizontal').scroll(function(){
   $('.title_ul').css('left',scroll_left);
 })
 // 鼠标滑动,table左右滑动开始；
-var mouse_flag = false;
-var mouse_start_x = null;
-var mouse_end_x = null;
-$('.am-table').mousedown(function(event){
-  mouse_flag = true;
-  mouse_start_x = event.clientX
-  $(this).mousemove(function(event){
-    var distance =$('.am-scrollable-horizontal').scrollLeft() + (event.clientX - mouse_start_x)/20;
-    $('.am-scrollable-horizontal').scrollLeft(distance);
-  })
-})
-$('.am-table').mouseup(function(event){
-  mouse_flag = false;
-  mouse_end_x = event.clientX;
-  $(this).off("mousemove");
-  $('.am-scrollable-horizontal').off("scrollLeft");
-})
+// var mouse_flag = false;
+// var mouse_start_x = null;
+// var mouse_end_x = null;
+// $('.am-table').mousedown(function(event){
+//   mouse_flag = true;
+//   mouse_start_x = event.clientX
+//   $(this).mousemove(function(event){
+//     var distance =$('.am-scrollable-horizontal').scrollLeft() + (event.clientX - mouse_start_x)/20;
+//     $('.am-scrollable-horizontal').scrollLeft(distance);
+//   })
+// })
+// $('.am-table').mouseup(function(event){
+//   mouse_flag = false;
+//   mouse_end_x = event.clientX;
+//   $(this).off("mousemove");
+//   $('.am-scrollable-horizontal').off("scrollLeft");
+// })
 // 鼠标滑动,table左右滑动结束；
 
   $('#repeatPassword').blur(function(){
