@@ -80,20 +80,20 @@ class RentReports extends Model
 
 
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
+        $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where(['CancelType'=>['neq',1],'ChangeType'=>['neq',1],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
 
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeGuanduanDecData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
+        $changeGuanduanDecData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['ChangeType'=>['eq',10],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
 
 //if($changeGuanduanDecData){halt($changeGuanduanDecData);}
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeGuanduanIncData = Db::name('change_order')->field('UseNature,OwnerType,NewInstitutionID ,sum(InflRent) as InflRents')
+        $changeGuanduanIncData = Db::name('change_order')->field('UseNature,OwnerType,NewInstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
             ->group('UseNature,OwnerType,NewInstitutionID')
             ->where(['ChangeType'=>['eq',10],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
@@ -173,18 +173,24 @@ class RentReports extends Model
         foreach($changeData as $k7 => $v7){
             $changedata[$v7['OwnerType']][$v7['UseNature']][$v7['InstitutionID']][$v7['ChangeType']] = [
                 'InflRents' => $v7['InflRents'],
+                'OldMonthRents' => $v7['OldMonthRents'],
+                'OldYearRents' => $v7['OldYearRents'],
             ];
         }
 
         foreach($changeGuanduanDecData as $k12 => $v12){
             $changeGuanduanDecdata[$v12['OwnerType']][$v12['UseNature']][$v12['InstitutionID']] = [
                 'InflRents' => $v12['InflRents'],
+                'OldMonthRents' => $v12['OldMonthRents'],
+                'OldYearRents' => $v12['OldYearRents'],
             ];
         }
 
         foreach($changeGuanduanIncData as $k13 => $v13){
             $changeGuanduanIncdata[$v13['OwnerType']][$v13['UseNature']][$v13['NewInstitutionID']] = [
                 'InflRents' => $v13['InflRents'],
+                'OldMonthRents' => $v13['OldMonthRents'],
+                'OldYearRents' => $v13['OldYearRents'],
             ];
         }
 
@@ -260,6 +266,8 @@ class RentReports extends Model
                         if(!isset($changedata[$owner][$i][$j][$k])){
                             $changedata[$owner][$i][$j][$k] = [ 
                                 'InflRents' => 0,
+                                'OldMonthRents' => 0,
+                                'OldYearRents' => 0,
                             ];
                         }
 
@@ -276,11 +284,15 @@ class RentReports extends Model
                     if(!isset($changeGuanduanDecdata[$owner][$i][$j])){
                         $changeGuanduanDecdata[$owner][$i][$j] = [
                             'InflRents' => 0,
+                            'OldMonthRents' => 0,
+                            'OldYearRents' => 0,
                         ];
                     }
                     if(!isset($changeGuanduanIncdata[$owner][$i][$j])){
                         $changeGuanduanIncdata[$owner][$i][$j] = [
                             'InflRents' => 0,
+                            'OldMonthRents' => 0,
+                            'OldYearRents' => 0,
                         ];
                     }
 
@@ -322,7 +334,7 @@ class RentReports extends Model
             for ($j = 4; $j < 34; $j++) { //每个管段，从4开始……
 
                 $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
-                $result[$owners][$j][0][2] = $temps[0][$owners][$j][20][1] + $temps[1][$owners][$j][20][1];
+                $result[$owners][$j][0][2] = $temps[1][$owners][$j][20][1] + $temps[1][$owners][$j][20][2];
                 $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][3];
                 $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
                 $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
@@ -331,10 +343,10 @@ class RentReports extends Model
                 $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
                 $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
                 $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
-                $result[$owners][$j][0][11] = $temps[0][$owners][$j][20][10] + $temps[1][$owners][$j][20][10];//$lastMonthData[$owners][$j][20][10];
+                $result[$owners][$j][0][11] = $temps[1][$owners][$j][20][10] + $temps[1][$owners][$j][20][11];//$lastMonthData[$owners][$j][20][10];
                 $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][12];
                 $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
-                $result[$owners][$j][0][14] = $temps[0][$owners][$j][20][13] + $temps[1][$owners][$j][20][13];//$lastMonthData[$owners][$j][20][13];
+                $result[$owners][$j][0][14] = $temps[1][$owners][$j][20][13] + $temps[1][$owners][$j][20][14];//$lastMonthData[$owners][$j][20][13];
                 $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][15];
                 array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
               
@@ -355,6 +367,24 @@ class RentReports extends Model
                 $result[$owners][$j][2][14] = 0;
                 $result[$owners][$j][2][15] = 0;
                 array_unshift($result[$owners][$j][2],array_sum($result[$owners][$j][2]) - $result[$owners][$j][2][1] - $result[$owners][$j][2][2] - $result[$owners][$j][2][3]);
+
+                //调整ChangeType = 3
+                $result[$owners][$j][3][1] = $changedata[$owners][2][$j][12]['InflRents'];
+                $result[$owners][$j][3][2] = $changedata[$owners][2][$j][12]['OldMonthRents'];
+                $result[$owners][$j][3][3] = $changedata[$owners][2][$j][12]['OldYearRents'];
+                $result[$owners][$j][3][4] = 0.4 * $result[$owners][$j][3][1];
+                $result[$owners][$j][3][5] = 0.4 * $result[$owners][$j][3][2];
+                $result[$owners][$j][3][6] = 0.4 * $result[$owners][$j][3][3];
+                $result[$owners][$j][3][7] = 0.6 * $result[$owners][$j][3][1];
+                $result[$owners][$j][3][8] = 0.6 * $result[$owners][$j][3][2];
+                $result[$owners][$j][3][9] = 0.6 * $result[$owners][$j][3][3];
+                $result[$owners][$j][3][10] = $changedata[$owners][3][$j][12]['InflRents'];
+                $result[$owners][$j][3][11] = $changedata[$owners][3][$j][12]['OldMonthRents'];
+                $result[$owners][$j][3][12] = $changedata[$owners][3][$j][12]['OldYearRents'];
+                $result[$owners][$j][3][13] = $changedata[$owners][1][$j][12]['InflRents'];
+                $result[$owners][$j][3][14] = $changedata[$owners][1][$j][12]['OldMonthRents'];
+                $result[$owners][$j][3][15] = $changedata[$owners][1][$j][12]['OldYearRents'];
+                array_unshift($result[$owners][$j][3],array_sum($result[$owners][$j][3]) - $result[$owners][$j][3][1] - $result[$owners][$j][3][2] - $result[$owners][$j][3][3]);
 
                 //注销异动ChangeType = 8
                 $result[$owners][$j][4][1] = $changedata[$owners][2][$j][8]['InflRents'];
@@ -415,8 +445,8 @@ class RentReports extends Model
 
                 //管段调整 = 增加的 - 减少的
                 $result[$owners][$j][7][1] = $changeGuanduanIncdata[$owners][2][$j]['InflRents'] - $changeGuanduanDecdata[$owners][2][$j]['InflRents'];
-                $result[$owners][$j][7][2] = 0;
-                $result[$owners][$j][7][3] = 0;
+                $result[$owners][$j][7][2] = $changeGuanduanIncdata[$owners][2][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][2][$j]['OldMonthRents'];
+                $result[$owners][$j][7][3] = $changeGuanduanIncdata[$owners][2][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][2][$j]['OldYearRents'];
                 $result[$owners][$j][7][4] = 0.4 * $result[$owners][$j][7][1];
                 $result[$owners][$j][7][5] = 0.4 * $result[$owners][$j][7][2];
                 $result[$owners][$j][7][6] = 0.4 * $result[$owners][$j][7][3];
@@ -424,30 +454,30 @@ class RentReports extends Model
                 $result[$owners][$j][7][8] = 0.6 * $result[$owners][$j][7][2];
                 $result[$owners][$j][7][9] = 0.6 * $result[$owners][$j][7][3];
                 $result[$owners][$j][7][10] = $changeGuanduanIncdata[$owners][3][$j]['InflRents'] - $changeGuanduanDecdata[$owners][3][$j]['InflRents'];
-                $result[$owners][$j][7][11] = 0;
-                $result[$owners][$j][7][12] = 0;
+                $result[$owners][$j][7][11] = $changeGuanduanIncdata[$owners][3][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldMonthRents'];
+                $result[$owners][$j][7][12] = $changeGuanduanIncdata[$owners][3][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldYearRents'];
                 $result[$owners][$j][7][13] = $changeGuanduanIncdata[$owners][1][$j]['InflRents'] - $changeGuanduanDecdata[$owners][1][$j]['InflRents'];
-                $result[$owners][$j][7][14] = 0;
-                $result[$owners][$j][7][15] = 0;
+                $result[$owners][$j][7][14] = $changeGuanduanIncdata[$owners][1][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldMonthRents'];
+                $result[$owners][$j][7][15] = $changeGuanduanIncdata[$owners][1][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldYearRents'];
                 array_unshift($result[$owners][$j][7],array_sum($result[$owners][$j][7]) - $result[$owners][$j][7][1] - $result[$owners][$j][7][2] - $result[$owners][$j][7][3]);
 
 
                 //基数异动增减合计
-                $result[$owners][$j][1][1] = $result[$owners][$j][2][1] - $result[$owners][$j][4][1] + $result[$owners][$j][5][1] - $result[$owners][$j][6][1] + $result[$owners][$j][7][1];
-                $result[$owners][$j][1][2] = $result[$owners][$j][2][2] - $result[$owners][$j][4][2] + $result[$owners][$j][5][2] - $result[$owners][$j][6][2] + $result[$owners][$j][7][2];
-                $result[$owners][$j][1][3] = $result[$owners][$j][2][3] - $result[$owners][$j][4][3] + $result[$owners][$j][5][3] - $result[$owners][$j][6][3] + $result[$owners][$j][7][3];
+                $result[$owners][$j][1][1] = $result[$owners][$j][2][1] + $result[$owners][$j][3][1] - $result[$owners][$j][4][1] + $result[$owners][$j][5][1] - $result[$owners][$j][6][1] + $result[$owners][$j][7][1];
+                $result[$owners][$j][1][2] = $result[$owners][$j][2][2] + $result[$owners][$j][3][2] - $result[$owners][$j][4][2] + $result[$owners][$j][5][2] - $result[$owners][$j][6][2] + $result[$owners][$j][7][2];
+                $result[$owners][$j][1][3] = $result[$owners][$j][2][3] + $result[$owners][$j][3][3] - $result[$owners][$j][4][3] + $result[$owners][$j][5][3] - $result[$owners][$j][6][3] + $result[$owners][$j][7][3];
                 $result[$owners][$j][1][4] = 0.4 * $result[$owners][$j][1][1];
                 $result[$owners][$j][1][5] = 0.4 * $result[$owners][$j][1][2];
                 $result[$owners][$j][1][6] = 0.4 * $result[$owners][$j][1][3];
                 $result[$owners][$j][1][7] = 0.6 * $result[$owners][$j][1][1];
                 $result[$owners][$j][1][8] = 0.6 * $result[$owners][$j][1][2];
                 $result[$owners][$j][1][9] = 0.6 * $result[$owners][$j][1][3];
-                $result[$owners][$j][1][10] = $result[$owners][$j][2][10] - $result[$owners][$j][4][10] + $result[$owners][$j][5][10] - $result[$owners][$j][6][10] + $result[$owners][$j][7][10];
-                $result[$owners][$j][1][11] = $result[$owners][$j][2][11] - $result[$owners][$j][4][11] + $result[$owners][$j][5][11] - $result[$owners][$j][6][11] + $result[$owners][$j][7][11];
-                $result[$owners][$j][1][12] = $result[$owners][$j][2][12] - $result[$owners][$j][4][12] + $result[$owners][$j][5][12] - $result[$owners][$j][6][12] + $result[$owners][$j][7][12];
-                $result[$owners][$j][1][13] = $result[$owners][$j][2][13] - $result[$owners][$j][4][13] + $result[$owners][$j][5][13] - $result[$owners][$j][6][13] + $result[$owners][$j][7][13];
-                $result[$owners][$j][1][14] = $result[$owners][$j][2][14] - $result[$owners][$j][4][14] + $result[$owners][$j][5][14] - $result[$owners][$j][6][14] + $result[$owners][$j][7][14];
-                $result[$owners][$j][1][15] = $result[$owners][$j][2][15] - $result[$owners][$j][4][15] + $result[$owners][$j][5][15] - $result[$owners][$j][6][15] + $result[$owners][$j][7][15];
+                $result[$owners][$j][1][10] = $result[$owners][$j][2][10] + $result[$owners][$j][3][10] - $result[$owners][$j][4][10] + $result[$owners][$j][5][10] - $result[$owners][$j][6][10] + $result[$owners][$j][7][10];
+                $result[$owners][$j][1][11] = $result[$owners][$j][2][11] + $result[$owners][$j][3][11] - $result[$owners][$j][4][11] + $result[$owners][$j][5][11] - $result[$owners][$j][6][11] + $result[$owners][$j][7][11];
+                $result[$owners][$j][1][12] = $result[$owners][$j][2][12] + $result[$owners][$j][3][12] - $result[$owners][$j][4][12] + $result[$owners][$j][5][12] - $result[$owners][$j][6][12] + $result[$owners][$j][7][12];
+                $result[$owners][$j][1][13] = $result[$owners][$j][2][13] + $result[$owners][$j][3][13] - $result[$owners][$j][4][13] + $result[$owners][$j][5][13] - $result[$owners][$j][6][13] + $result[$owners][$j][7][13];
+                $result[$owners][$j][1][14] = $result[$owners][$j][2][14] + $result[$owners][$j][3][14] - $result[$owners][$j][4][14] + $result[$owners][$j][5][14] - $result[$owners][$j][6][14] + $result[$owners][$j][7][14];
+                $result[$owners][$j][1][15] = $result[$owners][$j][2][15] + $result[$owners][$j][3][15] - $result[$owners][$j][4][15] + $result[$owners][$j][5][15] - $result[$owners][$j][6][15] + $result[$owners][$j][7][15];
                 array_unshift($result[$owners][$j][1],array_sum($result[$owners][$j][1]) - $result[$owners][$j][1][1] - $result[$owners][$j][1][2] - $result[$owners][$j][1][3]);
 
                 //规定租金那一行 = 上期结转 + 基数异动合计
