@@ -322,7 +322,7 @@ class RentReports extends Model
             for ($j = 4; $j < 34; $j++) { //每个管段，从4开始……
 
                 $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
-                $result[$owners][$j][0][2] = $lastMonthData[$owners][$j][20][1];
+                $result[$owners][$j][0][2] = $temps[0][$owners][$j][20][1] + $temps[1][$owners][$j][20][1];
                 $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][3];
                 $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
                 $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
@@ -331,10 +331,10 @@ class RentReports extends Model
                 $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
                 $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
                 $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
-                $result[$owners][$j][0][11] = $lastMonthData[$owners][$j][20][10];
+                $result[$owners][$j][0][11] = $temps[0][$owners][$j][20][10] + $temps[1][$owners][$j][20][10];//$lastMonthData[$owners][$j][20][10];
                 $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][12];
                 $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
-                $result[$owners][$j][0][14] = $lastMonthData[$owners][$j][20][13];
+                $result[$owners][$j][0][14] = $temps[0][$owners][$j][20][13] + $temps[1][$owners][$j][20][13];//$lastMonthData[$owners][$j][20][13];
                 $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][15];
                 array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
               
