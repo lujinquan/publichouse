@@ -457,8 +457,8 @@ class RentReports extends Model
                 $result[$owners][$j][7][11] = $changeGuanduanIncdata[$owners][3][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldMonthRents'];
                 $result[$owners][$j][7][12] = $changeGuanduanIncdata[$owners][3][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldYearRents'];
                 $result[$owners][$j][7][13] = $changeGuanduanIncdata[$owners][1][$j]['InflRents'] - $changeGuanduanDecdata[$owners][1][$j]['InflRents'];
-                $result[$owners][$j][7][14] = $changeGuanduanIncdata[$owners][1][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldMonthRents'];
-                $result[$owners][$j][7][15] = $changeGuanduanIncdata[$owners][1][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][3][$j]['OldYearRents'];
+                $result[$owners][$j][7][14] = $changeGuanduanIncdata[$owners][1][$j]['OldMonthRents'] - $changeGuanduanDecdata[$owners][1][$j]['OldMonthRents'];
+                $result[$owners][$j][7][15] = $changeGuanduanIncdata[$owners][1][$j]['OldYearRents'] - $changeGuanduanDecdata[$owners][1][$j]['OldYearRents'];
                 array_unshift($result[$owners][$j][7],array_sum($result[$owners][$j][7]) - $result[$owners][$j][7][1] - $result[$owners][$j][7][2] - $result[$owners][$j][7][3]);
 
 
