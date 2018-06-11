@@ -133,7 +133,7 @@ var queryData = {
         $("#dataQuery table").off('click');
         $("#dataQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           if(number == 1){
             $("#"+id).val($($(this).context).find('td').eq(0).text());
           }else if(number == 2){
@@ -145,7 +145,7 @@ var queryData = {
         $("#dataQuery table").off('click');
         $("#dataQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           if(number == 1){
             $("."+id).eq(n).val($($(this).context).find('td').eq(0).text());
           }else if(number == 2){
@@ -322,7 +322,7 @@ var tenantQuery = {
         $("#tenantQuery table").off('click');
         $("#tenantQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           $("#"+id).val($($(this).context).find('td').eq(0).text());
           callback();
         });
@@ -480,7 +480,7 @@ var banQuery = {
         $("#banQuery table").off('click');
         $("#banQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           $("#"+id).val($($(this).context).find('td').eq(0).text());
         });
       },
@@ -488,7 +488,7 @@ var banQuery = {
         $("#banQuery table").off('click');
         $("#banQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           $("."+className).eq(n).val($($(this).context).find('td').eq(0).text());
         });
       },
@@ -655,7 +655,7 @@ var houseQuery = {
         $("#houseQuery table").off('click');
         $("#houseQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           $("#"+id).val($($(this).context).find('td').eq(1).text());
         });
       },
@@ -663,7 +663,7 @@ var houseQuery = {
         $("#houseQuery table").off('click');
         $("#houseQuery table").on('click','tbody tr',function(){
           $(this).siblings().css({'background':'none','color':'#000'});
-          $(this).css({'background':'#00AAEB','color':'#FFF'});
+          $(this).css({'background':'#2e77ef','color':'#FFF'});
           $("."+className).eq(n).val($($(this).context).find('td').eq(1).text());
         });
       },

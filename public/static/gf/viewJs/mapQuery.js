@@ -84,7 +84,7 @@ mp.setMapStyle({
     function createMap(){
       	mp = new BMap.Map("allmap",{
 	      	minZoom:16,
-	      	maxZoom:21,
+	      	maxZoom:24,
 			enableMapClick: false
        	});
       	mp.centerAndZoom(new BMap.Point(114.322549,30.559567),15);
@@ -120,8 +120,8 @@ mp.setMapStyle({
 
     function ComplexCustomOverlay(point,text,address){
       	this._point = point;
-      	this._text = address;  
-      	//this._address = address;
+      	this._text = text;
+      	this._address = address;
     }
 
     ComplexCustomOverlay.prototype = new BMap.Overlay();
@@ -131,7 +131,6 @@ mp.setMapStyle({
       div.style.position = "absolute";
       div.style.zIndex = 0;    
       div.style.color = "white";
-      div.style.width = "110px";
       div.style.lineHeight = "18px";
       div.style.whiteSpace = "nowrap";
       div.style.MozUserSelect = "none";
@@ -143,7 +142,10 @@ mp.setMapStyle({
       span.style.backgroundColor = "#2d69f9";
       span.style.borderRadius = '4px';
       div.appendChild(span);
-      span.appendChild(document.createTextNode(this._text));      
+      span.appendChild(document.createTextNode(this._address));
+      var ban_id = document.createAttribute("ban_id");
+      ban_id.value = this._text;
+      span.setAttributeNode(ban_id);
       var that = this;
       var arrow = this._arrow = document.createElement("div");
       arrow.style.width = "0px";
@@ -206,14 +208,33 @@ mp.setMapStyle({
 					aLabel.push(res.data.point[i]);
 				}
 			}
-			console.log(aLabel)
-			getM(aLabel);
+			var room_size = mp.getZoom();
+			if(room_size > 18){
+				getM(aLabel);
+			}else{
+				mp.clearOverlays();
+			}
         }
     }); 
   	var TubulationID=document.getElementById('doc-select-2');
   	var OwnerTyp=document.getElementById('doc-select-5');
 	mp.addEventListener("dragend", function(){
-		getM(aLabel);
+		var room_size = mp.getZoom();
+		console.log(room_size);
+		if(room_size > 18){
+			getM(aLabel);
+		}else{
+			mp.clearOverlays();
+		}
+	});
+	mp.addEventListener("zoomend", function(){
+		var room_size = mp.getZoom();
+		console.log(room_size);
+		if(room_size > 18){
+			getM(aLabel);
+		}else{
+			mp.clearOverlays();
+		}
 	});
     TubulationID.onchange = OwnerTyp.onchange = function(){
    		mp.clearOverlays();
@@ -234,7 +255,12 @@ mp.setMapStyle({
 				}
 			}
 			console.log(aLabel);
-	    	getM(aLabel);
+	    	var room_size = mp.getZoom();
+			if(room_size > 18){
+				getM(aLabel);
+			}else{
+				mp.clearOverlays();
+			}
 
 		})//post
     }
@@ -284,7 +310,7 @@ mp.setMapStyle({
 						return false;
 					}
 
-					var b=$(this).find('span').html().split(':')[1];
+					var b=$(this).find('span').attr('ban_id');
 
 					$.get('/ph/Api/get_ban_detail_info?BanID='+b,function(res){
 						res = JSON.parse(res);

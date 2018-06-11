@@ -1,85 +1,101 @@
 <form id="TransferForm" style="margin-top:1.6rem;display:none;">
   <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-2">
-      <label for="doc-vld-email-2" class="label_style">房屋编号：</label>
-    </div>
-    <div class="am-u-md-4 am-u-end">
-      <input type="text" name="" id="HouseIdInput" placeholder="房屋编号" required/>
-    </div>
-    <div class="am-u-md-2 am-u-end">
-      <a class="am-btn" id="queryAction_1">查询</a>
-    </div>
+      <label class="label_title">基础信息</label>
   </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">1、房屋编号</label>
+  <div class="am-u-md-12">
+    <label class="label_style">房屋编号：</label>
+    <input type="text" class="label_input" id="HouseIdInput" placeholder="房屋编号" required/>
+    <button class="am-btn am-btn-primary am-btn-sm" id="queryAction_1">查询</button>
   </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">2.承租人房屋使用权没有争议</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">3.承租人不存在拖欠房屋租金</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">4.承租人未擅自拆改房屋结构</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">5.不是成套独用住房变为成套伙用住房</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
+  
+<div class="am-u-md-12" style="margin-top:20px;">
+  <div class="am-u-md-4 label_box">
+      <h1 class="label_h1">当前信息</h1>
+      <div class="am-u-md-12" style="padding:20px 0 0;">
+         <label class="label_style">租户ID：</label>
+         <label id="oldID" class="label_p_style"></label>
       </div>
-    <label for="doc-vld-email-2">6.承租人有本市城镇户籍</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <div class="am-u-md-1" style="line-height:32px;">
-      <input type="checkbox" name="" id="doc-vld-email-2" />
-    </div>
-    <label for="doc-vld-email-2">7.不属于国家和本市规定不得变更的其他情形</label>
-  </div>
-  <div class="am-form-group am-u-md-12">
-    <label for="doc-vld-email-2" style="color:red;">变更前，请确认以上信息；否则无法申请使用权变更！</label>
-  </div>
-  <div class="am-form-group am-u-md-6">
-    <h1 style="text-align:center;margin-bottom:0;margin-top:2rem;">当前信息</h1>
-    <div class="am-form-group am-u-md-12">
-       <label>租户ID:</label><label id="oldID"></label>
-    </div>
-    <div class="am-form-group am-u-md-12">
-       <label>租户姓名:</label><label id="oldName"></label>
-    </div>
-    <div class="am-form-group am-u-md-12">
-       <label>租户电话:</label><label id="oldTel"></label>
-    </div>
-  </div>
-  <div class="am-form-group am-u-md-6">
-    <h1 style="text-align:center;margin-bottom:0;margin-top:2rem;">新租户信息</h1>
-    <div class="am-form-group am-u-md-12">
-      <label for="doc-vld-email-2" class="label_style">租户ID：</label>
-      <div class="am-u-sm-7" style="padding:0;">
-        <input style="width:100%;" id="IdIput" type="text" name="" required/>
+      <div class="am-u-md-12" style="padding:10px 0 0;">
+         <label class="label_style">租户姓名：</label>
+         <label id="oldName" class="label_p_style"></label>
       </div>
+      <div class="am-u-md-12" style="padding:10px 0;">
+         <label class="label_style">租户电话：</label>
+         <label id="oldTel" class="label_p_style"></label>
+      </div>
+  </div>
+
+  <div class="am-u-md-4 label_box" style="margin:auto 30px;">
+      <h1 class="label_h1">新租户信息</h1>
+      <div class="am-u-md-12" style="padding:20px 0 6px;">
+        <label class="label_style">租户ID：</label>
+        <input id="IdIput" class="label_input" type="text"  required/>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0 0">
+         <label class="label_style">租户姓名：</label>
+         <label id="newNam" class="label_p_style"></label>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0;">
+         <label class="label_style">租户电话：</label>
+         <label id="newTel" class="label_p_style"></label>
+      </div>
+  </div>
+  <div class="am-form-group am-u-md-4" style="padding:0 0 10px;border:1px solid rgba(214,226,246,1);background:#f7faff;">
+      <h1 class="label_h1">房屋需满足一下条件：</h1>
+      <label class="label_explain">1、房屋编号</label>
+      <label class="label_explain">2.承租人房屋使用权没有争议</label>
+      <label class="label_explain">3.承租人不存在拖欠房屋租金</label>
+      <label class="label_explain">4.承租人未擅自拆改房屋结构</label>
+      <label class="label_explain">5.不是成套独用住房变为成套伙用住房</label>
+      <label class="label_explain">6.承租人有本市城镇户籍</label>
+      <label class="label_explain">7.不属于国家和本市规定不得变更的其他情形</label>
+  </div>
+</div>
+
+<div class="am-form-group am-u-md-12">
+    <label class="label_title">产权户籍情况</label>
+</div>
+
+  <div class="am-u-md-12">
+    <div class="am-u-md-4" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否属代、托、改造产：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_1" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_1" value="0"> 否
+      </label>
     </div>
-    <div class="am-form-group am-u-md-12">
-       <label>租户姓名:</label><label id="newNam"></label>
-    </div>
-    <div class="am-form-group am-u-md-12">
-       <label>租户电话:</label><label id="newTel"></label>
+    <div class="am-u-md-8" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否是五年内新翻覆修房屋：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_2" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_2" value="0"> 否
+      </label>
     </div>
   </div>
+
+  <div class="am-u-md-12">
+    <div class="am-u-md-4" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否属门面营业用房：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_3" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_3" value="0"> 否
+      </label>
+    </div>
+    <div class="am-u-md-8" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否属于征收范围内房屋：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_4" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="ra_4" value="0"> 否
+      </label>
+    </div>
+  </div>
+
 </form>
