@@ -118,9 +118,10 @@ mp.setMapStyle({
     	$('.contentM').css('display','none');
     })
 
-    function ComplexCustomOverlay(point, text){
+    function ComplexCustomOverlay(point,text,address){
       	this._point = point;
-      	this._text = "编号:"+text;  
+      	this._text = address;  
+      	//this._address = address;
     }
 
     ComplexCustomOverlay.prototype = new BMap.Overlay();
@@ -255,7 +256,7 @@ mp.setMapStyle({
 				parseFloat(a[i].BanGpsX)>leftLng &&
 				parseFloat(a[i].BanGpsY)<topLat &&
 				parseFloat(a[i].BanGpsY)>bottomLat){
-				myCompOverlay = new ComplexCustomOverlay(new BMap.Point(parseFloat(a[i].BanGpsX),parseFloat(a[i].BanGpsY)),a[i].BanID);
+				myCompOverlay = new ComplexCustomOverlay(new BMap.Point(parseFloat(a[i].BanGpsX),parseFloat(a[i].BanGpsY)),a[i].BanID,a[i].AreaFour);
 				mp.addOverlay(myCompOverlay);
 
 				//console.log(myCompOverlay);

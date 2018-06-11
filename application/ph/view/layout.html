@@ -116,27 +116,57 @@
       </div>
     </div>
     <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-padding am-text-center admin-content-list">
-      <?php
-      if(isset($short_cut_menus_list)){
-        foreach($short_cut_menus_list as $info){
-          echo '<li><a class="short-cut-hover" href="'. '/' . $info['url'] .'" style="color:#333;"><span><img class="now-short-cut-list" src="'. $info['icon'] .'"/></span><br/>'. $info['title'] .'</a></li>';
-        }
-      }
-      ?>
-<!--       <li><a id="add_short_cut_menu" href="javascript:void(0)" style="color:#333;"><span class="am-icon-btn am-icon-bars"></span><br/>添加</a></li> -->
-<!--       <li>
+
+
+     <?php if(isset($short_cut_menus_list['1'])){; ?>
+     <li class="add_work" style="background:url('/public/static/gf/icons/1.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['1']['Url']; ?>">
+            <span class="add_work_number">1</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['1']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      
+      <?php }else{; ?>
+      <li>
         <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
           <span class="am-icon-btn am-success am-icon-plus" style="background: #80CC5A;
             box-shadow: 0 8px 16px rgba(128,204,90,0.50);"></span><br/>
           增加快捷键
         </a>
       </li>
+      
+      <?php }; ?>
+
+
+
+      <?php if(isset($short_cut_menus_list['2'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/2.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['2']['Url']; ?>">
+            <span class="add_work_number">2</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['2']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
       <li>
         <a class="short-cut-hover" href="" style="color:#333;font-size:12px;">
           <span class="am-icon-btn am-success am-icon-plus" style="background: #4C84FF;box-shadow: 0 8px 16px rgba(76,132,255,0.50);"></span><br/>
           增加快捷键
         </a>
       </li>
+      <?php }; ?>
+
+
+      <?php if(isset($short_cut_menus_list['3'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/3.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['3']['Url']; ?>">
+            <span class="add_work_number">3</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['3']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
       <li>
         <a class="short-cut-hover" href="" style="color:#333;font-size:12px;">
           <span class="am-icon-btn am-success am-icon-plus" style="background: #7877D4;
@@ -144,16 +174,30 @@
           增加快捷键
         </a>
       </li>
+      <?php }; ?>
+   
+      
+      <?php if(isset($short_cut_menus_list['4'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/4.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['4']['Url']; ?>">
+            <span class="add_work_number">4</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['4']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
       <li>
-        <a class="short-cut-hover" href="" style="color:#333;font-size:12px;">
+        <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
           <span class="am-icon-btn am-success am-icon-plus" style="background: #60A1EF;
             box-shadow: 0 8px 16px rgba(86,153,241,0.50);"></span><br/>
           增加快捷键
         </a>
       </li>
+      <?php }; ?>
+      
     </ul>
 
-    <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-padding am-text-center admin-content-list ">
+    <!-- <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-padding am-text-center admin-content-list ">
       <li class="add_work" style="background:url('/public/static/gf/icons/1.png')">
         <a class="short-cut-hover" href="">
             <span class="add_work_number">1</span>
@@ -181,8 +225,8 @@
             <span class="add_work_name">地图查询</span>
         </a>
         <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
-      </li> -->
-    </ul>
+      </li>
+    </ul> -->
 
 
     <?php if(isset($wait_processing) && !empty($wait_processing)){ ;?>

@@ -46,6 +46,7 @@ class RentReport extends Base
 
         $result = isset($datas[$ownerType][$institutionid])?$datas[$ownerType][$institutionid]:array();
 
+        //Cache::rm('RentReport201804');
         //halt($result);
 
         foreach ($result as &$ree) {

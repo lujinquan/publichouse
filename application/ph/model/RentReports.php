@@ -320,13 +320,13 @@ class RentReports extends Model
         $datas = json_decode(Cache::store('file')->get('RentReport'.($cacheDate - 1),''),true);
         $lastMonthData = isset($datas)?$datas:array();
 
-        $firstMonth = substr($cacheDate,0,4).'01';
-        $lastcacheDate = $cacheDate - 1;
-        if($lastcacheDate >= $firstMonth){ //如果缓存的程序是2月份或2月份以上
-            for($s = $firstMonth ; $s <= $lastcacheDate; $s++){
-                $temps[] = json_decode(Cache::store('file')->get('RentReport'.($s),''),true);
-            }
-        }
+        // $firstMonth = substr($cacheDate,0,4).'01';
+        // $lastcacheDate = $cacheDate - 1;
+        // if($lastcacheDate >= $firstMonth){ //如果缓存的程序是2月份或2月份以上
+        //     for($s = $firstMonth ; $s <= $lastcacheDate; $s++){
+        //         $temps[] = json_decode(Cache::store('file')->get('RentReport'.($s),''),true);
+        //     }
+        // }
 //halt($temps);
 
         //第一步：处理市、区、代、自、托的每一个管段的数据
@@ -334,7 +334,7 @@ class RentReports extends Model
             for ($j = 4; $j < 34; $j++) { //每个管段，从4开始……
 
                 $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
-                $result[$owners][$j][0][2] = $temps[1][$owners][$j][20][1] + $temps[1][$owners][$j][20][2];
+                $result[$owners][$j][0][2] = $lastMonthData[$owners][$j][20][1] + $lastMonthData[$owners][$j][20][2];
                 $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][3];
                 $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
                 $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
@@ -343,10 +343,10 @@ class RentReports extends Model
                 $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
                 $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
                 $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
-                $result[$owners][$j][0][11] = $temps[1][$owners][$j][20][10] + $temps[1][$owners][$j][20][11];//$lastMonthData[$owners][$j][20][10];
+                $result[$owners][$j][0][11] = $lastMonthData[$owners][$j][20][10] + $lastMonthData[$owners][$j][20][11];//$lastMonthData[$owners][$j][20][10];
                 $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][12];
                 $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
-                $result[$owners][$j][0][14] = $temps[1][$owners][$j][20][13] + $temps[1][$owners][$j][20][14];//$lastMonthData[$owners][$j][20][13];
+                $result[$owners][$j][0][14] = $lastMonthData[$owners][$j][20][13] + $lastMonthData[$owners][$j][20][14];//$lastMonthData[$owners][$j][20][13];
                 $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][15];
                 array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
               
@@ -633,7 +633,8 @@ class RentReports extends Model
 
                 //本月份实收累计 = 本月规租 + 本年度各月份的【本月实收租金】$temps
                 //$result[$owners][$j][19][1] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][1];  //暂时是这样的
-                $result[$owners][$j][19][1] = $temps[0][$owners][$j][18][1] + $temps[1][$owners][$j][18][1] + $result[$owners][$j][18][1];
+                //上个月的累计+这个月的实收 = 这个月的累计
+                $result[$owners][$j][19][1] = $lastMonthData[$owners][$j][19][1] + $result[$owners][$j][18][1];
                 //以前月份实收累计
                 $result[$owners][$j][19][2] = $rentOldTotalMonthdata[$owners][2][$j]['PayRents'];
                 //以前年度实收累计
@@ -646,13 +647,13 @@ class RentReports extends Model
                 $result[$owners][$j][19][8] = 0.6 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][9] = 0.6 * $result[$owners][$j][19][3];
                 //$result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][10] + $result[$owners][$j][18][10];  //暂时是这样的
-                $result[$owners][$j][19][10] = $temps[0][$owners][$j][18][10] + $temps[1][$owners][$j][18][10] + $result[$owners][$j][18][10];
+                $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][19][10] + $result[$owners][$j][18][10];
                 
                 $result[$owners][$j][19][11] = $rentOldTotalMonthdata[$owners][3][$j]['PayRents'];
                 $result[$owners][$j][19][12] = $rentOldTotalYeardata[$owners][3][$j]['PayRents'];
                 //$result[$owners][$j][19][12] = $lastMonthData[$owners][$j][18][12]+ $result[$owners][$j][18][12];
                 //$result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][13] + $result[$owners][$j][18][13];  //暂时是这样的
-                $result[$owners][$j][19][13] = $temps[0][$owners][$j][18][13] + $temps[1][$owners][$j][18][13] + $result[$owners][$j][18][13];
+                $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][19][13] + $result[$owners][$j][18][13];
 
                 $result[$owners][$j][19][14] = $rentOldTotalMonthdata[$owners][1][$j]['PayRents'];
                 $result[$owners][$j][19][15] = $rentOldTotalYeardata[$owners][1][$j]['PayRents'];

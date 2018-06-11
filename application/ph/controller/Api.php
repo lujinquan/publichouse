@@ -821,7 +821,7 @@ class Api extends Controller
             $data['options'] = $searchForm;
         }
 
-        $data['point'] = Db::name('ban')->field('BanID ,BanGpsX ,BanGpsY')->where($where)->select();
+        $data['point'] = Db::name('ban')->field('BanID ,BanGpsX ,BanGpsY,AreaFour')->where($where)->select();
 
         if ($data) {
             return jsons('2000', '获取成功', $data);

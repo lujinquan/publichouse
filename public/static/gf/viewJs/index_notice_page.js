@@ -98,6 +98,8 @@ $('#upload_file_pages').on('click', '.upload_file_index', function(){
 
 // $('.am-icon-plus').on('click', '.am-icon-plus', function(){
 $('.admin-content-list .am-icon-plus').click(function(){
+	var this_index = $(this).parents('li').index()+1;
+	console.log(this_index);
 	$.post('/ph/Index/secondlevelMenu', function(res){
 		res = JSON.parse(res);
 		// console.log(res);
@@ -118,7 +120,7 @@ $('.admin-content-list .am-icon-plus').click(function(){
 		    		if(k == 0){
 		    			buf += '<tr>';
 		    		}
-		    		buf += '<td width="20%"><input name="short_cut" type="checkbox" value="'+ menu[i].UrlValue+ '|' + menu[i].Icons +'" />&nbsp;<font>' + menu[i].Title + '</font></td>';
+		    		buf += '<td width="20%"><input name="short_cut" type="checkbox" value="'+ menu[i].UrlValue+ '" />&nbsp;<font>' + menu[i].Title + '</font></td>';
 		    		k++;
 		    		if(k == 4){
 		    			buf += '</tr>';
@@ -145,37 +147,51 @@ $('.admin-content-list .am-icon-plus').click(function(){
 		    	});
 	        },
 	        yes:function(dia){
-	        	var shortcut = $('#check_menu input[type="checkbox"]:checked');
+	        	var shortcut_val = $('#check_menu input[type="checkbox"]:checked').val();
 	        	
-	        	var arr = new Array();
-	        	if(shortcut.length > 0){
-	        		// var arr = new Array(shortcut.length);
-	        		for(var i = 0; i < shortcut.length; i++){
-	        			// console.log($(shortcut[i]).next());return ;
-	        			var info = new Array();
-	        			info[0] = shortcut[i].value;
-	        			info[1] = $(shortcut[i]).next().html();
-	        			arr[i] = info;
-	        		}
+	        	// var arr = new Array();
+	        	// if(shortcut.length > 0){
+	        	// 	// var arr = new Array(shortcut.length);
+	        	// 	for(var i = 0; i < shortcut.length; i++){
+	        	// 		// console.log($(shortcut[i]).next());return ;
+	        	// 		var info = new Array();
+	        	// 		info[0] = shortcut[i].value;
+	        	// 		info[1] = $(shortcut[i]).next().html();
+	        	// 		arr[i] = info;
+	        	// 	}
+	        	// }
+	        	var data = {
+	        		id:this_index,
+	        		url:shortcut_val
 	        	}
-	        	console.log(arr);
-	        	$.post('/ph/Index/shortCutModify', {arr:arr}, function(res){
+	        	console.log(data);
+	        	$.post('/ph/Index/shortCutModify', data, function(res){
 	        		res = JSON.parse(res);
-	        		console.log(res);
-	        		$('#show_short_cut_menu').empty();
-	        		buf = '';
-	        		for(var i = 0; i < arr.length; i++){
-	        			var kv = arr[i][0].split('|');
-	        			buf += '<li><a  class="short-cut-hover" href="'+ '/' + kv[0] +'" style="color:#333;"><span><img class="now-short-cut-list" src="'+ kv[1] +'"/></span><br/>'+ arr[i][1] +'</a></li>';
-	        		}
-	        		buf += '<li><a id="add_short_cut_menu" href="javascript:void(0)" style="color:#333;"><span class="am-icon-btn am-icon-bars short-cut-menu-hover"></span><br/>添加</a></li>';
-	        		$('#show_short_cut_menu').append(buf);
+	        		// console.log(res);
+	        		// $('#show_short_cut_menu').empty();
+	        		// buf = '';
+	        		// for(var i = 0; i < arr.length; i++){
+	        		// 	var kv = arr[i][0].split('|');
+	        		// 	buf += '<li><a  class="short-cut-hover" href="'+ '/' + kv[0] +'" style="color:#333;"><span><img class="now-short-cut-list" src="'+ kv[1] +'"/></span><br/>'+ arr[i][1] +'</a></li>';
+	        		// }
+	        		// buf += '<li><a id="add_short_cut_menu" href="javascript:void(0)" style="color:#333;"><span class="am-icon-btn am-icon-bars short-cut-menu-hover"></span><br/>添加</a></li>';
+	        		// $('#show_short_cut_menu').append(buf);
+	        		location.reload();
 	        	});
 	        	layer.close(dia);
         	}
 	    });
 	});
 });
+$('.add_work_delete').click(function(){
+	var this_index = $(this).parent('li').index()+1;
+	console.log(this_index);
+	$.get('/ph/Index/shortCutModify/id/'+this_index,function(res){
+		location.reload();
+	})
+})
+
+
 
 $('.add_work').mouseenter(function(){
 	$(this).find('.add_work_delete').css('display','block');
@@ -227,7 +243,7 @@ $('.add_work').mouseleave(function(){
 
 $('#check_menu').on('click', 'input[type="checkbox"]', function(){
 	var shortcut = $('input[type="checkbox"]:checked');
-	if(shortcut.length >= 5){
+	if(shortcut.length >= 2){
 		$(this).context.checked = false;
 		$('#most_count').show();
 		return ;

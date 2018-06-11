@@ -155,16 +155,33 @@ class Index extends Base
      * index获取快捷方式列表
      */
     public function get_short_cut_menus_list(){
-        $user = Session::get('user_base_info.name');
-        $data = Db::name('short_cut')->where('User', $user)->select();
-        $arr = array();
-        foreach ($data as $info) {
-            $tmp = explode('|', $info['Url']);
-            if(!isset($tmp[1]))
-                $tmp[1] = '';
-            $arr[] = array('url' => $tmp[0], 'icon' => $tmp[1], 'title' => $info['Title']);
+        //$user = Session::get('user_base_info.name');
+        
+        $data = Db::name('short_cut')->where('CreateUserID', UID)->select();
+
+        $arr = [];
+
+        if($data){
+
+            foreach($data as $d){
+                $arr[$d['Step']] = $d;
+            }
+
+            return $arr;
+
+        }else{
+
+            return array();
         }
-        return $arr;
+        //halt($data);
+        // $arr = array();
+        // foreach ($data as $info) {
+        //     $tmp = explode('|', $info['Url']);
+        //     if(!isset($tmp[1]))
+        //         $tmp[1] = '';
+        //     $arr[] = array('url' => $tmp[0], 'icon' => $tmp[1], 'title' => $info['Title']);
+        // }
+        
     }
 
     /**
@@ -285,6 +302,7 @@ class Index extends Base
             if($info['level'] == '1')
                 $arr[] = $info;
         }
+        //halt($arr);
         return jsons('2000', '查询成功', $arr);
     }
 
@@ -292,19 +310,41 @@ class Index extends Base
      * 修改快捷方式
      */
     public function shortCutModify(){
+        if($this->request->isGet()){
+            $id = input('id');
+            if($id){
+                $re = Db::name('short_cut')->where(['CreateUserID' => UID, 'Step'=>$id])->delete();
+                if($re){
+                    return jsons('2000', '删除成功');
+                }else{
+                    return jsons('4000', '删除失败');
+                }
+            }
+        }
 
         if($this->request->isPost()){
             $data = $this->request->post();
-            $user = Session::get('user_base_info.name');
-            Db::name('short_cut')->where('User', $user)->delete();
-            if(isset($data['arr'])){
-                foreach ($data['arr'] as $info) {
-                    $url = $info[0];
-                    $title = $info[1];
-                    Db::name('short_cut')->insert(['Url' => $url, 'Title' => $title, 'User' => $user]);
-                }
+
+            $findone = Db::name('short_cut')->where(['CreateUserID' => UID, 'Step'=>$data['id']])->find();
+
+            if($findone){
+                $re = Db::name('short_cut')->where(['CreateUserID' => UID, 'Step'=>$data['id']])->update(['Url'=>'/'.$data['url']]);
+            }else{
+                $re = Db::name('short_cut')->insert(['Step'=>$data['id'],'Url'=>'/'.$data['url'],'CreateUserID' => UID]); 
             }
-            return jsons('2000', '修改成功');
+            
+
+            //halt(Db::name('short_cut')->getLastSql());
+            if($re){
+               $icons = Db::name('admin_menu')->where('UrlValue',$data['url'])->field('Icons,Title')->find();
+               if($icons){
+                    Db::name('short_cut')->where(['CreateUserID' => UID, 'Step'=>$data['id']])->update(['Icon'=>$icons['Icons'],'Title'=>$icons['Title']]);
+               }
+               return jsons('2000', '修改成功');
+            }else{
+               return jsons('4000', '修改失败'); 
+            }
+            
         }
     }
 

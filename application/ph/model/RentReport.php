@@ -51,7 +51,7 @@ class RentReport extends Model
 
         //从往期欠租表中分组获取当月收缴到的以前月的租金
         $rentOldMonthData = Db::name('old_rent')->field('UseNature,OwnerType,InstitutionID,sum(PayRent) as PayRents')
-            ->where($whereLastMonth)
+            ->where($whereNowMonth)
             ->where('PayYear',date('Y'))
             ->group('UseNature,OwnerType,InstitutionID')
             ->select();
