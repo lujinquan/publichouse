@@ -512,6 +512,29 @@ label{
   border: 1px solid #D6E2F6;
   border-radius: 2px;
 }
+.label_h1{
+  height:30px;
+  padding-left:10px;
+  margin-bottom:0;
+  font-size:12px;
+  color:rgba(112,127,147,1);
+  line-height:30px;
+  background:#f7faff;
+}
+.label_box{
+  width:288px;
+  padding:0 0 10px;
+  border:1px solid rgba(214,226,246,1);
+  display:inline-block;
+  vertical-align:middle;
+}
+.label_explain{
+  margin-left:20px;
+  font-size:10px;
+  line-height:19px;
+  display:block;
+}
+
 @-moz-document url-prefix(){.label_style{width:86px;}}
 .padding_left{
 	padding-left:3rem;

@@ -147,10 +147,10 @@ $("#addTransfer").click(function(){
 		});
 		layer.open({
 			type:1,
-			area:['650px','650px'],
+			area:['990px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['转让申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			yes:function(thisIndex){
