@@ -387,7 +387,7 @@ class RentReports extends Model
                 array_unshift($result[$owners][$j][3],array_sum($result[$owners][$j][3]) - $result[$owners][$j][3][1] - $result[$owners][$j][3][2] - $result[$owners][$j][3][3]);
 
                 //注销异动ChangeType = 8
-                $result[$owners][$j][4][1] = $changedata[$owners][2][$j][8]['InflRents'];
+                $result[$owners][$j][4][1] = 0;
                 $result[$owners][$j][4][2] = 0;
                 $result[$owners][$j][4][3] = 0;
                 $result[$owners][$j][4][4] = 0.4 * $result[$owners][$j][4][1];
@@ -396,10 +396,10 @@ class RentReports extends Model
                 $result[$owners][$j][4][7] = 0.6 * $result[$owners][$j][4][1];
                 $result[$owners][$j][4][8] = 0.6 * $result[$owners][$j][4][2];
                 $result[$owners][$j][4][9] = 0.6 * $result[$owners][$j][4][3];
-                $result[$owners][$j][4][10] = $changedata[$owners][3][$j][8]['InflRents'];
+                $result[$owners][$j][4][10] = 0;
                 $result[$owners][$j][4][11] = 0;
                 $result[$owners][$j][4][12] = 0;
-                $result[$owners][$j][4][13] = $changedata[$owners][1][$j][8]['InflRents'];
+                $result[$owners][$j][4][13] = 0;
                 $result[$owners][$j][4][14] = 0;
                 $result[$owners][$j][4][15] = 0;
                 array_unshift($result[$owners][$j][4],array_sum($result[$owners][$j][4]) - $result[$owners][$j][4][1] - $result[$owners][$j][4][2] - $result[$owners][$j][4][3]);
@@ -575,12 +575,12 @@ class RentReports extends Model
                 $result[$owners][$j][16][1] = $changeNoBasedata[$owners][2][$j][0]['InflRents'];
                 $result[$owners][$j][16][2] = 0;
                 $result[$owners][$j][16][3] = 0;
-                $result[$owners][$j][16][4] = 0.4 * $result[$owners][$j][14][1];
-                $result[$owners][$j][16][5] = 0.4 * $result[$owners][$j][14][2];
-                $result[$owners][$j][16][6] = 0.4 * $result[$owners][$j][14][3];
-                $result[$owners][$j][16][7] = 0.6 * $result[$owners][$j][14][1];
-                $result[$owners][$j][16][8] = 0.6 * $result[$owners][$j][14][2];
-                $result[$owners][$j][16][9] = 0.6 * $result[$owners][$j][14][3];
+                $result[$owners][$j][16][4] = 0.4 * $result[$owners][$j][16][1];
+                $result[$owners][$j][16][5] = 0.4 * $result[$owners][$j][16][2];
+                $result[$owners][$j][16][6] = 0.4 * $result[$owners][$j][16][3];
+                $result[$owners][$j][16][7] = 0.6 * $result[$owners][$j][16][1];
+                $result[$owners][$j][16][8] = 0.6 * $result[$owners][$j][16][2];
+                $result[$owners][$j][16][9] = 0.6 * $result[$owners][$j][16][3];
                 $result[$owners][$j][16][10] = $changeNoBasedata[$owners][3][$j][0]['InflRents'];
                 $result[$owners][$j][16][11] = 0;
                 $result[$owners][$j][16][12] = 0;
