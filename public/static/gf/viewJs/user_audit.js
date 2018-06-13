@@ -35,30 +35,30 @@ $("#addInfo").click(function(){
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
 				if(res.data.detail.IfReform==0){
-			$("input[name='IfReform']").eq(1).prop('checked',true);
-		}else{
-			$("input[name='IfReform']").eq(0).prop('checked',true);
-		}
-		if(res.data.detail.IfRepair==0){
-			$("input[name='IfRepair']").eq(1).prop('checked',true);
-		}else{
-			$("input[name='IfRepair']").eq(0).prop('checked',true);
-		}
-		if(res.data.detail.IfCollection==0){
-			$("input[name='IfCollection']").eq(1).prop('checked',true);
-		}else{
-			$("input[name='IfCollection']").eq(0).prop('checked',true);
-		}
-		if(res.data.detail.IfFacade==0){
-			$("input[name='IfFacade']").eq(1).prop('checked',true);
-		}else{
-			$("input[name='IfFacade']").eq(0).prop('checked',true);
-		}
-		if(res.data.detail.IfCheck==0){
-			$("input[name='IfCheck']").eq(1).prop('checked',true);
-		}else{
-			$("input[name='IfCheck']").eq(0).prop('checked',true);
-		}
+					$("input[name='IfReform']").eq(1).prop('checked',true);
+				}else{
+					$("input[name='IfReform']").eq(0).prop('checked',true);
+				}
+				if(res.data.detail.IfRepair==0){
+					$("input[name='IfRepair']").eq(1).prop('checked',true);
+				}else{
+					$("input[name='IfRepair']").eq(0).prop('checked',true);
+				}
+				if(res.data.detail.IfCollection==0){
+					$("input[name='IfCollection']").eq(1).prop('checked',true);
+				}else{
+					$("input[name='IfCollection']").eq(0).prop('checked',true);
+				}
+				if(res.data.detail.IfFacade==0){
+					$("input[name='IfFacade']").eq(1).prop('checked',true);
+				}else{
+					$("input[name='IfFacade']").eq(0).prop('checked',true);
+				}
+				if(res.data.detail.IfCheck==0){
+					$("input[name='IfCheck']").eq(1).prop('checked',true);
+				}else{
+					$("input[name='IfCheck']").eq(0).prop('checked',true);
+				}
 				processState('#FormState',res);
 			//类型判断开始
 				if(res.data.detail.ChangeType=="更名"){
@@ -559,7 +559,7 @@ $('.BtnDetail').click(function(){
 		resize:false,
 		zIndex:100,
 		title:['明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-		content:$('#approveForm'),
+		content:$('#approveForm')
 	});
 });
 

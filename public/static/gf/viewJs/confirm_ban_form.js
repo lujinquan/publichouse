@@ -58,8 +58,8 @@ function initAreaLink(idOne,idTwo,data){
 	var option = "";
 	if(data[value]){
 		for(var k = 0;k < data[value].length;k++){
-		option += "<option  value="+data[value][k].id+">"+data[value][k].AreaTitle+"</option>";
-	}
+			option += "<option  value="+data[value][k].id+">"+data[value][k].AreaTitle+"</option>";
+		}
 	}
 	
 	option = $(option);

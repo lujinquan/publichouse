@@ -99,7 +99,7 @@ input[type=checkbox],input[type=radio]{
 }
 
 .admin-content-list {
-
+  min-width:1100px;
   margin-top: 0;
 }
 .admin-content-list li {

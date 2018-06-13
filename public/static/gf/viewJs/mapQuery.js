@@ -72,8 +72,35 @@ mp.setMapStyle({
         }
     ]
 });
+var area_array = null;
+$.get('/ph/Api/get_relation_area',function(res){
+	console.log(res);
+	area_array = res;
+	setCircle(res);
 
-
+});
+	function setCircle(area){
+		mp.clearOverlays();
+		for(var i = 0;i < area.length;i++){
+			var point = new BMap.Point(area[i].GpsX, area[i].GpsY);
+			var circle = new BMap.Circle(point,150,{strokeStyle:'dashed',strokeWeight:'1px'});
+			mp.addOverlay(circle);
+			var opts = {
+			  position : point, 
+			  offset   : new BMap.Size(-30, -10) 
+			}
+			var label = new BMap.Label(area[i].AreaTitle, opts);
+				label.setStyle({
+					 color : "red",
+					 fontSize : "12px",
+					 height : "20px",
+					 lineHeight : "20px",
+					 fontFamily:"微软雅黑",
+					 border:0
+				 });
+			mp.addOverlay(label); 
+		}
+	}
 
 	function initMap(){
       	createMap();//创建地图
@@ -208,6 +235,7 @@ mp.setMapStyle({
 					aLabel.push(res.data.point[i]);
 				}
 			}
+			console.log(aLabel);
 			var room_size = mp.getZoom();
 			if(room_size > 18){
 				getM(aLabel);
@@ -224,7 +252,7 @@ mp.setMapStyle({
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			mp.clearOverlays();
+			setCircle(area_array);
 		}
 	});
 	mp.addEventListener("zoomend", function(){
@@ -233,7 +261,7 @@ mp.setMapStyle({
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			mp.clearOverlays();
+			setCircle(area_array);
 		}
 	});
     TubulationID.onchange = OwnerTyp.onchange = function(){
@@ -259,13 +287,14 @@ mp.setMapStyle({
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
-				mp.clearOverlays();
+				setCircle(area_array);
 			}
 
 		})//post
     }
 
 	function getM(a){
+		mp.clearOverlays();
 		var aDate = a.length;
 		console.log(aDate);
 		var myCompOverlay = '';
