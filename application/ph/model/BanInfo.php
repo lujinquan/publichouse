@@ -92,6 +92,9 @@ class BanInfo extends Model
             if ($searchForm['BanID']) {  //模糊检索楼栋编号
                 $where['BanID'] = array('like', '%'.$searchForm['BanID'].'%');
             }
+            if ($searchForm['OldBanID']) {  //模糊检索原楼栋编号
+                $where['OldBanID'] = array('like', '%'.$searchForm['OldBanID'].'%');
+            }
             if ($searchForm['AreaFour']) {  //模糊检索楼栋地址
                 $where['AreaFour'] = array('like', '%'.$searchForm['AreaFour'].'%');
             }
@@ -147,7 +150,7 @@ class BanInfo extends Model
 
     public function get_one_ban_base_info($banid = '',$status = 1,$map=''){
         //楼栋编号，机构id(到管段),楼栋产别，地址，产权证号，建成年份，完损等级，结构类别，使用性质，规定租金
-        if(!$map) $map = 'BanID ,AnathorBanID ,BanSysID ,TubulationID ,OwnerType ,AnathorOwnerType ,AreaFour ,IfSuspend,BanUsearea ,BanAddress ,BanPropertyID ,BanYear ,DamageGrade ,StructureType ,UseNature ,PreRent,TotalArea';
+        if(!$map) $map = 'BanID ,OldBanID,AnathorBanID ,BanSysID ,TubulationID ,OwnerType ,AnathorOwnerType ,AreaFour ,IfSuspend,BanUsearea ,BanAddress ,BanPropertyID ,BanYear ,DamageGrade ,StructureType ,UseNature ,PreRent,TotalArea';
         $data = self::field($map)->where('BanID','eq',$banid)->find();
 
         if(!$data){
