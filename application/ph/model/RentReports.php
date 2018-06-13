@@ -262,7 +262,7 @@ class RentReports extends Model
                         ];
                     }
 
-                    for($k=1;$k<13;$k++){
+                    for($k=1;$k<16;$k++){
                         if(!isset($changedata[$owner][$i][$j][$k])){
                             $changedata[$owner][$i][$j][$k] = [ 
                                 'InflRents' => 0,
@@ -387,7 +387,7 @@ class RentReports extends Model
                 array_unshift($result[$owners][$j][3],array_sum($result[$owners][$j][3]) - $result[$owners][$j][3][1] - $result[$owners][$j][3][2] - $result[$owners][$j][3][3]);
 
                 //注销异动ChangeType = 8
-                $result[$owners][$j][4][1] = 0;
+                $result[$owners][$j][4][1] = $changedata[$owners][2][$j][8]['InflRents'];
                 $result[$owners][$j][4][2] = 0;
                 $result[$owners][$j][4][3] = 0;
                 $result[$owners][$j][4][4] = 0.4 * $result[$owners][$j][4][1];
@@ -396,16 +396,16 @@ class RentReports extends Model
                 $result[$owners][$j][4][7] = 0.6 * $result[$owners][$j][4][1];
                 $result[$owners][$j][4][8] = 0.6 * $result[$owners][$j][4][2];
                 $result[$owners][$j][4][9] = 0.6 * $result[$owners][$j][4][3];
-                $result[$owners][$j][4][10] = 0;
+                $result[$owners][$j][4][10] = $changedata[$owners][3][$j][8]['InflRents'];
                 $result[$owners][$j][4][11] = 0;
                 $result[$owners][$j][4][12] = 0;
-                $result[$owners][$j][4][13] = 0;
+                $result[$owners][$j][4][13] = $changedata[$owners][1][$j][8]['InflRents'];
                 $result[$owners][$j][4][14] = 0;
                 $result[$owners][$j][4][15] = 0;
                 array_unshift($result[$owners][$j][4],array_sum($result[$owners][$j][4]) - $result[$owners][$j][4][1] - $result[$owners][$j][4][2] - $result[$owners][$j][4][3]);
 
                 //租差
-                $result[$owners][$j][5][1] = $housedata[$owners][2][$j]['DiffRents'];
+                $result[$owners][$j][5][1] = $changedata[$owners][2][$j][15]['InflRents'];
                 $result[$owners][$j][5][2] = 0;
                 $result[$owners][$j][5][3] = 0;
                 $result[$owners][$j][5][4] = 0.4 * $result[$owners][$j][5][1];
@@ -414,10 +414,10 @@ class RentReports extends Model
                 $result[$owners][$j][5][7] = 0.6 * $result[$owners][$j][5][1];
                 $result[$owners][$j][5][8] = 0.6 * $result[$owners][$j][5][2];
                 $result[$owners][$j][5][9] = 0.6 * $result[$owners][$j][5][3];
-                $result[$owners][$j][5][10] = $housedata[$owners][3][$j]['DiffRents'];
+                $result[$owners][$j][5][10] = $changedata[$owners][3][$j][15]['InflRents'];
                 $result[$owners][$j][5][11] = 0;
                 $result[$owners][$j][5][12] = 0;
-                $result[$owners][$j][5][13] = $housedata[$owners][1][$j]['DiffRents'];
+                $result[$owners][$j][5][13] = $changedata[$owners][1][$j][15]['InflRents'];
                 $result[$owners][$j][5][14] = 0;
                 $result[$owners][$j][5][15] = 0;
                 array_unshift($result[$owners][$j][5],array_sum($result[$owners][$j][5]) - $result[$owners][$j][5][1] - $result[$owners][$j][5][2] - $result[$owners][$j][5][3]);
