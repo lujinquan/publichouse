@@ -609,20 +609,16 @@ function get_wait_processing(){
 
     $institutionLevel = session('user_base_info.institution_level');
 
-    if($institutionLevel == 1){
-
-        $where = 1;
-
-    }elseif($institutionLevel == 2){
+    if($institutionLevel == 2){
         $where['a.InstitutionPID'] = session('user_base_info.institution_id');
 
-    }else{
+    }elseif($institutionLevel == 3){
         $where['a.InstitutionID'] = session('user_base_info.institution_id');
         
     }
 
-    //$where['Status'] = array('not in',0,1); 
-
+    $where['Status'] = array('not in','0,1'); 
+//halt($where);
     $changeData = Db::name('change_order')->alias('a')
         ->join('change_type b','a.ChangeType = b.id','left')
         ->where($where)
