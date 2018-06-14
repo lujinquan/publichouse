@@ -34,30 +34,30 @@ $("#addInfo").click(function(){
 				$('.houseAddress').text(res.data.detail.BanAddress);
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
-				if(res.data.detail.IfReform==0){
-					$("input[name='IfReform']").eq(1).prop('checked',true);
+				if(res.data.detail.IfReform=="0"){
+					$('.IfReform').text('否');
 				}else{
-					$("input[name='IfReform']").eq(0).prop('checked',true);
+					$('.IfReform').text('是');
 				}
-				if(res.data.detail.IfRepair==0){
-					$("input[name='IfRepair']").eq(1).prop('checked',true);
+				if(res.data.detail.IfRepair=="0"){
+					$('.IfRepair').text('否');
 				}else{
-					$("input[name='IfRepair']").eq(0).prop('checked',true);
+					$('.IfRepair').text('是');
 				}
-				if(res.data.detail.IfCollection==0){
-					$("input[name='IfCollection']").eq(1).prop('checked',true);
+				if(res.data.detail.IfCollection=="0"){
+					$('.IfCollection').text('否');
 				}else{
-					$("input[name='IfCollection']").eq(0).prop('checked',true);
+					$('.IfCollection').text('是');
 				}
-				if(res.data.detail.IfFacade==0){
-					$("input[name='IfFacade']").eq(1).prop('checked',true);
+				if(res.data.detail.IfFacade=="0"){
+					$('.IfFacade').text('否');
 				}else{
-					$("input[name='IfFacade']").eq(0).prop('checked',true);
+					$('.IfFacade').text('是');
 				}
 				if(res.data.detail.IfCheck==0){
-					$("input[name='IfCheck']").eq(1).prop('checked',true);
+					$('.IfCheck').text('否');
 				}else{
-					$("input[name='IfCheck']").eq(0).prop('checked',true);
+					$('.IfCheck').text('是');
 				}
 				processState('#FormState',res);
 			//类型判断开始
@@ -418,30 +418,30 @@ $('.BtnApprove').click(function(){
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
 		$('#approveName').text(res.data.detail.ChangeType);
-		if(res.data.detail.IfReform==0){
-			$('#IfReform').text('否');
+		if(res.data.detail.IfReform=="0"){
+			$('.IfReform').text('否');
 		}else{
-			$('#IfReform').text('是');
+			$('.IfReform').text('是');
 		}
-		if(res.data.detail.IfRepair==0){
-			$('#IfRepair').text('否');
+		if(res.data.detail.IfRepair=="0"){
+			$('.IfRepair').text('否');
 		}else{
-			$('#IfRepair').text('是');
+			$('.IfRepair').text('是');
 		}
-		if(res.data.detail.IfCollection==0){
-			$('#IfCollection').text('否');
+		if(res.data.detail.IfCollection=="0"){
+			$('.IfCollection').text('否');
 		}else{
-			$('#IfCollection').text('是');
+			$('.IfCollection').text('是');
 		}
-		if(res.data.detail.IfFacade==0){
-			$('#IfFacade').text('否');
+		if(res.data.detail.IfFacade=="0"){
+			$('.IfFacade').text('否');
 		}else{
-			$('#IfFacade').text('是');
+			$('.IfFacade').text('是');
 		}
 		if(res.data.detail.IfCheck==0){
-			$('#IfCheck').text('否');
+			$('.IfCheck').text('否');
 		}else{
-			$('#IfCheck').text('是');
+			$('.IfCheck').text('是');
 		}
 		
 		processState('#approveState',res);
@@ -522,29 +522,24 @@ $('.BtnDetail').click(function(){
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
 		if(res.data.detail.IfReform==0){
-			$('#IfReform').text('否');
+			$('.IfReform').text('否');
 		}else{
-			$('#IfReform').text('是');
+			$('.IfReform').text('是');
 		}
 		if(res.data.detail.IfRepair==0){
-			$('#IfRepair').text('否');
+			$('.IfRepair').text('否');
 		}else{
-			$('#IfRepair').text('是');
+			$('.IfRepair').text('是');
 		}
 		if(res.data.detail.IfCollection==0){
-			$('#IfCollection').text('否');
+			$('.IfCollection').text('否');
 		}else{
-			$('#IfCollection').text('是');
+			$('.IfCollection').text('是');
 		}
 		if(res.data.detail.IfFacade==0){
-			$('#IfFacade').text('否');
+			$('.IfFacade').text('否');
 		}else{
-			$('#IfFacade').text('是');
-		}
-		if(res.data.detail.IfCheck==0){
-			$('#IfCheck').text('否');
-		}else{
-			$('#IfCheck').text('是');
+			$('.IfFacade').text('是');
 		}
 		
 		// $('#IfRepair').text(res.data.detail.IfRepair);
