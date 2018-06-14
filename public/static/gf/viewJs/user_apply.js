@@ -115,7 +115,14 @@ $("#addGift").click(function(){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				$.post('/ph/UserApply/add',{type:3,houseid:ID,oldID:oldID,oldName:oldName,newID:newID,newName:newName},function(result){
+				$.post('/ph/UserApply/add',{
+					type:3,
+					houseid:ID,
+					oldID:oldID,
+					oldName:oldName,
+					newID:newID,
+					newName:newName
+				},function(result){
 					result = JSON.parse(result);
 					if(result.retcode == 2000){
 						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
@@ -166,7 +173,6 @@ $("#addTransfer").click(function(){
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
 				console.log(ra_1,ra_2,ra_3,ra_4,transferWay,transferMoney);
-				alert('fff');
 				$.post('/ph/UserApply/add',
 					{
 						type:4,houseid:ID,
