@@ -24,7 +24,7 @@ class UserAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID ,ChangeType ,IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, ChangeType ,IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
         $houseData = Db::name('house')->field('TenantID ,CreateTime ,BanAddress, FloorID, LeasedArea ,HouseArea')
@@ -32,12 +32,19 @@ class UserAudit extends Model
             ->find();
 
         //联系电话 ，当前租户姓名 ，身份证号码
-        $tenantData = Db::name('tenant')->field('TenantTel ,TenantName ,TenantNumber')
-            ->where('TenantID' ,'eq' ,$houseData['TenantID'])
+        $tenantOldData = Db::name('tenant')->field('TenantTel ,TenantName ,TenantNumber')
+            ->where('TenantID' ,'eq' ,$orderData['OldTenantID'])
+            ->find();
+
+        //联系电话 ，当前租户姓名 ，身份证号码
+        $tenantNewData = Db::name('tenant')->field('TenantTel ,TenantName ,TenantNumber')
+            ->where('TenantID' ,'eq' ,$orderData['NewTenantID'])
             ->find();
 
         $data['ChangeOrderID'] = $changeOrderID;
         $data['HouseID'] = $orderData['HouseID'];
+        $data['TransferType'] = $orderData['TransferType'];
+        $data['TransferRent'] = $orderData['TransferRent'];
         $data['ChangeType'] = $orderData['ChangeType'];
         $data['IfReform'] = $orderData['IfReform'];   //是否属代、托、改造产
         $data['IfRepair'] = $orderData['IfRepair'];   //是否是五年内新翻覆修房屋
@@ -50,9 +57,12 @@ class UserAudit extends Model
         $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'暂无';  //计租面积
         $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'暂无';      //实有面积
         $data['CreateTime'] = date('Y-m-d H:i:s' ,$houseData['CreateTime']);   //备案时间
-        $data['TenantTel'] = $tenantData['TenantTel']?$tenantData['TenantTel']:'暂无';  //租户联系方式
-        $data['TenantName'] = $tenantData['TenantName']?$tenantData['TenantName']:'暂无';  //租户姓名
-        $data['TenantNumber'] = $tenantData['TenantNumber']?$tenantData['TenantNumber']:'暂无';  //租户身份证号码
+        $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'暂无';  //租户联系方式
+        $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'暂无';  //租户姓名
+        $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'暂无';  //租户身份证号码
+        $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'暂无';  //租户联系方式
+        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'暂无';  //租户姓名
+        $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'暂无';  //租户身份证号码
 
         switch($data['ChangeType']){
             case 1:

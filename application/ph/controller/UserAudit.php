@@ -49,6 +49,8 @@ class UserAudit extends Base
 
             $changeOrderID = $data['ChangeOrderID'];  //变更编号
 
+            //halt($data);
+
             if($_FILES){ //由于目前前端的多文件上传一次只上传一个标题的多张图片，所以目前  $_FILES  只有一个元素，故 $ChangeImageIDS 只是一个字符串
 
                 //在补充资料的时候，需要判断当前状态是否为补充资料阶段，即当前主订单的 Status == 2 ,如果不是，则返回提示信息不让补充

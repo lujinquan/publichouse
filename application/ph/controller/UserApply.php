@@ -3,6 +3,7 @@ namespace app\ph\controller;
 
 use think\Cache;
 use think\helper\Hash;
+use app\ph\model\HouseInfo as HouseInfoModel;
 use think\Db;
 
 /**
@@ -43,25 +44,34 @@ class UserApply extends Base
 
             $data = $this->request->post();
 
-            if ($data['type'] == 1) {  //更名
-                $datas['HouseID'] = $data['houseid']; //房屋编号
-                $datas['OldTenantID'] = $data['tenantid'];  //租户编号
-                $datas['OldTenantName'] = $data['oldName']; //原租户名称
+            //halt($data);
 
-                if(empty($data['newName']) || empty($data['houseid'])) return jsons('4005' ,'请完善相关信息！');
+            if ($data['type'] == 4) {  //转让
 
-                $datas['NewTenantName'] = $data['newName']; //新租户名称
-            } else {  //过户 ，赠予 ，转让
+                $datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
                 $datas['HouseID'] = $data['houseid']; //房屋编号
-                $datas['OldTenantID'] = $data['oldID']; //原租户id
+                $datas['OldTenantID'] = $data['oldID'];  //原租户编号
                 $datas['OldTenantName'] = $data['oldName']; //原租户名称
                 $datas['NewTenantID'] = $data['newID']; //新租户id
                 $datas['NewTenantName'] = $data['newName']; //新租户名称
+                $datas['TransferType'] = $data['transferType']; //转让形式
+                $datas['TransferRent'] = $data['transferRent']; //转让金额
+                $datas['IfReform'] = $data['IfReform']; //是否属代、托、改造产
+                $datas['IfRepair'] = $data['IfRepair']; //是否是五年内新翻覆修房屋
+                $datas['IfFacade'] = $data['IfFacade']; //是否属门面营业用房
+                $datas['IfCollection'] = $data['IfCollection']; //是否属于征收范围内房屋
 
-                if(empty($data['newID']) || empty($data['newName']) || empty($data['houseid'])) return jsons('4005' ,'请完善相关信息！');
+                if(empty($data['newName']) || empty($data['houseid'] || empty($TransferType) || empty($TransferRent))) return jsons('4005' ,'请完善相关信息！');
+
+            } else { //别字更正
+
+
             }
 
-            $datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
+            
+            // $houseModel = new HouseInfoModel;
+
+            // halt($houseModel);
 
 
             $one = Db::name('house')->where('HouseID', 'eq', $data['houseid'])->field('InstitutionPID ,InstitutionID')->find();
@@ -73,6 +83,11 @@ class UserApply extends Base
             //$datas['InstitutionID'] = session('user_base_info.institution_id'); //机构id(此处登记的是当前房管员的所属机构)
             $datas['UserNumber'] = UID; //操作人id
             $datas['CreateTime'] = time();
+
+            $id = Db::name('process_config')->where('Type',100)->max('id');
+
+            //halt($id);
+
             $datas['ProcessConfigType'] = 100;  //100为使用权变更(对应change_type表)
             $datas['Status'] = 2; //待审批状态
 
