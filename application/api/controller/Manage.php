@@ -110,9 +110,9 @@ class Manage extends Controller
 
             foreach($arr as $v){
 
-                $k = $this->get_one_change_info($v['id']);
+                $k = $this->get_one_change_info($v['id'],$findOne['Role']);
 
-                if($k){
+                if($k['Status']){
 
                     $ChangeList['arr'][] = $k;
                 }
@@ -169,15 +169,43 @@ class Manage extends Controller
 
             foreach($arr as $v){
 
-                $k = $this->get_one_change_info($v['id']);
+                $k = $this->get_one_change_info($v['id'] ,$findOne['Role']);
 
-                if($k){
-
-                    $ChangeList['arr'][] = $k;
+                if(!isset($k['flag'])){
+                    $ChangeList['arr']['before'][] = $k;
+                }else{
+                    $ChangeList['arr']['ing'][] = $k;
                 }
+
+                
+                
 
                 //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
             }
+
+            $where['Status'] = array('in' ,[0,1]);
+
+
+
+            $ChangeLists['obj'] = Db::name('use_change_order')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+
+
+            $arr1 = $ChangeLists['obj']->all();
+//halt($arr1);
+            if(!$arr1){
+
+                $ChangeList['arr']['after'] = array();
+            }else{
+               foreach($arr1 as $v1){
+
+                $g = $this->get_one_change_info($v1['id'] ,$findOne['Role']);
+
+                
+                $ChangeList['arr']['after'][] = $g;
+
+                //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
+                } 
+            }  
 
              if(isset($ChangeList['arr'])){
                 return jsons('2000','获取成功',$ChangeList['arr']);
@@ -248,11 +276,27 @@ class Manage extends Controller
             defined('UID') or define('UID', $data['number']);
 
         
-            model('ph/UserAudit')->check_process($data['ChangeOrderID']);
+            $one =  Db::name('use_change_order')->alias('a')
+                                            ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+                                            ->where('a.ChangeOrderID' ,'eq' ,$data['ChangeOrderID'])
+                                            ->field('a.Status ,b.id ')
+                                            ->find();
 
-            if(!isset($data['reson'])) $data['reson']='';
+            $where['pid'] = array('eq' ,$one['id']);
+            $where['Total'] = array('eq' ,$one['Status']);
+
+            $roleID = Db::name('process_config')->where($where)->value('RoleID');
+
+            $currentRoles = json_decode($findOne['Role'],true);
+
+            if(!in_array($roleID ,$currentRoles)){
+
+                return jsons('4005' ,'审批失败，请注意查看审核状态……');
+            }
+
+            if(!isset($data['reason'])) $data['reason']='';
             
-            $result = model('ph/UserAudit')->create_child_order($data['ChangeOrderID'], $data['reson']);
+            $result = $this->create_child_order($data['ChangeOrderID'], $data['reason'],$findOne['InstitutionID']);
 
             if($result === true){
 
@@ -267,11 +311,102 @@ class Manage extends Controller
 
     }
 
+    //创建一个子订单，例如（补充资料完成，每次审核完成 ，）
+    public function create_child_order($changeOrderID,$reson='',$inst){
 
-    public function get_one_change_info($id = '' ,$map=''){
+        //获取流程总人数
+        $total = Db::name('use_change_order')->alias('a')
+                                             ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+                                             ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
+                                             ->value('Total');
+
+        $where['ChangeOrderID'] = array('eq' ,$changeOrderID);
+
+        //判断当前流程
+        $status = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
+
+        //若中间审核通过
+        if($status < $total && $reson == '') {
+
+            Db::name('use_change_order')->where($where)->setInc('Status',1); //步骤递进
+
+            $datas['Status'] = 2;
+
+        //若中间审核不通过
+        }elseif($status < $total && $reson != ''){
+
+            Db::name('use_change_order')->where($where)->setField('Status',2); //状态重置为待第二个角色操作
+
+            $datas['Status'] = 3;  //子订单状态：3为不通过，2为通过 ，1为待审核：  注意此时主订单状态已被重置
+
+        // 若终审不通过
+        }elseif($status == $total && $reson != ''){
+
+            //终审不通过则状态改为 0
+            Db::name('use_change_order')->where($where)->setField('Status',0);
+
+            $datas['Status'] = 3;
+
+        // 若终审通过
+        }elseif($status == $total && $reson == ''){
+
+            //终审通过则状态改为  1
+            Db::name('use_change_order')->where($where)->setField('Status',1);
+
+            //终审通过后，系统自动将变更数据更改,1更名，2过户，3赠予，4转让
+            $changeOrderDetail = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->field('*')->find();
+
+            if($changeOrderDetail['ChangeType'] == 1){ //更名
+
+                Db::name('tenant')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantName',$changeOrderDetail['NewTenantName']);
+//                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantID',$changeOrderDetail['NewTenantID']);
+                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantName',$changeOrderDetail['NewTenantName']);
+
+            }else{
+                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
+
+            }
+
+            $datas['Status'] = 2;
+
+        }
+
+        $option['FatherOrderID'] = array('eq' ,$changeOrderID);
+        $option['IfValid'] = array('eq' ,1);
+        $step = Db::name('use_child_order')->where($option)->max('Step');
+
+        if(!$step){
+            $datas['Step'] = 2;
+        }else{
+            $datas['Step'] = $step + 1;
+        }
+
+        $datas['FatherOrderID'] = $changeOrderID;  //父订单编号
+        $datas['InstitutionID'] = $inst; //保存机构
+        $datas['Reson'] = $reson; //不通过理由
+        $datas['UserNumber'] = UID;
+        $datas['CreateTime'] = time();
+
+        $re = Db::name('use_child_order')->insert($datas);  //创建子订单
+
+        if($status < $total && $reson != ''){
+            Db::name('use_child_order')->where('FatherOrderID' ,'eq' ,$changeOrderID)->setField('IfValid' ,0); //重置之前的子订单状态为无效
+        }
+
+
+        if($re){
+            return true;
+        }else{
+            return false;
+        }
+        
+
+    }
+
+    public function get_one_change_info($id = '' ,$userid = ''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType  ,Status';
+        //$map='ChangeOrderID ,HouseID ,ChangeType ,Status,b.HousePrerent';
         // $config = Db::name('use_change_order')->alias('a')
         //                                       ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
         //                                       ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
@@ -279,7 +414,7 @@ class Manage extends Controller
         //                                       ->find();
         $data = Db::name('use_change_order')->alias('a')
                                             ->join('house b' ,'a.HouseID = b.HouseID','left')
-                                            ->field('a.ChangeOrderID,a.HouseID,a.ChangeType,a.Status,b.TenantName')
+                                            ->field('a.ChangeOrderID,a.HouseID,a.ChangeType,a.Status,b.TenantName,b.HousePrerent')
                                             ->where('a.id','eq',$id)
                                             ->find();
 
@@ -309,14 +444,18 @@ class Manage extends Controller
 
         $res = $this->order_config_detail($data['ChangeOrderID'],$data['Status']);
 
-        $s = in_array($res['RoleID'],json_decode(session('user_base_info.role')));
+        //halt($userid);
+
+        $s = in_array($res['RoleID'],json_decode($userid));
 
         //halt($s);
+        $data['Status'] = $res['RoleName'];
 
         if(!$s){
-            return false;
+            $data['flag'] = 1;    
         }
 
+        return $data;
         // $data['Status'] = '待'.$res['RoleName'].$res['Title'];
 
         // $data['ProcessRoleID'] = $res['RoleID'];
@@ -327,8 +466,7 @@ class Manage extends Controller
         // $data['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$data['UserNumber'])->value('UserName');
 
         // $data['CreateTime'] = date('Y-m-d H:i:s' ,$data['CreateTime']);
-
-        return $data;
+        
     }
 
 

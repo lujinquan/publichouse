@@ -610,6 +610,7 @@ function get_wait_processing(){
     $institutionLevel = session('user_base_info.institution_level');
 
     if($institutionLevel == 1){
+        
         $where = 1;
 
     }elseif($institutionLevel == 2){
@@ -619,6 +620,8 @@ function get_wait_processing(){
         $where['a.InstitutionID'] = session('user_base_info.institution_id');
         
     }
+
+    $where['Status'] = array('not in',[0,1]); 
 
     $changeData = Db::name('change_order')->alias('a')
         ->join('change_type b','a.ChangeType = b.id','left')

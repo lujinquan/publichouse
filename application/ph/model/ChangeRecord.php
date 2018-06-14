@@ -139,16 +139,18 @@ class ChangeRecord extends Model
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
 
         $data['ChangeType'] = Db::name('change_type')->where('id','eq',$data['ChangeType'])->value('ChangeType');
-
-        if($data['Status'] === 1){
+//halt($data['Status']);
+        if($data['Status'] == 1){
 
             $data['Status'] = '通过';
+        }else{
+            $data['Status'] = '未通过';
         }
 
-        if($data['Status'] === 0){
-            $data['Status'] = '未通过';
+        // if($data['Status'] === 0){
             
-        }
+            
+        // }
 
         $data['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$data['UserNumber'])->value('UserName');
 
