@@ -137,7 +137,7 @@ $("#addGift").click(function(){
 		});
 	})
 });
-//新增赠与
+//新增转让
 $("#addTransfer").click(function(){
 	require(["layer","jquery"],function(layer){
 		$('#IdIput').val('');
@@ -163,7 +163,9 @@ $("#addTransfer").click(function(){
 				var ra_2 = $("input[type=radio][name=ra_2]:checked").val();
 				var ra_3 = $("input[type=radio][name=ra_3]:checked").val();
 				var ra_4 = $("input[type=radio][name=ra_4]:checked").val();
-				console.log(ra_1,ra_2,ra_3,ra_4);
+				var transferWay = $("#transferWay").val();
+				var transferMoney = $("#transferMoney").val();
+				console.log(ra_1,ra_2,ra_3,ra_4,transferWay,transferMoney);
 				alert('fff');
 				$.post('/ph/UserApply/add',
 					{
@@ -171,7 +173,13 @@ $("#addTransfer").click(function(){
 						oldID:oldID,
 						oldName:oldName,
 						newID:newID,
-						newName:newName
+						newName:newName,
+						transferWay:transferWay,
+						transferMoney:transferMoney,
+						ra_1:ra_1,
+						ra_2:ra_2,
+						ra_3:ra_3,
+						ra_4:ra_4
 					},function(result){
 					result = JSON.parse(result);
 					if(result.retcode == 2000){
@@ -296,7 +304,7 @@ function revise_1(res,id){
 		});
 		layer.open({
 			type:1,
-			area:['650px','650px'],
+			area:['990px','700px'],
 			resize:false,
 			zIndex:100,
 			title:['更名申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
@@ -349,7 +357,7 @@ function revise_2(res,id){
 		});
 		layer.open({
 			type:1,
-			area:['650px','650px'],
+			area:['990px','700px'],
 			resize:false,
 			zIndex:100,
 			title:['过户申请','color:#FFF;font-size:1.6rem;font-weight:600;'],

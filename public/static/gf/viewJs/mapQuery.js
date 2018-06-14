@@ -76,27 +76,45 @@ var area_array = null;
 $.get('/ph/Api/get_relation_area',function(res){
 	console.log(res);
 	area_array = res;
-	setCircle(res);
+	setCircle(res,16);
 
 });
-	function setCircle(area){
+	function setCircle(area,room_size){
 		mp.clearOverlays();
 		for(var i = 0;i < area.length;i++){
 			var point = new BMap.Point(area[i].GpsX, area[i].GpsY);
-			var circle = new BMap.Circle(point,150,{strokeStyle:'dashed',strokeWeight:'1px'});
+			if(room_size == 16){
+				radius = 150;
+			}else if(room_size == 17){
+				radius = 80;
+			}else if(room_size == 18){
+				radius = 50;
+			}
+
+			var circle = new BMap.Circle(point,radius,{
+				strokeStyle:'dashed',
+				strokeWeight:'1px',
+				fillColor:'#1188F0',
+				fillOpacity:'0.9'
+			});
 			mp.addOverlay(circle);
 			var opts = {
 			  position : point, 
-			  offset   : new BMap.Size(-30, -10) 
+			  offset   : new BMap.Size(-45, -10) 
 			}
 			var label = new BMap.Label(area[i].AreaTitle, opts);
 				label.setStyle({
-					 color : "red",
+					 color : "#FFF",
 					 fontSize : "12px",
 					 height : "20px",
 					 lineHeight : "20px",
 					 fontFamily:"微软雅黑",
-					 border:0
+					 border:0,
+					 display:'block',
+					 width:'90px',
+					 textAlign:'center',
+					 background:'none'
+
 				 });
 			mp.addOverlay(label); 
 		}
@@ -252,7 +270,7 @@ $.get('/ph/Api/get_relation_area',function(res){
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			setCircle(area_array);
+			setCircle(area_array,room_size);
 		}
 	});
 	mp.addEventListener("zoomend", function(){
@@ -261,7 +279,7 @@ $.get('/ph/Api/get_relation_area',function(res){
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			setCircle(area_array);
+			setCircle(area_array,room_size);
 		}
 	});
     TubulationID.onchange = OwnerTyp.onchange = function(){
@@ -287,7 +305,7 @@ $.get('/ph/Api/get_relation_area',function(res){
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
-				setCircle(area_array);
+				setCircle(area_array,room_size);
 			}
 
 		})//post
