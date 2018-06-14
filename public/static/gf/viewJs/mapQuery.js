@@ -416,6 +416,7 @@ $.get('/ph/Api/get_relation_area',function(res){
 
 						$(".house_M").click(function(){
 							var _this=$(this).index('.house_M');
+							console.log(_this);
 							var HouseID = $('.houseI').eq(_this).html();
 							console.log(HouseID);
 

@@ -166,13 +166,12 @@ $("#addTransfer").click(function(){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				var ra_1 = $("input[type=radio][name=ra_1]:checked").val();
-				var ra_2 = $("input[type=radio][name=ra_2]:checked").val();
-				var ra_3 = $("input[type=radio][name=ra_3]:checked").val();
-				var ra_4 = $("input[type=radio][name=ra_4]:checked").val();
+				var IfReform = $("input[type=radio][name=ra_1]:checked").val();
+				var IfRepair = $("input[type=radio][name=ra_2]:checked").val();
+				var IfCollection = $("input[type=radio][name=ra_3]:checked").val();
+				var IfFacade = $("input[type=radio][name=ra_4]:checked").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
-				console.log(ra_1,ra_2,ra_3,ra_4,transferWay,transferMoney);
 				$.post('/ph/UserApply/add',
 					{
 						type:4,houseid:ID,
@@ -180,12 +179,12 @@ $("#addTransfer").click(function(){
 						oldName:oldName,
 						newID:newID,
 						newName:newName,
-						transferWay:transferWay,
-						transferMoney:transferMoney,
-						ra_1:ra_1,
-						ra_2:ra_2,
-						ra_3:ra_3,
-						ra_4:ra_4
+						transferType:transferWay,
+						transferRent:transferMoney,
+						IfReform:IfReform,
+						IfRepair:IfRepair,
+						IfCollection:IfCollection,
+						IfFacade:IfFacade
 					},function(result){
 					result = JSON.parse(result);
 					if(result.retcode == 2000){

@@ -34,31 +34,48 @@ $("#addInfo").click(function(){
 				$('.houseAddress').text(res.data.detail.BanAddress);
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
-				if(res.data.detail.IfReform=="0"){
-					$('.IfReform').text('否');
+				if(true){
+					$('.status_2').show();
+					$('.status_3').hide();
+					new file({
+						button:"#RecordSheet",
+						show:"#RecordSheetShow",
+						upButton:"#RecordSheetUp",
+						size:1024,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"申请书"
+					});
 				}else{
-					$('.IfReform').text('是');
+					$('.status_2').hide();
+					$('.status_3').show();
+					if(res.data.detail.IfReform=="0"){
+						$('.IfReform').text('否');
+					}else{
+						$('.IfReform').text('是');
+					}
+					if(res.data.detail.IfRepair=="0"){
+						$('.IfRepair').text('否');
+					}else{
+						$('.IfRepair').text('是');
+					}
+					if(res.data.detail.IfCollection=="0"){
+						$('.IfCollection').text('否');
+					}else{
+						$('.IfCollection').text('是');
+					}
+					if(res.data.detail.IfFacade=="0"){
+						$('.IfFacade').text('否');
+					}else{
+						$('.IfFacade').text('是');
+					}
+					if(res.data.detail.IfCheck==0){
+						$('.IfCheck').text('否');
+					}else{
+						$('.IfCheck').text('是');
+					}
 				}
-				if(res.data.detail.IfRepair=="0"){
-					$('.IfRepair').text('否');
-				}else{
-					$('.IfRepair').text('是');
-				}
-				if(res.data.detail.IfCollection=="0"){
-					$('.IfCollection').text('否');
-				}else{
-					$('.IfCollection').text('是');
-				}
-				if(res.data.detail.IfFacade=="0"){
-					$('.IfFacade').text('否');
-				}else{
-					$('.IfFacade').text('是');
-				}
-				if(res.data.detail.IfCheck==0){
-					$('.IfCheck').text('否');
-				}else{
-					$('.IfCheck').text('是');
-				}
+
 				processState('#FormState',res);
 			//类型判断开始
 				if(res.data.detail.ChangeType=="更名"){
@@ -254,6 +271,7 @@ $("#addInfo").click(function(){
 					if($('.material_3').length == 0){
 						$('#addContent').after(DOM_3);
 					}
+					console.log('fff');
 					new file({
 						button:"#TrCheck",
 						show:"#TrCheckShow",
