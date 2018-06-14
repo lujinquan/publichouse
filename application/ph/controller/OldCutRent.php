@@ -33,9 +33,9 @@ class OldCutRent extends Base
                 ->field('BanAddress,ArrearRent,TenantID,OwnerType,UseNature,TenantName,HousePrerent,InstitutionID,InstitutionPID')
                 ->find();
             if($findOne){
-                if($findOne['ArrearRent'] < $data['PayRent'] && $data['PayYear'] < 2018){
-                    return jsons('4005','收缴金额不能超过年度结欠金额');
-                }
+                // if($findOne['ArrearRent'] < $data['PayRent'] && $data['PayYear'] < 2018){
+                //     return jsons('4005','收缴金额不能超过年度结欠金额');
+                // }
                 if($findOne['InstitutionID'] != session('user_base_info.institution_id')){
                     return jsons('4006','请确认该房屋是否属于当前管段');
                 }
