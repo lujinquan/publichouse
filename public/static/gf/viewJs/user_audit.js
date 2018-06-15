@@ -19,7 +19,7 @@ $("#addInfo").click(function(){
 		$.get('/ph/UserAudit/supply/ChangeOrderID/'+ID,function(res){
 			res = JSON.parse(res);
 			console.log(res);
-			if(res.retcode == 4005){
+			if(res.retcode == 4005 || res.retcode == 5000){
 				layer.msg(res.msg);
 			}else{
 				$('.changeType').text(res.data.detail.CreateTime);
@@ -41,6 +41,10 @@ $("#addInfo").click(function(){
 				if(res.data.config.status == '1'){
 					$('.status_2').show();
 					$('.status_3').hide();
+					$("input[name='IfReform'][value="+res.data.detail.IfReform+"]").attr('checked','checked');
+					$("input[name='IfRepair'][value="+res.data.detail.IfRepair+"]").attr('checked','checked');
+					$("input[name='IfCollection'][value="+res.data.detail.IfCollection+"]").attr('checked','checked');
+					$("input[name='IfFacade'][value="+res.data.detail.IfFacade+"]").attr('checked','checked');
 				}else{
 					$('.status_2').hide();
 					$('.status_3').show();
@@ -409,7 +413,7 @@ $("#addInfo").click(function(){
 						});
 					}
 					
-					AddInfo(ID,res.data.config.status);
+					AddInfo(ID,res.data.config.status,res.data.detail);
 				}
 			//类型判断结束	
 			}
@@ -529,13 +533,17 @@ $('.BtnDetail').click(function(){
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APhouseId').text(res.data.detail.HouseID);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
-		$('.APtenantID').text(res.data.detail.TenantID);
-		$('.APtenantName').text(res.data.detail.TenantName);
-		$('.APtenantNumber').text(res.data.detail.TenantNumber);
-		$('.APtenantTel').text(res.data.detail.TenantTel);
 		$('#approveName').text(res.data.detail.ChangeType);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		$('.APtransferRent').text(res.data.detail.TransferRent);
+		$('.OldTenantName').text(res.data.detail.OldTenantName);
+		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
+		$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+		$('.NewTenantName').text(res.data.detail.NewTenantName);
+		$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
+		$('.NewTenantTel').text(res.data.detail.NewTenantTel);
+
 		if(res.data.detail.IfReform==0){
 			$('.IfReform').text('否');
 		}else{
@@ -574,7 +582,7 @@ $('.BtnDetail').click(function(){
 });
 
 //资料补充弹窗封装
-function AddInfo(ID,status){
+function AddInfo(ID,status,detail){
 	if(status== '1'){
 		var btn = ['确认','取消','不通过'];
 	}else{
@@ -595,10 +603,17 @@ function AddInfo(ID,status){
 			var formData = fileTotall.getArrayFormdata();
 			console.log(formData);
 			formData.append('ChangeOrderID',ID);
-			formData.append('IfReform',$("input[name='IfReform']:checked").val());
-			formData.append('IfRepair',$("input[name='IfRepair']:checked").val());
-			formData.append('IfCollection',$("input[name='IfCollection']:checked").val());
-			formData.append('IfFacade',$("input[name='IfFacade']:checked").val());
+			if(status== '1'){
+				formData.append('IfReform',$("input[name='IfReform']:checked").val());
+				formData.append('IfRepair',$("input[name='IfRepair']:checked").val());
+				formData.append('IfCollection',$("input[name='IfCollection']:checked").val());
+				formData.append('IfFacade',$("input[name='IfFacade']:checked").val());
+			}else{
+				formData.append('IfReform',detail.IfReform);
+				formData.append('IfRepair',detail.IfRepair);
+				formData.append('IfCollection',detail.IfCollection);
+				formData.append('IfFacade',detail.IfFacade);
+			}
 			$.ajax({
                 type:"post",
                 url:"/ph/UserAudit/supply",
