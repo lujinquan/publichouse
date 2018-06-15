@@ -599,7 +599,6 @@ function AddInfo(ID,status){
 			formData.append('IfRepair',$("input[name='IfRepair']:checked").val());
 			formData.append('IfCollection',$("input[name='IfCollection']:checked").val());
 			formData.append('IfFacade',$("input[name='IfFacade']:checked").val());
-			formData.append('IfCheck',$("input[name='IfCheck']:checked").val());
 			$.ajax({
                 type:"post",
                 url:"/ph/UserAudit/supply",
