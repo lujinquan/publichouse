@@ -61,7 +61,9 @@ class UserApply extends Base
                 $datas['IfFacade'] = $data['IfFacade']; //是否属门面营业用房
                 $datas['IfCollection'] = $data['IfCollection']; //是否属于征收范围内房屋
 
-                if(empty($data['newName']) || empty($data['houseid'] || empty($TransferType) || empty($TransferRent))) return jsons('4005' ,'请完善相关信息！');
+                if(empty($data['newName']) || empty($data['houseid']) || empty($TransferType) || empty($TransferRent)) {
+                    return jsons('4005' ,'请完善相关信息！');
+                }
 
             } else { //别字更正
 
