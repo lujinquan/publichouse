@@ -271,7 +271,7 @@ mp.setMapStyle({
 				}
 				console.log(aLabel);
 			}
-			
+			area_array = res.data.point;
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
@@ -287,7 +287,7 @@ mp.setMapStyle({
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			//setCircle(area_array,room_size);
+			setCircle(area_array,room_size);
 		}
 	});
 	mp.addEventListener("zoomend", function(){
@@ -296,7 +296,7 @@ mp.setMapStyle({
 		if(room_size > 18){
 			getM(aLabel);
 		}else{
-			//setCircle(area_array,room_size);
+			setCircle(area_array,room_size);
 		}
 	});
     TubulationID.onchange = OwnerTyp.onchange = function(){
@@ -306,23 +306,27 @@ mp.setMapStyle({
     	$.post('/ph/Api/get_ban_map_point',{TubulationID:TubulationID,OwnerType:OwnerTyp},function(res){
     		res = JSON.parse(res);
            	console.log(res.data.point);
-           	res.data.point.sort(function(a,b){
-           		return a.BanGpsX - b.BanGpsX
-           	})
-			var aDate = res.data.point.length;
-			aLabel = [];
-			aLabel.push(res.data.point[1]);
-			for (var i = 0; i < aDate; i++){
-				if(res.data.point[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
-					aLabel.push(res.data.point[i]);
+           	var room_size = mp.getZoom();
+           	aLabel = [];
+			for(var j in res.data.point){
+			    res.data.point[j].detail.sort(function(a,b){
+			   		return a.BanGpsX - b.BanGpsX
+			   	})
+				var aDate = res.data.point[j].detail.length;
+				
+				aLabel.push(res.data.point[j].detail[0]);
+				for (var i = 0; i < aDate; i++) {
+					if(res.data.point[j].detail[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
+						aLabel.push(res.data.point[j].detail[i]);
+					}
 				}
+				console.log(aLabel);
 			}
-			console.log(aLabel);
-	    	var room_size = mp.getZoom();
+			area_array = res.data.point;
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
-				//setCircle(area_array,room_size);
+				setCircle(area_array,room_size);
 			}
 
 		})//post
@@ -401,9 +405,9 @@ mp.setMapStyle({
 						$('#UseArea li').not(":first").remove(); 
 
 						for(i=0;i<res.data.bottom.length;i++){
-							var newul=$("<li class='houseI'></li>");
-							newul.appendTo($("#HouseID"));
-							newul.html(res.data.bottom[i].HouseID);
+							// var newul=$("<li class='houseI'></li>");
+							// newul.appendTo($("#HouseID"));
+							// newul.html(res.data.bottom[i].HouseID);
 							var newul1=$("<li ></li>");
 							newul1.appendTo($("#TenantName"));
 							newul1.html(res.data.bottom[i].TenantName);
@@ -426,15 +430,15 @@ mp.setMapStyle({
 							newul8.appendTo($("#RegularPrice"));
 							newul8.html(res.data.bottom[i].HousePrerent);
 							var newul5=$("<li></li>");
-							var aInp = $("<input type='button' value='明细' class='f12 house_M detail-btn' />")
+							var aInp = $("<input type='button' data="+res.data.bottom[i].HouseID+" value='明细' class='f12 house_M detail-btn' />")
 							newul5.appendTo($("#DetailM"));
 							aInp.appendTo(newul5);	
 						}
 
 						$(".house_M").click(function(){
-							var _this=$(this).index('.house_M');
-							console.log(_this);
-							var HouseID = $('.houseI').eq(_this).html();
+							// var _this=$(this).index('.house_M');
+							// console.log(_this);
+							var HouseID = $(this).attr('data');
 							console.log(HouseID);
 
 							$.get('/ph/HouseInfo/detail/HouseID/'+HouseID,function(res){
