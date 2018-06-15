@@ -51,18 +51,18 @@ class UserAudit extends Model
         $data['IfCollection'] = $orderData['IfCollection'];  //是否属于征收范围内房屋
         $data['IfFacade'] = $orderData['IfFacade'];     //是否属门面营业用房
         $data['IfCheck'] = $orderData['IfCheck'];     //房屋结构查验是否通过
-        $data['BanAddress'] = $houseData['BanAddress']?$houseData['BanAddress']:'暂无';   //楼栋地址
-        $data['FloorID'] = $houseData['FloorID']?$houseData['FloorID']:'暂无';   //楼层号
-        $data['TenantID'] = $houseData['TenantID']?$houseData['TenantID']:'暂无';   //租户编号
-        $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'暂无';  //计租面积
-        $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'暂无';      //实有面积
+        $data['BanAddress'] = $houseData['BanAddress']?$houseData['BanAddress']:'';   //楼栋地址
+        $data['FloorID'] = $houseData['FloorID']?$houseData['FloorID']:'';   //楼层号
+        $data['TenantID'] = $houseData['TenantID']?$houseData['TenantID']:'';   //租户编号
+        $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'';  //计租面积
+        $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'';      //实有面积
         $data['CreateTime'] = date('Y-m-d H:i:s' ,$houseData['CreateTime']);   //备案时间
-        $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'暂无';  //租户联系方式
-        $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'暂无';  //租户姓名
-        $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'暂无';  //租户身份证号码
-        $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'暂无';  //租户联系方式
-        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'暂无';  //租户姓名
-        $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'暂无';  //租户身份证号码
+        $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'';  //租户联系方式
+        $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'';  //租户姓名
+        $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'';  //租户身份证号码
+        $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'';  //租户联系方式
+        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'';  //租户姓名
+        $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'';  //租户身份证号码
 
         switch($data['ChangeType']){
             case 1:
@@ -345,14 +345,16 @@ class UserAudit extends Model
      */
     public function check_supply($changeOrderID){
 
-        $status = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
+        //$status = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
 
-        if($status != 2){
+        self::check_process($changeOrderID);
 
-            return false;
-        }
+        // if($status > 3){
 
-        return true;
+        //     return false;
+        // }
+
+        // return true;
     }
 
     /**
@@ -375,6 +377,8 @@ class UserAudit extends Model
         $roleID = Db::name('process_config')->where($where)->value('RoleID');
 
         $currentRoles = json_decode(session('user_base_info.role'),true);
+
+        //dump($roleID);halt($currentRoles);
 
         if(!in_array($roleID ,$currentRoles)){
 
