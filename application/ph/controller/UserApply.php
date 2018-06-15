@@ -48,6 +48,10 @@ class UserApply extends Base
 
             if ($data['type'] == 4) {  //转让
 
+                if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType']) || empty($data['transferRent'])) {
+                    return jsons('4005' ,'请完善相关信息！');
+                }
+
                 $datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
                 $datas['HouseID'] = $data['houseid']; //房屋编号
                 $datas['OldTenantID'] = $data['oldID'];  //原租户编号
@@ -61,9 +65,7 @@ class UserApply extends Base
                 $datas['IfFacade'] = $data['IfFacade']; //是否属门面营业用房
                 $datas['IfCollection'] = $data['IfCollection']; //是否属于征收范围内房屋
 
-                if(empty($data['newName']) || empty($data['houseid']) || empty($TransferType) || empty($TransferRent)) {
-                    return jsons('4005' ,'请完善相关信息！');
-                }
+                
 
             } else { //别字更正
 

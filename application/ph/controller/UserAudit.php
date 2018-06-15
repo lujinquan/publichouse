@@ -102,6 +102,10 @@ class UserAudit extends Base
                 'IfFacade'=>$data['IfFacade'],
                 'IfCheck'=>isset($data['IfCheck'])?$data['IfCheck']:0,
             ];
+
+            if($nowStatus = 2){
+                $update['Status'] = 2;
+            }
             
             if($effect){
 
