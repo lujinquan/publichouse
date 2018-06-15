@@ -821,10 +821,12 @@ class Api extends Controller
             $data['options'] = $searchForm;
         }
 
-        $points = Db::name('ban')->alias('a')->join('area b','a.AreaThree = b.id','left')->field('BanID ,BanGpsX ,BanGpsY,a.AreaFour,a.AreaThree,b.AreaTitle')->where($where)->select();
+        $points = Db::name('ban')->alias('a')->join('area b','a.AreaThree = b.id','left')->field('BanID ,BanGpsX ,BanGpsY,a.AreaFour,a.AreaThree,b.GpsX,b.GpsY,b.AreaTitle')->where($where)->select();
 //halt($data['point']);
         foreach($points as $key => $value){
             $data['point'][$value['AreaThree']]['name'] = $value['AreaTitle'];
+            $data['point'][$value['AreaThree']]['GpsX'] = $value['GpsX'];
+            $data['point'][$value['AreaThree']]['GpsY'] = $value['GpsY'];
             $data['point'][$value['AreaThree']]['detail'][] = $value;
         }
 
