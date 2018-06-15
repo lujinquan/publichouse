@@ -131,8 +131,8 @@ class UserApply extends Base
                 return jsons('4000' ,'修改失败');
             }
         }
-        $map = 'HouseID ,ChangeType , OldTenantID ,OldTenantName , NewTenantID ,NewTenantName';
-        $oldData = Db::name('use_change_order')->field($map)->where('ChangeOrderID' ,'eq' ,$orderID)->find();
+        //$map = 'HouseID ,ChangeType , OldTenantID ,OldTenantName , NewTenantID ,NewTenantName';
+        $oldData = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$orderID)->find();
         $oldData['OldTenantTel'] = Db::name('tenant')->where('TenantID','eq',$oldData['OldTenantID'])->value('TenantTel');
         $oldData['NewTenantTel'] = Db::name('tenant')->where('TenantID','eq',$oldData['NewTenantID'])->value('TenantTel');
         if(!$oldData){
