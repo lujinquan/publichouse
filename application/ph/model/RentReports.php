@@ -99,7 +99,7 @@ class RentReports extends Model
             ->select();
 
         //获取非基数异动
-        $changeNoBaseData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,ChangeType')
+        $changeNoBaseData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where(['CancelType'=>['neq',1],'ChangeType'=>['neq',1],'Status'=>1])
             ->select();
@@ -197,6 +197,8 @@ class RentReports extends Model
         foreach($changeNoBaseData as $k11 => $v11){
             $changeNoBasedata[$v11['OwnerType']][$v11['UseNature']][$v11['InstitutionID']][$v11['ChangeType']] = [
                 'InflRents' => $v11['InflRents'],
+                'OldMonthRents' => $v11['OldMonthRents'],
+                'OldYearRents' => $v11['OldYearRents'],
             ];
         }
 
@@ -277,6 +279,8 @@ class RentReports extends Model
                         if(!isset($changeNoBasedata[$owner][$i][$j][$z])){
                             $changeNoBasedata[$owner][$i][$j][$z] = [ 
                                 'InflRents' => 0,
+                                'OldMonthRents' => 0,
+                                'OldYearRents' => 0,
                             ];
                         }
 
@@ -589,23 +593,41 @@ class RentReports extends Model
                 $result[$owners][$j][16][15] = 0;
                 array_unshift($result[$owners][$j][16],array_sum($result[$owners][$j][16]) - $result[$owners][$j][16][1] - $result[$owners][$j][16][2] - $result[$owners][$j][16][3]);
 
+                //陈欠核销ChangeType = 4
+                $result[$owners][$j][15][1] = $changeNoBasedata[$owners][2][$j][0]['InflRents'];
+                $result[$owners][$j][15][2] = $changeNoBasedata[$owners][2][$j][4]['OldMonthRents'];
+                $result[$owners][$j][15][3] = $changeNoBasedata[$owners][2][$j][4]['OldYearRents'];
+                $result[$owners][$j][15][4] = 0.4 * $result[$owners][$j][15][1];
+                $result[$owners][$j][15][5] = 0.4 * $result[$owners][$j][15][2];
+                $result[$owners][$j][15][6] = 0.4 * $result[$owners][$j][15][3];
+                $result[$owners][$j][15][7] = 0.6 * $result[$owners][$j][15][1];
+                $result[$owners][$j][15][8] = 0.6 * $result[$owners][$j][15][2];
+                $result[$owners][$j][15][9] = 0.6 * $result[$owners][$j][15][3];
+                $result[$owners][$j][15][10] = $changeNoBasedata[$owners][3][$j][0]['InflRents'];
+                $result[$owners][$j][15][11] = $changeNoBasedata[$owners][3][$j][4]['OldMonthRents'];
+                $result[$owners][$j][15][12] = $changeNoBasedata[$owners][3][$j][4]['OldYearRents'];
+                $result[$owners][$j][15][13] = $changeNoBasedata[$owners][1][$j][0]['InflRents'];
+                $result[$owners][$j][15][14] = $changeNoBasedata[$owners][1][$j][4]['OldMonthRents'];
+                $result[$owners][$j][15][15] = $changeNoBasedata[$owners][1][$j][4]['OldYearRents'];
+                array_unshift($result[$owners][$j][15],array_sum($result[$owners][$j][15]) - $result[$owners][$j][15][1] - $result[$owners][$j][15][2] - $result[$owners][$j][15][3]);
+
 
                 //非基数异动合计
-                $result[$owners][$j][9][1] = $result[$owners][$j][10][1] + $result[$owners][$j][11][1] + $result[$owners][$j][12][1] + $result[$owners][$j][14][1] - $result[$owners][$j][16][1];
-                $result[$owners][$j][9][2] = 0;
-                $result[$owners][$j][9][3] = 0;
+                $result[$owners][$j][9][1] = $result[$owners][$j][10][1] + $result[$owners][$j][11][1] + $result[$owners][$j][12][1] + $result[$owners][$j][14][1] + $result[$owners][$j][15][1] - $result[$owners][$j][16][1];
+                $result[$owners][$j][9][2] = $result[$owners][$j][10][2] + $result[$owners][$j][11][2] + $result[$owners][$j][12][2] + $result[$owners][$j][14][2] + $result[$owners][$j][15][2] - $result[$owners][$j][16][2];
+                $result[$owners][$j][9][3] = $result[$owners][$j][10][3] + $result[$owners][$j][11][3] + $result[$owners][$j][12][3] + $result[$owners][$j][14][3] + $result[$owners][$j][15][3] - $result[$owners][$j][16][2];
                 $result[$owners][$j][9][4] = 0.4 * $result[$owners][$j][9][1];
                 $result[$owners][$j][9][5] = 0.4 * $result[$owners][$j][9][2];
                 $result[$owners][$j][9][6] = 0.4 * $result[$owners][$j][9][3];
                 $result[$owners][$j][9][7] = 0.6 * $result[$owners][$j][9][1];
                 $result[$owners][$j][9][8] = 0.6 * $result[$owners][$j][9][2];
                 $result[$owners][$j][9][9] = 0.6 * $result[$owners][$j][9][3];
-                $result[$owners][$j][9][10] = $result[$owners][$j][10][10] + $result[$owners][$j][11][10] + $result[$owners][$j][12][10] + $result[$owners][$j][14][10] - $result[$owners][$j][16][10];
-                $result[$owners][$j][9][11] = 0;
-                $result[$owners][$j][9][12] = 0;
+                $result[$owners][$j][9][10] = $result[$owners][$j][10][10] + $result[$owners][$j][11][10] + $result[$owners][$j][12][10] + $result[$owners][$j][14][10] + $result[$owners][$j][15][10]- $result[$owners][$j][16][10];
+                $result[$owners][$j][9][11] = $result[$owners][$j][10][11] + $result[$owners][$j][11][11] + $result[$owners][$j][12][11] + $result[$owners][$j][14][11] + $result[$owners][$j][15][11]- $result[$owners][$j][16][11];
+                $result[$owners][$j][9][12] = $result[$owners][$j][10][12] + $result[$owners][$j][11][12] + $result[$owners][$j][12][12] + $result[$owners][$j][14][12] + $result[$owners][$j][15][12]- $result[$owners][$j][16][12];
                 $result[$owners][$j][9][13] = $result[$owners][$j][10][13] + $result[$owners][$j][11][13] + $result[$owners][$j][12][13] + $result[$owners][$j][14][13] - $result[$owners][$j][16][13];
-                $result[$owners][$j][9][14] = 0;
-                $result[$owners][$j][9][15] = 0;
+                $result[$owners][$j][9][14] = $result[$owners][$j][10][14] + $result[$owners][$j][11][14] + $result[$owners][$j][12][14] + $result[$owners][$j][14][14] + $result[$owners][$j][15][14]- $result[$owners][$j][16][14];
+                $result[$owners][$j][9][15] = $result[$owners][$j][10][15] + $result[$owners][$j][11][15] + $result[$owners][$j][12][15] + $result[$owners][$j][14][15] + $result[$owners][$j][15][15]- $result[$owners][$j][16][15];
                 array_unshift($result[$owners][$j][9],array_sum($result[$owners][$j][9]) - $result[$owners][$j][9][1] - $result[$owners][$j][9][2] - $result[$owners][$j][9][3]);
 
                 //应缴租金那一行 = 规定租金那一行 + 非基数异动合计
