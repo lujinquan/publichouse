@@ -435,12 +435,14 @@ $('.BtnApprove').click(function(){
 		$('.APcreateTime').text(res.data.detail.CreateTime);
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
-		$('.APtenantID').text(res.data.detail.TenantID);
-		$('.APtenantName').text(res.data.detail.TenantName);
-		$('.APtenantNumber').text(res.data.detail.TenantNumber);
-		$('.APtenantTel').text(res.data.detail.TenantTel);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		$('.OldTenantName').text(res.data.detail.OldTenantName);
+		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
+		$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+		$('.NewTenantName').text(res.data.detail.NewTenantName);
+		$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
+		$('.NewTenantTel').text(res.data.detail.NewTenantTel);
 		$('#approveName').text(res.data.detail.ChangeType);
 		if(res.data.detail.IfReform=="0"){
 			$('.IfReform').text('否');

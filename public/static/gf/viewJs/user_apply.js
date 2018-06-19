@@ -166,10 +166,10 @@ $("#addTransfer").click(function(){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				var IfReform = $("input[type=radio][name=ra_1]:checked").val();
-				var IfRepair = $("input[type=radio][name=ra_2]:checked").val();
-				var IfCollection = $("input[type=radio][name=ra_3]:checked").val();
-				var IfFacade = $("input[type=radio][name=ra_4]:checked").val();
+				var IfReform = $("input[type=radio][name=IfReform]:checked").val();
+				var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
+				var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
+				var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
 				$.post('/ph/UserApply/add',
@@ -377,6 +377,12 @@ function revise_2(res,id){
 				$('#newTel').val(res.data.TenantTel);
 				$('#newTel1').val(res.data.NewTenantTel);
 				$('#oldTel1').val(res.data.OldTenantTel);
+				$('#transferWay[option='+res.data.TransferType+']').attr('checked','checked');
+				$('#transferMoney').val(res.data.TransferRent);
+				$("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
+				$("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
+				$("input[name='IfCollection'][value="+res.data.IfCollection+"]").attr('checked','checked');
+				$("input[name='IfFacade'][value="+res.data.IfFacade+"]").attr('checked','checked');
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
@@ -384,7 +390,26 @@ function revise_2(res,id){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				$.post('/ph/UserApply/edit',{ChangeOrderID:id,HouseID:ID,OldTenantID:oldID,OldTenantName:oldName,NewTenantID:newID,NewTenantName:newName},function(result){
+				var IfReform = $("input[type=radio][name=IfReform]:checked").val();
+				var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
+				var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
+				var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
+				var transferWay = $("#transferWay").val();
+				var transferMoney = $("#transferMoney").val();
+				$.post('/ph/UserApply/edit',{
+					ChangeOrderID:id,
+					HouseID:ID,
+					OldTenantID:oldID,
+					OldTenantName:oldName,
+					NewTenantID:newID,
+					NewTenantName:newName,
+					transferType:transferWay,
+					transferRent:transferMoney,
+					IfReform:IfReform,
+					IfRepair:IfRepair,
+					IfCollection:IfCollection,
+					IfFacade:IfFacade
+				},function(result){
 					result = JSON.parse(result);
 					console.log(result);
 					if(result.retcode == 2000){
