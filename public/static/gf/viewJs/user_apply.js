@@ -160,6 +160,10 @@ $("#addTransfer").click(function(){
 			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
+			success:function(){
+				$('.label_p_style').text('');
+				$('.label_input').val('');
+			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
 				var oldID = $('#oldID').text();
@@ -266,8 +270,9 @@ tenantQuery.action('IdIput','','0,1',
 		var ID = $('#IdIput').val();
 		$.get('/ph/Api/get_tenant_info/TenantID/'+ ID,function(res){
 			res = JSON.parse(res);
+			console.log(res);
 			if(res.retcode == '2000'){
-				$('#newTel').text(res.data.TenantTel);
+				//$('#newTel').text(res.data.TenantTel);
 				$('#newNam').text(res.data.TenantName);
 			}else{
 				layer.msg(res.msg);
@@ -286,7 +291,7 @@ $('#queryAction_1').click(function(){
 		if(res.retcode == '2000'){
 			$('#oldID').text(res.data.TenantID);
 			$('#oldName').text(res.data.TenantName);
-			$('#oldTel').text(res.data.TenantTel);
+			//$('#oldTel').text(res.data.TenantTel);
 		}else{
 			layer.msg(res.msg);
 		}
