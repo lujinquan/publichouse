@@ -219,6 +219,13 @@ class Manage extends Controller
                 //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
             }
 
+            if(!isset($ChangeList['arr']['before'])){
+                $ChangeList['arr']['before'] = array();
+            }
+            if(!isset($ChangeList['arr']['ing'])){
+               $ChangeList['arr']['ing'] = array(); 
+            }
+
             $where['Status'] = array('in' ,[0,1]);
 
 
