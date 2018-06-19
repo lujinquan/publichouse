@@ -80,6 +80,7 @@ class UserApply extends Base
 
             $one = Db::name('house')->where('HouseID', 'eq', $data['houseid'])->field('InstitutionPID ,InstitutionID')->find();
 
+            
             $datas['InstitutionID'] = $one['InstitutionID'];
             $datas['InstitutionPID'] = $one['InstitutionPID'];
 
@@ -96,6 +97,12 @@ class UserApply extends Base
             $datas['Status'] = 2; //待审批状态
 
             if (Db::name('use_change_order')->insert($datas)) {
+
+                $dataChild = [
+                    'FatherOrderID' => $datas['ChangeOrderID'],
+                    'InstitutionID' => $datas['InstitutionID'],
+                    'Step' => 1,
+                ];
 
                 // 记录行为
                 action_log('UserApply_add', UID  ,7, '变更编号:'.$datas['ChangeOrderID']);
