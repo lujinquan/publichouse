@@ -381,7 +381,7 @@ function revise_2(res,id){
 				$('#newTel').val(res.data.TenantTel);
 				$('#newTel1').val(res.data.NewTenantTel);
 				$('#oldTel1').val(res.data.OldTenantTel);
-				$('#transferWay[option='+res.data.TransferType+']').attr('checked','checked');
+				$('#transferWay option[value='+res.data.TransferType+']').attr('selected','selected');
 				$('#transferMoney').val(res.data.TransferRent);
 				$("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
 				$("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
