@@ -72,17 +72,11 @@ mp.setMapStyle({
         }
     ]
 });
-var area_array = null;
-$.get('/ph/Api/get_relation_area',function(res){
-	console.log(res);
-	area_array = res;
-	setCircle(res,16);
-
-});
+	var area_array = null;
 	function setCircle(area,room_size){
 		mp.clearOverlays();
-		for(var i = 0;i < area.length;i++){
-			var point = new BMap.Point(area[i].GpsX, area[i].GpsY);
+		for(var i in area){
+			var point = new BMap.Point(parseFloat(area[i].GpsX), parseFloat(area[i].GpsY));
 			if(room_size == 16){
 				radius = 150;
 			}else if(room_size == 17){
@@ -98,12 +92,12 @@ $.get('/ph/Api/get_relation_area',function(res){
 				fillOpacity:'0.9'
 			});
 			mp.addOverlay(circle);
-			var opts = {
+			var opts_1 = {
 			  position : point, 
-			  offset   : new BMap.Size(-45, -10) 
+			  offset   : new BMap.Size(-45, -20) 
 			}
-			var label = new BMap.Label(area[i].AreaTitle, opts);
-				label.setStyle({
+			var label_1 = new BMap.Label(area[i].name, opts_1);
+				label_1.setStyle({
 					 color : "#FFF",
 					 fontSize : "12px",
 					 height : "20px",
@@ -116,7 +110,27 @@ $.get('/ph/Api/get_relation_area',function(res){
 					 background:'none'
 
 				 });
-			mp.addOverlay(label); 
+			mp.addOverlay(label_1);
+			var opts_2 = {
+			  position : point, 
+			  offset   : new BMap.Size(-45, 0) 
+			}
+			var label_2 = new BMap.Label(area[i].detail.length+'栋', opts_2);
+				label_2.setStyle({
+					 color : "#FFF",
+					 fontSize : "18px",
+					 height : "20px",
+					 lineHeight : "20px",
+					 fontFamily:"微软雅黑",
+					 border:0,
+					 display:'block',
+					 width:'90px',
+					 textAlign:'center',
+					 background:'none'
+
+				 });
+			mp.addOverlay(label_2);
+
 		}
 	}
 
@@ -242,23 +256,26 @@ $.get('/ph/Api/get_relation_area',function(res){
         success : function(res) {  
            	res = JSON.parse(res);
            	console.log(res.data.point);
-           	res.data.point.sort(function(a,b){
-           		return a.BanGpsX - b.BanGpsX
-           	})
-          	
-			var aDate = res.data.point.length;
-			aLabel.push(res.data.point[1]);
-			for (var i = 0; i < aDate; i++) {
-				if(res.data.point[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
-					aLabel.push(res.data.point[i]);
-				}
-			}
-			console.log(aLabel);
 			var room_size = mp.getZoom();
+           	
+			for(var j in res.data.point){
+			    res.data.point[j].detail.sort(function(a,b){
+			   		return a.BanGpsX - b.BanGpsX
+			   	})
+				var aDate = res.data.point[j].detail.length;
+				aLabel.push(res.data.point[j].detail[0]);
+				for (var i = 0; i < aDate; i++) {
+					if(res.data.point[j].detail[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
+						aLabel.push(res.data.point[j].detail[i]);
+					}
+				}
+				console.log(aLabel);
+			}
+			area_array = res.data.point;
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
-				mp.clearOverlays();
+				setCircle(res.data.point,room_size);
 			}
         }
     }); 
@@ -289,19 +306,23 @@ $.get('/ph/Api/get_relation_area',function(res){
     	$.post('/ph/Api/get_ban_map_point',{TubulationID:TubulationID,OwnerType:OwnerTyp},function(res){
     		res = JSON.parse(res);
            	console.log(res.data.point);
-           	res.data.point.sort(function(a,b){
-           		return a.BanGpsX - b.BanGpsX
-           	})
-			var aDate = res.data.point.length;
-			aLabel = [];
-			aLabel.push(res.data.point[1]);
-			for (var i = 0; i < aDate; i++){
-				if(res.data.point[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
-					aLabel.push(res.data.point[i]);
+           	var room_size = mp.getZoom();
+           	aLabel = [];
+			for(var j in res.data.point){
+			    res.data.point[j].detail.sort(function(a,b){
+			   		return a.BanGpsX - b.BanGpsX
+			   	})
+				var aDate = res.data.point[j].detail.length;
+				
+				aLabel.push(res.data.point[j].detail[0]);
+				for (var i = 0; i < aDate; i++) {
+					if(res.data.point[j].detail[i].BanGpsX !== aLabel[aLabel.length-1].BanGpsX){
+						aLabel.push(res.data.point[j].detail[i]);
+					}
 				}
+				console.log(aLabel);
 			}
-			console.log(aLabel);
-	    	var room_size = mp.getZoom();
+			area_array = res.data.point;
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
@@ -384,9 +405,9 @@ $.get('/ph/Api/get_relation_area',function(res){
 						$('#UseArea li').not(":first").remove(); 
 
 						for(i=0;i<res.data.bottom.length;i++){
-							var newul=$("<li class='houseI'></li>");
-							newul.appendTo($("#HouseID"));
-							newul.html(res.data.bottom[i].HouseID);
+							// var newul=$("<li class='houseI'></li>");
+							// newul.appendTo($("#HouseID"));
+							// newul.html(res.data.bottom[i].HouseID);
 							var newul1=$("<li ></li>");
 							newul1.appendTo($("#TenantName"));
 							newul1.html(res.data.bottom[i].TenantName);
@@ -409,14 +430,15 @@ $.get('/ph/Api/get_relation_area',function(res){
 							newul8.appendTo($("#RegularPrice"));
 							newul8.html(res.data.bottom[i].HousePrerent);
 							var newul5=$("<li></li>");
-							var aInp = $("<input type='button' value='明细' class='f12 house_M detail-btn' />")
+							var aInp = $("<input type='button' data="+res.data.bottom[i].HouseID+" value='明细' class='f12 house_M detail-btn' />")
 							newul5.appendTo($("#DetailM"));
 							aInp.appendTo(newul5);	
 						}
 
 						$(".house_M").click(function(){
-							var _this=$(this).index('.house_M');
-							var HouseID = $('.houseI').eq(_this).html();
+							// var _this=$(this).index('.house_M');
+							// console.log(_this);
+							var HouseID = $(this).attr('data');
 							console.log(HouseID);
 
 							$.get('/ph/HouseInfo/detail/HouseID/'+HouseID,function(res){

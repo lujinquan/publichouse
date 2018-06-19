@@ -31,6 +31,8 @@ return [
     'ReIDCard' => '更改后居民身份证',
     'ReContract' => '国有公房(民用住宅)租赁合同',
 
+    'RecordSheet' => '直管公房有偿转让备案单',
+
     'CnApplicationForm' => '申请书',
     'CnApBooklet' => '申请人户口簿',
     'CnApIDCard' => '申请人身份证、图章',

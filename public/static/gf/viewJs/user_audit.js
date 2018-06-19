@@ -2,10 +2,9 @@
 var dong = 1;
 var DOM_1 = $('.material_1').clone(true);
 var DOM_2 = $('.material_2').clone(true);
-var DOM_3 = $('.material_3').clone(true);
 $('.material_1').remove();
 $('.material_2').remove();
-$('.material_3').remove();
+$('.material_3').hide();
 $("#addInfo").click(function(){
 	var obj = $('.checkId');
 	for(var k in obj){
@@ -20,45 +19,57 @@ $("#addInfo").click(function(){
 		$.get('/ph/UserAudit/supply/ChangeOrderID/'+ID,function(res){
 			res = JSON.parse(res);
 			console.log(res);
-			if(res.retcode == 4005){
+			if(res.retcode == 4005 || res.retcode == 5000){
 				layer.msg(res.msg);
 			}else{
 				$('.changeType').text(res.data.detail.CreateTime);
 				$('.houseArea').text(res.data.detail.HouseArea);
 				$('.houseId').text(res.data.detail.HouseID);
 				$('.leasedArea').text(res.data.detail.LeasedArea);
-				$('.tenantID').text(res.data.detail.TenantID);
-				$('.tenantName').text(res.data.detail.TenantName);
-				$('.tenantNumber').text(res.data.detail.TenantNumber);
-				$('.tenantTel').text(res.data.detail.TenantTel);
 				$('.houseAddress').text(res.data.detail.BanAddress);
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
-				if(res.data.detail.IfReform=="0"){
-					$('.IfReform').text('否');
+
+				$('.TransferRent').text(res.data.detail.TransferRent);
+				$('.NewTenantName').text(res.data.detail.NewTenantName);
+				$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
+				$('.NewTenantTel').text(res.data.detail.NewTenantTel);
+				$('.OldTenantName').text(res.data.detail.OldTenantName);
+				$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
+				$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+				$('.material_3_status_2').hide();
+				if(res.data.config.status == '1'){
+					$('.status_2').show();
+					$('.status_3').hide();
+					$("input[name='IfReform'][value="+res.data.detail.IfReform+"]").attr('checked','checked');
+					$("input[name='IfRepair'][value="+res.data.detail.IfRepair+"]").attr('checked','checked');
+					$("input[name='IfCollection'][value="+res.data.detail.IfCollection+"]").attr('checked','checked');
+					$("input[name='IfFacade'][value="+res.data.detail.IfFacade+"]").attr('checked','checked');
 				}else{
-					$('.IfReform').text('是');
+					$('.status_2').hide();
+					$('.status_3').show();
+					if(res.data.detail.IfReform=="0"){
+						$('.IfReform').text('否');
+					}else{
+						$('.IfReform').text('是');
+					}
+					if(res.data.detail.IfRepair=="0"){
+						$('.IfRepair').text('否');
+					}else{
+						$('.IfRepair').text('是');
+					}
+					if(res.data.detail.IfCollection=="0"){
+						$('.IfCollection').text('否');
+					}else{
+						$('.IfCollection').text('是');
+					}
+					if(res.data.detail.IfFacade=="0"){
+						$('.IfFacade').text('否');
+					}else{
+						$('.IfFacade').text('是');
+					}
 				}
-				if(res.data.detail.IfRepair=="0"){
-					$('.IfRepair').text('否');
-				}else{
-					$('.IfRepair').text('是');
-				}
-				if(res.data.detail.IfCollection=="0"){
-					$('.IfCollection').text('否');
-				}else{
-					$('.IfCollection').text('是');
-				}
-				if(res.data.detail.IfFacade=="0"){
-					$('.IfFacade').text('否');
-				}else{
-					$('.IfFacade').text('是');
-				}
-				if(res.data.detail.IfCheck==0){
-					$('.IfCheck').text('否');
-				}else{
-					$('.IfCheck').text('是');
-				}
+
 				processState('#FormState',res);
 			//类型判断开始
 				if(res.data.detail.ChangeType=="更名"){
@@ -251,145 +262,158 @@ $("#addInfo").click(function(){
 					if($('.material_2')){
 						$('.material_2').remove();
 					}
-					if($('.material_3').length == 0){
-						$('#addContent').after(DOM_3);
+					if(res.data.config.status == '1'){
+						$('.material_3_status_2').show();
+						new file({
+							button:"#RecordSheet",
+							show:"#RecordSheetShow",
+							upButton:"#RecordSheetUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"申请书"
+						});
+					}else{
+						$('.status_3').show();
+						$('.material_3').show();
+						new file({
+							button:"#TrCheck",
+							show:"#TrCheckShow",
+							upButton:"#TrCheckUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"房屋结构查验情况"
+						});
+						new file({
+							button:"#TrApplicationForm",
+							show:"#TrApplicationFormShow",
+							upButton:"#TrCheckUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"申请书"
+						});
+						new file({
+							button:"#TrApBooklet",
+							show:"#TrApBookletShow",
+							upButton:"#TrApBookletUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"申请人户口簿"
+						});
+						new file({
+							button:"#TrApIDCard",
+							show:"#TrApIDCardShow",
+							upButton:"#TrApIDCardUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"申请人身份证、图章"
+						});
+						new file({
+							button:"#TrContract",
+							show:"#TrContractShow",
+							upButton:"#TrContractUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"国有公房（民用住宅）租赁合同"
+						});
+						new file({
+							button:"#TrDeathProve",
+							show:"#TrDeathProveShow",
+							upButton:"#TrDeathProveUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"原承租人死亡的，提交死亡证明"
+						});
+						new file({
+							button:"#TrAgreementOne",
+							show:"#TrAgreementOneShow",
+							upButton:"#TrAgreementOneUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"经公证的配偶及同户籍近亲同意使用权转让协议书（附件七）"
+						});
+						new file({
+							button:"#TrAgreementTwo",
+							show:"#TrAgreementTwoShow",
+							upButton:"#TrAgreementTwoUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"国有公房（民用住宅）使用权转让双方签订的国有公房（民用住宅）使用权转让协议书"
+						});
+						new file({
+							button:"#TrAgreementThr",
+							show:"#TrAgreementThrShow",
+							upButton:"#TrAgreementThrUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"承租人与配偶不同户籍的，结婚证"
+						});
+						new file({
+							button:"#TrAttachmentOne",
+							show:"#TrAttachmentOneShow",
+							upButton:"#TrAttachmentOneUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件六：承 诺 书"
+						});
+						new file({
+							button:"#TrAttachmentTwo",
+							show:"#TrAttachmentTwoShow",
+							upButton:"#TrAttachmentTwoUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件七：同意办理公有住房使用权转让或者代理转让协议书"
+						});
+						new file({
+							button:"#TrAttachmentThr",
+							show:"#TrAttachmentThrShow",
+							upButton:"#TrAttachmentThrUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件八 ：武昌区房地产公司房管所直管公房使用权转让备案单"
+						});
+						new file({
+							button:"#TrAttachmentFour",
+							show:"#TrAttachmentFourShow",
+							upButton:"#TrAttachmentFourUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件九：协 议 书"
+						});
+						new file({
+							button:"#TrAttachmentFive",
+							show:"#TrAttachmentFiveShow",
+							upButton:"#TrAttachmentFiveUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件十：同意办理公有住房使用权置换或者代理转让声明书"
+						});
+						new file({
+							button:"#TrAttachmentSix",
+							show:"#TrAttachmentSixShow",
+							upButton:"#TrAttachmentSixUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"附件十一：同意办理公有住房使用权置换或者代理转让声明书"
+						});
 					}
-					new file({
-						button:"#TrCheck",
-						show:"#TrCheckShow",
-						upButton:"#TrCheckUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"房屋结构查验情况"
-					});
-					new file({
-						button:"#TrApplicationForm",
-						show:"#TrApplicationFormShow",
-						upButton:"#TrCheckUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请书"
-					});
-					new file({
-						button:"#TrApBooklet",
-						show:"#TrApBookletShow",
-						upButton:"#TrApBookletUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请人户口簿"
-					});
-					new file({
-						button:"#TrApIDCard",
-						show:"#TrApIDCardShow",
-						upButton:"#TrApIDCardUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请人身份证、图章"
-					});
-					new file({
-						button:"#TrContract",
-						show:"#TrContractShow",
-						upButton:"#TrContractUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"国有公房（民用住宅）租赁合同"
-					});
-					new file({
-						button:"#TrDeathProve",
-						show:"#TrDeathProveShow",
-						upButton:"#TrDeathProveUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"原承租人死亡的，提交死亡证明"
-					});
-					new file({
-						button:"#TrAgreementOne",
-						show:"#TrAgreementOneShow",
-						upButton:"#TrAgreementOneUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"经公证的配偶及同户籍近亲同意使用权转让协议书（附件七）"
-					});
-					new file({
-						button:"#TrAgreementTwo",
-						show:"#TrAgreementTwoShow",
-						upButton:"#TrAgreementTwoUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"国有公房（民用住宅）使用权转让双方签订的国有公房（民用住宅）使用权转让协议书"
-					});
-					new file({
-						button:"#TrAgreementThr",
-						show:"#TrAgreementThrShow",
-						upButton:"#TrAgreementThrUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"承租人与配偶不同户籍的，结婚证"
-					});
-					new file({
-						button:"#TrAttachmentOne",
-						show:"#TrAttachmentOneShow",
-						upButton:"#TrAttachmentOneUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件六：承 诺 书"
-					});
-					new file({
-						button:"#TrAttachmentTwo",
-						show:"#TrAttachmentTwoShow",
-						upButton:"#TrAttachmentTwoUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件七：同意办理公有住房使用权转让或者代理转让协议书"
-					});
-					new file({
-						button:"#TrAttachmentThr",
-						show:"#TrAttachmentThrShow",
-						upButton:"#TrAttachmentThrUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件八 ：武昌区房地产公司房管所直管公房使用权转让备案单"
-					});
-					new file({
-						button:"#TrAttachmentFour",
-						show:"#TrAttachmentFourShow",
-						upButton:"#TrAttachmentFourUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件九：协 议 书"
-					});
-					new file({
-						button:"#TrAttachmentFive",
-						show:"#TrAttachmentFiveShow",
-						upButton:"#TrAttachmentFiveUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件十：同意办理公有住房使用权置换或者代理转让声明书"
-					});
-					new file({
-						button:"#TrAttachmentSix",
-						show:"#TrAttachmentSixShow",
-						upButton:"#TrAttachmentSixUp",
-						size:1024,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件十一：同意办理公有住房使用权置换或者代理转让声明书"
-					});
-					AddInfo(ID);
+					
+					AddInfo(ID,res.data.config.status,res.data.detail);
 				}
 			//类型判断结束	
 			}
@@ -411,12 +435,14 @@ $('.BtnApprove').click(function(){
 		$('.APcreateTime').text(res.data.detail.CreateTime);
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
-		$('.APtenantID').text(res.data.detail.TenantID);
-		$('.APtenantName').text(res.data.detail.TenantName);
-		$('.APtenantNumber').text(res.data.detail.TenantNumber);
-		$('.APtenantTel').text(res.data.detail.TenantTel);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		$('.OldTenantName').text(res.data.detail.OldTenantName);
+		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
+		$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+		$('.NewTenantName').text(res.data.detail.NewTenantName);
+		$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
+		$('.NewTenantTel').text(res.data.detail.NewTenantTel);
 		$('#approveName').text(res.data.detail.ChangeType);
 		if(res.data.detail.IfReform=="0"){
 			$('.IfReform').text('否');
@@ -437,11 +463,6 @@ $('.BtnApprove').click(function(){
 			$('.IfFacade').text('否');
 		}else{
 			$('.IfFacade').text('是');
-		}
-		if(res.data.detail.IfCheck==0){
-			$('.IfCheck').text('否');
-		}else{
-			$('.IfCheck').text('是');
 		}
 		
 		processState('#approveState',res);
@@ -514,13 +535,17 @@ $('.BtnDetail').click(function(){
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APhouseId').text(res.data.detail.HouseID);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
-		$('.APtenantID').text(res.data.detail.TenantID);
-		$('.APtenantName').text(res.data.detail.TenantName);
-		$('.APtenantNumber').text(res.data.detail.TenantNumber);
-		$('.APtenantTel').text(res.data.detail.TenantTel);
 		$('#approveName').text(res.data.detail.ChangeType);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		$('.APtransferRent').text(res.data.detail.TransferRent);
+		$('.OldTenantName').text(res.data.detail.OldTenantName);
+		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
+		$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+		$('.NewTenantName').text(res.data.detail.NewTenantName);
+		$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
+		$('.NewTenantTel').text(res.data.detail.NewTenantTel);
+
 		if(res.data.detail.IfReform==0){
 			$('.IfReform').text('否');
 		}else{
@@ -559,7 +584,12 @@ $('.BtnDetail').click(function(){
 });
 
 //资料补充弹窗封装
-function AddInfo(ID){
+function AddInfo(ID,status,detail){
+	if(status== '1'){
+		var btn = ['确认','取消','不通过'];
+	}else{
+		var btn = ['确认','取消'];
+	}
 	layer.open({
 		type:1,
 		area:['990px','700px'],
@@ -567,7 +597,7 @@ function AddInfo(ID){
 		zIndex:100,
 		title:['资料补充','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:$('#addForm'),
-		btn:['确认','取消'],
+		btn:btn,
 		cancel:function(){
 			$('.fileUploadContent').empty();
 		},
@@ -575,11 +605,17 @@ function AddInfo(ID){
 			var formData = fileTotall.getArrayFormdata();
 			console.log(formData);
 			formData.append('ChangeOrderID',ID);
-			formData.append('IfReform',$("input[name='IfReform']:checked").val());
-			formData.append('IfRepair',$("input[name='IfRepair']:checked").val());
-			formData.append('IfCollection',$("input[name='IfCollection']:checked").val());
-			formData.append('IfFacade',$("input[name='IfFacade']:checked").val());
-			formData.append('IfCheck',$("input[name='IfCheck']:checked").val());
+			if(status== '1'){
+				formData.append('IfReform',$("input[name='IfReform']:checked").val());
+				formData.append('IfRepair',$("input[name='IfRepair']:checked").val());
+				formData.append('IfCollection',$("input[name='IfCollection']:checked").val());
+				formData.append('IfFacade',$("input[name='IfFacade']:checked").val());
+			}else{
+				formData.append('IfReform',detail.IfReform);
+				formData.append('IfRepair',detail.IfRepair);
+				formData.append('IfCollection',detail.IfCollection);
+				formData.append('IfFacade',detail.IfFacade);
+			}
 			$.ajax({
                 type:"post",
                 url:"/ph/UserAudit/supply",
@@ -595,6 +631,37 @@ function AddInfo(ID){
                     location.reload();
                 }
             });
+		},
+		btn2:function(){
+
+		},
+		btn3:function(){
+			layer.open({
+				type:1,
+				area:['400px','400px'],
+				resize:false,
+				zIndex:100,
+				title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+				content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+				btn:['确认'],
+				yes:function(msgIndex){
+					var reasonMsg = $('#reason').val();
+					if(reasonMsg==''){
+						reasonMsg='无';
+					}else{
+						 reasonMsg = $('#reason').val();
+					}
+					console.log(reasonMsg);
+					$.post('/ph/UserAudit/process/',{ChangeOrderID:ID,reson:reasonMsg},function(res){
+						res = JSON.parse(res);
+						console.log(res);
+						layer.msg(res.msg);
+						console.log(res.msg);
+					});
+					layer.close(msgIndex);
+					location.reload();
+				}
+			})
 		}
 	});
 }

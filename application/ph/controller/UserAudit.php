@@ -49,12 +49,14 @@ class UserAudit extends Base
 
             $changeOrderID = $data['ChangeOrderID'];  //变更编号
 
+            //halt($data);
+
             if($_FILES){ //由于目前前端的多文件上传一次只上传一个标题的多张图片，所以目前  $_FILES  只有一个元素，故 $ChangeImageIDS 只是一个字符串
 
                 //在补充资料的时候，需要判断当前状态是否为补充资料阶段，即当前主订单的 Status == 2 ,如果不是，则返回提示信息不让补充
                 $nowStatus = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
 
-                if($nowStatus != 2){ return jsons('4001' ,'请注意检查当前流程状态');}
+                if($nowStatus > 3){ return jsons('4001' ,'请注意检查当前流程状态');}
 
                 //halt($_FILES);
 
@@ -93,13 +95,17 @@ class UserAudit extends Base
             }
 
             $update=[
-                'Status'=>2,
+                //'Status'=> ['exp','Status+1'],
                 'IfReform'=>$data['IfReform'],
                 'IfRepair'=>$data['IfRepair'],
                 'IfCollection'=>$data['IfCollection'],
                 'IfFacade'=>$data['IfFacade'],
                 'IfCheck'=>isset($data['IfCheck'])?$data['IfCheck']:0,
             ];
+
+            // if($nowStatus = 2){
+            //     $update['Status'] = 2;
+            // }
             
             if($effect){
 
