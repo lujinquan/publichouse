@@ -80,6 +80,32 @@ class Manage extends Controller
         return jsons('2000','退出成功',array());
     }
 
+    public function index()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            if (!isset($data['number'])) {
+                return jsons('4001', '参数错误');
+            } else {
+                $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
+                if (!$findOne) {
+                    return jsons('4002', '用户不存在');
+                }
+            }
+
+            $notices = Db::name('notice')->field('id, Title,UpdateTime')->limit(10)->select();
+
+            foreach ($notices as &$v) {
+                $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));
+            }
+
+            $result['notices'] = $notices;
+            $result['rents'] = Db::name('rent_order')->where(['OrderDate' => date('Ym', time()), 'InstitutionID' => $findOne['InstitutionID']])->field('sum(ReceiveRent) as ReceiveRents, sum(PaidRent) as PaidRents')->find();
+            return jsons('2000', '获取成功', $result);
+
+        }
+    }
+
     public function getUseRecordlst(){
 
         if ($this->request->isGet()) {
