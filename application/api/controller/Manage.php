@@ -39,8 +39,18 @@ class Manage extends Controller
             $uid = $UserModel->login($data['username'], $data['password']);
 
             $userNumber = $UserModel->get($uid)->Number;
+
+            $userRole = $UserModel->get($uid)->Role;
+
+            $allowRoles = json_decode($userRole);
+
+            if(in_array('112',$allowRoles) || in_array('116',$allowRoles) || in_array('117',$allowRoles)){
+                return jsons('4000','非审核人员不能登录该系统');
+            }
                 
             return $uid?jsons('2000','登录成功！',['number'=>$userNumber]):jsons('4000','登录失败');
+            
+            
             
         } else {
 
