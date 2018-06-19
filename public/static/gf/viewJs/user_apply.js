@@ -214,11 +214,15 @@ $('.BtnChange').click(function(){
 	$.get('/ph/UserApply/edit/ChangeOrderID/'+ID,function(res){
 		res = JSON.parse(res);
 			console.log(res);
-		if(res.data.ChangeType == 1){
-			revise_1(res,ID);
-		}else{
-			revise_2(res,ID);
-		}
+			if(res.retcode == "4005"){
+				layer.msg(res.msg);
+			}else{
+				if(res.data.ChangeType == 1){
+					revise_1(res,ID);
+				}else{
+					revise_2(res,ID);
+				}
+			}
 	})
 });
 //申请删除
@@ -399,7 +403,7 @@ function revise_2(res,id){
 				$.post('/ph/UserApply/edit',{
 					ChangeOrderID:id,
 					HouseID:ID,
-					OldTenantID:oldID,e
+					OldTenantID:oldID,
 					OldTenantName:oldName,
 					NewTenantID:newID,
 					NewTenantName:newName,
