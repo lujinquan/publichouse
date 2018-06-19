@@ -399,7 +399,7 @@ function revise_2(res,id){
 				$.post('/ph/UserApply/edit',{
 					ChangeOrderID:id,
 					HouseID:ID,
-					OldTenantID:oldID,
+					OldTenantID:oldID,e
 					OldTenantName:oldName,
 					NewTenantID:newID,
 					NewTenantName:newName,
