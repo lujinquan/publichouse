@@ -45,24 +45,8 @@ class HouseInfo extends Model
 
 
         $searchForm = input('request.');
-//        //halt($searchForm);
-//
-        $HouseIdList['option'] = array();
-//
-//        if ($BanID && !isset($searchForm['HouseID'])) {  //接收查看房屋跳转，传递进来的BanID参数
-//
-//            $houses = Db::name('room')->where('BanID',$BanID)->value('group_concat(HouseID) as houseids');
-//            $houseidArr = array_unique(explode(',',$houses));
-//
-//            $a = Db::name('house')->where('BanID',$BanID)->value('group_concat(HouseID) as houseids');
-//            $houseidArr2 =array_unique(explode(',',$a));
-//            $houseArr = array_unique(array_filter(array_merge($houseidArr,$houseidArr2)));
-//            array_multisort($houseArr);
-//            $where['HouseID'] = $houseArr?array('in',$houseArr):'';
-//
-//        }
 
-        //halt($searchForm);
+        $HouseIdList['option'] = array();
 
         if (isset($searchForm['BanID'])) {
 
@@ -171,7 +155,7 @@ class HouseInfo extends Model
     {
 
         //产别 ，使用性质，房屋编号 ，楼栋编号 ，楼栋地址，租户姓名，机构名称 ，门牌号码， 单元号，楼层号，使用面积 ，建筑面积，规定月租金 ，原价 ，泵费，基数租差
-        if (!$map) $map = 'OwnerType ,UseNature,LeasedArea,HouseID ,BanID ,BanAddress ,ArrearRent ,TenantID ,InstitutionID ,DoorID ,IfSuspend,UnitID ,FloorID ,ComprisingArea ,HouseUsearea ,HouseArea ,HousePrerent ,Oprice ,PumpCost ,HouseBase';
+        if (!$map) $map = 'OwnerType ,UseNature,LeasedArea,HouseID ,BanID ,BanAddress ,ArrearRent ,TenantID ,InstitutionID ,DoorID ,IfSuspend,UnitID ,FloorID ,ComprisingArea ,HouseUsearea ,HouseArea ,HousePrerent ,Oprice ,PumpCost';
         $data = Db::name('house')->field($map)->where('HouseID', 'eq', $houseid)->find();
         if (!$data) {
             return array();
@@ -190,10 +174,6 @@ class HouseInfo extends Model
 
     public function get_one_house_detail_info($houseid = '')
     {
-        //房屋编号，楼栋编号，机构名称，单元号，楼层号，产权证号，门牌号码，使用面积，是否住改非，计租面积，规定租金，应收租金，减免租金，
-        //$map = 'HouseID ,BanID ,InstitutionID ,UnitID ,FloorID ,HousePID ,DoorID ,HouseUsearea ,NonliveIf ,LeasedArea ,HousePrerent ,ReceiveRent ,RemitRent,';
-        //使用性质，泵费，维修费，房屋基数，计算原价，实际原价，租户姓名，欠租情况，欠租原因，户建面(房屋建筑面积)，套内建面 ，图片影像
-        //$map .= 'UseNature ,PumpCost ,RepairCost ,HouseBase ,OldOprice ,Oprice ,TenantID ,ArrearRent ,ArrearrentReason ,HouseArea ,ComprisingArea ,HouseImageIDS ';
 
         $map = '*';
 
@@ -523,7 +503,7 @@ class HouseInfo extends Model
             $objActSheet->setCellValue('J' . $i, convertUTF8($data[$i - 3]['HousePrerent']));    //规定月租金
             $objActSheet->setCellValue('K' . $i, convertUTF8($data[$i - 3]['Oprice']));    //原价
             $objActSheet->setCellValue('L' . $i, convertUTF8($data[$i - 3]['PumpCost']));          //泵费
-            $objActSheet->setCellValue('M' . $i, convertUTF8($data[$i - 3]['HouseBase']));          //基数租差
+           
 
             $objActSheet->getStyle('A' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);  //批量居中
             $objActSheet->getStyle('B' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -537,7 +517,7 @@ class HouseInfo extends Model
             $objActSheet->getStyle('J' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $objActSheet->getStyle('K' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $objActSheet->getStyle('L' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('M' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            
         }
 
 

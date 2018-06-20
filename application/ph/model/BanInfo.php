@@ -150,7 +150,7 @@ class BanInfo extends Model
 
     public function get_one_ban_base_info($banid = '',$status = 1,$map=''){
         //楼栋编号，机构id(到管段),楼栋产别，地址，产权证号，建成年份，完损等级，结构类别，使用性质，规定租金
-        if(!$map) $map = 'BanID ,OldBanID,AnathorBanID ,BanSysID ,TubulationID ,OwnerType ,AnathorOwnerType ,AreaFour ,IfSuspend,BanUsearea ,BanAddress ,BanPropertyID ,BanYear ,DamageGrade ,StructureType ,UseNature ,PreRent,TotalArea';
+        if(!$map) $map = 'BanID ,OldBanID,TubulationID ,OwnerType ,AreaFour ,IfSuspend,BanUsearea ,BanAddress ,BanPropertyID ,BanYear ,DamageGrade ,StructureType ,UseNature ,PreRent,TotalArea';
         $data = self::field($map)->where('BanID','eq',$banid)->find();
 
         if(!$data){
@@ -170,7 +170,6 @@ class BanInfo extends Model
         $data['IfSuspend'] = $data['IfSuspend']?'是':'否';
         $data['DamageGrade'] = get_damage($data['DamageGrade']);//完损等级
         $data['OwnerType'] = get_owner($data['OwnerType']);   //楼栋产别
-        $data['AnathorOwnerType'] = get_owner($data['AnathorOwnerType']);   //另一个楼栋产别
         $data['StructureType'] = get_structure($data['StructureType']);//结构名称
         $data['TubulationID'] = get_institution($data['TubulationID']);   //机构管段名称
         $data['UseNature'] = get_usenature($data['UseNature']);   //使用性质
