@@ -33,8 +33,7 @@ class RentReports extends Model
 
         // 以2018年5月报表为例
         $arr1 = array('eq', $cacheDate);     // 201805
-        $arr2 = array('eq', $cacheDate - 1); // 201804
-        $arr3 = array('eq', $cacheDate + 1); // 201806
+        $arr2 = array('eq', getlastMonthDays($cacheDate)); // 201804
         $arr4 = array('eq', substr($cacheDate,0,4)); // 2018
         $arr5 = array('between', [substr($cacheDate,0,4) . '01', $cacheDate - 1]); // 201801~201804,包含201801和201804
         $arr6 = array('between', [substr($cacheDate,0,4) . '01', $cacheDate]); // 201801~201805,包含201801和201805

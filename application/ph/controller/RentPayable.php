@@ -67,6 +67,27 @@ class RentPayable extends Base
     }
 
     /**
+     *  按上期处理
+     */
+    public function dealAsLast(){
+
+        $lastDate = getlastMonthDays(date('Ym',time()));
+
+        //halt($lastDate);
+        $institutionID = session('user_base_info.institution_id');
+
+        //验证合法性
+        if (session('user_base_info.institution_level') != 3) {
+            return jsons('4000', '您的角色没有计算租金权限……');
+        }
+        
+        Db::name('rent_order')->where(['OrderDate'=>$lastDate,'Insti'=>])
+
+        $bool = Db::name('rent_order')->where('RentOrderID','in',$ids)->update(['Type'=> 2 ,'UnpaidRentCopy'=> ['exp','UnpaidRent']]);
+        return $bool?jsons('2000' ,'批量欠缴成功'):jsons('4000' ,'批量欠缴失败');
+    }
+
+    /**
      *  批量扣款
      */
     public function batchDebit(){
