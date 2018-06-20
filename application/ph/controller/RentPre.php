@@ -90,9 +90,10 @@ class RentPre extends Base
                 $data['InstitutionID'] = $one['InstitutionID'];
                 $data['InstitutionPID'] = $one['InstitutionPID'];
                 $data['CurrMoney'] = $one['TenantBalance'];
+                $data['TempDate'] = date('Ymd',time());
                 $data['CreateUserID'] = UID;
                 $data['CreateTime'] = time();
-                $data['TenantTel'] = $one['TenantTel'];
+                //$data['TenantTel'] = $one['TenantTel'];
                 $res = Db::name('rent_recharge')->insert($data);
                 return $res?jsons('2000' ,'充值成功'):jsons('4000' ,'充值失败');
             }else{

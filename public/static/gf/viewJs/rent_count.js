@@ -12,15 +12,13 @@ $('#rentAllocation').click(function(){
 
 			var IfPre = $('input[name="allocationChoose"]:checked').val();
 			
-				layer.confirm('数据统计将花费5-10分钟，请耐心等待',function(thisIndex2){
-					layer.close(thisIndex2);
-					$.get('/ph/RentCount/conf/IfPre/'+IfPre,function(res){
-				res = JSON.parse(res);
-				if(res.retcode == 2000){
-						layer.msg(res.msg);
-						location.reload();
-						}
-				});
+			$.get('/ph/RentCount/conf/IfPre/'+IfPre,function(res){
+
+			res = JSON.parse(res);
+			if(res.retcode == 2000){
+					layer.msg(res.msg);
+					location.reload();
+					}
 			});
 			
 			layer.close(thisIndex);
@@ -37,7 +35,7 @@ $('#rentCount').click(function(){
 	});
 });
 $('#generateRent').click(function(){
-	layer.confirm('生成本期账单大约需要2分钟！',{title:'生成本期租金',icon:'1',skin:'lan_class'},function(conIndex){
+	layer.confirm('请确认租金配置无误！',{title:'生成本期租金',icon:'1',skin:'lan_class'},function(conIndex){
 		$.get('/ph/RentCount/add',function(res){
 			res = JSON.parse(res);
 			console.log(res);
