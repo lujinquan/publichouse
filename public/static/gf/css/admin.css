@@ -15,6 +15,9 @@ input[type=checkbox],input[type=radio]{
   margin-bottom:5px;
   
 }
+.am-icon-long-arrow-right{
+  color:#666;
+}
 .admin-icon-yellow {
   color: #ffbe40;
 }
