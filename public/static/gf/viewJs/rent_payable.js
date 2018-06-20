@@ -60,6 +60,16 @@ $('#generateCharging').click(function(){
 		location.reload();
 	});
 });
+//按上期欠缴处理
+$('#dealAsLast').click(function(){
+	// layer.msg('扣缴计算中,数据过大，耐心等待!',{time:600000});
+	$.get('/ph/RentPayable/dealAsLast/',function(res){
+		res = JSON.parse(res);
+		console.log(res);
+		layer.msg(res.msg);
+		location.reload();
+	});
+});
 //缴费
 $('.payment').click(function(){
 	var thisID = $(this).val();
