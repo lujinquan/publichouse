@@ -271,20 +271,11 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"申请书"
+							title:"直管公房有偿转让备案单"
 						});
 					}else{
 						$('.status_3').show();
 						$('.material_3').show();
-						new file({
-							button:"#TrCheck",
-							show:"#TrCheckShow",
-							upButton:"#TrCheckUp",
-							size:1024,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"房屋结构查验情况"
-						});
 						new file({
 							button:"#TrApplicationForm",
 							show:"#TrApplicationFormShow",
@@ -292,7 +283,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"申请书"
+							title:"住宅租约"
 						});
 						new file({
 							button:"#TrApBooklet",
@@ -301,16 +292,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"申请人户口簿"
-						});
-						new file({
-							button:"#TrApIDCard",
-							show:"#TrApIDCardShow",
-							upButton:"#TrApIDCardUp",
-							size:1024,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"申请人身份证、图章"
+							title:"原承租人户口"
 						});
 						new file({
 							button:"#TrContract",
@@ -319,16 +301,16 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"国有公房（民用住宅）租赁合同"
+							title:"现承租人户口"
 						});
 						new file({
-							button:"#TrDeathProve",
-							show:"#TrDeathProveShow",
-							upButton:"#TrDeathProveUp",
+							button:"#TrApIDCard",
+							show:"#TrApIDCardShow",
+							upButton:"#TrApIDCardUp",
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"原承租人死亡的，提交死亡证明"
+							title:"身份证"
 						});
 						new file({
 							button:"#TrAgreementOne",
@@ -337,7 +319,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"经公证的配偶及同户籍近亲同意使用权转让协议书（附件七）"
+							title:"结婚证"
 						});
 						new file({
 							button:"#TrAgreementTwo",
@@ -346,7 +328,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"国有公房（民用住宅）使用权转让双方签订的国有公房（民用住宅）使用权转让协议书"
+							title:"共有子女的证明材料"
 						});
 						new file({
 							button:"#TrAgreementThr",
@@ -355,7 +337,16 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"承租人与配偶不同户籍的，结婚证"
+							title:"亲属关系证明材料"
+						});
+						new file({
+							button:"#TrDeathProve",
+							show:"#TrDeathProveShow",
+							upButton:"#TrDeathProveUp",
+							size:1024,
+							url:"/ph/UserAudit/supply",
+							ChangeOrderID:res.data.detail.ChangeOrderID,
+							title:"死亡证"
 						});
 						new file({
 							button:"#TrAttachmentOne",
@@ -364,7 +355,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件六：承 诺 书"
+							title:"离婚证"
 						});
 						new file({
 							button:"#TrAttachmentTwo",
@@ -373,7 +364,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件七：同意办理公有住房使用权转让或者代理转让协议书"
+							title:"离婚协议书"
 						});
 						new file({
 							button:"#TrAttachmentThr",
@@ -382,7 +373,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件八 ：武昌区房地产公司房管所直管公房使用权转让备案单"
+							title:"过户协议书"
 						});
 						new file({
 							button:"#TrAttachmentFour",
@@ -391,7 +382,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件九：协 议 书"
+							title:"武汉市直管公房使用权有偿转让、受让审批表"
 						});
 						new file({
 							button:"#TrAttachmentFive",
@@ -400,16 +391,7 @@ $("#addInfo").click(function(){
 							size:1024,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件十：同意办理公有住房使用权置换或者代理转让声明书"
-						});
-						new file({
-							button:"#TrAttachmentSix",
-							show:"#TrAttachmentSixShow",
-							upButton:"#TrAttachmentSixUp",
-							size:1024,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"附件十一：同意办理公有住房使用权置换或者代理转让声明书"
+							title:"武汉市公有房屋使用权转让协议"
 						});
 					}
 					
@@ -687,7 +669,8 @@ function processState(id,res){
 	var status = parseInt(res.data.config.status) * 2 - 1;
 	FatherDom.empty();
 	for(var i = 0; i < ConfigLength;i++){
-		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span>——></span>');
+		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span><i class="am-icon-lg am-icon-long-arrow-right" +\
+			style="margin:auto 4px;"></i></span>');
 		FatherDom.append(SpanDom);
 	}
 	FatherDom.find('span').last().remove();
@@ -695,7 +678,7 @@ function processState(id,res){
 		if(j % 2== 0){
 			FatherDom.find('span').eq(j).addClass('process_style_active');
 		}else{
-			FatherDom.find('span').eq(j).addClass('line_style');
+			FatherDom.find('span').eq(j).find('i').addClass('line_style');
 		}
 	}
 	for(var k = 1;k <= RecordLength;k++){
@@ -704,7 +687,6 @@ function processState(id,res){
 		}else{
 			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].CreateTime+res.data.record[k-1].Status+"，原因："+res.data.record[k-1].Reson+"；</p>");
 		}
-		
 		FatherDom.append(RecordDom);
 	}
 }

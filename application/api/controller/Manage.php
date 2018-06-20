@@ -39,8 +39,18 @@ class Manage extends Controller
             $uid = $UserModel->login($data['username'], $data['password']);
 
             $userNumber = $UserModel->get($uid)->Number;
+
+            $userRole = $UserModel->get($uid)->Role;
+
+            $allowRoles = json_decode($userRole);
+
+            if(in_array('112',$allowRoles) || in_array('116',$allowRoles) || in_array('117',$allowRoles)){
+                return jsons('4000','非审核人员不能登录该系统');
+            }
                 
             return $uid?jsons('2000','登录成功！',['number'=>$userNumber]):jsons('4000','登录失败');
+            
+            
             
         } else {
 
@@ -68,6 +78,32 @@ class Manage extends Controller
         //cookie('signin_token', null);
 
         return jsons('2000','退出成功',array());
+    }
+
+    public function index()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            if (!isset($data['number'])) {
+                return jsons('4001', '参数错误');
+            } else {
+                $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
+                if (!$findOne) {
+                    return jsons('4002', '用户不存在');
+                }
+            }
+
+            $notices = Db::name('notice')->field('id, Title,UpdateTime')->limit(10)->select();
+
+            foreach ($notices as &$v) {
+                $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));
+            }
+
+            $result['notices'] = $notices;
+            $result['rents'] = Db::name('rent_order')->where(['OrderDate' => date('Ym', time()), 'InstitutionID' => $findOne['InstitutionID']])->field('sum(ReceiveRent) as ReceiveRents, sum(PaidRent) as PaidRents')->find();
+            return jsons('2000', '获取成功', $result);
+
+        }
     }
 
     public function getUseRecordlst(){
@@ -181,6 +217,13 @@ class Manage extends Controller
                 
 
                 //$ChangeList['arr'][] = $this->get_one_change_info($v['id']);
+            }
+
+            if(!isset($ChangeList['arr']['before'])){
+                $ChangeList['arr']['before'] = array();
+            }
+            if(!isset($ChangeList['arr']['ing'])){
+               $ChangeList['arr']['ing'] = array(); 
             }
 
             $where['Status'] = array('in' ,[0,1]);
@@ -505,37 +548,37 @@ class Manage extends Controller
 
     }
 
-    /**
-     * 小程序主页接口【公告、应缴金额、已缴金额】
-     */
-    public function index()
-    {
-        if ($this->request->isPost()) {
-            $data = $this->request->post();
-            if (!isset($data['number'])) {
-                return jsons('4001', '参数错误');
-            } else {
-                $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
-                if (!$findOne) {
-                    return jsons('4002', '用户不存在');
-                }
-                if ($findOne['InstitutionID'] < 4) {
-                    return jsons('4003', '该用户不是房管员用户');
-                }
-            }
+    // /**
+    //  * 小程序主页接口【公告、应缴金额、已缴金额】
+    //  */
+    // public function index()
+    // {
+    //     if ($this->request->isPost()) {
+    //         $data = $this->request->post();
+    //         if (!isset($data['number'])) {
+    //             return jsons('4001', '参数错误');
+    //         } else {
+    //             $findOne = Db::name('admin_user')->where('Number', $data['number'])->field('InstitutionID,Role')->find();
+    //             if (!$findOne) {
+    //                 return jsons('4002', '用户不存在');
+    //             }
+    //             if ($findOne['InstitutionID'] < 4) {
+    //                 return jsons('4003', '该用户不是房管员用户');
+    //             }
+    //         }
 
-            $notices = Db::name('notice')->field('id, Title,UpdateTime')->limit(10)->select();
+    //         $notices = Db::name('notice')->field('id, Title,UpdateTime')->limit(10)->select();
 
-            foreach ($notices as &$v) {
-                $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));
-            }
+    //         foreach ($notices as &$v) {
+    //             $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));
+    //         }
 
-            $result['notices'] = $notices;
-            $result['rents'] = Db::name('rent_order')->where(['OrderDate' => date('Ym', time()), 'InstitutionID' => $findOne['InstitutionID']])->field('sum(ReceiveRent) as ReceiveRents, sum(PaidRent) as PaidRents')->find();
-            return jsons('2000', '获取成功', $result);
+    //         $result['notices'] = $notices;
+    //         $result['rents'] = Db::name('rent_order')->where(['OrderDate' => date('Ym', time()), 'InstitutionID' => $findOne['InstitutionID']])->field('sum(ReceiveRent) as ReceiveRents, sum(PaidRent) as PaidRents')->find();
+    //         return jsons('2000', '获取成功', $result);
 
-        }
-    }
+    //     }
+    // }
 
     /**
      * 小程序获取单条公告详情的接口

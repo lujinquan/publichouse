@@ -160,6 +160,10 @@ $("#addTransfer").click(function(){
 			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
+			success:function(){
+				$('.label_p_style').text('');
+				$('.label_input').val('');
+			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
 				var oldID = $('#oldID').text();
@@ -214,11 +218,15 @@ $('.BtnChange').click(function(){
 	$.get('/ph/UserApply/edit/ChangeOrderID/'+ID,function(res){
 		res = JSON.parse(res);
 			console.log(res);
-		if(res.data.ChangeType == 1){
-			revise_1(res,ID);
-		}else{
-			revise_2(res,ID);
-		}
+			if(res.retcode == "4005"){
+				layer.msg(res.msg);
+			}else{
+				if(res.data.ChangeType == 1){
+					revise_1(res,ID);
+				}else{
+					revise_2(res,ID);
+				}
+			}
 	})
 });
 //申请删除
@@ -262,8 +270,9 @@ tenantQuery.action('IdIput','','0,1',
 		var ID = $('#IdIput').val();
 		$.get('/ph/Api/get_tenant_info/TenantID/'+ ID,function(res){
 			res = JSON.parse(res);
+			console.log(res);
 			if(res.retcode == '2000'){
-				$('#newTel').text(res.data.TenantTel);
+				//$('#newTel').text(res.data.TenantTel);
 				$('#newNam').text(res.data.TenantName);
 			}else{
 				layer.msg(res.msg);
@@ -282,7 +291,7 @@ $('#queryAction_1').click(function(){
 		if(res.retcode == '2000'){
 			$('#oldID').text(res.data.TenantID);
 			$('#oldName').text(res.data.TenantName);
-			$('#oldTel').text(res.data.TenantTel);
+			//$('#oldTel').text(res.data.TenantTel);
 		}else{
 			layer.msg(res.msg);
 		}
@@ -377,7 +386,7 @@ function revise_2(res,id){
 				$('#newTel').val(res.data.TenantTel);
 				$('#newTel1').val(res.data.NewTenantTel);
 				$('#oldTel1').val(res.data.OldTenantTel);
-				$('#transferWay[option='+res.data.TransferType+']').attr('checked','checked');
+				$('#transferWay option[value='+res.data.TransferType+']').attr('selected','selected');
 				$('#transferMoney').val(res.data.TransferRent);
 				$("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
 				$("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
@@ -403,8 +412,8 @@ function revise_2(res,id){
 					OldTenantName:oldName,
 					NewTenantID:newID,
 					NewTenantName:newName,
-					transferType:transferWay,
-					transferRent:transferMoney,
+					TransferType:transferWay,
+					TransferRent:transferMoney,
 					IfReform:IfReform,
 					IfRepair:IfRepair,
 					IfCollection:IfCollection,
