@@ -13,6 +13,9 @@ class BanInfo extends Base
 
     public function index()
     {
+
+//halt(config());
+
         //所有公共设施
         $faciLst = $this->BanInfoModel->get_all_facilities();
         //所有的街道

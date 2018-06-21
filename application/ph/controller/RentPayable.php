@@ -5,6 +5,7 @@
 namespace app\ph\controller;
 
 use think\Db;
+use app\ph\model\RentCount as RentCountModel;
 
 class RentPayable extends Base
 {
@@ -64,6 +65,58 @@ class RentPayable extends Base
         }
         $bool = Db::name('rent_order')->where('RentOrderID','in',$ids)->update(['Type'=> 2 ,'UnpaidRentCopy'=> ['exp','UnpaidRent']]);
         return $bool?jsons('2000' ,'批量欠缴成功'):jsons('4000' ,'批量欠缴失败');
+    }
+
+    /**
+     *  按上期处理
+     */
+    public function dealAsLast(){
+
+        $lastDate = getlastMonthDays(date('Ym',time()));
+
+        //halt($lastDate);
+        $institutionID = session('user_base_info.institution_id');
+
+        //验证合法性
+        if (session('user_base_info.institution_level') != 3) {
+            return jsons('4000', '您的角色没有按上期处理权限……');
+        }
+
+        $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'CutType'=>0,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();
+
+        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'CutType'=>0,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,HousePrerent,OwnerType')->select();
+
+        foreach($nowDatas as $n){
+            $nowData[$n['HouseID']][$n['OwnerType']] = $n;
+        }
+
+        foreach($oldDatas as $o){
+
+            if(isset($nowData[$o['HouseID']][$o['OwnerType']])){
+                //halt($nowData[$o['HouseID']][$o['OwnerType']]);
+                if($o['HousePrerent'] == $nowData[$o['HouseID']][$o['OwnerType']]['HousePrerent']){
+                    $result[] =[
+                        'id' => $nowData[$o['HouseID']][$o['OwnerType']]['id'],
+                        'PaidRent' => $o['PaidRent'],
+                        'UnpaidRent' => $o['UnpaidRent'],
+                        'Type' => 2,
+                    ];
+                 }
+            }
+        }
+
+        if(isset($result) && $result) {
+
+            //$bool = Db::name('rent_order')->update($result);
+            $rentmodel = new RentCountModel;
+
+            $bool = $rentmodel->saveAll($result);
+
+            return $bool?jsons('2000' ,'处理成功'):jsons('4000' ,'处理失败');
+        }else{
+            return jsons('2000' ,'无匹配订单');
+        }
+
     }
 
     /**

@@ -418,6 +418,7 @@ $('.BtnApprove').click(function(){
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
+		$('.APtransferRent').text(res.data.detail.TransferRent);
 		$('.AFloorID').text(res.data.detail.FloorID);
 		$('.OldTenantName').text(res.data.detail.OldTenantName);
 		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
@@ -650,11 +651,28 @@ function AddInfo(ID,status,detail){
 //查看附件函数
 function metailShow(id,res){
 	var ImgLength = res.data.urls.length;
+	var img_title = [];
+	var	img_array = [];
+	res.data.urls.forEach(function(data){
+		var index = img_title.indexOf(data.FileTitle);
+		if(index < 0){
+			img_title.push(data.FileTitle);
+			img_array[img_array.length] = [];
+			img_array[img_array.length - 1].push(data.FileUrl);
+		}else{
+			img_array[index].push(data.FileUrl);
+		}
+	});
 	var FatherDom = $(id);
 	FatherDom.empty();
-	for(var i = 0; i < ImgLength; i++){
-		var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.urls[i].FileUrl+" src="+res.data.urls[i].FileUrl+" alt="+res.data.urls[i].FileTitle+"/>");
-		FatherDom.append(ImgDom);
+	for(var i = 0; i < img_title.length; i++){
+		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
+		FatherDom.append(title_dom);
+		for(var j = 0;j < img_array[i].length;j++){
+			var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+
+				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>");
+			FatherDom.append(ImgDom);
+		}
 	}
 	layer.photos({
 	  photos: '#layer-photos-demo'

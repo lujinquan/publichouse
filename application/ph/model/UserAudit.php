@@ -24,10 +24,10 @@ class UserAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, ChangeType ,IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, ChangeType ,IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
-        $houseData = Db::name('house')->field('TenantID ,CreateTime ,BanAddress, FloorID, LeasedArea ,HouseArea')
+        $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea')
             ->where('HouseID' ,'eq' ,$orderData['HouseID'])
             ->find();
 
@@ -56,7 +56,7 @@ class UserAudit extends Model
         $data['TenantID'] = $houseData['TenantID']?$houseData['TenantID']:'';   //租户编号
         $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'';  //计租面积
         $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'';      //实有面积
-        $data['CreateTime'] = date('Y-m-d H:i:s' ,$houseData['CreateTime']);   //备案时间
+        $data['CreateTime'] = date('Y-m-d H:i:s' ,$orderData['CreateTime']);   //备案时间
         $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'';  //租户联系方式
         $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'';  //租户姓名
         $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'';  //租户身份证号码
