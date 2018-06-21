@@ -418,6 +418,7 @@ $('.BtnApprove').click(function(){
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
+		$('.APtransferRent').text(res.data.detail.TransferRent);
 		$('.AFloorID').text(res.data.detail.FloorID);
 		$('.OldTenantName').text(res.data.detail.OldTenantName);
 		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
