@@ -84,16 +84,8 @@ class BanInfo extends Model
             if ($searchForm['UseNature']) {  //检索使用性质
                 $where['UseNature'] = array('eq', $searchForm['UseNature']);
             }
-            if ($searchForm['IfSuspend']) {  //检索使用性质
-                $where['IfSuspend'] = array('eq', $searchForm['IfSuspend']);
-            }
-
-
             if ($searchForm['BanID']) {  //模糊检索楼栋编号
                 $where['BanID'] = array('like', '%'.$searchForm['BanID'].'%');
-            }
-            if ($searchForm['OldBanID']) {  //模糊检索原楼栋编号
-                $where['OldBanID'] = array('like', '%'.$searchForm['OldBanID'].'%');
             }
             if ($searchForm['AreaFour']) {  //模糊检索楼栋地址
                 $where['AreaFour'] = array('like', '%'.$searchForm['AreaFour'].'%');

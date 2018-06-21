@@ -73,18 +73,7 @@
                   <input name="BanID" type="text" class="am-form-field" value="{$BanID}">
                 </div>
           	  </td>
-<!--               <td>
-                <div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($banOption != array()){
-                            $OldBanID = $banOption['OldBanID'];
-                        }else{
-                            $OldBanID = '';
-                        }
-                     ?>
-                  <input name="OldBanID" type="text" class="am-form-field" value="{$OldBanID}">
-                </div>
-              </td> -->
+
               <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
                 <div class="am-form-group search_input none-length">
@@ -153,32 +142,7 @@
                       </select>
                   </div>
           		</td>
-<!--               <td>
-                  <div class="am-form-group search_input">
-                      <select name="IfSuspend">
-                          <option  value="" style="display:none">请选择</option>
-                          <?php
-                              if($banOption != array() ){
-                                  if($banOption['IfSuspend'] == 1){
-                                      $select1 ='selected';
-                                      $select2 ='';
-                                  }elseif($banOption['IfSuspend'] === '0'){
-                                      $select1 ='';
-                                      $select2 ='selected';
-                                  }else{
-                                      $select1 ='';
-                                      $select2 ='';
-                                  }
-                              }else{
-                                 $select1 ='';
-                                 $select2 ='';
-                              }
-                            ?>
-                          <option value="1" {$select1}>是</option>
-                          <option value="0" {$select2}>否</option>
-                      </select>
-                  </div>
-              </td> -->
+
               <td>
                 <div class="am-input-group am-input-group-sm">
                     <?php
