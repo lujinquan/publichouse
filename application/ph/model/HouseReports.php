@@ -695,6 +695,9 @@ class HouseReports extends Model
         if(isset($where['InstitutionID'])){
             $wheres['InstitutionPID'] = $where['InstitutionID'];
         }
+        if(!isset($wheres)){
+            $wheres = 1;
+        }
         $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
         $structureTypes = array(1=>'钢混',4=>'砖混一等',5=>'砖混二等',6=>'砖木一等',3=>'砖木二等',2=>'砖木三等',7=>'简易');
