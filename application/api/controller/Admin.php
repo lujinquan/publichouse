@@ -36,7 +36,7 @@ class Admin extends Controller
                 }
             }
 
-            $notices = Db::name('notice')->field('id, Title,UpdateTime')->order('Update desc')->limit(10)->select();
+            $notices = Db::name('notice')->field('id, Title,UpdateTime')->order('UpdateTime desc')->limit(10)->select();
 
             foreach ($notices as &$v) {
                 $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));
