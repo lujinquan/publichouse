@@ -87,7 +87,7 @@ $("#addInfo").click(function(){
 						button:"#ReBooklet",
 						show:"#Dshow",
 						upButton:"#ReBookletUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"更改姓名后户口簿"
@@ -96,7 +96,7 @@ $("#addInfo").click(function(){
 						button:"#ReIDCard",
 						show:"#ReIDCardShow",
 						upButton:"#ReIDCardUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"更改姓名后居民身份证"
@@ -105,7 +105,7 @@ $("#addInfo").click(function(){
 						button:"#ReContract",
 						show:"#ReContractShow",
 						upButton:"#ReContractUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"国有公房（民用住宅）租赁合同"
@@ -126,7 +126,7 @@ $("#addInfo").click(function(){
 						button:"#CnApplicationForm",
 						show:"#CnApplicationFormShow",
 						upButton:"#CnApplicationFormUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"申请书"
@@ -135,7 +135,7 @@ $("#addInfo").click(function(){
 						button:"#CnApBooklet",
 						show:"#CnApBookletShow",
 						upButton:"#CnApBookletUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"申请人户口簿"
@@ -144,7 +144,7 @@ $("#addInfo").click(function(){
 						button:"#CnApIDCard",
 						show:"#CnApIDCardShow",
 						upButton:"#CnApIDCardUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"申请人身份证、图章"
@@ -153,7 +153,7 @@ $("#addInfo").click(function(){
 						button:"#CnContract",
 						show:"#CnContractShow",
 						upButton:"#CnContractUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"国有公房（民用住宅）租赁合同"
@@ -162,7 +162,7 @@ $("#addInfo").click(function(){
 						button:"#CnDeathProve",
 						show:"#CnDeathProveShow",
 						upButton:"#CnDeathProveUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"原承租人死亡的，提交死亡证明"
@@ -171,7 +171,7 @@ $("#addInfo").click(function(){
 						button:"#CnMigProve",
 						show:"#CnMigProveShow",
 						upButton:"#CnMigProveUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"原承租人户籍迁出本市的，提交户籍注销证明"
@@ -180,7 +180,7 @@ $("#addInfo").click(function(){
 						button:"#CnLitig",
 						show:"#CnLitigShow",
 						upButton:"#CnLitigUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"诉讼离婚的，提交人民法院判决书或者调解书"
@@ -189,7 +189,7 @@ $("#addInfo").click(function(){
 						button:"#CnAgreement",
 						show:"#CnAgreementShow",
 						upButton:"#CnAgreementUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"协议离婚的，提交经民政部门备案的离婚协议书"
@@ -198,7 +198,7 @@ $("#addInfo").click(function(){
 						button:"#CnDivorce",
 						show:"#CnDivorceShow",
 						upButton:"#CnDivorceUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"离婚证"
@@ -207,7 +207,7 @@ $("#addInfo").click(function(){
 						button:"#CnAttachmentOne",
 						show:"#CnAttachmentOneShow",
 						upButton:"#CnAttachmentOneUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"附件一：公有住房指定承租人协议书（需公证）"
@@ -216,7 +216,7 @@ $("#addInfo").click(function(){
 						button:"#CnAttachmentTwo",
 						show:"#CnAttachmentTwoShow",
 						upButton:"#CnAttachmentTwoUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"附件二：公有住房过户协议书"
@@ -225,7 +225,7 @@ $("#addInfo").click(function(){
 						button:"#CnAttachmentThr",
 						show:"#CnAttachmentThrShow",
 						upButton:"#CnAttachmentThrUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"附件三：公有住房承租声明"
@@ -234,7 +234,7 @@ $("#addInfo").click(function(){
 						button:"#CnAttachmentFour",
 						show:"#CnAttachmentFourShow",
 						upButton:"#CnAttachmentFourUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"附件四：公有住房承租保证"
@@ -243,7 +243,7 @@ $("#addInfo").click(function(){
 						button:"#CnAttachmentFive",
 						show:"#CnAttachmentFiveShow",
 						upButton:"#CnAttachmentFiveUp",
-						size:1024,
+						size:10240,
 						url:"/ph/UserAudit/supply",
 						ChangeOrderID:res.data.detail.ChangeOrderID,
 						title:"附件五：公有住房承租承诺书"
@@ -268,7 +268,7 @@ $("#addInfo").click(function(){
 							button:"#RecordSheet",
 							show:"#RecordSheetShow",
 							upButton:"#RecordSheetUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"直管公房有偿转让备案单"
@@ -280,7 +280,7 @@ $("#addInfo").click(function(){
 							button:"#TrApplicationForm",
 							show:"#TrApplicationFormShow",
 							upButton:"#TrCheckUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"住宅租约"
@@ -289,7 +289,7 @@ $("#addInfo").click(function(){
 							button:"#TrApBooklet",
 							show:"#TrApBookletShow",
 							upButton:"#TrApBookletUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"原承租人户口"
@@ -298,7 +298,7 @@ $("#addInfo").click(function(){
 							button:"#TrContract",
 							show:"#TrContractShow",
 							upButton:"#TrContractUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"现承租人户口"
@@ -307,7 +307,7 @@ $("#addInfo").click(function(){
 							button:"#TrApIDCard",
 							show:"#TrApIDCardShow",
 							upButton:"#TrApIDCardUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"身份证"
@@ -316,7 +316,7 @@ $("#addInfo").click(function(){
 							button:"#TrAgreementOne",
 							show:"#TrAgreementOneShow",
 							upButton:"#TrAgreementOneUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"结婚证"
@@ -325,7 +325,7 @@ $("#addInfo").click(function(){
 							button:"#TrAgreementTwo",
 							show:"#TrAgreementTwoShow",
 							upButton:"#TrAgreementTwoUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"共有子女的证明材料"
@@ -334,7 +334,7 @@ $("#addInfo").click(function(){
 							button:"#TrAgreementThr",
 							show:"#TrAgreementThrShow",
 							upButton:"#TrAgreementThrUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"亲属关系证明材料"
@@ -343,7 +343,7 @@ $("#addInfo").click(function(){
 							button:"#TrDeathProve",
 							show:"#TrDeathProveShow",
 							upButton:"#TrDeathProveUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"死亡证"
@@ -352,7 +352,7 @@ $("#addInfo").click(function(){
 							button:"#TrAttachmentOne",
 							show:"#TrAttachmentOneShow",
 							upButton:"#TrAttachmentOneUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"离婚证"
@@ -361,7 +361,7 @@ $("#addInfo").click(function(){
 							button:"#TrAttachmentTwo",
 							show:"#TrAttachmentTwoShow",
 							upButton:"#TrAttachmentTwoUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"离婚协议书"
@@ -370,7 +370,7 @@ $("#addInfo").click(function(){
 							button:"#TrAttachmentThr",
 							show:"#TrAttachmentThrShow",
 							upButton:"#TrAttachmentThrUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"过户协议书"
@@ -379,7 +379,7 @@ $("#addInfo").click(function(){
 							button:"#TrAttachmentFour",
 							show:"#TrAttachmentFourShow",
 							upButton:"#TrAttachmentFourUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"武汉市直管公房使用权有偿转让、受让审批表"
@@ -388,7 +388,7 @@ $("#addInfo").click(function(){
 							button:"#TrAttachmentFive",
 							show:"#TrAttachmentFiveShow",
 							upButton:"#TrAttachmentFiveUp",
-							size:1024,
+							size:10240,
 							url:"/ph/UserAudit/supply",
 							ChangeOrderID:res.data.detail.ChangeOrderID,
 							title:"武汉市公有房屋使用权转让协议"
