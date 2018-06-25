@@ -48,11 +48,11 @@ class Base extends Controller
 
         $userBaseInfo = session('user_base_info'); //当前登录用户基本信息
 
-//        $lastLoginTime = Db::name('admin_user')->where('Number',UID)->value('LastLoginTime');
-//        if($userBaseInfo['last_login_time'] < $lastLoginTime){ //同一个账号第二次登录会挤掉第一次的登录
-//            //return $this->redirect('User/Publics/signout');
-//            return $this->success('您的账号已在另一个地方登陆……','User/Publics/signin');
-//        }
+        //同一个账号第二次登录会挤掉第一次的登录
+        $lastLoginTime = Db::name('admin_user')->where('Number',UID)->value('LastLoginTime');
+        if($userBaseInfo['last_login_time'] < $lastLoginTime){ 
+            return $this->success('您的账号于'.date('Y年m月d日 H时i分s秒',$lastLoginTime).'在另一个地方登录……','User/Publics/signin?flag=1','',5);
+        }
 
         $useRoles = json_decode(session('user_base_info.role'),true); //当前用户的角色数组
 
@@ -105,7 +105,7 @@ class Base extends Controller
         $uid = is_signin();
         if ($uid === 'time_out') {
             // 已登录
-            $this->success('登陆超时……',url('user/publics/signin'));
+            $this->success('登陆超时，本次登录',url('user/publics/signin'));
 
         } elseif($uid === 'empty_user') {
             // 未登录

@@ -40,10 +40,11 @@ class Publics extends Controller
                 $this->error($UserModel->getError());
             }
         } else {
-            //halt(1);
-            //halt(is_signin());
-            return is_signin() ? $this->redirect('ph/index/index') : $this->fetch();   //自动登录功能
-            //return $this->fetch();
+            
+            $flag = input('flag');
+
+            return is_signin() && $flag != 1 ? $this->redirect('ph/index/index') : $this->fetch();   //自动登录功能
+   
         }
     }
 

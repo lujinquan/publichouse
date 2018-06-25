@@ -28,5 +28,5 @@ return [
 //        '__miss__'  => 'blog/miss',
 //    ],
 //    'new/:id'   => 'News/read',
-//    '__miss__'  => 'public/miss',
+//   '__miss__'  => 'user/Publics/signin',
 ];

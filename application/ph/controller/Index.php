@@ -28,6 +28,8 @@ class Index extends Base
 
                 
         $notice_list = self::get_notice_list();
+
+        //halt($notice_list);
         $upload_file_list = self::get_upload_file_list();
         $short_cut_menus_list = self::get_short_cut_menus_list();
         // $short_cut_menus_list = '';

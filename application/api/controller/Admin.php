@@ -10,12 +10,13 @@ use think\Db;
 use think\Debug;
 
 /**
- * @title 接口控制器
+ * @title 房管员版的
  * @author Mr.Lu
  * @description
  */
 class Admin extends Controller
 {
+
     /**
      * 小程序主页接口【公告、应缴金额、已缴金额】
      */
@@ -35,7 +36,7 @@ class Admin extends Controller
                 }
             }
 
-            $notices = Db::name('notice')->field('id, Title,UpdateTime')->limit(10)->select();
+            $notices = Db::name('notice')->field('id, Title,UpdateTime')->order('UpdateTime desc')->limit(10)->select();
 
             foreach ($notices as &$v) {
                 $v['UpdateTime'] = date('Y/m/d', strtotime($v['UpdateTime']));

@@ -70,9 +70,6 @@ class HouseInfo extends Model
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
                 //$wheres['AnathorOwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            if ($searchForm['IfSuspend']) {  //检索使用性质
-                $where['IfSuspend'] = array('eq', $searchForm['IfSuspend']);
-            }
             if (isset($searchForm['UseNature']) && $searchForm['UseNature']) {   //检索使用性质
                 $where['UseNature'] = array('eq', $searchForm['UseNature']);
             }
