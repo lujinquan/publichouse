@@ -390,7 +390,9 @@ $('#file_search').click(function(){
 		$('#index_upload_file_list_content').empty();
 		var  buf = '';
 		for (var i = 0; i < list.length; i++) {
-			buf += '<tr><td width="50%">'+ list[i].Title +'</td><td><a class="index-file-download am-icon-download" href="downloadFile?file='+ list[i].Url +'"></a></td><td>'+ list[i].Time +'</td></tr>';
+			buf += '<tr><td style="width:50%;padding-left:20px;">'+ list[i].Title +
+			'</td><td style="width:20%;"><a class="index-file-download" href="downloadFile?file='+ list[i].Url 
+			+'" style="color:#4C84FF;">下载</a></td><td>'+ list[i].Time +'</td></tr>';
 		}
 		$('#index_upload_file_list_content').append(buf);
 
@@ -408,7 +410,10 @@ $('#notice_search').click(function(){
 		$('#index_notice_list_content').empty();
 		var  buf = '';
 		for (var i = 0; i < list.length; i++) {
-			buf += '<tr><td width="50%"><a class="notice_info" id="'+ list[i].id +'" href="javascript:void(0)">' + list[i].Title + '</a></td><td>'+ list[i].UpdateTime +'</td></tr>';
+			buf += '<tr><td style="width:70%;padding-left:20px;"><a class="notice_info" id="'
+			+ list[i].id +'" href="javascript:void(0)">' 
+			+ list[i].Title + '</a></td><td>'
+			+ list[i].UpdateTime +'</td></tr>';
 		}
 		$('#index_notice_list_content').append(buf);
 
