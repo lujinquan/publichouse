@@ -164,7 +164,7 @@ class RentPayable extends Base
 
             $where['RentOrderID'] = array('eq', $data['RentOrderID']);
 
-            $result = Db::name('rent_order')->where($where)->field('OrderDate, InstitutionID,InstitutionPID,OwnerType,UseNature ,HouseID,UnpaidRent, PaidRent ,ReceiveRent,Type')->find();
+            $result = Db::name('rent_order')->where($where)->find();
 
             if ($result['UnpaidRent'] < $data['cost']) {
 
@@ -174,37 +174,60 @@ class RentPayable extends Base
 
                 Db::name('rent_order')->where($where)->update(['UnpaidRent' => 0, 'Type' => 3, 'PaidRent' => $result['ReceiveRent']]);
 
+                if($result['Type'] ==2 && $result['OrderDate'] != date('Ym',time())){
+                    $backs = [
+                            'HouseID' => $result['HouseID'],
+                            'OwnerType' => $result['OwnerType'],
+                            'UseNature' => $result['UseNature'],
+                            'InstitutionID' => $result['InstitutionID'],
+                            'TenantID' => $result['TenantID'],
+                            'TenantName' => $result['TenantName'],
+                            'BanAddress' => $result['BanAddress'],
+                            'HousePrerent' => $result['HousePrerent'],
+                            'PayRent' => $data['cost'],
+                            'PayYear' => date('Y',time()),
+                            'PayMonth' => date('m',time()),
+                            'OldPayMonth' => date('Ym',time()),
+                            'CreateUserID' => UID,
+                            'CreateTime' => time(),
+                        ];
+                        Db::name('old_rent')->insert($backs);
+                }
+
             } else {
 
-                if($result['Type'] == 1){
-                    Db::name('rent_order')->where($where)->setDec('UnpaidRent', $data['cost']);
-                    Db::name('rent_order')->where($where)->update(['UnpaidRentCopy'=>['exp','UnpaidRent']]);
-                }else{
-                    Db::name('rent_order')->where($where)->setDec('UnpaidRent', $data['cost']);
+                if($result['Type'] ==2 && $result['OrderDate'] != date('Ym',time())){
+                    $backs = [
+                            'HouseID' => $result['HouseID'],
+                            'OwnerType' => $result['OwnerType'],
+                            'UseNature' => $result['UseNature'],
+                            'InstitutionID' => $result['InstitutionID'],
+                            'TenantID' => $result['TenantID'],
+                            'TenantName' => $result['TenantName'],
+                            'BanAddress' => $result['BanAddress'],
+                            'HousePrerent' => $result['HousePrerent'],
+                            'PayRent' => $data['cost'],
+                            'PayYear' => date('Y',time()),
+                            'PayMonth' => date('m',time()),
+                            'OldPayMonth' => date('Ym',time()),
+                            'CreateUserID' => UID,
+                            'CreateTime' => time(),
+                        ];
+                        Db::name('old_rent')->insert($backs);
                 }
-                Db::name('rent_order')->where($where)->setField('Type', 2);
-                Db::name('rent_order')->where($where)->setInc('PaidRent', $data['cost']);
 
-            }
+                // Db::name('rent_order')->where($where)->update([
+                //     'Type' => 2,
+                //     'PaidRent' => ['exp' ,'PaidRent' + $data['cost']],
+                //     'UnpaidRent' => ['exp' ,'UnpaidRent' - $data['cost']],
+                // ]);
 
-            $results = [
-                'RentOrderID' => $data['RentOrderID'],
-                'Rent' => $data['cost'],
-                'OrderDate' => $result['OrderDate'],
-                'InstitutionID' => $result['InstitutionID'],
-                'InstitutionPID' => $result['InstitutionPID'],
-                'HouseID' => $result['HouseID'],
-                'OwnerType' => $result['OwnerType'],
-                'UseNature' => $result['UseNature'],
-                'CreateDate' => isset($data['CreateDate'])?str_replace('-','',$data['CreateDate']):date('Ym',time()),
-                'CreateUserID' => UID,
-                'CreateTime' => time(),
-            ];
-
-            Db::name('rent_recovery')->insert($results);
+                Db::name('rent_order')->where($where)->setDec('UnpaidRent',$data['cost']);
+                Db::name('rent_order')->where($where)->setInc('PaidRent',$data['cost']);
+                Db::name('rent_order')->where($where)->update(['Type'=>2]);
 
             return jsons('2000', '缴款成功');
-
+            }
         }
 
 
