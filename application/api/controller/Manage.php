@@ -170,13 +170,13 @@ class Manage extends Controller
                 return jsons('4002', '参数错误');
             }
 
-            $level = Db::name('institution')->where('id',$findOne['InstitutionID'])->column('Level');
+            $level = Db::name('institution')->where('id',$findOne['InstitutionID'])->value('Level');
 
             
             if($level == 3){  //用户为管段级别，则直接查询
-                $where['InstitutionID'] = array('eq' ,$level);
+                $where['InstitutionID'] = array('eq' ,$findOne['InstitutionID']);
             }elseif($level == 2){  //用户为所级别，则获取所有该所子管段，查询
-                $where['InstitutionPID'] = array('eq' ,$level);
+                $where['InstitutionPID'] = array('eq' ,$findOne['InstitutionID']);
             }
 
             $where['Status'] = array('not in' ,[0,1]);
