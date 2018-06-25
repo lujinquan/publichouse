@@ -96,7 +96,7 @@ class UserAudit extends Model
 
         $fileUpload->set('allowtype',array('jpg','jpeg','gif','png')); //设置允许上传的类型
         $fileUpload->set('path',$_SERVER['DOCUMENT_ROOT'].'/uploads/usechange/'); //设置保存的路径
-        $fileUpload->set('maxsize',1000000); //限制上传文件大小
+        $fileUpload->set('maxsize',5*1024*1024); //限制上传文件大小
         $fileUpload->set('israndname',true); //设置是否随机重命名文件， false不随机
 
         $res = $fileUpload->upload($k1);
