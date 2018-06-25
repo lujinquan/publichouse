@@ -68,6 +68,23 @@ class RentPayable extends Base
     }
 
     /**
+     *  全部已缴
+     */
+    public function payAll(){
+
+        $institutionID = session('user_base_info.institution_id');
+
+        //验证合法性
+        if (session('user_base_info.institution_level') != 3) {
+            return jsons('4000', '该功能暂时只对房管员开放');
+        }
+        
+        $bool = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'Type'=>1,'InstitutionID'=>$institutionID])->update(['Type'=> 3 ,'PaidRent'=> ['exp','ReceiveRent'],'UnpaidRent'=>0]);
+
+        return $bool?jsons('2000' ,'操作成功'):jsons('4000' ,'操作失败');
+    }
+
+    /**
      *  按上期处理
      */
     public function dealAsLast(){
@@ -79,7 +96,7 @@ class RentPayable extends Base
 
         //验证合法性
         if (session('user_base_info.institution_level') != 3) {
-            return jsons('4000', '您的角色没有按上期处理权限……');
+            return jsons('4000', '该功能暂时只对房管员开放');
         }
 
         $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'CutType'=>0,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();

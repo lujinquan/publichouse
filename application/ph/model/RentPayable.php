@@ -27,14 +27,13 @@ class RentPayable extends Model
             $where['InstitutionPID'] = array('eq', $currentUserInstitutionID);
         } else {   //用户为公司级别，则获取所有子管段
         }
-        $nextDate = date('Ym',strtotime('+ 1 month'));
-        $where['OrderDate'] = array('eq' ,$nextDate);
+        $where['OrderDate'] = array('eq' ,date('Ym',time()));
         $where['Type'] = array('eq' ,1);
         $where['IfPaidable'] = array('eq' ,0);
         //执行扣缴操作
         $data = Db::name('rent_order')->where($where)->field('RentOrderID ,HouseID ,TenantID ,ReceiveRent')->select();
         if(!$data){
-            return jsons('4003' ,'没有'.date('Ym',strtotime('+ 1 month')).'月份的订单');
+            return jsons('4003' ,'没有'.date('Ym',time()).'月份的订单');
         }
         foreach($data as $k1 => $v1){
             $tenantBalance = Db::name('house')->where('HouseID',$v1['HouseID'])->value('RechargeRent');

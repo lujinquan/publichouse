@@ -209,7 +209,7 @@ class User extends Model
     public function isLogin()
     {
         $user = session('user_base_info');
-//halt($user);
+
         if (empty($user)) {
             return '';
         }else{
