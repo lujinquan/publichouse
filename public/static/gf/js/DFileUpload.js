@@ -97,7 +97,7 @@ var fileTotall = {
 };
 function file(opt){
     this.filesArray = [];
-    this.size = opt.size||4096;
+    this.size = opt.size||10240;
     this.url = opt.url;
     this.name = opt.button.substring(1);
     this.button = $(opt.button);
