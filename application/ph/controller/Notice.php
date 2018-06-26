@@ -35,7 +35,7 @@ class Notice extends Base
 
             $key = mb_detect_encoding($data['content'], array('UNICODE','ASCII','GB2312','GBK','UTF-8'));
 
-            halt($key);
+            //halt($key);
 
             // return jsons('2000', '发布成功', $data);
             $ret = model('ph/Notice')->notice_add($data);
