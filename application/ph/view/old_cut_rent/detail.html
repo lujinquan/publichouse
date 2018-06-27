@@ -47,7 +47,7 @@
       <label class="label_style">欠租年份：</label>
     </div>
     <div class="am-form-group am-u-sm-4 am-u-end" data-am-validator>
-      <input type="text" name="yaer" id="year" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" />
+      <input type="text" name="yaer" onfocus=this.blur() value="2017"/>
     </div>
   </div>
   <div class="am-form-group am-u-sm-12">
@@ -77,7 +77,7 @@
       <label class="label_style">缴纳月份：</label>
     </div>
     <div class="am-form-group am-u-sm-4 am-u-end" data-am-validator>
-      <input type="text" name="yaer" id="oldRentMonth" value="<?php echo date('Y-m',time()); ?>"  data-am-datepicker="{format: 'yyyy-mm', viewMode: 'months', minViewMode: 'months'}" />
+      <input type="text" name="yaer" id="oldRentMonth" onfocus=this.blur() value="<?php echo date('Y-m',time()); ?>"  />
     </div>
   </div>
 
