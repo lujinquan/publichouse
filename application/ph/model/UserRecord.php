@@ -152,7 +152,7 @@ class UserRecord extends Model
         //echo $data['Status'];
 
 
-        if($data['Status'] === 1){
+        if($data['Status'] == 1){
             $data['Status'] = '通过';
         }
 
