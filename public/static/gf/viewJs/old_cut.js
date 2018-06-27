@@ -42,7 +42,7 @@ $('#cutOldButton').click(function(){
 		yes:function(){
 			var postData = {
 				HouseID : $('#getInfo_1').val(),
-				PayYear : $('#year').val().replace(' ',''),
+				PayYear : $('#year').val(),
 				PayRent : $('#oldDebt').val(),
 				OldPayMonth:$('#oldRentMonth').val().replace('-','')
 			};
