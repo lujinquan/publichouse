@@ -50,7 +50,6 @@
                     <th class="table-date">机构名称</th>
                     <?php }; ?>
                     <th class="table-set">产别</th>
-                    <th class="table-set">是否暂停</th>
                     <th class="table-set">使用性质</th>
                     <th class="table-set">规定月租金</th>
                     <th class="table-set dong_none">单元号</th>
@@ -174,32 +173,7 @@
                             </div>
                         </td>
 
-                        <td>
-                          <div class="am-form-group search_input">
-                              <select name="IfSuspend">
-                                  <option  value="" style="display:none">请选择</option>
-                                  <?php
-                                      if($houseOption != array() && isset($houseOption['IfSuspend'])){
-                                          if($houseOption['IfSuspend'] == 1){
-                                              $select1 ='selected';
-                                              $select2 ='';
-                                          }elseif($houseOption['IfSuspend'] === '0'){
-                                              $select1 ='';
-                                              $select2 ='selected';
-                                          }else{
-                                              $select1 ='';
-                                              $select2 ='';
-                                          }
-                                      }else{
-                                         $select1 ='';
-                                         $select2 ='';
-                                      }
-                                    ?>
-                                  <option value="1" {$select1}>是</option>
-                                  <option value="0" {$select2}>否</option>
-                              </select>
-                          </div>
-                        </td>
+                    
                         <td>
                             <div class="am-form-group search_input">
                                 <select name="UseNature">
@@ -288,7 +262,7 @@
                     <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
                     <?php }; ?>
                     <td class="am-hide-sm-only"><?php echo $v1['OwnerType']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $v1['IfSuspend']; ?></td>
+                    
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
