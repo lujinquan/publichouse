@@ -74,4 +74,12 @@ class OldCutRent extends Base
         $one['houseDetail'] = get_house_info($one['HouseID']);
         return jsons('2000','获取成功',$one);
     }
+
+    public function delete()
+    {
+        $id = input('id');
+        if(!$id) return jsons('4004','参数缺失');
+        $re = Db::name('old_rent')->where('id','eq',$id)->delete();
+        return $re?jsons('2000','删除成功'):jsons('4000','删除失败');
+    }
 }

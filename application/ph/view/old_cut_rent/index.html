@@ -18,6 +18,11 @@
                             class="am-icon-plus"></span> 回收欠款
                     </button>
                     <?php }; ?>
+                    <?php if(in_array(533,$threeMenu)){ ; ?>
+                    <button type="button" id="cutdeleteOldButton" class="am-btn d-btn-1188F0 am-radius"><span
+                            class="am-icon-plus"></span> 删除收欠
+                    </button>
+                    <?php }; ?>
                 </div>
             </div>
         </div>
@@ -134,7 +139,7 @@
                 <tr class="check001">
                     <td>
                   <span class="piaochecked">
-                      <input class="checkId radioclass" type="radio" name='choose' value=""/>
+                      <input class="checkId radioclass" type="radio" name='choose' value="{$oldv['id']}"/>
                   </span>
                     </td>
                     <td><?php echo $oldk+1; ?></td>

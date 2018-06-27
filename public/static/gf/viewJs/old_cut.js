@@ -81,6 +81,25 @@ $('#cutOldButton').click(function(){
 		}
 	})
 });
+$('#cutdeleteOldButton').click(function(){
+	var id = $(".radioclass").attr('checked','checked').val();
+	console.log(id);
+    if(id == null || id == ''){
+        layer.msg('选择要删除的选项');
+        return ;
+    }
+    var data = 'id='+id;
+    layer.confirm('确定删除?',{icon: 2,skin:'lan_class'},function(){
+        $.post('/ph/OldCutRent/delete', data, function(res){
+            res = JSON.parse(res);
+            console.log(res);
+            if(res.data){
+                layer.msg('删除成功!');
+                $(location).attr('href', '');
+            }
+        })
+    });
+});
 // 详情detial
 $('.detailsBtn').click(function(){
 	var HouseID = $(this).val();
