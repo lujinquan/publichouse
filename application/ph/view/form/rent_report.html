@@ -301,7 +301,7 @@
                 <?php if(isset($result[10])){ 
                     foreach($result[10] as $v10){
                 ;?>
-                <td rowspan="1" colspan="1" class="some_hide_11"><?php echo $v10; ?></td>
+                <td rowspan="1" colspan="1" class="some_hide_11" style="color:red"><?php echo $v10; ?></td>
                 <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -351,7 +351,7 @@
                 <?php if(isset($result[12])){ 
                     foreach($result[12] as $v12){
                 ;?>
-                <td rowspan="1" colspan="1" class="some_hide_13"><?php echo $v12; ?></td>
+                <td rowspan="1" colspan="1" class="some_hide_13" style="color:red"><?php echo $v12; ?></td>
                 <?php }}else{; ?>
                 <td rowspan="1" colspan="1"></td>
                 <td rowspan="1" colspan="1"></td>
@@ -585,19 +585,19 @@
 <div style="display:inline-block;width:100%" class="fontSize_12">
     <div style="display:inline-block;width:8%">补充资料：</div>
     <div style="display:inline-block;width:25%">本月份实有户数：企事业
-        <span style="display:inline-block;width:20%"></span>户，
+        <span style="display:inline-block;width:20%;padding:20px;"><?php echo isset($result[100][2])?intval($result[100][3]):0; ?></span>户，
     </div>
-    <div style="display:inline-block;width:15%">机关
-        <span style="display:inline-block;width:40%"></span>户，
+    <div style="display:inline-block;width:20%">机关
+        <span style="display:inline-block;width:20%;padding:20px;"><?php echo isset($result[100][2])?intval($result[100][2]):0; ?></span>户，
     </div>
-    <div style="display:inline-block;width:15%">民用
-        <span style="display:inline-block;width:40%"></span>户，
+    <div style="display:inline-block;width:20%">民用
+        <span style="display:inline-block;width:20%;padding:20px;"><?php echo isset($result[100][2])?intval($result[100][1]):0; ?></span>户，
     </div>
 </div>
 <div style="display:inline-block;width:100%" class="fontSize_12">
     <div style="display:inline-block;width:8%"></div>
-    <div style="display:inline-block;width:30%">单位负责人：<span id="below_com">区房产公司</span></div>
-    <div style="display:inline-block;width:30%">制表人：</div>
-    <div style="display:inline-block;width:30%">报出日期：<span class="time"></span></div>
+    <div style="display:inline-block;width:25%">单位负责人：<span id="below_com">区房产公司</span></div>
+    <div style="display:inline-block;width:20%">制表人：<?php echo session('user_base_info.name'); ?></div>
+    <div style="display:inline-block;width:20%">报出日期：<span class="time"><?php echo date('Y-m-d',time()); ?></span></div>
 </div>
 <?php }; ?>

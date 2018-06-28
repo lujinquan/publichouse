@@ -65,7 +65,7 @@ class RentReports extends Model
 
 
         //从租金订单表中,获取规定、已缴、欠缴、应缴租金
-        $rentData = Db::name('rent_order')->field('UseNature,OwnerType,InstitutionID,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents')
+        $rentData = Db::name('rent_order')->field('UseNature,OwnerType,InstitutionID,count(HouseID) as HouseIDs,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents')
             ->where(['OrderDate'=>$arr1])
             ->group('UseNature,OwnerType,InstitutionID')
             ->select();
@@ -103,6 +103,12 @@ class RentReports extends Model
             ->where(['CancelType'=>['neq',1],'ChangeType'=>['neq',1],'Status'=>1])
             ->select();
 
+        //陈欠核销的是一个特别的非基数异动，以前年月必须是当月数据，不能同本月一样每个月继承
+        $changeHeXiaoData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
+            ->group('UseNature,OwnerType,InstitutionID')
+            ->where(['OrderDate'=>$arr1,'ChangeType'=>['eq',4],'Status'=>1])
+            ->select();
+
         //从房屋表中分组获取年度欠租、租差
         $changeSaleData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
@@ -124,6 +130,7 @@ class RentReports extends Model
         //重组为规定格式的租金数据
         foreach($rentData as $k1 => $v1){
             $rentdata[$v1['OwnerType']][$v1['UseNature']][$v1['InstitutionID']] = [
+                'HouseIDs' => $v1['HouseIDs'],
                 'CutRents' => $v1['CutRents'],
                 'ReceiveRents' => $v1['ReceiveRents'],
                 'PaidRents' => $v1['PaidRents'],
@@ -202,6 +209,15 @@ class RentReports extends Model
         }
 
         //重组为规定格式的实收累计收到的以前月数据
+        foreach($changeHeXiaoData as $k14 => $v14){
+            $changeHeXiaodata[$v14['OwnerType']][$v14['UseNature']][$v14['InstitutionID']] = [
+                'InflRents' => $v14['InflRents'],
+                'OldMonthRents' => $v14['OldMonthRents'],
+                'OldYearRents' => $v14['OldYearRents'],
+            ];
+        }
+
+        //重组为规定格式的实收累计收到的以前月数据
         foreach($changeSaleData as $k8 => $v8){
             $changeSaledata[$v8['OwnerType']][$v8['UseNature']][$v8['InstitutionID']] = [
                 'InflRents' => $v8['InflRents'],
@@ -229,6 +245,7 @@ class RentReports extends Model
                 for ($j=4;$j<34;$j++) {
                     if(!isset($rentdata[$owner][$i][$j])){
                         $rentdata[$owner][$i][$j] = [
+                            'HouseIDs' => 0,
                             'CutRents' => 0,
                             'ReceiveRents' => 0,
                             'PaidRents' => 0,
@@ -298,7 +315,13 @@ class RentReports extends Model
                             'OldYearRents' => 0,
                         ];
                     }
-
+                    if(!isset($changeHeXiaodata[$owner][$i][$j])){
+                        $changeHeXiaodata[$owner][$i][$j] = [
+                            'InflRents' => 0,
+                            'OldMonthRents' => 0,
+                            'OldYearRents' => 0,
+                        ];
+                    }
                     if(!isset($changeSaledata[$owner][$i][$j])){
                         $changeSaledata[$owner][$i][$j] = [
                             'InflRents' => 0,
@@ -594,8 +617,8 @@ class RentReports extends Model
 
                 //陈欠核销ChangeType = 4
                 $result[$owners][$j][15][1] = $changeNoBasedata[$owners][2][$j][0]['InflRents'];
-                $result[$owners][$j][15][2] = $changeNoBasedata[$owners][2][$j][4]['OldMonthRents'];
-                $result[$owners][$j][15][3] = $changeNoBasedata[$owners][2][$j][4]['OldYearRents'];
+                $result[$owners][$j][15][2] = $changeHeXiaodata[$owners][2][$j]['OldMonthRents'];
+                $result[$owners][$j][15][3] = $changeHeXiaodata[$owners][2][$j]['OldYearRents'];
                 $result[$owners][$j][15][4] = 0.4 * $result[$owners][$j][15][1];
                 $result[$owners][$j][15][5] = 0.4 * $result[$owners][$j][15][2];
                 $result[$owners][$j][15][6] = 0.4 * $result[$owners][$j][15][3];
@@ -603,11 +626,11 @@ class RentReports extends Model
                 $result[$owners][$j][15][8] = 0.6 * $result[$owners][$j][15][2];
                 $result[$owners][$j][15][9] = 0.6 * $result[$owners][$j][15][3];
                 $result[$owners][$j][15][10] = $changeNoBasedata[$owners][3][$j][0]['InflRents'];
-                $result[$owners][$j][15][11] = $changeNoBasedata[$owners][3][$j][4]['OldMonthRents'];
-                $result[$owners][$j][15][12] = $changeNoBasedata[$owners][3][$j][4]['OldYearRents'];
+                $result[$owners][$j][15][11] = $changeHeXiaodata[$owners][3][$j]['OldMonthRents'];
+                $result[$owners][$j][15][12] = $changeHeXiaodata[$owners][3][$j]['OldYearRents'];
                 $result[$owners][$j][15][13] = $changeNoBasedata[$owners][1][$j][0]['InflRents'];
-                $result[$owners][$j][15][14] = $changeNoBasedata[$owners][1][$j][4]['OldMonthRents'];
-                $result[$owners][$j][15][15] = $changeNoBasedata[$owners][1][$j][4]['OldYearRents'];
+                $result[$owners][$j][15][14] = $changeHeXiaodata[$owners][1][$j]['OldMonthRents'];
+                $result[$owners][$j][15][15] = $changeHeXiaodata[$owners][1][$j]['OldYearRents'];
                 array_unshift($result[$owners][$j][15],array_sum($result[$owners][$j][15]) - $result[$owners][$j][15][1] - $result[$owners][$j][15][2] - $result[$owners][$j][15][3]);
 
 
@@ -718,6 +741,10 @@ class RentReports extends Model
                 $result[$owners][$j][20][14] = bcsub($result[$owners][$j][17][14] , $result[$owners][$j][18][14],2);
                 $result[$owners][$j][20][15] = bcsub($result[$owners][$j][17][15] , $result[$owners][$j][18][15],2);
                 array_unshift($result[$owners][$j][20],array_sum($result[$owners][$j][20]) - $result[$owners][$j][20][1] - $result[$owners][$j][20][2] - $result[$owners][$j][20][3]);
+
+                $result[$owners][$j][100][1] = $rentdata[$owners][2][$j]['HouseIDs']; //工商总户数
+                $result[$owners][$j][100][2] = $rentdata[$owners][3][$j]['HouseIDs']; //党政总户数
+                $result[$owners][$j][100][3] = $rentdata[$owners][1][$j]['HouseIDs']; //民用总户数
             }
         }
 
