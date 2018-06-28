@@ -46,6 +46,7 @@ class UserManage extends Model
             ->join('post b','a.PostID = b.PostID','left')
             ->field('a.id')
             ->where($where)
+            ->where('UserName','neq','test')
             ->order('id desc')
             ->paginate(config('paginate.list_rows'));
 

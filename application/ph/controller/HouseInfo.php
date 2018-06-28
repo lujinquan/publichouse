@@ -34,6 +34,7 @@ class HouseInfo extends Base
         return $this->fetch();
     }
 
+    //【所有人都可以添加】，根据楼栋判断管段
     public function add()
     {
         // 保存数据
