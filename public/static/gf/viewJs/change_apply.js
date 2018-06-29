@@ -228,123 +228,48 @@ $('#addApply').click(function() {
             var value;
             var thisLayer = layer.open({
                 type: 1,
-                area: ['300px', '200px'],
+                area: ['990px', '700px'],
                 resize: false,
                 title: ['新增暂停计租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                 zIndex: 100,
-                content: "<button class='am-btn am-btn-secondary Dbtn' value='1'>按栋暂停</button><button class='am-btn am-btn-secondary Dbtn' value='2'>按户暂停</button>",
-                success: function() {
-                    $('.Dbtn').off('click');
-                    $('.Dbtn').on('click', function() {
-                        value = $(this).val();
-                        console.log(value);
-                        layer.close(thisLayer);
-                        if (value == 1) {
-                            $('.Hhide').css('display', 'none');
-                            $('#houseLabel').text('楼栋编号：');
-                            banQuery.action('getInfo_1','1');
-                            $('#DQueryData').on("click", function() {
-                                var BanID = $('#getInfo_1').val();
-                                $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
-                                    res = JSON.parse(res);
-                                    console.log(res);
-                                    layer.msg(res.msg);
-                                    $("#BanID").text(res.data.BanID);
-                                    $("#BanAddress").text(res.data.BanAddress);
-                                    $("#CreateTime").text(res.data.CreateTime);
-                                    $("#FloorID").text(res.data.BanFloorNum);
-                                    $("#HouseArea").text(res.data.BanUsearea);
-                                    $("#LeasedArea").text(res.data.LeasedArea);
-                                    $("#TenantName").text(res.data.TenantName);
-                                    $("#TenantNumber").text(res.data.TenantNumber);
-                                    $("#TenantTel").text(res.data.TenantTel);
-                                    $('#CreateTime').text(res.data.CreateTime);
-                                    $('#OwnerTypec').text(res.data.OwnerType);
-                                    // $('#HouseArea').text(res.data.TotalArea);
-                                    //$("#BanAddress").text(res.data.BanAddress);
-                                });
-                            });
-                        } else if (value == 2) {
-                            $('.Hhide').css('display', 'block');
-                            $('#houseLabel').text('房屋编号：');
-                            houseQuery.action('getInfo_1','1');
-                            $('#DQueryData').on("click", function() {
-                                var HouseID = $('#getInfo_1').val();
-                                $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
-                                    res = JSON.parse(res);
-                                    console.log(res);
-                                    layer.msg(res.msg);
-                                    $("#BanID").text(res.data.BanID);
-                                    $("#BanAddress").text(res.data.BanAddress);
-                                    $("#CreateTime").text(res.data.CreateTime);
-                                    $("#FloorID").text(res.data.FloorID);
-                                    $("#HouseArea").text(res.data.HouseUsearea);
-                                    $("#LeasedArea").text(res.data.LeasedArea);
-                                    $("#TenantName").text(res.data.TenantName);
-                                    $("#TenantNumber").text(res.data.TenantNumber);
-                                    $("#TenantTel").text(res.data.TenantTel);
-                                    $('#OwnerTypec').text(res.data.OwnerType);
-                                });
-                            });
-                        }
+                content: $('#pauseRent'),
+                btn:['保存','取消'],
+                success: function(){
+                    var fun = new getBanList();
+                    fun.getData();
+                    var seven = new file({
+                        button: "#pauseMaterial",
+                        show: "#pauseMaterialShow",
+                        upButton: "#pauseMaterialUp",
+                        size: 1024,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "非基数异动核算凭单"
+                    });
+                    $('#pauseHouseQuery').off('click');
+                    $('#pauseHouseQuery').on('click', function(){
                         layer.open({
                             type: 1,
-                            area: ['990px', '600px'],
+                            area: ['990px','780px'],
                             resize: false,
                             zIndex: 100,
                             title: ['新增暂停计租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                            content: $('#derateApplyForm'),
+                            content: $('#banLinkHouseForm'),
                             btn: ['确定', '取消'],
                             success: function() {
-                                var seven = new file({
-                                    button: "#SuspendReport",
-                                    show: "#SuspendReportShow",
-                                    upButton: "#SuspendReportUp",
-                                    size: 1024,
-                                    url: "/ph/ChangeApply/add",
-                                    ChangeOrderID: '',
-                                    Type: 1,
-                                    title: "暂停计租报告"
-                                });
+
                             },
                             yes: function(thisIndex) {
-                                if ($('#getInfo_1').val() == "") {
-                                    layer.msg('房屋编号存在问题呢！！！');
-                                } else {
-                                    var formData = fileTotall.getArrayFormdata();
-                                    if (value == 1) {
-                                        formData.append("BanID", $('#getInfo_1').val());
-                                    } else if (value == 2) {
-                                        formData.append("HouseID", $('#getInfo_1').val());
-                                    }
-                                    // formData.append("pasuseTimeStart",$("input[name='pasuseTimeStart']").val());
-                                    // formData.append("pasuseTimeEnd",$("input[name='pasuseTimeEnd']").val());
-                                    // formData.append("pasuseType",$("#pasuseType").val());
-                                    formData.append("type", 3);
-                                    $.ajax({
-                                        type: "post",
-                                        url: "/ph/ChangeApply/add",
-                                        data: formData,
-                                        processData: false,
-                                        contentType: false,
-                                        success: function(res) {
-                                            res = JSON.parse(res);
-                                            $(".uHide").css('display', 'block');
-                                            $(".uShow").css('display', 'none');
-                                            layer.msg(res.msg);
-                                            layer.close(thisIndex);
-                                            location.reload();
-                                        }
-                                    });
-                                }
+                                var house_dom = $('#pauseHouseAdd').html();
+                                console.log(fun.initData);
+                                $('#pauseBanID').text(fun.initData.BanID);
+                                $('#pauseBanAddress').text(fun.initData.BanAddress);
+                                $('#pauseOwnerType').text(fun.initData.OwnerType);
+                                $('#pauseHouseDetail').append($(house_dom));
                             },
                             end: function() {
-                                $("input[type='text']").val('');
-                                $("input[type='number']").val('');
-                                $(".label_content").text('');
-                                $(".img_content").text('');
-                                $("select").val('');
-                                location.reload();
+
                             }
                         });
                     });
@@ -2062,5 +1987,60 @@ $('#DQTenant').click(function() {
         }
     });
 });
-//查询插件
-// queryData.action(2,'getInfo_1');
+
+//暂停计租楼栋与房屋联动
+function getBanList(){
+    this.initData = {
+        BanAddress:"",
+        BanID:"",
+        OwnerType:""
+    };
+    this.getData = function(){
+        var self = this;
+        $.post('/ph/Api/get_all_ban_info',{}, function(res) {
+            res = JSON.parse(res);
+            console.log(res);
+            var ban_str = '';
+            for(var i = 0;i < res.data.data.length;i++){
+                ban_str += '<tr>\
+                    <td style="width:150px;">'+res.data.data[i].BanID+'</td>\
+                    <td style="width:150px;">'+res.data.data[i].DamageGrade+'</td>\
+                    <td style="width:150px;">'+res.data.data[i].StructureType+'</td>\
+                    <td style="width:150px;">'+res.data.data[i].OwnerType+'</td>\
+                    <td style="width:150px;">'+res.data.data[i].UseNature+'</td>\
+                    <td style="width:350px;">'+res.data.data[i].BanAddress+'</td>\
+                </tr>'
+            }
+            $('#pauseBanAdd').append($(ban_str));
+            $('#pauseBanAdd tr').click(function(){
+                var BanID = $(this).find('td').eq(0).text();
+                var BanAddress = $(this).find('td').eq(5).text();
+                var OwnerType = $(this).find('td').eq(3).text();
+                self.initData = {
+                    BanAddress:BanAddress,
+                    BanID:BanID,
+                    OwnerType:OwnerType
+                };
+                banLinkHouse(BanAddress);
+            })
+        });
+    };
+}
+function banLinkHouse(address){
+    $.post('/ph/Api/get_all_house_info',{BanAddress:this.address},function(res){
+        res = JSON.parse(res);
+        console.log(res);
+        var house_str = '';
+        for(var i = 0;i < res.data.data.length;i++){
+            house_str += '<tr>\
+                <td style="width:150px;"><input type="checkbox"></td>\
+                <td style="width:150px;">'+res.data.data[i].HouseID+'</td>\
+                <td style="width:150px;">'+res.data.data[i].StructureType+'</td>\
+                <td style="width:150px;">'+res.data.data[i].OwnerType+'</td>\
+                <td style="width:150px;">'+res.data.data[i].TenantName+'</td>\
+                <td style="width:350px;">'+res.data.data[i].BanAddress+'</td>\
+            </tr>'
+        }
+        $('#pauseHouseAdd').append($(house_str));
+    })
+}

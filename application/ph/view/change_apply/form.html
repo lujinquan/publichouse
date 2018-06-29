@@ -121,38 +121,6 @@
     </div>
   </div>
 
-
-<!-- 新增暂停计租 -->
-<!--   <div class="am-form-group am-u-sm-12 PauseRent">
-    <div class="am-u-sm-3">
-      <label>暂停起始时间：</label>
-    </div>
-    <div class="am-u-sm-3 am-u-end">
-        <input type="text" name="pasuseTimeStart" data-am-datepicker value=""> 
-    </div>
-  </div>
-  <div class="am-form-group am-u-sm-12 PauseRent">
-    <div class="am-u-sm-3">
-      <label>暂停结束时间：</label>
-    </div>
-    <div class="am-u-sm-3 am-u-end">
-        <input type="text" name="pasuseTimeEnd" data-am-datepicker value=""> 
-    </div>
-  </div> -->
-
-  <!--<div class="am-form-group am-u-sm-12 PauseRent">-->
-    <!--<div class="am-u-sm-3">-->
-      <!--<label>暂停类型：</label>-->
-    <!--</div>-->
-    <!--<div class="am-u-sm-3 am-u-end">-->
-        <!--<select type="text" name="pasuseType" id="pasuseType">-->
-          <!--<option id="0">未选择</option>-->
-        <!--</select>-->
-    <!--</div>-->
-  <!--</div>-->
-<!-- 新增暂停计租 -->
-
-
   <div class="am-form-group am-u-sm-12 CancelRent">
       <label class="label_style">注销类型：</label>
       <select name="CancelType" id="CancelType" class="label_p_style">
@@ -164,19 +132,6 @@
         <option value="6">其他</option>
       </select>
   </div>
-  <!-- <div class="am-form-group am-u-sm-12 CancelRent">
-    <div class="am-u-sm-3">
-      <label class="am-radio-inline">
-        <input type="radio" name="cancel"> 出售公房
-      </label>
-    </div>
-    <div class="am-u-sm-3 am-u-end">
-      <label class="am-radio-inline">
-        <input type="radio" name="cancel"> 拆迁注销
-      </label>
-    </div>
-  </div> -->
-
 
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">资料上传：</h2>
@@ -284,6 +239,67 @@
   </div>
 </form>
 
+<form id="pauseRent" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label id="houseLabel" class="label_style">房屋编号：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="pauseHouseQuery">查询</a>
+    </div>
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">楼栋编号：</label>
+      <label id="pauseBanID" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label id="pauseBanAddress" class="label_content label_p_style" style="width:476px;"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 ">
+      <label class="label_style">楼栋产别：</label>
+      <label id="pauseOwnerType" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">暂停租金：</label>
+      <label id="HouseArea" class="label_content label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">房屋明细：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+          <thead style="display:block;">
+              <tr>
+                  <td style="width:150px;">#</td>
+                  <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
+                  <td style="width:150px;" class="am-hide-sm-only">产别</td>
+                  <td style="width:150px;" class="am-hide-sm-only">使用性质</td>
+                  <td style="width:150px;" class="am-hide-sm-only">承租人</td>
+                  <td style="width:350px;" class="am-hide-sm-only">月租金</td>
+              </tr>
+          </thead>
+          <tbody id="pauseHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+
+          </tbody>
+      </table>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">资料上传：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12 PauseRent">
+      <div class="am-form-group am-u-sm-3">
+          <label>非基数异动核算凭单：</label>
+      </div>
+      <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="pauseMaterial" type="file" name="pauseMaterial" multiple>
+      </div>
+      <div id="pauseMaterialShow" class="am-u-md-12 img_content"></div>
+  </div>
+</form>
 
 <!-- 维修异动 -->
 <form id="repairChange" style="display:none;margin-top:20px;">
