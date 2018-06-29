@@ -24,27 +24,27 @@ return [
 //    'hostport' => '63179',
 
    // 公房测试服务器地址
-   'hostname' => 'sh-cdb-r8lcilx2.sql.tencentcdb.com',
-   // 数据库名
-   'database' => 'PH',
-   // 用户名
-   'username' => 'root',
-   // 密码
-   'password' => 'Wfw@ctnm0401',
-   // 端口
-   'hostport' => '63889',
+   // 'hostname' => 'sh-cdb-r8lcilx2.sql.tencentcdb.com',
+   // // 数据库名
+   // 'database' => 'PH',
+   // // 用户名
+   // 'username' => 'root',
+   // // 密码
+   // 'password' => 'Wfw@ctnm0401',
+   // // 端口
+   // 'hostport' => '63889',
 
-    // // 服务器地址
-    //  'hostname'        => 'localhost',
-    //  // 数据库名
-    //  'database'        => 'ph20180529',
-    //  // 用户名
-    //  'username'        => 'root',
-    //  // 密码
-    //  'password'        => 'ctnm',
-    //  // 端口
-    //  'hostport'        => '3306',
-
+    // 服务器地址
+     'hostname'        => 'localhost',
+     // 数据库名
+     'database'        => 'gf',
+     // 用户名
+     'username'        => 'root',
+     // 密码
+     'password'        => 'ctnm',
+     // 端口
+     'hostport'        => '3306',
+// 连接dsn// 连接dsn// 连接dsn// 连接dsn// 连接dsn
     // 连接dsn
     'dsn' => '',
     // 数据库连接参数
