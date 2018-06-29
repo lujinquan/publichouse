@@ -238,11 +238,11 @@ $('#addApply').click(function() {
                     var fun = new getBanList();
                     fun.getData();
                     var seven = new file({
-                        button: "#pauseMaterial",
                         show: "#pauseMaterialShow",
                         upButton: "#pauseMaterialUp",
                         size: 1024,
                         url: "/ph/ChangeApply/add",
+                        button: "#pauseMaterial",
                         ChangeOrderID: '',
                         Type: 1,
                         title: "非基数异动核算凭单"
