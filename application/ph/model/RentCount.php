@@ -335,7 +335,7 @@ class RentCount extends Model
         $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
         $houseData = Db::name('house')->field($fields)->where($where)->select();
         
-        $changeData = Db::name('change_order')->where(['ChangeType'=>1,'InstitutionID'=>$institutionID,'DateEnd'=>['<',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+        $changeData = Db::name('change_order')->where(['ChangeType'=>1,'InstitutionID'=>$institutionID,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
 
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
