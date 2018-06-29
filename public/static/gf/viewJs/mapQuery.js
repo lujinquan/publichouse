@@ -77,59 +77,82 @@ mp.setMapStyle({
 		mp.clearOverlays();
 		for(var i in area){
 			var point = new BMap.Point(parseFloat(area[i].GpsX), parseFloat(area[i].GpsY));
-			if(room_size == 16){
-				radius = 150;
-			}else if(room_size == 17){
-				radius = 80;
-			}else if(room_size == 18){
-				radius = 50;
-			}
+			// if(room_size == 16){
+			// 	radius = 150;
+			// }else if(room_size == 17){
+			// 	radius = 80;
+			// }else if(room_size == 18){
+			// 	radius = 50;
+			// }
 
-			var circle = new BMap.Circle(point,radius,{
-				strokeStyle:'dashed',
-				strokeWeight:'1px',
-				fillColor:'#1188F0',
-				fillOpacity:'0.9'
-			});
-			mp.addOverlay(circle);
-			var opts_1 = {
-			  position : point, 
-			  offset   : new BMap.Size(-45, -20) 
-			}
-			var label_1 = new BMap.Label(area[i].name, opts_1);
-				label_1.setStyle({
-					 color : "#FFF",
-					 fontSize : "12px",
-					 height : "20px",
-					 lineHeight : "20px",
-					 fontFamily:"微软雅黑",
-					 border:0,
-					 display:'block',
-					 width:'90px',
-					 textAlign:'center',
-					 background:'none'
+			// var circle = new BMap.Circle(point,radius,{
+			// 	strokeStyle:'solid',
+			// 	strokeWeight:2,
+			// 	fillColor:'#1188F0',
+			// 	fillOpacity:0.9
+			// });
+			// mp.addOverlay(circle);
+			// var opts_1 = {
+			//   position : point, 
+			//   offset   : new BMap.Size(-45, -20) 
+			// }
+			// var label_1 = new BMap.Label(area[i].name, opts_1);
+			// 	label_1.setStyle({
+			// 		 color : "#FFF",
+			// 		 fontSize : "12px",
+			// 		 height : "20px",
+			// 		 lineHeight : "20px",
+			// 		 fontFamily:"微软雅黑",
+			// 		 border:0,
+			// 		 display:'block',
+			// 		 width:'90px',
+			// 		 textAlign:'center',
+			// 		 background:'none'
 
-				 });
-			mp.addOverlay(label_1);
-			var opts_2 = {
-			  position : point, 
-			  offset   : new BMap.Size(-45, 0) 
-			}
-			var label_2 = new BMap.Label(area[i].detail.length+'栋', opts_2);
-				label_2.setStyle({
-					 color : "#FFF",
-					 fontSize : "18px",
-					 height : "20px",
-					 lineHeight : "20px",
-					 fontFamily:"微软雅黑",
-					 border:0,
-					 display:'block',
-					 width:'90px',
-					 textAlign:'center',
-					 background:'none'
+			// 	 });
+			// mp.addOverlay(label_1);
 
-				 });
-			mp.addOverlay(label_2);
+
+
+		var opts = {
+		  position : point,    // 指定文本标注所在的地理位置
+		  offset   : new BMap.Size(-27, -30)    //设置文本偏移量
+		}
+		var label = new BMap.Label("<p style='font-size:12px;text-align:center'>"+area[i].name+"</p></br><p style='font-size:20px;margin-top:-20px;text-align:center'>"+area[i].detail.length+"栋</p>", opts);  // 创建文本标注对象
+			label.setStyle({
+				 color : "#FFFFFF",
+				 height : "100px",
+				 width:"100px",
+				 paddingTop:"20px",
+				 textalign:"center",
+				 background:"#1188F0",
+				 border:"2px solid #1188e0",
+				 borderRadius:"50%",
+				 margin:0,
+				 lineHeight : "20px",
+				 fontFamily:"微软雅黑"
+			 });
+			mp.addOverlay(label);
+
+			// var opts_2 = {
+			//   position : point, 
+			//   offset   : new BMap.Size(-45, 0) 
+			// }
+			// var label_2 = new BMap.Label(area[i].detail.length+'栋', opts_2);
+			// 	label_2.setStyle({
+			// 		 color : "#FFF",
+			// 		 fontSize : "18px",
+			// 		 height : "20px",
+			// 		 lineHeight : "20px",
+			// 		 fontFamily:"微软雅黑",
+			// 		 border:0,
+			// 		 display:'block',
+			// 		 width:'90px',
+			// 		 textAlign:'center',
+			// 		 background:'none'
+
+			// 	 });
+			// mp.addOverlay(label_2);
 
 		}
 	}
