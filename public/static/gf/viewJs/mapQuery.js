@@ -112,8 +112,6 @@ mp.setMapStyle({
 			// 	 });
 			// mp.addOverlay(label_1);
 
-
-
 		var opts = {
 		  position : point,    // 指定文本标注所在的地理位置
 		  offset   : new BMap.Size(-27, -30)    //设置文本偏移量
