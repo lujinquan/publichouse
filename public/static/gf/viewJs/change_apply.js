@@ -223,9 +223,8 @@ $('#addApply').click(function() {
             break;
         case "3":
             $(".PauseRent").show();
-            $(".uHide").css('display', 'none');
-            $(".uShow").css('display', 'block');
             var value;
+            var house_array = [];
             var thisLayer = layer.open({
                 type: 1,
                 area: ['990px', '700px'],
@@ -260,9 +259,9 @@ $('#addApply').click(function() {
                             success: function() {
 
                             },
-                            yes: function(thisIndex) {
+                            yes: function() {
                                 var form_str = '';
-                                ;
+                                var HousePrerent = 0;
                                 for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
                                     if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
                                         form_str += '<tr>\
@@ -271,20 +270,46 @@ $('#addApply').click(function() {
                                             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
                                             <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
                                         </tr>';
+                                        HousePrerent += parseFloat($(".house_check:eq("+i+") td:eq(5)").text());
+                                        house_array.push($(".house_check:eq("+i+") td:eq(1)").text());
                                     }
                                 }
                                 $('#pauseBanID').text(fun.initData.BanID);
                                 $('#pauseBanAddress').text(fun.initData.BanAddress);
                                 $('#pauseOwnerType').text(fun.initData.OwnerType);
+                                $('#pauseHousePrerent').text(HousePrerent);
                                 $('#pauseHouseDetail').append(form_str);
                                 layer.close(ban_link_house);
-
                             },
                             end: function() {
 
                             }
                         });
                     });
+                },
+                yes:function(){
+                    var data = fileTotall.getArrayFormdata();
+                    data.append('banID',$('#pauseBanID').text());
+                    data.append('type',3);
+                    house_array.forEach(function(value,index){
+                        data.append("houseID_"+index,value);
+                    });
+                    $.ajax({
+                        type: "post",
+                        url: "/ph/ChangeApply/add",
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            layer.msg(res.msg);
+                            layer.close(thisLayer);
+                            location.reload();
+                        }
+                    });
+                },
+                end:function(){
+
                 }
             });
             break;
@@ -2013,14 +2038,14 @@ function getBanList(){
             res = JSON.parse(res);
             console.log(res);
             var ban_str = '';
-            for(var i = 0;i < res.data.data.length;i++){
+            for(var i = 0;i < res.data.length;i++){
                 ban_str += '<tr>\
-                    <td style="width:150px;">'+res.data.data[i].BanID+'</td>\
-                    <td style="width:150px;">'+res.data.data[i].DamageGrade+'</td>\
-                    <td style="width:150px;">'+res.data.data[i].StructureType+'</td>\
-                    <td style="width:150px;">'+res.data.data[i].OwnerType+'</td>\
-                    <td style="width:150px;">'+res.data.data[i].UseNature+'</td>\
-                    <td style="width:350px;">'+res.data.data[i].BanAddress+'</td>\
+                    <td style="width:150px;">'+res.data[i].BanID+'</td>\
+                    <td style="width:150px;">'+res.data[i].DamageGrade+'</td>\
+                    <td style="width:150px;">'+res.data[i].StructureType+'</td>\
+                    <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                    <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                    <td style="width:350px;">'+res.data[i].BanAddress+'</td>\
                 </tr>'
             }
             $('#pauseBanAdd').append($(ban_str));
@@ -2043,14 +2068,14 @@ function banLinkHouse(BanID){
         res = JSON.parse(res);
         console.log(res);
         var house_str = '';
-        for(var i = 0;i < res.data.data.length;i++){
+        for(var i = 0;i < res.data.length;i++){
             house_str += '<tr class="house_check">\
                 <td style="width:150px;"><input type="checkbox" ></td>\
-                <td style="width:150px;">'+res.data.data[i].HouseID+'</td>\
-                <td style="width:150px;">'+res.data.data[i].StructureType+'</td>\
-                <td style="width:150px;">'+res.data.data[i].OwnerType+'</td>\
-                <td style="width:150px;">'+res.data.data[i].TenantName+'</td>\
-                <td style="width:350px;">'+res.data.data[i].BanAddress+'</td>\
+                <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
             </tr>';
         }
         $('#pauseHouseAdd').append($(house_str));

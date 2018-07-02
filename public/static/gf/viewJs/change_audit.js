@@ -565,6 +565,7 @@ $('.BtnDetail').click(function(){
 		res = JSON.parse(res);
 		console.log(res);
 		var type = res.data.detail.type;
+		type = 3;
 		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
 			$('.APhouseId').text(res.data.detail.HouseID);
 			$('.APBanID').text(res.data.detail.BanID);
@@ -592,7 +593,6 @@ $('.BtnDetail').click(function(){
 				$('#IDNumber').text(res.data.detail.IDnumber);
 				$('#validity').text(res.data.detail.MuchMonth);
 			}else if(type == 2){
-
 				$(".breaks").hide();
 				$(".pause").hide();
 				$(".WriteOff").hide();
@@ -600,27 +600,31 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 			}else if(type == 3){
-				$(".breaks").hide();
-				$(".pause").show();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$(".LHide").css('display','none');
-				$('.Uhide').css('display','none');
-				$('.Ushow').css('display','block');
-				if(res.data.detail.ifHouse == 1){
-					$('#pauseType').text('按户占停');
-					$('.Ahide').css('display','block');
-					$('.AownerType').text(res.data.detail.OwnerType);
-				}else{
-					
-					$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#pauseType').text('按栋占停');
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-					$('.AownerType').text(res.data.detail.OwnerType);
-				}
+				new file({
+                    show: "#pauseUploadReportShow",
+                    upButton: "#pauseUploadReportUp",
+                    size: 1024,
+                    url: "/ph/ChangeApply/add",
+                    button: "#pauseUploadReport",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "上传报告"
+                });
+				layer.open({
+                    type: 1,
+                    area: ['990px','780px'],
+                    resize: false,
+                    zIndex: 100,
+                    title: ['暂停计租详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                    content: $('#pauseDetail'),
+                    btn: ['确定', '取消'],
+                    success: function() {
+
+                    },
+                    yes:function(){
+
+                    }
+                })
 			}else if(type == 4){
 				$(".breaks").hide();
 				$(".pause").hide();
@@ -643,9 +647,9 @@ $('.BtnDetail').click(function(){
 					$('#SerialNumber').text('楼栋编号:');
 					$('.APhouseId').text(res.data.detail.BanID);
 			}
-			processState('#approveState',res);
-			metailShow('#layer-photos-demo',res);
-			CordID = "#approveForm";
+			//processState('#approveState',res);
+			//metailShow('#layer-photos-demo',res);
+			//CordID = "#approveForm";
 		}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);
@@ -822,7 +826,7 @@ $('.BtnDetail').click(function(){
 					});
 				})//房间信息
 
-				})//房间点击
+			})//房间点击
 			$('.HousedCopy').on('click','.cur',function(){
 				$('.tableCopy:gt(0)').remove();
 				var RentHouseID=$(this).siblings().eq(0).text();
@@ -1042,45 +1046,14 @@ $('.BtnDetail').click(function(){
 			$("#CancelLeased").text(res.data.detail.NewHouseInfo.LeasedArea);
 			$("#CancelNum").text(res.data.detail.NewHouseInfo.HouseID);
 		}
-		// $(document).on('click','.SplitNum',function() {
-		// 		var val =$(this).next().val();
-		// 		console.log(val);
-		// 		$.get('/ph/Room/detail/RoomID/'+val,function(res){
-		// 			res = JSON.parse(res);
-		// 			$("#DRoomID").text(res.data.RoomID);
-		// 			$("#DBanID").text(res.data.BanID);
-		// 			$("#DHouseID").text(res.data.HouseID);
-		// 			$("#DRoomType").text(res.data.RoomType);
-		// 			$("#DUnitID").text(res.data.UnitID);
-		// 			$("#DFloorID").text(res.data.FloorID);
-		// 			$("#DRentPoint").text(res.data.RentPoint+"%");
-		// 			$("#DUseArea").text(res.data.UseArea);
-		// 			$("#DLeasedArea").text(res.data.LeasedArea);
-		// 			$("#DItems").text(res.data.Items);
-		// 			$("#DRoomNumber").text(res.data.RoomNumber);
-		// 			$('.BanAddress').text(res.data.BanAddress);
-		// 			$('#RoomNumber').text(res.data.RoomNumber);
-		// 			layer.open({
-		// 					type:1,
-		// 					area:['800px','600px'],
-		// 					resize:false,
-		// 					zIndex:100,
-		// 					title:['房间明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-		// 					content:$('#RoomDetail'),
-		// 					btn:['确定','取消'],
-		// 					success:function(){}
-		// 					});
-		// 					})
-																
-		// 					});
-		layer.open({
-			type:1,
-			area:['950px','800px'],
-			resize:false,
-			zIndex:100,
-			title:['查看明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$(CordID)
-		});
+		// layer.open({
+		// 	type:1,
+		// 	area:['950px','800px'],
+		// 	resize:false,
+		// 	zIndex:100,
+		// 	title:['查看明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		// 	content:$(CordID)
+		// });
 	});
 });
 $(document).on('click','.SplitNum',function() {
