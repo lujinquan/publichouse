@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:69:"D:\phpStudy\WWW\publichouse/application/user\view\publics\signin.html";i:1527493698;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:69:"D:\phpStudy\WWW\publichouse/application/user\view\publics\signin.html";i:1529982035;}*/ ?>
 <!--<div style="text-align:center;margin:200px 0px;font-size:20px;">服务器已迁移，请<span style="font-weight:bold;"><a href="http://118.25.128.122" target="_blank">点击此处</a></span>访问……</div>-->
 <!DOCTYPE html>
 <html>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:59:"D:\phpStudy\WWW\publichouse/application/ph/view/layout.html";i:1527835358;s:43:"application/ph/view/notice/notice_info.html";i:1523846106;s:42:"application/ph/view/index/second_menu.html";i:1523846106;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:59:"D:\phpStudy\WWW\publichouse/application/ph/view/layout.html";i:1529982035;s:43:"application/ph/view/notice/notice_info.html";i:1529982035;s:42:"application/ph/view/index/second_menu.html";i:1529982035;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -116,17 +116,110 @@
         <small class="am-text-primary">主页</small>
       </div>
     </div>
-    <p class="am-padding" style="margin:0;padding-top:0;padding-bottom:18px;color:#666;font-size:16px;">快捷入口</p>
-    <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-margin am-padding am-text-center admin-content-list ">
-      <?php
-      if(isset($short_cut_menus_list)){
-        foreach($short_cut_menus_list as $info){
-          echo '<li><a class="short-cut-hover" href="'. '/' . $info['url'] .'" style="color:#333;"><span><img class="now-short-cut-list" src="'. $info['icon'] .'"/></span><br/>'. $info['title'] .'</a></li>';
-        }
-      }
-      ?>
-      <li><a id="add_short_cut_menu" href="javascript:void(0)" style="color:#333;"><span class="am-icon-btn am-icon-bars"></span><br/>添加</a></li>
+    <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-padding am-text-center admin-content-list">
+
+
+     <?php if(isset($short_cut_menus_list['1'])){; ?>
+     <li class="add_work" style="background:url('/public/static/gf/icons/1.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['1']['Url']; ?>">
+            <span class="add_work_number">1</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['1']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      
+      <?php }else{; ?>
+      <li>
+        <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
+          <span class="am-icon-btn am-success am-icon-plus" style="background: #80CC5A;
+            box-shadow: 0 8px 16px rgba(128,204,90,0.50);"></span><br/>
+          增加快捷键
+        </a>
+      </li>
+      
+      <?php }; if(isset($short_cut_menus_list['2'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/2.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['2']['Url']; ?>">
+            <span class="add_work_number">2</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['2']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
+      <li>
+        <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
+          <span class="am-icon-btn am-success am-icon-plus" style="background: #4C84FF;box-shadow: 0 8px 16px rgba(76,132,255,0.50);"></span><br/>
+          增加快捷键
+        </a>
+      </li>
+      <?php }; if(isset($short_cut_menus_list['3'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/3.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['3']['Url']; ?>">
+            <span class="add_work_number">3</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['3']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
+      <li>
+        <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
+          <span class="am-icon-btn am-success am-icon-plus" style="background: #7877D4;
+            box-shadow: 0 8px 16px rgba(120,119,212,0.50);"></span><br/>
+          增加快捷键
+        </a>
+      </li>
+      <?php }; if(isset($short_cut_menus_list['4'])){; ?>
+      <li class="add_work" style="background:url('/public/static/gf/icons/4.png')">
+        <a class="short-cut-hover" href="<?php echo $short_cut_menus_list['4']['Url']; ?>">
+            <span class="add_work_number">4</span>
+            <span class="add_work_name"><?php echo $short_cut_menus_list['4']['Title']; ?></span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <?php }else{; ?>
+      <li>
+        <a class="short-cut-hover" href="javascript:void(0);" style="color:#333;font-size:12px;">
+          <span class="am-icon-btn am-success am-icon-plus" style="background: #60A1EF;
+            box-shadow: 0 8px 16px rgba(86,153,241,0.50);"></span><br/>
+          增加快捷键
+        </a>
+      </li>
+      <?php }; ?>
+      
     </ul>
+
+    <!-- <ul id="show_short_cut_menu" class="am-avg-sm-1 am-avg-md-5 am-padding am-text-center admin-content-list ">
+      <li class="add_work" style="background:url('/public/static/gf/icons/1.png')">
+        <a class="short-cut-hover" href="">
+            <span class="add_work_number">1</span>
+            <span class="add_work_name">地图查询</span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <li class="add_work" style="background:url('/public/static/gf/icons/2.png')">
+        <a class="short-cut-hover" href="">
+            <span class="add_work_number">2</span>
+            <span class="add_work_name">地图查询</span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <li class="add_work" style="background:url('/public/static/gf/icons/3.png')">
+        <a class="short-cut-hover" href="">
+            <span class="add_work_number">3</span>
+            <span class="add_work_name">地图查询</span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+      <li class="add_work" style="background:url('/public/static/gf/icons/4.png')">
+        <a class="short-cut-hover" href="">
+            <span class="add_work_number">4</span>
+            <span class="add_work_name">地图查询</span>
+        </a>
+        <img class="add_work_delete" src="/public/static/gf/icons/delete.png">
+      </li>
+    </ul> -->
+
+
     <?php if(isset($wait_processing) && !empty($wait_processing)){ ;?>
     <div class="am-g">
       <div class="am-u-sm-12">
@@ -160,25 +253,40 @@
       </div>
     </div>
     <?php }; ?>
-    <div class="am-g">
+    <div class="am-g" style="margin-bottom:10px;">
+    <style>
+      .am-panel-default>.am-panel-hd{
+        padding-top:16px;
+        color: #333;
+        background-color: #FFF;
+        border-color: #fff;
+      }
+	  .am-table-striped>tbody>tr:nth-child(odd)>td, .am-table-striped>tbody>tr:nth-child(odd)>th{
+		background-color:#F8FaFC;
+	  }
+    </style>
       <div class="am-u-md-6">
-        <div class="am-panel am-panel-default">
+        <div class="am-panel-default" style="background: #FFFFFF;box-shadow:0 0 8px rgba(9,51,101,0.1);border-radius: 4px;">
           <!-- <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-1'}"> -->
           <div class="am-panel-hd am-cf">
             文件下载
             <div style="float: right;">
-              <input style="border:1px solid #ddd;height:27px;padding-left:10px;font-size:14px;" type="text" name="file_search" placeholder="请输入搜索内容">
-              <button style="background:#FFF;border:1px solid #ddd;height:27px;color:#0e90d2;font-size:14px;" id="file_search">搜索</button>
+              <input style="border:1px solid #C6D2E6;border-right:0;height:32px;padding-left:10px;font-size:14px;" type="text" name="file_search" placeholder="请输入搜索内容"><button style="background:#FFF;border:1px solid #C6D2E6;height:32px;color:#999999;font-size:14px;" id="file_search">搜索</button>
             </div>
           </div>
-          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1">
-              <table class="am-table am-table-bd am-table-striped admin-content-table">
-                <thead><tr><th>文件名</th><th></th><th>创建时间</th></tr></thead>
+          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-1" style="padding-top:6px;">
+              <table class="am-table am-table-bd am-table-striped admin-content-table" style="border: 1px solid #D6E2F6;">
+                <thead><tr><th style="padding-left:20px;">文件名</th><th>操作</th><th>创建时间</th></tr></thead>
                 <tbody id="index_upload_file_list_content">
                     <?php
                     if(isset($upload_file_list)){
                       foreach($upload_file_list['list'] as $info){
-                        echo '<tr><td width="50%">'. $info['Title'] .'</td><td><a class="index-file-download am-icon-download" href="downloadFile?file='. $info['Url'] .'"></a></td><td>'. $info['Time'] .'</td></tr>';
+                        echo '
+                      <tr>
+                        <td style="width:50%;padding-left:20px;">'. $info['Title'] .'</td>
+                        <td style="width:20%;"><a class="index-file-download" href="downloadFile?file='. $info['Url'] .'" style="color:#4C84FF;">下载</a></td>
+                        <td>'. $info['Time'] .'</td>
+                      </tr>';
                       }
                     }
                     ?>
@@ -196,25 +304,23 @@
       </div>
 
       <div class="am-u-md-6">
-        <div class="am-panel am-panel-default">
+        <div class="am-panel-default" style="background: #FFFFFF;box-shadow:0 0 8px rgba(9,51,101,0.1);border-radius: 4px;">
           <!-- <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}"> -->
           <div class="am-panel-hd am-cf">
             公告
             <!-- <span class="am-icon-chevron-down am-fr" ></span> -->
             <div style="float: right;">
-              <input style="border:1px solid #ddd;height:27px;padding-left:10px;font-size:14px;" type="text" name="notice_search" placeholder="请输入搜索内容">
-              <button style="background:#FFF;border:1px solid #ddd;height:27px;color:#0e90d2;font-size:14px;" id="notice_search">搜索</button>
+              <input style="border:1px solid  #C6D2E6;border-right:0;height:32px;padding-left:10px;font-size:14px;" type="text" name="notice_search" placeholder="请输入搜索内容"><button style="background:#FFF;border:1px solid  #C6D2E6;height:32px;color: #999;font-size:14px;" id="notice_search">搜索</button>
             </div>
           </div>
-          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3">
-
-            <table class="am-table am-table-bd am-table-striped admin-content-table">
-              <thead><tr><th>标题</th><th>更新时间</th></tr></thead>
+          <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="padding-top:6px;">
+            <table class="am-table am-table-bd am-table-striped admin-content-table" style="border: 1px solid #D6E2F6;">
+              <thead><tr><th style="padding-left:20px;">标题</th><th>更新时间</th></tr></thead>
               <tbody id="index_notice_list_content">
                   <?php 
                   if(isset($notice_list)){
                     foreach($notice_list['list'] as $info){
-                      echo '<tr><td width="50%"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['UpdateTime'] .'</td></tr>';
+                      echo '<tr><td style="width:70%;padding-left:20px;"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['UpdateTime'] .'</td></tr>';
                     }
                   }
                   ?>
@@ -478,23 +584,23 @@ $('.am-scrollable-horizontal').scroll(function(){
   $('.title_ul').css('left',scroll_left);
 })
 // 鼠标滑动,table左右滑动开始；
-var mouse_flag = false;
-var mouse_start_x = null;
-var mouse_end_x = null;
-$('.am-table').mousedown(function(event){
-  mouse_flag = true;
-  mouse_start_x = event.clientX
-  $(this).mousemove(function(event){
-    var distance =$('.am-scrollable-horizontal').scrollLeft() + (event.clientX - mouse_start_x)/20;
-    $('.am-scrollable-horizontal').scrollLeft(distance);
-  })
-})
-$('.am-table').mouseup(function(event){
-  mouse_flag = false;
-  mouse_end_x = event.clientX;
-  $(this).off("mousemove");
-  $('.am-scrollable-horizontal').off("scrollLeft");
-})
+// var mouse_flag = false;
+// var mouse_start_x = null;
+// var mouse_end_x = null;
+// $('.am-table').mousedown(function(event){
+//   mouse_flag = true;
+//   mouse_start_x = event.clientX
+//   $(this).mousemove(function(event){
+//     var distance =$('.am-scrollable-horizontal').scrollLeft() + (event.clientX - mouse_start_x)/20;
+//     $('.am-scrollable-horizontal').scrollLeft(distance);
+//   })
+// })
+// $('.am-table').mouseup(function(event){
+//   mouse_flag = false;
+//   mouse_end_x = event.clientX;
+//   $(this).off("mousemove");
+//   $('.am-scrollable-horizontal').off("scrollLeft");
+// })
 // 鼠标滑动,table左右滑动结束；
 
   $('#repeatPassword').blur(function(){
@@ -553,7 +659,7 @@ $('.am-table').mouseup(function(event){
 // admin-sidebar-sub左边列表栏样式选择结束
 </script>
 
-<script type="text/javascript" src="/public/static/gf/viewjs/index_notice_page.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js"></script>
 
 </body>
 </html>

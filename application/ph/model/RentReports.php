@@ -669,13 +669,9 @@ class RentReports extends Model
                 $result[$owners][$j][17][14] = bcsub($result[$owners][$j][8][14] , $result[$owners][$j][9][14],2);
                 $result[$owners][$j][17][15] = bcsub($result[$owners][$j][8][15] , $result[$owners][$j][9][15],2);
                 array_unshift($result[$owners][$j][17],$result[$owners][$j][8][0] - $result[$owners][$j][9][0]);
-// if($owners == 2 && $j == 22){
-//     dump($rentdata[$owners][3][$j]['UnpaidRents']);//halt(rentdata[$owners][1][$j]['PaidRents']);
-    
-// }
 
                 //本月份实收租金 = 本月规租 - 本月订单欠租
-                $result[$owners][$j][18][1] = bcsub($result[$owners][$j][17][1] , $rentdata[$owners][2][$j]['UnpaidRents'],2);
+                $result[$owners][$j][18][1] = $rentdata[$owners][2][$j]['PaidRents'];
                 //以前月份实收租金
                 $result[$owners][$j][18][2] = $rentOldMonthdata[$owners][2][$j]['PayRents'];
                 //以前年度实收租金
@@ -686,13 +682,33 @@ class RentReports extends Model
                 $result[$owners][$j][18][7] = 0.6 * $result[$owners][$j][18][1];
                 $result[$owners][$j][18][8] = 0.6 * $result[$owners][$j][18][2];
                 $result[$owners][$j][18][9] = 0.6 * $result[$owners][$j][18][3];
-                $result[$owners][$j][18][10] = bcsub($result[$owners][$j][17][10] , $rentdata[$owners][3][$j]['UnpaidRents'],2);
+                $result[$owners][$j][18][10] = $rentdata[$owners][3][$j]['PaidRents'];
                 $result[$owners][$j][18][11] = $rentOldMonthdata[$owners][3][$j]['PayRents'];
                 $result[$owners][$j][18][12] = $rentOldYeardata[$owners][3][$j]['PayRents'];
-                $result[$owners][$j][18][13] = bcsub($result[$owners][$j][17][13] , $rentdata[$owners][1][$j]['UnpaidRents'],2);
+                $result[$owners][$j][18][13] = $rentdata[$owners][1][$j]['PaidRents'];
                 $result[$owners][$j][18][14] = $rentOldMonthdata[$owners][1][$j]['PayRents'];
                 $result[$owners][$j][18][15] = $rentOldYeardata[$owners][1][$j]['PayRents'];
                 array_unshift($result[$owners][$j][18],array_sum($result[$owners][$j][18]) - $result[$owners][$j][18][1] - $result[$owners][$j][18][2] - $result[$owners][$j][18][3]);
+
+                // //本月份实收租金 = 本月规租 - 本月订单欠租
+                // $result[$owners][$j][18][1] = bcsub($result[$owners][$j][17][1] , $rentdata[$owners][2][$j]['UnpaidRents'],2);
+                // //以前月份实收租金
+                // $result[$owners][$j][18][2] = $rentOldMonthdata[$owners][2][$j]['PayRents'];
+                // //以前年度实收租金
+                // $result[$owners][$j][18][3] = $rentOldYeardata[$owners][2][$j]['PayRents'];
+                // $result[$owners][$j][18][4] = 0.4 * $result[$owners][$j][18][1];
+                // $result[$owners][$j][18][5] = 0.4 * $result[$owners][$j][18][2];
+                // $result[$owners][$j][18][6] = 0.4 * $result[$owners][$j][18][3];
+                // $result[$owners][$j][18][7] = 0.6 * $result[$owners][$j][18][1];
+                // $result[$owners][$j][18][8] = 0.6 * $result[$owners][$j][18][2];
+                // $result[$owners][$j][18][9] = 0.6 * $result[$owners][$j][18][3];
+                // $result[$owners][$j][18][10] = bcsub($result[$owners][$j][17][10] , $rentdata[$owners][3][$j]['UnpaidRents'],2);
+                // $result[$owners][$j][18][11] = $rentOldMonthdata[$owners][3][$j]['PayRents'];
+                // $result[$owners][$j][18][12] = $rentOldYeardata[$owners][3][$j]['PayRents'];
+                // $result[$owners][$j][18][13] = bcsub($result[$owners][$j][17][13] , $rentdata[$owners][1][$j]['UnpaidRents'],2);
+                // $result[$owners][$j][18][14] = $rentOldMonthdata[$owners][1][$j]['PayRents'];
+                // $result[$owners][$j][18][15] = $rentOldYeardata[$owners][1][$j]['PayRents'];
+                // array_unshift($result[$owners][$j][18],array_sum($result[$owners][$j][18]) - $result[$owners][$j][18][1] - $result[$owners][$j][18][2] - $result[$owners][$j][18][3]);
 
                 //本月份实收累计 = 本月规租 + 本年度各月份的【本月实收租金】$temps
                 //$result[$owners][$j][19][1] = $lastMonthData[$owners][$j][18][1] + $result[$owners][$j][18][1];  //暂时是这样的

@@ -29,7 +29,7 @@ class BanInfo extends Model
     //  关闭更新时间
     protected $updateTime = false;
 
-    public function get_all_ban_lst($status = array('eq' ,0)){
+    public function get_all_ban_lst($status = array('eq',1)){
 
         $currentUserInstitutionID = session('user_base_info.institution_id');
 

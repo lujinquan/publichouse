@@ -937,14 +937,8 @@ class Api extends Controller
 
     public function get_log_info()
     {
-        $id = input('id');
-        $info = Db::name('admin_log')->where('id', 'eq', $id)->value('Description');
-        if ($info) {
-            return $info;
-        } else {
-            return '';
-        }
-
+        $info = Db::name('admin_log')->where('id', 'eq', input('id'))->value('Description');
+        return $info?jsons('2000','获取成功',json_decode($info,true)):jsons('2000','获取成功');
     }
 
     public function get_room_change_details()

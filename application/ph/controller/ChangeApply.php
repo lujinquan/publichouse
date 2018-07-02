@@ -107,8 +107,6 @@ class ChangeApply extends Base
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
 
-//dump($datas);
-
                     $result['CutType'] = $data['CutType'];  //减免类型
                     $result['IDnumber'] = $data['IDnumber'];  //证件号码
                     $result['HouseID'] = $data['HouseID'];  //房屋编号
@@ -118,7 +116,6 @@ class ChangeApply extends Base
                     $result['InstitutionPID'] = $datas['InstitutionPID'];   //机构父id
                     $result['ChangeOrderID'] = $datas['ChangeOrderID']; //订单编号
 
-//halt($result);
                     Db::name('rent_cut_order')->insert($result);
                     $res = Db::name('change_order')->insert($datas);
 

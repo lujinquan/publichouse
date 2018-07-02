@@ -10,11 +10,12 @@ $(".SystemDetailBtn").click(function(){
 			var thtml2='';
 			
 			res = JSON.parse(res);
-			console.log(res);
-			for(var x in res){
-				for(var k in res[x]){
-						console.log(res[x][k]);
-						thtml += '<td>'+res[x][k]+'</td>';
+			result = res['data'];
+			console.log(result);
+			for(var x in result){
+				for(var k in result[x]){
+						console.log(result[x][k]);
+						thtml += '<td>'+result[x][k]+'</td>';
 				}
 				thtml2+='<tr class="am-form-group am-form-inline am-form">'+thtml+'</tr>';
 					$('#tbo').html(thtml2);
