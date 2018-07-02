@@ -534,7 +534,9 @@ label{
   line-height:19px;
   display:block;
 }
-
+.label_content{
+  font-weight:500;
+}
 @-moz-document url-prefix(){.label_style{width:86px;}}
 .padding_left{
 	padding-left:3rem;
