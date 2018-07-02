@@ -366,7 +366,7 @@ class RentCount extends Model
 
                 //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
                 
-                $receiveRent = $v['HousePrerent'] - $cutRent;
+                $receiveRent = $v['HousePrerent'] + $v['DiffRent'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
                 $str .= "," . $v['HousePrerent'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
