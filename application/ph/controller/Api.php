@@ -915,16 +915,21 @@ class Api extends Controller
             $data['options'] = $searchForm;
         }
 
+        $houses = Db::name('house')->group('BanID')->column('BanID, count(HouseID) as HouseIDs');
+
         $points = Db::name('ban')->alias('a')->join('area b','a.AreaThree = b.id','left')->field('BanID ,BanGpsX ,BanGpsY,a.AreaFour,a.AreaThree,b.GpsX,b.GpsY,b.AreaTitle')->where($where)->select();
-//halt($data['point']);
+ 
         foreach($points as $key => $value){
+            $data['point'][$value['AreaThree']]['TotalHouse'] = 0;
             $data['point'][$value['AreaThree']]['name'] = $value['AreaTitle'];
             $data['point'][$value['AreaThree']]['GpsX'] = $value['GpsX'];
             $data['point'][$value['AreaThree']]['GpsY'] = $value['GpsY'];
             $data['point'][$value['AreaThree']]['detail'][] = $value;
+            if(isset($houses[$value['BanID']])){
+                $data['point'][$value['AreaThree']]['TotalHouse'] += $houses[$value['BanID']];
+            }
+            
         }
-
-        //halt($data['point']);
 
         if ($data) {
             return jsons('2000', '获取成功', $data);
