@@ -249,7 +249,7 @@ $('#addApply').click(function() {
                     });
                     $('#pauseHouseQuery').off('click');
                     $('#pauseHouseQuery').on('click', function(){
-                        layer.open({
+                        var ban_link_house = layer.open({
                             type: 1,
                             area: ['990px','780px'],
                             resize: false,
@@ -261,12 +261,24 @@ $('#addApply').click(function() {
 
                             },
                             yes: function(thisIndex) {
-                                var house_dom = $('#pauseHouseAdd').html();
-                                console.log(fun.initData);
+                                var form_str = '';
+                                ;
+                                for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
+                                    if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+                                        form_str += '<tr>\
+                                            <td style="width:200px;">'+i+'</td>\
+                                            <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(1)").text()+'</td>\
+                                            <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
+                                            <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
+                                        </tr>';
+                                    }
+                                }
                                 $('#pauseBanID').text(fun.initData.BanID);
                                 $('#pauseBanAddress').text(fun.initData.BanAddress);
                                 $('#pauseOwnerType').text(fun.initData.OwnerType);
-                                $('#pauseHouseDetail').append($(house_dom));
+                                $('#pauseHouseDetail').append(form_str);
+                                layer.close(ban_link_house);
+
                             },
                             end: function() {
 
@@ -1997,7 +2009,7 @@ function getBanList(){
     };
     this.getData = function(){
         var self = this;
-        $.post('/ph/Api/get_all_ban_info',{}, function(res) {
+        $.get('/ph/Api/get_all_ban', function(res) {
             res = JSON.parse(res);
             console.log(res);
             var ban_str = '';
@@ -2021,26 +2033,28 @@ function getBanList(){
                     BanID:BanID,
                     OwnerType:OwnerType
                 };
-                banLinkHouse(BanAddress);
+                banLinkHouse(BanID);
             })
         });
     };
 }
-function banLinkHouse(address){
-    $.post('/ph/Api/get_all_house_info',{BanAddress:this.address},function(res){
+function banLinkHouse(BanID){
+    $.get('/ph/Api/get_all_house/BanID/'+BanID,function(res){
         res = JSON.parse(res);
         console.log(res);
         var house_str = '';
         for(var i = 0;i < res.data.data.length;i++){
-            house_str += '<tr>\
-                <td style="width:150px;"><input type="checkbox"></td>\
+            house_str += '<tr class="house_check">\
+                <td style="width:150px;"><input type="checkbox" ></td>\
                 <td style="width:150px;">'+res.data.data[i].HouseID+'</td>\
                 <td style="width:150px;">'+res.data.data[i].StructureType+'</td>\
                 <td style="width:150px;">'+res.data.data[i].OwnerType+'</td>\
                 <td style="width:150px;">'+res.data.data[i].TenantName+'</td>\
                 <td style="width:350px;">'+res.data.data[i].BanAddress+'</td>\
-            </tr>'
+            </tr>';
         }
         $('#pauseHouseAdd').append($(house_str));
+
+
     })
 }
