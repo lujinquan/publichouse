@@ -494,6 +494,100 @@ class Api extends Controller
     }
 
     /**
+     * @title 楼栋查询器接口
+     * @author Mr.Lu
+     */
+    public function get_all_ban()
+    {
+
+        if ($this->request->isPost()) {
+            $map = $this->request->post();
+        }
+        //默认查询条件
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+        $currentUserLevel = session('user_base_info.institution_level');
+        if ($currentUserLevel == 3) {  //用户为管段级别，则直接查询
+            $where['TubulationID'] = array('eq', $currentUserInstitutionID);
+        } elseif ($currentUserLevel == 2) {  //用户为所级别，则获取所有该所子管段，查询
+            $where['InstitutionID'] = array('eq', $currentUserInstitutionID);
+        } else {    //用户为公司级别，则获取所有子管段
+        }
+        $where['Status'] = array('eq', 1);
+
+        //检索查询条件
+        if (isset($map['InstitutionID']) && $map['InstitutionID']) { //楼栋机构查询
+            $level = Db::name('institution')->where('id', 'eq', $map['InstitutionID'])->value('Level');
+            if ($level == 3) {
+                $where['TubulationID'] = array('eq', $map['InstitutionID']);
+            } elseif ($level == 2) {
+                $where['InstitutionID'] = array('eq', $map['InstitutionID']);
+            }
+        }
+
+        $data = Db::name('ban')->where($where)
+            ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,UseNature,BanAddress')
+            ->select();
+
+        $dams = Db::name('ban_damage_grade')->column('id,DamageGrade');
+        $owns = Db::name('ban_owner_type')->column('id,OwnerType');
+        $strs = Db::name('ban_structure_type')->column('id,StructureType');
+        $uses= Db::name('use_nature')->column('id,UseNature');
+
+        if ($data) {
+            foreach ($data as &$v) {
+                $v['DamageGrade'] = $dams[$v['DamageGrade']];//完损等级
+                $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
+                $v['StructureType'] = $strs[$v['StructureType']];//结构名称
+                $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
+            }
+        }
+
+        return jsons('2000', '获取成功', $data);
+
+    }
+
+    /**
+     * @title 房屋查询器接口
+     * @author Mr.Lu
+     */
+    public function get_all_house()
+    {
+
+        if ($this->request->isGet()) {
+            $map = $this->request->get();
+        }
+        //默认查询条件
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+        $currentUserLevel = session('user_base_info.institution_level');
+        if ($currentUserLevel == 3) {  //用户为管段级别，则直接查询
+            $where['InstitutionID'] = array('eq', $currentUserInstitutionID);
+        } elseif ($currentUserLevel == 2) {  //用户为所级别，则获取所有该所子管段，查询
+            $where['InstitutionPID'] = array('eq', $currentUserInstitutionID);
+        } else {    //用户为公司级别，则获取所有子管段
+        }
+        $where['Status'] = array('eq', 1);
+        $where['BanID'] = array('eq',input('BanID'));
+       
+
+        $data = Db::name('house')->where($where)
+            ->field('HouseID ,OwnerType,UseNature,TenantName,HousePrerent')
+            ->select();
+
+        $owns = Db::name('ban_owner_type')->column('id,OwnerType');
+        $uses= Db::name('use_nature')->column('id,UseNature');
+
+        if ($data) {
+            foreach ($data as &$v) {
+                $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
+                $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
+            }
+        }
+        
+        return jsons('2000', '获取成功', $data);
+
+    }
+
+    /**
      * @title 房屋查询器接口
      * @author Mr.Lu
      */
