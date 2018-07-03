@@ -58,7 +58,6 @@ class ChangeApply extends Base
                 return jsons('4004','友情提示，您暂无权限提交该异动单……');
             }
 
-            //halt($data);
             if ($_FILES) {   //文件上传
 
                 foreach ($_FILES as $k => $v) {
@@ -79,20 +78,18 @@ class ChangeApply extends Base
             $datas['UserNumber'] = UID;
             $datas['CreateTime'] = time();
             $suffix = substr(uniqid(),-6);
+
+
             switch ($data['type']) {
 
                 case 1:  //租金减免
 
                     $one = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])
-                        ->field('InstitutionPID ,InstitutionID,TenantID,OwnerType,AnathorOwnerType,UseNature')->find();
+                        ->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')->find();
 
                     if(isset($data['RemitRent']) && $data['RemitRent']){
                         $result['OwnerType'] = $one['OwnerType'];  //第一个产别
                         $result['RemitRent'] = $data['RemitRent'];  //第一个产别的减免金额
-                    }
-                    if(isset($data['ARemitRent']) && $data['ARemitRent']){
-                        $result['AnathorRemitRent'] = $data['ARemitRent'];  //第二个产别的减免金额
-                        $result['AnathorOwnerType'] = $one['AnathorOwnerType'];  //第二个产别
                     }
 
                     //从表单传递进来的数据：房屋编号 ，减免类型， 证件号， 证件有效期
@@ -107,6 +104,10 @@ class ChangeApply extends Base
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'01'.$suffix;   //01代表租金减免
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
+                    $datas['CutType'] = $data['CutType'];  //减免类型
+                    $datas['InflRent'] = $one['HousePrerent'];  //减免类型
+                    $datas['OrderDate'] = date('Ym', time());  //订单期 
+                    $datas['DateEnd'] = date('Ym', strtotime($data['validity'].' month'));
 
                     $result['CutType'] = $data['CutType'];  //减免类型
                     $result['IDnumber'] = $data['IDnumber'];  //证件号码
