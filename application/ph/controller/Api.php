@@ -858,7 +858,7 @@ class Api extends Controller
             if ($data['newPassword'] !== $data['repeatPassword']) {
                 return jsons('4002', '密码输入不一致');
             }
-            exit;
+
             $newPassword = md5(md5($data['newPassword'] . $one['Salt']));
             $res = Db::name('admin_user')->where('Number', $id)->setField('Password', $newPassword);
             if ($res) {
