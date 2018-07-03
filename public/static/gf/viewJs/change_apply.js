@@ -44,17 +44,20 @@ $('#addApply').click(function() {
                             $("#TenantNumber").text(res.data.TenantID);
                             $("#TenantTel").text(res.data.TenantTel);
                             $("#OwnTypeD").text(res.data.OwnerType);
-                            
                             $("#monthRent").text(res.data.HousePrerent);
-                            
-                            if(res.data.AnathorOwnerType!=='暂无'){
-                                $('.CutHide').css('display','block');
-                                $("#AOwnTypeD").text(res.data.AnathorOwnerType);
-                                $("#oldPt").text(res.data.AnathorHousePrerent);
-                            }
                         });
                     });
                     houseQuery.action('getInfo_1','1');
+                    new file({
+                        button: "#basic",
+                        show: "#basicShow",
+                        upButton: "#basicUp",
+                        size: 1024,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "证件上传"
+                    });
                     var one = new file({
                         button: "#ID",
                         show: "#IDShow",
@@ -66,9 +69,9 @@ $('#addApply').click(function() {
                         title: "证件上传"
                     });
                     var two = new file({
-                        button: "#AppForm",
-                        show: "#AppFormShow",
-                        upButton: "#AppFormUp",
+                        button: "#houseBook",
+                        show: "#houseBookShow",
+                        upButton: "#houseBookUp",
                         size: 1024,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
@@ -76,9 +79,9 @@ $('#addApply').click(function() {
                         title: "证件上传"
                     });
                     var three = new file({
-                        button: "#AppBook",
-                        show: "#AppBookShow",
-                        upButton: "#AppBookUp",
+                        button: "#household",
+                        show: "#householdShow",
+                        upButton: "#householdUp",
                         size: 1024,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
@@ -86,9 +89,9 @@ $('#addApply').click(function() {
                         title: "证件上传"
                     });
                     var four = new file({
-                        button: "#ReBooklet",
-                        show: "#ReBookletShow",
-                        upButton: "#ReBookletUp",
+                        button: "#cutRent",
+                        show: "#cutRentShow",
+                        upButton: "#cutRentUp",
                         size: 1024,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
@@ -96,9 +99,29 @@ $('#addApply').click(function() {
                         title: "证件上传"
                     });
                     var five = new file({
-                        button: "#HouseLease",
-                        show: "#HouseLeaseShow",
-                        upButton: "#HouseLeaseUp",
+                        button: "#houseSecurity",
+                        show: "#houseSecurityShow",
+                        upButton: "#houseSecurityUp",
+                        size: 1024,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "证件上传"
+                    });
+                    var six = new file({
+                        button: "#nonCardinality",
+                        show: "#nonCardinalityShow",
+                        upButton: "#nonCardinalityUp",
+                        size: 1024,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "证件上传"
+                    });
+                    new file({
+                        button: "#noticeBook",
+                        show: "#noticeBookShow",
+                        upButton: "#noticeBookUp",
                         size: 1024,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
