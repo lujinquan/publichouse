@@ -852,13 +852,13 @@ class Api extends Controller
             if ($one['Password'] != md5(md5($data['oldPassword'] . $one['Salt']))) {
                 return jsons('4002', '原密码输入错误……');
             }
-            if (!preg_match("/^[A-Za-z0-9]+$/", $data['newPassword'])) {
+            if (!preg_match("/^[A-Za-z0-9]{6,18}+$/", $data['newPassword'])) {
                 return jsons('4002', '新密码不合法');
             }
             if ($data['newPassword'] !== $data['repeatPassword']) {
                 return jsons('4002', '密码输入不一致');
             }
-            //exit;
+            exit;
             $newPassword = md5(md5($data['newPassword'] . $one['Salt']));
             $res = Db::name('admin_user')->where('Number', $id)->setField('Password', $newPassword);
             if ($res) {

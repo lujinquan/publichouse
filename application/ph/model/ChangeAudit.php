@@ -811,11 +811,12 @@ class ChangeAudit extends Model
         $currentRoles = json_decode(session('user_base_info.role'), true);
 
         if (!in_array($roleID, $currentRoles)) {
-
             return false;
+        }else{
+           return true; 
         }
 
-        return true;
+        
     }
 
     /**

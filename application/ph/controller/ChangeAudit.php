@@ -111,31 +111,6 @@ class ChangeAudit extends Base
      */
     public function process(){
 
-        if($this->request->isGet()) {
-
-             $changeOrderID = input('ChangeOrderID'); //变更编号
-
-            $changeType = Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->value('ChangeType');
-
-            if(empty($changeOrderID)){
-
-                return jsons('4000' ,'参数缺失');
-            }
-
-            if($changeType == 7){ //新发租的详情多加一些信息，房屋编号、租户、房屋状态；房屋编号、房间编号、房间状态
-                $res['newRent'] = model('ph/ChangeAudit')->get_new_rent_detail($changeOrderID);
-            }
-
-            $res['detail'] = model('ph/ChangeAudit')->get_change_detail_info($changeOrderID);  //最上层
-            $res['urls'] = model('ph/ChangeAudit')->process_imgs_url($changeOrderID );         // 第二层
-            $res['config'] = model('ph/ChangeAudit')->process_status($changeOrderID );         // 第三层
-            $res['record'] = model('ph/ChangeAudit')->process_record($changeOrderID );         // 最底层
-            $res['changetype'] = $changeType;
-
-            return jsons('2000' ,'获取成功' ,$res);
-
-        }
-
         if($this->request->isPost()) {
 
             $data = $this->request->post();
@@ -144,6 +119,31 @@ class ChangeAudit extends Base
 
             if($checkProcess === false){
                 return jsons('4005' ,'审批失败，请注意查看审核状态……');
+            }
+
+            $find = Db::name('change_order')->where('ChangeOrderID',$data['ChangeOrderID'])->field('ChangeImageIDS,Status,ChangeType')->find();
+
+            if(in_array($find['ChangeType'] ,[1,3]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
+
+                if($_FILES){         
+                    foreach($_FILES as $k1 => $v1){
+                        $ChangeImageIDS[] = model('ph/UserAudit') -> uploads($v1,$k1);
+                    }
+                    $ChangeImageIDS = implode(',', $ChangeImageIDS);  //返回的是使用权变更的影像资料id(多个以逗号隔开)
+                }
+                if(isset($ChangeImageIDS)){ //执行添加  
+
+                    $changeImageIDS = $find['ChangeImageIDS']?$find['ChangeImageIDS'].','.$ChangeImageIDS:$ChangeImageIDS;    
+
+                    $effect = Db::name('change_order')->where('ChangeOrderID' ,'eq' ,$data['ChangeOrderID'])->setField('ChangeImageIDS' ,$changeImageIDS);
+
+                    if(!$effect){
+                        return jsons('4003','添加资料失败');
+                    }
+                }else{
+                    return jsons('4002','请补充资料……');
+                }
+
             }
 
             $data['reson'] = isset($data['reson'])?$data['reson']:'';
