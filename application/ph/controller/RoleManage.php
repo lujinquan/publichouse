@@ -118,6 +118,9 @@ class RoleManage extends Base
             //return jsons('900','程序优化中，请稍后访问……');
 
             //halt($data);
+            if(!isset($data['id'])){
+                return jsons('4002','未分配任何权限……');
+            }
             if(!in_array('1',$data['id'])){
                 array_unshift($data['id'] ,"1");
             }
@@ -131,7 +134,7 @@ class RoleManage extends Base
 
             $result = Db::name('admin_role')->where('id','eq',$data['Role'])->setField('MenuAuth',$newMenuAuth);
 
-            if($result){
+            if($result !== false){
 
                 // 记录行为
                 action_log('RoleManage_roleToMenu', UID  ,6, '编号为:'.$data['Role']);

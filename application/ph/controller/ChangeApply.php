@@ -80,6 +80,7 @@ class ChangeApply extends Base
             $datas['CreateTime'] = time();
             $suffix = substr(uniqid(),-6);
             switch ($data['type']) {
+
                 case 1:  //租金减免
 
                     $one = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])
@@ -145,39 +146,46 @@ class ChangeApply extends Base
 
                 case 3:  // 暂停计租:目前有两种，一种是按户暂停，另一种是按楼栋，暂时都按照按户暂停
 
-                    if(isset($data['HouseID'])){
+                    if(!isset($data['houseID'])){
 
-                        $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                        $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
+                        return jsons('4000','暂未选择任何房屋');
 
-                        $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
+                    }else{
 
-                        $datas['InstitutionID'] = $one['InstitutionID'];
-                        $datas['InstitutionPID'] = $one['InstitutionPID'];
-                        $datas['OwnerType'] = $one['OwnerType'];
-                        $datas['UseNature'] = $one['UseNature'];
+                        $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])->column('HouseID,UseNature');
 
+                        foreach($houses as $k => $v){
+                            $housearr[$v][] = $k;
+                        }
+                        foreach($housearr as $h){
+                            $one = Db::name('house')->where(['HouseID'=>['in',$h]])
+                                                  ->field('sum(HousePrerent) as HousePrerents,UseNature,OwnerType,InstitutionID, InstitutionPID')
+                                                  ->find();
+
+                            $suffix = substr(uniqid(),-6);
+
+                            $result['InflRent'] = $one['HousePrerents'];
+                            $result['Status'] = 2;
+                            $result['UserName'] = session('user_base_info.name');
+                            $result['UserNumber'] = UID;
+                            $result['CreateTime'] = time();
+                            $result['HouseID'] = trim(implode(',',$h),',');
+                            $result['InstitutionID'] = $one['InstitutionID'];
+                            $result['InstitutionPID'] = $one['InstitutionPID'];
+                            $result['OwnerType'] = $one['OwnerType'];
+                            $result['UseNature'] = $one['UseNature'];
+                            $result['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                            $result['ChangeType'] = $data['type'];  //异动类型
+                            $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
+                            $result['ProcessConfigType'] = 3;   //流程控制线路
+                            $result['OrderDate'] = date('Ym', time());
+                            $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
+
+                            $res = Db::name('change_order')->insert($result);
+                        }
+                        
                     }
-                    if(isset($data['BanID'])){
-
-                        $datas['BanID'] = $data['BanID'];  //楼栋编号
-                        $one = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->field('TubulationID ,InstitutionID,OwnerType,UseNature')->find();
-                        $datas['InstitutionID'] = $one['TubulationID'];  //机构id
-                        $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
-                        $datas['OwnerType'] = $one['OwnerType'];
-                        $datas['UseNature'] = $one['UseNature'];
-
-                    }
-
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-
-                    $datas['ChangeType'] = $data['type'];  //异动类型
-                    $datas['ProcessConfigName'] = $changeTypes[3];  //异动名称
-                    $datas['ProcessConfigType'] = 3;   //流程控制线路
-                    $datas['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
-
-
-                    $res = Db::name('change_order')->insert($datas);
+                
                     break;
 
                 case 4:  // 陈欠核销,按户来，核销掉一段时间的账目

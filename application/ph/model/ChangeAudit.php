@@ -244,23 +244,13 @@ class ChangeAudit extends Model
     {   //暂停计租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID ,HouseID')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
 
-        if ($oneData['HouseID']) {  //按户暂停
+        $houses = explode(',',$oneData);
 
-            $data = get_house_info($oneData['HouseID']);
-
-            $data['ifHouse'] = 1;
-
-        } else {  //按栋暂停
-
-            $map = '';
-
-            $data = get_ban_info($oneData['BanID'], $map);
-
-            $data['ifHouse'] = 0;
-
-        }
+        $data['houses'] = Db::name('house')->where(['HouseID'=>['in',$houses]])
+                                     ->field('HouseID,TenantName,HousePrerent')
+                                     ->select();
 
         $data['type'] = 3;
 
