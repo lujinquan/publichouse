@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => false,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -152,7 +152,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 异常页面的模板文件,上线的时候去掉该注释
-    //'exception_tmpl'         => __TEMPLATES__.'404.html',
+    'exception_tmpl'         => __TEMPLATES__.'404.html',
 
     // 错误显示信息,非调试模式有效
     'error_message'          => '页面错误！请稍后再试～',
@@ -252,7 +252,7 @@ return [
         'prefix'         => 'ph_admin_',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
-        'expire'         => '3600*24',
+        'expire'         => '7200',
         // 是否自动开启 SESSION
         'auto_start'     => TRUE, 
         'path'           => SESSION_PATH,
@@ -265,7 +265,7 @@ return [
         // cookie 名称前缀
         'prefix'    => 'ph_admin_',
         // cookie 保存时间
-        'expire'    => 0,
+        'expire'    => 7200,
         // cookie 保存路径
         'path'      => '/',
         // cookie 有效域名
@@ -315,3 +315,4 @@ return [
     'TemplateNumber' => '3059645',
 
 ];
+
