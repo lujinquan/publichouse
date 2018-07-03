@@ -13,84 +13,132 @@ $('.BtnApprove').click(function(){
 		res = JSON.parse(res);
 		console.log(res);
 		var type = res.data.detail.type;
-		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
-
-			$('.APhouseId').text(res.data.detail.HouseID);
-			$('.APBanID').text(res.data.detail.BanID);
-			$('.APhouseAddress').text(res.data.detail.BanAddress);
-			$('.APFloorID').text(res.data.detail.FloorID);
-			$('.APtenantName').text(res.data.detail.TenantName);
-			$('.APtenantTel').text(res.data.detail.TenantTel);
-			$('.APtenantNumber').text(res.data.detail.TenantNumber);
-			$('.APcreateTime').text(res.data.detail.CreateTime);
-			$('.APhouseArea').text(res.data.detail.HouseArea);
-			$('.APleasedArea').text(res.data.detail.LeasedArea);
-			//$('#approveName').text(res.data.detail.ChangeType);
-			if(type == 1){
-				$(".breaks").show();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('#breakType').text(res.data.detail.CutName);
-				$('#IDNumber').text(res.data.detail.IDnumber);
-				$('#validity').text(res.data.detail.MuchMonth);
-			}else if(type == 2){
-
-				$(".breaks").hide();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-			}else if(type == 3){
-				$(".breaks").hide();
-				$(".pause").show();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$(".LHide").css('display','none');
-				$('.Uhide').css('display','none');
-				$('.Ushow').css('display','block');
-				if(res.data.detail.ifHouse == 1){
-					$('#pauseType').text('按户占停');
-					$('.Ahide').css('display','block');
-					$('.AownerType').text(res.data.detail.OwnerType);
-				}else{
-					
-					$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#pauseType').text('按栋占停');
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-					$('.AownerType').text(res.data.detail.OwnerType);
+		if(type == 1){
+			$(".breaks").show();
+			$(".pause").hide();
+			$(".WriteOff").hide();
+			$(".cancel").hide();
+			$('.Uhide').css('display','block');
+			$('.Ushow').css('display','none');
+			$('#breakType').text(res.data.detail.CutName);
+			$('#IDNumber').text(res.data.detail.IDnumber);
+			$('#validity').text(res.data.detail.MuchMonth);
+		}else if(type == 2){
+			$(".breaks").hide();
+			$(".pause").hide();
+			$(".WriteOff").hide();
+			$(".cancel").hide();
+			$('.Uhide').css('display','block');
+			$('.Ushow').css('display','none');
+		}else if(type == 3){
+			new file({
+                show: "#pauseUploadReportShow",
+                upButton: "#pauseUploadReportUp",
+                size: 1024,
+                url: "/ph/ChangeApply/add",
+                button: "#pauseUploadReport",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "上传报告"
+            });
+			var thisIndex = layer.open({
+                type: 1,
+                area: ['990px','780px'],
+                resize: false,
+                zIndex: 100,
+                title: ['暂停计租审批', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                content: $('#pauseDetail'),
+                btn:['通过','不通过'],
+                success: function() {
+                	var house_str = '';
+                	$('.pauseBanId').text(res.data.detail.ban.BanID);
+                	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
+                	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
+                	$('.pauseInflRent').text(res.data.detail.InflRent);
+                	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+                	for(var i = 0;i < res.data.detail.house.length;i++){
+                		house_str += '<tr>\
+			                <td style="width:200px;">'+i+'</td>\
+			                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
+			                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+			                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+			            </tr>';
+                	}
+                	$('#pauseHouseDetail').append($(house_str));
+					processState('#pauseRentState',res);
+					metailShow('#pauseRentPhotos',res);
+					if(res.data.config.status == '1'){
+						$('.status_2').show();
+					}
+                },
+                yes:function(){
+					var formData = fileTotall.getArrayFormdata();
+                	$.ajax({
+		                type:"post",
+		                url:'/ph/ChangeAudit/detail/ChangeOrderID/'+value,
+		                data:formData,
+		                processData:false,
+		                contentType:false,
+		                success:function(res){
+		                    res = JSON.parse(res);
+		                       console.log(res);
+		                    layer.msg(res.msg);
+		                    layer.close(thisIndex);
+		                    location.reload();
+		                }
+                	})
+                },
+		        btn2:function(){
+					layer.open({
+						type:1,
+						area:['400px','400px'],
+						resize:false,
+						zIndex:100,
+						title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+						content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+						btn:['确认'],
+						yes:function(msgIndex){
+							var reasonMsg = $('#reason').val();
+							if (reasonMsg=='') {
+								reasonMsg='空';
+							}else{
+								reasonMsg=$('#reason').val();
+							}
+							console.log(reasonMsg);
+							$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
+								res = JSON.parse(res);
+								console.log(res);
+								layer.msg(res.msg);
+								if(res.retcode == "2000"){
+									layer.close(msgIndex);
+									location.reload();
+								}
+							});
+						}
+					})
 				}
-			}else if(type == 4){
-				$(".breaks").hide();
-				$(".pause").hide();
-				$(".WriteOff").show();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('.WriteOffStartTime').text(res.data.detail.DateStart);
-				$('.WriteOffEndTime').text(res.data.detail. DateEnd);
-			}else if(type == 8){
-				$(".breaks").hide();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").show();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-			}
-			processState('#approveState',res);
-			metailShow('#layer-photos-demo',res);
-			CordID = "#approveForm";
+            })
+		}else if(type == 4){
+			$(".breaks").hide();
+			$(".pause").hide();
+			$(".WriteOff").show();
+			$(".cancel").hide();
+			$('.Uhide').css('display','block');
+			$('.Ushow').css('display','none');
+			$('.WriteOffStartTime').text(res.data.detail.DateStart);
+			$('.WriteOffEndTime').text(res.data.detail. DateEnd);
+		}else if(type == 8){
+			$(".breaks").hide();
+			$(".pause").hide();
+			$(".WriteOff").hide();
+			$(".cancel").show();
+			$('.Uhide').css('display','block');
+			$('.Ushow').css('display','none');
+			$('.Ahide').css('display','none');
+			$('.APFloorID').text(res.data.detail.BanFloorNum);
+			$('.APhouseArea').text(res.data.detail.BanUsearea);
+			$('#SerialNumber').text('楼栋编号:');
+			$('.APhouseId').text(res.data.detail.BanID);
 		}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);
@@ -252,7 +300,7 @@ $('.BtnApprove').click(function(){
 					});
 				})//房间信息
 
-				})//房间点击
+			})//房间点击
 			$('.HousedCopy').on('click','.cur',function(){
 				
 				$('.tableCopy:gt(0)').remove();
@@ -354,8 +402,6 @@ $('.BtnApprove').click(function(){
 				$('.PipeHouseArea').text(res.data.detail.TotalArea);
 				$('.PipeCorverArea').text(res.data.detail.CoveredArea);
 			}
-			
-			
 			CordID = "#PipeAdjusted";
 		}else if(type == 11){//租金追加调整
 			processState('#AddState',res);
@@ -487,64 +533,6 @@ $('.BtnApprove').click(function(){
 			$("#CancelNum").text(res.data.detail.NewHouseInfo.HouseID);
 			
 		}
-	
-	layer.open({
-		type:1,
-		area:['950px','800px'],
-		resize:false,
-		resize:false,
-		zIndex:100,
-		title:['审批','color:#FFF;font-size:1.6rem;font-weight:600;'],
-		content:$(CordID),
-		btn:['通过','不通过'],
-		yes:function(thisIndex){
-			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value},function(res){
-				res = JSON.parse(res);
-				console.log(res);
-				layer.msg(res.msg);
-				if(res.retcode == "2000"){
-					layer.close(thisIndex);
-					location.reload();
-				}
-			});
-			
-		},
-		btn2:function(){
-			layer.open({
-				type:1,
-				area:['400px','400px'],
-				
-				resize:false,
-				zIndex:100,
-				title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
-				content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
-				btn:['确认'],
-				yes:function(msgIndex){
-					var reasonMsg = $('#reason').val();
-					if (reasonMsg=='') {
-						reasonMsg='空';
-					}else{
-						reasonMsg=$('#reason').val();
-					}
-					console.log(reasonMsg);
-					$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
-						res = JSON.parse(res);
-						console.log(res);
-						layer.msg(res.msg);
-						if(res.retcode == "2000"){
-							layer.close(msgIndex);
-							location.reload();
-						}
-					});
-					
-				}
-			})
-		}
-	});
-	layer.photos({
-	  photos: '#layer-photos-demo'
-	  ,anim: 5
-	});
 });
 })
 
@@ -565,7 +553,6 @@ $('.BtnDetail').click(function(){
 		res = JSON.parse(res);
 		console.log(res);
 		var type = res.data.detail.type;
-		type = 3;
 		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
 			$('.APhouseId').text(res.data.detail.HouseID);
 			$('.APBanID').text(res.data.detail.BanID);
@@ -600,16 +587,6 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 			}else if(type == 3){
-				new file({
-                    show: "#pauseUploadReportShow",
-                    upButton: "#pauseUploadReportUp",
-                    size: 1024,
-                    url: "/ph/ChangeApply/add",
-                    button: "#pauseUploadReport",
-                    ChangeOrderID: '',
-                    Type: 1,
-                    title: "上传报告"
-                });
 				layer.open({
                     type: 1,
                     area: ['990px','780px'],
@@ -617,12 +594,25 @@ $('.BtnDetail').click(function(){
                     zIndex: 100,
                     title: ['暂停计租详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                     content: $('#pauseDetail'),
-                    btn: ['确定', '取消'],
-                    success: function() {
-
-                    },
-                    yes:function(){
-
+                    success: function(){
+                    	var house_str = '';
+                    	$('.pauseBanId').text(res.data.detail.ban.BanID);
+                    	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
+                    	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
+                    	$('.pauseInflRent').text(res.data.detail.InflRent);
+                    	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+                    	$('.status_2').hide();
+                    	for(var i = 0;i < res.data.detail.house.length;i++){
+                    		house_str += '<tr>\
+				                <td style="width:200px;">'+i+'</td>\
+				                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
+				                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+				                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+				            </tr>';
+                    	}
+                    	$('#pauseHouseDetail').append($(house_str));
+						processState('#pauseRentState',res);
+						metailShow('#pauseRentPhotos',res);
                     }
                 })
 			}else if(type == 4){
@@ -1090,11 +1080,28 @@ $(document).on('click','.SplitNum',function() {
 //查看附件函数
 function metailShow(id,res){
 	var ImgLength = res.data.urls.length;
+	var img_title = [];
+	var	img_array = [];
+	res.data.urls.forEach(function(data){
+		var index = img_title.indexOf(data.FileTitle);
+		if(index < 0){
+			img_title.push(data.FileTitle);
+			img_array[img_array.length] = [];
+			img_array[img_array.length - 1].push(data.FileUrl);
+		}else{
+			img_array[index].push(data.FileUrl);
+		}
+	});
 	var FatherDom = $(id);
 	FatherDom.empty();
-	for(var i = 0; i < ImgLength; i++){
-		var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.urls[i].FileUrl+" src="+res.data.urls[i].FileUrl+" alt="+res.data.urls[i].FileTitle+"/>");
-		FatherDom.append(ImgDom);
+	for(var i = 0; i < img_title.length; i++){
+		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
+		FatherDom.append(title_dom);
+		for(var j = 0;j < img_array[i].length;j++){
+			var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+
+				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>");
+			FatherDom.append(ImgDom);
+		}
 	}
 	console.log(id);
 	layer.photos({
@@ -1110,7 +1117,8 @@ function processState(id,res){
 	var status = parseInt(res.data.config.status) * 2 - 1;
 	FatherDom.empty();
 	for(var i = 0; i < ConfigLength;i++){
-		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span>——></span>');
+		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span><i class="am-icon-lg am-icon-long-arrow-right" +\
+			style="margin:auto 4px;"></i></span>');
 		FatherDom.append(SpanDom);
 	}
 	FatherDom.find('span').last().remove();
@@ -1118,7 +1126,7 @@ function processState(id,res){
 		if(j % 2== 0){
 			FatherDom.find('span').eq(j).addClass('process_style_active');
 		}else{
-			FatherDom.find('span').eq(j).addClass('line_style');
+			FatherDom.find('span').eq(j).find('i').addClass('line_style');
 		}
 	}
 	for(var k = 1;k <= RecordLength;k++){
@@ -1127,7 +1135,6 @@ function processState(id,res){
 		}else{
 			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].CreateTime+res.data.record[k-1].Status+"，原因："+res.data.record[k-1].Reson+"；</p>");
 		}
-		
 		FatherDom.append(RecordDom);
 	}
 }
