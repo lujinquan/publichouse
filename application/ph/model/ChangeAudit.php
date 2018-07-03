@@ -246,11 +246,11 @@ class ChangeAudit extends Model
         //房屋编号
         $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,BanID')->find();
 
-        $data['BanID'] = get_ban_info($oneData['BanID']);
+        $data['ban'] = get_ban_info($oneData['BanID']);
 
         $houses = explode(',',$oneData['HouseID']);
 
-        $data['houses'] = Db::name('house')->where(['HouseID'=>['in',$houses]])
+        $data['house'] = Db::name('house')->where(['HouseID'=>['in',$houses]])
                                      ->field('HouseID,TenantName,HousePrerent')
                                      ->select();
         $data['InflRent'] = $oneData['InflRent'];
