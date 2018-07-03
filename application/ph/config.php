@@ -1,3 +1,4 @@
+
 <?php
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -64,11 +65,14 @@ return [
     'TrAttachmentFive' => '武汉市公有房屋使用权转让协议',
 
     //新增租金减免
-    'ID' => '减免证件',
-    'AppForm' => '租金核减审核表',
-    'AppBook' => '租金核减申请书',
-    'ReBooklet' => '户口薄',
-    'HouseLease' => '住房租约',
+    'basic' => '低保证',
+    'ID' => '身份证',
+    'houseBook' => '房产证',
+    'household' => '户口本',
+    'cutRent' => '核减租金会审单',
+    'houseSecurity' => '住房保障申请表',
+    'nonCardinality' => '非基数异动核算凭单',
+    'noticeBook' => '审通知书',
 
     //新增空租
     'EmptyReport' => '空租报告',
@@ -257,7 +261,5 @@ return [
     'BelowFiveNum' => '空间1至1.7米(5㎡以下)',
     'MoreFiveNum' => '阁楼(含1.7米)(5㎡以上)',
     'IfWater' => '是否有上下水',
-    'RemitRent' => '减免金额',
-
-
+    'RemitRent' => '减免金额'
 ];
