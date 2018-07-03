@@ -158,13 +158,15 @@ class ChangeApply extends Base
                             $housearr[$v][] = $k;
                         }
                         foreach($housearr as $h){
+                            $result = [];
                             $one = Db::name('house')->where(['HouseID'=>['in',$h]])
-                                                  ->field('sum(HousePrerent) as HousePrerents,UseNature,OwnerType,InstitutionID, InstitutionPID')
+                                                  ->field('sum(HousePrerent) as HousePrerents,BanID,UseNature,OwnerType,InstitutionID, InstitutionPID')
                                                   ->find();
 
                             $suffix = substr(uniqid(),-6);
 
                             $result['InflRent'] = $one['HousePrerents'];
+                            $result['BanID'] = $one['BanID'];
                             $result['Status'] = 2;
                             $result['UserName'] = session('user_base_info.name');
                             $result['UserNumber'] = UID;
