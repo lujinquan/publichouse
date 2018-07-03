@@ -73,9 +73,10 @@ $('.BtnApprove').click(function(){
                 },
                 yes:function(){
 					var formData = fileTotall.getArrayFormdata();
+					formData.append('ChangeOrderID',value);
                 	$.ajax({
 		                type:"post",
-		                url:'/ph/ChangeAudit/detail/ChangeOrderID/'+value,
+		                url:'/ph/ChangeAudit/process/',
 		                data:formData,
 		                processData:false,
 		                contentType:false,
