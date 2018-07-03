@@ -116,7 +116,12 @@ mp.setMapStyle({
 		  position : point,    // 指定文本标注所在的地理位置
 		  offset   : new BMap.Size(-27, -30)    //设置文本偏移量
 		}
-		var label = new BMap.Label("<p style='font-size:12px;text-align:center'>"+area[i].name+"</p></br><p style='font-size:20px;margin-top:-20px;text-align:center'>"+area[i].detail.length+"栋</p>", opts);  // 创建文本标注对象
+		var label = new BMap.Label("<p style='font-size:12px;text-align:center'>"
+		+area[i].name+"</p></br><p style='font-size:14px;margin-top:-35px;text-align:center'>"
+		+area[i].detail.length+"栋</p>"
+		+"</br><p style='font-size:14px;margin-top:-35px;text-align:center'>"
+		+area[i].TotalHouse+"户</p>"
+		, opts);  // 创建文本标注对象
 			label.setStyle({
 				 color : "#FFFFFF",
 				 height : "100px",
@@ -293,6 +298,7 @@ mp.setMapStyle({
 				console.log(aLabel);
 			}
 			area_array = res.data.point;
+			console.log(area_array);
 			if(room_size > 18){
 				getM(aLabel);
 			}else{
