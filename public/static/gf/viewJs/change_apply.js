@@ -37,16 +37,15 @@ $('#addApply').click(function() {
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
-                            $("#FloorID").text(res.data.FloorID);
-                            $("#HouseArea").text(res.data.HouseUsearea);
-                            //$("#HouseArea").text(res.data.HouseUsearea);
+                            $("#useNature").text(res.data.FloorID);
+                            $("#HouseUsearea").text(res.data.HouseUsearea);
                             $("#LeasedArea").text(res.data.LeasedArea);
                             $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantNumber);
+                            $("#TenantNumber").text(res.data.TenantID);
                             $("#TenantTel").text(res.data.TenantTel);
                             $("#OwnTypeD").text(res.data.OwnerType);
                             
-                            $("#oldPo").text(res.data.HousePrerent);
+                            $("#monthRent").text(res.data.HousePrerent);
                             
                             if(res.data.AnathorOwnerType!=='暂无'){
                                 $('.CutHide').css('display','block');
@@ -292,7 +291,7 @@ $('#addApply').click(function() {
                     data.append('banID',$('#pauseBanID').text());
                     data.append('type',3);
                     house_array.forEach(function(value,index){
-                        data.append("houseID_"+index,value);
+                        data.append("houseID",value);
                     });
                     $.ajax({
                         type: "post",

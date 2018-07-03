@@ -17,47 +17,48 @@
       <label class="label_style">房屋地址：</label>
       <label id="BanAddress" class="label_content label_p_style" style="width:476px;"></label>
     </div>
+
+    <div class="am-form-group am-u-sm-4 breaks">
+      <label class="label_style"> 产别：</label>
+      <label id="OwnTypeD" class="label_p_style"></label>
+    </div>
+
     <div class="am-form-group am-u-sm-4">
-      <label class="label_style">楼层：</label>
-      <label id="FloorID" class="label_content label_p_style"></label>
+      <label class="label_style">使用性质：</label>
+      <label id="useNature" class="label_content label_p_style"></label>
     </div>
     <div class="am-form-group am-u-sm-4 Hhide">
-      <label class="label_style">承租人：</label>
-      <label id="TenantName" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4 Hhide">
-      <label class="label_style">联系电话：</label>
-      <label id="TenantTel" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4 ">
-      <label class="label_style">备案时间：</label>
-      <label id="CreateTime" class="label_content label_p_style"></label>
+      <label class="label_style">计租表：</label>
+      <label id="TenantName_1" class="label_content label_p_style"></label>
     </div>
     <div class="am-form-group am-u-sm-4 uHide">
       <label class="label_style">使用面积：</label>
-      <label id="HouseArea" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4 Hhide">
-      <label class="label_style">身份证号：</label>
-      <label id="TenantNumber" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4 uShow" style="display: none">
-      <label class="label_style">产别：</label>
-      <label id="OwnerTypec" class="label_content label_p_style"></label>
+      <label id="HouseUsearea" class="label_content label_p_style"></label>
     </div>
     <div class="am-form-group am-u-sm-4 Hhide">
       <label class="label_style">计租面积：</label>
       <label id="LeasedArea" class="label_content label_p_style"></label>
     </div>
-    <div class="am-form-group am-u-sm-4 breaks">
-      <label class="label_style"> 产别：</label>
-      <label id="OwnTypeD" class="label_p_style"></label>
-    </div>
+
     <div class="am-form-group am-u-sm-4 am-u-end breaks">
-      <label class="label_style">原金额：</label>
-      <label id="oldPo" class="label_p_style"></label>
+      <label class="label_style">月租金：</label>
+      <label id="monthRent" class="label_p_style"></label>
+    </div>
+
+    <div class="am-form-group am-u-sm-4 ">
+      <label class="label_style">承租人：</label>
+      <label id="TenantName" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide">
+      <label class="label_style">身份证号：</label>
+      <label id="TenantNumber" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide">
+      <label class="label_style">联系电话：</label>
+      <label id="TenantTel" class="label_content label_p_style"></label>
     </div>
   </div>
+
 
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">填报信息：</h2>
@@ -99,12 +100,12 @@
       </select>
     </div>
     <div class="am-form-group am-u-sm-12 breaks">
-        <label class="label_style">证件上传：</label>
+        <label class="label_style">低保证：</label>
           <div class="am-form-group am-form-file am-u-md-5">
                 <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                <input id="ID" type="file" name="ID" multiple>
+                <input id="basic" type="file" name="basic" multiple>
           </div>
-          <div id="IDShow" class="am-u-md-12 img_content"></div>
+          <div id="basicShow" class="am-u-md-12 img_content"></div>
     </div>
   </div>
 
@@ -136,67 +137,68 @@
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">资料上传：</h2>
   </div>
+
   <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>租金核减审核表：</label>
+      <label>身份证：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="AppForm" type="file" name="AppForm" multiple>
+              <input id="ID" type="file" name="ID" multiple>
         </div>
-        <div id="AppFormShow" class="am-u-md-12 img_content"></div>
+        <div id="IDShow" class="am-u-md-12 img_content"></div>
   </div>
   <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>资金核减申请书：</label>
+      <label>房产证：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="AppBook" type="file" name="AppBook" multiple>
+              <input id="houseBook" type="file" name="houseBook" multiple>
         </div>
-        <div id="AppBookShow" class="am-u-md-12 img_content"></div>
+        <div id="houseBookShow" class="am-u-md-12 img_content"></div>
   </div>
   <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>户口簿：</label>
+      <label>户口本：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="ReBooklet" type="file" name="ReBooklet" multiple>
+              <input id="household" type="file" name="household" multiple>
         </div>
-        <div id="ReBookletShow" class="am-u-md-12 img_content"></div>
+        <div id="householdShow" class="am-u-md-12 img_content"></div>
   </div>
   <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>住房租约：</label>
+      <label>核减租金会审单：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="HouseLease" type="file" name="HouseLease" multiple>
+              <input id="cutRent" type="file" name="cutRent" multiple>
         </div>
-        <div id="HouseLeaseShow" class="am-u-md-12 img_content"></div>
+        <div id="cutRentShow" class="am-u-md-12 img_content"></div>
   </div>
 
-  <div class="am-form-group am-u-sm-12 EmptyRent">
+  <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>空租报告：</label>
+      <label>住房保障申请表：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="EmptyReport" type="file" name="EmptyReport" multiple>
+              <input id="houseSecurity" type="file" name="houseSecurity" multiple>
         </div>
-        <div id="EmptyReportShow" class="am-u-md-12 img_content"></div>
+        <div id="houseSecurityShow" class="am-u-md-12 img_content"></div>
   </div>
 
-  <div class="am-form-group am-u-sm-12 PauseRent">
+  <div class="am-form-group am-u-sm-12 breaks">
     <div class="am-form-group am-u-sm-3">
-      <label>暂停计租报告：</label>
+      <label>非基数异动核算凭单：</label>
     </div>
         <div class="am-form-group am-form-file am-u-md-5">
               <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="SuspendReport" type="file" name="SuspendReport" multiple>
+              <input id="nonCardinality" type="file" name="nonCardinality" multiple>
         </div>
-        <div id="SuspendReportShow" class="am-u-md-12 img_content"></div>
+        <div id="nonCardinalityShow" class="am-u-md-12 img_content"></div>
   </div>
 
   <div class="am-form-group am-u-sm-12 CancelRent">
