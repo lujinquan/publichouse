@@ -291,7 +291,7 @@ $('#addApply').click(function() {
                     data.append('banID',$('#pauseBanID').text());
                     data.append('type',3);
                     house_array.forEach(function(value,index){
-                        data.append("houseID",value);
+                        data.append("houseID[]",value);
                     });
                     $.ajax({
                         type: "post",

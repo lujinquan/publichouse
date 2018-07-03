@@ -1,0 +1,70 @@
+<div id="pauseDetail" class="am-form" style="display:none;margin-top:1.6rem;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-md-4">
+      <label id="houseLabel" class="label_style">楼栋编号：</label>
+      <label class="label_content">99895632585</label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label class="label_content">武汉市武昌区建设大道347号</label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">楼栋产别：</label>
+      <label class="label_content">区属</label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">暂停租金：</label>
+      <label class="label_content">998547</label>
+    </div>
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">备案时间：</label>
+      <label class="label_content">2018-06-11</label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">房屋明细：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+          <thead style="display:block;">
+              <tr>
+                  <td style="width:200px;">#</td>
+                  <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
+                  <td style="width:200px;" class="am-hide-sm-only">承租人</td>
+                  <td style="width:350px;" class="am-hide-sm-only">月租金</td>
+              </tr>
+          </thead>
+          <tbody id="pauseHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+
+          </tbody>
+      </table>
+  </div>
+
+    <div class="am-u-md-12" style="padding-left:0;">
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">查看附件：</h2>
+        </div>
+        <div id="pauseRentPhotos" class="am-u-md-12"></div>
+
+        <div class="am-form-group am-u-sm-12 status_2">
+            <div class="am-form-group am-u-sm-3">
+              <label>上传报告：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="pauseUploadReport" type="file" name="pauseUploadReport" multiple>
+            </div>
+            <div id="pauseUploadReportShow" class="am-u-md-12 img_content"></div>
+        </div>
+
+
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">审批状态：</h2>
+        </div>
+        <div id="pauseRentState" class="am-u-md-12" style="padding-left:3rem;"></div>
+    </div>
+</div>
