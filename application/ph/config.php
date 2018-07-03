@@ -1,3 +1,4 @@
+
 <?php
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -77,6 +78,7 @@ return [
     'EmptyReport' => '空租报告',
 
     //新增暂停计租
+    'pauseMaterial' => '非基数异动核算凭单',
     'SuspendReport' => '暂停计租报告',
 
     //新增注销
@@ -259,7 +261,5 @@ return [
     'BelowFiveNum' => '空间1至1.7米(5㎡以下)',
     'MoreFiveNum' => '阁楼(含1.7米)(5㎡以上)',
     'IfWater' => '是否有上下水',
-    'RemitRent' => '减免金额',
-
-
+    'RemitRent' => '减免金额'
 ];
