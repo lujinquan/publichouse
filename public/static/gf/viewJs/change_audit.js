@@ -70,7 +70,7 @@ $('.BtnApprove').click(function(){
         	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
         	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
         	$('.pauseInflRent').text(res.data.detail.InflRent);
-        	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+        	$('.pauseCreateTime').text(res.data.detail.CreateTime);
         	if(res.data.config.status == '1'){
 				$('.status_2').show();
 			}else{
@@ -78,12 +78,13 @@ $('.BtnApprove').click(function(){
 			}
         	for(var i = 0;i < res.data.detail.house.length;i++){
         		house_str += '<tr>\
-	                <td style="width:200px;">'+i+'</td>\
+	                <td style="width:200px;">'+(i+1)+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
 	                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
 	            </tr>';
         	}
+        	$('#pauseHouseDetail').empty();
         	$('#pauseHouseDetail').append($(house_str));
 			processState('#pauseRentState',res);
 			metailShow('#pauseRentPhotos',res);
@@ -556,16 +557,17 @@ $('.BtnDetail').click(function(){
             	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
             	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
             	$('.pauseInflRent').text(res.data.detail.InflRent);
-            	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+            	$('.pauseCreateTime').text(res.data.detail.CreateTime);
             	$('.status_2').hide();
             	for(var i = 0;i < res.data.detail.house.length;i++){
             		house_str += '<tr>\
-		                <td style="width:200px;">'+i+'</td>\
+		                <td style="width:200px;">'+(i+1)+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
 		                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
 		            </tr>';
             	}
+            	$('#pauseHouseDetail').empty();
             	$('#pauseHouseDetail').append($(house_str));
 				processState('#pauseRentState',res);
 				metailShow('#pauseRentPhotos',res);

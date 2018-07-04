@@ -16,7 +16,7 @@ $('#addApply').click(function() {
     $(".WriteOff").hide();
     $('#DQueryData').off('click');
     $('#houseLabel').text('房屋编号：');
-    switch (checkId) {
+    switch (checkId){
         case "1":
             layer.open({
                 type: 1,
@@ -273,6 +273,7 @@ $('#addApply').click(function() {
                     });
                     $('#pauseHouseQuery').off('click');
                     $('#pauseHouseQuery').on('click', function(){
+                        $('#pauseHouseAdd').empty();
                         var ban_link_house = layer.open({
                             type: 1,
                             area: ['990px','780px'],
@@ -338,7 +339,12 @@ $('#addApply').click(function() {
                     });
                 },
                 end:function(){
-
+                    $("input[type='text']").val('');
+                    $("input[type='number']").val('');
+                    $(".label_content").text('');
+                    $(".img_content").text('');
+                    $("select").val('');
+                    location.reload();
                 }
             });
             break;
@@ -2102,7 +2108,7 @@ function getBanList(){
     };
     this.search = function(val){
         this.filterData = this.initData.banData.filter(function(data){
-                return data.BanAddress.indexOf(val) > -1;
+            return data.BanAddress.indexOf(val) > -1;
         })
         this.renderDom(this.filterData);
     }
@@ -2137,6 +2143,9 @@ function banLinkHouse(BanID){
             }else{
                 $(this).find("input[type='checkbox']").prop('checked',true);
             }
+        })
+        $(".house_check input[type='checkbox']").click(function(event){
+            event.stopPropagation();
         })
     })
 }
