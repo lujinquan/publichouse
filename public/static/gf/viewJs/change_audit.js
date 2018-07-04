@@ -14,37 +14,39 @@ $('.BtnApprove').click(function(){
 		console.log(res);
 		var type = res.data.detail.type;
 		if(type == 1){
-			layer.open({
-                type: 1,
-                area: ['990px','780px'],
-                resize: false,
-                zIndex: 100,
-                title: ['租金减免详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#derate'),
-                btn:['通过','不通过'],
-                success: function(){
-                	$('.derateHouseID').text(res.data.detail.HouseID);
-                	$('.derateBanID').text(res.data.detail.BanID);
-                	$('.derateAddress').text(res.data.detail.BanAddress);
-                	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
-                	$('.derateUseNature').text(res.data.detail.UseNature);
-                	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
-                	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
-                	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
-                	$('.derateTenantName').text(res.data.detail.TenantName);
-                	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
-                	$('.derateTenantTel').text(res.data.detail.TenantTel);
-                	$('.derateMoney').text(res.data.detail.RemitRent);
-                	$('.derateType').text(res.data.detail.CutName);
-                	$('.derateNumber').text(res.data.detail.MuchMonth);
-                	$('.derateTime').text(res.data.detail.IDnumber);
-                	if(res.data.config.status == '1'){
-						$('.status_2').show();
-					}
-					processState('#derateState',res);
-					metailShow('#deratePhotos',res);
-                }
-            })
+			new file({
+                show: "#noticeBookShow",
+                upButton: "#noticeBookUp",
+                size: 1024,
+                url: "/ph/ChangeApply/add",
+                button: "#noticeBook",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "审通知书"
+            });
+        	$('.derateHouseID').text(res.data.detail.HouseID);
+        	$('.derateBanID').text(res.data.detail.BanID);
+        	$('.derateAddress').text(res.data.detail.BanAddress);
+        	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.derateUseNature').text(res.data.detail.UseNature);
+        	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+        	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.derateTenantName').text(res.data.detail.TenantName);
+        	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.derateTenantTel').text(res.data.detail.TenantTel);
+        	$('.derateMoney').text(res.data.detail.RemitRent);
+        	$('.derateType').text(res.data.detail.CutName);
+        	$('.derateNumber').text(res.data.detail.IDnumber);
+            $('.derateTime').text(res.data.detail.MuchMonth+'月');
+        	if(res.data.config.status == '1'){
+				$('.status_2').show();
+			}else{
+				$('.status_2').hide();
+			}
+			processState('#derateState',res);
+			metailShow('#deratePhotos',res);
+			layerBox(value,'derate','租金减免详情',1);
 		}else if(type == 2){
 			$(".breaks").hide();
 			$(".pause").hide();
@@ -63,84 +65,29 @@ $('.BtnApprove').click(function(){
                 Type: 1,
                 title: "上传报告"
             });
-			var thisIndex = layer.open({
-                type: 1,
-                area: ['990px','780px'],
-                resize: false,
-                zIndex: 100,
-                title: ['暂停计租审批', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#pauseDetail'),
-                btn:['通过','不通过'],
-                success: function() {
-                	var house_str = '';
-                	$('.pauseBanId').text(res.data.detail.ban.BanID);
-                	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
-                	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
-                	$('.pauseInflRent').text(res.data.detail.InflRent);
-                	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
-                	for(var i = 0;i < res.data.detail.house.length;i++){
-                		house_str += '<tr>\
-			                <td style="width:200px;">'+i+'</td>\
-			                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
-			                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
-			                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
-			            </tr>';
-                	}
-                	$('#pauseHouseDetail').append($(house_str));
-					processState('#pauseRentState',res);
-					metailShow('#pauseRentPhotos',res);
-					if(res.data.config.status == '1'){
-						$('.status_2').show();
-					}
-                },
-                yes:function(){
-					var formData = fileTotall.getArrayFormdata();
-					formData.append('ChangeOrderID',value);
-                	$.ajax({
-		                type:"post",
-		                url:'/ph/ChangeAudit/process/',
-		                data:formData,
-		                processData:false,
-		                contentType:false,
-		                success:function(res){
-		                    res = JSON.parse(res);
-		                       console.log(res);
-		                    layer.msg(res.msg);
-		                    layer.close(thisIndex);
-		                    location.reload();
-		                }
-                	})
-                },
-		        btn2:function(){
-					layer.open({
-						type:1,
-						area:['400px','400px'],
-						resize:false,
-						zIndex:100,
-						title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
-						content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
-						btn:['确认'],
-						yes:function(msgIndex){
-							var reasonMsg = $('#reason').val();
-							if (reasonMsg=='') {
-								reasonMsg='空';
-							}else{
-								reasonMsg=$('#reason').val();
-							}
-							console.log(reasonMsg);
-							$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
-								res = JSON.parse(res);
-								console.log(res);
-								layer.msg(res.msg);
-								if(res.retcode == "2000"){
-									layer.close(msgIndex);
-									location.reload();
-								}
-							});
-						}
-					})
-				}
-            })
+        	var house_str = '';
+        	$('.pauseBanId').text(res.data.detail.ban.BanID);
+        	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
+        	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
+        	$('.pauseInflRent').text(res.data.detail.InflRent);
+        	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+        	if(res.data.config.status == '1'){
+				$('.status_2').show();
+			}else{
+				$('.status_2').hide();
+			}
+        	for(var i = 0;i < res.data.detail.house.length;i++){
+        		house_str += '<tr>\
+	                <td style="width:200px;">'+i+'</td>\
+	                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
+	                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+	                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+	            </tr>';
+        	}
+        	$('#pauseHouseDetail').append($(house_str));
+			processState('#pauseRentState',res);
+			metailShow('#pauseRentPhotos',res);
+			layerBox(value,'pauseDetail','暂停计租审批',1);
 		}else if(type == 4){
 			$(".breaks").hide();
 			$(".pause").hide();
@@ -576,50 +523,26 @@ $('.BtnDetail').click(function(){
 		res = JSON.parse(res);
 		console.log(res);
 		var type = res.data.detail.type;
-		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
-			$('.APhouseId').text(res.data.detail.HouseID);
-			$('.APBanID').text(res.data.detail.BanID);
-			$('.APhouseAddress').text(res.data.detail.BanAddress);
-			$('.APFloorID').text(res.data.detail.FloorID);
-			$('.APtenantName').text(res.data.detail.TenantName);
-			$('.APtenantTel').text(res.data.detail.TenantTel);
-			$('.APtenantNumber').text(res.data.detail.TenantNumber);
-			$('.APcreateTime').text(res.data.detail.CreateTime);
-			$('.APhouseArea').text(res.data.detail.HouseArea);
-			$('.APleasedArea').text(res.data.detail.LeasedArea);
-			$('.MuchMonth').text(res.data.detail.MuchMonth);
-			$('.RemitRent').text(res.data.detail.RemitRent);
-			$('.AownerType').text(res.data.detail.OwnerType);
-			$('.HousePrerent').text(res.data.detail.HousePrerent||res.data.detail.PreRent);
-			//$('#approveName').text(res.data.detail.ChangeType);
 			if(type == 1){
-				layer.open({
-                    type: 1,
-                    area: ['990px','780px'],
-                    resize: false,
-                    zIndex: 100,
-                    title: ['租金减免详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                    content: $('#derate'),
-                    success: function(){
-                    	$('.derateHouseID').text(res.data.detail.HouseID);
-                    	$('.derateBanID').text(res.data.detail.BanID);
-                    	$('.derateAddress').text(res.data.detail.BanAddress);
-                    	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
-                    	$('.derateUseNature').text(res.data.detail.UseNature);
-                    	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
-                    	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
-                    	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
-                    	$('.derateTenantName').text(res.data.detail.TenantName);
-                    	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
-                    	$('.derateTenantTel').text(res.data.detail.TenantTel);
-                    	$('.derateMoney').text(res.data.detail.RemitRent);
-                    	$('.derateType').text(res.data.detail.CutName);
-                    	$('.derateNumber').text(res.data.detail.MuchMonth);
-                    	$('.derateTime').text(res.data.detail.IDnumber);
-						processState('#derateState',res);
-						metailShow('#deratePhotos',res);
-                    }
-                })
+				$('.status_2').hide();
+            	$('.derateHouseID').text(res.data.detail.HouseID);
+            	$('.derateBanID').text(res.data.detail.BanID);
+            	$('.derateAddress').text(res.data.detail.BanAddress);
+            	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+            	$('.derateUseNature').text(res.data.detail.UseNature);
+            	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+            	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+            	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+            	$('.derateTenantName').text(res.data.detail.TenantName);
+            	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+            	$('.derateTenantTel').text(res.data.detail.TenantTel);
+            	$('.derateMoney').text(res.data.detail.RemitRent);
+            	$('.derateType').text(res.data.detail.CutName);
+            	$('.derateNumber').text(res.data.detail.IDnumber);
+            	$('.derateTime').text(res.data.detail.MuchMonth+'月');
+				processState('#derateState',res);
+				metailShow('#deratePhotos',res);
+				layerBox(value,'derate','租金减免详情',2);
 			}else if(type == 2){
 				$(".breaks").hide();
 				$(".pause").hide();
@@ -628,34 +551,25 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 			}else if(type == 3){
-				layer.open({
-                    type: 1,
-                    area: ['990px','780px'],
-                    resize: false,
-                    zIndex: 100,
-                    title: ['暂停计租详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                    content: $('#pauseDetail'),
-                    success: function(){
-                    	var house_str = '';
-                    	$('.pauseBanId').text(res.data.detail.ban.BanID);
-                    	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
-                    	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
-                    	$('.pauseInflRent').text(res.data.detail.InflRent);
-                    	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
-                    	$('.status_2').hide();
-                    	for(var i = 0;i < res.data.detail.house.length;i++){
-                    		house_str += '<tr>\
-				                <td style="width:200px;">'+i+'</td>\
-				                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
-				                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
-				                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
-				            </tr>';
-                    	}
-                    	$('#pauseHouseDetail').append($(house_str));
-						processState('#pauseRentState',res);
-						metailShow('#pauseRentPhotos',res);
-                    }
-                })
+            	var house_str = '';
+            	$('.pauseBanId').text(res.data.detail.ban.BanID);
+            	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
+            	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
+            	$('.pauseInflRent').text(res.data.detail.InflRent);
+            	$('.pauseCreateTime').text(res.data.detail.ban.CreateTime);
+            	$('.status_2').hide();
+            	for(var i = 0;i < res.data.detail.house.length;i++){
+            		house_str += '<tr>\
+		                <td style="width:200px;">'+i+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+		                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		            </tr>';
+            	}
+            	$('#pauseHouseDetail').append($(house_str));
+				processState('#pauseRentState',res);
+				metailShow('#pauseRentPhotos',res);
+				layerBox(value,'pauseDetail','暂停计租详情',2);
 			}else if(type == 4){
 				$(".breaks").hide();
 				$(".pause").hide();
@@ -673,15 +587,11 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 				$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-			}
-			//processState('#approveState',res);
-			//metailShow('#layer-photos-demo',res);
-			//CordID = "#approveForm";
-		}else if(type == 5){
+				$('.APFloorID').text(res.data.detail.BanFloorNum);
+				$('.APhouseArea').text(res.data.detail.BanUsearea);
+				$('#SerialNumber').text('楼栋编号:');
+				$('.APhouseId').text(res.data.detail.BanID);
+			}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);
 			$('.Uhide').css('display','block');
@@ -1178,4 +1088,74 @@ function processState(id,res){
 		}
 		FatherDom.append(RecordDom);
 	}
+}
+// 详情与审批流程弹出框
+function layerBox(value,id,name,operation){
+	var this_index = layer.open({
+        type: 1,
+        area: ['990px','780px'],
+        resize: false,
+        zIndex: 100,
+        title: [name, 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#'+id+''),
+        btn:operation==1?['通过','不通过']:'',
+        success: function(){
+
+        },
+        yes:function(){
+			var formData = fileTotall.getArrayFormdata();
+			formData.append('ChangeOrderID',value);
+        	processPass(formData,this_index);
+        },
+        btn2:function(){
+			noPass(value)
+		}
+    })
+}
+// 审批通过事件
+function processPass(formData,this_index){
+	$.ajax({
+        type:"post",
+        url:'/ph/ChangeAudit/process/',
+        data:formData,
+        processData:false,
+        contentType:false,
+        success:function(res){
+            res = JSON.parse(res);
+               console.log(res);
+            layer.msg(res.msg);
+            layer.close(this_index);
+            location.reload();
+        }
+	})
+}
+// 审批不通过事件
+function noPass(value){
+	layer.open({
+		type:1,
+		area:['400px','400px'],
+		resize:false,
+		zIndex:100,
+		title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+		btn:['确认'],
+		yes:function(msgIndex){
+			var reasonMsg = $('#reason').val();
+			if (reasonMsg=='') {
+				reasonMsg='空';
+			}else{
+				reasonMsg=$('#reason').val();
+			}
+			console.log(reasonMsg);
+			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
+				res = JSON.parse(res);
+				console.log(res);
+				layer.msg(res.msg);
+				if(res.retcode == "2000"){
+					layer.close(msgIndex);
+					location.reload();
+				}
+			});
+		}
+	})
 }

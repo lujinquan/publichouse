@@ -284,10 +284,12 @@ $('#addApply').click(function() {
                             yes: function() {
                                 var form_str = '';
                                 var HousePrerent = 0;
+                                var count = 0;
                                 for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
                                     if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+                                        count++;
                                         form_str += '<tr>\
-                                            <td style="width:200px;">'+i+'</td>\
+                                            <td style="width:200px;">'+count+'</td>\
                                             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(1)").text()+'</td>\
                                             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
                                             <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
@@ -299,7 +301,8 @@ $('#addApply').click(function() {
                                 $('#pauseBanID').text(fun.initData.BanID);
                                 $('#pauseBanAddress').text(fun.initData.BanAddress);
                                 $('#pauseOwnerType').text(fun.initData.OwnerType);
-                                $('#pauseHousePrerent').text(HousePrerent);
+                                $('#pauseHousePrerent').text(HousePrerent.toFixed(2));
+                                $('#pauseHouseDetail').empty();
                                 $('#pauseHouseDetail').append(form_str);
                                 layer.close(ban_link_house);
                             },
@@ -2070,6 +2073,7 @@ function getBanList(){
                     <td style="width:350px;">'+res.data[i].BanAddress+'</td>\
                 </tr>'
             }
+            $('#pauseBanAdd').empty();
             $('#pauseBanAdd').append($(ban_str));
             $('#pauseBanAdd tr').click(function(){
                 var BanID = $(this).find('td').eq(0).text();
@@ -2100,6 +2104,7 @@ function banLinkHouse(BanID){
                 <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
             </tr>';
         }
+        $('#pauseHouseAdd').empty();
         $('#pauseHouseAdd').append($(house_str));
 
 
