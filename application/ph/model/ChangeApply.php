@@ -86,4 +86,54 @@ class ChangeApply extends Model
         }
 
     }
+
+    public function check_apply_table($data)
+    {
+        //校验该角色是否被允许提交异动申请
+        $pid = Db::name('process_config')->where('Type','eq',$data['type'])->value('id');
+        $nowRoleID = Db::name('process_config')->where('pid','eq',$pid)->where('Total','eq',1)->value('RoleID');
+        $roles = json_decode(session('user_base_info.role'),true);  //获取该登录用户的所有角色
+        if(!in_array($nowRoleID,$roles)){
+            return jsons('4004','友情提示，您暂无权限提交异动单……');
+        }
+
+        if(!isset($data['type'])){
+            return jsons('4000','参数缺失……');
+        }
+
+        switch ($data['type']) {
+                case 1:  //租金减免
+                    if(!$data['RemitRent']){
+                        return jsons('4002','减免类型不能为空');
+                    }
+                    if(!$data['CutType']){
+                        return jsons('4002','减免类型不能为空');
+                    }
+                    if(!$data['validity']){
+                        return jsons('4002','有效期不能为空');
+                    }
+                break;
+                case 2:
+
+                break;
+                case 3:
+
+                    if(!($data['houseID'])){
+
+                        return jsons('4000','暂未选择任何房屋');
+
+                    }
+                break;
+
+                default:
+        }
+
+
+
+    }
+
+
+
+
+
 }

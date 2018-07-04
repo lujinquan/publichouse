@@ -256,7 +256,7 @@ class ChangeAudit extends Model
     {   //暂停计租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,BanID')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,CreateTime,BanID')->find();
 
         $data['ban'] = get_ban_info($oneData['BanID']);
 
@@ -266,6 +266,7 @@ class ChangeAudit extends Model
                                      ->field('HouseID,TenantName,HousePrerent')
                                      ->select();
         $data['InflRent'] = $oneData['InflRent'];
+        $data['CreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 3;
         return $data;
     }
