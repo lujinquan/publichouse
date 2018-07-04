@@ -104,7 +104,11 @@ class ChangeApply extends Model
         switch ($data['type']) {
                 case 1:  //租金减免
                     if(!$data['RemitRent']){
-                        return jsons('4002','减免类型不能为空');
+                        return jsons('4002','减免金额不能为空');
+                    }else{
+                       if(!preg_match("/^[1-9]*[1-9][0-9]*$/",$data['RemitRent'])){
+                            return jsons('4003','减免金额请填写数字');
+                        } 
                     }
                     if(!$data['CutType']){
                         return jsons('4002','减免类型不能为空');
