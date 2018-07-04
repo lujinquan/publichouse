@@ -46,7 +46,7 @@ class ChangeApply extends Base
             //halt($data);
 
             $bool = model('ph/ChangeApply')->check_apply_table($data);
-exit;
+            
             if ($_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('ChangeApply')->uploads($v, $k ,$data['type']);
