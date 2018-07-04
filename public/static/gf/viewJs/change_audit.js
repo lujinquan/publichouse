@@ -17,7 +17,7 @@ $('.BtnApprove').click(function(){
 			new file({
                 show: "#noticeBookShow",
                 upButton: "#noticeBookUp",
-                size: 1024,
+                size: 10240,
                 url: "/ph/ChangeApply/add",
                 button: "#noticeBook",
                 ChangeOrderID: '',
@@ -58,7 +58,7 @@ $('.BtnApprove').click(function(){
 			new file({
                 show: "#pauseUploadReportShow",
                 upButton: "#pauseUploadReportUp",
-                size: 1024,
+                size: 10240,
                 url: "/ph/ChangeApply/add",
                 button: "#pauseUploadReport",
                 ChangeOrderID: '',
@@ -614,7 +614,6 @@ $('.BtnDetail').click(function(){
 			$('.Dhide').css('display','none');
 			// $('.DamageGradeChange').text(res.data.detail.StructureType);//
 			CordID = "#houseAdjust";
-
 		}else if(type == 6){//维修
 			processState('#RepairState',res);
 			metailShow('#RepairPhotos',res);

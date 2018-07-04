@@ -3,12 +3,14 @@
   <div class="am-form-group am-u-sm-12">
     <h2 class="label_title">基础信息：</h2>
   </div>
-  <div class="am-form-group am-u-sm-12">
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-md-12">
       <label id="houseLabel" class="label_style">房屋编号：</label>
       <input id="getInfo_1" class="label_input" required/>
       <button class="am-btn am-btn-primary am-btn-sm" id="DQueryData">查询</button>
     </div>
+  </div>
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-4" style="padding-right: 0">
       <label class="label_style">楼栋编号：</label>
       <label id="BanID" class="label_content label_p_style"></label>
@@ -17,20 +19,22 @@
       <label class="label_style">房屋地址：</label>
       <label id="BanAddress" class="label_content label_p_style" style="width:476px;"></label>
     </div>
-
+  </div>
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-4 breaks">
       <label class="label_style"> 产别：</label>
       <label id="OwnTypeD" class="label_p_style"></label>
     </div>
-
     <div class="am-form-group am-u-sm-4">
       <label class="label_style">使用性质：</label>
       <label id="useNature" class="label_content label_p_style"></label>
     </div>
     <div class="am-form-group am-u-sm-4 Hhide">
       <label class="label_style">计租表：</label>
-      <label id="TenantName_1" class="label_content label_p_style"></label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="rentMeterButton">查询</a>
     </div>
+  </div>
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-4 uHide">
       <label class="label_style">使用面积：</label>
       <label id="HouseUsearea" class="label_content label_p_style"></label>
@@ -39,12 +43,12 @@
       <label class="label_style">计租面积：</label>
       <label id="LeasedArea" class="label_content label_p_style"></label>
     </div>
-
     <div class="am-form-group am-u-sm-4 am-u-end breaks">
       <label class="label_style">月租金：</label>
       <label id="monthRent" class="label_p_style"></label>
     </div>
-
+  </div>
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-4 ">
       <label class="label_style">承租人：</label>
       <label id="TenantName" class="label_content label_p_style"></label>
@@ -58,7 +62,6 @@
       <label id="TenantTel" class="label_content label_p_style"></label>
     </div>
   </div>
-
 
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">填报信息：</h2>
@@ -108,9 +111,7 @@
           <div id="basicShow" class="am-u-md-12 img_content"></div>
     </div>
   </div>
-
-
-   <div class="am-form-group am-u-sm-12 CutHide" style="display: none;">
+  <div class="am-form-group am-u-sm-12 CutHide" style="display: none;">
     <div class="am-form-group am-u-sm-3">
      <label> 产别：<span  id="AOwnTypeD"></span></label>
     </div>
@@ -169,25 +170,25 @@
         <div id="householdShow" class="am-u-md-12 img_content"></div>
   </div>
   <div class="am-form-group am-u-sm-12 breaks">
-    <div class="am-form-group am-u-sm-3">
-      <label>核减租金会审单：</label>
-    </div>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="cutRent" type="file" name="cutRent" multiple>
-        </div>
-        <div id="cutRentShow" class="am-u-md-12 img_content"></div>
+      <div class="am-form-group am-u-sm-3">
+        <label>核减租金会审单：</label>
+      </div>
+      <div class="am-form-group am-form-file am-u-md-5">
+            <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+            <input id="cutRent" type="file" name="cutRent" multiple>
+      </div>
+      <div id="cutRentShow" class="am-u-md-12 img_content"></div>
   </div>
 
   <div class="am-form-group am-u-sm-12 breaks">
-    <div class="am-form-group am-u-sm-3">
-      <label>住房保障申请表：</label>
-    </div>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="houseSecurity" type="file" name="houseSecurity" multiple>
-        </div>
-        <div id="houseSecurityShow" class="am-u-md-12 img_content"></div>
+      <div class="am-form-group am-u-sm-3">
+          <label>住房保障申请表：</label>
+      </div>
+      <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="houseSecurity" type="file" name="houseSecurity" multiple>
+      </div>
+      <div id="houseSecurityShow" class="am-u-md-12 img_content"></div>
   </div>
 
   <div class="am-form-group am-u-sm-12 breaks">
@@ -200,46 +201,13 @@
         </div>
         <div id="nonCardinalityShow" class="am-u-md-12 img_content"></div>
   </div>
-
-  <div class="am-form-group am-u-sm-12 CancelRent">
-    <div class="am-form-group am-u-sm-3">
-      <label>新增注销材料：</label>
-    </div>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="CancelReport" type="file" name="CancelReport" multiple>
-        </div>
-        <div id="CancelReportShow" class="am-u-md-12 img_content"></div>
-  </div>
-
-  <div class="am-form-group am-u-sm-12 WriteOff">
-    <div class="am-form-group am-u-sm-3">
-      <label>核销起始时间：</label>
-    </div>
-    <div class="am-u-md-3 am-u-end">
-      <input type="text" name="DateStart" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'months', minViewMode: 'months'}" />
-    </div>
-  </div>
-
-  <div class="am-form-group am-u-sm-12 WriteOff">
-    <div class="am-form-group am-u-sm-3">
-      <label>核销结束时间：</label>
-    </div>
-    <div class="am-u-md-3 am-u-end">
-      <input type="text" name="DateEnd" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'months', minViewMode: 'months'}" />
-    </div>
-  </div>
-  <div class="am-form-group am-u-sm-12 WriteOff">
-    <div class="am-form-group am-u-sm-3">
-      <label>陈欠核销报告：</label>
-    </div>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="WriteOffReport" type="file" name="WriteOffReport" multiple>
-        </div>
-        <div id="WriteOffShow" class="am-u-md-12 img_content"></div>
-  </div>
 </form>
+<div id="rentMeter">
+
+</div>
+
+
+
 
 <form id="pauseRent" style="display:none;margin-top:20px;">
   <div class="am-form-group am-u-sm-12">
