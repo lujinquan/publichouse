@@ -3,8 +3,8 @@
       <h2 class="label_title">查找楼栋编号：</h2>
     </div> 
     <div class="am-form-group am-u-sm-4">
-      <input class="label_input" />
-      <button class="am-btn am-btn-primary am-btn-sm">查询</button>
+      <input class="label_input" id="banLinkInput" placeholder="输入地址查询" />
+      <button class="am-btn am-btn-primary am-btn-sm" id="banLinkSearch">查询</button>
     </div>
     <div class="am-form-group am-u-sm-12">
         <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact" style="border:1px solid #ccc;">
@@ -31,7 +31,7 @@
           <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
               <thead style="display:block;">
                   <tr>
-                      <td style="width:150px;"><input type="checkbox"></td>
+                      <td style="width:150px;"><input type="checkbox" id="allChoose"></td>
                       <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
                       <td style="width:150px;" class="am-hide-sm-only">产别</td>
                       <td style="width:150px;" class="am-hide-sm-only">使用性质</td>
