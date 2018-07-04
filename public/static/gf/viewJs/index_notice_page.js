@@ -245,7 +245,7 @@ $('#check_menu').on('click', 'input[type="checkbox"]', function(){
 	var shortcut = $('input[type="checkbox"]:checked');
 	if(shortcut.length >= 2){
 		$(this).context.checked = false;
-		$('#most_count').show();
+		$('#most_count').hide();
 		return ;
 	} else {
 		$('#most_count').hide();
