@@ -71,6 +71,15 @@ class ChangeAudit extends Model
             if ($searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
+            if ($searchForm['OwnerType']) {  //检索变更类型
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
+            if ($searchForm['UseNature']) {  //检索变更类型
+                $where['UseNature'] = array('eq', $searchForm['UseNature']);
+            }
+            if ($searchForm['InflRent']) {  //检索变更类型
+                $where['InflRent'] = array('eq', $searchForm['InflRent']);
+            }
             if ($searchForm['UserName']) {  //检索操作人名称
                 $where['UserName'] = array('like', '%' . $searchForm['UserName'] . '%');
             }
@@ -119,7 +128,7 @@ class ChangeAudit extends Model
     {
 
         //异动编号 ，房屋编号 ，异动类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if (!$map) $map = 'ChangeOrderID ,HouseID ,ChangeType ,InstitutionID ,UserNumber ,CreateTime ,Status';
+        if (!$map) $map = 'ChangeOrderID ,HouseID ,ChangeType ,OwnerType ,UseNature, InflRent, InstitutionID ,UserNumber ,CreateTime ,Status';
         $data = self::field($map)->where('id', 'eq', $id)->find();
 
         if (!$data) {
@@ -133,6 +142,9 @@ class ChangeAudit extends Model
         $res = self::order_config_detail($data['ChangeOrderID'], $data['Status']);
 
         $data['ProcessRoleID'] = $res['RoleID'];
+
+        $data['UseNature'] = get_usenature($data['UseNature']);
+        $data['OwnerType'] = get_owner($data['OwnerType']); 
 
         $data['Status'] = '待' . $res['RoleName'] . $res['Title'];
 

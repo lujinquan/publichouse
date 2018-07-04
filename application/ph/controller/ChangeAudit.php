@@ -9,6 +9,8 @@ class ChangeAudit extends Base
 
         $data = model('ph/ChangeAudit') -> get_all_change_lst();
 
+        //halt($data['arr']);
+
         $changes = Db::name('process')->field('id, ProcessName')->select();
 
         //获取所有完损等级

@@ -79,6 +79,15 @@ class ChangeRecord extends Model
             if (isset($searchForm['ChangeType']) && $searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
+            if ($searchForm['OwnerType']) {  //检索变更类型
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
+            if ($searchForm['UseNature']) {  //检索变更类型
+                $where['UseNature'] = array('eq', $searchForm['UseNature']);
+            }
+            if ($searchForm['InflRent']) {  //检索变更类型
+                $where['InflRent'] = array('eq', $searchForm['InflRent']);
+            }
             if (isset($searchForm['UserName']) && $searchForm['UserName']) {  //检索操作人名称
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
@@ -129,7 +138,7 @@ class ChangeRecord extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,InstitutionID ,UserNumber ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,UseNature,InflRent,InstitutionID ,UserNumber ,CreateTime ,Status';
         $data = Db::name('change_order')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
@@ -139,7 +148,8 @@ class ChangeRecord extends Model
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
 
         $data['ChangeType'] = Db::name('change_type')->where('id','eq',$data['ChangeType'])->value('ChangeType');
-//halt($data['Status']);
+        $data['UseNature'] = get_usenature($data['UseNature']);
+        $data['OwnerType'] = get_owner($data['OwnerType']);
         if($data['Status'] == 1){
 
             $data['Status'] = '通过';
