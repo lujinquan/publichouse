@@ -14,15 +14,37 @@ $('.BtnApprove').click(function(){
 		console.log(res);
 		var type = res.data.detail.type;
 		if(type == 1){
-			$(".breaks").show();
-			$(".pause").hide();
-			$(".WriteOff").hide();
-			$(".cancel").hide();
-			$('.Uhide').css('display','block');
-			$('.Ushow').css('display','none');
-			$('#breakType').text(res.data.detail.CutName);
-			$('#IDNumber').text(res.data.detail.IDnumber);
-			$('#validity').text(res.data.detail.MuchMonth);
+			layer.open({
+                type: 1,
+                area: ['990px','780px'],
+                resize: false,
+                zIndex: 100,
+                title: ['租金减免详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                content: $('#derate'),
+                btn:['通过','不通过'],
+                success: function(){
+                	$('.derateHouseID').text(res.data.detail.HouseID);
+                	$('.derateBanID').text(res.data.detail.BanID);
+                	$('.derateAddress').text(res.data.detail.BanAddress);
+                	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+                	$('.derateUseNature').text(res.data.detail.UseNature);
+                	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+                	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+                	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+                	$('.derateTenantName').text(res.data.detail.TenantName);
+                	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+                	$('.derateTenantTel').text(res.data.detail.TenantTel);
+                	$('.derateMoney').text(res.data.detail.RemitRent);
+                	$('.derateType').text(res.data.detail.CutName);
+                	$('.derateNumber').text(res.data.detail.MuchMonth);
+                	$('.derateTime').text(res.data.detail.IDnumber);
+                	if(res.data.config.status == '1'){
+						$('.status_2').show();
+					}
+					processState('#derateState',res);
+					metailShow('#deratePhotos',res);
+                }
+            })
 		}else if(type == 2){
 			$(".breaks").hide();
 			$(".pause").hide();
@@ -571,15 +593,33 @@ $('.BtnDetail').click(function(){
 			$('.HousePrerent').text(res.data.detail.HousePrerent||res.data.detail.PreRent);
 			//$('#approveName').text(res.data.detail.ChangeType);
 			if(type == 1){
-				$(".breaks").show();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('#breakType').text(res.data.detail.CutName);
-				$('#IDNumber').text(res.data.detail.IDnumber);
-				$('#validity').text(res.data.detail.MuchMonth);
+				layer.open({
+                    type: 1,
+                    area: ['990px','780px'],
+                    resize: false,
+                    zIndex: 100,
+                    title: ['租金减免详情', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                    content: $('#derate'),
+                    success: function(){
+                    	$('.derateHouseID').text(res.data.detail.HouseID);
+                    	$('.derateBanID').text(res.data.detail.BanID);
+                    	$('.derateAddress').text(res.data.detail.BanAddress);
+                    	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+                    	$('.derateUseNature').text(res.data.detail.UseNature);
+                    	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+                    	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+                    	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+                    	$('.derateTenantName').text(res.data.detail.TenantName);
+                    	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+                    	$('.derateTenantTel').text(res.data.detail.TenantTel);
+                    	$('.derateMoney').text(res.data.detail.RemitRent);
+                    	$('.derateType').text(res.data.detail.CutName);
+                    	$('.derateNumber').text(res.data.detail.MuchMonth);
+                    	$('.derateTime').text(res.data.detail.IDnumber);
+						processState('#derateState',res);
+						metailShow('#deratePhotos',res);
+                    }
+                })
 			}else if(type == 2){
 				$(".breaks").hide();
 				$(".pause").hide();

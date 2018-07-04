@@ -78,9 +78,8 @@ return [
     'EmptyReport' => '空租报告',
 
     //新增暂停计租
-    'pauseUploadReport' => '暂停计租报告',
+    'pauseUploadReport' => '上传报告',
     'pauseMaterial' => '非基数异动核算凭单',
-    'SuspendReport' => '暂停计租报告',
 
     //新增注销
     'CancelReport' => '新增注销材料',
