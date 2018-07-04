@@ -258,6 +258,9 @@ $('#addApply').click(function() {
                 success: function(){
                     var fun = new getBanList();
                     fun.getData();
+                    $('#banLinkSearch').click(function(){
+                        fun.search($('#banLinkInput').val());
+                    })
                     var seven = new file({
                         show: "#pauseMaterialShow",
                         upButton: "#pauseMaterialUp",
@@ -298,6 +301,7 @@ $('#addApply').click(function() {
                                         house_array.push($(".house_check:eq("+i+") td:eq(1)").text());
                                     }
                                 }
+                                console.log(fun.initData.BanID);
                                 $('#pauseBanID').text(fun.initData.BanID);
                                 $('#pauseBanAddress').text(fun.initData.BanAddress);
                                 $('#pauseOwnerType').text(fun.initData.OwnerType);
@@ -2055,39 +2059,53 @@ function getBanList(){
     this.initData = {
         BanAddress:"",
         BanID:"",
-        OwnerType:""
+        OwnerType:"",
+        banData:null,
+        filterData:null
     };
     this.getData = function(){
         var self = this;
         $.get('/ph/Api/get_all_ban', function(res) {
             res = JSON.parse(res);
             console.log(res);
-            var ban_str = '';
-            for(var i = 0;i < res.data.length;i++){
-                ban_str += '<tr>\
-                    <td style="width:150px;">'+res.data[i].BanID+'</td>\
-                    <td style="width:150px;">'+res.data[i].DamageGrade+'</td>\
-                    <td style="width:150px;">'+res.data[i].StructureType+'</td>\
-                    <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
-                    <td style="width:150px;">'+res.data[i].UseNature+'</td>\
-                    <td style="width:350px;">'+res.data[i].BanAddress+'</td>\
-                </tr>'
-            }
-            $('#pauseBanAdd').empty();
-            $('#pauseBanAdd').append($(ban_str));
-            $('#pauseBanAdd tr').click(function(){
-                var BanID = $(this).find('td').eq(0).text();
-                var BanAddress = $(this).find('td').eq(5).text();
-                var OwnerType = $(this).find('td').eq(3).text();
-                self.initData = {
-                    BanAddress:BanAddress,
-                    BanID:BanID,
-                    OwnerType:OwnerType
-                };
-                banLinkHouse(BanID);
-            })
+            self.initData.banData = res.data;
+            self.renderDom(res.data);
         });
     };
+    this.renderDom = function(data){
+        var self = this;
+        var ban_str = '';
+        for(var i = 0;i < data.length;i++){
+            ban_str += '<tr>\
+                <td style="width:150px;">'+data[i].BanID+'</td>\
+                <td style="width:150px;">'+data[i].DamageGrade+'</td>\
+                <td style="width:150px;">'+data[i].StructureType+'</td>\
+                <td style="width:150px;">'+data[i].OwnerType+'</td>\
+                <td style="width:150px;">'+data[i].UseNature+'</td>\
+                <td style="width:350px;">'+data[i].BanAddress+'</td>\
+            </tr>'
+        }
+        $('#allChoose').prop('checked',false);
+        $('#pauseBanAdd').empty();
+        $('#pauseBanAdd').append($(ban_str));
+        $('#pauseBanAdd tr').click(function(){
+            var BanID = $(this).find('td').eq(0).text();
+            var BanAddress = $(this).find('td').eq(5).text();
+            var OwnerType = $(this).find('td').eq(3).text();
+            self.initData = {
+                BanAddress:BanAddress,
+                BanID:BanID,
+                OwnerType:OwnerType
+            };
+            banLinkHouse(BanID);
+        })
+    };
+    this.search = function(val){
+        this.filterData = this.initData.banData.filter(function(data){
+                return data.BanAddress.indexOf(val) > -1;
+        })
+        this.renderDom(this.filterData);
+    }
 }
 function banLinkHouse(BanID){
     $.get('/ph/Api/get_all_house/BanID/'+BanID,function(res){
@@ -2106,7 +2124,19 @@ function banLinkHouse(BanID){
         }
         $('#pauseHouseAdd').empty();
         $('#pauseHouseAdd').append($(house_str));
-
-
+        $('#allChoose').click(function(){
+            if($(this).prop('checked')){
+                $(".house_check input[type='checkbox']").prop('checked',true);
+            }else{
+                $(".house_check input[type='checkbox']").prop('checked',false);
+            }
+        })
+        $('.house_check').click(function(){
+            if($(this).find("input[type='checkbox']").prop('checked')){
+                $(this).find("input[type='checkbox']").prop('checked',false);
+            }else{
+                $(this).find("input[type='checkbox']").prop('checked',true);
+            }
+        })
     })
 }
