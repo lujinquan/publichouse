@@ -132,33 +132,27 @@ class ChangeAudit extends Base
                         $ChangeImageIDS[] = model('ph/UserAudit') -> uploads($v1,$k1);
                     }
                     $ChangeImageIDS = implode(',', $ChangeImageIDS);  //返回的是使用权变更的影像资料id(多个以逗号隔开)
-                }
-                if(isset($ChangeImageIDS)){ //执行添加  
+                    if(isset($ChangeImageIDS)){ //执行添加  
 
-                    $changeImageIDS = $find['ChangeImageIDS']?$find['ChangeImageIDS'].','.$ChangeImageIDS:$ChangeImageIDS;    
+                        $changeImageIDS = $find['ChangeImageIDS']?$find['ChangeImageIDS'].','.$ChangeImageIDS:$ChangeImageIDS;    
 
-                    $effect = Db::name('change_order')->where('ChangeOrderID' ,'eq' ,$data['ChangeOrderID'])->setField('ChangeImageIDS' ,$changeImageIDS);
+                        $effect = Db::name('change_order')->where('ChangeOrderID' ,'eq' ,$data['ChangeOrderID'])->setField('ChangeImageIDS' ,$changeImageIDS);
 
-                    if(!$effect){
-                        return jsons('4003','添加资料失败');
+                        if(!$effect){
+                            return jsons('4003','添加资料失败');
+                        }
+                    }else{
+                        return jsons('4002','请补充资料……');
                     }
-                }else{
-                    return jsons('4002','请补充资料……');
                 }
-
+                
             }
 
             $data['reson'] = isset($data['reson'])?$data['reson']:'';
 
             $result = model('ph/ChangeAudit')->create_child_order($data['ChangeOrderID'], $data['reson']); //执行审核
 
-            if($result === true){
-
-                return jsons('2000' ,'审核完成');
-            }else{
-
-                return jsons('4000' ,'审核异常');
-            }
+            return ($result === true)?jsons('2000' ,'审核完成'):jsons('4000' ,'审核异常');
 
         }
 

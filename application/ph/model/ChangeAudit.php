@@ -548,7 +548,7 @@ class ChangeAudit extends Model
         } elseif ($reson != '') {
 
             //终审不通过则状态改为 0
-            self::where($where)->setField('Status', 3);
+            self::where($where)->setField('Status', 0);
 
             $datas['Status'] = 3;
 
