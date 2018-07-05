@@ -6,6 +6,7 @@ use think\Loader;
 use think\Cache;
 use think\Config;
 use think\Controller;
+use app\ph\model\HouseInfo as HouseInfoModel;
 use think\Db;
 use think\Debug;
 
@@ -1300,135 +1301,23 @@ class Api extends Controller
     }
 
     public function test()
-    {
-        $res = Db::name('house')->limit(100)->column('HouseID,HousePrerent');
-//halt($res);
-        $arr = [];
+    {   
+        // $housemodel = new HouseInfoModel;
 
-        foreach($res as $k => $v){
-            //count_house_rent($k);
-             $arr[] = [
-                        'HouseID' => $k,
-                        'CountRent' => count_house_rent($k),
-                        'HousePrerent' => $v, 
-                    ];
-        }
-
-        Db::name('house_diff')->insertAll($arr);
-        
-        //halt($res);
-
-        // $res1 = Db::name('ban')->column('BanID,PreRent');
-
-        // $arr = [];
-        // foreach($res1 as $k => $v){
-        //     if(isset($res[$k])){
-        //         if($v != $res[$k]){
-        //             $arr[] = [
-        //                 'BanID' => $k,
-        //                 'FromBan' => $v,
-        //                 'FromHouse' => $res[$k],
-        //                 'Diff' => $res[$k] - $v,
-        //             ];
-                    
-        //         }
-        //     }
-            
+        // $offset = 15000;
+        // $length = 5000;  
+        // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
+        // //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
+        // //$res = ['10400119035596'=>0];
+        // foreach($res as $k => $v){  
+        //      $s = 0;
+        //      $s = count_house_rent($k);
+        //      //dump($k.'计算租金是：');halt($s);
+        //      $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
+        //      //halt($k);
         // }
-        
-        //halt($arr);
 
-
-
-        //$arr = Db::query("select max(BanID) from ld_zanting where BanID !='' group by BanID");
-        // $arr = Db::table('ld_zanting')->where('BanID > 0')->group('BanID')->column('max(id)');
-
-        // $re = Db::table('ld_zanting')->where('id','not in',$arr)->delete();
-       
-        // halt($re);
-
-        //将房间使用面积统计到楼栋中去，
-//        $res = Db::name('room')->field('sum(UseArea) as UseAreas,BanID')->group('BanID')->select();
-//        foreach($res as $v){
-//            Db::name('ban')->where('BanID',$v['BanID'])->update(['BanUsearea'=>$v['UseAreas']]);
-//        }
-
-//        //将同时绑定两个房屋的房间的面积计算到房屋中去
-//        $arr = Db::name('room')->field('UseArea,LeasedArea,HouseID')->where('RoomPublicStatus = 2')->select();
-//        $k = 0;
-//        foreach($arr as $v){
-//            $houseids = explode(',',$v['HouseID']);
-//            $data[$k]['HouseID'] = $houseids[0];
-//            $data[$k]['UseArea'] = $v['UseArea']/2;
-//            $data[$k]['LeasedArea'] = $v['LeasedArea']/2;
-//            $k++;
-//            $data[$k]['HouseID'] = $houseids[1];
-//            $data[$k]['UseArea'] = $v['UseArea']/2;
-//            $data[$k]['LeasedArea'] = $v['LeasedArea']/2;
-//            $k++;
-//        }
-//        foreach ($data as $value) {
-//            Db::name('house')->where('HouseID',$value['HouseID'])->setInc('HouseUsearea',$value['UseArea']);
-//            Db::name('house')->where('HouseID',$value['HouseID'])->setInc('LeasedArea',$value['LeasedArea']);
-//        }
-
-/*       //将楼栋地址同步到房屋表中去
-        $res = Db::execute("update ph_house as a inner join ph_ban as b on a.BanID = b.BanID set a.BanAddress = b.AreaFour");
-        halt('本次操作有'.$res.'条记录受影响');*/
-
-
-/*        //将租户的姓名同步到房屋表中去
-        $res = Db::execute("update ph_house as a inner join ph_tenant as b on a.TenantID = b.TenantID set a.TenantName = b.TenantName");
-        halt('本次操作有'.$res.'条记录受影响');*/
-
-//        //以管段分查询出同一地址下姓名重复的名字
-//        $data = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
-//        $insti = Db::name('institution')->column('id,Institution');
-//        foreach($data as $dav){
-//            $a = Db::name('house')->where(['InstitutionID'=>$dav,'Status'=>1])->column('HouseID,concat(BanAddress,TenantID) as BanTenant');
-//            $b = Db::name('house')->where(['InstitutionID'=>$dav,'Status'=>1])->column('HouseID,TenantName');
-//            foreach($a as $k1 => $v1){ //$sql = Db::name('house')->getLastSql();
-//                foreach($a as $k2 => $v2){
-//                    if($v1 === $v2 && $k1 != $k2){
-//                        $arr[$insti[$dav]][] = $b[$k1];
-//                    }
-//                }
-//            }
-//            if(isset($arr[$insti[$dav]])){
-//                $arr[$insti[$dav]] = array_unique($arr[$insti[$dav]]);
-//            }
-//        }
-//        halt($arr);
-
-//        //以管段分查询出同楼栋下间号重复的房间编号
-//        $data = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
-//        $insti = Db::name('institution')->column('id,Institution');
-//        foreach($data as $dav){
-//            $a = Db::name('room')->where(['InstitutionID'=>$dav,'Status'=>1])->column('RoomID,concat(BanID,RoomNumber) as BanRoom');
-//            foreach($a as $k1 => $v1){
-//                foreach($a as $k2 => $v2){
-//                    if($v1 === $v2 && $k1 != $k2){
-//                        $arr[$insti[$dav]][] = $k1;
-//                    }
-//                }
-//            }
-//            if(isset($arr[$insti[$dav]])){
-//                $arr[$insti[$dav]] = array_unique($arr[$insti[$dav]]);
-//            }
-//        }
-//        halt($arr);
-
-        // //以管段分查询出同楼栋下间号重复的房间编号
-        // $data = [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
-        // $insti = Db::name('institution')->column('id,Institution');
-        // foreach($data as $dav){
-        //     $a = Db::name('ban')->where(['TubulationID'=>$dav,'Status'=>1,'OldBanID'=>''])->column('BanID');
-        //     $arr[$insti[$dav]][] = $a;
-        // }
-        // halt($arr);
-
-
-        halt('ok');
+        halt(20000);
 
     }
 

@@ -667,19 +667,27 @@ function count_house_rent($houseid){
     $where['RoomPublicStatus'] = array('<',3); //去掉3户共用的房间
 
     $roomArr = Db::name('room')->where($where)->column('RoomID');
-
+//halt($roomArr);
     if($roomArr){
         foreach ($roomArr as $value) {
+    //         if($value == 119525){
+    //     halt($value);
+    // }
             $rent[] = count_room_rent($value);
         }
+        //dump($rent);
         $sumrent = array_sum($rent);
     }else{
         $sumrent = 0;
     }
-    //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
-    $houseAddRent = Db::name('house')->field('PlusRent,PublicRent,DiffRent,ProtocolRent')->where('HouseID',$houseid)->find();
 
-    $houseRent = $sumrent+array_sum($houseAddRent);
+    //halt($sumrent);
+    //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
+    $houseAddRent = Db::name('house')->field('PublicRent')->where('HouseID',$houseid)->find();
+
+    $jiaji = $houseAddRent?array_sum($houseAddRent):0;
+
+    $houseRent = $sumrent + $jiaji;
 
     return $houseRent;
 }
@@ -702,7 +710,11 @@ function count_room_rent($roomid){
     //计算租金= 计租面积 * 实际基价 * 结构基价 * 基价折减率 * 架空率 * 层次调解率
     $roomRent = $roomOne['LeasedArea'] * $roomOne['RentPoint'] * $structureTypePoint * $emptyPoint * $floorPoint;
 
-    return $roomRent;
+    if($roomOne['RoomPublicStatus'] == 2){ //被两户共用了，就只取一半
+        $roomRent = $roomRent / 2;
+    }
+
+    return round($roomRent,2);
 }
 
 function get_floor_point($liveFloor,$BanFloorNum,$ifElevator){
