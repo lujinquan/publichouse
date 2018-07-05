@@ -123,9 +123,11 @@ class ChangeApply extends Model
                 case 3:
 
                     if(!($data['houseID'])){
-
                         return jsons('4000','暂未选择任何房屋');
-
+                    }
+                    $arrs = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])->group('OwnerType')->column('OwnerType');
+                    if(count($arrs) > 1){
+                        return jsons('4004','所选房屋产别不能超过一种');
                     }
                 break;
 

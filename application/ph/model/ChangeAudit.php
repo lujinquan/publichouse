@@ -548,7 +548,7 @@ class ChangeAudit extends Model
         } elseif ($reson != '') {
 
             //终审不通过则状态改为 0
-            self::where($where)->setField('Status', 0);
+            self::where($where)->setField('Status', 3);
 
             $datas['Status'] = 3;
 
@@ -562,7 +562,7 @@ class ChangeAudit extends Model
 
 
             //终审通过后，系统直接将对应的数据修改为异动后的数据
-            //model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);  //终审通过后，系统直接更改相关的
+            model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);  //终审通过后，系统直接更改相关的
 
             $datas['Status'] = 2;
 
@@ -654,17 +654,15 @@ class ChangeAudit extends Model
             case 3:  //暂停计租异动完成后的，系统处理
 
                 //修改对应的房屋的状态为暂停计租
-                $one = Db::name('change_order')->field('HouseID,BanID')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                if ($one['BanID']) {      //按栋暂停，将这栋楼底下的所有房屋标记为暂停计租状态
-                    Db::name('house')->where('BanID', 'eq', $one['BanID'])->setField('IfSuspend', 1);
-                    //修改租金配置表,删除不可用状态房屋对应的租金配置记录
-                    $houseids = Db::name('house')->where('BanID', 'eq', $one['BanID'])->column('HouseID');
-                    Db::name('rent_config')->where('HouseID', 'in', $houseids)->delete();
-                } else {      //按户暂停，将该房屋标记为暂停计租状态
-                    Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->setField('IfSuspend', 1);
-                    //修改租金配置表,删除不可用状态房屋对应的租金配置记录
-                    Db::name('rent_config')->where('HouseID', 'eq', $one['HouseID'])->delete();
-                }
+                $houseids = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
+
+                if(strpos($houseids,',')){
+                    $arr = explode(',',$houseids);
+                    Db::name('house')->where('HouseID', 'in', $arr)->setField('IfSuspend', 1);
+                }else{
+                    Db::name('house')->where('HouseID', 'eq', $houseids)->setField('IfSuspend', 1);
+                } 
+                
                 break;
 
             case 4:  //陈欠核销异动完成后的，系统处理 （待完善，将所有满足条件的账抹平）

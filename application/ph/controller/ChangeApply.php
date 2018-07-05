@@ -134,7 +134,8 @@ class ChangeApply extends Base
 
                 case 3:  // 暂停计租:目前有两种，一种是按户暂停，另一种是按楼栋，暂时都按照按户暂停
 
-                    $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])->column('HouseID,UseNature');
+                    $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
+                                               ->column('HouseID,UseNature');
 
                     foreach($houses as $k => $v){
                         $housearr[$v][] = $k;
@@ -142,8 +143,8 @@ class ChangeApply extends Base
                     foreach($housearr as $h){
                         $result = [];
                         $one = Db::name('house')->where(['HouseID'=>['in',$h]])
-                                              ->field('sum(HousePrerent) as HousePrerents,BanID,UseNature,OwnerType,InstitutionID, InstitutionPID')
-                                              ->find();
+                                                ->field('sum(HousePrerent) as HousePrerents,BanID,UseNature,OwnerType,InstitutionID, InstitutionPID')
+                                                ->find();
 
                         $suffix = substr(uniqid(),-6);
 
