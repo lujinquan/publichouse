@@ -291,6 +291,7 @@ $('#addApply').click(function() {
                                 var form_str = '';
                                 var HousePrerent = 0;
                                 var count = 0;
+                                house_array = [];
                                 for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
                                     if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked')){
                                         count++;
@@ -301,7 +302,6 @@ $('#addApply').click(function() {
                                             <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
                                         </tr>';
                                         HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
-                                        house_array = [];
                                         house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
                                     }
                                 }
