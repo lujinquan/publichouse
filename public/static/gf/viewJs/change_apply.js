@@ -9,8 +9,8 @@ $('#addH').click(function() {
 $('#addApply').click(function() {
     var checkId = $("input:checked").val();
     console.log(checkId);
-    $(".breaks").hide();
-    $(".EmptyRent").hide();
+    $(".rent_reduction").hide();
+    $(".cancel").hide();
     $(".PauseRent").hide();
     $(".CancelRent").hide();
     $(".WriteOff").hide();
@@ -27,7 +27,7 @@ $('#addApply').click(function() {
                 content: $('#derateApplyForm'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    $(".breaks").show();
+                    $(".rent_reduction").show();
                     $('#DQueryData').on("click", function() {
                         var HouseID = $('#getInfo_1').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
@@ -141,7 +141,7 @@ $('#addApply').click(function() {
                         formData.append("RemitRent", $('#RemitRent').val());
                        
                         if($('.CutHide').css('display')=='block'){
-                             formData.append("ARemitRent", $('#ARemitRent').val());
+                            formData.append("ARemitRent", $('#ARemitRent').val());
                         }
                         formData.append("type", 1);
                         $.ajax({
@@ -164,7 +164,7 @@ $('#addApply').click(function() {
                 end: function() {
                     $("input[type='text']").val('');
                     $("input[type='number']").val('');
-                    $(".label_content").text('');
+                    $(".label_p_style").text('');
                     $(".img_content").text('');
                     $("select").val('');
                     location.reload();
@@ -291,6 +291,7 @@ $('#addApply').click(function() {
                                 var form_str = '';
                                 var HousePrerent = 0;
                                 var count = 0;
+                                house_array = [];
                                 for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
                                     if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked')){
                                         count++;
@@ -301,7 +302,6 @@ $('#addApply').click(function() {
                                             <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
                                         </tr>';
                                         HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
-                                        house_array = [];
                                         house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
                                     }
                                 }
@@ -344,6 +344,7 @@ $('#addApply').click(function() {
                 end:function(){
                     $("input[type='text']").val('');
                     $("input[type='number']").val('');
+                    $(".label_p_style").text('');
                     $("select").val('');
                     location.reload();
                 }
@@ -1229,106 +1230,109 @@ $('#addApply').click(function() {
             });
             break;
         case "8":
-            $(".CancelRent").show();
+            $(".cancel").show();
             var layer_cancelRent = layer.open({
                 type:1,
-                area:['400px', '200px'],
+                area:['990px', '700px'],
                 resize:false,
                 zIndex:99,
                 title:['新增注销', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content:"<div class='text-center'>\
-                    <button class='am-btn am-btn-secondary cancelRent-btn' value='801'>按栋注销</button>\
-                    <button class='am-btn am-btn-secondary cancelRent-btn' value='802'>按户注销</button></div>",
+                content:$('#derateApplyForm'),
+                btn: ['确定', '取消'],
                 success:function(){
-                    $('.cancelRent-btn').click(function(){
-                        layer.close(layer_cancelRent);
-                        var cancelRent_value =  $(this).val();
-                        if(cancelRent_value == '801'){
-                            $('#houseLabel').text('楼栋编号：');
-                            banQuery.action('getInfo_1','1');
-                        }else{
-                            $('#houseLabel').text('房屋编号：');
-                            houseQuery.action('getInfo_1','1');
-                        }
-                        layer.open({
-                            type: 1,
-                            area: ['990px', '600px'],
-                            resize: false,
-                            zIndex: 100,
-                            title: ['新增注销', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                            content: $('#derateApplyForm'),
-                            btn: ['确定', '取消'],
-                            success: function() {
-                                $('.Hhide').css("display", "none");
-                                $('#DQueryData').on("click", function() {
-                                    var ban_or_house_ID = $('#getInfo_1').val();
-                                    if(cancelRent_value == '801'){
-                                        var url = '/ph/Api/get_ban_info/BanID/' + ban_or_house_ID;
-                                    }else{
-                                        var url = '/ph/Api/get_house_info/HouseID/' + ban_or_house_ID
-                                    }
-                                    $.get(url, function(res) {
-                                        res = JSON.parse(res);
-                                        console.log(res);
-                                        layer.msg(res.msg);
-                                        $("#BanID").text(res.data.ban_or_house_ID);
-                                        $("#BanAddress").text(res.data.BanAddress);
-                                        $("#CreateTime").text(res.data.CreateTime);
-                                        $("#FloorID").text(res.data.BanFloorNum);
-                                        $("#HouseArea").text(res.data.HouseUsearea);
-                                        $("#LeasedArea").text(res.data.LeasedArea);
-                                        $("#TenantName").text(res.data.TenantName);
-                                        $("#TenantNumber").text(res.data.TenantNumber);
-                                        $("#TenantTel").text(res.data.TenantTel);
-                                        $('#CreateTime').text(res.data.CreateTime);
-                                        $('#HouseArea').text(res.data.BanUsearea);
-                                        //$("#BanAddress").text(res.data.BanAddress);
-                                    });
-                                });
-                                new file({
-                                    button: "#CancelReport",
-                                    show: "#CancelReportShow",
-                                    upButton: "#CancelReportUp",
-                                    size: 1024,
-                                    url: "/ph/ChangeApply/add",
-                                    ChangeOrderID: '',
-                                    Type: 1,
-                                    title: "暂停计租报告"
-                                });
-                            },
-                            yes: function(thisIndex) {
-                                var formData = fileTotall.getArrayFormdata();
-                                if(cancelRent_value == '801'){
-                                    formData.append("BanID", $('#getInfo_1').val());
-                                }else{
-                                    formData.append("HouseID", $('#getInfo_1').val());
+                   $('#DQueryData').on("click", function() {
+                        var HouseID = $('#getInfo_1').val();
+                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                            res = JSON.parse(res);
+                            console.log(res);
+                            layer.msg(res.msg);
+                            $("#BanID").text(res.data.BanID);
+                            $("#BanAddress").text(res.data.BanAddress);
+                            $("#CreateTime").text(res.data.CreateTime);
+                            $("#useNature").text(res.data.FloorID);
+                            $("#HouseUsearea").text(res.data.HouseUsearea);
+                            $("#LeasedArea").text(res.data.LeasedArea);
+                            $("#TenantName").text(res.data.TenantName);
+                            $("#TenantNumber").text(res.data.TenantID);
+                            $("#TenantTel").text(res.data.TenantTel);
+                            $("#OwnTypeD").text(res.data.OwnerType);
+                            $("#monthRent").text(res.data.HousePrerent);
+                        });
+                    });
+                    houseQuery.action('getInfo_1','1');
+                    new file({
+                        button: "#removeOrder",
+                        show: "#removeOrderShow",
+                        upButton: "#removeOrderUp",
+                        size: 10240,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "拆迁令"
+                    });
+                    new file({
+                        button: "#redLineMap",
+                        show: "#redLineMapShow",
+                        upButton: "#redLineMapUp",
+                        size: 10240,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "红线图"
+                    });
+                    new file({
+                        button: "#reimbursementInvoice",
+                        show: "#reimbursementInvoiceShow",
+                        upButton: "#reimbursementInvoiceUp",
+                        size: 10240,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "补偿款收回的发票"
+                    });
+                    new file({
+                        button: "#Cardinality",
+                        show: "#CardinalityShow",
+                        upButton: "#CardinalityUp",
+                        size: 10240,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "基数异动核算凭单"
+                    });
+                },
+                yes:function(){
+                    if ($('#getInfo_1').val() == "") {
+                        layer.msg('房屋编号存在问题呢！！！');
+                    } else {
+                        var formData = fileTotall.getArrayFormdata();
+                        formData.append("HouseID", $('#getInfo_1').val());
+                        formData.append("cancelType", $('#cancelType').val());
+                        formData.append("type", 8);
+                        $.ajax({
+                            type: "post",
+                            url: "/ph/ChangeApply/add",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(res) {
+                                res = JSON.parse(res);
+                                layer.msg(res.msg);
+                                if(res.retcode == '2000'){
+                                    layer.close(thisIndex);
+                                    location.reload();
                                 }
-                                formData.append("CancelType", $('#CancelType').val());
-                                formData.append("type", 8);
-                                $.ajax({
-                                    type: "post",
-                                    url: "/ph/ChangeApply/add",
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function(res) {
-                                        res = JSON.parse(res);
-                                        layer.msg(res.msg);
-                                        layer.close(thisIndex);
-                                        location.reload();
-                                    }
-                                })
-                            },
-                            end: function() {
-                                $("input[type='text']").val('');
-                                $("input[type='number']").val('');
-                                $(".label_content").text('');
-                                $(".img_content").text('');
-                                $("select").val('');
-                                location.reload();
                             }
                         });
-                    })
+                    }
+                },
+                end:function(){
+                    $("input[type='text']").val('');
+                    $("input[type='number']").val('');
+                    $(".label_p_style").text('');
+                    $(".img_content").text('');
+                    $("select").val('');
+                    location.reload();
                 }
             })
             break;
