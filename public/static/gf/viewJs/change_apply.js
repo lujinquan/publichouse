@@ -291,17 +291,18 @@ $('#addApply').click(function() {
                                 var form_str = '';
                                 var HousePrerent = 0;
                                 var count = 0;
-                                for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
-                                    if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+                                for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
+                                    if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked')){
                                         count++;
                                         form_str += '<tr>\
                                             <td style="width:200px;">'+count+'</td>\
-                                            <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(1)").text()+'</td>\
-                                            <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
-                                            <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(2)").text()+'</td>\
+                                            <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
                                         </tr>';
-                                        HousePrerent += parseFloat($(".house_check:eq("+i+") td:eq(5)").text());
-                                        house_array.push($(".house_check:eq("+i+") td:eq(1)").text());
+                                        HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
+                                        house_array = [];
+                                        house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
                                     }
                                 }
                                 $('#pauseBanID').text(fun.initData.BanID);
@@ -2088,7 +2089,7 @@ function getBanList(){
                 <td style="width:150px;">'+data[i].StructureType+'</td>\
                 <td style="width:150px;">'+data[i].OwnerType+'</td>\
                 <td style="width:150px;">'+data[i].UseNature+'</td>\
-                <td style="width:350px;">'+data[i].BanAddress+'</td>\
+                <td style="width:350px;">'+data[i].AreaFour+'</td>\
             </tr>'
         }
         $('#allChoose').prop('checked',false);
@@ -2107,12 +2108,26 @@ function getBanList(){
     this.search = function(val){
         console.log(val);
         this.initData.filterData = this.initData.banData.filter(function(data){
-            return data.BanAddress.indexOf(val) > -1;
+            return data.AreaFour.indexOf(val) > -1;
         })
         this.renderDom(this.initData.filterData);
     }
 }
 function banLinkHouse(BanID){
+    // var count = $('#pauseHouseChoose tr').length;
+    // var form_str = '';
+    // for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
+    //     if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+    //         count++;
+    //         form_str += '<tr>\
+    //             <td style="width:200px;">'+count+'</td>\
+    //             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(1)").text()+'</td>\
+    //             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
+    //             <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
+    //         </tr>';
+    //     }
+    // }
+    // $('#pauseHouseChoose').append(form_str);
     $.get('/ph/Api/get_all_house/BanID/'+BanID,function(res){
         res = JSON.parse(res);
         var house_str = '';
@@ -2130,25 +2145,64 @@ function banLinkHouse(BanID){
         $('#pauseHouseAdd').append($(house_str));
         $('#allChoose').click(function(){
             if($(this).prop('checked')){
-                $(".house_check input[type='checkbox']").prop('checked',true);
+                $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',true);
+                console.log($("#pauseHouseAdd .house_check").length);
+                for(var j = 0;j < $("#pauseHouseAdd .house_check").length;j++){
+                    console.log(j);
+                    var dom = $("#pauseHouseAdd .house_check").eq(j);
+                    tr_add(dom,dom.find("td").eq(1).text());
+                }
             }else{
-                $(".house_check input[type='checkbox']").prop('checked',false);
+                $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',false);
             }
         })
-        $('.house_check').click(function(){
+        $('#pauseHouseAdd .house_check').click(function(){
             if($(this).find("input[type='checkbox']").prop('checked')){
                 $(this).find("input[type='checkbox']").prop('checked',false);
+                layer.msg('已经添加！');
             }else{
                 $(this).find("input[type='checkbox']").prop('checked',true);
+                tr_add($(this),$(this).find("td").eq(1).text());
             }
         })
-        $(".house_check input[type='checkbox']").click(function(event){
+        $("#pauseHouseAdd .house_check input[type='checkbox']").click(function(event){
             event.stopPropagation();
+            if($(this).prop('checked')){
+                tr_add($(this).parents('.house_check'),$(this).parents('.house_check').find("td").eq(1).text());
+            }else{
+                tr_remove($(this).parents('.house_check').find("td").eq(1).text());
+            }
         })
     })
 }
+$("#pauseHouseChoose").on("click",".house_check input[type='checkbox']",function(event){
+    event.stopPropagation();
+    if(!$(this).prop('checked')){
+        $(this).parents('tr').remove();
+    }
+})
 
+function tr_add(dom,houseID){
+    var flag = false;
+    for(var i = 0;i < $('#pauseHouseChoose tr').length;i++){
+        if($('#pauseHouseChoose tr:eq('+i+') td:eq(1)').text() == houseID){
+            flag = true;
+        }
+    }
+    if(!flag){
+        $('#pauseHouseChoose').append(dom.clone());
+    }else{
+        layer.msg('已经添加！');
+    }
+}
 
+function tr_remove(houseID){
+    for(var i = 0;i < $('#pauseHouseChoose tr').length;i++){
+        if($('#pauseHouseChoose tr:eq('+i+') td:eq(1)').text() == houseID){
+            $('#pauseHouseChoose tr:eq('+i+')').remove();
+        }
+    }
+}
 //计租表
 $('#rentMeterButton').click(function() {
     $('.RentExample:gt(0)').remove();
