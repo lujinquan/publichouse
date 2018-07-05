@@ -82,7 +82,11 @@ return [
     'pauseMaterial' => '非基数异动核算凭单',
 
     //新增注销
-    'CancelReport' => '新增注销材料',
+    'removeOrder' => '拆迁令',
+    'redLineMap' => '红线图',
+    'reimbursementInvoice' => '补偿款收回的发票',
+    'Cardinality' => '基数异动核算凭单',
+
 
     //新增陈欠核销
     'WriteOffReport' => '陈欠核销报告',
