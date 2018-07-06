@@ -4,6 +4,7 @@
 namespace app\ph\model;
 
 use think\Model;
+use app\ph\model\HouseInfo as HouseModel;
 use think\Db;
 use think\Loader;
 use think\Config;
@@ -103,10 +104,30 @@ class ChangeApply extends Model
 
         switch ($data['type']) {
                 case 1:  //租金减免
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>1,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋正在减免异动订单中处理……');
+                    }
+                    $houseModel = new HouseModel;
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'IfSuspend'=>0,
+                        'IfEmpty'=>0,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
                     if(!$data['RemitRent']){
                         return jsons('4002','减免金额不能为空');
                     }else{
-                       if(!preg_match("/^[1-9]*[1-9][0-9]*$/",$data['RemitRent'])){
+                       if(!preg_match("/^\d+(\.\d+)?$/",$data['RemitRent'])){
                             return jsons('4003','减免金额请填写数字');
                         } 
                     }
@@ -116,6 +137,7 @@ class ChangeApply extends Model
                     if(!$data['validity']){
                         return jsons('4002','有效期不能为空');
                     }
+                    return $finds;
                 break;
                 case 2:
 
@@ -123,11 +145,49 @@ class ChangeApply extends Model
                 case 3:
 
                     if(!($data['houseID'])){
-                        return jsons('4000','暂未选择任何房屋');
+                        return jsons('4000','未选择任何房屋');
                     }
+                    $houseids = Db::name('change_order')->where(['HouseID'=>['in',$data['houseID']],'ChangeType'=>3])->column('HouseID');
+                    if($houseids){
+                        $implodeHouses = implode(',',$houseids);
+                        return jsons('4005','该房屋:'.$implodeHouses.'已经在暂停异动中了');
+                    }
+
                     $arrs = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])->group('OwnerType')->column('OwnerType');
                     if(count($arrs) > 1){
                         return jsons('4004','所选房屋产别不能超过一种');
+                    }
+                break;
+                case 8:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋正在注销异动订单中处理……');
+                    }
+                    $houseModel = new HouseModel;
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    if(!($data['HouseID'])){
+                        return jsons('4000','未选择任何房屋');
+                    }
+                    if(!($data['cancelType'])){
+                        
+                        return jsons('4000','未选择注销类型');
+                    }else{
+                        $canceltype = Db::name('cancel_type')->where('id',$data['cancelType'])->find();
+                        if(!$canceltype){
+                            return jsons('4001','注销类型不合法');
+                        }
                     }
                 break;
 

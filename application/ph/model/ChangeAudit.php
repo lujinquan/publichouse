@@ -106,7 +106,7 @@ class ChangeAudit extends Model
 
         $where['Status'] = array('not in', [0, 1]);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 
@@ -232,7 +232,7 @@ class ChangeAudit extends Model
 
         //halt($datas);
 
-        $data = array_merge($data, $datas);
+        $data = array_merge($datas,$data);
 
         $data['type'] = 1;
 

@@ -548,7 +548,7 @@ class Api extends Controller
     }
 
     /**
-     * @title 房屋查询器接口
+     * @title 异动的时候调用的查询
      * @author Mr.Lu
      */
     public function get_all_house()
@@ -569,9 +569,10 @@ class Api extends Controller
         $where['Status'] = array('eq', 1);
         $where['BanID'] = array('eq',input('BanID'));
         $where['IfSuspend'] = array('eq', 0);
+        $where['HouseChangeStatus'] = array('eq', 0);
        
         $data = Db::name('house')->where($where)
-            ->field('HouseID ,OwnerType,UseNature,TenantName,HousePrerent')
+            ->field('HouseID ,OwnerType,UseNature,TenantName,HousePrerent,BanAddress')
             ->select();
 
         $owns = Db::name('ban_owner_type')->column('id,OwnerType');
@@ -1302,20 +1303,20 @@ class Api extends Controller
 
     public function test()
     {   
-        // $housemodel = new HouseInfoModel;
+        $housemodel = new HouseInfoModel;
 
         // $offset = 15000;
         // $length = 5000;  
         // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
         // //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        // //$res = ['10400119035596'=>0];
-        // foreach($res as $k => $v){  
-        //      $s = 0;
-        //      $s = count_house_rent($k);
-        //      //dump($k.'计算租金是：');halt($s);
-        //      $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
-        //      //halt($k);
-        // }
+        $res = ['10400119005616'=>0];
+        foreach($res as $k => $v){  
+             $s = 0;
+             $s = count_house_rent($k);
+             //dump($k.'计算租金是：');halt($s);
+             $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
+             //halt($k);
+        }
 
         halt(20000);
 
