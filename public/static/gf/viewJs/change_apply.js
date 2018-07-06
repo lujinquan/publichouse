@@ -32,6 +32,7 @@ $('#addApply').click(function() {
                         var HouseID = $('#getInfo_1').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
+                            console.log(res);
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
@@ -39,7 +40,7 @@ $('#addApply').click(function() {
                             $("#HouseUsearea").text(res.data.HouseUsearea);
                             $("#LeasedArea").text(res.data.LeasedArea);
                             $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantID);
+                            $("#TenantNumber").text(res.data.TenantNumber);
                             $("#TenantTel").text(res.data.TenantTel);
                             $("#OwnTypeD").text(res.data.OwnerType);
                             $("#monthRent").text(res.data.HousePrerent);

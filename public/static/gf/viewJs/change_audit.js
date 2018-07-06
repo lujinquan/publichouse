@@ -35,7 +35,7 @@ $('.BtnApprove').click(function(){
         	$('.derateTenantName').text(res.data.detail.TenantName);
         	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
         	$('.derateTenantTel').text(res.data.detail.TenantTel);
-        	$('.derateMoney').text(res.data.detail.RemitRent);
+        	$('.derateMoney').text(res.data.detail.InflRent);
         	$('.derateType').text(res.data.detail.CutName);
         	$('.derateNumber').text(res.data.detail.IDnumber);
             $('.derateTime').text(res.data.detail.MuchMonth+'月');
@@ -538,7 +538,7 @@ $('.BtnDetail').click(function(){
             	$('.derateTenantName').text(res.data.detail.TenantName);
             	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
             	$('.derateTenantTel').text(res.data.detail.TenantTel);
-            	$('.derateMoney').text(res.data.detail.RemitRent);
+            	$('.derateMoney').text(res.data.detail.InflRent);
             	$('.derateType').text(res.data.detail.CutName);
             	$('.derateNumber').text(res.data.detail.IDnumber);
             	$('.derateTime').text(res.data.detail.MuchMonth+'月');
