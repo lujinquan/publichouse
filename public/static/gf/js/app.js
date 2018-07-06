@@ -598,7 +598,7 @@ var houseQuery = {
             var  tbodyDom= $('<tbody></tbody>');
             for(var i = 0;i < length;i++){
               var trDom = $("<tr><td>"+res.data.data[i].BanID+"</td><td>"+res.data.data[i].HouseID+"</td>\
-              <td>"+res.data.data[i].UnitID+"</td><td>"+res.data.data[i].FloorID+"</td><td>"+res.data.data[i].TenantName+"</td><td>"+res.data.data[i].BanAddress+"</td>\
+              <td>"+res.data.data[i].UnitID+"</td><td>"+res.data.data[i].FloorID+"</td><td>"+res.data.data[i].TenantName+"</td><td>"+res.data.data[i].HousePrerent+"</td><td>"+res.data.data[i].BanAddress+"</td>\
               </tr>");
               tbodyDom.append(trDom);
             }

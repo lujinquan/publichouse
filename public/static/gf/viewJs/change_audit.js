@@ -82,7 +82,7 @@ $('.BtnApprove').click(function(){
 	                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].HousePrerent+'</td>\
-	                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+	                <td style="width:350px;">'+res.data.detail.house[i].BanAddress+'</td>\
 	            </tr>';
         	}
         	$('#pauseHouseDetail').empty();
@@ -565,7 +565,8 @@ $('.BtnDetail').click(function(){
 		                <td style="width:200px;">'+(i+1)+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
-		                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		                <td style="width:350px;">'+res.data.detail.house[i].BanAddress+'</td>\
 		            </tr>';
             	}
             	$('#pauseHouseDetail').empty();
@@ -1165,3 +1166,111 @@ function noPass(value){
 		}
 	})
 }
+
+//计租表
+$('#rentMeterButton').click(function() {
+    $('.RentExample:gt(0)').remove();
+    var HouseID = $('.derateHouseID').text();
+    $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
+        res = JSON.parse(res);
+        console.log(res);
+        $('.RentBan').text(res.data.banDetail.BanID);
+        $('.RentStructure').text(res.data.banDetail.StructureType);
+        $('.RentAddress').text(res.data.banDetail.BanAddress);
+        $('.RentPoint').text(res.data.banDetail.NewPoint);
+        $('.RentName').text(res.data.houseDetail.TenantName);
+        $('.RentLayer').text(res.data.houseDetail.FloorID);
+        $('.RentUnit').text(res.data.houseDetail.UnitID);
+        $('.RentComprising').text(res.data.houseDetail.ComprisingArea);
+        $('.RentWallpaper').text(res.data.houseDetail.WallpaperArea);
+        $('.RentCeramic').text(res.data.houseDetail.CeramicTileArea);
+        $('.RentBath').text(res.data.houseDetail.BathtubNum);
+        $('.RentBasin').text(res.data.houseDetail.BasinNum);
+        $('.RentBelow').text(res.data.houseDetail.BelowFiveNum);
+        $('.RentMore').text(res.data.houseDetail.MoreFiveNum);
+        $('.RentApproved').text(res.data.houseDetail.ApprovedRent);
+        $('.RentRemit').text(res.data.houseDetail.RemitRent);
+        $('.RentPump').text(res.data.houseDetail.PumpCost);
+        $('.RentReceive').text(res.data.houseDetail.ReceiveRent);
+        $('.RentHouseArea').text(res.data.houseDetail.HouseUsearea);
+        $('.diffRent').text(res.data.houseDetail.DiffRent);
+        $('.agreementRent').text(res.data.houseDetail.ProtocolRent);
+        $('.RentLeased').text(res.data.houseDetail.LeasedArea);
+        $('.RentEle').text(res.data.houseDetail.IfElevatorName);
+        $('.OweLink').prop('href', "/ph/RentUnpaid/index?HouseID=" + HouseID);
+        if (res.data.houseDetail.IfWater == 0) {
+            $('.RentW').prop({
+                checked: false
+            });
+        } else {
+            $('.RentW').prop({
+                checked: true
+            });
+        }
+        if (res.data.houseDetail.IfFirst  == 0) {
+            $('.RentE').prop({
+                checked: false
+            });
+        } else {
+            $('.RentE').prop({
+                checked: true
+            });
+        }
+        //产别
+        var OwnTypes = res.data.houseDetail.OwnerTypes;
+        $('.RentType').eq(0).text(OwnTypes[0].OwnerType);
+        $('.RentPrice').eq(0).text(OwnTypes[0].HousePrerent);
+        if (OwnTypes[1].OwnerType == 0) {
+            $('.RentType').eq(1).text('无');
+            $('.RentPrice').eq(1).text('无');
+        } else {
+            $('.RentType').eq(1).text(OwnTypes[1].OwnerType);
+            $('.RentPrice').eq(1).text(OwnTypes[1].HousePrerent);
+        }
+        //房间信息
+        var RentRoom = res.data.roomDetail;
+        var RentA = [];
+        for (var i in RentRoom) {
+            RentA.push(i);
+        }
+        var RentHtml = '';
+        var time = 0;
+        for (var a = 0; a < RentA.length; a++) {
+            var num = RentA[a];
+            $('.addPrice').before($(".RentExample").eq(0).clone(true));
+            $(".RentExample").eq(a + 1).css('display', 'block');
+            $(".RentRoomName").eq(a + 1).text(RentRoom[num][0].RoomName);
+            for (var j = 0; j < RentRoom[num].length; j++) {
+                var aH = res.data.roomDetail[num][j].HouseID.split(',');
+                var Shtml = '';
+                for (var h = 0; h < aH.length; h++) {
+                    if (aH.length == 1) {
+                        Shtml = '';
+                        Shtml += '<option>' + aH[0] + '</option>';
+                    } else {
+                        Shtml += '<option>' + aH[h] + '</option>';
+                    }
+                }
+                RentHtml += '<ul class="am-u-md-12 house_style RentDate ul-mr"><li style="width:9%" class="RentID">' + res.data.roomDetail[num][j].RoomID + '</li>' + '<li style="width:5%" class="RentNum">' + res.data.roomDetail[num][j].RoomNumber + '</li>' + '<li style="width:9%" class="RentBanA">' + res.data.roomDetail[num][j].BanID + '</li>' + '<li style="width:5%" class="RentPublic">' + res.data.roomDetail[num][j].RoomPublicStatus + '</li>' + '<li style="width:9%" class="RentHouse">' + aH[0] + '</li>' +'<li style="width:6%" class="RentPro">' + res.data.roomDetail[num][j].OwnerType + '</li>'+'<li style="width:6%" class="RentU">' + res.data.roomDetail[num][j].UnitID + '</li>' + '<li style="width:6%" class="RentL">' + res.data.roomDetail[num][j].FloorID + '</li>' + '<li style="width:7%" class="RentArea">' + res.data.roomDetail[num][j].UseArea + '</li>' + '<li style="width:7%" class="RentCut">' + res.data.roomDetail[num][j].RentPoint + '</li>' + '<li style="width:7%" class="RentLeasedArea">' + res.data.roomDetail[num][j].LeasedArea + '</li>' + '<li style="width:7%" class="RentChat">' + res.data.roomDetail[num][j].FloorPoint + '</li>' + '<li style="width:7%" class="RentMp">' + res.data.roomDetail[num][j].RoomRentMonth + '</li>' + '<li style="width:5%" class="RentStatus">' + res.data.roomDetail[num][j].Status + '</li></ul>';
+                $('.RoomDeT').eq(j).css('display', 'block');
+                $('.RoomDeT').eq(j).parent().children().eq(0).removeClass('nomal').addClass('active');
+                $('.pull').eq(j).prop('src', '/public/static/gf/icons/triU.png');
+            } //小长度             
+            $('.RentTit').eq(a + 1).after(RentHtml);
+            RentHtml = '';
+            $('.RoomDeT').eq(1).css('display', 'block');
+            $('.RoomDeT').eq(1).parent().children().eq(0).removeClass('nomal').addClass('active');
+            $('.pull').eq(1).prop('src', '/public/static/gf/icons/triU.png');
+            //$('.RoomDeT').eq(1).previousSibling().removeClass('nomal').addClass('active');
+        } //大长度
+    })
+    layer.open({
+        type: 1,
+        skin: 'yue-class',
+        area: ['1300px', '700px'],
+        zIndex: 1000,
+        resize: false,
+        title: ['计租表', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#RentForm')
+    });
+});
