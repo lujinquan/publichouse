@@ -25,6 +25,7 @@ $('.BtnApprove').click(function(){
                 Type: 1,
                 title: "审通知书"
             });
+            $('.rent_reduction').show();
         	$('.derateHouseID').text(res.data.detail.HouseID);
         	$('.derateBanID').text(res.data.detail.BanID);
         	$('.derateAddress').text(res.data.detail.BanAddress);
@@ -47,7 +48,7 @@ $('.BtnApprove').click(function(){
 			}
 			processState('#derateState',res);
 			metailShow('#deratePhotos',res);
-			layerBox(value,'derate','租金减免详情',1,res.data.config.status);
+			layerBox(value,'derate','租金减免审批',1,res.data.config.status);
 		}else if(type == 2){
 			$(".breaks").hide();
 			$(".pause").hide();
