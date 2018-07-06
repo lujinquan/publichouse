@@ -5,7 +5,8 @@ $('.BtnApprove').click(function(){
 	$(".breaks").hide();
 	$(".pause").hide();
 	$(".WriteOff").hide();
-	$(".cancel").hide();
+	$('.rent_reduction').hide();
+	$('.cancel').hide();
 	$('#SerialNumber').text('房屋编号:');
 	$(".LHide").css('display','block');
 	console.log(value);
@@ -91,26 +92,32 @@ $('.BtnApprove').click(function(){
 			metailShow('#pauseRentPhotos',res);
 			layerBox(value,'pauseDetail','暂停计租审批',1,res.data.config.status);
 		}else if(type == 4){
-			$(".breaks").hide();
-			$(".pause").hide();
-			$(".WriteOff").show();
-			$(".cancel").hide();
-			$('.Uhide').css('display','block');
-			$('.Ushow').css('display','none');
-			$('.WriteOffStartTime').text(res.data.detail.DateStart);
-			$('.WriteOffEndTime').text(res.data.detail. DateEnd);
+				$(".breaks").hide();
+				$(".pause").hide();
+				$(".WriteOff").show();
+				$(".cancel").hide();
+				$('.Uhide').css('display','block');
+				$('.Ushow').css('display','none');
+				$('.WriteOffStartTime').text(res.data.detail.DateStart);
+				$('.WriteOffEndTime').text(res.data.detail. DateEnd);
 		}else if(type == 8){
-			$(".breaks").hide();
-			$(".pause").hide();
-			$(".WriteOff").hide();
-			$(".cancel").show();
-			$('.Uhide').css('display','block');
-			$('.Ushow').css('display','none');
-			$('.Ahide').css('display','none');
-			$('.APFloorID').text(res.data.detail.BanFloorNum);
-			$('.APhouseArea').text(res.data.detail.BanUsearea);
-			$('#SerialNumber').text('楼栋编号:');
-			$('.APhouseId').text(res.data.detail.BanID);
+			$('.status_2').hide();
+			$('.cancel').show();
+			$('.cancelType').text(res.data.detail.CancelType);
+        	$('.derateHouseID').text(res.data.detail.HouseID);
+        	$('.derateBanID').text(res.data.detail.BanID);
+        	$('.derateAddress').text(res.data.detail.BanAddress);
+        	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.derateUseNature').text(res.data.detail.UseNature);
+        	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+        	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.derateTenantName').text(res.data.detail.TenantName);
+        	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.derateTenantTel').text(res.data.detail.TenantTel);
+			processState('#derateState',res);
+			metailShow('#deratePhotos',res);
+			layerBox(value,'derate','注销审批',1);
 		}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);
@@ -516,8 +523,8 @@ $('.BtnDetail').click(function(){
 		CordID = "#approveForm";
 	$(".breaks").hide();
 	$(".pause").hide();
-	$(".WriteOff").hide();
-	$(".cancel").hide();
+	$('.rent_reduction').hide();
+	$('.cancel').hide();
 	$('#SerialNumber').text('房屋编号:');
 	$(".LHide").css('display','block');
 	console.log(value);
@@ -527,6 +534,7 @@ $('.BtnDetail').click(function(){
 		var type = res.data.detail.type;
 			if(type == 1){
 				$('.status_2').hide();
+				$('.rent_reduction').show();
             	$('.derateHouseID').text(res.data.detail.HouseID);
             	$('.derateBanID').text(res.data.detail.BanID);
             	$('.derateAddress').text(res.data.detail.BanAddress);
@@ -584,17 +592,23 @@ $('.BtnDetail').click(function(){
 				$('.WriteOffStartTime').text(res.data.detail.DateStart);
 				$('.WriteOffEndTime').text(res.data.detail. DateEnd);
 			}else if(type == 8){
-				$(".breaks").hide();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").show();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('.Ahide').css('display','none');
-				$('.APFloorID').text(res.data.detail.BanFloorNum);
-				$('.APhouseArea').text(res.data.detail.BanUsearea);
-				$('#SerialNumber').text('楼栋编号:');
-				$('.APhouseId').text(res.data.detail.BanID);
+				$('.status_2').hide();
+				$('.cancel').show();
+				$('.cancelType').text(res.data.detail.CancelType);
+            	$('.derateHouseID').text(res.data.detail.HouseID);
+            	$('.derateBanID').text(res.data.detail.BanID);
+            	$('.derateAddress').text(res.data.detail.BanAddress);
+            	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+            	$('.derateUseNature').text(res.data.detail.UseNature);
+            	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+            	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+            	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+            	$('.derateTenantName').text(res.data.detail.TenantName);
+            	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+            	$('.derateTenantTel').text(res.data.detail.TenantTel);
+				processState('#derateState',res);
+				metailShow('#deratePhotos',res);
+				layerBox(value,'derate','注销详情',2);
 			}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);

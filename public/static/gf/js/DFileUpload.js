@@ -13,6 +13,7 @@ var fileTotall = {
         console.log(this.totalArray);
         if(length == 0){
             layer.msg('请选择文件！');
+            return false;
         }else{
             for(var i = 0; i < length;i++){
                 if(this.totalArray[i] != null){
@@ -160,6 +161,7 @@ file.prototype.upload = function(){
     var formData = new FormData();
     if(length == 0){
         layer.msg('请选择文件！');
+        return false;
     }else{
         for(var i = 0; i < length;i++){
             if(this.filesArray[i] != null){

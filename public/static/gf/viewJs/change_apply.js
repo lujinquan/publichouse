@@ -322,7 +322,7 @@ $('#addApply').click(function() {
                         });
                     });
                 },
-                yes:function(){
+                yes:function(thisIndex){
                     var data = fileTotall.getArrayFormdata();
                     data.append('banID',$('#pauseBanID').text());
                     data.append('type',3);
@@ -339,8 +339,10 @@ $('#addApply').click(function() {
                         success: function(res) {
                             res = JSON.parse(res);
                             layer.msg(res.msg);
-                            layer.close(thisLayer);
-                            location.reload();
+                            if(res.retcode == '2000'){
+                                layer.close(thisIndex);
+                                location.reload();
+                            }
                         }
                     });
                 },
@@ -1248,7 +1250,6 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
@@ -1256,7 +1257,7 @@ $('#addApply').click(function() {
                             $("#HouseUsearea").text(res.data.HouseUsearea);
                             $("#LeasedArea").text(res.data.LeasedArea);
                             $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantID);
+                            $("#TenantNumber").text(res.data.TenantNumber);
                             $("#TenantTel").text(res.data.TenantTel);
                             $("#OwnTypeD").text(res.data.OwnerType);
                             $("#monthRent").text(res.data.HousePrerent);
@@ -1304,7 +1305,7 @@ $('#addApply').click(function() {
                         title: "基数异动核算凭单"
                     });
                 },
-                yes:function(){
+                yes:function(thisIndex){
                     if ($('#getInfo_1').val() == "") {
                         layer.msg('房屋编号存在问题呢！！！');
                     } else {
