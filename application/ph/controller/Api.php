@@ -1308,8 +1308,8 @@ class Api extends Controller
         // $offset = 15000;
         // $length = 5000;  
         // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
-        // //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        $res = ['10400119005616'=>0];
+        $res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
+        //$res = ['10101020056826'=>0];
         foreach($res as $k => $v){  
              $s = 0;
              $s = count_house_rent($k);

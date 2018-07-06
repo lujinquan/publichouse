@@ -189,6 +189,7 @@ class ChangeApply extends Model
                             return jsons('4001','注销类型不合法');
                         }
                     }
+                    return $finds;
                 break;
 
                 default:
