@@ -688,7 +688,8 @@ function count_house_rent($houseid){
     $jiaji = $houseAddRent?array_sum($houseAddRent):0;
 
     $houseRent = $sumrent + $jiaji;
-
+    //dump($rent);dump($sumrent);
+//halt($houseRent);
     return $houseRent;
 }
 
@@ -706,7 +707,11 @@ function count_room_rent($roomid){
     $structureTypePoint = get_structure_type_point($banOne['StructureType']);
     //房间的架空率，与楼栋是否一层为架空层有关
     $emptyPoint = $banOne['IfFirst']?0.98:1;
-    //dump($roomOne['LeasedArea']);dump($roomOne['RentPoint']);dump($structureTypePoint);dump($emptyPoint);halt($floorPoint);
+
+    //if($roomid = '121640'){
+//dump($roomOne['LeasedArea']);dump($roomOne['RentPoint']);dump($structureTypePoint);dump($emptyPoint);halt($floorPoint);
+    //}
+    
     //计算租金= 计租面积 * 实际基价 * 结构基价 * 基价折减率 * 架空率 * 层次调解率
     $roomRent = $roomOne['LeasedArea'] * $roomOne['RentPoint'] * $structureTypePoint * $emptyPoint * $floorPoint;
 

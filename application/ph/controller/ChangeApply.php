@@ -45,7 +45,7 @@ class ChangeApply extends Base
             $data = $this->request->post();
             //halt($data);
 
-            $bool = model('ph/ChangeApply')->check_apply_table($data);
+            $one = model('ph/ChangeApply')->check_apply_table($data);
             
             if ($_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
@@ -64,12 +64,6 @@ class ChangeApply extends Base
             switch ($data['type']) {
 
                 case 1:  //租金减免
-
-                    $one = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])
-                        ->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
-                        ->find();
-                  
-                    
 
                     if($data['RemitRent']){
                         $result['OwnerType'] = $one['OwnerType'];  
@@ -353,34 +347,14 @@ class ChangeApply extends Base
                     break;
 
                 case 8:  // 注销
-                    if(isset($data['HouseID'])){
-
-                        $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                        $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
-
-                        $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
-
-                        $datas['InstitutionID'] = $one['InstitutionID'];
-                        $datas['InstitutionPID'] = $one['InstitutionPID'];
-                        $datas['OwnerType'] = $one['OwnerType'];
-                        $datas['UseNature'] = $one['UseNature'];
-
-                    }
-                    if(isset($data['BanID'])){
-
-                        $datas['BanID'] = $data['BanID'];  //楼栋编号
-                        $one = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->field('TubulationID ,InstitutionID,OwnerType,UseNature')->find();
-                        $datas['InstitutionID'] = $one['TubulationID'];  //机构id
-                        $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
-                        $datas['OwnerType'] = $one['OwnerType'];
-                        $datas['UseNature'] = $one['UseNature'];
-
-                    }
-
-
-                    //从表单传递进来的数据：房屋编号
-                
-                    $datas['CancelType'] = $data['CancelType'];  //注销类型
+                   
+                    $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
+                    $datas['InstitutionID'] = $one['InstitutionID'];
+                    $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['OwnerType'] = $one['OwnerType'];
+                    $datas['UseNature'] = $one['UseNature'];
+                    $datas['CancelType'] = $data['cancelType'];  //注销类型
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[8];  //异动名称
                     $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
