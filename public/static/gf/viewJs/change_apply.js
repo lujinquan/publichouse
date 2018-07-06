@@ -292,8 +292,10 @@ $('#addApply').click(function() {
                                 var HousePrerent = 0;
                                 var count = 0;
                                 house_array = [];
+                                var type = $('#pauseHouseChoose tr:eq(0) td:eq(2)').text();
                                 for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
-                                    if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+                                    if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked') &&
+                                        (type == $('#pauseHouseChoose tr:eq('+i+') td:eq(2)').text())){
                                         count++;
                                         form_str += '<tr>\
                                             <td style="width:200px;">'+count+'</td>\
@@ -303,6 +305,9 @@ $('#addApply').click(function() {
                                         </tr>';
                                         HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
                                         house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
+                                    }else{
+                                        layer.msg('产别有不同类型！');
+                                        return false;
                                     }
                                 }
                                 $('#pauseBanID').text(fun.initData.BanID);

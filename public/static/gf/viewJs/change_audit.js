@@ -46,7 +46,7 @@ $('.BtnApprove').click(function(){
 			}
 			processState('#derateState',res);
 			metailShow('#deratePhotos',res);
-			layerBox(value,'derate','租金减免详情',1);
+			layerBox(value,'derate','租金减免详情',1,res.data.config.status);
 		}else if(type == 2){
 			$(".breaks").hide();
 			$(".pause").hide();
@@ -88,7 +88,7 @@ $('.BtnApprove').click(function(){
         	$('#pauseHouseDetail').append($(house_str));
 			processState('#pauseRentState',res);
 			metailShow('#pauseRentPhotos',res);
-			layerBox(value,'pauseDetail','暂停计租审批',1);
+			layerBox(value,'pauseDetail','暂停计租审批',1,res.data.config.status);
 		}else if(type == 4){
 			$(".breaks").hide();
 			$(".pause").hide();
@@ -1091,7 +1091,7 @@ function processState(id,res){
 	}
 }
 // 详情与审批流程弹出框
-function layerBox(value,id,name,operation){
+function layerBox(value,id,name,operation,status){
 	var this_index = layer.open({
         type: 1,
         area: ['990px','780px'],
@@ -1104,7 +1104,11 @@ function layerBox(value,id,name,operation){
 
         },
         yes:function(){
-			var formData = fileTotall.getArrayFormdata();
+        	if(status == '1'){
+        		var formData = fileTotall.getArrayFormdata();
+        	}else{
+        		var formData = new FormData();
+        	}
 			formData.append('ChangeOrderID',value);
         	processPass(formData,this_index);
         },
@@ -1126,7 +1130,7 @@ function processPass(formData,this_index){
                console.log(res);
             layer.msg(res.msg);
             layer.close(this_index);
-            location.reload();
+            //location.reload();
         }
 	})
 }
