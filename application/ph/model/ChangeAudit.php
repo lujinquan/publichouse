@@ -263,7 +263,7 @@ class ChangeAudit extends Model
         $houses = explode(',',$oneData['HouseID']);
 
         $data['house'] = Db::name('house')->where(['HouseID'=>['in',$houses]])
-                                     ->field('HouseID,TenantName,HousePrerent')
+                                     ->field('HouseID,TenantName,HousePrerent,BanAddress')
                                      ->select();
         $data['InflRent'] = $oneData['InflRent'];
         $data['CreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);

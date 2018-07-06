@@ -486,7 +486,7 @@ class Api extends Controller
         }
 
         $data = Db::name('house')->where($where)
-            ->field('BanID ,HouseID ,UnitID ,FloorID ,TenantName,BanAddress')
+            ->field('BanID ,HouseID ,UnitID ,FloorID ,TenantName,BanAddress,HousePrerent')
             ->paginate(config('paginate.list_rows'))
             ->toArray();
         $data['totalPage'] = ceil($data['total'] / $data['per_page']);
