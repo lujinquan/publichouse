@@ -6,8 +6,8 @@
   <div class="am-u-sm-12">
     <div class="am-form-group am-u-md-12">
       <label id="houseLabel" class="label_style">房屋编号：</label>
-      <input id="getInfo_1" class="label_input" required/>
-      <button class="am-btn am-btn-primary am-btn-sm" id="DQueryData">查询</button>
+      <input id="getInfo_1" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="DQueryData">查询</a>
     </div>
   </div>
   <div class="am-u-sm-12">
@@ -36,7 +36,7 @@
     </div>
     <div class="am-form-group am-u-sm-4 cancel">
       <label class="label_style">注销类别：</label>
-      <select name="cancelType" id="cancelType" class="label_select" required>
+      <select name="cancelType" id="cancelType" class="label_select">
           <option>请选择</option>
           <option value="1">房屋出售</option>
           <option value="2">危改拆除</option>
@@ -87,7 +87,7 @@
     </div>
     <div class="am-u-sm-4">
         <label class="label_style">减免类型：</label>
-        <select name="CutType" id="CutType" class="label_select" required>
+        <select name="CutType" id="CutType" class="label_select">
             <option  value="" style="display:none">请选择</option>
             <?php foreach($cutTypeLst as $v1){;?>
             <option value="{$v1['id']}"><?php echo $v1['CutName']; ?></option>
@@ -296,7 +296,8 @@
                   <td style="width:200px;">#</td>
                   <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
                   <td style="width:200px;" class="am-hide-sm-only">承租人</td>
-                  <td style="width:350px;" class="am-hide-sm-only">月租金</td>
+                  <td style="width:200px;" class="am-hide-sm-only">月租金</td>
+                  <td style="width:350px;" class="am-hide-sm-only">房屋地址</td>
               </tr>
           </thead>
           <tbody id="pauseHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
@@ -330,8 +331,8 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-12">
         <label class="label_style">楼栋编号：</label>
-        <input type="text" name="BanID" id="houseID" class="label_input" placeholder="楼栋编号" required/>
-        <button id="DRquery" class="am-btn am-btn-primary am-btn-sm">查询</button>
+        <input type="text" name="BanID" id="houseID" class="label_input" placeholder="楼栋编号" />
+        <a id="DRquery" class="am-btn am-btn-primary am-btn-sm">查询</a>
     </div>
     <div class="am-form-group am-u-md-12">
         <h2 class="label_title">异动前</h2>
@@ -378,7 +379,7 @@
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">使用性质：</label>
-        <select name="useProp" class="label_select" required>
+        <select name="useProp" class="label_select">
             <option  value="" style="display:none">请选择</option>
             <?php foreach($natureLst as $v0){;?>
             <option value="{$v0['id']}"><?php echo $v0['UseNature']; ?></option>
@@ -387,7 +388,7 @@
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">产别：</label>
-        <select name="proCate" class="label_select" required>
+        <select name="proCate" class="label_select">
             <option  value="" style="display:none">请选择</option>
             <?php foreach($owerLst as $v2){;?>
             <option value="{$v2['id']}"><?php echo $v2['OwnerType']; ?></option>
@@ -396,7 +397,7 @@
     </div>
     <div class="am-form-group am-u-md-4">
       <label class="label_style">栋数：</label>
-      <input type="text" name="NumOfBuild" class="label_input"  required/>
+      <input type="text" name="NumOfBuild" class="label_input" />
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">层次：</label>
@@ -404,7 +405,7 @@
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">结构：</label>
-        <select name="BuildStructure" class="label_select" required>
+        <select name="BuildStructure" class="label_select">
             <option  value="" style="display:none">请选择</option>
             <?php foreach($structureLst as $v3){;?>
             <option value="{$v3['id']}"><?php echo $v3['StructureType']; ?></option>
@@ -413,15 +414,15 @@
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">占地面积：</label>
-        <input type="text" name="CoversArea" class="label_input"  required/>
+        <input type="text" name="CoversArea" class="label_input" />
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">建筑面积：</label>
-        <input type="text" name="BuildArea" class="label_input"  required/>
+        <input type="text" name="BuildArea" class="label_input" />
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">完损等级：</label>
-        <select name="LossLevel" class="label_select" required>
+        <select name="LossLevel" class="label_select">
             <option  value="" style="display:none">请选择</option>
             <?php foreach($damaLst as $v4){;?>
             <option value="{$v4['id']}"><?php echo $v4['DamageGrade']; ?></option>
@@ -478,8 +479,8 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-12">
         <label class="label_style Ahouse">房屋编号：</label>
-        <input type="text" name="HouseID" id="AdjustHouseID" class="label_input" placeholder="楼栋编号" required/>
-        <button id="DAquery" class="am-btn am-btn-primary am-btn-sm">查询</button>
+        <input type="text" name="HouseID" id="AdjustHouseID" class="label_input" placeholder="楼栋编号" />
+        <a id="DAquery" class="am-btn am-btn-primary am-btn-sm">查询</a>
     </div>
     <div class="am-form-group am-u-md-4">
         <label class="label_style">楼栋编号：</label>
@@ -537,7 +538,7 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-4 am-u-end">
         <label>完损等级：</label>
-          <select name="LevelChange" id="doc-select-4" class="label_select" required>
+          <select name="LevelChange" id="doc-select-4" class="label_select" >
               <option  value="" style="display:none">请选择</option>
               <?php foreach($damaLst as $k2 =>$v2){; ?>
               <option value="{$v2['id']}"><?php echo $v2['DamageGrade']; ?></option>
@@ -579,8 +580,8 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-12">
         <label id="NLIDName" class="label_style">房屋编号：</label>
-        <input type="text" name="HouseID" id="NLHouseID" class="label_input" required/>
-        <button id="NLAquery" class="am-btn am-btn-primary am-btn-sm NLShow">查询</button>
+        <input type="text" name="HouseID" id="NLHouseID" class="label_input" />
+        <a id="NLAquery" class="am-btn am-btn-primary am-btn-sm NLShow">查询</a>
     </div>
 
     <div class="am-form-group am-u-md-12 addBuild">
@@ -588,7 +589,7 @@
         <label id="" class="label_style">房屋编号：</label>
       </div>
       <div class="am-u-md-3" style="margin-bottom:10px">
-        <input type="text" name="buildID_1" id="NLHouseID_1" placeholder="房屋编号" required/>
+        <input type="text" name="buildID_1" id="NLHouseID_1" placeholder="房屋编号" />
       </div>
       <div><img src="/public/static/gf/icons/addh.png" id="addH" width="28px"></div>
       <div class="addB am-u-md-12" style="padding-left:0;"></div>
@@ -640,7 +641,7 @@
      <div class="am-form-group am-u-md-12">
           <label class="label_style">租户编号：</label>
           <input type="number" id="TenantInput" class="label_input" />
-          <button id="DQTenant" class="am-btn am-btn-primary am-btn-sm NLShow">查询</button>
+          <a id="DQTenant" class="am-btn am-btn-primary am-btn-sm NLShow">查询</a>
       </div>
       <div class="am-form-group am-u-md-4">
           <label class="label_style">住户姓名：</label>
@@ -729,8 +730,8 @@
 <div class="am-form-group am-u-md-12">
   <div class="am-form-group am-u-md-12">
       <label id="PipeName" class="label_style">楼栋编号：</label>
-      <input type="text" name="PipeBanID" id="PipeBanID" class="label_input" placeholder="房屋编号" required/>
-      <button id="PipeQuery" class="am-btn am-btn-primary am-btn-sm PipeShow">查询</button>
+      <input type="text" name="PipeBanID" id="PipeBanID" class="label_input" placeholder="房屋编号" />
+      <a id="PipeQuery" class="am-btn am-btn-primary am-btn-sm PipeShow">查询</a>
   </div>
 
 <div id="PipeBan">
@@ -823,7 +824,7 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-4">
           <label class="label_style">调整管段：</label>
-          <select name="PipeAdjusted" id="PipeAdjusted" class="label_p_style" required>
+          <select name="PipeAdjusted" id="PipeAdjusted" class="label_p_style">
               <option  value="" style="display:none">请选择</option>
               <?php foreach($allInstitutions as $k10 => $v10){ if($v10['level'] == 1){; ?>
               <optgroup label="<?php echo $v10['Institution'] ;?>">
@@ -868,8 +869,8 @@
   <div class="am-form-group am-u-md-12">
     <div class="am-form-group am-u-md-12">
         <label id="AddName" class="label_style">房屋编号：</label>
-        <input type="text" name="AddHouseID" id="AddHouseID" class="label_input" placeholder="房屋编号" required />
-        <button id="AddQuery" class="am-btn am-btn-primary am-btn-sm AddShow">查询</button>
+        <input type="text" name="AddHouseID" id="AddHouseID" class="label_input" placeholder="房屋编号" />
+        <a id="AddQuery" class="am-btn am-btn-primary am-btn-sm AddShow">查询</a>
     </div>
 
     <div class="am-form-group am-u-md-4">
@@ -918,11 +919,11 @@
   <div class="am-form-group am-u-sm-12">
     <div class="am-form-group am-u-md-4">
         <label>追加时间：</label>
-        <input type="text" name="AddTime" id="AddTime" class="label_input" data-am-datepicker required />
+        <input type="text" name="AddTime" id="AddTime" class="label_input" data-am-datepicker />
     </div>
     <div class="am-form-group am-u-md-4 am-u-end">
         <label>追加金额：</label>
-        <input type="number" name="AddMoney" class="label_input" id="AddMoney" required />
+        <input type="number" name="AddMoney" class="label_input" id="AddMoney" />
     </div>
   </div>
 
@@ -950,7 +951,7 @@
   <div class="am-u-sm-12">
     <div class="am-form-group am-u-md-12">
         <label  class="label_style">房屋编号：</label>
-        <input type="text" name="" id="AdjustHouseNum" class="label_input" required/>
+        <input type="text" name="" id="AdjustHouseNum" class="label_input" />
         <a class="am-btn am-btn-primary am-btn-sm" id="AdjustQuery">查询</a>
     </div>
       <div class="am-form-group am-u-sm-4">
@@ -1057,7 +1058,7 @@
     <div class="am-u-sm-12">
       <div class="am-form-group am-u-md-12">
         <label class="label_style">房屋编号：</label>
-        <input type="text" id="SplitHouseNum" class="label_input" required/>
+        <input type="text" id="SplitHouseNum" class="label_input" />
         <a class="am-btn am-btn-primary am-btn-sm" id="SplitQuery">查询</a>
       </div>
     </div>
@@ -1119,7 +1120,7 @@
     <div class="am-u-sm-12">
         <div class="am-form-group am-u-md-12">
           <label class="label_style">房屋编号：</label>
-          <input type="text" name="" id="SplitAddNum" class="label_input" required/>
+          <input type="text" name="" id="SplitAddNum" class="label_input" />
           <a class="am-btn am-btn-primary am-btn-sm" id="SplitAddQuery">查询</a>
         </div>
     </div>
@@ -1235,7 +1236,7 @@
     <div class="am-u-md-12">
       <div class="am-form-group am-u-md-12">
           <label class="label_style">房屋编号：</label>
-          <input type="text" id="HoldsHouseNum" class="label_input" required/>
+          <input type="text" id="HoldsHouseNum" class="label_input" />
           <a class="am-btn am-btn-primary am-btn-sm" id="HoldsQuery">查询</a>
       </div>
     </div>
@@ -1291,7 +1292,7 @@
     <div class="am-u-md-12">
         <div class="am-form-group am-u-md-12">
           <label  class="label_style">房屋编号：</label>
-          <input type="text" id="CancelNum" class="label_input" required/>
+          <input type="text" id="CancelNum" class="label_input" />
           <a class="am-btn am-btn-primary am-btn-sm" id="CancelQuery">查询</a>
         </div>
     </div>

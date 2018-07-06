@@ -81,6 +81,7 @@ $('.BtnApprove').click(function(){
 	                <td style="width:200px;">'+(i+1)+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 	                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+	                <td style="width:200px;">'+res.data.detail.house[i].HousePrerent+'</td>\
 	                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
 	            </tr>';
         	}
@@ -1130,7 +1131,7 @@ function processPass(formData,this_index){
                console.log(res);
             layer.msg(res.msg);
             layer.close(this_index);
-            //location.reload();
+            location.reload();
         }
 	})
 }

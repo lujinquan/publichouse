@@ -32,8 +32,6 @@ $('#addApply').click(function() {
                         var HouseID = $('#getInfo_1').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
-                            console.log(res);
-                            layer.msg(res.msg);
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
@@ -187,8 +185,6 @@ $('#addApply').click(function() {
                         var HouseID = $('#getInfo_1').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
-                            console.log(res);
-                            layer.msg(res.msg);
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
@@ -301,7 +297,8 @@ $('#addApply').click(function() {
                                             <td style="width:200px;">'+count+'</td>\
                                             <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text()+'</td>\
                                             <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(2)").text()+'</td>\
-                                            <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
+                                            <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(6)").text()+'</td>\
                                         </tr>';
                                         HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
                                         house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
@@ -2111,7 +2108,7 @@ function getBanList(){
             self.initData.BanAddress = BanAddress;
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
-            banLinkHouse(BanID);
+            banLinkHouse(BanID,BanAddress);
         })
     };
     this.search = function(val){
@@ -2122,21 +2119,7 @@ function getBanList(){
         this.renderDom(this.initData.filterData);
     }
 }
-function banLinkHouse(BanID){
-    // var count = $('#pauseHouseChoose tr').length;
-    // var form_str = '';
-    // for(var i = 0;i <$('#pauseHouseAdd tr').length;i++ ){
-    //     if($(".house_check:eq("+i+") input[type='checkbox']").is(':checked')){
-    //         count++;
-    //         form_str += '<tr>\
-    //             <td style="width:200px;">'+count+'</td>\
-    //             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(1)").text()+'</td>\
-    //             <td style="width:200px;">'+$(".house_check:eq("+i+") td:eq(2)").text()+'</td>\
-    //             <td style="width:350px;">'+$(".house_check:eq("+i+") td:eq(5)").text()+'</td>\
-    //         </tr>';
-    //     }
-    // }
-    // $('#pauseHouseChoose').append(form_str);
+function banLinkHouse(BanID,BanAddress){
     $.get('/ph/Api/get_all_house/BanID/'+BanID,function(res){
         res = JSON.parse(res);
         var house_str = '';
@@ -2148,23 +2131,12 @@ function banLinkHouse(BanID){
                 <td style="width:150px;">'+res.data[i].UseNature+'</td>\
                 <td style="width:150px;">'+res.data[i].TenantName+'</td>\
                 <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
+                <td style="width:350px;display:none;">'+BanAddress+'</td>\
             </tr>';
         }
+        $('#allChoose').prop('checked',false);
         $('#pauseHouseAdd').empty();
         $('#pauseHouseAdd').append($(house_str));
-        $('#allChoose').click(function(){
-            if($(this).prop('checked')){
-                $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',true);
-                console.log($("#pauseHouseAdd .house_check").length);
-                for(var j = 0;j < $("#pauseHouseAdd .house_check").length;j++){
-                    console.log(j);
-                    var dom = $("#pauseHouseAdd .house_check").eq(j);
-                    tr_add(dom,dom.find("td").eq(1).text());
-                }
-            }else{
-                $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',false);
-            }
-        })
         $('#pauseHouseAdd .house_check').click(function(){
             if($(this).find("input[type='checkbox']").prop('checked')){
                 $(this).find("input[type='checkbox']").prop('checked',false);
@@ -2184,13 +2156,24 @@ function banLinkHouse(BanID){
         })
     })
 }
+$('#allChoose').click(function(){
+    if($(this).prop('checked')){
+        $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',true);
+        for(var j = 0;j < $("#pauseHouseAdd .house_check").length;j++){
+            console.log(j);
+            var dom = $("#pauseHouseAdd .house_check").eq(j);
+            tr_add(dom,dom.find("td").eq(1).text());
+        }
+    }else{
+        $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',false);
+    }
+})
 $("#pauseHouseChoose").on("click",".house_check input[type='checkbox']",function(event){
     event.stopPropagation();
     if(!$(this).prop('checked')){
         $(this).parents('tr').remove();
     }
 })
-
 function tr_add(dom,houseID){
     var flag = false;
     for(var i = 0;i < $('#pauseHouseChoose tr').length;i++){

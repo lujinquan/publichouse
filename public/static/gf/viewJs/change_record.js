@@ -1,282 +1,3 @@
-// //审批
-// $('.BtnApprove').click(function(){
-// 	var value = $(this).val(),
-// 		CordID = "#approveForm";
-// 	$(".breaks").hide();
-// 	$(".pause").hide();
-// 	$(".WriteOff").hide();
-// 	$(".cancel").hide();
-// 	$('#SerialNumber').text('房屋编号:');
-// 	$(".LHide").css('display','block');
-// 	console.log(value);
-// 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+value,function(res){
-// 		res = JSON.parse(res);
-// 		console.log(res);
-// 		var type = res.data.detail.type;
-// 		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
-
-// 			$('.APhouseId').text(res.data.detail.HouseID);
-// 			$('.APBanID').text(res.data.detail.BanID);
-// 			$('.APhouseAddress').text(res.data.detail.BanAddress);
-// 			$('.APFloorID').text(res.data.detail.FloorID);
-// 			$('.APtenantName').text(res.data.detail.TenantName);
-// 			$('.APtenantTel').text(res.data.detail.TenantTel);
-// 			$('.APtenantNumber').text(res.data.detail.TenantNumber);
-// 			$('.APcreateTime').text(res.data.detail.CreateTime);
-// 			$('.APhouseArea').text(res.data.detail.HouseArea);
-// 			$('.APleasedArea').text(res.data.detail.LeasedArea);
-// 			//$('#approveName').text(res.data.detail.ChangeType);
-// 			if(type == 1){
-// 				$(".breaks").show();
-// 				$(".pause").hide();
-// 				$(".WriteOff").hide();
-// 				$(".cancel").hide();
-// 				$('.Uhide').css('display','block');
-// 				$('.Ushow').css('display','none');
-// 				$('#breakType').text(res.data.detail.CutName);
-// 				$('#IDNumber').text(res.data.detail.IDnumber);
-// 				$('#validity').text(res.data.detail.MuchMonth);
-// 			}else if(type == 2){
-
-// 				$(".breaks").hide();
-// 				$(".pause").hide();
-// 				$(".WriteOff").hide();
-// 				$(".cancel").hide();
-// 				$('.Uhide').css('display','block');
-// 				$('.Ushow').css('display','none');
-// 			}else if(type == 3){
-// 				$(".breaks").hide();
-// 				$(".pause").show();
-// 				$(".WriteOff").hide();
-// 				$(".cancel").hide();
-// 				$(".LHide").css('display','none');
-// 				$('.Uhide').css('display','none');
-// 				$('.Ushow').css('display','block');
-// 				if(res.data.detail.ifHouse == 1){
-// 					$('#pauseType').text('按户占停');
-// 					$('.Ahide').css('display','block');
-// 					$('.AownerType').text(res.data.detail.OwnerType);
-// 				}else{
-					
-// 					$('.Ahide').css('display','none');
-// 					$('.APFloorID').text(res.data.detail.BanFloorNum);
-// 					$('.APhouseArea').text(res.data.detail.BanUsearea);
-// 					$('#pauseType').text('按栋占停');
-// 					$('#SerialNumber').text('楼栋编号:');
-// 					$('.APhouseId').text(res.data.detail.BanID);
-// 					$('.AownerType').text(res.data.detail.OwnerType);
-// 				}
-// 			}else if(type == 4){
-// 				$(".breaks").hide();
-// 				$(".pause").hide();
-// 				$(".WriteOff").show();
-// 				$(".cancel").hide();
-// 				$('.Uhide').css('display','block');
-// 				$('.Ushow').css('display','none');
-// 				$('.WriteOffStartTime').text(res.data.detail.DateStart);
-// 				$('.WriteOffEndTime').text(res.data.detail. DateEnd);
-// 			}else if(type == 8){
-// 				$(".breaks").hide();
-// 				$(".pause").hide();
-// 				$(".WriteOff").hide();
-// 				$(".cancel").show();
-// 				$('.Uhide').css('display','block');
-// 				$('.Ushow').css('display','none');
-// 				$('.Ahide').css('display','none');
-// 					$('.APFloorID').text(res.data.detail.BanFloorNum);
-// 					$('.APhouseArea').text(res.data.detail.BanUsearea);
-// 					$('#SerialNumber').text('楼栋编号:');
-// 					$('.APhouseId').text(res.data.detail.BanID);
-// 			}
-// 			processState('#approveState',res);
-// 			metailShow('#layer-photos-demo',res);
-// 			CordID = "#approveForm";
-// 		}else if(type == 5){
-// 			metailShow('#AdjustPhotos',res);
-// 			processState('#AdjustState',res);
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('.Ehide').css('display','block');
-// 			$('.HouseID').text(res.data.detail.HouseID);
-// 			$('.BanID').text(res.data.detail.BanID);
-// 			$('.BanAddress').text(res.data.detail.BanAddress);
-// 			$('.FloorID').text(res.data.detail.FloorID);
-// 			$('.TenantName').text(res.data.detail.TenantName);
-// 			$('.TenantTel').text(res.data.detail.TenantTel);
-// 			$('.TenantNumber').text(res.data.detail.TenantNumber);
-// 			$('.CreateTime').text(res.data.detail.CreateTime);
-// 			$('.HouseArea').text(res.data.detail.HouseArea);
-// 			$('.LeasedArea').text(res.data.detail.LeasedArea);
-// 			$('.DamageGrade').text(res.data.detail.DamageGrade);
-// 			$('.StructureType').text(res.data.detail.StructureType);
-// 			$('.Dhide').css('display','none');
-// 			// $('.DamageGradeChange').text(res.data.detail.StructureType);//
-// 			CordID = "#houseAdjust";
-
-// 		}else if(type == 6){//维修
-// 			processState('#RepairState',res);
-// 			metailShow('#RepairPhotos',res);
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('#RCBanID').text(res.data.detail.ChangeOrderID);
-// 			$('#RCReason').text(res.data.detail.RepairReson);
-// 			$('#RCRepairType').text(res.data.detail.RepairType);
-// 			$('#OldUseNature').text(res.data.detail.OldUseNature);
-// 			$('#OldOwnerType').text(res.data.detail.OldOwnerType);
-// 			$('#OldBanUnitNum').text(res.data.detail.OldBanUnitNum);
-// 			$('#OldBanFloorNum').text(res.data.detail.OldBanFloorNum);
-// 			$('#OldStructure').text(res.data.detail.OldStructure);
-// 			$('#OldCoveredArea').text(res.data.detail.OldCoveredArea);
-// 			$('#OldTotalArea').text(res.data.detail.OldTotalArea);
-// 			$('#OldDamageGrade').text(res.data.detail.OldDamageGrade);
-// 			$('#RCBanAddress').text(res.data.detail.BanAddress);
-// 			$('#UseNature').text(res.data.detail.UseNature);
-// 			$('#OwnerType').text(res.data.detail.OwnerType);
-// 			$('#BanUnitNum').text(res.data.detail.BanUnitNum);
-// 			$('#BanFloorNum').text(res.data.detail.BanFloorNum);
-// 			$('#Structure').text(res.data.detail.Structure);
-// 			$('#CoveredArea').text(res.data.detail.CoveredArea);
-// 			$('#TotalArea').text(res.data.detail.TotalArea);
-// 			$('#DamageGrade').text(res.data.detail.DamageGrade);
-
-// 			CordID = "#repairChange";
-// 		}else if(type == 7){//新发租
-// 			CordID = "#NLBan";
-// 			var BanID = $('#NLHouseID').val();
-// 			console.log(BanID);
-// 			//$.get('/ph/BanInfo/detail/BanID/'+)
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('#BanID').text(res.data.detail.BanID);
-// 			$('#BanYear').text(res.data.detail.CreateTime);
-// 			$('#DamageGrade1').text(res.data.detail.DamageGrade);
-// 			$('#BanAddress').text(res.data.detail.BanAddress);
-// 			$('#BanUsearea').text(res.data.detail.HouseArea);
-// 			$('#OwnerTypex').text(res.data.detail.OwnerType);
-// 			$('#StructureTypex').text(res.data.detail.StructureType);
-// 			$('#UseNaturex').text(res.data.detail.UseNature);
-// 			console.log(res);
-// 			processState('#approveBan',res);
-// 			// metailShow('#approveBan',res);
-// 		}else if(type == 9){//房屋调整(最后调整)
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('.Ehide').css('display','none');
-// 			$('.HouseID').text(res.data.detail.HouseID);
-// 			$('.BanID').text(res.data.detail.BanID);
-// 			$('.BanAddress').text(res.data.detail.BanAddress);
-// 			$('.FloorID').text(res.data.detail.BanFloorNum);
-// 			$('.TenantName').text(res.data.detail.TenantName);
-// 			$('.TenantTel').text(res.data.detail.TenantTel);
-// 			$('.TenantNumber').text(res.data.detail.TenantNumber);
-// 			$('.CreateTime').text(res.data.detail.CreateTime);
-// 			$('.HouseArea').text(res.data.detail.TotalArea);
-// 			$('.LeasedArea').text(res.data.detail.LeasedArea);
-// 			$('.DamageGrade').text(res.data.detail.DamageGrade);
-// 			$('.StructureType').text(res.data.detail.StructureType);
-// 			$('.Dhide').css('display','block');
-// 			$('.DamageGradeChange').text(res.data.detail.NewDamage);//
-// 			processState('#AdjustState',res);
-// 			metailShow('#AdjustPhotos',res);
-// 			CordID = "#houseAdjust";
-// 		}else if(type == 10){//管段调整
-// 			processState('#PipeState',res);
-// 			metailShow('#PipePhotos',res);
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('.PipeBanId').text(res.data.detail.BanID);
-// 			$('.PipeHouseAddress').text(res.data.detail.BanAddress);
-// 			$('.PipeUseNature').text(res.data.detail.UseNature);
-// 			$('.PipeUnitNumber').text(res.data.detail.BanUnitNum);
-// 			$('.PipeFloorID').text(res.data.detail.BanFloorNum);
-// 			$('.PipeStructure').text(res.data.detail.StructureType);
-// 			$('.PipeDamageGrade').text(res.data.detail.DamageGrade);
-// 			$('#OldPipe').text(res.data.detail.InstitutionID);
-// 			$('#NewPipe').text(res.data.detail.NewInstitutionID);
-// 			$('.PipeType').text(res.data.detail.OwnerType);
-// 			$('.PipeHouseArea').text(res.data.detail.TotalArea);
-// 			$('.PipeCorverArea').text(res.data.detail.CoveredArea);
-// 			// $('.PipeType').text(res.data.detail.StructureType);
-// 			CordID = "#PipeAdjusted";
-// 		}else if(type == 11){//租金追加调整
-// 			processState('#AddState',res);
-// 			metailShow('#AddPhotos',res);
-// 			$('.Uhide').css('display','block');
-// 			$('.Ushow').css('display','none');
-// 			$('.AddHouseID').text(res.data.detail.HouseID);
-// 			$('.AddBanID').text(res.data.detail.BanID);
-// 			$('.AddBanAddress').text(res.data.detail.BanAddress);
-// 			$('.AddFloorID').text(res.data.detail.FloorID);
-// 			$('.AddTenantName').text(res.data.detail.TenantName);
-// 			$('.AddTenantTel').text(res.data.detail.TenantTel);
-// 			$('.AddTenantNumber').text(res.data.detail.TenantNumber);
-// 			$('.AddCreateTime').text(res.data.detail.CreateTime);
-// 			$('.AddHouseArea').text(res.data.detail.HouseArea);
-// 			$('.AddLeasedArea').text(res.data.detail.LeasedArea);
-// 			$('#AddTime').text(res.data.detail.DateStart);
-// 			$('#AddMoney').text(res.data.detail.AddRent);
-// 			CordID = "#AddAdjusted";
-// 		}
-
-// 	layer.open({
-// 		type:1,
-// 		area:['950px','800px'],
-// 		resize:false,
-// 		resize:false,
-// 		zIndex:100,
-// 		title:['审批','color:#FFF;font-size:1.6rem;font-weight:600;'],
-// 		content:$(CordID),
-// 		btn:['通过','不通过'],
-// 		yes:function(thisIndex){
-// 			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value},function(res){
-// 				res = JSON.parse(res);
-// 				console.log(res);
-// 				layer.msg(res.msg);
-// 				if(res.retcode == "2000"){
-// 					layer.close(thisIndex);
-// 					location.reload();
-// 				}
-// 			});
-			
-// 		},
-// 		btn2:function(){
-// 			layer.open({
-// 				type:1,
-// 				area:['400px','400px'],
-				
-// 				resize:false,
-// 				zIndex:100,
-// 				title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
-// 				content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
-// 				btn:['确认'],
-// 				yes:function(msgIndex){
-// 					var reasonMsg = $('#reason').val();
-// 					if (reasonMsg=='') {
-// 						reasonMsg='空';
-// 					}else{
-// 						reasonMsg=$('#reason').val();
-// 					}
-// 					console.log(reasonMsg);
-// 					$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
-// 						res = JSON.parse(res);
-// 						console.log(res);
-// 						layer.msg(res.msg);
-// 					});
-// 					layer.close(msgIndex);
-// 					location.reload();
-// 				}
-// 			})
-// 		}
-// 	});
-// 	layer.photos({
-// 	  photos: '#layer-photos-demo'
-// 	  ,anim: 5
-// 	});
-// });
-// })
-
-
-
 //明细
 $('.BtnDetail').click(function(){
 	var value = $(this).val(),
@@ -292,33 +13,26 @@ $('.BtnDetail').click(function(){
 		res = JSON.parse(res);
 		console.log(res);
 		var type = res.data.detail.type;
-		if(type == 1 || type == 2 || type == 3 || type == 4 || type == 8){
-			$('.APhouseId').text(res.data.detail.HouseID);
-			$('.APBanID').text(res.data.detail.BanID);
-			$('.APhouseAddress').text(res.data.detail.BanAddress);
-			$('.APFloorID').text(res.data.detail.FloorID);
-			$('.APtenantName').text(res.data.detail.TenantName);
-			$('.APtenantTel').text(res.data.detail.TenantTel);
-			$('.APtenantNumber').text(res.data.detail.TenantNumber);
-			$('.APcreateTime').text(res.data.detail.CreateTime);
-			$('.APhouseArea').text(res.data.detail.HouseArea);
-			$('.APleasedArea').text(res.data.detail.LeasedArea);
-			$('.MuchMonth').text(res.data.detail.MuchMonth);
-			$('.RemitRent').text(res.data.detail.RemitRent);
-			$('.AownerType').text(res.data.detail.OwnerType);
-			$('.HousePrerent').text(res.data.detail.HousePrerent||res.data.detail.PreRent);
-			//$('#approveName').text(res.data.detail.ChangeType);
 			if(type == 1){
-				$(".breaks").show();
-				$(".pause").hide();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('#breakType').text(res.data.detail.CutName);
-				$('#IDNumber').text(res.data.detail.IDnumber);
-				$('#validity').text(res.data.detail.MuchMonth);
-				$('.HousePrerent').text(res.data.detail.HousePrerent);
+				$('.status_2').hide();
+            	$('.derateHouseID').text(res.data.detail.HouseID);
+            	$('.derateBanID').text(res.data.detail.BanID);
+            	$('.derateAddress').text(res.data.detail.BanAddress);
+            	$('.derateOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+            	$('.derateUseNature').text(res.data.detail.UseNature);
+            	$('.detateHouseUsearea').text(res.data.detail.HouseUsearea);
+            	$('.derateLeasedArea').text(res.data.detail.LeasedArea);
+            	$('.derateHousePrerent').text(res.data.detail.HousePrerent);
+            	$('.derateTenantName').text(res.data.detail.TenantName);
+            	$('.derateTenantNumber').text(res.data.detail.TenantNumber);
+            	$('.derateTenantTel').text(res.data.detail.TenantTel);
+            	$('.derateMoney').text(res.data.detail.RemitRent);
+            	$('.derateType').text(res.data.detail.CutName);
+            	$('.derateNumber').text(res.data.detail.IDnumber);
+            	$('.derateTime').text(res.data.detail.MuchMonth+'月');
+				processState('#derateState',res);
+				metailShow('#deratePhotos',res);
+				layerBox(value,'derate','租金减免详情',2);
 			}else if(type == 2){
 				$(".breaks").hide();
 				$(".pause").hide();
@@ -327,28 +41,26 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 			}else if(type == 3){
-				$(".breaks").hide();
-				$(".pause").show();
-				$(".WriteOff").hide();
-				$(".cancel").hide();
-				$(".LHide").css('display','none');
-				$('.Uhide').css('display','none');
-				$('.Ushow').css('display','block');
-				if(res.data.detail.ifHouse == 1){
-					$('#pauseType').text('按户占停');
-					$('.Ahide').css('display','block');
-					$('.AownerType').text(res.data.detail.OwnerType);
-					$('.HousePrerent').text(res.data.detail.HousePrerent);
-				}else{
-					$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#pauseType').text('按栋占停');
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-					$('.AownerType').text(res.data.detail.OwnerType);
-					$('.HousePrerent').text(res.data.detail.PreRent);
-				}
+            	var house_str = '';
+            	$('.pauseBanId').text(res.data.detail.ban.BanID);
+            	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
+            	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
+            	$('.pauseInflRent').text(res.data.detail.InflRent);
+            	$('.pauseCreateTime').text(res.data.detail.CreateTime);
+            	$('.status_2').hide();
+            	for(var i = 0;i < res.data.detail.house.length;i++){
+            		house_str += '<tr>\
+		                <td style="width:200px;">'+(i+1)+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
+		                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		            </tr>';
+            	}
+            	$('#pauseHouseDetail').empty();
+            	$('#pauseHouseDetail').append($(house_str));
+				processState('#pauseRentState',res);
+				metailShow('#pauseRentPhotos',res);
+				layerBox(value,'pauseDetail','暂停计租详情',2);
 			}else if(type == 4){
 				$(".breaks").hide();
 				$(".pause").hide();
@@ -366,15 +78,11 @@ $('.BtnDetail').click(function(){
 				$('.Uhide').css('display','block');
 				$('.Ushow').css('display','none');
 				$('.Ahide').css('display','none');
-					$('.APFloorID').text(res.data.detail.BanFloorNum);
-					$('.APhouseArea').text(res.data.detail.BanUsearea);
-					$('#SerialNumber').text('楼栋编号:');
-					$('.APhouseId').text(res.data.detail.BanID);
-			}
-			processState('#approveState',res);
-			metailShow('#layer-photos-demo',res);
-			CordID = "#approveForm";
-		}else if(type == 5){
+				$('.APFloorID').text(res.data.detail.BanFloorNum);
+				$('.APhouseArea').text(res.data.detail.BanUsearea);
+				$('#SerialNumber').text('楼栋编号:');
+				$('.APhouseId').text(res.data.detail.BanID);
+			}else if(type == 5){
 			metailShow('#AdjustPhotos',res);
 			processState('#AdjustState',res);
 			$('.Uhide').css('display','block');
@@ -395,7 +103,6 @@ $('.BtnDetail').click(function(){
 			$('.Dhide').css('display','none');
 			// $('.DamageGradeChange').text(res.data.detail.StructureType);//
 			CordID = "#houseAdjust";
-
 		}else if(type == 6){//维修
 			processState('#RepairState',res);
 			metailShow('#RepairPhotos',res);
@@ -421,7 +128,6 @@ $('.BtnDetail').click(function(){
 			$('#CoveredArea').text(res.data.detail.CoveredArea);
 			$('#TotalArea').text(res.data.detail.TotalArea);
 			$('#DamageGrade').text(res.data.detail.DamageGrade);
-
 			CordID = "#repairChange";
 		}else if(type == 7){//新发租
 			//$('.HousedCopy li:lt(3)').empty();
@@ -551,7 +257,7 @@ $('.BtnDetail').click(function(){
 					});
 				})//房间信息
 
-				})//房间点击
+			})//房间点击
 			$('.HousedCopy').on('click','.cur',function(){
 				$('.tableCopy:gt(0)').remove();
 				var RentHouseID=$(this).siblings().eq(0).text();
@@ -579,8 +285,6 @@ $('.BtnDetail').click(function(){
 					});
 				});
 			});
-			
-			// metailShow('#approveBan',res);
 		}else if(type == 9){//房屋调整(最后调整)
 			$('.Uhide').css('display','block');
 			$('.Ushow').css('display','none');
@@ -607,6 +311,7 @@ $('.BtnDetail').click(function(){
 			metailShow('#PipePhotos',res);
 			$('.Uhide').css('display','block');
 			$('.Ushow').css('display','none');
+			console.log(res.data.detail.HouseID);
 			if(res.data.detail.HouseID){
 				console.log()
 				$('#PipeAdjustBan').hide();
@@ -726,103 +431,118 @@ $('.BtnDetail').click(function(){
 			$("#SplitAddLeased").text(res.data.detail.NewHouseInfo.LeasedArea);
 			$("#SplitAddNum").text(res.data.detail.NewHouseInfo.HouseID);
 			
-				}else if(type==14){
-					$('.SplitNum').unbind('click');
-					$('.HoldRoom').children().remove();
-					$('.HoldRoom2').children().remove();
-					CordID="#HouseHolds";
-					processState('#HouseHoldsState',res);
-					metailShow('#HouseHoldsFile',res);
-					var Oldarr=[];
-					var OldRoomNumbers=res.data.detail.OldHouseInfo.RoomNumbers;
-					for(var i in OldRoomNumbers){
-						Oldarr.push(i);
-					}
-					for(var n=0;n<Oldarr.length;n++){
-						var RoomHtml = '<li><i class="SplitNum cur">'+Oldarr[n]+'</i><input type="hidden" value="'+OldRoomNumbers[Oldarr[n]]+'"/></li>';
-						$('.HoldRoom').append(RoomHtml);
-					}
-					var Newarr=[];
-					var NewRoomNumbers=res.data.detail.NewHouseInfo.RoomNumbers;
-					for(var i in NewRoomNumbers){
-						Newarr.push(i);
-					}
-					for(var n=0;n<Newarr.length;n++){
-						var RoomHtml = '<li><i class="SplitNum cur">'+Newarr[n]+'</i><input type="hidden" value="'+NewRoomNumbers[Newarr[n]]+'"/></li>';
-						$('.HoldRoom2').append(RoomHtml);
-					}
-					$("#HoldsHouseNum").text(res.data.detail.OldHouseInfo.HouseID);
-					$("#HoldsBanID").text(res.data.detail.OldHouseInfo.BanID);
-					$("#HoldsBanAddress").text(res.data.detail.OldHouseInfo.BanAddress);
-					$("#HoldsFloorID").text(res.data.detail.OldHouseInfo.FloorID);
-					$("#HoldsTenantName").text(res.data.detail.OldHouseInfo.TenantName);
-					$("#HoldsTenantTel").text(res.data.detail.OldHouseInfo.TenantTel);
-					$("#HoldsTenantNumber").text(res.data.detail.OldHouseInfo.TenantNumber);
-					$("#HoldsCreateTime").text(res.data.detail.OldHouseInfo.CreateTime);
-					$("#HoldsHouseArea").text(res.data.detail.OldHouseInfo.HouseArea);
-					$("#HoldsLeasedArea").text(res.data.detail.OldHouseInfo.LeasedArea);
-					$("#CancelID").text(res.data.detail.NewHouseInfo.BanID);
-					$("#CancelAddress").text(res.data.detail.NewHouseInfo.BanAddress);
-					$("#CancelFloor").text(res.data.detail.NewHouseInfo.FloorID);
-					$("#CancelName").text(res.data.detail.NewHouseInfo.TenantName);
-					$("#CancelTel").text(res.data.detail.NewHouseInfo.TenantTel);
-					$("#CancelNumber").text(res.data.detail.NewHouseInfo.TenantNumber);
-					$("#CancelTime").text(res.data.detail.NewHouseInfo.CreateTime);
-					$("#CancelArea").text(res.data.detail.NewHouseInfo.HouseArea);
-					$("#CancelLeased").text(res.data.detail.NewHouseInfo.LeasedArea);
-					$("#CancelNum").text(res.data.detail.NewHouseInfo.HouseID);
-				}
-			
-		layer.open({
-			type:1,
-			area:['950px','800px'],
-			resize:false,
-			zIndex:100,
-			title:['查看明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$(CordID)
-		});
+		}else if(type==14){
+			$('.SplitNum').unbind('click');
+			$('.HoldRoom').children().remove();
+			$('.HoldRoom2').children().remove();
+			CordID="#HouseHolds";
+			processState('#HouseHoldsState',res);
+			metailShow('#HouseHoldsFile',res);
+			var Oldarr=[];
+			var OldRoomNumbers=res.data.detail.OldHouseInfo.RoomNumbers;
+			for(var i in OldRoomNumbers){
+				Oldarr.push(i);
+			}
+			for(var n=0;n<Oldarr.length;n++){
+				var RoomHtml = '<li><i class="SplitNum cur">'+Oldarr[n]+'</i><input type="hidden" value="'+OldRoomNumbers[Oldarr[n]]+'"/></li>';
+				$('.HoldRoom').append(RoomHtml);
+			}
+			var Newarr=[];
+			var NewRoomNumbers=res.data.detail.NewHouseInfo.RoomNumbers;
+			for(var i in NewRoomNumbers){
+				Newarr.push(i);
+			}
+			for(var n=0;n<Newarr.length;n++){
+				var RoomHtml = '<li><i class="SplitNum cur">'+Newarr[n]+'</i><input type="hidden" value="'+NewRoomNumbers[Newarr[n]]+'"/></li>';
+				$('.HoldRoom2').append(RoomHtml);
+			}
+			$("#HoldsHouseNum").text(res.data.detail.OldHouseInfo.HouseID);
+			$("#HoldsBanID").text(res.data.detail.OldHouseInfo.BanID);
+			$("#HoldsBanAddress").text(res.data.detail.OldHouseInfo.BanAddress);
+			$("#HoldsFloorID").text(res.data.detail.OldHouseInfo.FloorID);
+			$("#HoldsTenantName").text(res.data.detail.OldHouseInfo.TenantName);
+			$("#HoldsTenantTel").text(res.data.detail.OldHouseInfo.TenantTel);
+			$("#HoldsTenantNumber").text(res.data.detail.OldHouseInfo.TenantNumber);
+			$("#HoldsCreateTime").text(res.data.detail.OldHouseInfo.CreateTime);
+			$("#HoldsHouseArea").text(res.data.detail.OldHouseInfo.HouseArea);
+			$("#HoldsLeasedArea").text(res.data.detail.OldHouseInfo.LeasedArea);
+			$("#CancelID").text(res.data.detail.NewHouseInfo.BanID);
+			$("#CancelAddress").text(res.data.detail.NewHouseInfo.BanAddress);
+			$("#CancelFloor").text(res.data.detail.NewHouseInfo.FloorID);
+			$("#CancelName").text(res.data.detail.NewHouseInfo.TenantName);
+			$("#CancelTel").text(res.data.detail.NewHouseInfo.TenantTel);
+			$("#CancelNumber").text(res.data.detail.NewHouseInfo.TenantNumber);
+			$("#CancelTime").text(res.data.detail.NewHouseInfo.CreateTime);
+			$("#CancelArea").text(res.data.detail.NewHouseInfo.HouseArea);
+			$("#CancelLeased").text(res.data.detail.NewHouseInfo.LeasedArea);
+			$("#CancelNum").text(res.data.detail.NewHouseInfo.HouseID);
+		}
+		// layer.open({
+		// 	type:1,
+		// 	area:['950px','800px'],
+		// 	resize:false,
+		// 	zIndex:100,
+		// 	title:['查看明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		// 	content:$(CordID)
+		// });
 	});
 });
+$(document).on('click','.SplitNum',function() {
+	var val =$(this).next().val();
+	console.log(val);
+	$.get('/ph/Room/detail/RoomID/'+val,function(res){
+		res = JSON.parse(res);
+		$("#DRoomID").text(res.data.RoomID);
+		$("#DBanID").text(res.data.BanID);
+		$("#DHouseID").text(res.data.HouseID);
+		$("#DRoomType").text(res.data.RoomType);
+		$("#DUnitID").text(res.data.UnitID);
+		$("#DFloorID").text(res.data.FloorID);
+		$("#DRentPoint").text(res.data.RentPoint);
+		$("#DUseArea").text(res.data.UseArea);
+		$("#DLeasedArea").text(res.data.LeasedArea);
+		$("#DItems").text(res.data.Items);
+		$("#DRoomNumber").text(res.data.RoomNumber);
+		$('.BanAddress').text(res.data.BanAddress);
+		$('#RoomNumber').text(res.data.RoomNumber);
+		layer.open({
+			type:1,
+			area:['800px','600px'],
+			resize:false,
+			zIndex:100,
+			title:['房间明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			content:$('#RoomDetail'),
+			btn:['确定','取消'],
+			success:function(){}
+		});
+	})															
+});
 
-	$(document).on('click','.SplitNum',function() {
-				var val =$(this).next().val();
-				console.log(val);
-				$.get('/ph/Room/detail/RoomID/'+val,function(res){
-					res = JSON.parse(res);
-					$("#DRoomID").text(res.data.RoomID);
-					$("#DBanID").text(res.data.BanID);
-					$("#DHouseID").text(res.data.HouseID);
-					$("#DRoomType").text(res.data.RoomType);
-					$("#DUnitID").text(res.data.UnitID);
-					$("#DFloorID").text(res.data.FloorID);
-					$("#DRentPoint").text(res.data.RentPoint);
-					$("#DUseArea").text(res.data.UseArea);
-					$("#DLeasedArea").text(res.data.LeasedArea);
-					$("#DItems").text(res.data.Items);
-					$("#DRoomNumber").text(res.data.RoomNumber);
-					$('.BanAddress').text(res.data.BanAddress);
-					$('#RoomNumber').text(res.data.RoomNumber);
-					layer.open({
-							type:1,
-							area:['800px','600px'],
-							resize:false,
-							zIndex:100,
-							title:['房间明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-							content:$('#RoomDetail'),
-							btn:['确定','取消'],
-							success:function(){}
-							});
-							})
-																
-							});
 //查看附件函数
 function metailShow(id,res){
 	var ImgLength = res.data.urls.length;
+	var img_title = [];
+	var	img_array = [];
+	res.data.urls.forEach(function(data){
+		var index = img_title.indexOf(data.FileTitle);
+		if(index < 0){
+			img_title.push(data.FileTitle);
+			img_array[img_array.length] = [];
+			img_array[img_array.length - 1].push(data.FileUrl);
+		}else{
+			img_array[index].push(data.FileUrl);
+		}
+	});
 	var FatherDom = $(id);
 	FatherDom.empty();
-	for(var i = 0; i < ImgLength; i++){
-		var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.urls[i].FileUrl+" src="+res.data.urls[i].FileUrl+" alt="+res.data.urls[i].FileTitle+"/>");
-		FatherDom.append(ImgDom);
+	for(var i = 0; i < img_title.length; i++){
+		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
+		FatherDom.append(title_dom);
+		for(var j = 0;j < img_array[i].length;j++){
+			var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+
+				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>");
+			FatherDom.append(ImgDom);
+		}
 	}
 	console.log(id);
 	layer.photos({
@@ -838,15 +558,16 @@ function processState(id,res){
 	var status = parseInt(res.data.config.status) * 2 - 1;
 	FatherDom.empty();
 	for(var i = 0; i < ConfigLength;i++){
-		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span>——></span>');
+		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span><i class="am-icon-lg am-icon-long-arrow-right" +\
+			style="margin:auto 4px;"></i></span>');
 		FatherDom.append(SpanDom);
 	}
 	FatherDom.find('span').last().remove();
-	for(var j = 0; j < ConfigLength*2-1; j++){
+	for(var j = 0; j < status; j++){
 		if(j % 2== 0){
 			FatherDom.find('span').eq(j).addClass('process_style_active');
 		}else{
-			FatherDom.find('span').eq(j).addClass('line_style');
+			FatherDom.find('span').eq(j).find('i').addClass('line_style');
 		}
 	}
 	for(var k = 1;k <= RecordLength;k++){
@@ -855,7 +576,33 @@ function processState(id,res){
 		}else{
 			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].CreateTime+res.data.record[k-1].Status+"，原因："+res.data.record[k-1].Reson+"；</p>");
 		}
-		
 		FatherDom.append(RecordDom);
 	}
+}
+// 详情与审批流程弹出框
+function layerBox(value,id,name,operation,status){
+	var this_index = layer.open({
+        type: 1,
+        area: ['990px','780px'],
+        resize: false,
+        zIndex: 100,
+        title: [name, 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#'+id+''),
+        btn:operation==1?['通过','不通过']:'',
+        success: function(){
+
+        },
+        yes:function(){
+        	if(status == '1'){
+        		var formData = fileTotall.getArrayFormdata();
+        	}else{
+        		var formData = new FormData();
+        	}
+			formData.append('ChangeOrderID',value);
+        	processPass(formData,this_index);
+        },
+        btn2:function(){
+			noPass(value)
+		}
+    })
 }
