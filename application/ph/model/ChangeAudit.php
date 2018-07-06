@@ -219,20 +219,20 @@ class ChangeAudit extends Model
     {  //获取租金减免的详情
 
         //房屋编号
-        $houseID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
+        $houseID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID')->find();
 
-        $data = get_house_info($houseID);
-//halt($changeOrderID);
-        //halt($data);
+        $data = get_house_info($houseID['HouseID']);
 
         $datas = Db::name('rent_cut_order')->alias('a')
             ->join('cut_rent_type b', 'a.CutType = b.id', 'left')->where('ChangeOrderID', 'eq', $changeOrderID)
-            ->field('b.CutName ,a.*')
+            ->field('b.CutName ,a.IDnumber,a.MuchMonth')
             ->find();
 
-        //halt($datas);
-
-        $data = array_merge($datas,$data);
+        $data['InflRent'] = $houseID['InflRent'];
+        $data['CutName'] = $datas['CutName'];
+        $data['IDnumber'] = $datas['IDnumber'];
+        $data['MuchMonth'] = $datas['MuchMonth'];
+        //halt($data);
 
         $data['type'] = 1;
 
@@ -611,37 +611,22 @@ class ChangeAudit extends Model
         switch ($changeType) {
             case 1:  //租金减免异动完成后的，系统处理
 
-                //$nowYearMonth = date('Ym',time());
-
-                $one = Db::name('rent_cut_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('MuchMonth,OwnerType,HouseID,RemitRent,AnathorOwnerType,AnathorRemitRent,CutType,IDnumber')->find();
-
-                $startline = date('Ym', time());
-
-                $one['MuchMonth'] = $one['MuchMonth'] + 1;
-                $deadline = date('Ym', strtotime("+ " . $one['MuchMonth'] . " month"));
-
-                //添加减免截止时间，用来在生成租金订单的时候判断是否可以减免,例如201709则表示减免时间从下个月开始一直持续到2017年8月份，9月份则过期
-                Db::name('rent_cut_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['Startline' => $startline, 'Deadline' => $deadline]);
-
                 //将减免的金额写入到房屋减免字段中去
-                Db::name('house')->where('HouseID', $one['HouseID'])->setField('RemitRent', $one['RemitRent']+$one['RemitRent']);
+                Db::name('house')->where('HouseID', $one['HouseID'])->setInc('RemitRent', $one['RemitRent']);
 
                 //将减免类型，减免金额，减免证件号写入到租金配置中去
-                Db::name('rent_config')->where('HouseID', $one['HouseID'])->update(['CutType' => $one['CutType'], 'CutRent' => $one['RemitRent'], 'CutNumber' => $one['IDnumber']]);
+                Db::name('rent_config')->where('HouseID', $one['HouseID'])->update([ ]);
 
-                //将租金配置中该房屋的应收租金减去减免金额
-                if ($one['OwnerType']) {
-                    Db::name('rent_config')->where(['HouseID'=> $one['HouseID'],'OwnerType'=>$one['OwnerType']])
-                    ->update([
-                        'ReceiveRent'=>['exp','ReceiveRent'-$one['RemitRent']],
-                        'UnpaidRent'=>['exp','UnpaidRent'-$one['RemitRent']] ,
-                    ]);
-                }
-
-                if ($one['AnathorOwnerType']) {
-                    Db::name('rent_config')->where(['HouseID'=> $one['HouseID'],'OwnerType'=>$one['AnathorOwnerType']])->setDec('ReceiveRent', $one['RemitRent']);
-                    Db::name('rent_config')->where(['HouseID'=> $one['HouseID'],'OwnerType'=>$one['AnathorOwnerType']])->setDec('UnpaidRent', $one['RemitRent']);
-                }
+                
+                Db::name('rent_config')->where('HouseID', $one['HouseID'])
+                ->update([
+                    'CutType' => $one['CutType'],
+                    'CutRent' => $one['RemitRent'], 
+                    'CutNumber' => $one['IDnumber'],
+                    'ReceiveRent'=>['exp','ReceiveRent'-$one['RemitRent']],
+                    'UnpaidRent'=>['exp','UnpaidRent'-$one['RemitRent']] ,
+                ]);
+                
 
                 break;
             case 2:  //空租异动完成后的，系统处理
