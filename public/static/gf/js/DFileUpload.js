@@ -39,6 +39,7 @@ var fileTotall = {
         var formData = new FormData();
         if(length == 0){
             layer.msg("请选择要上传的文件");
+            return false;
         }else{
             var currentTitle = this.array[0].title,j = 0;
             for(var i = 0; i < length; i++){
@@ -75,6 +76,7 @@ var fileTotall = {
         var formData = new FormData();
         if(length == 0){
             layer.msg("请选择要上传的文件");
+            return false;
         }else{
             var currentTitle = this.array[0].title,j = 0;
             for(var i = 0; i < length; i++){

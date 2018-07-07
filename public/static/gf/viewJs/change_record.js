@@ -53,7 +53,8 @@ $('.BtnDetail').click(function(){
 		                <td style="width:200px;">'+(i+1)+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].HouseID+'</td>\
 		                <td style="width:200px;">'+res.data.detail.house[i].TenantName+'</td>\
-		                <td style="width:350px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		                <td style="width:200px;">'+res.data.detail.house[i].HousePrerent+'</td>\
+		                <td style="width:350px;">'+res.data.detail.house[i].BanAddress+'</td>\
 		            </tr>';
             	}
             	$('#pauseHouseDetail').empty();
