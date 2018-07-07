@@ -218,7 +218,6 @@ class ChangeAudit extends Model
     public function get_one_detail($changeOrderID)
     {  //获取租金减免的详情
 
-        //房屋编号
         $houseID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID')->find();
 
         $data = get_house_info($houseID['HouseID']);
@@ -611,22 +610,34 @@ class ChangeAudit extends Model
         switch ($changeType) {
             case 1:  //租金减免异动完成后的，系统处理
 
+                $one = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','left')->where('a.ChangeOrderID',$changeOrderID)->field('b.IDnumber,a.*')->find();
                 //将减免的金额写入到房屋减免字段中去
-                Db::name('house')->where('HouseID', $one['HouseID'])->setInc('RemitRent', $one['RemitRent']);
+                Db::name('house')->where('HouseID', $one['HouseID'])->setInc('RemitRent', $one['InflRent']);
 
-                //将减免类型，减免金额，减免证件号写入到租金配置中去
-                Db::name('rent_config')->where('HouseID', $one['HouseID'])->update([ ]);
+                //将减免类型，减免金额，减免证件号写入到租金配置中去 
+                $rentconfigfind = Db::name('rent_config')->where('HouseID', $one['HouseID'])->find();  
 
-                
-                Db::name('rent_config')->where('HouseID', $one['HouseID'])
-                ->update([
-                    'CutType' => $one['CutType'],
-                    'CutRent' => $one['RemitRent'], 
-                    'CutNumber' => $one['IDnumber'],
-                    'ReceiveRent'=>['exp','ReceiveRent'-$one['RemitRent']],
-                    'UnpaidRent'=>['exp','UnpaidRent'-$one['RemitRent']] ,
-                ]);
-                
+                if($rentconfigfind){
+                    Db::name('rent_config')->where('HouseID', $one['HouseID'])
+                                            ->update([
+                                                'CutType' => $one['CutType'],
+                                                'CutRent' => $one['InflRent'], 
+                                                'CutNumber' => $one['IDnumber'],
+                                                'ReceiveRent'=>['exp','ReceiveRent'-$one['InflRent']],
+                                                'UnpaidRent'=>['exp','UnpaidRent'-$one['InflRent']] ,
+                                            ]);
+                }
+                $rentorderfind = Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])->find();        
+                if($rentconfigfind){
+                    Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])
+                                            ->update([
+                                                'CutType' => $one['CutType'],
+                                                'CutRent' => $one['InflRent'], 
+                                                'CutNumber' => $one['IDnumber'],
+                                                'ReceiveRent'=>['exp','ReceiveRent'-$one['InflRent']],
+                                                'UnpaidRent'=>['exp','UnpaidRent'-$one['InflRent']] ,
+                                            ]);
+                }
 
                 break;
             case 2:  //空租异动完成后的，系统处理

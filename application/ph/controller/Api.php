@@ -7,6 +7,7 @@ use think\Cache;
 use think\Config;
 use think\Controller;
 use app\ph\model\HouseInfo as HouseInfoModel;
+use app\ph\model\Room as RoomModel;
 use think\Db;
 use think\Debug;
 
@@ -1305,20 +1306,23 @@ class Api extends Controller
     {   
         $housemodel = new HouseInfoModel;
 
-        // $offset = 15000;
-        // $length = 5000;  
+        $roommodel = new RoomModel;
+
+        $offset = 0;
+        $length = 10000;  
         // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
-        $res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        //$res = ['10101020056826'=>0];
+        //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
+        $res = Db::name('room')->limit($offset,$length)->column('RoomID,RoomRentMonth');
+        //$res = ['10900918250336'=>0];
         foreach($res as $k => $v){  
              $s = 0;
-             $s = count_house_rent($k);
+             $s = count_room_rent($k);
              //dump($k.'计算租金是：');halt($s);
-             $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
+             $roommodel->save(['RoomRentMonth'=>$s],['RoomID'=>$k]);
              //halt($k);
         }
 
-        halt(20000);
+        halt(10000);
 
     }
 
