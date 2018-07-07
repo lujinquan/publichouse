@@ -644,7 +644,7 @@ class ChangeAudit extends Model
                                             ]);
                 }
 
-                $str = "( 2,". $one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
+                $str = "( 1,". $one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
 
