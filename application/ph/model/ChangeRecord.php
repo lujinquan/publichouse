@@ -82,9 +82,6 @@ class ChangeRecord extends Model
             if ($searchForm['OwnerType']) {  //检索变更类型
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            if ($searchForm['UseNature']) {  //检索变更类型
-                $where['UseNature'] = array('eq', $searchForm['UseNature']);
-            }
             if ($searchForm['InflRent']) {  //检索变更类型
                 $where['InflRent'] = array('eq', $searchForm['InflRent']);
             }
