@@ -1308,11 +1308,11 @@ class Api extends Controller
 
         $roommodel = new RoomModel;
 
-        $offset = 0;
-        $length = 10000;  
+        // $offset = 0;
+        // $length = 10000;  
         // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
         //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        $res = Db::name('room')->limit($offset,$length)->column('RoomID,RoomRentMonth');
+        $res = Db::name('room')->column('RoomID,RoomRentMonth');
         //$res = ['10900918250336'=>0];
         foreach($res as $k => $v){  
              $s = 0;
@@ -1322,7 +1322,7 @@ class Api extends Controller
              //halt($k);
         }
 
-        halt(10000);
+        halt('ok');
 
     }
 

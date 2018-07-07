@@ -4,6 +4,9 @@
 namespace app\ph\model;
 
 use think\Model;
+use app\ph\model\BanInfo as BanInfoModel;
+use app\ph\model\HouseInfo as HouseInfoModel;
+use app\ph\model\TenantInfo as TenantInfoModel;
 use think\Db;
 use util\Tree;
 
@@ -74,9 +77,9 @@ class ChangeAudit extends Model
             if ($searchForm['OwnerType']) {  //检索变更类型
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            if ($searchForm['UseNature']) {  //检索变更类型
-                $where['UseNature'] = array('eq', $searchForm['UseNature']);
-            }
+            // if ($searchForm['UseNature']) {  //检索变更类型
+            //     $where['UseNature'] = array('eq', $searchForm['UseNature']);
+            // }
             if ($searchForm['InflRent']) {  //检索变更类型
                 $where['InflRent'] = array('eq', $searchForm['InflRent']);
             }
@@ -607,6 +610,8 @@ class ChangeAudit extends Model
      */
     public function after_process($changeOrderID, $changeType)
     {
+        
+
         switch ($changeType) {
             case 1:  //租金减免异动完成后的，系统处理
 
@@ -639,6 +644,10 @@ class ChangeAudit extends Model
                                             ]);
                 }
 
+                $str = "( 2,". $one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
+
                 break;
             case 2:  //空租异动完成后的，系统处理
                 //修改对应的房屋的状态为空租
@@ -649,15 +658,28 @@ class ChangeAudit extends Model
 
             case 3:  //暂停计租异动完成后的，系统处理
 
-                //修改对应的房屋的状态为暂停计租
-                $houseids = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
+                $houseModel = new HouseInfoModel;
 
-                if(strpos($houseids,',')){
-                    $arr = explode(',',$houseids);
-                    Db::name('house')->where('HouseID', 'in', $arr)->setField('IfSuspend', 1);
+                //修改对应的房屋的状态为暂停计租
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,ChangeType')->find();
+
+                if(strpos($changeFind['HouseID'],',')){
+                    $arr = explode(',',$changeFind['HouseID']);
+                    $houseModel->where('HouseID', 'in', $arr)->setField('IfSuspend', 1);
+                    $housearr = $houseModel->where('HouseID', 'in', $arr)->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->select();
+
+                    $str = '';
+                    foreach($housearr as $v){
+                        $str .= "(" . $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. "),";
+                    }
+
                 }else{
-                    Db::name('house')->where('HouseID', 'eq', $houseids)->setField('IfSuspend', 1);
-                } 
+                    $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->setField('IfSuspend', 1);
+                    $housearr = $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->find();
+                    $str = "(" . $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. ")";
+                }
+//halt($str);
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 
                 break;
 

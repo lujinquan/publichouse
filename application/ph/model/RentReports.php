@@ -79,49 +79,49 @@ class RentReports extends Model
 
 
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents ,ChangeType')
+        $changeData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents ,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where(['CancelType'=>['neq',1],'ChangeType'=>['neq',1],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
 
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeGuanduanDecData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
+        $changeGuanduanDecData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['ChangeType'=>['eq',10],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
 
 //if($changeGuanduanDecData){halt($changeGuanduanDecData);}
         //获取基数异动//房屋出售的挑出去,减免的挑出去
-        $changeGuanduanIncData = Db::name('change_order')->field('UseNature,OwnerType,NewInstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
+        $changeGuanduanIncData = Db::name('rent_table')->field('UseNature,OwnerType,NewInstitutionID ,sum(InflRent) as InflRents,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
             ->group('UseNature,OwnerType,NewInstitutionID')
             ->where(['ChangeType'=>['eq',10],'OrderDate'=>$arr1,'Status'=>1])
             ->select();
 
         //获取非基数异动
-        $changeNoBaseData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents,ChangeType')
+        $changeNoBaseData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents,ChangeType')
             ->group('UseNature,OwnerType,InstitutionID,ChangeType')
             ->where(['CancelType'=>['neq',1],'ChangeType'=>['neq',1],'Status'=>1])
             ->select();
 
         //陈欠核销的是一个特别的非基数异动，以前年月必须是当月数据，不能同本月一样每个月继承
-        $changeHeXiaoData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
+        $changeHeXiaoData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents ,sum(OldMonthRent) as OldMonthRents ,sum(OldYearRent) as OldYearRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['OrderDate'=>$arr1,'ChangeType'=>['eq',4],'Status'=>1])
             ->select();
 
         //从房屋表中分组获取年度欠租、租差
-        $changeSaleData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
+        $changeSaleData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['OrderDate'=>$arr1,'CancelType'=>1,'Status'=>1])
             ->select();
 
         //从房屋表中分组获取年度欠租、租差
-        $changeZhengceData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
+        $changeZhengceData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['DateEnd'=>['egt',$cacheDate],'CutType'=>5,'Status'=>1])
             ->select();
 
-        $changejianmianData = Db::name('change_order')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
+        $changejianmianData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['DateEnd'=>['egt',$cacheDate],'ChangeType'=>1,'CutType'=>['neq',5],'Status'=>1])
             ->select();

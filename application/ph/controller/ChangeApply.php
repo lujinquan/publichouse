@@ -128,42 +128,40 @@ class ChangeApply extends Base
 
                 case 3:  // 暂停计租:目前有两种，一种是按户暂停，另一种是按楼栋，暂时都按照按户暂停
 
-                    $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
-                                               ->column('HouseID,UseNature');
+                    // $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
+                    //                            ->column('HouseID,UseNature');
 
-                    foreach($houses as $k => $v){
-                        $housearr[$v][] = $k;
-                    }
-                    foreach($housearr as $h){
-                        $result = [];
-                        $one = Db::name('house')->where(['HouseID'=>['in',$h]])
-                                                ->field('sum(HousePrerent) as HousePrerents,BanID,UseNature,OwnerType,InstitutionID, InstitutionPID')
-                                                ->find();
-
-                        $suffix = substr(uniqid(),-6);
-
-                        $result['InflRent'] = $one['HousePrerents'];
-                        $result['BanID'] = $one['BanID'];
-                        $result['Status'] = 2;
-                        $result['UserName'] = session('user_base_info.name');
-                        $result['UserNumber'] = UID;
-                        $result['CreateTime'] = time();
-                        $result['HouseID'] = trim(implode(',',$h),',');
-                        $result['InstitutionID'] = $one['InstitutionID'];
-                        $result['InstitutionPID'] = $one['InstitutionPID'];
-                        $result['OwnerType'] = $one['OwnerType'];
-                        $result['UseNature'] = $one['UseNature'];
-                        $result['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-                        $result['ChangeType'] = $data['type'];  //异动类型
-                        $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
-                        $result['ProcessConfigType'] = 3;   //流程控制线路
-                        $result['OrderDate'] = date('Ym', time());
-                        $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
-
-                        $res = Db::name('change_order')->insert($result);
+                    // foreach($houses as $k => $v){
+                    //     $housearr[$v][] = $k;
+                    // }
+                    // foreach($housearr as $h){
+                    //    $result = [];
+                    
+                    $one = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
+                                            ->field('sum(HousePrerent) as HousePrerents,BanID,OwnerType,InstitutionID, InstitutionPID')
+                                            ->find();
+                    $suffix = substr(uniqid(),-6);
+                    $result['InflRent'] = $one['HousePrerents'];
+                    $result['BanID'] = $one['BanID'];
+                    $result['Status'] = 2;
+                    $result['UserName'] = session('user_base_info.name');
+                    $result['UserNumber'] = UID;
+                    $result['CreateTime'] = time();
+                    $result['HouseID'] = trim(implode(',',$data['houseID']),',');
+                    $result['InstitutionID'] = $one['InstitutionID'];
+                    $result['InstitutionPID'] = $one['InstitutionPID'];
+                    $result['OwnerType'] = $one['OwnerType'];
+                    $result['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $result['ChangeType'] = $data['type'];  //异动类型
+                    $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
+                    $result['ProcessConfigType'] = 3;   //流程控制线路
+                    $result['OrderDate'] = date('Ym', time());
+                    $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
+//halt($result);
+                    $res = Db::name('change_order')->insert($result);
                         
                         
-                    }
+                    //}
                 
                     break;
 

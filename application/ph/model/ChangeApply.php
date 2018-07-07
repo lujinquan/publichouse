@@ -104,9 +104,9 @@ class ChangeApply extends Model
 
         switch ($data['type']) {
                 case 1:  //租金减免
-                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>1,'Status'=>['>',1]])->find();
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>1,'Status'=>['>',1],'DateEnd'=>['>=',date('Ym',time())]])->find();
                     if($ifin){
-                        return jsons('4001','该房屋正在减免异动订单中处理……');
+                        return jsons('4001','该房屋正在减免异动中');
                     }
                     $houseModel = new HouseModel;
 
