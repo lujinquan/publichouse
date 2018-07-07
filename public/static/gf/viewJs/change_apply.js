@@ -2111,6 +2111,7 @@ function getBanList(){
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
             banLinkHouse(BanID,BanAddress);
+            $('#pauseHouseChoose').empty();
         })
     };
     this.search = function(val){
