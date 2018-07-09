@@ -1067,16 +1067,24 @@ function metailShow(id,res){
 		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
 		FatherDom.append(title_dom);
 		for(var j = 0;j < img_array[i].length;j++){
-			var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+
-				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>");
+			var ImgDom = $("<li style='width:100px;display:inline-block;'><img style='width:100px;' layer-pid="+i+" data-original="+
+				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/></li>");
 			FatherDom.append(ImgDom);
 		}
 	}
 	console.log(id);
-	layer.photos({
-	  photos: id
-	  ,anim: 5
-	});
+	// layer.photos({
+	//   photos: id
+	//   ,anim: 5
+	// });
+	$(id+' img').click(function(){
+		var viewer = new Viewer($(id)[0],{
+				hidden:function(){
+					viewer.destroy();
+				}
+			}
+		);
+	})
 }
 //流程配置函数
 function processState(id,res){

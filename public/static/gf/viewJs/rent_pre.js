@@ -1,15 +1,22 @@
 $('#recharge').click(function(){
-	 // houseQuery.action('houseID','2');
-	  queryData.actionD(2,'houseID');
+	// houseQuery.action('houseID','2');
+	//queryData.actionD(2,'houseID');
+	houseQuery.action('houseID','1');
+	$('#rechargeForm input').val('');
+	$('#name').text('');
+	$('#phoneNumber').text('');
+	$('#currentMoney').text('');
+	$('#HousePrerent').text('');
 	layer.open({
 		type:1,
-		area:['600px','600px'],
+		area:['650px','600px'],
 		resize:false,
 		zIndex:100,
 		title:['充值','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content: $('#rechargeForm'),
 		btn:['充值','取消'],
 		success:function(){
+			$('#houseID').off('blur');
 			$('#houseID').blur(function(){
 				var houseID = $('#houseID').val();
 				$.get('/ph/Api/get_house_info/HouseID/'+houseID,function(res){
@@ -18,6 +25,7 @@ $('#recharge').click(function(){
 					$('#name').text(res.data.TenantName);
 					$('#phoneNumber').text(res.data.TenantTel);
 					$('#currentMoney').text(res.data.RechargeRent);//房屋余额
+					$('#HousePrerent').text(res.data.HousePrerent);
 				});
 			});
 		},
@@ -33,6 +41,7 @@ $('#recharge').click(function(){
 				success:function(){
 					$('#rentIDT').text($('#houseID').val());
 					$('#rentName').text($('#name').text());
+					$('#rentHouseMoney').text($('#HousePrerent').text());
 					$('#rentMoney').text($('#inputMoney').val());
 				},
 				yes:function(thisIndex){
