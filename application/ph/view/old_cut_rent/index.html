@@ -37,8 +37,11 @@
                     <th class="table-id">#</th>
                     <th class="table-title">缴纳日期</th>
                     <th class="table-title">房屋编号</th>
-                    <th class="table-type">机构名称</th>
-                    <!-- <th class="table-set">产别</th> -->
+                    <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                    <th class="table-set">机构名称</th>
+                    <?php }; ?>
+                    <th class="table-set">产别</th>
+                    <th class="table-set">使用性质</th>
                     <th class="table-author am-hide-sm-only">租户姓名</th>
                     <th class="table-date am-hide-sm-only">楼栋地址</th>
                     <th class="table-set">规定租金</th>
@@ -68,9 +71,10 @@
                                 <input name="HouseID" type="text" class="am-form-field" value="{$houseID}">
                             </div>
                         </td>
+                        <?php if(session('user_base_info.institution_level')!=3){ ;?>
                         <td>
                             <div class="am-form-group search_input none-length">
-                                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                                
                                 <select name="TubulationID" id="doc-select-2">
                                     <option  value="" style="display:none">请选择</option>
                                     <?php if(session('user_base_info.institution_level')==1){;?>
@@ -101,11 +105,56 @@
                                 }
                                 ?>
                                     <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
-                                    <?php }}} ; ?>
+                                    <?php }} ; ?>
                                 </select>
                             </div>
                         </td>
+                        <?php } ; ?>
+                         <td>
+                              <div class="am-form-group search_input">
+                                  <select name="OwnerType" id="doc-select-5">
+                                      <option  value="" style="display:none">请选择</option>
+                                      <?php foreach($owerLst as $k3 =>$v3){;?>
+                                      <?php
+                                          if($oldRentOption != array()){
+                                              if($oldRentOption['OwnerType'] == $v3['id']){
+                                                  $select ='selected';
+                                              }else{
+                                                  $select ='';
+                                              }
+                                          }else{
+                                              $select ='';
+                                          }
+                                          ?>
+                                      <option value="<?php echo $v3['id']; ?>" {$select}><?php echo $v3['OwnerType']; ?></option>
+                                      <?php }; ?>
+                                  </select>
+                              </div>
+                          </td>
+                          <td>
+                            <div class="am-form-group search_input">
+                                <select name="UseNature">
+                                    <option value="" style="display:none">请选择</option>
+                                    <?php foreach($useNatureLst as $k0 =>$v0){;?>
 
+                                    <?php
+                                if(isset($oldRentOption['UseNature'])){
+                                    if($oldRentOption['UseNature'] == $v0['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+
+                                    <option value="<?php echo $v0['id']; ?>"
+                                            {$select}><?php echo $v0['UseNature']; ?></option>
+                                    <?php }; ?>
+                                </select>
+                            </div>
+                        </td>
                         <td>
                             <div class="am-input-group am-input-group-sm">
                                 <?php
@@ -145,7 +194,11 @@
                     <td><?php echo $oldk+1; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['OldPayMonth']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['HouseID']; ?></td>
+                    <?php if(session('user_base_info.institution_level')!=3){ ;?>
                     <td class="am-hide-sm-only"><?php echo $instArr[$oldv['InstitutionID']]; ?></td>
+                    <?php }; ?>
+                    <td class="am-hide-sm-only"><?php echo $oldv['OwnerType']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $oldv['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['TenantName']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['BanAddress']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['HousePrerent']; ?></td>

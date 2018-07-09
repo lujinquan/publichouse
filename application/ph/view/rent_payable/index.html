@@ -57,8 +57,9 @@
                 <th class="table-set">租户姓名</th>
                 <th class="table-set">楼栋地址</th>
                 <th class="table-set">规定租金</th>
-                <th class="table-set">减免租金</th>
+                <th class="table-set">租差</th>
                 <th class="table-set">泵费</th>
+                <th class="table-set">减免租金</th>
                 <th class="table-set">应缴租金</th>
                 <th class="table-set">历史欠租</th> 
                 <th class="table-set">操作</th>
@@ -236,8 +237,84 @@
                         <input name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}">
                     </div>
                 </td>
-                <td><div style="width:50px;"></div></td>
-                <td><div style="width:50px;"></div></td>
+                <td>
+                <div class="am-form-group search_input">
+                    <select name="DiffRent">
+                        <option value="" style="display:none">请选择</option>
+                       
+
+                        <?php
+                        if(isset($rentOption['DiffRent'])){
+                            if($rentOption['DiffRent'] == 1){
+                                $selectDiff ='selected';
+                                $selectDiffs ='';
+                            }else{
+                                $selectDiff ='';
+                                $selectDiffs ='selected';
+                            }
+                        }else{
+                            $selectDiff ='';
+                            $selectDiffs ='';
+                        }
+                        ?>
+
+                        <option value="1" {$selectDiff}>有</option>
+                        <option value="0" {$selectDiffs}>无</option>
+                       
+                    </select>
+                </div></td>
+                <td>
+                <div class="am-form-group search_input">
+                    <select name="PumpCost">
+                        <option value="" style="display:none">请选择</option>
+                       
+
+                        <?php
+                        if(isset($rentOption['PumpCost'])){
+                            if($rentOption['PumpCost'] == 1){
+                                $selectPump ='selected';
+                                $selectPumps ='';
+                            }else{
+                                $selectPump ='';
+                                $selectPumps ='selected';
+                            }
+                        }else{
+                            $selectPump ='';
+                            $selectPumps ='';
+                        }
+                        ?>
+
+                        <option value="1" {$selectPump}>有</option>
+                        <option value="0" {$selectPumps}>无</option>
+                       
+                    </select>
+                </div></td>
+                <td>
+                <div class="am-form-group search_input">
+                    <select name="CutRent">
+                        <option value="" style="display:none">请选择</option>
+                       
+
+                        <?php
+                        if(isset($rentOption['CutRent'])){
+                            if($rentOption['CutRent'] == 1){
+                                $selectCut ='selected';
+                                $selectCuts ='';
+                            }else{
+                                $selectCut ='';
+                                $selectCuts ='selected';
+                            }
+                        }else{
+                            $selectCut ='';
+                            $selectCuts ='';
+                        }
+                        ?>
+
+                        <option value="1" {$selectCut}>有</option>
+                        <option value="0" {$selectCuts}>无</option>
+                       
+                    </select>
+                </div></td>
                 <td><div style="width:50px;"></div></td>
                 <td><div style="width:50px;"></div></td>
               <td>
@@ -285,8 +362,9 @@
                 <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HousePrerent']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['CutRent']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['DiffRent']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['PumpCost']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CutRent']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['ReceiveRent']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HistoryUnpaidRent']; ?></td>
       				  <td>

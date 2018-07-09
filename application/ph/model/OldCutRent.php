@@ -51,6 +51,15 @@ class OldCutRent extends Model
             if ($searchForm['OldPayMonth']) {  //检索缴费日期
                 $where['OldPayMonth'] = array('eq', str_replace('-','',$searchForm['OldPayMonth']));
             }
+            if ($searchForm['OwnerType']) {  //检索产别
+                $where['OwnerType'] = array('eq', $OwnerType);
+            }
+            if ($searchForm['UseNature']) {  //检索使用性质
+                $where['UseNature'] = array('eq', $UseNature);
+            }
+            if ($searchForm['OldPayMonth']) {  //检索缴费日期
+                $where['OldPayMonth'] = array('eq', str_replace('-','',$searchForm['OldPayMonth']));
+            }
             if ($searchForm['HouseID']) {  //模糊检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
@@ -69,6 +78,15 @@ class OldCutRent extends Model
         $OldRentList['obj'] = self::field($fields)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $OldRentList['arr'] = $OldRentList['obj']?$OldRentList['obj']->all():array();
+
+        $owners = Db::name('ban_owner_type')->column('id,OwnerType');
+
+        $uses = Db::name('use_nature')->column('id,UseNature');
+
+        foreach($OldRentList['arr'] as $v){
+            $v['OwnerType'] = $owners[$v['OwnerType']];
+            $v['UseNature'] = $uses[$v['UseNature']];
+        }
 
         return $OldRentList;
     }

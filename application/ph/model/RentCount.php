@@ -184,6 +184,15 @@ class RentCount extends Model
             if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //模糊检索楼栋地址
                 $where['BanAddress'] = array('like', '%' . $searchForm['BanAddress'] . '%');
             }
+            if(isset($searchForm['DiffRent']) && $searchForm['DiffRent']){ 
+                $where['DiffRent'] = array('>', 0);
+            }
+            if(isset($searchForm['PumpCost']) && $searchForm['PumpCost']){
+                $where['PumpCost'] = array('>', 0);
+            }
+            if(isset($searchForm['CutRent']) && $searchForm['CutRent']){
+                $where['CutRent'] = array('>', 0);
+            }
             if (isset($searchForm['CutType']) && $searchForm['CutType']) {  //检索减免类型
                 $where['CutType'] = array('eq', $searchForm['CutType']);
             }
@@ -279,7 +288,7 @@ class RentCount extends Model
         //订单编号，房屋编号，机构名称，租户姓名，楼栋地址，单元号，楼层号，门牌号  规定租金  , 减免租金 ，减免类型，减免证件号，月应收租金  滞纳金额 ,泵费，维修费
         //$maps = 'a.RentOrderID,a.HouseID,a.InstitutionID,a.TenantID,a.HousePrerent,a.CreateTime,a.CutRent,a.CutType,a.CutNumber,a.ReceiveRent,a.LateRent,a.PaidableTime,b.UnitID,b.FloorID,b.DoorID,b.BanID,b.PumpCost,b.RepairCost';
 
-        $maps = 'a.* ,b.UnitID,b.FloorID,b.TenantName,b.DoorID,b.BanID,b.PumpCost,b.RepairCost';
+        $maps = 'a.* ,b.TenantName,b.BanID,b.RepairCost';
 
         $one = Db::name('rent_order')->alias('a')
             ->join('house b', 'a.HouseID = b.HouseID', 'left')
