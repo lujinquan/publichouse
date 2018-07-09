@@ -36,7 +36,7 @@ $('#addApply').click(function() {
                             $("#BanID").text(res.data.BanID);
                             $("#BanAddress").text(res.data.BanAddress);
                             $("#CreateTime").text(res.data.CreateTime);
-                            $("#useNature").text(res.data.FloorID);
+                            $("#useNature").text(res.data.UseNature);
                             $("#HouseUsearea").text(res.data.HouseUsearea);
                             $("#LeasedArea").text(res.data.LeasedArea);
                             $("#TenantName").text(res.data.TenantName);
