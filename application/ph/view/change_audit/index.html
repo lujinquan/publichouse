@@ -224,6 +224,9 @@
               <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
               <td>
                   <div class="am-btn-group am-btn-group-xs">
+                      <?php if(in_array(534,$threeMenu)){ ; ?>
+                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDelete" value="<?php echo $v['ChangeOrderID']; ?>">删除</button>
+                      <?php }; ?>
                       <?php if(in_array(368,$threeMenu)){ ; ?>
                       <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
                       <?php }; ?>
