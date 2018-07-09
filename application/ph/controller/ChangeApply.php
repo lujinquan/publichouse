@@ -44,6 +44,9 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
+            if(!in_array($data['type'],[1,3,8])){
+                return jsons('4001','程序正在升级中……');
+            }
 
             $one = model('ph/ChangeApply')->check_apply_table($data);
             
@@ -350,6 +353,8 @@ class ChangeApply extends Base
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['OrderDate'] = date('Ym', time());  //订单期
+                    $datas['InflRent'] = $one['HousePrerent'];
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
                     $datas['CancelType'] = $data['cancelType'];  //注销类型
