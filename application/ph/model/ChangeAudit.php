@@ -732,17 +732,15 @@ class ChangeAudit extends Model
                 break;
 
             case 8:  //注销异动完成后的，系统处理
-                $nextMonthDate = date('Y', time());
-                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['DateStart' => $nextMonthDate]);
-                //修改对应的楼栋的状态为注销
-                $banID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('BanID');
-                Db::name('ban')->where('BanID', 'eq', $banID)->setField('Status', 100); //为历史数据，不可用状态
+                //$nextMonthDate = date('Y', time());
+
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,ChangeType')->find();
+        
                 //修改对应的楼栋底下的房屋的状态为注销
-                Db::name('house')->where('BanID', 'eq', $banID)->setField('Status', 100);  //100为历史数据，不可用状态
-                Db::name('room')->where('BanID', 'eq', $banID)->setField('Status', 100);  //100为历史数据，不可用状态
-                $houseids = Db::name('house')->where('BanID', 'eq', $banID)->column('HouseID');
+                Db::name('house')->where('BanID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
+            
                 //修改租金配置表,删除不可用状态房屋对应的租金配置记录
-                Db::name('rent_config')->where('HouseID', 'in', $houseids)->delete();
+                Db::name('rent_config')->where('HouseID', 'eq', $changeFind['HouseID'])->delete();
                 break;
 
             case 9:  //房屋调整异动完成后的，系统处理

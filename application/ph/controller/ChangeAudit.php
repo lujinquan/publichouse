@@ -192,4 +192,32 @@ class ChangeAudit extends Base
 
         return jsons('2000' ,'获取成功' ,$res);
     }
+
+
+    /**
+     * 
+     * @description  通过主订单编号来获取流程配置，和当前流程状态
+     * @author Mr.Lu
+     */
+    public function delete(){
+
+        $changeOrderID = input('ChangeOrderID'); //变更编号
+
+        $status = Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->value('Status');
+
+        if($status != 2){
+
+            return jsons('4002' ,'异动单已在审核流程中，无法删除……');
+        }else{
+
+            $s = Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->delete();
+            if($s){
+                return jsons('2000' ,'删除成功');
+            }else{
+                return jsons('4001' ,'删除失败');    
+            }
+        }
+
+        
+    }
 }

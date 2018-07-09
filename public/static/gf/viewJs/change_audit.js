@@ -1015,6 +1015,18 @@ $('.BtnDetail').click(function(){
 		// });
 	});
 });
+$('.BtnDelete').click(function(){
+	var value = $(this).val();
+	console.log(value);
+	$.get('/ph/ChangeAudit/delete/ChangeOrderID/'+value,function(res){
+		res = JSON.parse(res);
+		layer.msg(res.msg);
+		if(res.retcode == '2000'){
+			location.reload();
+		}
+	})
+})
+
 $(document).on('click','.SplitNum',function() {
 	var val =$(this).next().val();
 	console.log(val);

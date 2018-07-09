@@ -231,6 +231,9 @@
                       <?php if(in_array(369,$threeMenu)){ ; ?>
                       <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}" value="<?php echo $v['ChangeOrderID']; ?>">审批</button>
                       <?php }; ?>
+                      <?php if(in_array(534,$threeMenu)){ ; ?>
+                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDelete" value="<?php echo $v['ChangeOrderID']; ?>">删除</button>
+                      <?php }; ?>
                   </div>
               </td>
           </tr>
