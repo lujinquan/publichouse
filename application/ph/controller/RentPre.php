@@ -77,18 +77,20 @@ class RentPre extends Base
                     'Status' => 1,
                     'HouseID' => $data['HouseID'],
                 ];
-            $tenantid = Db::name('house')->where($where)->value('TenantID');
-            if(!$tenantid){
+            $houseFind = Db::name('house')->where($where)->field('TenantID,OwnerType,UseNature,InstitutionID,InstitutionPID')->find();
+            if(!$houseFind['TenantID']){
                 return jsons('4001','房屋为非正常状态……');
             }
             Db::name('house')->where('HouseID','eq',$data['HouseID'])->setInc('RechargeRent',$data['Money']);
-            $re = Db::name('tenant')->where('TenantID' ,'eq' ,$tenantid)->setInc('TenantBalance',$data['Money']);
+            $re = Db::name('tenant')->where('TenantID' ,'eq' ,$houseFind['TenantID'])->setInc('TenantBalance',$data['Money']);
             if($re){
-                $one = Db::name('tenant')->where('TenantID' ,'eq' ,$tenantid)->field('TenantName,TenantTel,TenantBalance,InstitutionID,InstitutionPID')->find();
-                $data['TenantID'] = $tenantid;
+                $one = Db::name('tenant')->where('TenantID' ,'eq' ,$houseFind['TenantID'])->field('TenantName,TenantTel,TenantBalance')->find();
+                $data['TenantID'] = $houseFind['TenantID'];
                 $data['TenantName'] = $one['TenantName'];
-                $data['InstitutionID'] = $one['InstitutionID'];
-                $data['InstitutionPID'] = $one['InstitutionPID'];
+                $data['OwnerType'] = $houseFind['OwnerType'];
+                $data['UseNature'] = $houseFind['UseNature'];
+                $data['InstitutionID'] = $houseFind['InstitutionID'];
+                $data['InstitutionPID'] = $houseFind['InstitutionPID'];
                 $data['CurrMoney'] = $one['TenantBalance'];
                 $data['TempDate'] = date('Ymd',time());
                 $data['CreateUserID'] = UID;

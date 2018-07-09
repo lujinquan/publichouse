@@ -184,16 +184,19 @@ class RentCount extends Model
             if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //模糊检索楼栋地址
                 $where['BanAddress'] = array('like', '%' . $searchForm['BanAddress'] . '%');
             }
-            if (isset($searchForm['CutType']) && $searchForm['CutType']) {  //模糊检索减免类型
+            if (isset($searchForm['CutType']) && $searchForm['CutType']) {  //检索减免类型
                 $where['CutType'] = array('eq', $searchForm['CutType']);
             }
-            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //模糊检索产别
+            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //检索产别
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
+            if (isset($searchForm['UseNature']) && $searchForm['UseNature']) {  //检索产别使用性质
+                $where['UseNature'] = array('eq', $searchForm['UseNature']);
             }
             if (isset($searchForm['TenantID']) && $searchForm['TenantID']) {  //模糊检索租户id
                 $where['TenantID'] = array('like', '%' . $searchForm['TenantID'] . '%');
             }
-            if (isset($searchForm['CutNumber']) && $searchForm['CutNumber']) {  //模糊检索楼栋地址
+            if (isset($searchForm['CutNumber']) && $searchForm['CutNumber']) {  //模糊检索减免证件号
                 $where['CutNumber'] = array('like', '%' . $searchForm['CutNumber'] . '%');
             }
 
@@ -290,6 +293,7 @@ class RentCount extends Model
         $str = ($start . '/' . $end);
         $one['OrderDate'] = $str;
         $one['OwnerType'] = get_owner($one['OwnerType']);
+        $one['UseNature'] = get_usenature($one['UseNature']);
         $one['InstitutionID'] = Db::name('institution')->where('id', 'eq', $one['InstitutionID'])->value('Institution');
         $one['PaidableTime'] = date('Y/m/d', $one['PaidableTime']);
         $one['CreateTime'] = date('Y/m/d', $one['CreateTime']);
@@ -301,16 +305,13 @@ class RentCount extends Model
         $one['TenantBalance'] = Db::name('tenant')->where('TenantID', 'eq', $one['TenantID'])->value('TenantBalance');
         $wheres['HouseID'] = array('eq', $one['HouseID']);
         $wheres['CreateTime'] = array('lt', $one['CreateTime']);
-        $historyUnpaidRent = Db::name('rent_order')->where($wheres)->sum('UnpaidRent');
-        $one['HistoryUnpaidRent'] = $historyUnpaidRent ? $historyUnpaidRent : '0.00';
-
         return $one;
     }
 
     /**
      *  测试模式，一次帮整个公司全部配置一遍
      */
-    public function config11($ifPre)
+    public function config($ifPre)
     {
 
 
@@ -326,10 +327,14 @@ class RentCount extends Model
         $where['HousePrerent'] = array('>', 0); // 规租大于0
         $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
 
-        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
+        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
         $houseData = Db::name('house')->field($fields)->where($where)->select();
         
         $changeData = Db::name('change_order')->where(['ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+
+        $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
+
+        //halt($rentData);
 
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
@@ -357,14 +362,19 @@ class RentCount extends Model
                     $cutType = 0;
                     $cutRent = 0;
                 }
+                if(isset($rentData[$v['HouseID']])){
+                    $historyUnpaidRent = $rentData[$v['HouseID']] + $v['ArrearRent'];
+                }else{
+                    $historyUnpaidRent = $v['ArrearRent'];
+                }
 
                 //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
                 
                 $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
-                $str .= "," . $v['HousePrerent'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
-                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . UID . "," . time() . "),";
+                $str .= "," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . $historyUnpaidRent . "," . UID . "," . time() . "),";
             }
         } else { //使用计算租金
             return jsons('4002' ,'暂时无法配置计算租金');
@@ -372,7 +382,7 @@ class RentCount extends Model
         }
 
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
-        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
@@ -380,7 +390,7 @@ class RentCount extends Model
     /**
      *  注意，两个所，分别计算
      */
-    public function config($ifPre)
+    public function config11($ifPre)
     {
 
         $institutionID = session('user_base_info.institution_id');
@@ -402,10 +412,14 @@ class RentCount extends Model
         $where['HousePrerent'] = array('>', 0); // 规租大于0
         $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
 
-        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
+        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
         $houseData = Db::name('house')->field($fields)->where($where)->select();
         
         $changeData = Db::name('change_order')->where(['ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+
+        $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
+
+        //halt($rentData);
 
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
@@ -433,14 +447,19 @@ class RentCount extends Model
                     $cutType = 0;
                     $cutRent = 0;
                 }
+                if(isset($rentData[$v['HouseID']])){
+                    $historyUnpaidRent = $rentData[$v['HouseID']] + $v['ArrearRent'];
+                }else{
+                    $historyUnpaidRent = $v['ArrearRent'];
+                }
 
                 //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
                 
                 $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
-                $str .= "," . $v['HousePrerent'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
-                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . UID . "," . time() . "),";
+                $str .= "," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . $historyUnpaidRent . "," . UID . "," . time() . "),";
             }
         } else { //使用计算租金
             return jsons('4002' ,'暂时无法配置计算租金');
@@ -448,7 +467,7 @@ class RentCount extends Model
         }
 
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
-        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
@@ -483,7 +502,7 @@ class RentCount extends Model
         } else {  //生成下月租金
 
             //然后再生成下月租金订单
-            $sql = "insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,ReceiveRent,LateRent,UnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,ReceiveRent,LateRent,UnpaidRent from ph_rent_config where InstitutionID = $institutionID)";
+            $sql = "insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent from ph_rent_config where InstitutionID = $institutionID)";
 
             $flag = Db::execute($sql);
 
