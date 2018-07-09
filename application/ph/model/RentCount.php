@@ -308,34 +308,28 @@ class RentCount extends Model
     }
 
     /**
-     *  注意，两个所，分别计算
+     *  测试模式，一次帮整个公司全部配置一遍
      */
-    public function config($ifPre)
+    public function config11($ifPre)
     {
 
-        $institutionID = session('user_base_info.institution_id');
-
-        //验证合法性
-        if (session('user_base_info.institution_level') != 3) {
-            return jsons('4000', '您的角色没有计算租金权限……');
-        }
 
         //重新生成租金配置时，先删除原配置
-        Db::name('rent_config')->where('InstitutionID', 'eq', $institutionID)->delete();
+        Db::name('rent_config')->delete(true);
 
         $where['Status'] = array('eq', 1);    //房屋必须是可用状态
         $where['IfEmpty'] = array('eq', 0);    // 是否空租
         $where['IfSuspend'] = array('eq', 0);  // 是否暂停计租
-        $where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
+        //$where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
         //$where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
         $where['OwnerType'] = array('neq', 6); // 6是生活用房
         $where['HousePrerent'] = array('>', 0); // 规租大于0
         $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
 
-        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
+        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
         $houseData = Db::name('house')->field($fields)->where($where)->select();
         
-        $changeData = Db::name('change_order')->where(['ChangeType'=>1,'InstitutionID'=>$institutionID,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+        $changeData = Db::name('change_order')->where(['ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
 
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
@@ -366,7 +360,83 @@ class RentCount extends Model
 
                 //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
                 
-                $receiveRent = $v['HousePrerent'] + $v['DiffRent'] - $cutRent;
+                $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
+
+                $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+                $str .= "," . $v['HousePrerent'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . UID . "," . time() . "),";
+            }
+        } else { //使用计算租金
+            return jsons('4002' ,'暂时无法配置计算租金');
+
+        }
+
+        //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
+        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+
+        return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+    }
+
+    /**
+     *  注意，两个所，分别计算
+     */
+    public function config($ifPre)
+    {
+
+        $institutionID = session('user_base_info.institution_id');
+
+        //验证合法性
+        if (session('user_base_info.institution_level') != 3) {
+            return jsons('4000', '您的角色没有计算租金权限……');
+        }
+
+        //重新生成租金配置时，先删除原配置
+        Db::name('rent_config')->where('InstitutionID', 'eq', $institutionID)->delete();
+
+        $where['Status'] = array('eq', 1);    //房屋必须是可用状态
+        $where['IfEmpty'] = array('eq', 0);    // 是否空租
+        $where['IfSuspend'] = array('eq', 0);  // 是否暂停计租
+        $where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
+        //$where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
+        $where['OwnerType'] = array('neq', 6); // 6是生活用房
+        $where['HousePrerent'] = array('>', 0); // 规租大于0
+        $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
+
+        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent';
+        $houseData = Db::name('house')->field($fields)->where($where)->select();
+        
+        $changeData = Db::name('change_order')->where(['ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+
+        foreach($changeData as $c){
+            $changedata[$c['HouseID']] = $c;
+        }
+
+        //halt($changedata);
+
+        $str = '';
+
+        if ($ifPre == 1) { //使用规定租金
+
+            foreach ($houseData as $v) {
+
+                if ($v['AnathorHousePrerent'] > 0) {
+                    $receiveRent = $v['AnathorHousePrerent'];  //应收租金，后期处理
+                    $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+                    $str .= "," . $v['AnathorHousePrerent'] . ", 0, 0 '" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['AnathorOwnerType'] . "," . $v['UseNature'];
+                    $str .= ",1," . $receiveRent . "," . $receiveRent . "," . UID . "," . time() . "),";
+                }
+
+                if(isset($changedata[$v['HouseID']])){
+                    $cutType = $changedata[$v['HouseID']]['CutType'];
+                    $cutRent = $changedata[$v['HouseID']]['InflRent'];
+                }else{
+                    $cutType = 0;
+                    $cutRent = 0;
+                }
+
+                //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
+                
+                $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
                 $str .= "," . $v['HousePrerent'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];

@@ -46,6 +46,12 @@ class RentPre extends Model
             if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //模糊检索租户姓名
                 $where['TenantName'] = array('like', '%'.$searchForm['TenantName'].'%');
             }
+            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {   //检索产别
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
+            if (isset($searchForm['UseNature']) && $searchForm['UseNature']) {   //检索使用性质
+                $where['UseNature'] = array('eq', $searchForm['UseNature']);
+            }
             if (isset($searchForm['IfPrint'])) {  //检索是否打印过发票
                 $where['IfPrint'] = array('eq', $searchForm['IfPrint']);
             }
@@ -90,6 +96,8 @@ class RentPre extends Model
 
         foreach ($preRentLst['arr'] as $k => &$v) {
 
+            $v["OwnerType"] = get_owner($v["OwnerType"]);
+            $v["UseNature"] = get_usenature($v["UseNature"]);
             $v['CreateTime'] = date('Y/m/d' ,$v['CreateTime']);
             $v['Institution'] = get_institution($v['InstitutionID']);
             $v['IfPrintSign'] = $v['IfPrint'] == 1?'是':'否';
