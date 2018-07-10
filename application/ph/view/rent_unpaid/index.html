@@ -72,22 +72,20 @@
                             </div>
                         </td>
                         <td>
-                            <div class="am-input-group am-input-group-sm" style="width:150px;">
+                            <div class="am-input-group am-input-group-sm">
                                 <?php
-                                    if(isset($rentOption['DateStart']) && isset($rentOption['DateEnd'])){
-                                        $DateStart = $rentOption['DateStart'];
-                                        $DateEnd = $rentOption['DateEnd'];
+                                    if($rentOption != array()){
+                                        $OrderDate = $rentOption['OrderDate'];
+
                                     }else{
-                                        $DateStart = '';
-                                        $DateEnd = '';
+                                        $OrderDate = '';
+
                                     }
                                  ?>
-                                <input style="width:70px;" name="DateStart" class="am-form-field" type="text"
-                               data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}"
-                               value="{$DateStart}" placeholder="" data-am-datepicker readonly/>
-                                <input style="width:70px;" type="text" name="DateEnd" class="am-form-field" type="text"
-                               data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}"
-                               value="{$DateEnd}" placeholder="" data-am-datepicker readonly/>
+                                <input style="width:140px;" type="text" name="OrderDate" class="am-form-field" type="text"
+                                   data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}"
+                                   value="{$OrderDate}" placeholder="" data-am-datepicker readonly/>
+                                
                             </div>
                         </td>
                         <td>

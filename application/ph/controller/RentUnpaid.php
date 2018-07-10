@@ -59,7 +59,7 @@ class RentUnpaid extends Base
 
         $bool = Db::name('rent_order')->where(['RentOrderID'=>['in',$ids],'OrderDate'=>date('Ym',time())])->update(['Type'=> 1 ,'PaidRent'=>0,'UnpaidRent'=> ['exp','ReceiveRent']]);
 
-        return $bool?jsons('2000' ,'撤销成功'):jsons('4000' ,'撤销订单不合法');
+        return $bool?jsons('2000' ,'撤销成功'):jsons('4000' ,'往期订单无法撤销');
     }
 
     /**

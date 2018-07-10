@@ -201,54 +201,30 @@ class RentCount extends Model
             if (isset($searchForm['CutNumber']) && $searchForm['CutNumber']) {  //模糊检索减免证件号
                 $where['CutNumber'] = array('like', '%' . $searchForm['CutNumber'] . '%');
             }
-
-            if (isset($searchForm['DateStart'])) {  //订单日期检索
-
-                if ($searchForm['DateStart'] && $searchForm['DateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
-                    $start = (int)(str_replace('/', '', $searchForm['DateStart']));
-                    $end = (int)(str_replace('/', '', $searchForm['DateEnd']));
-                    //dump($start);dump($end);exit;
-                    if ($start < $end) {
-                        $where['OrderDate'] = array('between', $start . "," . $end);
-                    }
-                    if ($start > $end) {
-                        $where['OrderDate'] = array('between', $end . "," . $start);
-                    }
-                    if ($start == $end) {
-                        $where['OrderDate'] = array('eq', $start);
-                    }
-                }
-                if ($searchForm['DateStart'] && empty($searchForm['DateEnd'])) { //检索大于等于起始时间
-                    $start = (int)(str_replace('/', '', $searchForm['DateStart']));
-                    $where['OrderDate'] = array('egt', $start);
-                }
-                if (empty($searchForm['DateStart']) && $searchForm['DateEnd']) { //检索小于等于结束时间
-                    $end = (int)(str_replace('/', '', $searchForm['DateEnd']));
-                    $where['OrderDate'] = array('elt', $end);
-                }
-
+            if (isset($searchForm['OrderDate'])) {  //订单日期检索              
+                $where['OrderDate'] = array('eq', str_replace('/','',$searchForm['OrderDate']));
             }
 
-            if (isset($searchForm['UnpaidDateStart'])) {  //缴费日期检索
+            // if (isset($searchForm['UnpaidDateStart'])) {  //缴费日期检索
 
-                if ($searchForm['UnpaidDateStart'] && $searchForm['UnpaidDateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
-                    $start = strtotime($searchForm['UnpaidDateStart']) - 1;
-                    $end = strtotime($searchForm['UnpaidDateEnd']) + 24 * 3600;
-                    //dump($start);dump($end);exit;
-                    if ($start < $end) {
-                        $where['PaidableTime'] = array('between', $start . "," . $end);
-                    }
-                }
-                if ($searchForm['UnpaidDateStart'] && empty($searchForm['UnpaidDateEnd'])) { //检索大于等于起始时间
-                    $start = strtotime($searchForm['UnpaidDateStart']);
-                    //dump($start);exit;
-                    $where['PaidableTime'] = array('gt', $start);
-                }
-                if ($searchForm['UnpaidDateEnd'] && empty($searchForm['UnpaidDateStart'])) { //检索小于等于结束时间
-                    $end = strtotime($searchForm['UnpaidDateEnd']);
-                    $where['PaidableTime'] = array('lt', $end);
-                }
-            }
+            //     if ($searchForm['UnpaidDateStart'] && $searchForm['UnpaidDateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
+            //         $start = strtotime($searchForm['UnpaidDateStart']) - 1;
+            //         $end = strtotime($searchForm['UnpaidDateEnd']) + 24 * 3600;
+            //         //dump($start);dump($end);exit;
+            //         if ($start < $end) {
+            //             $where['PaidableTime'] = array('between', $start . "," . $end);
+            //         }
+            //     }
+            //     if ($searchForm['UnpaidDateStart'] && empty($searchForm['UnpaidDateEnd'])) { //检索大于等于起始时间
+            //         $start = strtotime($searchForm['UnpaidDateStart']);
+            //         //dump($start);exit;
+            //         $where['PaidableTime'] = array('gt', $start);
+            //     }
+            //     if ($searchForm['UnpaidDateEnd'] && empty($searchForm['UnpaidDateStart'])) { //检索小于等于结束时间
+            //         $end = strtotime($searchForm['UnpaidDateEnd']);
+            //         $where['PaidableTime'] = array('lt', $end);
+            //     }
+            // }
         }
         //halt($where);
 

@@ -61,29 +61,32 @@ class RentPre extends Model
             if (isset($searchForm['HouseID']) && $searchForm['HouseID']) {  //模糊检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
-            if(isset($searchForm['DateStart']) || isset($searchForm['DateEnd'])){
-                if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-                    $start = strtotime($searchForm['DateStart']);
-                    $end = strtotime($searchForm['DateEnd']);
-                    if($start < $end){
-                        $where['CreateTime'] = array('between',$start.",".$end);
-                    }
-                    if($start > $end){
-                        $where['CreateTime'] = array('between',$end.",".$start);
-                    }
-                    if($start == $end){
-                        $where['CreateTime'] = array('between',$start.",".($start+86399));
-                    }
-                }
-                if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-                    $start = strtotime($searchForm['DateStart']);
-                    $where['CreateTime'] = array('egt',$start);
-                }
-                if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-                    $end = strtotime($searchForm['DateEnd']);
-                    $where['CreateTime'] = array('elt',$end);
-                }
+            if(isset($searchForm['TempDate']) || $searchForm['TempDate']){     
+                $where['TempDate'] = array('eq',str_replace('/','',$searchForm['TempDate']));   
             }
+            //if(isset($searchForm['DateStart']) || isset($searchForm['DateEnd'])){
+            //     if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
+            //         $start = strtotime($searchForm['DateStart']);
+            //         $end = strtotime($searchForm['DateEnd']);
+            //         if($start < $end){
+            //             $where['CreateTime'] = array('between',$start.",".$end);
+            //         }
+            //         if($start > $end){
+            //             $where['CreateTime'] = array('between',$end.",".$start);
+            //         }
+            //         if($start == $end){
+            //             $where['CreateTime'] = array('between',$start.",".($start+86399));
+            //         }
+            //     }
+            //     if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
+            //         $start = strtotime($searchForm['DateStart']);
+            //         $where['CreateTime'] = array('egt',$start);
+            //     }
+            //     if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
+            //         $end = strtotime($searchForm['DateEnd']);
+            //         $where['CreateTime'] = array('elt',$end);
+            //     }
+            // }
             
         }
         if(!isset($where)){

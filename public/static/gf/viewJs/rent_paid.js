@@ -26,6 +26,32 @@ $('#withHolding').click(function(){
 		});
 	}
 });
+//批量撤回
+$('#batchRevocation').click(function(){
+	var Orders = [];
+	var checkDom = $('.checkId');
+	var length = checkDom.length;
+	for(var i = 0;i < length;i++){
+		if(checkDom[i].checked){
+			Orders.push(checkDom[i].value);
+		}
+	}
+	if(Orders.length == 0){
+		layer.msg('请选择批量操作对象！');
+	}else{
+		console.log(Orders);
+		$.post('/ph/RentPaid/payBack',{value:Orders},function(res){
+			res = JSON.parse(res);
+			console.log(res);
+			if(res.retcode == "2000"){
+				layer.msg(res.msg);
+				location.reload();
+			}else{
+				layer.msg(res.msg);
+			}
+		});
+	}
+});
 //查看详情
 $('.details').click(function(){
 	var thisID = $(this).val();

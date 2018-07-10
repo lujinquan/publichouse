@@ -50,6 +50,23 @@ class RentPaid extends Base
     }
 
     /**
+     *  批量撤销
+     */
+    public function payBack(){
+
+        $ids = $_POST['value'];
+
+        if(!$ids){
+
+            return jsons('4001' ,'参数错误');
+        }
+
+        $bool = Db::name('rent_order')->where(['RentOrderID'=>['in',$ids],'OrderDate'=>date('Ym',time())])->update(['Type'=> 1 ,'PaidRent'=>0,'UnpaidRent'=> ['exp','ReceiveRent']]);
+
+        return $bool?jsons('2000' ,'撤销成功'):jsons('4000' ,'撤销订单不合法');
+    }
+
+    /**
      *  明细
      */
     public function detail(){

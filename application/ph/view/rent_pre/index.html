@@ -171,15 +171,12 @@
                   <div class="am-input-group am-input-group-sm" style="width:150px;">
                       <?php
                         if($preRentOption != array()){
-                            $DateStart = $preRentOption['DateStart'];
-                            $DateEnd = $preRentOption['DateEnd'];
+                            $TempDate = $preRentOption['TempDate'];
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $TempDate = ''; 
                         }
                       ?>
-                      <input style="width:70px;" name="DateStart" value="{$DateStart}" type="text" class="am-form-field" data-am-datepicker value="">
-                      <input style="width:70px;" name="DateEnd" value="{$DateEnd}" type="text" class="am-form-field" data-am-datepicker value="">
+                      <input style="width:140px;" name="TempDate" value="{$TempDate}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy/mm/dd', viewMode: 'years',minViewMode: 'days'}">
                   </div>
               </td>
               <td>

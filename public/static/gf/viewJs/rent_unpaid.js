@@ -67,8 +67,10 @@ $('#batchRevocation').click(function(){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg(res.msg);
 				location.reload();
+			}else{
+				layer.msg(res.msg);
 			}
 		});
 	}
