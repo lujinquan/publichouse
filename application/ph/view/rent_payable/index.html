@@ -248,9 +248,12 @@
                             if($rentOption['DiffRent'] == 1){
                                 $selectDiff ='selected';
                                 $selectDiffs ='';
-                            }else{
+                            }elseif($rentOption['DiffRent'] === 0){
                                 $selectDiff ='';
                                 $selectDiffs ='selected';
+                            }else{
+                                $selectDiff ='';
+                                $selectDiffs ='';
                             }
                         }else{
                             $selectDiff ='';
@@ -274,9 +277,12 @@
                             if($rentOption['PumpCost'] == 1){
                                 $selectPump ='selected';
                                 $selectPumps ='';
-                            }else{
+                            }elseif($rentOption['PumpCost'] === 0){
                                 $selectPump ='';
                                 $selectPumps ='selected';
+                            }else{
+                              $selectPump ='';
+                              $selectPumps ='';
                             }
                         }else{
                             $selectPump ='';
@@ -300,9 +306,12 @@
                             if($rentOption['CutRent'] == 1){
                                 $selectCut ='selected';
                                 $selectCuts ='';
-                            }else{
+                            }elseif($rentOption['CutRent'] === 0){
                                 $selectCut ='';
                                 $selectCuts ='selected';
+                            }else{
+                                $selectCut ='';
+                                $selectCuts ='';
                             }
                         }else{
                             $selectCut ='';

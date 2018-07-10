@@ -92,7 +92,9 @@ class RentCount extends Model
 
         if (!isset($where)) $where = 1;
 
-        $RentLst['obj'] = Db::name('rent_config')->field('id')->where($where)->paginate(config('paginate.list_rows'));
+        $maps = 'HouseID,InstitutionID,BanAddress,TenantName,PumpCost,DiffRent,CutRent,HistoryUnpaidRent,ReceiveRent,LateRent,OwnerType,UseNature';
+
+        $RentLst['obj'] = Db::name('rent_config')->field($maps)->where($where)->paginate(config('paginate.list_rows'));
 
         $RentLst['receiveRentTotal'] = Db::name('rent_config')->where($where)->sum('ReceiveRent');
 
@@ -100,46 +102,28 @@ class RentCount extends Model
 
         if (!$arr) {
             $RentLst['arr'] = array();
+
+        }else{
+
+            $owners = Db::name('ban_owner_type')->column('id,OwnerType');
+            $uses = Db::name('use_nature')->column('id,UseNature');
+            $ins = Db::name('institution')->column('id,Institution');
+
+            foreach ($arr as &$v) {
+                $v['InstitutionID'] = $ins[$v['InstitutionID']];
+                $v['OwnerType'] = $owners[$v['OwnerType']];
+                $v['UseNature'] = $uses[$v['UseNature']];  
+
+                $RentLst['arr'][] = $v;
+            }
         }
 
-        foreach ($arr as $v) {
-            $RentLst['arr'][] = self::get_one_rent_info($v['id']);
-        }
+        
 
         return $RentLst;
     }
 
-    public function get_one_rent_info($id)
-    {
 
-        //订单编号，房屋编号，机构名称，租户姓名，楼栋地址，单元号，楼层号，门牌号  规定租金  , 减免租金 ，减免类型，减免证件号，月应收租金  滞纳金额 ,泵费，维修费
-        $maps = 'a.HouseID,a.InstitutionID,a.BanAddress,a.TenantID,a.PumpCost,a.DiffRent,a.CutRent,a.CutType,a.CutNumber,a.ReceiveRent,a.LateRent,b.UnitID,b.FloorID,a.OwnerType,b.UseNature,b.DoorID,b.BanID';
-        $one = Db::name('rent_config')->alias('a')
-            ->join('house b', 'a.HouseID = b.HouseID', 'left')
-            ->where('a.id', 'eq', $id)
-            ->field($maps)
-            ->find();
-
-        $one['InstitutionID'] = Db::name('institution')->where('id', 'eq', $one['InstitutionID'])->value('Institution');
-
-        if ($one['CutType'] != 0) {
-
-            $one['CutType'] = Db::name('cut_rent_type')->where('id', 'eq', $one['CutType'])->value('CutName');
-
-        }
-
-        $one['OwnerType'] = get_owner($one['OwnerType']);
-        $one['UseNatureName'] = get_usenature($one['UseNature']);
-        $one['TenantID'] = Db::name('tenant')->where('TenantID', 'eq', $one['TenantID'])->value('TenantName');
-
-        $wheres['HouseID'] = array('eq', $one['HouseID']);
-
-        $historyUnpaidRent = Db::name('rent_order')->where($wheres)->sum('UnpaidRent');
-
-        $one['HistoryUnpaidRent'] = $historyUnpaidRent ? $historyUnpaidRent : '0.00';
-
-        return $one;
-    }
 
     public function get_all_rent_order_lst($where = array())
     {
@@ -270,7 +254,9 @@ class RentCount extends Model
 
         if (!isset($where)) $where = 1;
 
-        $RentLst['obj'] = self::field('RentOrderID')->where($where)->order('id desc')->paginate(config('paginate.list_rows'));
+        $maps = 'RentOrderID,HouseID,InstitutionID,BanAddress,TenantID,TenantName,HousePrerent,PumpCost,DiffRent,CutRent,HistoryUnpaidRent,UnpaidRent,PaidRent,PaidableTime,ReceiveRent,LateRent,OwnerType,UseNature,CreateTime,OrderDate';
+
+        $RentLst['obj'] = self::field($maps)->where($where)->order('id desc')->paginate(config('paginate.list_rows'));
         $findOne = Db::name('rent_order')->where($where)
                     ->field('sum(UnpaidRent) as UnpaidRents,sum(PaidRent) as PaidRents,sum(ReceiveRent) as ReceiveRents')
                     ->find();
@@ -284,52 +270,30 @@ class RentCount extends Model
             $RentLst['arr'] = array();
         }
 
-        foreach ($arr as $v) {
-            $RentLst['arr'][] = self::get_one_rent_order_info($v['RentOrderID']);
+        $owners = Db::name('ban_owner_type')->column('id,OwnerType');
+        $uses = Db::name('use_nature')->column('id,UseNature');
+        $ins = Db::name('institution')->column('id,Institution');
+
+        foreach ($arr as &$v) {
+            $start = substr($v['OrderDate'], 0, 4);
+            $end = substr($v['OrderDate'], 4);
+            $str = ($start . '/' . $end);
+            $v['OrderDate'] = $str;
+            $v['OwnerType'] = $owners[$v['OwnerType']];
+            $v['UseNature'] = $uses[$v['UseNature']];
+            $v['InstitutionID'] = $ins[$v['InstitutionID']];
+            $v['PaidableTime'] = date('Y/m/d', $v['PaidableTime']);
+            $v['CreateTime'] = date('Y/m/d', $v['CreateTime']);
+            $RentLst['arr'][] = $v;
         }
 
         return $RentLst;
     }
 
-    public function get_one_rent_order_info($rentOrderID)
-    {
-
-        //订单编号，房屋编号，机构名称，租户姓名，楼栋地址，单元号，楼层号，门牌号  规定租金  , 减免租金 ，减免类型，减免证件号，月应收租金  滞纳金额 ,泵费，维修费
-        //$maps = 'a.RentOrderID,a.HouseID,a.InstitutionID,a.TenantID,a.HousePrerent,a.CreateTime,a.CutRent,a.CutType,a.CutNumber,a.ReceiveRent,a.LateRent,a.PaidableTime,b.UnitID,b.FloorID,b.DoorID,b.BanID,b.PumpCost,b.RepairCost';
-
-        $maps = 'a.* ,b.TenantName,b.BanID,b.RepairCost';
-
-        $one = Db::name('rent_order')->alias('a')
-            ->join('house b', 'a.HouseID = b.HouseID', 'left')
-            ->where('RentOrderID', 'eq', $rentOrderID)
-            ->field($maps)
-            ->find();
-
-        //halt($one);
-        $start = substr($one['OrderDate'], 0, 4);
-        $end = substr($one['OrderDate'], 4);
-        $str = ($start . '/' . $end);
-        $one['OrderDate'] = $str;
-        $one['OwnerType'] = get_owner($one['OwnerType']);
-        $one['UseNature'] = get_usenature($one['UseNature']);
-        $one['InstitutionID'] = Db::name('institution')->where('id', 'eq', $one['InstitutionID'])->value('Institution');
-        $one['PaidableTime'] = date('Y/m/d', $one['PaidableTime']);
-        $one['CreateTime'] = date('Y/m/d', $one['CreateTime']);
-
-        if ($one['CutType'] != 0) {
-            $one['CutType'] = Db::name('cut_rent_type')->where('id', 'eq', $one['CutType'])->value('CutName');
-        }
-
-        $one['TenantBalance'] = Db::name('tenant')->where('TenantID', 'eq', $one['TenantID'])->value('TenantBalance');
-        $wheres['HouseID'] = array('eq', $one['HouseID']);
-        $wheres['CreateTime'] = array('lt', $one['CreateTime']);
-        return $one;
-    }
-
     /**
      *  测试模式，一次帮整个公司全部配置一遍
      */
-    public function config($ifPre)
+    public function config11($ifPre)
     {
 
 
@@ -408,7 +372,7 @@ class RentCount extends Model
     /**
      *  注意，两个所，分别计算
      */
-    public function config11($ifPre)
+    public function config($ifPre)
     {
 
         $institutionID = session('user_base_info.institution_id');

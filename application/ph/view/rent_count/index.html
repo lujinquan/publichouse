@@ -235,9 +235,12 @@
                             if($rentOption['DiffRent'] == 1){
                                 $selectDiff ='selected';
                                 $selectDiffs ='';
-                            }else{
+                            }elseif($rentOption['DiffRent'] === 0){
                                 $selectDiff ='';
                                 $selectDiffs ='selected';
+                            }else{
+                                $selectDiff ='';
+                                $selectDiffs ='';
                             }
                         }else{
                             $selectDiff ='';
@@ -261,9 +264,12 @@
                             if($rentOption['PumpCost'] == 1){
                                 $selectPump ='selected';
                                 $selectPumps ='';
-                            }else{
+                            }elseif($rentOption['PumpCost'] === 0){
                                 $selectPump ='';
                                 $selectPumps ='selected';
+                            }else{
+                                $selectPump ='';
+                                $selectPumps ='';
                             }
                         }else{
                             $selectPump ='';
@@ -287,9 +293,12 @@
                             if($rentOption['CutRent'] == 1){
                                 $selectCut ='selected';
                                 $selectCuts ='';
-                            }else{
+                            }elseif($rentOption['CutRent'] === 0){
                                 $selectCut ='';
                                 $selectCuts ='selected';
+                            }else{
+                                $selectCut ='';
+                                $selectCuts ='';
                             }
                         }else{
                             $selectCut ='';
@@ -348,8 +357,8 @@
                     <td class="am-hide-sm-only"><?php echo $v['InstitutionID']; ?></td>
                     <?php }; ?>
                     <td class="am-hide-sm-only"><?php echo $v['OwnerType']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $v['UseNatureName']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $v['TenantID']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['UseNature']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['DiffRent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['PumpCost']; ?></td>
