@@ -31,11 +31,17 @@
                 <tr>
                     <th class="table-check"></th>
                     <th class="table-id">#</th>
-                    <th class="table-title">变更编号</th>
                     <th class="table-type">房屋编号</th>
-                    <th class="table-author am-hide-sm-only">变更类型</th>
-                    <th class="table-date am-hide-sm-only">申请机构</th>
+                    <th class="table-title">产别</th>
+                    <th class="table-title">转让形式</th>
+                    <th class="table-date am-hide-sm-only">机构</th>
                     <th class="table-set">操作人</th>
+
+                    <th class="table-set">房屋地址</th>
+                    <th class="table-set">租户姓名</th>
+                    <th class="table-set">使用面积</th>
+                    <th class="table-set">月租金</th>
+
                     <th class="table-set">申请时间</th>
                     <th class="table-set">审核状态</th>
                     <th class="table-set" style="width:220px;">操作</th>
@@ -176,6 +182,12 @@
                                 <input type="text" name="UserName" class="am-form-field" value="{$UserName}">
                             </div>
                         </td>
+
+<td><div style="min-width:50px;"></div></td>
+<td><div style="min-width:50px;"></div></td>
+<td><div style="min-width:50px;"></div></td>
+<td><div style="min-width:50px;"></div></td>
+
                         <td>
                             <div class="am-input-group am-input-group-sm" style="width:210px;">
 
@@ -230,6 +242,12 @@
                     <td class="am-hide-sm-only"><?php echo $v1['ChangeType']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+
+<td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+<td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+<td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+<td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+
                     <td><?php echo $v1['CreateTime']; ?></td>
                     <td><?php echo $v1['Status']; ?></td>
                     <td>
@@ -244,6 +262,7 @@
                                     value="<?php echo $v1['ChangeOrderID']; ?>">查看明细
                             </button>
                             <?php }; ?>
+                            
                         </div>
                     </td>
                 </tr>

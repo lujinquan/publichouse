@@ -154,7 +154,7 @@ $("#addTransfer").click(function(){
 		});
 		layer.open({
 			type:1,
-			area:['990px','700px'],
+			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
 			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
@@ -163,6 +163,16 @@ $("#addTransfer").click(function(){
 			success:function(){
 				$('.label_p_style').text('');
 				$('.label_input').val('');
+				new file({
+                    button: "#transferApplication",
+                    show: "#transferApplicationShow",
+                    upButton: "#transferApplicationUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "书面申请报告"
+                });
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
@@ -170,42 +180,38 @@ $("#addTransfer").click(function(){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				var IfReform = $("input[type=radio][name=IfReform]:checked").val();
-				var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
-				var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
-				var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
+				// var IfReform = $("input[type=radio][name=IfReform]:checked").val();
+				// var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
+				// var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
+				// var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
+				var transferReason = $("#transferReason").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
-				$.post('/ph/UserApply/add',
-					{
-						type:4,houseid:ID,
-						oldID:oldID,
-						oldName:oldName,
-						newID:newID,
-						newName:newName,
-						transferType:transferWay,
-						transferRent:transferMoney,
-						IfReform:IfReform,
-						IfRepair:IfRepair,
-						IfCollection:IfCollection,
-						IfFacade:IfFacade
-					},function(result){
-					result = JSON.parse(result);
-					if(result.retcode == 2000){
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisIndex);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg(result.msg);
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg(result.msg);
-					}
+
+				var formData = fileTotall.getArrayFormdata();
+				formData.append('houseid',ID);
+				formData.append('oldID',oldID);
+				formData.append('oldName',oldName);
+				formData.append('newID',newID);
+				formData.append('newName',newName);
+				formData.append('transferType',transferWay);
+				formData.append('transferRent',transferMoney);
+				formData.append('transferReason',transferReason);
+
+				$.ajax({
+				    type: "post",
+				    url: "/ph/UserApply/add",
+				    data: formData,
+				    processData: false,
+				    contentType: false,
+				    success: function(res) {
+				        res = JSON.parse(res);
+				        layer.msg(res.msg);
+				        if(res.retcode == '2000'){
+				            layer.close(thisIndex);
+				            location.reload();
+				        }
+				    }
 				});
 			}
 		});

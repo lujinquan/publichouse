@@ -87,16 +87,16 @@ $('#addApply').click(function() {
                         Type: 1,
                         title: "证件上传"
                     });
-                    var four = new file({
-                        button: "#cutRent",
-                        show: "#cutRentShow",
-                        upButton: "#cutRentUp",
-                        size: 10240,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "证件上传"
-                    });
+                    // var four = new file({
+                    //     button: "#cutRent",
+                    //     show: "#cutRentShow",
+                    //     upButton: "#cutRentUp",
+                    //     size: 10240,
+                    //     url: "/ph/ChangeApply/add",
+                    //     ChangeOrderID: '',
+                    //     Type: 1,
+                    //     title: "证件上传"
+                    // });
                     var five = new file({
                         button: "#houseSecurity",
                         show: "#houseSecurityShow",
@@ -260,16 +260,16 @@ $('#addApply').click(function() {
                     $('#banLinkSearch').click(function(){
                         fun.search($('#banLinkInput').val());
                     })
-                    var seven = new file({
-                        show: "#pauseMaterialShow",
-                        upButton: "#pauseMaterialUp",
-                        size: 10240,
-                        url: "/ph/ChangeApply/add",
-                        button: "#pauseMaterial",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "非基数异动核算凭单"
-                    });
+                    // var seven = new file({
+                    //     show: "#pauseMaterialShow",
+                    //     upButton: "#pauseMaterialUp",
+                    //     size: 10240,
+                    //     url: "/ph/ChangeApply/add",
+                    //     button: "#pauseMaterial",
+                    //     ChangeOrderID: '',
+                    //     Type: 1,
+                    //     title: "非基数异动核算凭单"
+                    // });
                     $('#pauseHouseQuery').off('click');
                     $('#pauseHouseQuery').on('click', function(){
                         $('#pauseHouseAdd').empty();
@@ -319,7 +319,7 @@ $('#addApply').click(function() {
                     });
                 },
                 yes:function(thisIndex){
-                    var data = fileTotall.getArrayFormdata();
+                    var data = new FormData();
                     data.append('banID',$('#pauseBanID').text());
                     data.append('type',3);
                     house_array.forEach(function(value,index){

@@ -1215,7 +1215,7 @@ $('#rentMeterButton').click(function() {
         $('.RentPoint').text(res.data.banDetail.NewPoint);
         $('.RentName').text(res.data.houseDetail.TenantName);
         $('.RentLayer').text(res.data.houseDetail.FloorID);
-        $('.RentUnit').text(res.data.houseDetail.UnitID);
+        $('.BanFloorNum').text(res.data.banDetail.BanFloorNum);
         $('.RentComprising').text(res.data.houseDetail.ComprisingArea);
         $('.RentWallpaper').text(res.data.houseDetail.WallpaperArea);
         $('.RentCeramic').text(res.data.houseDetail.CeramicTileArea);

@@ -40,6 +40,7 @@
          <label id="newTel" class="label_p_style"></label>
       </div>
   </div>
+
   <div class="am-form-group am-u-md-4" style="padding:0 0 10px;border:1px solid rgba(214,226,246,1);background:#f7faff;">
       <h1 class="label_h1">房屋需满足以下条件：</h1>
       <label class="label_explain">1.房屋编号</label>
@@ -50,6 +51,7 @@
       <label class="label_explain">6.承租人有本市城镇户籍</label>
       <label class="label_explain">7.不属于国家和本市规定不得变更的其他情形</label>
   </div>
+
 </div>
 
 <div class="am-u-md-4" style="margin:20px auto 30px;">
@@ -65,11 +67,29 @@
     <input class="label_input" id="transferMoney" />
 </div>
 
+<div class="am-u-md-4" style="padding-left:0;margin:20px auto 30px;">
+    <label>有偿转让原因：</label>
+    <input class="label_input" id="transferReason" />
+</div>
+
+
 <div class="am-u-md-12"><hr /></div>
 
-<div class="am-form-group am-u-md-12">
-    <label class="label_title">产权户籍情况</label>
+<div class="am-u-md-12">
+    <div class="am-u-md-4">
+        <p>书面申请报告：</p>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-8">
+        <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        <input id="transferApplication" type="file" name="transferApplication" multiple>
+    </div>
+    <div id="transferApplicationShow" class="am-u-md-12"></div>
 </div>
+
+<!-- 
+  <div class="am-form-group am-u-md-12">
+      <label class="label_title">产权户籍情况</label>
+  </div>
 
   <div class="am-u-md-12">
     <div class="am-u-md-4" style="padding:10px 0 0">
@@ -112,5 +132,5 @@
       </label>
     </div>
   </div>
-
+ -->
 </form>
