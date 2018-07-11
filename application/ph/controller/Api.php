@@ -1068,7 +1068,7 @@ class Api extends Controller
             ->where($where)
             ->select();
 
-        //halt($data);
+        ob_clean();
 
         Loader::import('tcpdf.tcpdf', EXTEND_PATH);
 
@@ -1199,7 +1199,7 @@ class Api extends Controller
             $value['Cost'] = 0.65 * ($value['HousePrerent']);  //金额是房租的65%
         }
 
-        //halt($data);
+        ob_clean();
 
         Loader::import('tcpdf.tcpdf', EXTEND_PATH);
 

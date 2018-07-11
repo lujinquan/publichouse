@@ -268,6 +268,26 @@ class RentCount extends Model
         return $RentLst;
     }
 
+    public function get_one_rent_order_info($rentOrderID)
+    {
+        $owners = Db::name('ban_owner_type')->column('id,OwnerType');
+        $uses = Db::name('use_nature')->column('id,UseNature');
+        $ins = Db::name('institution')->column('id,Institution');
+
+        $v = self::where('RentOrderID',$rentOrderID)->find();
+        $start = substr($v['OrderDate'], 0, 4);
+        $end = substr($v['OrderDate'], 4);
+        $str = ($start . '/' . $end);
+        $v['OrderDate'] = $str;
+        $v['OwnerType'] = $owners[$v['OwnerType']];
+        $v['UseNature'] = $uses[$v['UseNature']];
+        $v['InstitutionID'] = $ins[$v['InstitutionID']];
+        $v['PaidableTime'] = date('Y/m/d', $v['PaidableTime']);
+        $v['CreateTime'] = date('Y/m/d', $v['CreateTime']);
+        $RentLst['arr'][] = $v;
+        return $v;
+    }
+
     /**
      *  测试模式，一次帮整个公司全部配置一遍
      */

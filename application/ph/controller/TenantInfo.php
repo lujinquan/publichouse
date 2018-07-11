@@ -70,10 +70,12 @@ class TenantInfo extends Base
     public function detail(){
         $tenantID = input('TenantID');
 
+        //halt($tenantID);
+
         if($tenantID){
 
             //所有楼栋基础信息
-            $tenantDetail = $this -> TenantInfoModel ->get_one_ban_detail_info($tenantID);
+            $tenantDetail = $this -> TenantInfoModel ->get_one_tenant_detail_info($tenantID);
 
             return jsons(2000,'获取成功',$tenantDetail);
 

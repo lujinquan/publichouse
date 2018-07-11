@@ -26,21 +26,7 @@ class UserRecord extends Model
 
         }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
 
-            $allInstitution = Db::name('institution')->field('id ,Institution,pid')
-                                                     ->where('pid','eq',$currentUserInstitutionID)
-                                                     ->select();
-
-
-            foreach($allInstitution as $key => $value){
-
-                $arrs[] = $value['id']; //保存所有子管段id
-            }
-
-            $where['InstitutionID'] = array('in' ,$arrs);
-
-        }else{    //用户为公司级别，则获取所有子管段
-
-         
+            $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
 
         }
 
@@ -77,24 +63,14 @@ class UserRecord extends Model
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
 
-            if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-                $start = strtotime($searchForm['DateStart']);
-                $end = strtotime($searchForm['DateEnd']);
-                //dump($start);dump($end);exit;
-                if($start < $end){
-                    $where['CreateTime'] = array('between',$start.",".$end);
-                }
-            }
-            if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-                $start = strtotime($searchForm['DateStart']);
-                //dump($start);exit;
-                $where['CreateTime'] = array('egt',$start);
-            }
-            if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-                $end = strtotime($searchForm['DateEnd']);
-                $where['CreateTime'] = array('elt',$end);
-            }
+            if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
 
+                $starttime = strtotime($searchForm['CreateTime']);
+
+                $endtime = $starttime + 3600*24;
+
+                $where['CreateTime'] = array('between',[$starttime,$endtime]);
+            }
 
         }
 
@@ -132,25 +108,7 @@ class UserRecord extends Model
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
 
-        switch($data['ChangeType']){
-            case 1:
-                $data['ChangeType'] = '更名';
-                break;
-            case 2:
-                $data['ChangeType'] = '过户';
-                break;
-            case 3:
-                $data['ChangeType'] = '赠予';
-                break;
-            case 4:
-                $data['ChangeType'] = '转让';
-                break;
-            default:
-                break;
-        }
-
-        //echo $data['Status'];
-
+        $data['ChangeType'] = Db::name('use_change_type')->where('id','eq',$data['ChangeType'])->value('UseChangeTitle');
 
         if($data['Status'] == 1){
             $data['Status'] = '通过';

@@ -24,6 +24,11 @@
                             class="am-icon-cogs"></span> 批量撤回
                     </button>
                     <?php }; ?>
+                    <?php if(in_array(538,$threeMenu)){ ; ?>
+                    <button type="button" id="payAll" class="am-btn d-btn-1188F0 am-radius"><span
+                            class="am-icon-cogs"></span> 批量缴费
+                    </button>
+                    <?php }; ?>
                 </div>
             </div>
         </div>
@@ -308,7 +313,7 @@
                             <button class="am-btn am-btn-default am-btn-xs am-text-primary details details_btn"
                                     value="<?php echo $v['RentOrderID']; ?>">明细
                             </button>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary payment" value="<?php echo $v['RentOrderID']; ?>">缴费</button>
+                            
                         </div>
                     </td>
                 </tr>
