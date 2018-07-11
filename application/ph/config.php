@@ -69,7 +69,7 @@ return [
     'ID' => '身份证',
     'houseBook' => '房产证',
     'household' => '户口本',
-    'cutRent' => '核减租金会审单',
+    'annualRentalContract' => '年租房合同(协议)',
     'houseSecurity' => '住房保障申请表',
     'nonCardinality' => '非基数异动核算凭单',
     'noticeBook' => '审通知书',

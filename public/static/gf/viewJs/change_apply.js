@@ -57,6 +57,16 @@ $('#addApply').click(function() {
                         Type: 1,
                         title: "证件上传"
                     });
+                    new file({
+                        button: "#annualRentalContract",
+                        show: "#annualRentalContractShow",
+                        upButton: "#basicUp",
+                        size: 10240,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "年租房合同(协议)"
+                    });
                     var one = new file({
                         button: "#ID",
                         show: "#IDShow",
