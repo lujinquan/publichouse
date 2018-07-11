@@ -24,7 +24,7 @@ class UserAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, ChangeType ,IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
         $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea')
@@ -45,7 +45,6 @@ class UserAudit extends Model
         $data['HouseID'] = $orderData['HouseID'];
         $data['TransferType'] = $orderData['TransferType'];
         $data['TransferRent'] = $orderData['TransferRent'];
-        $data['ChangeType'] = $orderData['ChangeType'];
         $data['IfReform'] = $orderData['IfReform'];   //是否属代、托、改造产
         $data['IfRepair'] = $orderData['IfRepair'];   //是否是五年内新翻覆修房屋
         $data['IfCollection'] = $orderData['IfCollection'];  //是否属于征收范围内房屋
@@ -63,23 +62,6 @@ class UserAudit extends Model
         $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'';  //租户联系方式
         $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'';  //租户姓名
         $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'';  //租户身份证号码
-
-        switch($data['ChangeType']){
-            case 1:
-                $data['ChangeType'] = '更名';
-                break;
-            case 2:
-                $data['ChangeType'] = '过户';
-                break;
-            case 3:
-                $data['ChangeType'] = '赠予';
-                break;
-            case 4:
-                $data['ChangeType'] = '转让';
-                break;
-            default:
-                break;
-        }
 
         return $data;
 

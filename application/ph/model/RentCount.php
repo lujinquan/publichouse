@@ -40,6 +40,8 @@ class RentCount extends Model
             $val = trim($val);
         }
 
+        //halt($searchForm);
+
         if (isset($searchForm['HouseID'])) {
 
             $RentLst['option'] = $searchForm;

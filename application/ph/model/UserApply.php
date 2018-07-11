@@ -28,18 +28,6 @@ class UserApply extends Model
 
             $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
 
-//            $allInstitution = Db::name('institution')->field('id ,Institution,pid')
-//                                                     ->where('pid','eq',$currentUserInstitutionID)
-//                                                     ->select();
-//
-//
-//            foreach($allInstitution as $key => $value){
-//
-//                $arrs[] = $value['id']; //保存所有子管段id
-//            }
-//
-//            $where['InstitutionID'] = array('in' ,$arrs);
-
         }else{    //用户为公司级别，则获取所有子管段
 
 
@@ -79,25 +67,13 @@ class UserApply extends Model
             if (isset($searchForm['UserName']) && $searchForm['UserName']) {  //检索操作人姓名
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
+            if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
 
-            if(isset($searchForm['DateStart']) && isset($searchForm['DateEnd'])){
-                if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-                    $start = strtotime($searchForm['DateStart']);
-                    $end = strtotime($searchForm['DateEnd']);
-                    //dump($start);dump($end);exit;
-                    if($start < $end){
-                        $where['CreateTime'] = array('between',$start.",".$end);
-                    }
-                }
-                if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-                    $start = strtotime($searchForm['DateStart']);
-                    //dump($start);exit;
-                    $where['CreateTime'] = array('egt',$start);
-                }
-                if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-                    $end = strtotime($searchForm['DateEnd']);
-                    $where['CreateTime'] = array('elt',$end);
-                }
+                $starttime = strtotime($searchForm['CreateTime']);
+
+                $endtime = $starttime + 3600*24;
+
+                $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
 
         }
@@ -128,8 +104,8 @@ class UserApply extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,InstitutionID ,UserNumber ,CreateTime ,Status';
-        $data = self::field($map)->where('id','eq',$id)->find();
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,HouseUsearea,BanAddress,OldTenantName, HousePrerent, OwnerType,InstitutionID ,UserNumber ,CreateTime ,Status';
+        $data = $this->alias('a')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
             return array();
@@ -137,22 +113,7 @@ class UserApply extends Model
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
 
-        switch($data['ChangeType']){
-            case 1:
-                $data['ChangeType'] = '更名';
-                break;
-            case 2:
-                $data['ChangeType'] = '过户';
-                break;
-            case 3:
-                $data['ChangeType'] = '赠予';
-                break;
-            case 4:
-                $data['ChangeType'] = '转让';
-                break;
-            default:
-                break;
-        }
+        $data['ChangeType'] = Db::name('use_change_type')->where('id','eq',$data['ChangeType'])->value('UseChangeTitle');
 
         $res = self::order_config_detail($data['ChangeOrderID'],$data['Status']);
 
@@ -160,24 +121,7 @@ class UserApply extends Model
 
         $data['ProcessRoleID'] = $res['RoleID'];
 
-//        switch($data['Status']){
-//            case 1:
-//                $data['Status'] = '待副房调员审核';
-//                break;
-//            case 2:
-//                $data['Status'] = '待所长审核';
-//                break;
-//            case 3:
-//                $data['Status'] = '待科长审核';
-//                break;
-//            case 4:
-//                $data['Status'] = '待总经理审核';
-//                break;
-//            default:
-//                break;
-//        }
-
-
+        $data['OwnerType'] = get_owner($data['OwnerType']);
 
         $data['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$data['UserNumber'])->value('UserName');
 

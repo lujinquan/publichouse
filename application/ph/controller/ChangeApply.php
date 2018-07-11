@@ -50,7 +50,7 @@ class ChangeApply extends Base
 
             $one = model('ph/ChangeApply')->check_apply_table($data);
             
-            if ($_FILES) {   //文件上传
+            if (isset($_FILES) && $_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('ChangeApply')->uploads($v, $k ,$data['type']);
                 }
@@ -154,7 +154,7 @@ class ChangeApply extends Base
                     $result['InstitutionID'] = $one['InstitutionID'];
                     $result['InstitutionPID'] = $one['InstitutionPID'];
                     $result['OwnerType'] = $one['OwnerType'];
-                    $result['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $result['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $result['ChangeType'] = $data['type'];  //异动类型
                     $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
                     $result['ProcessConfigType'] = 3;   //流程控制线路

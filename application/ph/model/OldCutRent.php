@@ -52,13 +52,13 @@ class OldCutRent extends Model
                 $where['OldPayMonth'] = array('eq', str_replace('-','',$searchForm['OldPayMonth']));
             }
             if ($searchForm['OwnerType']) {  //检索产别
-                $where['OwnerType'] = array('eq', $OwnerType);
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
             if ($searchForm['UseNature']) {  //检索使用性质
-                $where['UseNature'] = array('eq', $UseNature);
+                $where['UseNature'] = array('eq', $searchForm['UseNature']);
             }
             if ($searchForm['OldPayMonth']) {  //检索缴费日期
-                $where['OldPayMonth'] = array('eq', str_replace('-','',$searchForm['OldPayMonth']));
+                $where['OldPayMonth'] = array('eq', str_replace('/','',$searchForm['OldPayMonth']));
             }
             if ($searchForm['HouseID']) {  //模糊检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
@@ -72,7 +72,9 @@ class OldCutRent extends Model
 
         }
 
-        $where = isset($where)?$where:1;
+        //$where = isset($where)?$where:1;
+
+        $where['PayYear'] = array('<',2018);
 
         $fields = '*';
         $OldRentList['obj'] = self::field($fields)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
@@ -84,6 +86,10 @@ class OldCutRent extends Model
         $uses = Db::name('use_nature')->column('id,UseNature');
 
         foreach($OldRentList['arr'] as $v){
+            $start = substr($v['OldPayMonth'], 0, 4);
+            $end = substr($v['OldPayMonth'], 4);
+            $str = ($start . '/' . $end);
+            $v['OldPayMonth'] = $str;
             $v['OwnerType'] = $owners[$v['OwnerType']];
             $v['UseNature'] = $uses[$v['UseNature']];
         }

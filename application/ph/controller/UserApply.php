@@ -46,43 +46,35 @@ class UserApply extends Base
 
             //halt($data);
 
-            if ($data['type'] == 4) {  //转让
-
-                if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType']) || empty($data['transferRent'])) {
-                    return jsons('4005' ,'请完善相关信息！');
-                }
-
-                $datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
-                $datas['HouseID'] = $data['houseid']; //房屋编号
-                $datas['OldTenantID'] = $data['oldID'];  //原租户编号
-                $datas['OldTenantName'] = $data['oldName']; //原租户名称
-                $datas['NewTenantID'] = $data['newID']; //新租户id
-                $datas['NewTenantName'] = $data['newName']; //新租户名称
-                $datas['TransferType'] = $data['transferType']; //转让形式
-                $datas['TransferRent'] = $data['transferRent']; //转让金额
-                $datas['IfReform'] = $data['IfReform']; //是否属代、托、改造产
-                $datas['IfRepair'] = $data['IfRepair']; //是否是五年内新翻覆修房屋
-                $datas['IfFacade'] = $data['IfFacade']; //是否属门面营业用房
-                $datas['IfCollection'] = $data['IfCollection']; //是否属于征收范围内房屋
-
-                
-
-            } else { //别字更正
-
-
+            if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType']) || empty($data['transferRent'])) {
+                return jsons('4005' ,'请完善相关信息！');
             }
 
-            
+            //$datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
+            $datas['HouseID'] = $data['houseid']; //房屋编号
+            $datas['OldTenantID'] = $data['oldID'];  //原租户编号
+            $datas['OldTenantName'] = $data['oldName']; //原租户名称
+            $datas['NewTenantID'] = $data['newID']; //新租户id
+            $datas['NewTenantName'] = $data['newName']; //新租户名称
+            $datas['ChangeType'] = $data['transferType']; //转让形式
+            $datas['TransferRent'] = $data['transferRent']; //转让金额
+            $datas['ChangeReason'] = $data['transferReason']; //转让原因
+
             // $houseModel = new HouseInfoModel;
 
             // halt($houseModel);
 
 
-            $one = Db::name('house')->where('HouseID', 'eq', $data['houseid'])->field('InstitutionPID ,InstitutionID')->find();
+            $one = Db::name('house')->where('HouseID', 'eq', $data['houseid'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature,HousePrerent,BanAddress,HouseUsearea')->find();
 
             
             $datas['InstitutionID'] = $one['InstitutionID'];
             $datas['InstitutionPID'] = $one['InstitutionPID'];
+            $datas['BanAddress'] = $one['BanAddress'];
+            $datas['UseNature'] = $one['UseNature'];
+            $datas['OwnerType'] = $one['OwnerType'];
+            $datas['HousePrerent'] = $one['HousePrerent'];
+            $datas['HouseUsearea'] = $one['HouseUsearea'];
 
             $datas['ChangeOrderID'] = date('YmdHis', time());
             //$datas['InstitutionID'] = session('user_base_info.institution_id'); //机构id(此处登记的是当前房管员的所属机构)

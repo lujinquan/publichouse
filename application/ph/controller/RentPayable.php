@@ -99,9 +99,9 @@ class RentPayable extends Base
             return jsons('4000', '该功能暂时只对房管员开放');
         }
 
-        $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'CutType'=>0,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();
+        $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();
 
-        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'CutType'=>0,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,HousePrerent,OwnerType')->select();
+        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,HousePrerent,OwnerType')->select();
 
         foreach($nowDatas as $n){
             $nowData[$n['HouseID']][$n['OwnerType']] = $n;

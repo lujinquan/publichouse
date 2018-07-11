@@ -35,7 +35,7 @@
                 <tr>
                     <th class="table-check"></th>
                     <th class="table-id">#</th>
-                    <th class="table-title">缴纳日期</th>
+                    
                     <th class="table-title">房屋编号</th>
                     <?php if(session('user_base_info.institution_level')!=3){ ;?>
                     <th class="table-set">机构名称</th>
@@ -44,7 +44,8 @@
                     <th class="table-set">使用性质</th>
                     <th class="table-author am-hide-sm-only">租户姓名</th>
                     <th class="table-date am-hide-sm-only">楼栋地址</th>
-                    <th class="table-set">规定租金</th>
+                    
+                    <th class="table-title">缴纳日期</th>
                     <th class="table-set">缴纳欠租</th>
                     <th class="table-set">操作</th>
                 </tr>
@@ -55,14 +56,7 @@
                     <tr class="am-form-group am-form-inline am-form">
                         <td></td>
                         <td></td>
-                        <td>
-                            <div class="am-input-group am-input-group-sm" style="width:80px;">
-                                <?php
-                                $OldPayMonth = $oldRentOption?$oldRentOption['OldPayMonth']:'';
-                                ?>
-                                <input type="text" id="timeYear" name="OldPayMonth" value="{$OldPayMonth}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" placeholder="" data-am-datepicker readonly/>
-                            </div>
-                        </td>
+                        
                         <td>
                             <div class="am-input-group am-input-group-sm">
                                 <?php
@@ -171,7 +165,15 @@
                                 <input name="BanAddress" type="text" class="am-form-field" value="{$banAddress}">
                             </div>
                         </td>
-                        <td><div style="width:60px;"></div></td>
+                        <td>
+                            <div class="am-input-group am-input-group-sm" style="width:80px;">
+                                <?php
+                                $OldPayMonth = $oldRentOption?$oldRentOption['OldPayMonth']:'';
+                                ?>
+                                <input type="text" id="timeYear" name="OldPayMonth" value="{$OldPayMonth}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}" placeholder="" data-am-datepicker readonly/>
+                            </div>
+                        </td>
+                        
                         <td><div style="width:60px;"></div></td>
                         <td>
                             <div style="min-width:140px;">
@@ -192,7 +194,6 @@
                   </span>
                     </td>
                     <td><?php echo $oldk+1; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $oldv['OldPayMonth']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['HouseID']; ?></td>
                     <?php if(session('user_base_info.institution_level')!=3){ ;?>
                     <td class="am-hide-sm-only"><?php echo $instArr[$oldv['InstitutionID']]; ?></td>
@@ -201,7 +202,7 @@
                     <td class="am-hide-sm-only"><?php echo $oldv['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['TenantName']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['BanAddress']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $oldv['HousePrerent']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $oldv['OldPayMonth']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $oldv['PayRent']; ?></td>
                     <td>
                         <div class="am-btn-group am-btn-group-xs">
