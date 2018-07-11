@@ -1,10 +1,4 @@
 //补充资料
-var dong = 1;
-var DOM_1 = $('.material_1').clone(true);
-var DOM_2 = $('.material_2').clone(true);
-$('.material_1').remove();
-$('.material_2').remove();
-$('.material_3').hide();
 $("#addInfo").click(function(){
 	var obj = $('.checkId');
 	for(var k in obj){
@@ -29,7 +23,14 @@ $("#addInfo").click(function(){
 				$('.houseAddress').text(res.data.detail.BanAddress);
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
-
+				if(res.data.detail.TransferType == "1"){
+					$('#TypeName').text("交易转让");
+				}else if(res.data.detail.TransferType == "2"){
+					$('#TypeName').text("亲属转让");
+				}else{
+					$('#TypeName').text("正常过户");
+				}
+				
 				$('.TransferRent').text(res.data.detail.TransferRent);
 				$('.NewTenantName').text(res.data.detail.NewTenantName);
 				$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
@@ -37,17 +38,29 @@ $("#addInfo").click(function(){
 				$('.OldTenantName').text(res.data.detail.OldTenantName);
 				$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
 				$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+
 				$('.material_3_status_2').hide();
-				if(res.data.config.status == '1'){
+				if(res.data.config.status == '1'){//资料员补充资料
 					$('.status_2').show();
 					$('.status_3').hide();
+					// new file({
+					// 	button:"#approveApplyReport",
+					// 	show:"#approveApplyReportShow",
+					// 	upButton:"#approveApplyReportUp",
+					// 	size:10240,
+					// 	url:"/ph/UserAudit/supply",
+					// 	ChangeOrderID:'',
+					// 	title:"书面申请报告"
+					// });
 					$("input[name='IfReform'][value="+res.data.detail.IfReform+"]").attr('checked','checked');
 					$("input[name='IfRepair'][value="+res.data.detail.IfRepair+"]").attr('checked','checked');
 					$("input[name='IfCollection'][value="+res.data.detail.IfCollection+"]").attr('checked','checked');
 					$("input[name='IfFacade'][value="+res.data.detail.IfFacade+"]").attr('checked','checked');
-				}else{
+				}else if(res.data.config.status == '2'){//房调员补充资料
 					$('.status_2').hide();
 					$('.status_3').show();
+					$('.material_1').show();
+
 					if(res.data.detail.IfReform=="0"){
 						$('.IfReform').text('否');
 					}else{
@@ -68,337 +81,157 @@ $("#addInfo").click(function(){
 					}else{
 						$('.IfFacade').text('是');
 					}
-				}
+					new file({
+						button:"#transferMaterial_1",
+						show:"#transferMaterial_1Show",
+						upButton:"#transferMaterial_1Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"死亡证"
+					});
+					new file({
+						button:"#transferMaterial_2",
+						show:"#transferMaterial_2Show",
+						upButton:"#transferMaterial_2Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"原承租人户口"
+					});
+					new file({
+						button:"#transferMaterial_3",
+						show:"#transferMaterial_3Show",
+						upButton:"#transferMaterial_3Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"现承租人户口"
+					});
+					new file({
+						button:"#transferMaterial_4",
+						show:"#transferMaterial_4Show",
+						upButton:"#transferMaterial_4Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"住宅租约"
+					});
+					new file({
+						button:"#transferMaterial_5",
+						show:"#transferMaterial_5Show",
+						upButton:"#transferMaterial_5Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"结婚证"
+					});
+					new file({
+						button:"#transferMaterial_6",
+						show:"#transferMaterial_6Show",
+						upButton:"#transferMaterial_6Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"现承租人身份证"
+					});
+					new file({
+						button:"#transferMaterial_7",
+						show:"#transferMaterial_7Show",
+						upButton:"#transferMaterial_7Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"武汉市直管公房承租人过户申请审批表"
+					});
+					new file({
+						button:"#transferMaterial_8",
+						show:"#transferMaterial_8Show",
+						upButton:"#transferMaterial_8Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"武汉市直管公房承租人过户协议书"
+					});
+					new file({
+						button:"#transferMaterial_9",
+						show:"#transferMaterial_9Show",
+						upButton:"#transferMaterial_9Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"共有子女材料证明"
+					});
+					new file({
+						button:"#transferMaterial_10",
+						show:"#transferMaterial_10Show",
+						upButton:"#transferMaterial_10Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"离婚协议书"
+					});
+					new file({
+						button:"#transferMaterial_11",
+						show:"#transferMaterial_11Show",
+						upButton:"#transferMaterial_11Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"武汉市公有房屋使用权转让协议"
+					});
+					new file({
+						button:"#transferMaterial_12",
+						show:"#transferMaterial_12Show",
+						upButton:"#transferMaterial_12Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"武汉市公有住房承租权有偿转让申请书"
+					});
+					new file({
+						button:"#transferMaterial_13",
+						show:"#transferMaterial_13Show",
+						upButton:"#transferMaterial_13Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"同意办理公有住房使用权转让或者代理转让协议"
+					});
+					new file({
+						button:"#transferMaterial_14",
+						show:"#transferMaterial_14Show",
+						upButton:"#transferMaterial_14Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"材料承诺书"
+					});
+					new file({
+						button:"#transferMaterial_15",
+						show:"#transferMaterial_15Show",
+						upButton:"#transferMaterial_15Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"家庭成员身份证明"
+					});
+					new file({
+						button:"#transferMaterial_16",
+						show:"#transferMaterial_16Show",
+						upButton:"#transferMaterial_16Up",
+						size:10240,
+						url:"/ph/UserAudit/supply",
+						ChangeOrderID:res.data.detail.ChangeOrderID,
+						title:"缴费承诺书"
+					});
+				}else{
 
-				processState('#FormState',res);
-			//类型判断开始
-				if(res.data.detail.ChangeType=="更名"){
-					$('#TypeName').text('更名');
-					if($('.material_2')){
-						$('.material_2').remove();
-					}
-					if($('.material_3')){
-						$('.material_3').remove();
-					}
-					if($('.material_1').length == 0){
-						$('#addContent').after(DOM_1);
-					}
-					var one = new file({
-						button:"#ReBooklet",
-						show:"#Dshow",
-						upButton:"#ReBookletUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"更改姓名后户口簿"
-					});
-					var two = new file({
-						button:"#ReIDCard",
-						show:"#ReIDCardShow",
-						upButton:"#ReIDCardUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"更改姓名后居民身份证"
-					});
-					var two = new file({
-						button:"#ReContract",
-						show:"#ReContractShow",
-						upButton:"#ReContractUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"国有公房（民用住宅）租赁合同"
-					});
-					AddInfo(ID);
-				}else if(res.data.detail.ChangeType=="过户"){
-					$('#TypeName').text('过户');
-					if($('.material_1')){
-						$('.material_1').remove();
-					}
-					if($('.material_3')){
-						$('.material_3').remove();
-					}
-					if($('.material_2').length == 0){
-						$('#addContent').after(DOM_2);
-					}
-					new file({
-						button:"#CnApplicationForm",
-						show:"#CnApplicationFormShow",
-						upButton:"#CnApplicationFormUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请书"
-					});
-					new file({
-						button:"#CnApBooklet",
-						show:"#CnApBookletShow",
-						upButton:"#CnApBookletUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请人户口簿"
-					});
-					new file({
-						button:"#CnApIDCard",
-						show:"#CnApIDCardShow",
-						upButton:"#CnApIDCardUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"申请人身份证、图章"
-					});
-					new file({
-						button:"#CnContract",
-						show:"#CnContractShow",
-						upButton:"#CnContractUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"国有公房（民用住宅）租赁合同"
-					});
-					new file({
-						button:"#CnDeathProve",
-						show:"#CnDeathProveShow",
-						upButton:"#CnDeathProveUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"原承租人死亡的，提交死亡证明"
-					});
-					new file({
-						button:"#CnMigProve",
-						show:"#CnMigProveShow",
-						upButton:"#CnMigProveUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"原承租人户籍迁出本市的，提交户籍注销证明"
-					});
-					new file({
-						button:"#CnLitig",
-						show:"#CnLitigShow",
-						upButton:"#CnLitigUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"诉讼离婚的，提交人民法院判决书或者调解书"
-					});
-					new file({
-						button:"#CnAgreement",
-						show:"#CnAgreementShow",
-						upButton:"#CnAgreementUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"协议离婚的，提交经民政部门备案的离婚协议书"
-					});
-					new file({
-						button:"#CnDivorce",
-						show:"#CnDivorceShow",
-						upButton:"#CnDivorceUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"离婚证"
-					});
-					new file({
-						button:"#CnAttachmentOne",
-						show:"#CnAttachmentOneShow",
-						upButton:"#CnAttachmentOneUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件一：公有住房指定承租人协议书（需公证）"
-					});
-					new file({
-						button:"#CnAttachmentTwo",
-						show:"#CnAttachmentTwoShow",
-						upButton:"#CnAttachmentTwoUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件二：公有住房过户协议书"
-					});
-					new file({
-						button:"#CnAttachmentThr",
-						show:"#CnAttachmentThrShow",
-						upButton:"#CnAttachmentThrUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件三：公有住房承租声明"
-					});
-					new file({
-						button:"#CnAttachmentFour",
-						show:"#CnAttachmentFourShow",
-						upButton:"#CnAttachmentFourUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件四：公有住房承租保证"
-					});
-					new file({
-						button:"#CnAttachmentFive",
-						show:"#CnAttachmentFiveShow",
-						upButton:"#CnAttachmentFiveUp",
-						size:10240,
-						url:"/ph/UserAudit/supply",
-						ChangeOrderID:res.data.detail.ChangeOrderID,
-						title:"附件五：公有住房承租承诺书"
-					});
-					AddInfo(ID);
-				}else if(res.data.detail.ChangeType=="赠予" || res.data.detail.ChangeType=="转让"){
-					if(res.data.detail.ChangeType=="赠予"){
-						$('#TypeName').text('转增亲友');
-					}else{
-						$('#TypeName').text('转让');
-					}
-					//DOM修改
-					if($('.material_1')){
-						$('.material_1').remove();
-					}
-					if($('.material_2')){
-						$('.material_2').remove();
-					}
-					if(res.data.config.status == '1'){
-						$('.material_3_status_2').show();
-						new file({
-							button:"#RecordSheet",
-							show:"#RecordSheetShow",
-							upButton:"#RecordSheetUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"直管公房有偿转让备案单"
-						});
-					}else{
-						$('.status_3').show();
-						$('.material_3').show();
-						new file({
-							button:"#TrApplicationForm",
-							show:"#TrApplicationFormShow",
-							upButton:"#TrCheckUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"住宅租约"
-						});
-						new file({
-							button:"#TrApBooklet",
-							show:"#TrApBookletShow",
-							upButton:"#TrApBookletUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"原承租人户口"
-						});
-						new file({
-							button:"#TrContract",
-							show:"#TrContractShow",
-							upButton:"#TrContractUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"现承租人户口"
-						});
-						new file({
-							button:"#TrApIDCard",
-							show:"#TrApIDCardShow",
-							upButton:"#TrApIDCardUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"身份证"
-						});
-						new file({
-							button:"#TrAgreementOne",
-							show:"#TrAgreementOneShow",
-							upButton:"#TrAgreementOneUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"结婚证"
-						});
-						new file({
-							button:"#TrAgreementTwo",
-							show:"#TrAgreementTwoShow",
-							upButton:"#TrAgreementTwoUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"共有子女的证明材料"
-						});
-						new file({
-							button:"#TrAgreementThr",
-							show:"#TrAgreementThrShow",
-							upButton:"#TrAgreementThrUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"亲属关系证明材料"
-						});
-						new file({
-							button:"#TrDeathProve",
-							show:"#TrDeathProveShow",
-							upButton:"#TrDeathProveUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"死亡证"
-						});
-						new file({
-							button:"#TrAttachmentOne",
-							show:"#TrAttachmentOneShow",
-							upButton:"#TrAttachmentOneUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"离婚证"
-						});
-						new file({
-							button:"#TrAttachmentTwo",
-							show:"#TrAttachmentTwoShow",
-							upButton:"#TrAttachmentTwoUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"离婚协议书"
-						});
-						new file({
-							button:"#TrAttachmentThr",
-							show:"#TrAttachmentThrShow",
-							upButton:"#TrAttachmentThrUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"过户协议书"
-						});
-						new file({
-							button:"#TrAttachmentFour",
-							show:"#TrAttachmentFourShow",
-							upButton:"#TrAttachmentFourUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"武汉市直管公房使用权有偿转让、受让审批表"
-						});
-						new file({
-							button:"#TrAttachmentFive",
-							show:"#TrAttachmentFiveShow",
-							upButton:"#TrAttachmentFiveUp",
-							size:10240,
-							url:"/ph/UserAudit/supply",
-							ChangeOrderID:res.data.detail.ChangeOrderID,
-							title:"武汉市公有房屋使用权转让协议"
-						});
-					}
-					
-					AddInfo(ID,res.data.config.status,res.data.detail);
 				}
-			//类型判断结束	
-			}
+				//metailShow('#lookingUpStatus3',res);
+				processState('#FormState',res);
+				AddInfo(ID,res.data.config.status,res.data.detail);
+				}
 		})
 	}
 });
@@ -420,6 +253,14 @@ $('.BtnApprove').click(function(){
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.APtransferRent').text(res.data.detail.TransferRent);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		if(res.data.detail.TransferType == "1"){
+			$('.approveName').text("交易转让");
+		}else if(res.data.detail.TransferType == "2"){
+			$('.approveName').text("亲属转让");
+		}else{
+			$('.approveName').text("正常过户");
+		}
+
 		$('.OldTenantName').text(res.data.detail.OldTenantName);
 		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
 		$('.OldTenantTel').text(res.data.detail.OldTenantTel);
@@ -447,7 +288,6 @@ $('.BtnApprove').click(function(){
 		}else{
 			$('.IfFacade').text('是');
 		}
-		
 		processState('#approveState',res);
 		metailShow('#layer-photos-demo',res);
 	});
@@ -521,6 +361,15 @@ $('.BtnDetail').click(function(){
 		$('#approveName').text(res.data.detail.ChangeType);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
+		if(res.data.detail.TransferType == "1"){
+			$('.approveName').text("交易转让");
+		}else if(res.data.detail.TransferType == "2"){
+			$('.approveName').text("亲属转让");
+		}else{
+			$('.approveName').text("正常过户");
+		}
+
+
 		$('.APtransferRent').text(res.data.detail.TransferRent);
 		$('.OldTenantName').text(res.data.detail.OldTenantName);
 		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
@@ -568,7 +417,7 @@ $('.BtnDetail').click(function(){
 
 //资料补充弹窗封装
 function AddInfo(ID,status,detail){
-	if(status== '1'){
+	if(status== '1' ||status== '2'){
 		var btn = ['确认','取消','不通过'];
 	}else{
 		var btn = ['确认','取消'];
@@ -585,8 +434,11 @@ function AddInfo(ID,status,detail){
 			$('.fileUploadContent').empty();
 		},
 		yes:function(thisIndex){
-			var formData = fileTotall.getArrayFormdata();
-			console.log(formData);
+			if(status == "1"){
+				var formData = new FormData();
+			}else{
+				var formData = fileTotall.getArrayFormdata();
+			}
 			formData.append('ChangeOrderID',ID);
 			if(status== '1'){
 				formData.append('IfReform',$("input[name='IfReform']:checked").val());

@@ -369,6 +369,7 @@ function revise_1(res,id){
 	})
 }
 function revise_2(res,id){
+	console.log('fff');
 	require(["layer","jquery"],function(layer){
 		$('#IdIput').val('');
 		$('#HouseIdInput').val('');
@@ -388,6 +389,7 @@ function revise_2(res,id){
 				$('#oldID').text(res.data.OldTenantID);
 				$('#oldName').text(res.data.OldTenantName);
 				$('#IdIput').val(res.data.NewTenantID);
+				$('#transferReason').val(res.data.ChangeReason);
 				$('#newNam').text(res.data.NewTenantName);
 				$('#newTel').val(res.data.TenantTel);
 				$('#newTel1').val(res.data.NewTenantTel);
