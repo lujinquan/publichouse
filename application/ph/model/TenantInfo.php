@@ -170,36 +170,17 @@ class TenantInfo extends Model
 
     }
 
-    public function get_one_ban_detail_info($tenantid = ''){
+    public function get_one_tenant_detail_info($tenantid = ''){
 
         //租户id ,租户名称 ，租户电话 ，年龄 ，性别 ，余额 ，欠租情况 ，身份证号码 ，银行名称 ，银行卡号 ，qq号 ，微信号 ，诚信值 ,登记时间 ，登记人ID ，最后更新时间
-        $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID ,  TenantQQ , TenantWeChat , TenantValue ,CreateTime ,CreateUserID ,UpdateTime';
+        // $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID ,  TenantQQ , TenantWeChat , TenantValue ,CreateTime ,CreateUserID ,UpdateTime';
 
-        $data = self::get_one_tenant_base_info($tenantid, $map);
-
+        $data = self::where('TenantID',$tenantid)->find();;
+//halt($data);
         if($data['TenantSex'] === 1){
             $data['TenantSex'] = '男';
         }else{
             $data['TenantSex'] = '女';
-        }
-
-        $data['CreateTime'] = date('Y-m-d H:i:s',$data['CreateTime']);
-
-        $data['UpdateTime'] = date('Y-m-d H:i:s',$data['UpdateTime']);
-
-        if($data['UpdateTime'] < $data['CreateTime']){
-
-            $data['UpdateTime'] = $data['CreateTime'];
-        }
-
-        $user = Db::name('admin_user')->where('Number' ,'eq' ,$data['CreateUserID'])->field('UserName ,InstitutionID')->find();
-
-        $data['CreateUserID'] = $user['UserName'];
-
-        $data['InstitutionName'] = Db::name('institution')->where('id' ,'eq' ,$user['InstitutionID'])->value('Institution');
-
-        if(!$data){
-            return array();
         }
 
         return $data;

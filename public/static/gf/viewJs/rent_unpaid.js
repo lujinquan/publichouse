@@ -75,6 +75,32 @@ $('#batchRevocation').click(function(){
 		});
 	}
 });
+//批量缴费
+$('#payAll').click(function(){
+	var Orders = [];
+	var checkDom = $('.checkId');
+	var length = checkDom.length;
+	for(var i = 0;i < length;i++){
+		if(checkDom[i].checked){
+			Orders.push(checkDom[i].value);
+		}
+	}
+	if(Orders.length == 0){
+		layer.msg('请选择批量操作对象！');
+	}else{
+		console.log(Orders);
+		$.post('/ph/RentUnpaid/payAll',{value:Orders},function(res){
+			res = JSON.parse(res);
+			console.log(res);
+			if(res.retcode == "2000"){
+				layer.msg('批量操作成功！');
+				location.reload();
+			}else{
+				layer.msg(res.msg);
+			}
+		});
+	}
+});
 
 //查看明细
 $('.details').click(function(){

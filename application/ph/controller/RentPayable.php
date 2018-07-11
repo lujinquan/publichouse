@@ -152,6 +152,8 @@ class RentPayable extends Base
         }
     }
 
+    
+
     /**
      *  缴款
      */
@@ -241,7 +243,7 @@ class RentPayable extends Base
             'HousePrerent' => $result['HousePrerent'],  //规定租金
             'CutRent' => $result['CutRent'],    //减免租金
             'PumpCost' => $result['PumpCost'],    //泵费
-            'RepairCost' => $result['RepairCost'],  //维修费
+            //'RepairCost' => $result['RepairCost'],  //维修费
             'ReceiveRent' => $result['ReceiveRent'],  //应缴租金
             'LateRent' => $result['LateRent'],  //滞纳金
             'ReceiveRent' => $result['ReceiveRent'],  //应收租金

@@ -46,6 +46,38 @@ class RentUnpaid extends Base
     }
 
     /**
+     *  批量催缴
+     */
+    public function payAll(){
+
+        $ids = $_POST['value'];
+
+        if(!$ids){
+
+            return jsons('4001' ,'参数错误');
+        }
+
+        $orders = Db::name('rent_order')->where(['RentOrderID'=>['in',$ids]])->field('OwnerType,UseNature,InstitutionID,InstitutionPID,TenantID,UnpaidRent,TenantName,BanAddress,HouseID,HousePrerent,OrderDate,CreateTime')->select();
+        $str =  '';
+        
+        foreach($orders as $v){
+
+            $PayYear = date('Y',$v['CreateTime']);
+            $OldPayMonth = date('Ym',time());
+
+            $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+            $str .= "," . $v['HousePrerent'] . "," . $v['UnpaidRent'] . "," . $PayYear . "," . $v['OrderDate'] . "," . $OldPayMonth . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'].  "," . UID . "," . time() . "),";
+        }
+
+        $res = Db::execute("insert into ".config('database.prefix')."old_rent (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,PayRent,PayYear,PayMonth,OldPayMonth,TenantName,BanAddress,OwnerType,UseNature,CreateUserID,CreateTime) values " . rtrim($str, ','));
+        
+        $bool = Db::name('rent_order')->where(['RentOrderID'=>['in',$ids]])->update(['Type'=> 3 ,'PaidRent'=> ['exp','ReceiveRent'],'UnpaidRent'=>0]);
+
+        return $bool?jsons('2000' ,'操作成功'):jsons('4000' ,'操作失败');
+
+    }
+
+    /**
      *  批量撤销
      */
     public function payBack(){
