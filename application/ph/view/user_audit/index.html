@@ -2,6 +2,7 @@
 {block name="title"}<title>使用权变更审核</title>{/block}
 {block name="content"}
 <link rel="stylesheet" href="/public/static/gf/css/iconfont.css">
+<link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
 <link rel="stylesheet" href="/public/static/gf/css/fileUpload.css">
 <!-- content start -->
 <div class="admin-content">
@@ -16,8 +17,8 @@
             <div class="am-btn-toolbar">   
                 <div class="am-btn-group-xs">
                     <?php if(in_array(88,$threeMenu)){ ; ?>
-                    <button type="button" id="addInfo" class="am-btn d-btn-1188F0"><span class="am-icon-edit"></span> 补充资料
-                    </button>
+<!--                     <button type="button" id="addInfo" class="am-btn d-btn-1188F0"><span class="am-icon-edit"></span> 补充资料
+                    </button> -->
                     <?php }; ?>
                 </div>
             </div>
@@ -301,6 +302,6 @@
 {/block}
 {block name="JsFile"}
 <script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script>
-<!-- <script type="text/javascript" src="/public/static/gf/js/fileUpload.js"></script> -->
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js"></script>
 <script type="text/javascript" src="/public/static/gf/viewJs/user_audit.js"></script>
 {/block}

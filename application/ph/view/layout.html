@@ -23,6 +23,8 @@
     .div_input label{width:120px;display:inline-block;vertical-align:middle;text-align:right;font-size:20px;color:#999;font-weight:500;}
     .div_input input{height:35px;padding:5px;margin:10px 0;display:inline-block;vertical-align:middle;border:1px solid #ccc;border-radius:4px;}
     #offCanvas{margin-left: 44px;}
+
+    li.am-active>a.name_style:hover{color:#FFF;}
   </style>
   {block name="css"}{/block}
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -49,7 +51,7 @@
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
 <!--       <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
       <li class="am-dropdown" data-am-dropdown>
-        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+        <a class="am-dropdown-toggle name_style" data-am-dropdown-toggle href="javascript:;">
           <span class="am-icon-users" id="userName">
             <?php echo session('user_base_info.name').'('.session('user_base_info.institution_name').')'; ?>
           </span><span class="am-icon-caret-down"></span>
