@@ -65,7 +65,7 @@
                             <input style="width:122px;" type="text" name="ChangeOrderID" class="am-form-field" value="{$ChangeOrderID}">
                             </div>
                         </td>
-<?php if(session('user_base_info.institution_level')!=3){ ;?>
+                            <?php if(session('user_base_info.institution_level')!=3){ ;?>
                         <td>
                             <div class="am-form-group search_input">
 
@@ -207,11 +207,11 @@
                                 <input type="text" name="UserName" class="am-form-field" value="{$UserName}">
                             </div>
                         </td>
-                        <td><div style="min-width:50px;"></div></td>
-                        <td><div style="min-width:50px;"></div></td>
-                        <td><div style="min-width:50px;"></div></td>
+                        <td><div style="min-width:80px;"></div></td>
+                        <td><div style="min-width:60px;"></div></td>
+                        <td><div style="min-width:60px;"></div></td>
                         <td>
-                        <div class="am-input-group am-input-group-sm" style="width:200px;">
+                        <div class="am-input-group am-input-group-sm" style="width:130px;">
                                 <?php
                         if($changeOption != array()){
                             $CreateTime = $changeOption['CreateTime'];  
@@ -219,9 +219,9 @@
                             $CreateTime = '';
                         }
                      ?>
-                    <div class="am-u-sm-6" style="padding:0;">
-                          <input style="width:200px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
-                    </div>
+                        <div class="am-u-sm-6" style="padding:0;">
+                              <input style="width:130px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
+                        </div>
                     
                         </div>
                     </td>
