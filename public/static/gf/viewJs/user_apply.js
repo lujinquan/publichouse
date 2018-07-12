@@ -5,146 +5,16 @@ require.config({
 		"layer":"layer/layer"
 	}
 });
-//新增更名
-$("#addRename").click(function(){
-	require(["layer","jquery"],function(layer){
-		layer.config({	//真实layer的配置路径
-			path:'/public/static/gf/layer/'
-		});
-		layer.open({
-			type:1,
-			area:['990px','700px'],
-			resize:false,
-			zIndex:100,
-			title:['更名申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#RenameForm'),
-			btn:['确认','取消'],
-			yes:function(thisIndex){
-				var ID = $('.tenantID').eq(0).text();
-				var Name = $('.tenantName').text();
-				var newName = $('#newName').val();
-				var Houseid = $('#getInfo_1').val();
-				$.post('/ph/UserApply/add',{type:1,houseid:Houseid,tenantid:ID,oldName:Name,newName:newName},function(result){
-					result = JSON.parse(result);
-					console.log(result);
-					if(result.retcode == 2000){
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisIndex);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg(result.msg);
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg(result.msg);
-					}
-				});
-			}
-		});
-	})
+new file({
+    button: "#transferApplication",
+    show: "#transferApplicationShow",
+    upButton: "#transferApplicationUp",
+    size: 10240,
+    url: "/ph/ChangeApply/add",
+    ChangeOrderID: '',
+    Type: 1,
+    title: "书面申请报告"
 });
-//新增过户
-$("#addTransferName").click(function(){
-	require(["layer","jquery"],function(layer){
-		$('#IdIput').val('');
-		$('#HouseIdInput').val('');
-		layer.config({	//真实layer的配置路径
-			path:'/public/static/gf/layer/'
-		});
-		layer.open({
-			type:1,
-			area:['990px','700px'],
-			resize:false,
-			zIndex:100,
-			title:['过户申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#TransferForm'),
-			btn:['确认','取消'],
-			yes:function(thisIndex){
-				var ID = $('#HouseIdInput').val();//房屋ID
-				var oldID = $('#oldID').text();
-				var oldName = $('#oldName').text();
-				var newID = $('#IdIput').val();
-				var newName = $('#newNam').text();
-				console.log(newName);
-				$.post('/ph/UserApply/add',{type:2,houseid:ID,oldID:oldID,oldName:oldName,newID:newID,newName:newName},function(result){
-					result = JSON.parse(result);
-					console.log(result);
-					if(result.retcode == 2000){
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisInde);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg(result.msg);
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg(result.msg);
-					}
-				});
-			}
-		});
-	})
-});
-//新增赠与
-$("#addGift").click(function(){
-	require(["layer","jquery"],function(layer){
-		$('#IdIput').val('');
-		$('#HouseIdInput').val('');
-		layer.config({	//真实layer的配置路径
-			path:'/public/static/gf/layer/'
-		});
-		layer.open({
-			type:1,
-			area:['990px','700px'],
-			resize:false,
-			zIndex:100,
-			title:['转增亲友申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#TransferForm'),
-			btn:['确认','取消'],
-			yes:function(thisIndex){
-				var ID = $('#HouseIdInput').val();//房屋ID
-				var oldID = $('#oldID').text();
-				var oldName = $('#oldName').text();
-				var newID = $('#IdIput').val();
-				var newName = $('#newNam').text();
-				$.post('/ph/UserApply/add',{
-					type:3,
-					houseid:ID,
-					oldID:oldID,
-					oldName:oldName,
-					newID:newID,
-					newName:newName
-				},function(result){
-					result = JSON.parse(result);
-					if(result.retcode == 2000){
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisIndex);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg(result.msg);
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg(result.msg);
-					}
-				});
-			}
-		});
-	})
-});
-//新增转让
 $("#addTransfer").click(function(){
 	require(["layer","jquery"],function(layer){
 		$('#IdIput').val('');
@@ -157,22 +27,12 @@ $("#addTransfer").click(function(){
 			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['新增转让申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			success:function(){
 				$('.label_p_style').text('');
 				$('.label_input').val('');
-				new file({
-                    button: "#transferApplication",
-                    show: "#transferApplicationShow",
-                    upButton: "#transferApplicationUp",
-                    size: 10240,
-                    url: "/ph/ChangeApply/add",
-                    ChangeOrderID: '',
-                    Type: 1,
-                    title: "书面申请报告"
-                });
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
@@ -227,11 +87,7 @@ $('.BtnChange').click(function(){
 			if(res.retcode == "4005"){
 				layer.msg(res.msg);
 			}else{
-				if(res.data.ChangeType == 1){
-					revise_1(res,ID);
-				}else{
-					revise_2(res,ID);
-				}
+				revise_2(res,ID);
 			}
 	})
 });
@@ -317,59 +173,7 @@ $('#queryAction_1').click(function(){
 		
 // 	});
 // });
-function revise_1(res,id){
-	require(["layer","jquery"],function(layer){
-		layer.config({	//真实layer的配置路径
-			path:'/public/static/gf/layer/'
-		});
-		layer.open({
-			type:1,
-			area:['990px','700px'],
-			resize:false,
-			zIndex:100,
-			title:['更名申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#RenameForm'),
-			btn:['确认','取消'],
-			success:function(){
-				$('#getInfo_1').val(res.data.HouseID);
-				$('.tenantID').text(res.data.OldTenantID);
-				$('.tenantName').text(res.data.OldTenantName);
-				$('#newName').val(res.data.NewTenantName);
-				$('#newTel').val(res.data.TenantTel);
-				$('#newTel1').val(res.data.OldTenantTel);
-				$('#oldTel1').val(res.data.OldTenantTel);
-			},
-			yes:function(thisIndex){
-				var ID = $('.tenantID').eq(0).text();
-				var Name = $('.tenantName').text();
-				var newName = $('#newName').val();
-				var Houseid = $('#getInfo_1').val();
-				
-				$.post('/ph/UserApply/edit',{ChangeOrderID:id,HouseID:Houseid,OldTenantID:ID,OldTenantName:Name,NewTenantName:newName},function(result){
-					result = JSON.parse(result);
-					console.log(result);
-					if(result.retcode == 2000){
-						// layer.confirm('修改成功',{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisIndex);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg('修改成功！');
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm('修改失败',{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg('修改失败');
-					}
-				});
-			}
-		});
-	})
-}
 function revise_2(res,id){
-	console.log('fff');
 	require(["layer","jquery"],function(layer){
 		$('#IdIput').val('');
 		$('#HouseIdInput').val('');
@@ -378,10 +182,10 @@ function revise_2(res,id){
 		});
 		layer.open({
 			type:1,
-			area:['990px','700px'],
+			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['过户申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['转让申请修改','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			success:function(){
@@ -391,15 +195,15 @@ function revise_2(res,id){
 				$('#IdIput').val(res.data.NewTenantID);
 				$('#transferReason').val(res.data.ChangeReason);
 				$('#newNam').text(res.data.NewTenantName);
-				$('#newTel').val(res.data.TenantTel);
-				$('#newTel1').val(res.data.NewTenantTel);
-				$('#oldTel1').val(res.data.OldTenantTel);
 				$('#transferWay option[value='+res.data.TransferType+']').attr('selected','selected');
 				$('#transferMoney').val(res.data.TransferRent);
-				$("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
-				$("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
-				$("input[name='IfCollection'][value="+res.data.IfCollection+"]").attr('checked','checked');
-				$("input[name='IfFacade'][value="+res.data.IfFacade+"]").attr('checked','checked');
+
+				$('#transferWay option[value='+res.data.ChangeType+']').attr('selected',true);
+
+				// $("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
+				// $("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
+				// $("input[name='IfCollection'][value="+res.data.IfCollection+"]").attr('checked','checked');
+				// $("input[name='IfFacade'][value="+res.data.IfFacade+"]").attr('checked','checked');
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
@@ -407,43 +211,39 @@ function revise_2(res,id){
 				var oldName = $('#oldName').text();
 				var newID = $('#IdIput').val();
 				var newName = $('#newNam').text();
-				var IfReform = $("input[type=radio][name=IfReform]:checked").val();
-				var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
-				var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
-				var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
+				// var IfReform = $("input[type=radio][name=IfReform]:checked").val();
+				// var IfRepair = $("input[type=radio][name=IfRepair]:checked").val();
+				// var IfCollection = $("input[type=radio][name=IfCollection]:checked").val();
+				// var IfFacade = $("input[type=radio][name=IfFacade]:checked").val();
+				var transferReason = $("#transferReason").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
-				$.post('/ph/UserApply/edit',{
-					ChangeOrderID:id,
-					HouseID:ID,
-					OldTenantID:oldID,
-					OldTenantName:oldName,
-					NewTenantID:newID,
-					NewTenantName:newName,
-					TransferType:transferWay,
-					TransferRent:transferMoney,
-					IfReform:IfReform,
-					IfRepair:IfRepair,
-					IfCollection:IfCollection,
-					IfFacade:IfFacade
-				},function(result){
-					result = JSON.parse(result);
-					console.log(result);
-					if(result.retcode == 2000){
-						// layer.confirm('修改成功',{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisInde);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg('修改成功！');
-						layer.close(thisIndex);
-						location.reload();
-					}else{
-						// layer.confirm('修改失败',{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// });
-						layer.msg('修改失败！');
-					}
+
+				var formData = fileTotall.getArrayFormdata();
+				formData.append('ChangeOrderID',id);
+				formData.append('HouseID',ID);
+				formData.append('OldTenantID',oldID);
+				formData.append('OldTenantName',oldName);
+				formData.append('NewTenantID',newID);
+				formData.append('NewTenantName',newName);
+				formData.append('ChangeType',transferWay);
+				formData.append('TransferRent',transferMoney);
+				formData.append('ChangeReason',transferReason);
+
+				$.ajax({
+				    type: "post",
+				    url: "/ph/UserApply/edit",
+				    data: formData,
+				    processData: false,
+				    contentType: false,
+				    success: function(res) {
+				        res = JSON.parse(res);
+				        layer.msg(res.msg);
+				        if(res.retcode == '2000'){
+				            layer.close(thisIndex);
+				            location.reload();
+				        }
+				    }
 				});
 			}
 		});
