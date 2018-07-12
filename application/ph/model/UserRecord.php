@@ -56,6 +56,9 @@ class UserRecord extends Model
             if ($searchForm['HouseID']) {  //检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
+            if ($searchForm['BanAddress']) {  //检索房屋地址
+                $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
+            }
             if ($searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
@@ -76,21 +79,44 @@ class UserRecord extends Model
 
         $where['Status'] = array('in' , [1,0]);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,OldTenantName,HouseUsearea,InstitutionID,BanAddress,HousePrerent,UserNumber ,CreateTime ,Status';
 
-        //dump($HouseIdList['obj']);exit;
+        $ChangeList['obj'] = self::field($map)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 
         if(!$arr){
 
             $ChangeList['arr'] = array();
-        }
+        }else{
 
-        foreach($arr as $v){
+            $owners = Db::name('ban_owner_type')->column('id,OwnerType');
 
-            $ChangeList['arr'][] = self::get_one_change_info($v['id']);
+            $ins = Db::name('institution')->column('id,Institution');
 
+            $types = Db::name('use_change_type')->column('id,UseChangeTitle');
+
+            $users = Db::name('admin_user')->column('Number,UserName');
+
+            foreach($arr as $v){
+
+                if($v['Status'] == 1){
+                    $v['Status'] = '成功';
+                }
+
+                if($v['Status'] === 0){
+                    $v['Status'] = '失败';
+                }
+
+                $v['UserNumber'] = $users[$v['UserNumber']];
+                $v['OwnerType'] = $owners[$v['OwnerType']];
+                $v['ChangeType'] = $types[$v['ChangeType']];
+                $v['InstitutionID'] = $ins[$v['InstitutionID']];
+                $v['CreateTime'] = date('Y-m-d',$v['CreateTime']);
+                
+                $ChangeList['arr'][] = $v;
+
+            }
         }
 
         return $ChangeList;
@@ -99,7 +125,7 @@ class UserRecord extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,InstitutionID ,UserNumber ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,HouseUsearea,InstitutionID ,BanAddress,HousePrerent,UserNumber ,CreateTime ,Status';
         $data = Db::name('use_change_order')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
@@ -111,11 +137,11 @@ class UserRecord extends Model
         $data['ChangeType'] = Db::name('use_change_type')->where('id','eq',$data['ChangeType'])->value('UseChangeTitle');
 
         if($data['Status'] == 1){
-            $data['Status'] = '通过';
+            $data['Status'] = '成功';
         }
 
         if($data['Status'] === 0){
-            $data['Status'] = '未通过';
+            $data['Status'] = '失败';
         }
 
         //echo $data['Status'];exit;

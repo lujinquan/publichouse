@@ -32,7 +32,12 @@
                 <?php if(session('user_base_info.institution_level')!=3){ ;?>
         				<th class="table-date am-hide-sm-only">申请机构</th>
                 <?php }; ?>
-        				<th class="table-set">操作人</th>
+                <th class="table-set">房屋地址</th>
+        				<th class="table-set">操作人</th> 
+                
+                <th class="table-set">使用面积</th>
+                <th class="table-set">月租金</th>
+                <th class="table-set">租户姓名</th>
         				<th class="table-set">申请时间</th>
         				<th class="table-set">审核状态</th>
         				<th class="table-set">操作</th>
@@ -163,15 +168,19 @@
                           <td>
                             <div class="am-input-group am-input-group-sm">
                                   <?php
-                        if($changeOption != array()){
-                            $UserName = $changeOption['UserName'];
-                        }else{
-                            $UserName = '';
-                        }
-                     ?>
-                                  <input type="text" name="UserName" class="am-form-field" value="{$UserName}">
+                                    if($changeOption != array()){
+                                        $BanAddress = $changeOption['BanAddress'];
+                                    }else{
+                                        $BanAddress = '';
+                                    }
+                                 ?>
+                                  <input type="text" name="BanAddress" class="am-form-field" value="{$BanAddress}">
                               </div>
                           </td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                           <td>
                         <div class="am-input-group am-input-group-sm" style="width:200px;">
                                 <?php
@@ -212,7 +221,11 @@
                       <?php if(session('user_base_info.institution_level')!=3){ ;?>
                       <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
                       <?php }; ?>
+                      <td class="am-hide-sm-only"><?php echo $v1['BanAddress']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['UserNumber']; ?></td>
+                      <td class="am-hide-sm-only"><?php echo $v1['HouseUsearea']; ?></td>
+                      <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
+                      <td class="am-hide-sm-only"><?php echo $v1['OldTenantName']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['CreateTime']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['Status']; ?></td>
                       <td>

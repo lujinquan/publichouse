@@ -92,19 +92,12 @@ class UserAudit extends Base
             }
 
             $update=[
-                //'Status'=> ['exp','Status+1'],
                 'IfReform'=>$data['IfReform'],
                 'IfRepair'=>$data['IfRepair'],
                 'IfCollection'=>$data['IfCollection'],
                 'IfFacade'=>$data['IfFacade'],
                 'IfCheck'=>isset($data['IfCheck'])?$data['IfCheck']:0,
             ];
-
-            // if($nowStatus = 2){
-            //     $update['Status'] = 2;
-            // }
-            
-            //if($effect){
 
             //资料补充成功后，做后置操作，修改主订单当前状态，创建子订单，即子订单记录
             Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->update($update);
@@ -113,13 +106,6 @@ class UserAudit extends Base
             model('ph/UserAudit')->create_child_order($changeOrderID);
 
             return jsons('2000' ,'补充成功' );
-
-            // }else{
-
-            //     return jsons('4000' ,'补充失败' );
-
-            // }
-
 
         }
 
@@ -172,7 +158,7 @@ class UserAudit extends Base
      * @description
      */
     public function process(){
-   //halt(1);     
+   
         if($this->request->isPost()) {
 
             $data = $this->request->post();

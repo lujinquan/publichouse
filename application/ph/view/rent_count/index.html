@@ -48,12 +48,11 @@
                     <th class="table-set">使用性质</th>
                     <th class="table-set">租户姓名</th>
                     <th class="table-set">楼栋地址</th>
-                    <!--<th class="table-set">单元号</th>-->
                     <th class="table-set">租差</th>
                     <th class="table-set">泵费</th>
                     <th class="table-set">减免租金</th>
-                    <th class="table-set">月应收租金</th>
-                    <th class="table-set">滞纳金额</th>
+                    <th class="table-set">规定租金</th>
+                    <th class="table-set">应收租金</th>
                     <th class="table-set">历史欠租</th>
                     <th class="table-set">操作</th>
                 </tr>
@@ -311,22 +310,14 @@
                        
                     </select>
                 </div></td>
-                        <!--<td>-->
-                            <!--<div style="width:50px;"></div>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<div style="width:50px;"></div>-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<div style="width:50px;"></div>-->
-                        <!--</td>-->
+                        <td>
+                            <div style="width:50px;"></div>
+                        </td>
                         <td>
                             <div style="width:70px;"></div>
                             {$receiveRentTotal}
                         </td>
-                        <td>
-                            <div style="width:50px;"></div>
-                        </td>
+                        
                         <td>
                             <div style="width:50px;"></div>
                         </td>
@@ -363,8 +354,8 @@
                     <td class="am-hide-sm-only"><?php echo $v['DiffRent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['PumpCost']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['CutRent']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $v['ReceiveRent']; ?></td>
-                    <td class="am-hide-sm-only"><?php echo $v['LateRent']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['HousePrerent']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['ReceiveRent']; ?></td>  
                     <td class="am-hide-sm-only"><?php echo $v['HistoryUnpaidRent']; ?></td>
                     <td>
                         <div class="am-btn-toolbar">

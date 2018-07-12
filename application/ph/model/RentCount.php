@@ -94,7 +94,7 @@ class RentCount extends Model
 
         if (!isset($where)) $where = 1;
 
-        $maps = 'HouseID,InstitutionID,BanAddress,TenantName,PumpCost,DiffRent,CutRent,HistoryUnpaidRent,ReceiveRent,LateRent,OwnerType,UseNature';
+        $maps = 'HouseID,InstitutionID,BanAddress,TenantName,PumpCost,HousePrerent,DiffRent,CutRent,HistoryUnpaidRent,ReceiveRent,LateRent,OwnerType,UseNature';
 
         $RentLst['obj'] = Db::name('rent_config')->field($maps)->where($where)->paginate(config('paginate.list_rows'));
 
