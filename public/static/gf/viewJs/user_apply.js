@@ -220,14 +220,15 @@ function revise_2(res,id){
 				var transferMoney = $("#transferMoney").val();
 
 				var formData = fileTotall.getArrayFormdata();
-				formData.append('houseid',ID);
-				formData.append('oldID',oldID);
-				formData.append('oldName',oldName);
-				formData.append('newID',newID);
-				formData.append('newName',newName);
+				formData.append('ChangeOrderID',id);
+				formData.append('HouseID',ID);
+				formData.append('OldTenantID',oldID);
+				formData.append('OldTenantName',oldName);
+				formData.append('NewTenantID',newID);
+				formData.append('NewTenantName',newName);
 				formData.append('ChangeType',transferWay);
-				formData.append('transferRent',transferMoney);
-				formData.append('transferReason',transferReason);
+				formData.append('TransferRent',transferMoney);
+				formData.append('ChangeReason',transferReason);
 
 				$.ajax({
 				    type: "post",
