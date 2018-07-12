@@ -27,7 +27,7 @@ $("#addTransfer").click(function(){
 			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['新增转让','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['新增转让申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			success:function(){
@@ -185,7 +185,7 @@ function revise_2(res,id){
 			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['过户申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['转让申请修改','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			success:function(){
@@ -197,6 +197,9 @@ function revise_2(res,id){
 				$('#newNam').text(res.data.NewTenantName);
 				$('#transferWay option[value='+res.data.TransferType+']').attr('selected','selected');
 				$('#transferMoney').val(res.data.TransferRent);
+
+				$('#transferWay option[value='+res.data.ChangeType+']').attr('selected',true);
+
 				// $("input[name='IfReform'][value="+res.data.IfReform+"]").attr('checked','checked');
 				// $("input[name='IfRepair'][value="+res.data.IfRepair+"]").attr('checked','checked');
 				// $("input[name='IfCollection'][value="+res.data.IfCollection+"]").attr('checked','checked');
@@ -222,7 +225,7 @@ function revise_2(res,id){
 				formData.append('oldName',oldName);
 				formData.append('newID',newID);
 				formData.append('newName',newName);
-				formData.append('transferType',transferWay);
+				formData.append('ChangeType',transferWay);
 				formData.append('transferRent',transferMoney);
 				formData.append('transferReason',transferReason);
 
