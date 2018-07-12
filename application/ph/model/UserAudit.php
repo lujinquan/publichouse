@@ -16,11 +16,11 @@ class UserAudit extends Model
 
 
     /**
- * 补充资料时获取的详情，此处和审批及明细中的详情不同点在于：补充资料的详情没有图片url数组信息
- * @description  通过主订单编号来获取流程配置，和当前流程状态
- * @author Mr.Lu
- * @return array [  ]
- */
+     * 补充资料时获取的详情，此处和审批及明细中的详情不同点在于：补充资料的详情没有图片url数组信息
+     * @description  通过主订单编号来获取流程配置，和当前流程状态
+     * @author Mr.Lu
+     * @return array [  ]
+     */
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
@@ -119,7 +119,7 @@ class UserAudit extends Model
 
     //创建一个子订单，例如（补充资料完成，每次审核完成 ，）
     public function create_child_order($changeOrderID,$reson=''){
-
+        
         //获取流程总人数
         $total = Db::name('use_change_order')->alias('a')
                                              ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
@@ -155,6 +155,7 @@ class UserAudit extends Model
 
         // 若终审通过
         }elseif($status == $total && $reson == ''){
+
 
             //终审通过则状态改为  1
             self::where($where)->setField('Status',1);

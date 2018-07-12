@@ -1,0 +1,156 @@
+<form id="oldCutForm" class="am-form" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-2">
+      <label id="houseLabel" class="label_style">房屋编号：</label>
+    </div>
+    <div class="am-u-md-6">
+      <input type="text" name="" id="getInfo_1" placeholder="" required/>
+    </div>
+    <div class="am-u-md-2 am-u-end">
+      <a class="am-btn" id="DQueryData">查询</a>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0;">
+      <label>楼栋编号：</label><label id="BanID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8" style="padding:0;">
+      <label>房屋地址：</label><label id="BanAddress" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="FloorID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide" style="padding:0;">
+      <label>承租人：</label><label id="TenantName" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide" style="padding:0;">
+      <label>联系电话：</label><label id="TenantTel" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>身份证号：</label><label id="TenantNumber" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end" style="padding:0;">
+      <label>备案时间：</label><label id="CreateTime" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end uHide" style="padding:0;">
+      <label>建筑面积：</label><label id="HouseArea" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>计租面积：</label><label id="LeasedArea" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end uHide" style="padding:0;">
+      <label>年度结欠：</label><label id="ArrearRent" class="label_content"></label>
+    </div>
+  </div>
+   <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">欠租年份：</label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end" data-am-validator>
+      <input type="text" name="yaer" id="year" onfocus=this.blur() value="2017"/>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">欠租月份：</label>
+    </div>
+    <div class="am-form-group am-u-sm-10 am-u-end debt">
+      <ul class="debt_ul">
+      	<li class="debt_month dong" value="1">1</li>
+      	<li class="debt_month" value="2">2</li>
+      	<li class="debt_month" value="3">3</li>
+      	<li class="debt_month" value="4">4</li>
+      	<li class="debt_month" value="5">5</li>
+      	<li class="debt_month" value="6">6</li>
+      	<li class="debt_month" value="7">7</li>
+      	<li class="debt_month" value="8">8</li>
+      	<li class="debt_month" value="9">9</li>
+      	<li class="debt_month" value="10">10</li>
+      	<li class="debt_month" value="11">11</li>
+      	<li class="debt_month" value="12">12</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">缴纳月份：</label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end" data-am-validator>
+      <input type="text" name="yaer" id="oldRentMonth" onfocus=this.blur() value="<?php echo date('Y-m',time()); ?>"  />
+    </div>
+  </div>
+
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">缴纳欠款：</label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <input type="number" name="debt" id="oldDebt" />
+    </div>
+  </div>
+ </form>
+
+ <div id="DoldCutForm" class="am-form" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-md-12">
+    <div class="am-u-md-2">
+      <label id="houseLabel" class="label_style">房屋编号：</label>
+    </div>
+    <div class="am-u-md-10 am-u-md-end">
+      <label id="DgetInfo_1" class="label_content"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right:0;">
+      <label>楼栋编号：</label><label id="DBanID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4" style="padding:0;">
+      <label>房屋地址：</label><label id="DBanAddress" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label>楼层：</label><label id="DFloorID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide" >
+      <label>承租人：</label><label id="DTenantName" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 Hhide" style="padding:0;">
+      <label>联系电话：</label><label id="DTenantTel" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end Hhide" style="padding:0;">
+      <label>身份证号：</label><label id="DTenantNumber" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label>备案时间：</label><label id="DCreateTime" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end uHide" style="padding:0;">
+      <label>建筑面积：</label><label id="DHouseArea" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end Hhide" style="padding:0;">
+      <label>计租面积：</label><label id="DLeasedArea" class="label_content"></label>
+    </div>
+  </div>
+   <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">欠租年份：</label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end" data-am-validator>
+      <label id="Dyear" class="label_content"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">欠租月份：</label>
+    </div>
+    <div class="am-form-group am-u-sm-10 am-u-end debt">
+		<label id="Dmonth" class="label_content"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-2">
+      <label class="label_style">缴纳欠款：</label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label id="DoldDebt" class="label_content"></label>
+    </div>
+  </div>
+ </div>
