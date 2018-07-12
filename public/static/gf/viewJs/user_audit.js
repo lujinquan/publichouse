@@ -23,14 +23,11 @@ $("#addInfo").click(function(){
 				$('.houseAddress').text(res.data.detail.BanAddress);
 				$('.FloorID').text(res.data.detail.FloorID);
 				$('.createTime').text(res.data.detail.CreateTime);
-				if(res.data.detail.TransferType == "1"){
-					$('#TypeName').text("交易转让");
-				}else if(res.data.detail.TransferType == "2"){
-					$('#TypeName').text("亲属转让");
-				}else{
-					$('#TypeName').text("正常过户");
-				}
-				
+				$('.approveName').text(res.data.detail.ChangeType);
+				$('.useNature').text(res.data.detail.UseNature);
+				$('.OwnerType').text(res.data.detail.OwnerType);
+				$('.ChangeReason').text(res.data.detail.ChangeReason);
+
 				$('.TransferRent').text(res.data.detail.TransferRent);
 				$('.NewTenantName').text(res.data.detail.NewTenantName);
 				$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
@@ -253,13 +250,10 @@ $('.BtnApprove').click(function(){
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.APtransferRent').text(res.data.detail.TransferRent);
 		$('.AFloorID').text(res.data.detail.FloorID);
-		if(res.data.detail.TransferType == "1"){
-			$('.approveName').text("交易转让");
-		}else if(res.data.detail.TransferType == "2"){
-			$('.approveName').text("亲属转让");
-		}else{
-			$('.approveName').text("正常过户");
-		}
+				$('.approveName').text(res.data.detail.ChangeType);
+				$('.useNature').text(res.data.detail.UseNature);
+				$('.OwnerType').text(res.data.detail.OwnerType);
+				$('.ChangeReason').text(res.data.detail.ChangeReason);
 
 		$('.OldTenantName').text(res.data.detail.OldTenantName);
 		$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
@@ -361,13 +355,10 @@ $('.BtnDetail').click(function(){
 		$('#approveName').text(res.data.detail.ChangeType);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
 		$('.AFloorID').text(res.data.detail.FloorID);
-		if(res.data.detail.TransferType == "1"){
-			$('.approveName').text("交易转让");
-		}else if(res.data.detail.TransferType == "2"){
-			$('.approveName').text("亲属转让");
-		}else{
-			$('.approveName').text("正常过户");
-		}
+				$('.approveName').text(res.data.detail.ChangeType);
+				$('.useNature').text(res.data.detail.UseNature);
+				$('.OwnerType').text(res.data.detail.OwnerType);
+				$('.ChangeReason').text(res.data.detail.ChangeReason);
 
 
 		$('.APtransferRent').text(res.data.detail.TransferRent);
