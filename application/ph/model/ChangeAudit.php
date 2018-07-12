@@ -87,23 +87,32 @@ class ChangeAudit extends Model
                 $where['UserName'] = array('like', '%' . $searchForm['UserName'] . '%');
             }
 
-            if ($searchForm['DateStart'] && $searchForm['DateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
-                $start = strtotime($searchForm['DateStart']);
-                $end = strtotime($searchForm['DateEnd']);
-                //dump($start);dump($end);exit;
-                if ($start < $end) {
-                    $where['CreateTime'] = array('between', $start . "," . $end);
-                }
+            if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
+
+                $starttime = strtotime($searchForm['CreateTime']);
+
+                $endtime = $starttime + 3600*24;
+
+                $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
-            if ($searchForm['DateStart'] && empty($searchForm['DateEnd'])) { //检索大于等于起始时间
-                $start = strtotime($searchForm['DateStart']);
-                //dump($start);exit;
-                $where['CreateTime'] = array('egt', $start);
-            }
-            if ($searchForm['DateEnd'] && empty($searchForm['DateStart'])) { //检索小于等于结束时间
-                $end = strtotime($searchForm['DateEnd']);
-                $where['CreateTime'] = array('elt', $end);
-            }
+            
+            // if ($searchForm['DateStart'] && $searchForm['DateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
+            //     $start = strtotime($searchForm['DateStart']);
+            //     $end = strtotime($searchForm['DateEnd']);
+            //     //dump($start);dump($end);exit;
+            //     if ($start < $end) {
+            //         $where['CreateTime'] = array('between', $start . "," . $end);
+            //     }
+            // }
+            // if ($searchForm['DateStart'] && empty($searchForm['DateEnd'])) { //检索大于等于起始时间
+            //     $start = strtotime($searchForm['DateStart']);
+            //     //dump($start);exit;
+            //     $where['CreateTime'] = array('egt', $start);
+            // }
+            // if ($searchForm['DateEnd'] && empty($searchForm['DateStart'])) { //检索小于等于结束时间
+            //     $end = strtotime($searchForm['DateEnd']);
+            //     $where['CreateTime'] = array('elt', $end);
+            // }
 
         }
 
@@ -258,9 +267,9 @@ class ChangeAudit extends Model
     {   //暂停计租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,CreateTime,BanID')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,CreateTime')->find();
 
-        $data['ban'] = get_ban_info($oneData['BanID']);
+        //$data['ban'] = get_ban_info($oneData['BanID']);
 
         $houses = explode(',',$oneData['HouseID']);
 
@@ -270,6 +279,8 @@ class ChangeAudit extends Model
         $data['InflRent'] = $oneData['InflRent'];
         $data['CreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 3;
+
+        //halt($data);
         return $data;
     }
 

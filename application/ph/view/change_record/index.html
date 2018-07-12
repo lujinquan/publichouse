@@ -62,21 +62,21 @@
 
                                     <?php
 
-                                if($changeOption != array()){
+                                        if(isset($changeOption['ChangeType'])){
 
-                                    if($changeOption['ChangeType'] == $v0['id']){
+                                            if($changeOption['ChangeType'] == $v0['id']){
 
-                                        $select ='selected';
-                                    }else{
+                                                $select ='selected';
+                                            }else{
 
-                                        $select ='';
-                                    }
-                                }else{
+                                                $select ='';
+                                            }
+                                        }else{
 
-                                    $select ='';
-                                }
+                                            $select ='';
+                                        }
 
-                                ?>
+                                    ?>
 
                                     <option value="<?php echo $v0['id']; ?>"
                                             {$select}><?php echo $v0['ProcessName']; ?></option>
@@ -93,7 +93,7 @@
                                     <?php if(session('user_base_info.institution_level')==1){;?>
                                     <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
                                     <?php
-                                if($changeOption != array()){
+                                if(isset($changeOption['TubulationID'])){
                                     if($changeOption['TubulationID'] == $v10['id']){
                                         $select ='selected';
                                     }else{
@@ -108,7 +108,7 @@
                                     <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
                                     <?php foreach($instLst as $k12 => $v12){ ; ?>
                                     <?php
-                                if($changeOption != array()){
+                                if(isset($changeOption['TubulationID'])){
                                     if($changeOption['TubulationID'] == $v12['id']){
                                         $select ='selected';
                                     }else{
@@ -133,7 +133,7 @@
 
                           <?php
 
-                                if($changeOption != array()){
+                                if(isset($changeOption['OwnerType'])){
 
                                     if($changeOption['OwnerType'] == $v3['id']){
 
@@ -158,7 +158,7 @@
                   <td>
               <div class="am-input-group am-input-group-sm">
                         <?php
-                        if($changeOption != array()){
+                        if(isset($changeOption['InflRent'])){
                             $InflRent = $changeOption['InflRent'];
                         }else{
                             $InflRent = '';
@@ -170,36 +170,30 @@
                         <td>
                             <div class="am-input-group am-input-group-sm">
                                 <?php
-                        if($changeOption != array()){
-                            $UserName = $changeOption['UserName'];
-                        }else{
-                            $UserName = '';
-                        }
-                     ?>
+                                    if(isset($changeOption['UserName'])){
+                                        $UserName = $changeOption['UserName'];
+                                    }else{
+                                        $UserName = '';
+                                    }
+                                 ?>
                                 <input type="text" class="am-form-field" name="UserName" value="{$UserName}">
                             </div>
                         </td>
                         <td>
-                            <div class="am-input-group am-input-group-sm" style="width:210px;">
-                                    <?php
-                        if($changeOption != array()){
-                            $DateStart = $changeOption['DateStart'];
-                            $DateEnd = $changeOption['DateEnd'];
+                        <div class="am-input-group am-input-group-sm" style="width:200px;">
+                                <?php
+                        if(isset($changeOption['CreateTime'])){
+                            $CreateTime = $changeOption['CreateTime'];  
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $CreateTime = '';
                         }
                      ?>
-                                <div class="am-u-sm-6" style="padding:0;">
-                                    <input style="width:100px;" name="DateStart" value="{$DateStart}" type="text" class="am-form-field"
-                                           data-am-datepicker/>
-                                </div>
-                                <div class="am-u-sm-6" style="padding:0;">
-                                    <input style="width:100px;" name="DateEnd" value="{$DateEnd}" type="text" class="am-form-field"
-                                           data-am-datepicker/>
-                                </div>
-                            </div>
-                        </td>
+                    <div class="am-u-sm-6" style="padding:0;">
+                          <input style="width:200px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
+                    </div>
+                    
+                        </div>
+                    </td>
                         <td><div style="width:100px;"></div></td>
                         <td>
                             <div class="am-btn-group am-btn-group-xs" style="width:114px;">

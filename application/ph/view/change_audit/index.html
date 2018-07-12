@@ -164,24 +164,20 @@
       			  </td>
 
                 <td>
-                    <div class="am-input-group am-input-group-sm" style="width:210px;">
-                            <?php
+                        <div class="am-input-group am-input-group-sm" style="width:200px;">
+                                <?php
                         if($changeOption != array()){
-                            $DateStart = $changeOption['DateStart'];
-                            $DateEnd = $changeOption['DateEnd'];
+                            $CreateTime = $changeOption['CreateTime'];  
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $CreateTime = '';
                         }
                      ?>
-                        <div class="am-u-sm-6" style="padding:0;">
-                            <input style="width:100px;" name="DateStart" value="{$DateStart}" type="text" class="am-form-field" data-am-datepicker />
-                        </div>
-                        <div class="am-u-sm-6" style="padding:0;">
-                            <input style="width:100px;" name="DateEnd" value="{$DateEnd}" type="text" class="am-form-field" data-am-datepicker />
-                        </div>
+                    <div class="am-u-sm-6" style="padding:0;">
+                          <input style="width:200px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
                     </div>
-                </td>
+                    
+                        </div>
+                    </td>
                 <td><div style="width:100px;"></div></td>
       			  <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:114px;">

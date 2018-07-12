@@ -203,7 +203,7 @@ class RentCount extends Model
             if (isset($searchForm['CutNumber']) && $searchForm['CutNumber']) {  //模糊检索减免证件号
                 $where['CutNumber'] = array('like', '%' . $searchForm['CutNumber'] . '%');
             }
-            if (isset($searchForm['OrderDate'])) {  //订单日期检索              
+            if (isset($searchForm['OrderDate']) && $searchForm['OrderDate']) {  //订单日期检索              
                 $where['OrderDate'] = array('eq', str_replace('/','',$searchForm['OrderDate']));
             }
 
@@ -235,6 +235,8 @@ class RentCount extends Model
         $maps = 'RentOrderID,HouseID,InstitutionID,BanAddress,TenantID,TenantName,HousePrerent,PumpCost,DiffRent,CutRent,HistoryUnpaidRent,UnpaidRent,PaidRent,PaidableTime,ReceiveRent,LateRent,OwnerType,UseNature,CreateTime,OrderDate';
 
         $RentLst['obj'] = self::field($maps)->where($where)->order('id desc')->paginate(config('paginate.list_rows'));
+
+        //halt($RentLst['obj']);
         $findOne = Db::name('rent_order')->where($where)
                     ->field('sum(UnpaidRent) as UnpaidRents,sum(PaidRent) as PaidRents,sum(ReceiveRent) as ReceiveRents')
                     ->find();
@@ -252,7 +254,7 @@ class RentCount extends Model
         $uses = Db::name('use_nature')->column('id,UseNature');
         $ins = Db::name('institution')->column('id,Institution');
 
-        foreach ($arr as &$v) {
+        foreach ($arr as $v) {
             $start = substr($v['OrderDate'], 0, 4);
             $end = substr($v['OrderDate'], 4);
             $str = ($start . '/' . $end);

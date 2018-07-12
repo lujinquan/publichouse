@@ -33,9 +33,9 @@ class OldCutRent extends Base
                 ->field('BanAddress,ArrearRent,TenantID,OwnerType,UseNature,TenantName,HousePrerent,InstitutionID,InstitutionPID')
                 ->find();
             if($findOne){
-                // if($findOne['ArrearRent'] < $data['PayRent'] && $data['PayYear'] < 2018){
-                //     return jsons('4005','收缴金额不能超过年度结欠金额');
-                // }
+                if($findOne['ArrearRent'] < $data['PayRent'] && $data['PayYear'] < 2018){
+                    return jsons('4005','收缴金额不能超过年度结欠金额');
+                }
                 // if($findOne['InstitutionID'] != session('user_base_info.institution_id')){
                 //     return jsons('4006','请确认该房屋是否属于当前管段');
                 // }
@@ -54,9 +54,9 @@ class OldCutRent extends Base
             $data['CreateUserID'] = UID;
             //halt($data);
             if (OldCutRentModel::create($data)) {
-//                if($data['PayYear'] < 2018){
-//                    Db::name('house')->where('HouseID',$data['HouseID'])->setDec('ArrearRent',$data['PayRent']);
-//                }
+               // if($data['PayYear'] < 2018){
+               //     Db::name('house')->where('HouseID',$data['HouseID'])->setDec('ArrearRent',$data['PayRent']);
+               // }
                 // 记录行为
                 //action_log('BanInfo_add', UID, 1, '编号为:' . $data['BanID']);
                 return jsons('2000', '新增成功');
@@ -79,7 +79,12 @@ class OldCutRent extends Base
     {
         $id = input('id');
         if(!$id) return jsons('4004','参数缺失');
+        $find = Db::name('old_rent')->where('id','eq',$id)->find();
         $re = Db::name('old_rent')->where('id','eq',$id)->delete();
+
+        // if($re){
+        //     Db::name('house')->where('HouseID',$find['HouseID'])->setInc('ArrearRent',$find['PayRent']);
+        // }
         return $re?jsons('2000','删除成功'):jsons('4000','删除失败');
     }
 }

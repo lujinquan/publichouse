@@ -79,42 +79,49 @@ class ChangeRecord extends Model
             if (isset($searchForm['ChangeType']) && $searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
-            if ($searchForm['OwnerType']) {  //检索变更类型
+            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //检索变更类型
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            if ($searchForm['InflRent']) {  //检索变更类型
+            if (isset($searchForm['InflRent']) && $searchForm['InflRent']) {  //检索变更类型
                 $where['InflRent'] = array('eq', $searchForm['InflRent']);
             }
             if (isset($searchForm['UserName']) && $searchForm['UserName']) {  //检索操作人名称
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
 
-            if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-                $start = strtotime($searchForm['DateStart']);
-                $end = strtotime($searchForm['DateEnd']);
-                //dump($start);dump($end);exit;
-                if($start < $end){
-                    $where['CreateTime'] = array('between',$start.",".$end);
-                }
+            if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
+
+                $starttime = strtotime($searchForm['CreateTime']);
+
+                $endtime = $starttime + 3600*24;
+
+                $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
-            if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-                $start = strtotime($searchForm['DateStart']);
-                $where['CreateTime'] = array('egt',$start);
-            }
-            if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-                $end = strtotime($searchForm['DateEnd']);
-                $where['CreateTime'] = array('elt',$end);
-            }
+
+            // if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
+            //     $start = strtotime($searchForm['DateStart']);
+            //     $end = strtotime($searchForm['DateEnd']);
+            //     //dump($start);dump($end);exit;
+            //     if($start < $end){
+            //         $where['CreateTime'] = array('between',$start.",".$end);
+            //     }
+            // }
+            // if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
+            //     $start = strtotime($searchForm['DateStart']);
+            //     $where['CreateTime'] = array('egt',$start);
+            // }
+            // if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
+            //     $end = strtotime($searchForm['DateEnd']);
+            //     $where['CreateTime'] = array('elt',$end);
+            // }
 
         }
 
         $where['Status'] = array('in' , [1,0]);
 
-        //halt($where);
+        $where['IfShow'] = array('eq',1);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));//config('paginate.list_rows')
-
-        //dump($HouseIdList['obj']);exit;
+        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 

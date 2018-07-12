@@ -51,6 +51,7 @@
                     <th class="table-set">使用性质</th>
                     <th class="table-set">租户姓名</th>
                     <th class="table-set">楼栋地址</th>
+                    <th class="table-set">规定租金</th>
                     <th class="table-set">应缴租金</th>
                     <th class="table-set">已缴租金</th>
                     <th class="table-set">欠缴租金</th>
@@ -231,6 +232,7 @@
                                        value="{$BanAddress}">
                             </div>
                         </td>
+                        <td><div style="width:50px;"></div></td>
                         <td>
                             <div style="width:50px;"></div>
                             {$receiveRents}
@@ -304,6 +306,7 @@
                     <td class="am-hide-sm-only"><?php echo $v['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['HousePrerent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['ReceiveRent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['PaidRent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['UnpaidRent']; ?></td>
