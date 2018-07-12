@@ -51,7 +51,7 @@ class UserAudit extends Base
 
             //halt($data);
 
-            if($_FILES){ //由于目前前端的多文件上传一次只上传一个标题的多张图片，所以目前  $_FILES  只有一个元素，故 $ChangeImageIDS 只是一个字符串
+            if(isset($_FILES) && $_FILES){ //由于目前前端的多文件上传一次只上传一个标题的多张图片，所以目前  $_FILES  只有一个元素，故 $ChangeImageIDS 只是一个字符串
 
                 //在补充资料的时候，需要判断当前状态是否为补充资料阶段，即当前主订单的 Status == 2 ,如果不是，则返回提示信息不让补充
                 $nowStatus = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
@@ -73,25 +73,22 @@ class UserAudit extends Base
 
             //$checkStatus = model('ph/UserAudit')->check_file($data['title']);
 
-            $checkStatus = false;
 
-            if($checkStatus === false){ //执行添加
+            $oldImageIDS = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('ChangeImageIDS');
 
-                $oldImageIDS = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('ChangeImageIDS');
-
-                if($oldImageIDS){
-
+            if($oldImageIDS){
+                if(isset($ChangeImageIDS)){
                     $changeImageIDS = $oldImageIDS.','.$ChangeImageIDS;
                 }else{
-
-                    $changeImageIDS = $ChangeImageIDS;
+                    $changeImageIDS = $oldImageIDS;
                 }
-
-                $effect = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->setField('ChangeImageIDS' ,$changeImageIDS);
+            }else{
+                if(isset($ChangeImageIDS)){
+                    $changeImageIDS = $ChangeImageIDS;
+                }     
             }
-
-            if($checkStatus === true){ //执行修改
-
+            if(isset($changeImageIDS)){
+                $effect = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->setField('ChangeImageIDS' ,$changeImageIDS);
             }
 
             $update=[
@@ -107,21 +104,21 @@ class UserAudit extends Base
             //     $update['Status'] = 2;
             // }
             
-            if($effect){
+            //if($effect){
 
-                //资料补充成功后，做后置操作，修改主订单当前状态，创建子订单，即子订单记录
-                Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->update($update);
+            //资料补充成功后，做后置操作，修改主订单当前状态，创建子订单，即子订单记录
+            Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->update($update);
 
-                //生成子订单
-                model('ph/UserAudit')->create_child_order($changeOrderID);
+            //生成子订单
+            model('ph/UserAudit')->create_child_order($changeOrderID);
 
-                return jsons('2000' ,'补充成功' );
+            return jsons('2000' ,'补充成功' );
 
-            }else{
+            // }else{
 
-                return jsons('4000' ,'补充失败' );
+            //     return jsons('4000' ,'补充失败' );
 
-            }
+            // }
 
 
         }
