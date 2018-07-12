@@ -24,7 +24,7 @@ class UserAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,TransferType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
         $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea')
@@ -43,7 +43,10 @@ class UserAudit extends Model
 
         $data['ChangeOrderID'] = $changeOrderID;
         $data['HouseID'] = $orderData['HouseID'];
-        $data['TransferType'] = $orderData['TransferType'];
+        $data['ChangeType'] = Db::name('use_change_type')->where('id',$orderData['ChangeType'])->value('UseChangeTitle');
+        $data['OwnerType'] = get_owner($orderData['OwnerType']);
+        $data['UseNature'] = get_usenature($orderData['UseNature']);
+        $data['ChangeReason'] = $orderData['ChangeReason'];
         $data['TransferRent'] = $orderData['TransferRent'];
         $data['IfReform'] = $orderData['IfReform'];   //是否属代、托、改造产
         $data['IfRepair'] = $orderData['IfRepair'];   //是否是五年内新翻覆修房屋
@@ -159,16 +162,7 @@ class UserAudit extends Model
             //终审通过后，系统自动将变更数据更改,1更名，2过户，3赠予，4转让
             $changeOrderDetail = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->field('*')->find();
 
-            if($changeOrderDetail['ChangeType'] == 1){ //更名
-
-                Db::name('tenant')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantName',$changeOrderDetail['NewTenantName']);
-//                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantID',$changeOrderDetail['NewTenantID']);
-                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->setField('TenantName',$changeOrderDetail['NewTenantName']);
-
-            }else{
-                Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
-
-            }
+            Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
 
             $datas['Status'] = 2;
 
@@ -196,13 +190,7 @@ class UserAudit extends Model
             Db::name('use_child_order')->where('FatherOrderID' ,'eq' ,$changeOrderID)->setField('IfValid' ,0); //重置之前的子订单状态为无效
         }
 
-
-        if($re){
-            return true;
-        }else{
-            return false;
-        }
-        
+        return $re?true:false;
 
     }
 

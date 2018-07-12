@@ -76,7 +76,7 @@ class UserRecord extends Model
 
         $where['Status'] = array('in' , [1,0]);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         //dump($HouseIdList['obj']);exit;
 
