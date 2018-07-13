@@ -1,4 +1,4 @@
-$('.BtnChange').click(function(){
+$('.BtnDetail').click(function(){
 	var value = $(this).val();
 	console.log(value);
 	$.get('/ph/UserAudit/detail/ChangeOrderID/'+value,function(res){

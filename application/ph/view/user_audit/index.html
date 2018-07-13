@@ -271,16 +271,14 @@
                     <td>
                         <div class="am-btn-group am-btn-group-xs">
                             <?php if(in_array(90,$threeMenu)){; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}"
-                                    value="<?php echo $v1['ChangeOrderID']; ?>">审批
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}" value="<?php echo $v1['ChangeOrderID']; ?>">审批
                             </button>
                             <?php }; ?>
                             <?php if(in_array(89,$threeMenu)){; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail "
-                                    value="<?php echo $v1['ChangeOrderID']; ?>">查看明细
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail " value="<?php echo $v1['ChangeOrderID']; ?>">查看明细
                             </button>
                             <?php }; ?>
-                            
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnGathering" value="<?php echo $v1['ChangeOrderID']; ?>">确认收款</button>
                         </div>
                     </td>
                 </tr>

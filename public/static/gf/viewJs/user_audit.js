@@ -757,3 +757,50 @@ function status_1_2(ID,res){
 		AddInfo(ID,res.data.config.status,res.data.detail);
 	}
 }
+
+
+// 确认收款
+$('.BtnGathering').click(function(){
+	var value = $(this).val();
+	console.log(value);
+	layer.open({
+		type:1,
+		area:['600px','400px'],
+		resize:false,
+		zIndex:100,
+		title:['确认收据','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		content:$('#acquittanceBox'),
+		btn:['确定','取消'],
+		success:function(){
+			$('#acquittanceShow').empty();
+			new file({
+				button:"#acquittance",
+				show:"#acquittanceShow",
+				upButton:"#acquittanceUp",
+				size:10240,
+				url:"/ph/UserAudit/supply",
+				ChangeOrderID:'',
+				title:"收据"
+			});
+		},
+		yes:function(){
+			var formData = fileTotall.getArrayFormdata();
+			formData.append('ChangeOrderID',value);
+			$.ajax({
+                type:"post",
+                url:"/ph/UserAudit/supply",
+                data:formData,
+                processData:false,
+                contentType:false,
+                success:function(res){
+                    res = JSON.parse(res);
+                       console.log(res);
+                    layer.msg(res.msg);
+					if(res.retcode == '2000'){
+						location.reload(); 
+					}
+                }
+            });
+		}
+	})
+})

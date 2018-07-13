@@ -48,7 +48,8 @@ $("#addTransfer").click(function(){
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
 
-				var formData = fileTotall.getArrayFormdata();
+				var formData = fileTotall.getArrayFormdata() || new FormData();
+				console.log(formData);
 				formData.append('houseid',ID);
 				formData.append('oldID',oldID);
 				formData.append('oldName',oldName);

@@ -177,25 +177,24 @@
                                   <input type="text" name="BanAddress" class="am-form-field" value="{$BanAddress}">
                               </div>
                           </td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td style="min-width:60px;"></td>
+                          <td style="min-width:60px;"></td>
+                          <td style="min-width:60px;"></td>
+                          <td style="min-width:60px;"></td>
                           <td>
-                        <div class="am-input-group am-input-group-sm" style="width:200px;">
+                            <div class="am-input-group am-input-group-sm" style="width:130px;">
                                 <?php
-                        if($changeOption != array()){
-                            $CreateTime = $changeOption['CreateTime'];  
-                        }else{
-                            $CreateTime = '';
-                        }
-                     ?>
-                    <div class="am-u-sm-6" style="padding:0;">
-                          <input style="width:200px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
-                    </div>
-                    
-                        </div>
-                    </td>
+                                    if($changeOption != array()){
+                                        $CreateTime = $changeOption['CreateTime'];  
+                                    }else{
+                                        $CreateTime = '';
+                                    }
+                                 ?>
+                              <div class="am-u-sm-6" style="padding:0;">
+                                  <input style="width:130px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
+                              </div>
+                            </div>
+                          </td>
                           <td><div style="min-width:110px;"></div></td>
                           <td>
                               <div class="am-btn-group am-btn-group-xs" style="width:114px;">
@@ -230,7 +229,7 @@
                       <td class="am-hide-sm-only"><?php echo $v1['Status']; ?></td>
                       <td>
                           <div class="am-btn-group am-btn-group-xs">
-                              <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnChange" value="<?php echo $v1['ChangeOrderID']; ?>">明细</button>
+                              <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail" value="<?php echo $v1['ChangeOrderID']; ?>">明细</button>
                           </div>
                       </td>
                   </tr>
@@ -247,8 +246,8 @@
     </div>
   </div>
   <!-- content end -->
-  {include file="application/ph/view/user_record/form.html" /}
+{include file="application/ph/view/user_audit/approveForm.html" /}
 {/block}
 {block name="JsFile"}
-<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/user_record.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/user_audit.js"></script>
 {/block}
