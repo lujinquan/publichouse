@@ -50,6 +50,13 @@ class UserApply extends Base
                 return jsons('4005' ,'请完善相关信息！');
             }
 
+            if (isset($_FILES) && $_FILES) {   //文件上传
+                foreach ($_FILES as $k => $v) {
+                    $ChangeImageIDS[] = model('UserApply')->uploads($v, $k);
+                }
+                $ChangeImageIDS = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
+            }
+
             //$datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
             $datas['HouseID'] = $data['houseid']; //房屋编号
             $datas['OldTenantID'] = $data['oldID'];  //原租户编号
@@ -59,6 +66,7 @@ class UserApply extends Base
             $datas['ChangeType'] = $data['transferType']; //转让形式
             $datas['TransferRent'] = $data['transferRent']; //转让金额
             $datas['ChangeReason'] = $data['transferReason']; //转让原因
+            $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';
 
             // $houseModel = new HouseInfoModel;
 

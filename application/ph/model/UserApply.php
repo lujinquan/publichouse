@@ -5,6 +5,8 @@ namespace app\ph\model;
 use app\user\model\Role as RoleModel;
 use think\Model;
 use think\Exception;
+use think\Loader;
+use think\Config;
 use think\Db;
 
 class UserApply extends Model
@@ -200,6 +202,51 @@ class UserApply extends Model
         }
 
         return false;
+    }
+
+    public function uploads($file,$k1){
+
+        $title = Config::get($k1); //上传文件标题
+
+        Loader::import('uploads.Uploads',EXTEND_PATH);
+
+        $fileUpload = new \FileUpload();
+
+        $fileUpload->set('allowtype',array('jpg','jpeg','gif','png')); //设置允许上传的类型
+        $fileUpload->set('path',$_SERVER['DOCUMENT_ROOT'].'/uploads/changeOrder/'); //设置保存的路径
+        $fileUpload->set('maxsize',5*1024*1024); //限制上传文件大小
+        $fileUpload->set('israndname',true); //设置是否随机重命名文件， false不随机
+
+        $res = $fileUpload->upload($k1);
+
+        if($res !== true){
+
+            //return jsons('4003' ,$fileUpload->getErrorMsg());
+            return jsons('4003' ,'上传失败');
+
+        }else{  //上传成功
+
+            //多文件上传，遍历操作
+            $names = $fileUpload->getFileName();
+
+            foreach($names as $k => $v){
+
+                $data['FileUrl']= '/uploads/changeOrder/'.$v;          //写入到数据库中的地址和存放地址 $targetPath 不一样
+                $data['FileTitle'] = $title;                  
+                $data['FileType'] = 1;        //图片类型
+                $data['UploadUserID'] = UID;
+                $data['UploadTime'] = time();
+                $result = Db::name('upload_file')->insert($data);    //返回受影响的记录数，通常为1
+
+                if($result == 1) {
+                    $fileID[] = Db::name('upload_file')->getLastInsID();
+                }
+            }
+
+            return $fileIDS = implode(',', $fileID);
+
+        }
+
     }
 
 }
