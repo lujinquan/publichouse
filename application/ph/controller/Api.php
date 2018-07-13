@@ -43,7 +43,7 @@ class Api extends Controller
         $data = Db::name('tenant')->alias('a')
             ->join('house b', 'a.TenantID = b.TenantID', 'left')
             ->where('b.HouseID', 'eq', $houseID)
-            ->field('a.TenantID ,a.TenantName ,a.TenantTel')
+            ->field('a.TenantID ,a.TenantName ,a.TenantTel,a.TenantNumber')
             ->find();
 
         if (!$data) {
