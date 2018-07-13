@@ -46,7 +46,7 @@ class UserApply extends Base
 
             //halt($data);
 
-            if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType']) || empty($data['transferRent'])) {
+            if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType'])) {
                 return jsons('4005' ,'请完善相关信息！');
             }
 
