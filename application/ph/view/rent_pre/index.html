@@ -267,6 +267,9 @@
                             }
                             ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary print {$IfProcess}" value="">{$if}打印发票</button>
+                        <?php if(in_array(539,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary deleteButton}" value="">删除</button>
+                        <?php }; ?>
                     </div>
                   </td>
             </tr>

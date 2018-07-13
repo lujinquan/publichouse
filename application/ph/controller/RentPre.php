@@ -56,23 +56,6 @@ class RentPre extends Base
 
             $data = $this->request->post();
 
-            //检查当前充值的租户是否位于当前机构
-//            $tenantInstitutionID = Db::name('tenant')->where('TenantID' ,'eq' ,$data['TenantID'])->value('InstitutionID');
-//            $currentUserInstitutionID = session('user_base_info.institution_id');
-//            $currentUserLevel = session('user_base_info.institution_level');
-//            if($currentUserLevel == 3){  //用户为管段级别，则直接查询
-//                $option[] = $currentUserInstitutionID;
-//            }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-//                $option = Db::name('institution')->where('pid' ,'eq' ,$currentUserInstitutionID)->column('id');
-//            }else{    //用户为公司级别，则获取所有子管段
-//                $option = Db::name('institution')->where('Level' ,'eq' ,3)->column('id');
-//            }
-//            if(!in_array($tenantInstitutionID ,$option )){
-//                return jsons('4000' ,'请确认该租户是否属于当前机构……');
-//            }
-
-
-
             $where = [
                     'Status' => 1,
                     'HouseID' => $data['HouseID'],
@@ -109,6 +92,14 @@ class RentPre extends Base
      *  打印发票
      */
     public function invoice(){
+
+        return jsons('2000','功能开发中……');
+    }
+
+    /**
+     *  打印发票
+     */
+    public function delete(){
 
 
     }
