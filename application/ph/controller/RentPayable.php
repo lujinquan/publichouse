@@ -24,6 +24,7 @@ class RentPayable extends Base
             'owerLst' => $owerLst,
             'rentLst' => $rentLst['arr'],
             'rentLstObj' => $rentLst['obj'],
+            'receiveRents' => $rentLst['receiveRents'],
             'rentOption' => $rentLst['option'],
         ]);
         return $this->fetch();

@@ -39,7 +39,7 @@ class ConfirmTenantInfo extends Base
             if(true !== $result) {
                 return jsons('4001',$result);
             }
-            $data['Status'] = 0; //状态改为未确认状态
+            $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
             $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
             $oldOneData = Db::name('tenant')->field($fields)->where('TenantID', 'eq', $tenantID)->find();

@@ -236,6 +236,8 @@ class RentCount extends Model
 
         $RentLst['obj'] = self::field($maps)->where($where)->order('id desc')->paginate(config('paginate.list_rows'));
 
+        $RentLst['receiveRents'] = self::where($where)->value('sum(ReceiveRent) as ReceiveRents');
+
         //halt($RentLst['obj']);
         $findOne = Db::name('rent_order')->where($where)
                     ->field('sum(UnpaidRent) as UnpaidRents,sum(PaidRent) as PaidRents,sum(ReceiveRent) as ReceiveRents')

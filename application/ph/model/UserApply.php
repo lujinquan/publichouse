@@ -70,14 +70,12 @@ class UserApply extends Model
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
-
                 $starttime = strtotime($searchForm['CreateTime']);
 
                 $endtime = $starttime + 3600*24;
 
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
-
         }
 
         $where['Status'] = array('not in' ,[0,1]);
