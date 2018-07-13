@@ -28,6 +28,8 @@ return [
     'HouseImageIDS' => '房屋影像资料',
 
     //使用权变更
+    //
+    "transferApplication"=>"书面申请报告",
     "approveApplyReport"=>"书面申请报告",
     "transferMaterial_1"=>"死亡证",
     "transferMaterial_2"=>"原承租人户口",
