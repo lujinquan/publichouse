@@ -231,8 +231,10 @@ class RentPayable extends Base
                 Db::name('rent_order')->where($where)->setInc('PaidRent',$data['cost']);
                 Db::name('rent_order')->where($where)->update(['Type'=>2]);
 
-            return jsons('2000', '缴款成功');
+            
             }
+
+            return jsons('2000', '缴款成功');
         }
 
 

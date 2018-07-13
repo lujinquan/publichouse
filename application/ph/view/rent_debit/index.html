@@ -64,17 +64,14 @@
 
                 <td>
                     <div class="am-input-group am-input-group-sm" style="width:150px;">
-                            <?php
+                      <?php
                         if($rentOption != array()){
-                            $DateStart = $rentOption['DateStart'];
-                            $DateEnd = $rentOption['DateEnd'];
+                            $OrderDate = $rentOption['OrderDate'];  
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $OrderDate = '';
                         }
                      ?>
-                      <input style="width:70px;" type="text" name="DateStart" class="am-form-field" type="text" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" value="{$DateStart}" placeholder="" data-am-datepicker readonly/>
-                      <input style="width:70px;" type="text" name="DateEnd" class="am-form-field" type="text" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" value="{$DateEnd}" placeholder="" data-am-datepicker readonly/>
+                      <input style="width:140px;" type="text" name="OrderDate" class="am-form-field" type="text" data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}" value="{$OrderDate}" placeholder="" data-am-datepicker readonly/>
                     </div>
                 </td>
 
@@ -202,19 +199,17 @@
                     <div class="am-input-group am-input-group-sm" style="width:210px;">
                             <?php
                         if($rentOption != array()){
-                            $UnpaidDateStart = $rentOption['UnpaidDateStart'];
-                            $UnpaidDateEnd = $rentOption['UnpaidDateEnd'];
+                            $PaidableTime = $rentOption['PaidableTime'];
+                           
                         }else{
-                            $UnpaidDateStart = '';
-                            $UnpaidDateEnd = '';
+                            $PaidableTime = '';
+  
                         }
                      ?>
                         <div class="am-u-sm-6" style="padding:0;">
-                          <input style="width:100px;" name="UnpaidDateStart" value="{$UnpaidDateStart}" type="text" class="am-form-field" data-am-datepicker />
+                          <input style="width:140px;" name="PaidableTime" value="{$PaidableTime}" type="text" class="am-form-field" data-am-datepicker />
                         </div>
-                        <div class="am-u-sm-6" style="padding:0;">
-                            <input style="width:100px;" name="UnpaidDateEnd" value="{$UnpaidDateEnd}" type="text" class="am-form-field" data-am-datepicker />
-                        </div>
+                       
                     </div>
                 </td>
                 <td><div style="width:50px;"></div></td>
@@ -222,7 +217,7 @@
                 <td><div style="width:50px;"></div></td>
               <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:110px;">
-                  <button type="submit" class="am-btn am-btn-primary am-btn-xs details details_btn" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                  <button type="submit" class="am-btn am-btn-primary am-btn-xs" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
                   <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/RentDebit/index.html"><span class="ResetIcon"></span>重置</a>
                 </div>
               </td>

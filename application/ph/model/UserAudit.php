@@ -141,7 +141,7 @@ class UserAudit extends Model
         //若中间审核不通过
         }elseif($status < $total && $reson != ''){
 
-            self::where($where)->setField('Status',2); //状态重置为待第二个角色操作
+            self::where($where)->setField('Status',0); //状态重置为0
 
             $datas['Status'] = 3;  //子订单状态：3为不通过，2为通过 ，1为待审核：  注意此时主订单状态已被重置
 

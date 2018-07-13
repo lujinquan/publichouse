@@ -206,6 +206,14 @@ class RentCount extends Model
             if (isset($searchForm['OrderDate']) && $searchForm['OrderDate']) {  //订单日期检索              
                 $where['OrderDate'] = array('eq', str_replace('/','',$searchForm['OrderDate']));
             }
+            if(isset($searchForm['PaidableTime']) && $searchForm['PaidableTime']){
+
+                $starttime = strtotime($searchForm['PaidableTime']);
+
+                $endtime = $starttime + 3600*24;
+
+                $where['PaidableTime'] = array('between',[$starttime,$endtime]);
+            }
 
             // if (isset($searchForm['UnpaidDateStart'])) {  //缴费日期检索
 
@@ -228,7 +236,6 @@ class RentCount extends Model
             //     }
             // }
         }
-        //halt($where);
 
         if (!isset($where)) $where = 1;
 
