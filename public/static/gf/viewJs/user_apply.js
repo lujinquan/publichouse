@@ -27,7 +27,7 @@ $("#addTransfer").click(function(){
 			area:['1020px','700px'],
 			resize:false,
 			zIndex:100,
-			title:['新增转让申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['使用权变更申请','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#TransferForm'),
 			btn:['确认','取消'],
 			success:function(){
@@ -134,7 +134,7 @@ tenantQuery.action('IdIput','','0,1',
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == '2000'){
-				//$('#newTel').text(res.data.TenantTel);
+				$('#newTel').text(res.data.TenantNumber);
 				$('#newNam').text(res.data.TenantName);
 			}else{
 				layer.msg(res.msg);
@@ -153,7 +153,7 @@ $('#queryAction_1').click(function(){
 		if(res.retcode == '2000'){
 			$('#oldID').text(res.data.TenantID);
 			$('#oldName').text(res.data.TenantName);
-			//$('#oldTel').text(res.data.TenantTel);
+			$('#oldTel').text(res.data.TenantNumber);
 		}else{
 			layer.msg(res.msg);
 		}
