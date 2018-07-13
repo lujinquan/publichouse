@@ -131,7 +131,7 @@ class Api extends Controller
             return jsons('4000', '未传入租户编号参数');
         }
 
-        $data = Db::name('tenant')->where('TenantID', 'eq', $tenantID)->field('TenantID ,TenantName ,TenantTel,TenantBalance')->find();
+        $data = Db::name('tenant')->where('TenantID', 'eq', $tenantID)->field('TenantID ,TenantName ,TenantTel,TenantBalance,TenantNumber')->find();
 
         if (!$data) {
 
