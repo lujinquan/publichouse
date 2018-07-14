@@ -44,8 +44,6 @@ class BanInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
-
-            //halt($data);
             // 验证
             $result = $this->validate($data, 'BanInfo');
             if (true !== $result) {
@@ -85,21 +83,6 @@ class BanInfo extends Base
             $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent']; 
             $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
 
-            // $data = [
-            //     'BanGpsX' => $arr[0],
-            //     'BanGpsY' => $arr[1],
-            //     'InstitutionID' => 
-            //     'BanID' => $maxBanID?$maxBanID + 1:$banID . '0001',
-            //     'BanAddress' => $areaTwo . $areaThree . $data['AreaFour'],
-            //     'CreateUserID' => UID,
-            //     'CreateTime' =>time(),
-            //     'Status' => 1,
-            //     'TotalArea' => $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea'],
-            //     'TotalNum' => $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum'],
-            //     'PreRent' => $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent'],
-            //     'TotalOprice' => $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'],
-            // ];
-            //halt($data);
             if ($ban->allowField(true)->save($data)) {
                 // 记录行为
                 action_log('BanInfo_add', UID, 1, '编号为:' . $data['BanID']);
