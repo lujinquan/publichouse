@@ -56,8 +56,7 @@ class UserAudit extends Base
                 //在补充资料的时候，需要判断当前状态是否为补充资料阶段，即当前主订单的 Status == 2 ,如果不是，则返回提示信息不让补充
                 $nowStatus = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
 
-                if($nowStatus > 3){ return jsons('4001' ,'请注意检查当前流程状态');}
-
+                if($nowStatus > 3 && $nowStatus <8){ return jsons('4001' ,'请注意检查当前流程状态');}
                 //halt($_FILES);
 
                 foreach($_FILES as $k1 => $v1){
@@ -90,18 +89,27 @@ class UserAudit extends Base
             if(isset($changeImageIDS)){
                 $effect = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->setField('ChangeImageIDS' ,$changeImageIDS);
             }
-
-            $update=[
-                'IfReform'=>$data['IfReform'],
-                'IfRepair'=>$data['IfRepair'],
-                'IfCollection'=>$data['IfCollection'],
-                'IfFacade'=>$data['IfFacade'],
-                'IfCheck'=>isset($data['IfCheck'])?$data['IfCheck']:0,
-            ];
-
+            if(isset($data['IfReform'])){
+                $update['IfReform'] = $data['IfReform'];
+            }
+            if(isset($data['IfRepair'])){
+                $update['IfRepair'] = $data['IfRepair'];
+            }
+            if(isset($data['IfCollection'])){
+                $update['IfCollection'] = $data['IfCollection'];
+            }
+            if(isset($data['IfFacade'])){
+                $update['IfFacade'] = $data['IfFacade'];
+            }
+            if(isset($data['IfCheck'])){
+                $update['IfCheck'] = $data['IfCheck'];
+            }
+            if(isset($update)){
+                Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->update($update);
+            }
             //资料补充成功后，做后置操作，修改主订单当前状态，创建子订单，即子订单记录
-            Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->update($update);
-
+            
+//halt($changeOrderID);
             //生成子订单
             model('ph/UserAudit')->create_child_order($changeOrderID);
 

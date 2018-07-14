@@ -31,6 +31,7 @@ return [
     //
     "transferApplication"=>"书面申请报告",
     "approveApplyReport"=>"书面申请报告",
+    "acquittance"=>"收据",
     "transferMaterial_1"=>"死亡证",
     "transferMaterial_2"=>"原承租人户口",
     "transferMaterial_3"=>"现承租人户口",

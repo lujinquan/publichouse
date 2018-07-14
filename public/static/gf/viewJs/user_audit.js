@@ -794,10 +794,12 @@ $('.BtnGathering').click(function(){
                 contentType:false,
                 success:function(res){
                     res = JSON.parse(res);
-                       console.log(res);
-                    layer.msg(res.msg);
+                    console.log(res);
 					if(res.retcode == '2000'){
+						layer.msg(res.msg);
 						location.reload(); 
+					}else{
+						location.reload();
 					}
                 }
             });

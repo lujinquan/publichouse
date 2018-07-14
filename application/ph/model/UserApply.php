@@ -117,6 +117,8 @@ class UserApply extends Model
 
         $res = self::order_config_detail($data['ChangeOrderID'],$data['Status']);
 
+        $data['StatusValue'] = $data['Status'];
+        
         $data['Status'] = '待'.$res['RoleName'].$res['Title'];
 
         $data['ProcessRoleID'] = $res['RoleID'];

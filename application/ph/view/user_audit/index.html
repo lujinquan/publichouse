@@ -239,13 +239,18 @@
 
                 <?php foreach($changeLst as $k1 => $v1){
 
-                    if(in_array($v1['ProcessRoleID'],$useRoles)){
+                    if(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] == 8){
 
-                    $IfProcess = '';
+                        $IfProcess = '';
+                        $IfLastProcess = 'not-process';
 
+                    }elseif(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] != 8){
+                        $IfProcess = 'not-process';
+                        $IfLastProcess = '';          
                     }else{
 
-                    $IfProcess = 'not-process';
+                        $IfProcess = 'not-process';
+                        $IfLastProcess = 'not-process';
                     }
 
                 ;?>
@@ -278,7 +283,10 @@
                             <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail " value="<?php echo $v1['ChangeOrderID']; ?>">明细
                             </button>
                             <?php }; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnGathering" value="<?php echo $v1['ChangeOrderID']; ?>">确认收款</button>
+                            <?php if(in_array(90,$threeMenu)){; ?>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnGathering {$IfLastProcess}" value="<?php echo $v1['ChangeOrderID']; ?>">确认收款</button>
+                            <?php }; ?>
+                            
                         </div>
                     </td>
                 </tr>
