@@ -85,6 +85,9 @@ class ChangeApply extends Base
                     $datas['OwnerType'] = $one['OwnerType']; //产别
                     $datas['UseNature'] = $one['UseNature']; //使用性质
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>1])->order('id desc')->value('id');        //找到最新的流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'01'.$suffix;   //01代表租金减免
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
@@ -119,7 +122,10 @@ class ChangeApply extends Base
                     $datas['OwnerType'] = $one['OwnerType'];  //异动类型
                     $datas['UseNature'] = $one['UseNature'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[2];  //异动名称
-                    $datas['ProcessConfigType'] = 2;   //流程控制线路，注意这里的数字就是 上面的case值，即process表中对应的空租代号
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>2])->order('id desc')->value('id');        //找到最新的流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'02'.$suffix;   //02代表空租
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
@@ -157,7 +163,10 @@ class ChangeApply extends Base
                     $result['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $result['ChangeType'] = $data['type'];  //异动类型
                     $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
-                    $result['ProcessConfigType'] = 3;   //流程控制线路
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $result['OrderDate'] = date('Ym', time());
                     $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
 //halt($result);
