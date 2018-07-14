@@ -191,7 +191,7 @@ class ConfirmBanInfo extends Base
                 action_log('BanInfo_delete', UID, 1, '编号为:' . $banID);
                 return jsons(2000, '删除成功');
             } else {
-                return jsons(4000, '删除失败，参数异常！');
+                return jsons(4000, '删除失败');
             }
         }
     }

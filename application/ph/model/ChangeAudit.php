@@ -521,7 +521,7 @@ class ChangeAudit extends Model
     public function order_config_detail($changeOrderID, $status)
     {
         $config = Db::name('change_order')->alias('a')
-            ->join('process_config b', 'a.ProcessConfigType = b.Type', 'left')
+            ->join('process_config b', 'a.ProcessConfigType = b.id', 'left')
             ->where('a.ChangeOrderID', 'eq', $changeOrderID)
             ->field('b.id, b.Title ,b.Total')
             ->find();
@@ -541,7 +541,7 @@ class ChangeAudit extends Model
 
         //获取流程总人数
         $total = Db::name('change_order')->alias('a')
-            ->join('process_config b', 'a.ProcessConfigType = b.Type', 'left')
+            ->join('process_config b', 'a.ProcessConfigType = b.id', 'left')
             ->where('a.ChangeOrderID', 'eq', $changeOrderID)
             ->value('Total');
 
@@ -836,7 +836,7 @@ class ChangeAudit extends Model
     {
 
         $one = Db::name('change_order')->alias('a')
-            ->join('process_config b', 'a.ProcessConfigType = b.Type', 'left')
+            ->join('process_config b', 'a.ProcessConfigType = b.id', 'left')
             ->where('a.ChangeOrderID', 'eq', $changeOrderID)
             ->field('a.Status ,b.id ')
             ->find();
@@ -871,7 +871,7 @@ class ChangeAudit extends Model
 
         //获取，当前审批流程的名称、总步骤数、提交资料人员id ，提交时间
         $process = Db::name('change_order')->alias('a')
-            ->join('process_config b', 'a.ProcessConfigType = b.Type', 'left')
+            ->join('process_config b', 'a.ProcessConfigType = b.id', 'left')
             ->where('a.ChangeOrderID', 'eq', $changeOrderID)
             ->field('b.Total, b.Title , b.id ,a.Status ,a.UserNumber ,a.CreateTime')
             ->find();
@@ -958,7 +958,7 @@ class ChangeAudit extends Model
         //$wheres['a.ChangeType'] = array('eq' ,$changeType);
 
         $process = Db::name('change_order')->alias('a')
-            ->join('process_config b', 'a.ProcessConfigType = b.Type', 'left')
+            ->join('process_config b', 'a.ProcessConfigType = b.id', 'left')
             ->where($wheres)
             ->field('b.Total, b.id ,a.Status')
             ->find();

@@ -22,7 +22,7 @@ class ProcessConfig extends Model
 
         $where['pid'] = array('eq' , 0);
 
-        $processLst['obj'] = self::field('id ,Title ,CreateUser ,CreateTime')->where($where)->order('id asc')->paginate(config('paginate.list_rows'));
+        $processLst['obj'] = self::field('id ,Title ,CreateUser ,CreateTime ,Status')->where($where)->order('id desc')->paginate(config('paginate.list_rows'));
 
         $processLst['arr'] = $processLst['obj']->all();
 
@@ -35,6 +35,11 @@ class ProcessConfig extends Model
 
             $v['CreateUser'] = Db::name('admin_user')->where('Number' ,'eq' ,$v['CreateUser'])->value('UserName');
             $v['CreateTime'] = date('Y-m-d H:i:s' ,$v['CreateTime']);
+            if($v['Status'] == 1){
+                $v['Status'] = '有效';
+            }else{
+                $v['Status'] = '无效';
+            }
 
         }
 

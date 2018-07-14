@@ -12,16 +12,9 @@ class UserManage extends Base
     public function index(){
 
         $userLst = model('ph/UserManage') -> get_all_user_lst();
-
         $instLst = $this -> BanInfoModel ->get_all_institution();//待调
-        //halt($instLst);
-
         $postLst = Db::name('post')->field('id ,PostID ,PostName')->select();
-
         $allRole = Db::name('admin_role')->field('id ,RoleName')->select();
-
-        //dump($userLst);exit;
-
         $this->assign([
             'userLst' => $userLst['arr'],
             'userLstObj' => $userLst['obj'],
@@ -87,18 +80,6 @@ class UserManage extends Base
         if($this->request->isPost()){
 
             $data = $this->request->post();
-
-            //$data = $UserManageModel -> apply_datebase($data);  //这里不让修改密码
-
-            //dump($data);exit;
-            //dump($data);exit;
-            // 验证
-//            $result = $this->validate($data,'BanInfo');
-//
-//            if(true !== $result) return $this->error($result);
-
-    //        $banInfo = UserManageModel::update($data);
-            //dump($data);exit;
             $res = Db::name('admin_user')->where('Number','eq',$data['Number'])->update($data);
 
             if ($res >0 || $res === 0) {
@@ -126,6 +107,12 @@ class UserManage extends Base
     public function  delete(){
         $id = input('id');
         if($id){
+            $role = Db::name('admin_user')->where('id' ,'eq' ,$id)->value('Role');
+
+            if($role){
+                return jsons('4001','该用户已被分配角色无法删除');
+            }
+
             $res = Db::name('admin_user')->where('id' ,'eq' ,$id)->delete();
             if($res){
 

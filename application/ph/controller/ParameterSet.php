@@ -284,15 +284,31 @@ class ParameterSet extends Base
         return $ret;
     }
     public function ban_structure_type_delete($confId){
+        $find =  Db::name('ban')->where('StructureType',$confId)->find();
+        if($find){
+            return jsons('4001','已有绑定信息无法删除');
+        }
         return Db::name('ban_structure_type')->delete($confId);
     }
     public function ban_owner_type_delete($confId){
+        $find =  Db::name('house')->where('OwnerType',$confId)->find();
+        if($find){
+            return jsons('4001','已有绑定信息无法删除');
+        }
         return Db::name('ban_owner_type')->delete($confId);
     }
     public function ban_damage_grade_delete($confId){
+        $find =  Db::name('ban')->where('DamageGrade',$confId)->find();
+        if($find){
+            return jsons('4001','已有绑定信息无法删除');
+        }
         return Db::name('ban_damage_grade')->delete($confId);
     }
     public function use_nature_delete($confId){
+        $find =  Db::name('house')->where('UseNature',$confId)->find();
+        if($find){
+            return jsons('4001','已有绑定信息无法删除');
+        }
         return Db::name('use_nature')->delete($confId);
     }
 }

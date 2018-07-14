@@ -64,7 +64,7 @@ class RentPre extends Base
             if(!$houseFind['TenantID']){
                 return jsons('4001','房屋为非正常状态……');
             }
-            $rentOrderID = Db::name('rent_order')->where(['HouseID'=>$data['HouseID','Type'=>2]])->find();
+            $rentOrderID = Db::name('rent_order')->where(['HouseID'=>$data['HouseID'],'Type'=>2])->find();
             if($rentOrderID){
                 return jsons('4002','该房屋有欠缴订单无法预充');
             }

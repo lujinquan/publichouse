@@ -98,23 +98,6 @@ class ChangeRecord extends Model
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
 
-            // if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-            //     $start = strtotime($searchForm['DateStart']);
-            //     $end = strtotime($searchForm['DateEnd']);
-            //     //dump($start);dump($end);exit;
-            //     if($start < $end){
-            //         $where['CreateTime'] = array('between',$start.",".$end);
-            //     }
-            // }
-            // if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-            //     $start = strtotime($searchForm['DateStart']);
-            //     $where['CreateTime'] = array('egt',$start);
-            // }
-            // if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-            //     $end = strtotime($searchForm['DateEnd']);
-            //     $where['CreateTime'] = array('elt',$end);
-            // }
-
         }
 
         $where['Status'] = array('in' , [1,0]);
@@ -156,15 +139,10 @@ class ChangeRecord extends Model
         $data['OwnerType'] = get_owner($data['OwnerType']);
         if($data['Status'] == 1){
 
-            $data['Status'] = '通过';
+            $data['Status'] = '成功';
         }else{
-            $data['Status'] = '未通过';
+            $data['Status'] = '失败';
         }
-
-        // if($data['Status'] === 0){
-            
-            
-        // }
 
         $data['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$data['UserNumber'])->value('UserName');
 

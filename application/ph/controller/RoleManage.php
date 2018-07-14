@@ -14,24 +14,8 @@ class RoleManage extends Base
 
         $roleLst = $RoleManageModel -> get_all_role_lst();
 
-        //dump($roleLst);exit;
-
         $treeMenu =Db::name('admin_menu')->field('id ,pid ,Level ,Title')->order('id')->select();
 
-//        //临时转换三级菜单为二级菜单
-//        foreach($treeMenu as $key =>&$value){
-//            if($value['Level'] == 3){
-//                foreach($treeMenu as $key1 => $value1){
-//                    if($value['pid'] == $value1['id']){
-//                        $value['pid'] = $value1['pid'];
-//                        $value['Level'] = 2;
-//                    }
-//                }
-//            }
-//        }
-
-        //unset($treeMenu[1]);  //默认的主页按钮不显示
-        //halt($treeMenu);
         $this->assign([
             'roleLst' => $roleLst['arr'],
             'roleLstObj' => $roleLst['obj'],
@@ -42,14 +26,11 @@ class RoleManage extends Base
     }
     
     public function add(){
-        // 保存数据
+
         if ($this->request->isPost()) {
             $data = $this->request->post();
-
             if(empty($data['RoleName'])) return jsons('4001' ,'角色名称不能为空');
-
             if ($banInfo = RoleManageModel::create($data)) {
-
                 $max = Db::name('post')->max('id');
                 // 记录行为
                 action_log('RoleManage_add', UID  ,6, '编号为:'.$max);
@@ -58,8 +39,6 @@ class RoleManage extends Base
                 return jsons('4000' ,'新增失败');
             }
         }
-        echo '没有数据！';
-        //return $this->fetch();
     }
 
     public function  edit(){
@@ -95,7 +74,13 @@ class RoleManage extends Base
 
     public function  delete(){
         $id = input('id');
+
         if($id){
+            $findid = '"'.$id.'"';
+            $f = Db::name('admin_user')->where('Role','like','%'.$findid.'%')->find();
+            if($f){
+                return jsons('4000','该角色已绑定后台用户无法删除');
+            }
             $res = Db::name('admin_role')->where('id' ,'eq' ,$id)->delete();
             if($res){
 
@@ -107,7 +92,6 @@ class RoleManage extends Base
             }
         }
 
-        return '没有数据';
     }
 
     public function roleToMenu(){

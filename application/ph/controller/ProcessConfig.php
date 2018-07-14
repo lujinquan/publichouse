@@ -127,9 +127,16 @@ class ProcessConfig extends Base
 
         $id = input('id');
 
-        $res = Db::name('process_config')->where('id' ,'eq' ,$id)->delete();
+        $s = Db::name('change_order')->where('ProcessConfigType',$id)->find();
 
-        Db::name('process_config')->where('pid' ,'eq' ,$id)->delete();
+        //如果该配置在以往的异动流程单中有绑定，那么只能设置状态为0，没有绑定才可以直接删除
+        if($s){
+            $res = Db::name('process_config')->where('id' ,'eq' ,$id)->setField('Status',0);
+            Db::name('process_config')->where('pid' ,'eq' ,$id)->setField('Status',0);
+        }else{
+            $res = Db::name('process_config')->where('id' ,'eq' ,$id)->delete();
+            Db::name('process_config')->where('pid' ,'eq' ,$id)->delete();
+        } 
 
         if($res){
 

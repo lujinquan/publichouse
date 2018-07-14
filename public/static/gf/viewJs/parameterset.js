@@ -143,12 +143,12 @@ $("table").on('click', '.conf-delete', function(){
 		$.post('/ph/ParameterSet/delete', data, function(res){
 			res = JSON.parse(res);
 			console.log(res);
-			if(res.data){
-			   layer.msg('删除成功',{icon:1,time:1000},function(){
+			if(res.retcode == '2000'){
+			   layer.msg(res.msg,function(){
 					_this.parent().parent().parent().remove();
 				})
 			}else{
-				layer.msg('删除失败',{icon:2,time:1000});
+				layer.msg(res.msg);
 			}
 			layer.close(this_index);
 		})

@@ -84,7 +84,7 @@ class ChangeApply extends Base
                     $datas['TenantID'] = $one['TenantID']; //当前租户
                     $datas['OwnerType'] = $one['OwnerType']; //产别
                     $datas['UseNature'] = $one['UseNature']; //使用性质
-                    $datas['ProcessConfigType'] = 1;        //流程控制线路，注意这里的数字就是 
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>1])->order('id desc')->value('id');        //找到最新的流程控制线路
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'01'.$suffix;   //01代表租金减免
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id

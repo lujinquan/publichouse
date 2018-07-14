@@ -118,17 +118,15 @@ $("#deleteUser").click(function(){
 	if(ID == undefined){
 		layer.msg('请先选择要修改的信息');
 	}else{
-		layer.confirm('确定删除用户信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
+		layer.confirm('请谨慎操作!!!',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 
 					$.get('/ph/UserManage/delete/id/'+ ID,function(result){
 						result = JSON.parse(result);
 						if(result.retcode  == '2000' ){
-							// layer.confirm('删除成功',function(index_2){
-							// 	layer.close(index_2);
-							// 	location.reload();
-							// });
-							layer.msg('删除成功!');
+							layer.msg(result.msg);
 							location.reload();
+						}else{
+							layer.msg(result.msg);
 						}
 					});
 

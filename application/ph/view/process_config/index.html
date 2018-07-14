@@ -32,6 +32,7 @@
         				<th class="table-type">流程名称</th>
         				<th class="table-author am-hide-sm-only">创建人</th>
         				<th class="table-date am-hide-sm-only">创建时间</th>
+                <th class="table-date am-hide-sm-only">有效性</th>
         				<th class="table-set" style="width:220px;">操作</th>
               </tr>
           </thead>
@@ -80,6 +81,7 @@
                 <td class="am-hide-sm-only"><?php echo $v['Title']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['CreateUser']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
                       <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only proDetail" value="<?php echo $v['id']; ?>">明细</button>

@@ -92,8 +92,10 @@ $("#deleteRole").click(function(){
 					$.get('/ph/RoleManage/delete/id/'+RoleID,function(result){
 						result = JSON.parse(result);
 						if(result.retcode  == '2000' ){
-							layer.msg('删除成功！');
+							layer.msg(result.msg);
 							location.reload();
+						}else{
+							layer.msg(result.msg);
 						}
 					});
 

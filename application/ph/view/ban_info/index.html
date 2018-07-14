@@ -36,11 +36,9 @@
                 <th class="table-check"></th>
         				<th class="table-id">#</th>
         				<th class="table-title table-th-length">楼栋编号</th>
-
                 <?php if(session('user_base_info.institution_level')!=3){ ;?>
         				<th class="table-th-length">机构名称</th>
                 <?php }; ?>
-                
         				<th class="table-author am-hide-sm-only table-th-length">产别</th>
         				<th class="table-date am-hide-sm-only">楼栋地址</th>
         				<th class="table-set dong_none">产权证号</th>
@@ -171,18 +169,12 @@
                 <div class="am-input-group am-input-group-sm" style="width:150px;">
                     <?php
                          if($banOption != array()){
-                            $DateStart = $banOption['DateStart'];
-                            $DateEnd = $banOption['DateEnd'];
+                            $BanYear = $banOption['BanYear'];
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $BanYear = '';
                         }
                      ?>
-
-                    <input style="width:70px;" name="DateStart" value="{$DateStart}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
-                  
-                    <input style="width:70px;" name="DateEnd" value="{$DateEnd}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
-
+                    <input style="width:140px;" name="BanYear" value="{$BanYear}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
                 </div>
               </td>
               <td>

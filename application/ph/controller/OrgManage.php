@@ -143,7 +143,7 @@ class OrgManage extends Base
             $flag = Db::name('ban')->where($where)->find();
             
             if($flag){
-                return jsons('4001','该机构有辖属楼栋不允许删除');
+                return jsons('4001','该机构有辖属房屋无法删除');
             }
             $res = Db::name('institution')->where('id' ,'eq' ,$id)->delete();
 

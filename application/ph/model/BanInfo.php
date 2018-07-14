@@ -96,24 +96,9 @@ class BanInfo extends Model
             if ($searchForm['BanPropertyID']) {  //模糊检索产权证号
                 $where['BanPropertyID'] = array('like', '%'.$searchForm['BanPropertyID'].'%');
             }
-
-            if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-                $start = $searchForm['DateStart'];
-                $end = $searchForm['DateEnd'];
-                //dump($start);dump($end);exit;
-                if($start < $end){
-                    $where['BanYear'] = array('between',$start.",".$end);
-                }
-            }
-            if($searchForm['DateStart'] && empty($searchForm['DateEnd'])){ //检索大于等于起始时间
-                $start = $searchForm['DateStart'];
-                //dump($start);exit;
-                $where['BanYear'] = array('egt',$start);
-            }
-            if($searchForm['DateEnd'] && empty($searchForm['DateStart'])){ //检索小于等于结束时间
-                $end = $searchForm['DateEnd'];
-                $where['BanYear'] = array('elt',$end);
-            }
+            if($searchForm['BanYear']){  //检索大于等于起始时间，且小于等于结束时间     
+                $where['BanYear'] = array('eq',$searchForm['BanYear']);
+            }  
 
         }
 

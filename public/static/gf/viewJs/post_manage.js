@@ -13,9 +13,6 @@ $("#addPost").click(function(){
 			$.post('/ph/PostManage/add',data,function(result){
 				result = JSON.parse(result);
 				if(result.retcode == 2000){
-					// layer.msg(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-					// 	layer.close(conIndex);
-					// });
 					layer.msg(result.msg);
 					layer.close(thisIndex);
 					location.reload();
@@ -101,8 +98,10 @@ $("#deletePost").click(function(){
 			$.get('/ph/PostManage/delete/PostID/'+ PostID,function(result){
 				result = JSON.parse(result);
 				if(result.retcode  == '2000' ){
-					layer.msg('删除成功!');
+					layer.msg(result.msg);
 					location.reload();
+				}else{
+					layer.msg(result.msg);
 				}
 			});
 			layer.close(index);

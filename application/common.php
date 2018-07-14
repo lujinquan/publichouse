@@ -618,7 +618,32 @@ function get_wait_processing(){
     }
 
     $where['Status'] = array('not in','0,1'); 
-//halt($where);
+
+    $useData = Db::name('use_change_order')->alias('a')->join('use_change_type b','a.ChangeType = b.id','left')->field('a.ChangeOrderID ,a.CreateTime ,b.UseChangeTitle as ChangeType ,a.Status')->order('a.CreateTime desc')->limit(5)->select();
+
+    foreach($useData as $u){
+
+        $config = Db::name('use_change_order')->alias('a')
+            ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+            ->where('a.ChangeOrderID' ,'eq' ,$u['ChangeOrderID'])
+            ->order('a.CreateTime desc')
+            ->field('b.id, b.Title ,b.Total')
+            ->find();
+
+        $maps['pid'] = array('eq',$config['id']);
+        $maps['Total'] = array('eq',$u['Status']);
+
+        $roleid = Db::name('process_config')->where($maps)->value('RoleID');
+
+        unset($u['Status']);
+
+        $u['CreateTime'] = date('Y-m-d H:i:s',$u['CreateTime']);
+
+        if(in_array($roleid,$roleArr)){
+            $datas[] = $u;
+        }
+    }
+
     $changeData = Db::name('change_order')->alias('a')
         ->join('change_type b','a.ChangeType = b.id','left')
         ->where($where)
@@ -651,7 +676,7 @@ function get_wait_processing(){
     }
 
     if(!isset($datas)) return array();
-
+//halt($datas);
     return $datas;
 }
 

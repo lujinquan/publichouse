@@ -81,24 +81,22 @@ class PostManage extends Base
 
     public function  delete(){
         $postID = input('PostID');
-
         if($postID){
-
+            $find = Db::name('admin_user')->where('PostID' ,'eq' ,$postID)->find();
+            if($find){
+                return jsons('4000','该职务已绑定后台用户无法删除');
+            }
             $res = Db::name('post')->where('PostID' ,'eq' ,$postID)->delete();
-
             if($res){
-
                 // 记录行为
                 action_log('PostManage_delete', UID  ,6, '编号为:'.$postID);
                 return jsons(2000 ,'删除成功');
 
             }else{
-
                 return jsons(4000 ,'删除失败，参数异常！');
 
             }
         }
-
         return '没有数据';
     }
 }
