@@ -85,3 +85,15 @@ $('#printInvoice').click(function(){
 		});
 	}
 });
+
+$('.deleteButton').click(function(){
+	var value = $(this).val();
+	console.log(value);
+	layer.confirm('确认要删除？', {icon: 3, title:'提示',skin:'lan_class'}, function(index){
+		$.get('/ph/RentPre/delete/id/'+value,function(res){
+			res = JSON.parse(res);
+			layer.msg(res.msg);
+			layer.close(index);
+		})
+	});
+})
