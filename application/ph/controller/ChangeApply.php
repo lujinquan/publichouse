@@ -171,8 +171,7 @@ class ChangeApply extends Base
                     $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
 //halt($result);
                     $res = Db::name('change_order')->insert($result);
-                        
-                        
+   
                     //}
                 
                     break;
