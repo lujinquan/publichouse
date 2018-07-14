@@ -62,10 +62,7 @@ class UserRecord extends Model
             if ($searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
-            if ($searchForm['UserName']) {  //检索操作人姓名
-                $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
-            }
-
+            
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
 
                 $starttime = strtotime($searchForm['CreateTime']);
@@ -102,9 +99,7 @@ class UserRecord extends Model
 
                 if($v['Status'] == 1){
                     $v['Status'] = '成功';
-                }
-
-                if($v['Status'] === 0){
+                }elseif($v['Status'] == 0){
                     $v['Status'] = '失败';
                 }
 
@@ -112,7 +107,7 @@ class UserRecord extends Model
                 $v['OwnerType'] = $owners[$v['OwnerType']];
                 $v['ChangeType'] = $types[$v['ChangeType']];
                 $v['InstitutionID'] = $ins[$v['InstitutionID']];
-                $v['CreateTime'] = date('Y-m-d',$v['CreateTime']);
+                $v['CreateTime'] = date('Y-m-d H:i:s',$v['CreateTime']);
                 
                 $ChangeList['arr'][] = $v;
 
