@@ -64,6 +64,10 @@ class RentPre extends Base
             if(!$houseFind['TenantID']){
                 return jsons('4001','房屋为非正常状态……');
             }
+            $rentOrderID = Db::name('rent_order')->where(['HouseID'=>$data['HouseID','Type'=>2]])->find();
+            if($rentOrderID){
+                return jsons('4002','该房屋有欠缴订单无法预充');
+            }
             Db::name('house')->where('HouseID','eq',$data['HouseID'])->setInc('RechargeRent',$data['Money']);
             $re = Db::name('tenant')->where('TenantID' ,'eq' ,$houseFind['TenantID'])->setInc('TenantBalance',$data['Money']);
             if($re){
@@ -101,7 +105,16 @@ class RentPre extends Base
      */
     public function delete(){
 
+        $id = input('id');
 
+        $find = Db::name('rent_recharge')->where('id',$id)->find();
+
+        if($find){
+
+            Db::name('house')->where('HouseID','eq',$data['HouseID'])->setInc('RechargeRent',$data['Money']);
+            $re = Db::name('tenant')->where('TenantID' ,'eq' ,$houseFind['TenantID'])->setInc('TenantBalance',$data['Money']);
+
+        }
     }
 
 
