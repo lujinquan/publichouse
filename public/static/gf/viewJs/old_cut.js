@@ -93,10 +93,10 @@ $('#cutdeleteOldButton').click(function(){
         $.post('/ph/OldCutRent/delete', data, function(res){
             res = JSON.parse(res);
             console.log(res);
-            if(res.data){
-                layer.msg('删除成功!');
-                $(location).attr('href', '');
-            }
+            layer.msg(res.msg);
+            if(res.retcode == '2000'){
+				location.reload();
+			}
         })
     });
 });
