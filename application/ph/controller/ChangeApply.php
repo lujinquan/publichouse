@@ -356,6 +356,7 @@ class ChangeApply extends Base
                     break;
 
                 case 8:  // 注销
+
                    
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');

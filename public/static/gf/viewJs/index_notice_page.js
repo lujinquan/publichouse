@@ -54,14 +54,14 @@ $('#index_notice_list_content').on('click', '.notice_info', function(){
 
 $('#wait_processing').on('click', '.upload_file_index', function(){
 	var id = $(this).context.id;
-	console.log(id);
+	//console.log(id);
 	var data = 'id='+id;
 	$.post('/ph/Index/waitProcessing', data, function(res){
 
 		res = JSON.parse(res);
-		//console.log(res);
+		//alert(res);
 		var list = res.data.list;
-		console.log(list);
+		//console.log(list);
 		$('#index_wait_processing_content').empty();
 		var  buf = '';
 		for (var i = 0; i < list.length; i++) {

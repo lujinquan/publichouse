@@ -243,7 +243,12 @@
           <?php
 
           foreach($wait_processing['list'] as $wait_k => $wait_v){
-              echo '<tr><td width="20%">'. ++$wait_k .'</td><td width="20%">'.$wait_v['ChangeType'].'</td><td>'. $wait_v['ChangeOrderID'] .'</td><td>'. $wait_v['CreateTime'] .'</td><td><div class="am-dropdown" data-am-dropdown><a style="color:#108EE9;" class="waitProcessing" href="/ph/ChangeAudit/index">立即处理</a></div></td></tr>';
+              if($wait_v['type'] == 1){
+                $href = '/ph/UserAudit/index';
+              }else{
+                $href = '/ph/ChangeAudit/index';
+              }
+              echo '<tr><td width="20%">'. ++$wait_k .'</td><td width="20%">'.$wait_v['ChangeType'].'</td><td>'. $wait_v['ChangeOrderID'] .'</td><td>'. $wait_v['CreateTime'] .'</td><td><div class="am-dropdown" data-am-dropdown><a style="color:#108EE9;" class="waitProcessing" href="'.$href.'">立即处理</a></div></td></tr>';
           }
 
           ?>

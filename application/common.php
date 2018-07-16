@@ -639,6 +639,8 @@ function get_wait_processing(){
 
         $u['CreateTime'] = date('Y-m-d H:i:s',$u['CreateTime']);
 
+        $u['type'] = 1;
+
         if(in_array($roleid,$roleArr)){
             $datas[] = $u;
         }
@@ -669,6 +671,8 @@ function get_wait_processing(){
         unset($v['Status']);
 
         $v['CreateTime'] = date('Y-m-d H:i:s',$v['CreateTime']);
+        
+        $v['type'] = 2;
 
         if(in_array($roleid,$roleArr)){
             $datas[] = $v;
