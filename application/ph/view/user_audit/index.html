@@ -241,12 +241,12 @@
 
                     if(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] == 8){
 
-                        $IfProcess = '';
-                        $IfLastProcess = 'not-process';
+                        $IfProcess = 'not-process';
+                        $IfLastProcess = '';
 
                     }elseif(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] != 8){
-                        $IfProcess = 'not-process';
-                        $IfLastProcess = '';          
+                        $IfProcess = '';
+                        $IfLastProcess = 'not-process';        
                     }else{
 
                         $IfProcess = 'not-process';
@@ -275,7 +275,7 @@
                     <td><?php echo $v1['Status']; ?></td>
                     <td>
                         <div class="am-btn-group am-btn-group-xs">
-                            <?php if(in_array(90,$threeMenu)){; ?>
+                            <?php if(in_array(90,$threeMenu) || in_array(88,$threeMenu)){; ?>
                             <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}" value="<?php echo $v1['ChangeOrderID']; ?>">审批
                             </button>
                             <?php }; ?>

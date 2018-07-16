@@ -94,7 +94,7 @@ class OldMonthRent extends Model
             $str = ($start . '/' . $end);
             $startPay = substr($v['PayMonth'], 0, 4);
             $endPay = substr($v['PayMonth'], 4);
-            $strPay = ($start . '/' . $end);
+            $strPay = ($startPay . '/' . $endPay);
             $v['OldPayMonth'] = $str;
             $v['PayMonth'] = $strPay;
             $v['OwnerType'] = $owners[$v['OwnerType']];

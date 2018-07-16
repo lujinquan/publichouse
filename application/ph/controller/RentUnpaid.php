@@ -46,7 +46,7 @@ class RentUnpaid extends Base
     }
 
     /**
-     *  批量催缴
+     *  批量缴费
      */
     public function payAll(){
 
@@ -68,7 +68,9 @@ class RentUnpaid extends Base
             $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
             $str .= "," . $v['HousePrerent'] . "," . $v['UnpaidRent'] . "," . $PayYear . "," . $v['OrderDate'] . "," . $OldPayMonth . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'].  "," . UID . "," . time() . "),";
         }
+
         if($str){
+
             $res = Db::execute("insert into ".config('database.prefix')."old_rent (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,PayRent,PayYear,PayMonth,OldPayMonth,TenantName,BanAddress,OwnerType,UseNature,CreateUserID,CreateTime) values " . rtrim($str, ','));
         }
 
