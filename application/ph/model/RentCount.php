@@ -285,7 +285,7 @@ class RentCount extends Model
         $uses = Db::name('use_nature')->column('id,UseNature');
         $ins = Db::name('institution')->column('id,Institution');
 
-        $v = self::where('RentOrderID',$rentOrderID)->find();
+        $v = Db::name('rent_order')->alias('a')->join('house b','a.HouseID = b.HouseID','left')->field('a.*,b.UnitID,b.FloorID,b.RechargeRent')->where('a.RentOrderID',$rentOrderID)->find();
         $start = substr($v['OrderDate'], 0, 4);
         $end = substr($v['OrderDate'], 4);
         $str = ($start . '/' . $end);
