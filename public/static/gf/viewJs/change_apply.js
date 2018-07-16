@@ -1308,15 +1308,12 @@ $('#addApply').click(function() {
                         formData.append("cancelReason", $('#cancelReason').val());
                         formData.append("type", 8);
                         for(var i = 0;i < $('.cancel_BanNumber').length;i++){
-                            BanArray.push({
-                                BanID : $('.cancel_BanNumber .banID').eq(i).text(),
-                                houseArea : $('.cancel_BanNumber .houseArea').eq(i).text(),
-                                housePrice : $('.cancel_BanNumber .housePrice').eq(i).text(),
-                                cancelPrent : $('.cancel_BanNumber .cancelPrent').eq(i).text()
-
-                            })
+                            formData.append("Ban["+i+"][banID]", $('.cancel_BanNumber .banID').eq(i).text());
+                            formData.append("Ban["+i+"][houseArea]", $('.cancel_BanNumber .houseArea').eq(i).val());
+                            formData.append("Ban["+i+"][housePrice]", $('.cancel_BanNumber .housePrice').eq(i).val());
+                            formData.append("Ban["+i+"][cancelPrent]", $('.cancel_BanNumber .cancelPrent').eq(i).val());
                         }
-                        formData.append("Ban", BanArray);
+                        
                         $.ajax({
                             type: "post",
                             url: "/ph/ChangeApply/add",
