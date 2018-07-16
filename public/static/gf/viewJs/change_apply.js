@@ -1241,84 +1241,82 @@ $('#addApply').click(function() {
             });
             break;
         case "8":
-            $(".cancel").show();
+            houseQuery.action('getcancel','1');
             var layer_cancelRent = layer.open({
                 type:1,
                 area:['990px', '700px'],
                 resize:false,
                 zIndex:99,
                 title:['新增注销', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content:$('#derateApplyForm'),
+                content:$('#cancel'),
                 btn: ['确定', '取消'],
                 success:function(){
-                   $('#DQueryData').on("click", function() {
-                        var HouseID = $('#getInfo_1').val();
+                   $('#cancelQueryData').on("click", function() {
+                        var HouseID = $('#getcancel').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            $("#BanID").text(res.data.BanID);
-                            $("#BanAddress").text(res.data.BanAddress);
-                            $("#CreateTime").text(res.data.CreateTime);
-                            $("#useNature").text(res.data.FloorID);
-                            $("#HouseUsearea").text(res.data.HouseUsearea);
-                            $("#LeasedArea").text(res.data.LeasedArea);
-                            $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantNumber);
-                            $("#TenantTel").text(res.data.TenantTel);
-                            $("#OwnTypeD").text(res.data.OwnerType);
-                            $("#monthRent").text(res.data.HousePrerent);
+                            $('#cancelUseNature').text(res.data.UseNature);
+                            $('#cancelDamageGrade').text(res.data.DamageGrade);
+                            $('#cancelHouseUsearea').text(res.data.HouseUsearea);
+                            $('#cancelCoveredArea').text(res.data.CoveredArea);
+                            $('#cancelHousePrerent').text(res.data.HousePrerent);
+                            $('#cancelTenantName').text(res.data.TenantName);
+                            $('#cancelTenantNumber').text(res.data.TenantNumber);
+                            $('#cancelTenantTel').text(res.data.TenantTel);
+                            $('#cancelUnitID').text(res.data.UnitID);
+                            $('#cancelFloorID').text(res.data.FloorID);
+                            for(var i = 0;i < res.data.Ban.length;i++){
+                                var ban_dom = $('.cancel_BanNumber').clone();
+                                ban_dom.find('.banID').text(res.data.Ban[i].BanID);
+                                ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
+                                ban_dom.find('.banOwnerType').text(res.data.Ban[i].OwnerType);
+                                $('#addBanNumber').append(ban_dom);
+                            }
+                            $('.cancel_BanNumber:eq(0)').remove();
                         });
                     });
-                    houseQuery.action('getInfo_1','1');
                     new file({
-                        button: "#removeOrder",
-                        show: "#removeOrderShow",
-                        upButton: "#removeOrderUp",
+                        button: "#housingBill",
+                        show: "#housingBillShow",
+                        upButton: "#housingBillUp",
                         size: 10240,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
                         Type: 1,
-                        title: "拆迁令"
+                        title: "武汉市直管公有住房出售收入专用票据"
                     });
                     new file({
-                        button: "#redLineMap",
-                        show: "#redLineMapShow",
-                        upButton: "#redLineMapUp",
+                        button: "#housingApprovalForm",
+                        show: "#housingApprovalFormShow",
+                        upButton: "#housingApprovalFormUp",
                         size: 10240,
                         url: "/ph/ChangeApply/add",
                         ChangeOrderID: '',
                         Type: 1,
-                        title: "红线图"
-                    });
-                    new file({
-                        button: "#reimbursementInvoice",
-                        show: "#reimbursementInvoiceShow",
-                        upButton: "#reimbursementInvoiceUp",
-                        size: 10240,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "补偿款收回的发票"
-                    });
-                    new file({
-                        button: "#Cardinality",
-                        show: "#CardinalityShow",
-                        upButton: "#CardinalityUp",
-                        size: 10240,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "基数异动核算凭单"
+                        title: "武昌区房地局出售直管公有住房审批表"
                     });
                 },
                 yes:function(thisIndex){
-                    if ($('#getInfo_1').val() == "") {
+                    if ($('#getcancel').val() == "") {
                         layer.msg('房屋编号存在问题呢！！！');
                     } else {
-                        var formData = fileTotall.getArrayFormdata();
-                        formData.append("HouseID", $('#getInfo_1').val());
+                        var formData = fileTotall.getArrayFormdata() || new FormData();
+                        var BanArray = [];
+                        formData.append("HouseID", $('#getcancel').val());
                         formData.append("cancelType", $('#cancelType').val());
+                        formData.append("cancelReason", $('#cancelReason').val());
                         formData.append("type", 8);
+                        for(var i = 0;i < $('.cancel_BanNumber').length;i++){
+                            BanArray.push({
+                                BanID : $('.cancel_BanNumber .banID').eq(i).text(),
+                                houseArea : $('.cancel_BanNumber .houseArea').eq(i).text(),
+                                housePrice : $('.cancel_BanNumber .housePrice').eq(i).text(),
+                                cancelPrent : $('.cancel_BanNumber .cancelPrent').eq(i).text()
+
+                            })
+                        }
+                        formData.append("Ban", BanArray);
                         $.ajax({
                             type: "post",
                             url: "/ph/ChangeApply/add",

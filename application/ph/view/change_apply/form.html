@@ -34,19 +34,6 @@
       <label class="label_style">计租表：</label>
       <a class="am-btn am-btn-primary am-btn-sm" id="rentMeterButton">查询</a>
     </div>
-    <div class="am-form-group am-u-sm-4 cancel">
-      <label class="label_style">注销类别：</label>
-      <select name="cancelType" id="cancelType" class="label_select" required>
-          <option value="">请选择</option>
-          <option value="1">房屋出售</option>
-          <option value="2">危改拆除</option>
-          <option value="3">落私发还</option>
-          <option value="4">自然灭失</option>
-          <option value="5">房屋划转</option>
-          <option value="6">其他</option>
-      </select>
-    </div>
-
   </div>
   <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-4">
@@ -138,18 +125,6 @@
     </div>
   </div>
 
-  <div class="am-form-group am-u-sm-12 CancelRent">
-      <label class="label_style">注销类型：</label>
-      <select name="CancelType" id="CancelType" class="label_p_style">
-        <option value="1">房屋出售</option>
-        <option value="2">危改拆除</option>
-        <option value="3">落私发还</option>
-        <option value="4">自然灭失</option>
-        <option value="5">房屋划转</option>
-        <option value="6">其他</option>
-      </select>
-  </div>
-
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">资料上传：</h2>
   </div>
@@ -206,48 +181,10 @@
       </div>
       <div id="houseSecurityShow" class="am-u-md-12 img_content"></div>
   </div>
-
-  <div class="am-form-group am-u-sm-12 cancel">
-      <div class="am-form-group am-u-sm-3">
-        <label>拆迁令：</label>
-      </div>
-      <div class="am-form-group am-form-file am-u-md-5">
-          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-          <input id="removeOrder" type="file" name="removeOrder" multiple>
-      </div>
-      <div id="removeOrderShow" class="am-u-md-12 img_content"></div>
-  </div>
-  <div class="am-form-group am-u-sm-12 cancel">
-      <div class="am-form-group am-u-sm-3">
-        <label>红线图：</label>
-      </div>
-      <div class="am-form-group am-form-file am-u-md-5">
-          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-          <input id="redLineMap" type="file" name="redLineMap" multiple>
-      </div>
-      <div id="redLineMapShow" class="am-u-md-12 img_content"></div>
-  </div>
-  <div class="am-form-group am-u-sm-12 cancel">
-      <div class="am-form-group am-u-sm-3">
-        <label>补偿款收回的发票：</label>
-      </div>
-      <div class="am-form-group am-form-file am-u-md-5">
-          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-          <input id="reimbursementInvoice" type="file" name="reimbursementInvoice" multiple>
-      </div>
-      <div id="reimbursementInvoiceShow" class="am-u-md-12 img_content"></div>
-  </div>
-  <div class="am-form-group am-u-sm-12 cancel">
-      <div class="am-form-group am-u-sm-3">
-        <label>基数异动核算凭单：</label>
-      </div>
-      <div class="am-form-group am-form-file am-u-md-5">
-          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-          <input id="Cardinality" type="file" name="Cardinality" multiple>
-      </div>
-      <div id="CardinalityShow" class="am-u-md-12 img_content"></div>
-  </div>
 </form>
+
+
+
 
 <!-- 暂停计租 -->
 <form id="pauseRent" style="display:none;margin-top:20px;">
@@ -1204,135 +1141,141 @@
 </form>
     <!--分户新增房屋结束-->
    
-<!-- 新增并户 -->
-  <form id="HouseHolds" style="display:none;margin-top:20px;">
-    <div class="am-form-group am-u-sm-12">
-        <h2 class="label_title">并户保留房屋：</h2>
-    </div>
-
-    <div class="am-u-md-12">
-      <div class="am-form-group am-u-md-12">
-          <label class="label_style">房屋编号：</label>
-          <input type="text" id="HoldsHouseNum" class="label_input" />
-          <a class="am-btn am-btn-primary am-btn-sm" id="HoldsQuery">查询</a>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">楼栋编号：</label>
-        <label id="HoldsBanID" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-8">
-        <label class="label_style">房屋地址：</label>
-        <label id="HoldsBanAddress" class="label_content label_p_style" style="width:474px;"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">楼层：</label>
-        <label id="HoldsFloorID" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">承租人：</label>
-        <label id="HoldsTenantName" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">联系电话：</label>
-        <label id="HoldsTenantTel" class="label_content label_p_style"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">身份证号：</label>
-        <label id="HoldsTenantNumber" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">备案时间：</label>
-        <label id="HoldsCreateTime" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">使用面积：</label>
-        <label id="HoldsHouseArea" class="label_content label_p_style"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">计租面积：</label>
-        <label id="HoldsLeasedArea" class="label_content label_p_style"></label>
-      </div>  
-    </div>
-  <!--房屋编号-->
-    <!--并户注销房屋-->
-    <div class="am-form-group am-u-sm-12">
-        <h2 class="label_title">并户注销房屋：</h2>
-    </div>
-    <div class="am-u-md-12">
-        <div class="am-form-group am-u-md-12">
-          <label  class="label_style">房屋编号：</label>
-          <input type="text" id="CancelNum" class="label_input" />
-          <a class="am-btn am-btn-primary am-btn-sm" id="CancelQuery">查询</a>
-        </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4" style="padding-right: 0">
-        <label class="label_style">楼栋编号：</label>
-        <label id="CancelID" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-8">
-        <label class="label_style">房屋地址：</label>
-        <label id="CancelAddress" class="label_content label_p_style" style="width:474px;"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">楼层：</label>
-        <label id="CancelFloor" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">承租人：</label>
-        <label id="CancelName" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4">
-        <label class="label_style">联系电话：</label>
-        <label id="CancelTel" class="label_content label_p_style"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">身份证号：</label>
-        <label id="CancelNumber" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">备案时间：</label>
-        <label id="CancelTime" class="label_content label_p_style"></label>
-      </div>
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">使用面积：</label>
-        <label id="CancelArea" class="label_content label_p_style"></label>
-      </div>
-    </div>
-    <div class="am-u-sm-12">
-      <div class="am-form-group am-u-sm-4 am-u-end">
-        <label class="label_style">计租面积：</label>
-        <label id="CancelLeased" class="label_content label_p_style"></label>
-      </div>  
-    </div>
-
-    <div class="am-form-group am-u-sm-12">
-        <h2 class="label_title">提交材料：</h2>
-    </div>
+<!-- 注销 -->
+<form id="cancel" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-u-sm-12">
     <div class="am-form-group am-u-md-12">
-      <div class="am-form-group am-u-sm-12">
-        <div class="am-form-group am-u-sm-3 pd0">
-          <label>异动申请书：</label>
-        </div>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="CancelApplication" type="file" name="CancelApplication" multiple>
-        </div>
-        <div id="CancelApplicationShow" class="am-u-md-12 img_content"></div>
-      </div>
-      <div class="am-u-md-12">注：异动审批通过后，次月生效</div>
+      <label class="label_style">房屋编号：</label>
+      <input id="getcancel" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="cancelQueryData">查询</a>
     </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">使用性质：</label>
+      <label id="cancelUseNature" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">完损等级：</label>
+      <label id="cancelDamageGrade" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">注销类别：</label>
+      <select name="cancelType" id="cancelType" class="label_select" required>
+          <option value="">请选择</option>
+          <option value="1">房屋出售</option>
+          <option value="2">危改拆除</option>
+          <option value="3">落私发还</option>
+          <option value="4">自然灭失</option>
+          <option value="5">房屋划转</option>
+          <option value="6">其他</option>
+      </select>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用面积：</label>
+      <label id="cancelHouseUsearea" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">计租面积：</label>
+      <label id="cancelCoveredArea" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">月租金：</label>
+       <label id="cancelHousePrerent" class="label_content label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">承租人：</label>
+      <label id="cancelTenantName" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">身份证号：</label>
+      <label id="cancelTenantNumber" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">联系电话：</label>
+       <label id="cancelTenantTel" class="label_content label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">单元号：</label>
+      <label id="cancelUnitID" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">层次：</label>
+      <label id="cancelFloorID" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">异动事由：</label>
+       <input id="cancelReason" class="label_input" />
+    </div>
+  </div>
+
+<div id="addBanNumber">
+  <div class="cancel_BanNumber">
+    <div class="am-form-group am-u-sm-12">
+        <hr />
+    </div>
+    <div class="am-u-sm-12">
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">楼栋编号：</label>
+        <label class="label_p_style banID"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">房屋地址：</label>
+        <label class="label_p_style HouseAdress"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">产别：</label>
+         <label class="label_p_style banOwnerType"></label>
+      </div>
+    </div>
+    <div class="am-u-sm-12">
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">建筑面积：</label>
+        <input class="label_input houseArea" />
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">房屋原价：</label>
+        <input class="label_input housePrice" />
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">注销租金：</label>
+        <input class="label_input cancelPrent" />
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="am-form-group am-u-sm-12">
+      <h2 class="label_title">资料上传：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label>武汉市直管公有住房出售收入专用票据：</label>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="housingBill" type="file" name="housingBill" multiple>
+    </div>
+    <div id="housingBillShow" class="am-u-md-12 img_content"></div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label>武昌区房地局出售直管公有住房审批表：</label>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="housingApprovalForm" type="file" name="housingApprovalForm" multiple>
+    </div>
+    <div id="housingApprovalFormShow" class="am-u-md-12 img_content"></div>
+  </div>
 </form>
 <!--新增并户结束-->

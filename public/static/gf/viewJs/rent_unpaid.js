@@ -114,20 +114,24 @@ $('.details').click(function(){
 		$('#TenantName').text(res.data.TenantName);
 		$('#HouseID').text(res.data.HouseID);
 		$('#BanAddress').text(res.data.BanAddress);
+		$('#OwnerType').text(res.data.OwnerType);
+		$('#UseNature').text(res.data.UseNature);
 		$('#UnitID').text(res.data.UnitID);
 		$('#FloorID').text(res.data.FloorID);
 		$('#DoorID').text(res.data.DoorID);
-		//$('#TenantBalance').text(res.data.TenantBalance);
+		$('#TenantBalance').text(res.data.TenantBalance);
 		$('#HousePrerent').text(res.data.HousePrerent);
 		$('#CutRent').text(res.data.CutRent);
+		$('#PumpCost').text(res.data.PumpCost);
+		$('#DiffRent').text(res.data.DiffRent);
 		$('#ReceiveRent').text(res.data.ReceiveRent);
 		$('#PaidRent').text(res.data.PaidRent);
 		$('#UnpaidRent').text(res.data.UnpaidRent);
-		$('#LateRent').text(res.data.LateRent);
+		$('#RechargeRent').text(res.data.RechargeRent);
 	});
 	layer.open({
 		type:1,
-		area:['600px','600px'],
+		area:['700px','600px'],
 		resize:false,
 		title:['欠缴明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:$('#details')

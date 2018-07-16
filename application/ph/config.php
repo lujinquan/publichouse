@@ -103,10 +103,8 @@ return [
     'pauseMaterial' => '非基数异动核算凭单',
 
     //新增注销
-    'removeOrder' => '拆迁令',
-    'redLineMap' => '红线图',
-    'reimbursementInvoice' => '补偿款收回的发票',
-    'Cardinality' => '基数异动核算凭单',
+    'housingBill' => '武汉市直管公有住房出售收入专用票据',
+    'housingApprovalForm' => '武昌区房地局出售直管公有住房审批表',
 
 
     //新增陈欠核销
