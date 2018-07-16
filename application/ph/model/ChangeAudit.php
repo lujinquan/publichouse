@@ -621,7 +621,6 @@ class ChangeAudit extends Model
      */
     public function after_process($changeOrderID, $changeType)
     {
-        
 
         switch ($changeType) {
             case 1:  //租金减免异动完成后的，系统处理
