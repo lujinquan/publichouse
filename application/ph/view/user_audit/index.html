@@ -239,18 +239,22 @@
 
                 <?php foreach($changeLst as $k1 => $v1){
 
-                    if(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] == 8){
+                    if(in_array($v1['ProcessRoleID'],$useRoles) && $v1['StatusValue'] == 8){
 
-                        $IfProcess = '';
-                        $IfLastProcess = 'not-process';
+                    
 
-                    }elseif(in_array($v1['ProcessRoleID'],$useRoles) && $v1['Status'] != 8){
-                        $IfProcess = 'not-process';
-                        $IfLastProcess = '';          
-                    }else{
+                        $v1['IfProcess'.$k1] = 'not-process';
 
-                        $IfProcess = 'not-process';
-                        $IfLastProcess = 'not-process';
+                        $v1['IfLastProcess'.$k1] = '';
+
+                    }elseif(in_array($v1['ProcessRoleID'],$useRoles) && $v1['StatusValue'] != 8){
+             
+                        $v1['IfProcess'.$k1] = '';
+                        $v1['IfLastProcess'.$k1] = 'not-process';        
+                    }elseif(!in_array($v1['ProcessRoleID'],$useRoles)){
+
+                        $v1['IfProcess'.$k1] = 'not-process';
+                        $v1['IfLastProcess'.$k1] = 'not-process';
                     }
 
                 ;?>
@@ -259,7 +263,7 @@
                         <span class="piaochecked">
                             <input name="ID" class="checkId radioclass" type="radio" value="<?php echo $v1['ChangeOrderID']; ?>"/></td>
                         </span>
-                    <td><?php echo ++$k1; ?></td>
+                    <td><?php echo ($k1 + 1); ?></td>
                     <td><?php echo $v1['ChangeOrderID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HouseID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['OwnerType']; ?></td>
@@ -275,8 +279,8 @@
                     <td><?php echo $v1['Status']; ?></td>
                     <td>
                         <div class="am-btn-group am-btn-group-xs">
-                            <?php if(in_array(90,$threeMenu)){; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}" value="<?php echo $v1['ChangeOrderID']; ?>">审批
+                            <?php if(in_array(90,$threeMenu) || in_array(88,$threeMenu)){; ?>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove <?php echo $v1['IfProcess'.$k1]; ?>" value="<?php echo $v1['ChangeOrderID']; ?>">审批
                             </button>
                             <?php }; ?>
                             <?php if(in_array(89,$threeMenu)){; ?>
@@ -284,7 +288,7 @@
                             </button>
                             <?php }; ?>
                             <?php if(in_array(90,$threeMenu)){; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnGathering {$IfLastProcess}" value="<?php echo $v1['ChangeOrderID']; ?>">确认收款</button>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnGathering <?php echo $v1['IfLastProcess'.$k1]; ?>" value="<?php echo $v1['ChangeOrderID']; ?>">确认收款</button>
                             <?php }; ?>
                             
                         </div>

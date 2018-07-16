@@ -64,6 +64,9 @@ class UserApply extends Base
             $datas['NewTenantID'] = $data['newID']; //新租户id
             $datas['NewTenantName'] = $data['newName']; //新租户名称
             $datas['ChangeType'] = $data['transferType']; //转让形式
+            if($data['transferType'] == 1 && !$data['transferRent']){
+                return jsons('4002','交易转让必须填写转让金额');
+            }
             $datas['TransferRent'] = $data['transferRent']; //转让金额
             $datas['ChangeReason'] = $data['transferReason']; //转让原因
             $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';

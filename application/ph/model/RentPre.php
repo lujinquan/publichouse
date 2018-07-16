@@ -73,6 +73,8 @@ class RentPre extends Model
 
         $preRentLst['obj'] = self::field('*')->order('id desc')->where($where)->paginate(config('paginate.list_rows'));
 
+        $preRentLst['rechargeMoney'] = self::where($where)->value('sum(Money) as rechargeMoney');
+
         $preRentLst['arr'] = $preRentLst['obj']->all() ? $preRentLst['obj']->all() : array();
 
         foreach ($preRentLst['arr'] as $k => &$v) {

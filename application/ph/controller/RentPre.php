@@ -20,6 +20,7 @@ class RentPre extends Base
             'preRentLst' => $preRentLst['arr'],
             'preRentLstObj' => $preRentLst['obj'],
             'preRentOption' => $preRentLst['option'],
+            'rechargeMoney' => $preRentLst['rechargeMoney']
         ]);
         
         return $this->fetch();

@@ -54,9 +54,9 @@ class OldCutRent extends Base
             $data['CreateUserID'] = UID;
             //halt($data);
             if (OldCutRentModel::create($data)) {
-               // if($data['PayYear'] < 2018){
-               //     Db::name('house')->where('HouseID',$data['HouseID'])->setDec('ArrearRent',$data['PayRent']);
-               // }
+               if($data['PayYear'] < 2018){
+                   Db::name('house')->where('HouseID',$data['HouseID'])->setDec('ArrearRent',$data['PayRent']);
+               }
                 // 记录行为
                 //action_log('BanInfo_add', UID, 1, '编号为:' . $data['BanID']);
                 return jsons('2000', '新增成功');
@@ -80,11 +80,15 @@ class OldCutRent extends Base
         $id = input('id');
         if(!$id) return jsons('4004','参数缺失');
         $find = Db::name('old_rent')->where('id','eq',$id)->find();
+
+        if($find['OldPayMonth'] != date('Ym',time())){
+            return jsons('4000','无法删除以前月收回的年度欠缴');
+        }
         $re = Db::name('old_rent')->where('id','eq',$id)->delete();
 
-        // if($re){
-        //     Db::name('house')->where('HouseID',$find['HouseID'])->setInc('ArrearRent',$find['PayRent']);
-        // }
+        if($re){
+            Db::name('house')->where('HouseID',$find['HouseID'])->setInc('ArrearRent',$find['PayRent']);
+        }
         return $re?jsons('2000','删除成功'):jsons('4000','删除失败');
     }
 }

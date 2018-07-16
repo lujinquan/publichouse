@@ -655,7 +655,7 @@ function get_wait_processing(){
     foreach($changeData as $v){
 
         $config = Db::name('change_order')->alias('a')
-            ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+            ->join('process_config b' ,'a.ProcessConfigType = b.id' ,'left')
             ->where('a.ChangeOrderID' ,'eq' ,$v['ChangeOrderID'])
             ->order('a.CreateTime desc')
             ->field('b.id, b.Title ,b.Total')
@@ -674,9 +674,9 @@ function get_wait_processing(){
             $datas[] = $v;
         }
     }
-
-    if(!isset($datas)) return array();
 //halt($datas);
+    if(!isset($datas)) return array();
+
     return $datas;
 }
 
