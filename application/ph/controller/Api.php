@@ -165,6 +165,20 @@ class Api extends Controller
             ->field($map)
             ->find();
 
+        $arr = Db::name('room')->where('HouseID','like','%'.$houseID.'%')->group('BanID')->column('BanID');
+
+
+
+        if($arr){
+            $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.BanAddress,b.OwnerType')->select();
+
+            //halt($data['BanDetail']);
+        }else{
+
+           $data['Ban'] = []; 
+        }
+
+    
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['AnathorOwnerType'] = $data['AnathorOwnerType'] ? get_owner($data['AnathorOwnerType']) : '暂无';
         $data['DamageGrade'] = get_damage($data['DamageGrade']);
