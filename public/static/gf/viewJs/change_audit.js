@@ -122,13 +122,13 @@ $('.BtnApprove').click(function(){
         	var house_str = '';
         	for(var i = 0;i < res.data.detail.Ban.length;i++){
         		house_str += '<tr>\
-	                <td style="width:200px;">'+(i+1)+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].banID+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].houseArea+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].housePrice+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
+	                <td style="width:150px;">'+(i+1)+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].banID+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].houseArea+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].housePrice+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
 	            </tr>';
         	}
         	$('#cancelHouseDetail').empty();
@@ -269,13 +269,13 @@ $('.BtnDetail').click(function(){
         	var house_str = '';
         	for(var i = 0;i < res.data.detail.Ban.length;i++){
         		house_str += '<tr>\
-	                <td style="width:200px;">'+(i+1)+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].banID+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].houseArea+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].housePrice+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
-	                <td style="width:350px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
+	                <td style="width:150px;">'+(i+1)+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].banID+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].houseArea+'</td>\
+	                <td style="width:150px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].housePrice+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
+	                <td style="width:200px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
 	            </tr>';
         	}
         	$('#cancelHouseDetail').empty();
