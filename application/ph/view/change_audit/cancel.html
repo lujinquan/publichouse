@@ -1,0 +1,130 @@
+<!-- 租金减免明细-->
+<div id="cancel" class="am-form" style="display:none;margin-top:1.6rem;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-md-12">
+          <label class="label_style">房屋编号：</label>
+          <label class="label_content cancelHouseID"></label>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          <label class="label_style">使用性质：</label>
+          <label class="label_content cancelUseNature"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">完损等级：</label>
+          <label class="label_content cancelDamageGrade"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">产别：</label>
+          <label class="label_content cancelOwnerTypes"></label>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          <label class="label_style">使用面积：</label>
+          <label class="label_content cancelHouseUsearea"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">计租面积：</label>
+          <label class="label_content cancelLeasedArea"></label>
+        </div>
+        <div class="am-u-sm-4 cancel">
+          <label class="label_style">月租金：</label>
+          <label class="label_content cancelHousePrerent"></label>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          <label class="label_style">承租人：</label>
+          <label class="label_content cancelTenantName"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">身份证号：</label>
+          <label class="label_content cancelTenantNumber"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">联系电话：</label>
+          <label class="label_content cancelTenantTel"></label>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          <label class="label_style">单元号：</label>
+          <label class="label_content cancelUnitID"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">层次：</label>
+          <label class="label_content cancelFloorID"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">注销类别：</label>
+          <label class="label_content CancelType"></label>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-8">
+          <label class="label_style">异动事由：</label>
+          <label class="label_content Remark"></label>
+        </div>
+        <div class="am-u-sm-4">
+          <label class="label_style">备案时间：</label>
+          <label class="label_content cancelCreateTime"></label>
+        </div>
+    </div>
+
+
+    <div class="am-form-group am-u-sm-12 rent_reduction">
+      <h2 class="label_title">注销信息：</h2>
+    </div>
+    <div class="am-form-group am-u-sm-12">
+      <div class="am-u-sm-12">
+        <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+            <thead style="display:block;">
+                <tr>
+                    <td style="width:150px;">#</td>
+                    <td style="width:150px;" class="am-hide-sm-only">楼栋编号</td>
+                    <td style="width:150px;" class="am-hide-sm-only">建筑面积/㎡</td>
+                    <td style="width:150px;" class="am-hide-sm-only">使用面积/㎡</td>
+                    <td style="width:200px;" class="am-hide-sm-only">房屋原价/元</td>
+                    <td style="width:200px;" class="am-hide-sm-only">注销租金/元</td>
+                    <td style="width:200px;" class="am-hide-sm-only">房屋地址</td>
+                </tr>
+            </thead>
+            <tbody id="cancelHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="am-u-md-12" style="padding-left:0;">
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">查看附件：</h2>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <div id="cancelPhotos" class="am-u-md-12" style="margin-bottom:30px;"></div>
+        </div>
+
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>注销报告：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="cancelUploadReport" type="file" name="cancelUploadReport" multiple>
+            </div>
+            <div id="cancelUploadReportShow" class="am-u-md-12 img_content"></div>
+        </div>
+
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">审批状态：</h2>
+        </div>
+        <div id="cancelState" class="am-u-md-12" style="padding-left:3rem;"></div>
+    </div>
+</div>
