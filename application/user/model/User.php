@@ -56,8 +56,13 @@ class User extends Model
             // 检查是否分配用户组
             if (empty($user['Role'])) {
                 //$this->error = '禁止访问，原因：未分配角色！';
-                return jsons('4003','禁止访问，原因：未分配角色！');
+                return jsons('4003','未被分配角色！');
                 //return false;
+            }
+            $roleArr = json_decode($user['Role'],true);
+            $if = Db::name('admin_role')->where(['id'=>['in',$roleArr],'Status'=>0])->find();
+            if($if){
+                return jsons('4003','角色已失效！');
             }
             //验证加密狗是否匹配
             /*if($user->DogId == null || $user->DogId == ''){
