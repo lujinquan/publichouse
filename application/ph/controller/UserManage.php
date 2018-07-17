@@ -14,7 +14,7 @@ class UserManage extends Base
         $userLst = model('ph/UserManage') -> get_all_user_lst();
         $instLst = $this -> BanInfoModel ->get_all_institution();//待调
         $postLst = Db::name('post')->field('id ,PostID ,PostName')->select();
-        $allRole = Db::name('admin_role')->field('id ,RoleName')->select();
+        $allRole = Db::name('admin_role')->where('Status',1)->field('id ,RoleName')->select();
         $this->assign([
             'userLst' => $userLst['arr'],
             'userLstObj' => $userLst['obj'],

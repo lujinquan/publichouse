@@ -112,7 +112,11 @@ class RoleManage extends Base
                 array_unshift($data['id'] ,"2");
             }
 
-            //if($data) array_unshift($data['id'] ,"1" );  //默认首页都可以进入
+            $status = Db::name('admin_role')->where('id','eq',$data['Role'])->value('Status');
+
+            if(!$status){
+                return jsons('4000' ,'分配失败，该角色为无效状态');
+            }
 
             $newMenuAuth = json_encode($data['id']);
 

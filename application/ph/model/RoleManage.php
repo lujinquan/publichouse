@@ -20,7 +20,7 @@ class RoleManage extends Model
 
     public function get_all_role_lst(){
 
-        $RoleLst['obj'] = self::field('id ,RoleName ,Ifstation ,Status')->order('id desc')->paginate(config('paginate.list_rows'));
+        $RoleLst['obj'] = self::field('id ,RoleName ,Ifstation ,Status')->order('Status desc')->paginate(config('paginate.list_rows'));
 
         $RoleLst['arr'] = $RoleLst['obj']->all()?$RoleLst['obj']->all():array();
 
