@@ -748,13 +748,15 @@ class ChangeAudit extends Model
             case 8:  //注销异动完成后的，系统处理
                 //$nextMonthDate = date('Y', time());
 
-                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,ChangeType')->find();
-        
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,Deadline,ChangeType')->find();
+                
                 //修改对应的楼栋底下的房屋的状态为注销
-                Db::name('house')->where('BanID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
+                //Db::name('house')->where('BanID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
             
                 //修改租金配置表,删除不可用状态房屋对应的租金配置记录
                 Db::name('rent_config')->where('HouseID', 'eq', $changeFind['HouseID'])->delete();
+                //删除该房屋本月订单
+                Db::name('rent_order')->where(['HouseID'=> ['eq', $changeFind['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->delete();
                 break;
 
             case 9:  //房屋调整异动完成后的，系统处理

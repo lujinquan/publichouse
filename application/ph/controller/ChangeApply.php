@@ -360,6 +360,7 @@ class ChangeApply extends Base
 //halt($data);
 
                     $datas['Deadline'] = json_encode($data['Ban']);
+                    //halt($datas['Deadline']);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['InstitutionID'] = $one['InstitutionID'];
