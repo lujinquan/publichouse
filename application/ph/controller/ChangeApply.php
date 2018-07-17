@@ -356,10 +356,11 @@ class ChangeApply extends Base
                     break;
 
                 case 8:  // 注销
+//halt($data);
 
-                   
+                    $datas['Deadline'] = json_encode($data['Ban']);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
+                    $datas['TenantID'] = $one['TenantID'];
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
                     $datas['OrderDate'] = date('Ym', time());  //订单期
@@ -367,10 +368,14 @@ class ChangeApply extends Base
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
                     $datas['CancelType'] = $data['cancelType'];  //注销类型
+                    $datas['Remark'] = $data['cancelReason'];  //异动缘由
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[8];  //异动名称
                     $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-                    $datas['ProcessConfigType'] = 8;        //流程控制线路
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>8])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'08'.$suffix;   //08代表注销
                     $res = Db::name('change_order')->insert($datas);
                     break;

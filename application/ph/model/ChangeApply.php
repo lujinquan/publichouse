@@ -189,6 +189,9 @@ class ChangeApply extends Model
                             return jsons('4001','注销类型不合法');
                         }
                     }
+                    if(!$data['Ban']){
+                        return jsons('4001','请完善异动信息');
+                    }
                     return $finds;
                 break;
 
