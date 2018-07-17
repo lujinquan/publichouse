@@ -748,11 +748,50 @@ class ChangeAudit extends Model
             case 8:  //注销异动完成后的，系统处理
                 //$nextMonthDate = date('Y', time());
 
-                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,Deadline,ChangeType')->find();
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,Deadline,ChangeType,UseNature')->find();
                 
-                //修改对应的楼栋底下的房屋的状态为注销
-                //Db::name('house')->where('BanID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
+                $deadline = json_decode($changeFind['Deadline'],true);
+
+                foreach($deadline as $v){
+                    switch($changeFind['UseNature']){
+                        case 1:
+                            Db::name('ban')->where('BanID',$v['banID'])->update(
+                                [
+                                    'CivilArea' => ['exp','CivilArea-'.$v['houseArea']],
+                                    'CivilOprice' => ['exp','CivilOprice-'.$v['housePrice']],
+                                    'CivilRent' => ['exp','CivilRent-'.$v['cancelPrent']],
+                                    'BanUsearea' => ['exp','BanUsearea-'.$v['cancelHouseUsearea']],
+                                ]
+                            );
+                        break;
+                           
+                        case 2:
+                         
+                            Db::name('ban')->where('BanID',$v['banID'])->update(
+                                [
+                                    'EnterpriseArea' => ['exp','EnterpriseArea-'.$v['houseArea']],
+                                    'EnterpriseOprice' => ['exp','EnterpriseOprice-'.$v['housePrice']],
+                                    'EnterpriseRent' => ['exp','EnterpriseRent-'.$v['cancelPrent']],
+                                ]
+                            );
+                        break;
             
+                        case 3:
+                            
+                            Db::name('ban')->where('BanID',$v['banID'])->update(
+                                [
+                                    'PartyArea' => ['exp','PartyArea-'.$v['houseArea']],
+                                    'PartyOprice' => ['exp','PartyOprice-'.$v['housePrice']],
+                                    'PartyRent' => ['exp','PartyRent-'.$v['cancelPrent']],
+                                ]
+                            );
+                        break;
+
+                    }
+                    
+                }
+                //修改对应的楼栋底下的房屋的状态为注销
+                Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
                 //修改租金配置表,删除不可用状态房屋对应的租金配置记录
                 Db::name('rent_config')->where('HouseID', 'eq', $changeFind['HouseID'])->delete();
                 //删除该房屋本月订单
