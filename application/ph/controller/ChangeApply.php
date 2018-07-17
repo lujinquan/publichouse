@@ -137,15 +137,6 @@ class ChangeApply extends Base
 
                 case 3:  // 暂停计租:目前有两种，一种是按户暂停，另一种是按楼栋，暂时都按照按户暂停
 
-                    // $houses = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
-                    //                            ->column('HouseID,UseNature');
-
-                    // foreach($houses as $k => $v){
-                    //     $housearr[$v][] = $k;
-                    // }
-                    // foreach($housearr as $h){
-                    //    $result = [];
-                    
                     $one = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
                                             ->field('sum(HousePrerent) as HousePrerents,BanID,OwnerType,InstitutionID, InstitutionPID')
                                             ->find();
@@ -164,16 +155,15 @@ class ChangeApply extends Base
                     $result['ChangeType'] = $data['type'];  //异动类型
                     $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
                     $result['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
-                    //halt($datas['ProcessConfigType']);
+
                     if(!$result['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
                     $result['OrderDate'] = date('Ym', time());
                     $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
-//halt($result);
+
                     $res = Db::name('change_order')->insert($result);
-   
-                    //}
+
                 
                     break;
 
@@ -373,7 +363,7 @@ class ChangeApply extends Base
                     $datas['Remark'] = $data['cancelReason'];  //异动缘由
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[8];  //异动名称
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>8])->order('id desc')->value('id');        //流程控制线路
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');

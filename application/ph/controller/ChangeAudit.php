@@ -125,13 +125,14 @@ class ChangeAudit extends Base
 
             $find = Db::name('change_order')->where('ChangeOrderID',$data['ChangeOrderID'])->field('ChangeImageIDS,Status,ChangeType')->find();
 
-            if(in_array($find['ChangeType'] ,[1,3]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
+            if(in_array($find['ChangeType'] ,[1,3,8]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
 
-                if($_FILES){         
+                if(isset($_FILES) && $_FILES){         
                     foreach($_FILES as $k1 => $v1){
                         $ChangeImageIDS[] = model('ph/UserAudit') -> uploads($v1,$k1);
                     }
                     $ChangeImageIDS = implode(',', $ChangeImageIDS);  //返回的是使用权变更的影像资料id(多个以逗号隔开)
+                    //halt($ChangeImageIDS);
                     if(isset($ChangeImageIDS)){ //执行添加  
 
                         $changeImageIDS = $find['ChangeImageIDS']?$find['ChangeImageIDS'].','.$ChangeImageIDS:$ChangeImageIDS;    
