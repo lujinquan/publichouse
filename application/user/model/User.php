@@ -91,6 +91,7 @@ class User extends Model
                 // 更新登录信息
                 $user->LastLoginTime = request()->time();
                 $user->LastLoginIp   = get_client_ip(1);
+                $user->LoginTimes += 1;
 
                 if ($user->save()) {
                     // 自动登录
