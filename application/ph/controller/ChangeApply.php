@@ -163,8 +163,9 @@ class ChangeApply extends Base
                     $result['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $result['ChangeType'] = $data['type'];  //异动类型
                     $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
-                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
-                    if(!$datas['ProcessConfigType']){
+                    $result['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
+                    //halt($datas['ProcessConfigType']);
+                    if(!$result['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
                     $result['OrderDate'] = date('Ym', time());

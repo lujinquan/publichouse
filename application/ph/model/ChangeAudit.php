@@ -389,11 +389,15 @@ class ChangeAudit extends Model
     {   //注销
 
         //房屋编号
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID ,HouseID,CancelType')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CancelType')->find();
 
-        $data = $oneData['BanID']?get_ban_info($oneData['BanID']):get_house_info($oneData['HouseID']);
+        $data = get_house_info($oneData['HouseID']);
 
         $data['CancelType'] = Db::name('cancel_type')->where('id', 'eq', $oneData['CancelType'])->value('Title');
+
+        $data['Ban'] = json_decode($oneData['Deadline']);
+
+        $data['Remark'] = $oneData['Remark'];
 
         $data['type'] = 8;
 
