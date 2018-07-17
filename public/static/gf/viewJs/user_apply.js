@@ -33,6 +33,25 @@ $("#addTransfer").click(function(){
 			success:function(){
 				$('.label_p_style').text('');
 				$('.label_input').val('');
+				$('.transfer_money').show();
+				$('.transfer_reason').show();
+				$('.fileUpLoad').hide();
+				$('#transferWay').change(function(){
+					var transferWay_value = $(this).val();
+					if(transferWay_value == '1'){
+						$('.transfer_money').show();
+						$('.transfer_reason').show();
+						$('.fileUpLoad').hide();
+					}else if(transferWay_value == '2'){
+						$('.transfer_money').hide();
+						$('.transfer_reason').show();
+						$('.fileUpLoad').hide();
+					}else{
+						$('.transfer_money').hide();
+						$('.transfer_reason').hide();
+						$('.fileUpLoad').show();
+					}
+				})
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID
@@ -48,8 +67,8 @@ $("#addTransfer").click(function(){
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
 
+
 				var formData = fileTotall.getArrayFormdata() || new FormData();
-				console.log(formData);
 				formData.append('houseid',ID);
 				formData.append('oldID',oldID);
 				formData.append('oldName',oldName);
@@ -58,7 +77,6 @@ $("#addTransfer").click(function(){
 				formData.append('transferType',transferWay);
 				formData.append('transferRent',transferMoney);
 				formData.append('transferReason',transferReason);
-
 				$.ajax({
 				    type: "post",
 				    url: "/ph/UserApply/add",

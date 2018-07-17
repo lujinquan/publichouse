@@ -1266,6 +1266,7 @@ $('#addApply').click(function() {
                             $('#cancelTenantTel').text(res.data.TenantTel);
                             $('#cancelUnitID').text(res.data.UnitID);
                             $('#cancelFloorID').text(res.data.FloorID);
+                            $('#cancelOwnerType').text(res.data.OwnerType);
                             for(var i = 0;i < res.data.Ban.length;i++){
                                 var ban_dom = $('.cancel_BanNumber').clone();
                                 ban_dom.find('.banID').text(res.data.Ban[i].BanID);
@@ -1309,9 +1310,11 @@ $('#addApply').click(function() {
                         formData.append("type", 8);
                         for(var i = 0;i < $('.cancel_BanNumber').length;i++){
                             formData.append("Ban["+i+"][banID]", $('.cancel_BanNumber .banID').eq(i).text());
+                            formData.append("Ban["+i+"][HouseAdress]", $('.cancel_BanNumber .HouseAdress').eq(i).text());
                             formData.append("Ban["+i+"][houseArea]", $('.cancel_BanNumber .houseArea').eq(i).val());
                             formData.append("Ban["+i+"][housePrice]", $('.cancel_BanNumber .housePrice').eq(i).val());
                             formData.append("Ban["+i+"][cancelPrent]", $('.cancel_BanNumber .cancelPrent').eq(i).val());
+                            formData.append("Ban["+i+"][cancelHouseUsearea]", $('.cancel_BanNumber .cancelHouseUsearea').eq(i).val());
                         }
                         
                         $.ajax({
