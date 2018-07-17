@@ -150,7 +150,7 @@ $('.BtnApprove').click(function(){
 			}
 			processState('#cancelState',res);
 			metailShow('#cancelPhotos',res);
-			layerBox(value,'cancel','注销审批',1);
+			layerBox(value,'cancel','注销审批',1,res.data.config.status);
 		}else if(type == 5){
 
 		}else if(type == 6){//维修
