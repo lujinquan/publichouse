@@ -444,37 +444,24 @@ class ChangeAudit extends Model
     }
 
     public function get_eleven_detail($changeOrderID)
-    {   //租金追加调整
-
-        //房屋编号
-        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,AddRent,DateStart')->find();
-
+    {   
+        //租金追加调整
+        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
         $data = get_house_info($one['HouseID']);
-
-        $data['AddRent'] = $one['AddRent'];
-
-        $data['DateStart'] = date('Y-m-d H:i:s', $one['DateStart']);
-
+        $data['Ban'] = json_decode($one['Deadline'],true);
+        $data['Remark'] = $one['Remark'];
         $data['type'] = 11;
-
         return $data;
     }
 
     public function get_twelve_detail($changeOrderID)
-    {   //租金调整
-
-        //房屋编号
+    {   
+        //租金调整
         $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
-
-
         $data = get_house_info($one['HouseID']);
-
         $data['Ban'] = json_decode($one['Deadline'],true);
-
         $data['Remark'] = $one['Remark'];
-
         $data['type'] = 12;
-
         return $data;
     }
 
