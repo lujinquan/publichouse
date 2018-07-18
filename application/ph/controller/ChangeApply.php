@@ -450,13 +450,22 @@ class ChangeApply extends Base
                     break;
 
                 case 12:  // 租金调整
-
+//halt($data);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[12];  //异动名称
-                    $datas['ProcessConfigType'] = 12;        //流程控制线路
-                    $datas['InflRent'] = $data['InflRent'];  //影响的金额
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>12])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
+                    $datas['Deadline'] = json_encode($data['Ban']);
+                    $datas['Remark'] = $data['RentReason'];
+                    $InflRent = 0;
+                    foreach($data['Ban'] as $b){
+                        $InflRent += $b['addRentMoney'];
+                    }
+                    $datas['InflRent'] = $InflRent;  //影响的金额
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'12'.$suffix;   //12代表租金调整
                     $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])
                         ->field('InstitutionPID ,InstitutionID,UseNature,OwnerType,HousePrerent')
@@ -465,7 +474,6 @@ class ChangeApply extends Base
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
-                    $datas['OldHousePrerent'] = $one['HousePrerent'];
 
                     $res = Db::name('change_order')->insert($datas);
 

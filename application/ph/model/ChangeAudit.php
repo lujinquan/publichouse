@@ -464,9 +464,14 @@ class ChangeAudit extends Model
     {   //租金调整
 
         //房屋编号
-        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID')->find();
+        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
 
         $data = get_house_info($one['HouseID']);
+
+        $data['Ban'] = json_decode($one['Deadline'],true);
+
+        $data['Remark'] = $one['Remark'];
 
         $data['type'] = 12;
 
