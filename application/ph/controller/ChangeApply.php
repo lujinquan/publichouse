@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,3,8])){
+            if(!in_array($data['type'],[1,3,8,11,12])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -451,37 +451,23 @@ class ChangeApply extends Base
 
                 case 12:  // 租金调整
 
-
-
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[12];  //异动名称
                     $datas['ProcessConfigType'] = 12;        //流程控制线路
+                    $datas['InflRent'] = $data['InflRent'];  //影响的金额
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'12'.$suffix;   //12代表租金调整
                     $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])
-                        ->field('InstitutionPID ,InstitutionID,UseNature,OwnerType,HousePrerent,AnathorOwnerType,AnathorHousePrerent')
+                        ->field('InstitutionPID ,InstitutionID,UseNature,OwnerType,HousePrerent')
                         ->find();
-                    if (!$one['AnathorOwnerType'] && $data['AdjustPriceA']) {
-                        return jsons('4000','无产别的租金必须为空……');
-                    }
-
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
-
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
-                    $result['OldHousePrerent'] = $one['HousePrerent'];
-                    $result['AnathorOwnerType'] = $one['AnathorOwnerType'];
-                    $result['OldAnathorHousePrerent'] = $one['AnathorHousePrerent'];
-                    $result['NewHousePrerent'] = $data['AdjustPrice'];
-                    $result['NewAnathorHousePrerent'] = $data['AdjustPriceA'];
-                    $result['ChangeOrderID'] = $datas['ChangeOrderID'];
+                    $datas['OldHousePrerent'] = $one['HousePrerent'];
 
                     $res = Db::name('change_order')->insert($datas);
-
-                    Db::name('rent_change_order')->insert($result);
 
                     break;
 

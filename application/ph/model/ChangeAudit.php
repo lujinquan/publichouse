@@ -468,11 +468,6 @@ class ChangeAudit extends Model
 
         $data = get_house_info($one['HouseID']);
 
-        $find = Db::name('rent_change_order')->field('NewHousePrerent,NewAnathorHousePrerent')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-
-        $data['NewHousePrerent'] = $find['NewHousePrerent'];
-        $data['NewAnathorHousePrerent'] = $find['NewAnathorHousePrerent'];
-
         $data['type'] = 12;
 
         return $data;
@@ -658,9 +653,9 @@ class ChangeAudit extends Model
                                             ]);
                 }
 
-                $str = "( 1,". $one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
+                $str = "( 1,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
 
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
 
                 break;
             case 2:  //空租异动完成后的，系统处理
@@ -675,7 +670,7 @@ class ChangeAudit extends Model
                 $houseModel = new HouseInfoModel;
 
                 //修改对应的房屋的状态为暂停计租
-                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,ChangeType')->find();
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('ChangeOrderID,HouseID,OrderDate,ChangeType')->find();
 
                 if(strpos($changeFind['HouseID'],',')){
                     $arr = explode(',',$changeFind['HouseID']);
@@ -684,16 +679,16 @@ class ChangeAudit extends Model
 
                     $str = '';
                     foreach($housearr as $v){
-                        $str .= "(" . $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. "),";
+                        $str .= "('" .$changeFind['ChangeOrderID'] . "',". $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. "),";
                     }
 
                 }else{
                     $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->setField('IfSuspend', 1);
                     $housearr = $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->find();
-                    $str = "(" . $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. ")";
+                    $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. ")";
                 }
 //halt($str);
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeOrderID,ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 
                 break;
 
@@ -748,7 +743,7 @@ class ChangeAudit extends Model
             case 8:  //注销异动完成后的，系统处理
                 //$nextMonthDate = date('Y', time());
 
-                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,OrderDate,Deadline,ChangeType,UseNature')->find();
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
                 
                 $deadline = json_decode($changeFind['Deadline'],true);
 
@@ -792,6 +787,10 @@ class ChangeAudit extends Model
                 }
                 //修改对应的楼栋底下的房屋的状态为注销
                 Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
+
+                $str = "( 8,'". $changeFind['ChangeOrderID'] . "'," $changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . $changeFind['OrderDate']. ")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 //修改租金配置表,删除不可用状态房屋对应的租金配置记录
                 Db::name('rent_config')->where('HouseID', 'eq', $changeFind['HouseID'])->delete();
                 //删除该房屋本月订单
@@ -828,16 +827,14 @@ class ChangeAudit extends Model
             case 11:  //租金追加调整异动完成后的，系统处理
                 break;
             case 12:  //租金调整异动完成后的，系统处理
-                $houseid = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
-                $oneData = Db::name('rent_change_order')->where('ChangeOrderID', 'eq', $changeOrderID)
-                    ->field('OwnerType,OldHousePrerent,AnathorOwnerType,OldAnathorHousePrerent')
-                    ->find();
-                $updateData['HouseID'] = $houseid;
-                $updateData['OwnerType'] = $oneData['OwnerType'];
-                $updateData['HousePrerent'] = $oneData['OldHousePrerent'];
-                $updateData['AnathorOwnerType'] = $oneData['AnathorOwnerType'];
-                $updateData['AnathorHousePrerent'] = $oneData['OldAnathorHousePrerent'];
-                Db::name('house')->update($updateData);
+                $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setDec('HousePrerent', $one['InflRent']);
+
+                $str = "( 12,'". $one['ChangeOrderID'] . "'," $one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+
                 break;
 
             case 13:  //分户异动完成后的，系统处理(分户后的面积，金额处理没做)
