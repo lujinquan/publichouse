@@ -184,9 +184,9 @@ $('.BtnApprove').click(function(){
         	for(var i = 0;i < res.data.detail.Ban.length;i++){
         		house_str += '<tr>\
 	                <td style="width:150px;">'+(i+1)+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].banID+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].addRentMoney+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].banID+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].addRentMoney+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
 	            </tr>';
         	}
         	$('#rentBanDetail').empty();
@@ -341,7 +341,36 @@ $('.BtnDetail').click(function(){
 		}else if(type == 11){//租金追加调整
 
 		}else if(type == 12){
+			$('.status_2').hide();
+			$('#rentAdjustment').show();
+			
+        	$('.rentHouseID').text(res.data.detail.HouseID);
+        	$('.rentType').text(res.data.detail.CancelType);
+        	$('.rentUseNature').text(res.data.detail.UseNature);
+        	$('.rentDamageGrade').text(res.data.detail.DamageGrade);
+        	$('.rentOwnerTypes').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.rentLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.rentHouseUsearea').text(res.data.detail.HouseUsearea);
+        	$('.rentHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.rentTenantName').text(res.data.detail.TenantName);
+        	$('.rentTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.rentTenantTel').text(res.data.detail.TenantTel);
+        	$('.rentRemark').text(res.data.detail.Remark);
 
+        	var house_str = '';
+        	for(var i = 0;i < res.data.detail.Ban.length;i++){
+        		house_str += '<tr>\
+	                <td style="width:150px;">'+(i+1)+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].banID+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].addRentMoney+'</td>\
+	                <td style="width:250px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
+	            </tr>';
+        	}
+        	$('#rentBanDetail').empty();
+        	$('#rentBanDetail').append($(house_str));
+			processState('#rentState',res);
+			metailShow('#rentPhotos',res);
+			layerBox(value,'rentAdjustment','规定租金审批',2);
 		}else if(type==13){
 
 		}else if(type==14){
