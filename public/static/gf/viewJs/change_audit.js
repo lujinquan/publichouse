@@ -107,7 +107,7 @@ $('.BtnApprove').click(function(){
 			$('.CancelType').text(res.data.detail.CancelType);
         	$('.cancelHouseID').text(res.data.detail.HouseID);
         	$('.cancelUseNature').text(res.data.detail.UseNature);
-        	$('.cancelDamageGrade').text(res.data.detail.BanAddress);
+        	$('.cancelDamageGrade').text(res.data.detail.DamageGrade);
         	$('.cancelOwnerTypes').text(res.data.detail.OwnerTypes[0].OwnerType);
         	$('.cancelLeasedArea').text(res.data.detail.LeasedArea);
         	$('.cancelHouseUsearea').text(res.data.detail.HouseUsearea);
@@ -254,7 +254,7 @@ $('.BtnDetail').click(function(){
 			$('.CancelType').text(res.data.detail.CancelType);
         	$('.cancelHouseID').text(res.data.detail.HouseID);
         	$('.cancelUseNature').text(res.data.detail.UseNature);
-        	$('.cancelDamageGrade').text(res.data.detail.BanAddress);
+        	$('.cancelDamageGrade').text(res.data.detail.DamageGrade);
         	$('.cancelOwnerTypes').text(res.data.detail.OwnerTypes[0].OwnerType);
         	$('.cancelLeasedArea').text(res.data.detail.LeasedArea);
         	$('.cancelHouseUsearea').text(res.data.detail.HouseUsearea);
