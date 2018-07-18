@@ -173,7 +173,7 @@ return [
     'AddApplication' => '追加租金报告',
 
     //租金调整
-    'AdjustImage' =>'租金调整报告',
+    'rentUploadReport' =>'规定租金调整报告',
 
     // 大修中修分界线
     'middleDevide' => 10,

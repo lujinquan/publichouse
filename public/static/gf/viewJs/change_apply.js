@@ -1726,7 +1726,6 @@ $('#addApply').click(function() {
                     formData.append("type", 12);
                     formData.append("HouseID", $('#getRent').val());
                     formData.append("RentReason", $('#RentReason').val());
-
                     for(var i = 0;i < $('.Rent_BanNumber').length;i++){
                         formData.append("Ban["+i+"][banID]", $('.Rent_BanNumber .banID').eq(i).text());
                         formData.append("Ban["+i+"][HouseAdress]", $('.Rent_BanNumber .HouseAdress').eq(i).text());
