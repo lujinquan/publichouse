@@ -414,7 +414,7 @@
     </div>
     <div class="am-form-group am-u-sm-4">
       <label class="label_style">计租面积：</label>
-      <label id="RentCoveredArea" class="label_content label_p_style"></label>
+      <label id="RentLeasedArea" class="label_content label_p_style"></label>
     </div>
     <div class="am-form-group am-u-sm-4">
       <label class="label_style">月租金：</label>
@@ -469,6 +469,118 @@
       <div class="am-form-group am-u-sm-12" style="margin-top:20px;">
           <hr />
       </div>
+    </div>
+  </div>
+
+  <div class="Rent_BanNumber" style="display:none;">
+    <div class="am-u-sm-12">
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">楼栋编号：</label>
+        <label class="label_p_style banID"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">房屋地址：</label>
+        <label class="label_p_style HouseAdress"></label>
+      </div>
+      <div class="am-form-group am-u-sm-4">
+        <label class="label_style">增加金额：</label>
+        <input type="number" class="label_input addRentMoney" />
+      </div>
+    </div>
+    <div class="am-form-group am-u-sm-12" style="margin-top:20px;">
+        <hr />
+    </div>
+  </div>
+
+
+</form>
+
+
+<!-- 租金追加调整 -->
+<form id="RentAdditional" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">房屋编号：</label>
+      <input id="getRentAdd" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="RentAddQueryData">查询</a>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">楼栋编号：</label>
+      <label id="RentAddBanID" class="label_p_style"></label>
+    </div>
+
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label id="RentAddAddress" class="label_p_style" style="width:476px;"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">使用性质：</label>
+      <label id="RentAddUseNature" class="label_content label_p_style"></label>
+    </div>
+
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用面积：</label>
+      <label id="RentAddHouseUseArea" class="label_p_style"></label>
+    </div>
+
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">计租面积：</label>
+      <label id="RentAddLeasedArea" class="label_content label_p_style"></label>
+    </div>
+
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">承租人：</label>
+      <label id="RentAddTenantName" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">身份证号：</label>
+      <label id="RentAddTenantNumber" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">联系电话：</label>
+      <label id="RentAddTenantTel" class="label_content label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">产别：</label>
+       <label id="RentAddOwnerType" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-form-group am-u-sm-12" style="margin-top:20px;">
+      <hr />
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">追加金额：</h2>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">以前年：</label>
+      <input type="number" class="label_input" id="RentAddYear" style="margin-right:10px;" />元
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">以前月：</label>
+      <input type="number" class="label_input" id="RentAddMonth" style="margin-right:10px;" />元
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">异动事由：</label>
+      <input class="label_input RentAddReason" style="width:476px;" />
     </div>
   </div>
 </form>

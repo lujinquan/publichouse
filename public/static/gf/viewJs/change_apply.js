@@ -1616,46 +1616,35 @@ $('#addApply').click(function() {
                 resize: false,
                 zIndex: 100,
                 title: ['新增追加调整', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#Add'),
+                content: $('#RentAdditional'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    houseQuery.action('AddHouseID','1');
-                    $('#AddQuery').off('click');
-                    $('#AddQuery').on('click', function() {
-                        var HouseID = $("#AddHouseID").val()
+                    houseQuery.action('getRentAdd','1');
+                    $('#RentAddQueryData').off('click');
+                    $('#RentAddQueryData').on('click', function() {
+                        var HouseID = $("#getRentAdd").val()
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
                             layer.msg(res.msg);
-                            $("#AddBanID").text(res.data.BanID);
-                            $("#AddBanAddress").text(res.data.BanAddress);
-                            $("#AddFloorID").text(res.data.FloorID);
-                            $("#AddTenantName").text(res.data.TenantName);
-                            $("#AddTenantTel").text(res.data.TenantTel);
-                            $("#AddTenantNumber").text(res.data.TenantNumber);
-                            $("#AddCreateTime").text(res.data.CreateTime);
-                            $("#AddHouseArea").text(res.data.HouseArea);
-                            $("#AddLeasedArea").text(res.data.LeasedArea);
-                            //$("#TenantTel").text(res.data.TenantTel);
-                            //$("#BanAddress").text(res.data.BanAddress);
+                            $("#RentAddBanID").text(res.data.BanID);
+                            $("#RentAddAddress").text(res.data.BanAddress);
+                            $("#RentAddTenantName").text(res.data.TenantName);
+                            $("#RentAddTenantTel").text(res.data.TenantTel);
+                            $("#RentAddTenantNumber").text(res.data.TenantNumber);
+                            $("#RentAddUseNature").text(res.data.UseNature);
+                            $("#RentAddHouseUseArea").text(res.data.HouseUsearea);
+                            $("#RentAddLeasedArea").text(res.data.LeasedArea);
+                            $("#RentAddOwnerType").text(res.data.OwnerType);
                         });
-                    });
-                    new file({
-                        button: "#AddApplication",
-                        show: "#AddApplicationShow",
-                        upButton: "#AddApplicationUp",
-                        size: 1024,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "追加租金报告"
                     });
                 },
                 yes: function(thisIndex) {
-                    var formData = fileTotall.getArrayFormdata();
-                    formData.append("HouseID", $('#AddHouseID').val());
-                    formData.append("AddTime", $('#AddTime').val());
-                    formData.append("AddMoney", $('#AddMoney').val());
+                    var formData = new FormData();
+                    formData.append("HouseID",$('#getRentAdd').val());
+                    formData.append("RentAddYear",$('#RentAddYear').val());
+                    formData.append("RentAddMonth",$('#RentAddMonth').val());
+                    formData.append("RentAddReason",$('.RentAddReason').val());
                     formData.append("type", 11);
                     $.ajax({
                         type: "post",
@@ -1704,13 +1693,13 @@ $('#addApply').click(function() {
                             $("#RentDamageGrade").text(res.data.DamageGrade);
                             $("#RentOwnerType").text(res.data.OwnerType);
                             $("#RentHouseUsearea").text(res.data.HouseUsearea);
-                            $("#RentCoveredArea").text(res.data.CoveredArea);
+                            $("#RentLeasedArea").text(res.data.LeasedArea);
                             $("#RentHousePrerent").text(res.data.HousePrerent);
                             $("#RentTenantName").text(res.data.TenantName);
                             $("#RentTenantNumber").text(res.data.TenantNumber);
                             $("#RentTenantTel").text(res.data.TenantTel);
 
-                            var DOM = $('.Rent_BanNumber').eq(0).clone();
+                            var DOM = $('.Rent_BanNumber').eq($('.Rent_BanNumber').length - 1).clone();
                             $('#addRent').empty();
                             for(var i = 0;i < res.data.Ban.length;i++){
                                 var ban_dom = DOM.clone();
