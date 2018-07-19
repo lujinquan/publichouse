@@ -165,19 +165,41 @@ $('.BtnApprove').click(function(){
 			$('#rentAdd').show();
         	$('.rentAddHouseID').text(res.data.detail.HouseID);
         	$('.rentAddBanID').text(res.data.detail.BanID);
-        	$('.rentAddAddress').text(res.data.detail.Address);
+        	$('.rentAddAddress').text(res.data.detail.BanAddress);
         	$('.rentAddUseNature').text(res.data.detail.UseNature);
-        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUseArea);
+        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUsearea);
         	$('.rentAddLeasedArea').text(res.data.detail.LeasedArea);
         	$('.rentAddTenantName').text(res.data.detail.TenantName);
         	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
         	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
-        	$('.rentAddOwnerType').text(res.data.detail.OwnerType);
-        	$('.rentAddYear').text(res.data.detail.RentAddYear);
-        	$('.rentAddMonth').text(res.data.detail.RentAddMonth);
-        	$('.rentAddReason').text(res.data.detail.RentAddReason);
+        	$('.rentAddOwnerType').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.rentAddYear').text(res.data.detail.OldYearRent);
+        	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
+        	$('.rentAddReason').text(res.data.detail.Remark);
         	processState('#rentAddState',res);
-        	layerBox(value,'rentAdd','租金追加调整审批',1,res.data.config.status);
+			var this_index = layer.open({
+		        type: 1,
+		        area: ['990px','780px'],
+		        resize: false,
+		        zIndex: 100,
+		        title: ['租金追加调整审批', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+		        content: $('#rentAdd'),
+		        btn:['通过','不通过'],
+		        success: function(){
+
+		        },
+		        yes:function(){
+		        	var formData = new FormData();
+					formData.append('ChangeOrderID',value);
+		        	processPass(formData,this_index);
+		        },
+		        btn2:function(){
+					noPass(value)
+				}
+		    })
+
+
+
 		}else if(type==12){
 			$('.status_2').hide();
 			$('#rentAdjustment').show();
@@ -357,17 +379,17 @@ $('.BtnDetail').click(function(){
 			$('#rentAdd').show();
         	$('.rentAddHouseID').text(res.data.detail.HouseID);
         	$('.rentAddBanID').text(res.data.detail.BanID);
-        	$('.rentAddAddress').text(res.data.detail.Address);
+        	$('.rentAddAddress').text(res.data.detail.BanAddress);
         	$('.rentAddUseNature').text(res.data.detail.UseNature);
-        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUseArea);
+        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUsearea);
         	$('.rentAddLeasedArea').text(res.data.detail.LeasedArea);
         	$('.rentAddTenantName').text(res.data.detail.TenantName);
         	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
         	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
-        	$('.rentAddOwnerType').text(res.data.detail.OwnerType);
-        	$('.rentAddYear').text(res.data.detail.RentAddYear);
-        	$('.rentAddMonth').text(res.data.detail.RentAddMonth);
-        	$('.rentAddReason').text(res.data.detail.RentAddReason);
+        	$('.rentAddOwnerType').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.rentAddYear').text(res.data.detail.OldYearRent);
+        	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
+        	$('.rentAddReason').text(res.data.detail.Remark);
         	processState('#rentAddState',res);
         	layerBox(value,'rentAdd','租金追加调整审批',2);
 		}else if(type == 12){
