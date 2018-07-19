@@ -156,7 +156,7 @@ class Api extends Controller
         if (!$houseID) {
             return jsons('4000', '未传入房屋编号参数');
         }
-        $map = 'a.*,b.DamageGrade ,b.UseNature ,b.StructureType ,b.BanAddress ,b.CoveredArea ,c.TenantTel,c.TenantNumber';
+        $map = 'a.*,b.DamageGrade ,b.UseNature ,b.StructureType ,b.AreaFour,b.BanAddress ,b.CoveredArea ,c.TenantTel,c.TenantNumber';
         //承租人姓名
         $data = Db::name('house')->alias('a')
             ->join('ban b', 'a.BanID = b.BanID', 'left')
@@ -164,6 +164,14 @@ class Api extends Controller
             ->where('a.HouseID', 'eq', $houseID)
             ->field($map)
             ->find();
+
+        $data['OwnerType'] = get_owner($data['OwnerType']);
+        $data['AnathorOwnerType'] = $data['AnathorOwnerType'] ? get_owner($data['AnathorOwnerType']) : '暂无';
+        $data['DamageGrade'] = get_damage($data['DamageGrade']);
+        $data['TubulationID'] = get_institution($data['InstitutionID']);
+        $data['StructureType'] = get_structure($data['StructureType']);
+        $data['UseNature'] = get_usenature($data['UseNature']);
+        $data['CreateTime'] = date('Y-m-d H:i:s', $data['CreateTime']);
 
         $arr = Db::name('room')->where('HouseID','like','%'.$houseID.'%')->group('BanID')->column('BanID');
 
@@ -175,17 +183,15 @@ class Api extends Controller
             //halt($data['BanDetail']);
         }else{
 
-           $data['Ban'] = []; 
+           $data['Ban'] = [
+                'BanID' => $data['BanID'],
+                'BanAddress' => $data['AreaFour'],
+                'OwnerType' => $data['OwnerType'],
+           ]; 
         }
 
     
-        $data['OwnerType'] = get_owner($data['OwnerType']);
-        $data['AnathorOwnerType'] = $data['AnathorOwnerType'] ? get_owner($data['AnathorOwnerType']) : '暂无';
-        $data['DamageGrade'] = get_damage($data['DamageGrade']);
-        $data['TubulationID'] = get_institution($data['InstitutionID']);
-        $data['StructureType'] = get_structure($data['StructureType']);
-        $data['UseNature'] = get_usenature($data['UseNature']);
-        $data['CreateTime'] = date('Y-m-d H:i:s', $data['CreateTime']);
+        
 
         if (!$data) {
             return jsons('4001', '找不到该房屋对应的租户信息');
