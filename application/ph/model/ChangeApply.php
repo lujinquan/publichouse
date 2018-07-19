@@ -194,6 +194,56 @@ class ChangeApply extends Model
                     }
                     return $finds;
                 break;
+                case 11:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>11,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋已在租金追加调整异动单中……');
+                    }
+                    if(!$data['RentAddYear'] && !($data['RentAddMonth'])){
+                        return jsons('4002','以前年和以前月数据不能同时为空');
+                    }
+                    $houseModel = new HouseModel;
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    return $finds;
+                break;
+                case 12:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>12,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋已在租金调整异动单中……');
+                    }
+                    $houseModel = new HouseModel;
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    if(!$data['Ban']){
+                        return jsons('4001','请完善异动信息');
+                    }
+                    return $finds;
+                break;
+
+
 
                 default:
         }

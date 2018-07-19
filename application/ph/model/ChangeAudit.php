@@ -818,6 +818,21 @@ class ChangeAudit extends Model
                 break;
 
             case 11:  //租金追加调整异动完成后的，系统处理
+                $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                $houseInfo = Db::name('house')->where('HouseID',$one['HouseID'])->find();
+
+                $st = "('". $one['HouseID'] . "'," .$one['OwnerType'] . "," . $one['InstitutionID'] . "," . $one['InstitutionPID'] . ", " .$one['UseNature'] . ", " . $houseInfo['TenantID'] . ",'" . $houseInfo['TenantName'] . "','" . $houseInfo['BanAddress']."',".$houseInfo['HousePrerent'] . "," . $one['OldMonthRent'] . "," . date('Ym',strtotime('-1 month')) . ", " .date('Y',time()) . ", " . date('Ym',time()) . "," . $one['UserNumber'] . "," . time() . "),";
+
+                $st .= "('". $one['HouseID'] . "'," .$one['OwnerType'] . "," . $one['InstitutionID'] . "," . $one['InstitutionPID'] . ", " .$one['UseNature'] . ", " . $houseInfo['TenantID'] . ",'" . $houseInfo['TenantName'] . "','" . $houseInfo['BanAddress']."',".$houseInfo['HousePrerent'] . "," . $one['OldYearRent'] . ",'', 2017 , " . date('Ym',time()) . "," . $one['UserNumber'] . "," . time() . "),";
+
+                Db::execute("insert into ".config('database.prefix')."old_rent (HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,TenantID,TenantName,BanAddress,HousePrerent,PayRent,PayMonth,PayYear,OldPayMonth,CreateUserID,CreateTime) values " . rtrim($st, ','));
+
+                //追收做到调整里面了
+                $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " .$one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,OldMonthRent,OldYearRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+
                 break;
             case 12:  //租金调整异动完成后的，系统处理
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
