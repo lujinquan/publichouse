@@ -1314,7 +1314,7 @@ $('#addApply').click(function() {
                         formData.append("cancelType", $('#cancelType').val());
                         formData.append("cancelReason", $('#cancelReason').val());
                         formData.append("type", 8);
-                        for(var i = 0;i < $('.cancel_BanNumber').length;i++){
+                        for(var i = 0;i < $('.cancel_BanNumber').length-1;i++){
                             formData.append("Ban["+i+"][banID]", $('.cancel_BanNumber .banID').eq(i).text());
                             formData.append("Ban["+i+"][HouseAdress]", $('.cancel_BanNumber .HouseAdress').eq(i).text());
                             formData.append("Ban["+i+"][houseArea]", $('.cancel_BanNumber .houseArea').eq(i).val());
@@ -1715,7 +1715,7 @@ $('#addApply').click(function() {
                     formData.append("type", 12);
                     formData.append("HouseID", $('#getRent').val());
                     formData.append("RentReason", $('#RentReason').val());
-                    for(var i = 0;i < $('.Rent_BanNumber').length;i++){
+                    for(var i = 0;i < $('.Rent_BanNumber').length - 1;i++){
                         formData.append("Ban["+i+"][banID]", $('.Rent_BanNumber .banID').eq(i).text());
                         formData.append("Ban["+i+"][HouseAdress]", $('.Rent_BanNumber .HouseAdress').eq(i).text());
                         formData.append("Ban["+i+"][addRentMoney]", $('.Rent_BanNumber .addRentMoney').eq(i).val());
