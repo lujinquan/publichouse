@@ -102,7 +102,7 @@ class RentPre extends Base
     }
 
     /**
-     *  打印发票
+     *  删除预充
      */
     public function delete(){
 
@@ -112,9 +112,11 @@ class RentPre extends Base
 
         if($find){
 
-            Db::name('house')->where('HouseID','eq',$data['HouseID'])->setInc('RechargeRent',$data['Money']);
-            $re = Db::name('tenant')->where('TenantID' ,'eq' ,$houseFind['TenantID'])->setInc('TenantBalance',$data['Money']);
+            Db::name('house')->where('HouseID','eq',$find['HouseID'])->setInc('RechargeRent',$find['Money']);
+            $re = Db::name('tenant')->where('TenantID' ,'eq' ,$find['TenantID'])->setInc('TenantBalance',$find['Money']);
 
+            Db::name('rent_recharge')->where('id',$id)->delete();
+            return jsons('2000','删除成功！');
         }
     }
 

@@ -94,6 +94,7 @@ $('.deleteButton').click(function(){
 			res = JSON.parse(res);
 			layer.msg(res.msg);
 			layer.close(index);
+			location.reload();
 		})
 	});
 })

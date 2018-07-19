@@ -80,6 +80,15 @@ class UserManage extends Base
         if($this->request->isPost()){
 
             $data = $this->request->post();
+
+            //halt($data);
+
+            $number = Db::name('admin_user')->where('UserName','eq',$data['UserName'])->value('Number');
+
+            if($number && $number != $data['Number']){
+                return jsons('4000','登录账号已被使用');
+            }
+
             $res = Db::name('admin_user')->where('Number','eq',$data['Number'])->update($data);
 
             if ($res >0 || $res === 0) {
