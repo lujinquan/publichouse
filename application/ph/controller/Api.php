@@ -183,7 +183,7 @@ class Api extends Controller
             //halt($data['BanDetail']);
         }else{
 
-           $data['Ban'] = [
+           $data['Ban'][] = [
                 'BanID' => $data['BanID'],
                 'BanAddress' => $data['AreaFour'],
                 'OwnerType' => $data['OwnerType'],
