@@ -1636,6 +1636,8 @@ $('#addApply').click(function() {
                             $("#RentAddHouseUseArea").text(res.data.HouseUsearea);
                             $("#RentAddLeasedArea").text(res.data.LeasedArea);
                             $("#RentAddOwnerType").text(res.data.OwnerType);
+                            $("#RentAddHousePrerent").text(res.data.HousePrerent);
+                            $("#RentAddDamageGrade").text(res.data.DamageGrade);
                         });
                     });
                 },

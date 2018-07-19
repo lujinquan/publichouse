@@ -173,6 +173,8 @@ $('.BtnApprove').click(function(){
         	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
         	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
         	$('.rentAddOwnerType').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.rentAddHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.rentAddDamageGrade').text(res.data.detail.DamageGrade);
         	$('.rentAddYear').text(res.data.detail.OldYearRent);
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
@@ -387,6 +389,8 @@ $('.BtnDetail').click(function(){
         	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
         	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
         	$('.rentAddOwnerType').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.rentAddHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.rentAddDamageGrade').text(res.data.detail.DamageGrade);
         	$('.rentAddYear').text(res.data.detail.OldYearRent);
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
