@@ -437,6 +437,7 @@ class ChangeApply extends Base
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    $datas['OrderDate'] = date('Ym',time());
                     $datas['OldYearRent'] = $data['RentAddYear'];  
                     $datas['OldMonthRent'] = $data['RentAddMonth'];  
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'11'.$suffix;   //09代表房屋调整
@@ -460,6 +461,7 @@ class ChangeApply extends Base
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    $datas['OrderDate'] = date('Ym',time());
                     $datas['Deadline'] = json_encode($data['Ban']);
                     $datas['Remark'] = $data['RentReason'];
                     $InflRent = 0;
