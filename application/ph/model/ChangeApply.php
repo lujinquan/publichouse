@@ -196,6 +196,7 @@ class ChangeApply extends Model
                 break;
                 case 11:
                     $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>11,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    //halt($ifin);
                     if($ifin){
                         return jsons('4001','该房屋已在租金追加调整异动单中……');
                     }
