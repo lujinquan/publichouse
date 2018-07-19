@@ -162,7 +162,22 @@ $('.BtnApprove').click(function(){
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
-			
+			$('#rentAdd').show();
+        	$('.rentAddHouseID').text(res.data.detail.HouseID);
+        	$('.rentAddBanID').text(res.data.detail.BanID);
+        	$('.rentAddAddress').text(res.data.detail.Address);
+        	$('.rentAddUseNature').text(res.data.detail.UseNature);
+        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUseArea);
+        	$('.rentAddLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.rentAddTenantName').text(res.data.detail.TenantName);
+        	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
+        	$('.rentAddOwnerType').text(res.data.detail.OwnerType);
+        	$('.rentAddYear').text(res.data.detail.RentAddYear);
+        	$('.rentAddMonth').text(res.data.detail.RentAddMonth);
+        	$('.rentAddReason').text(res.data.detail.RentAddReason);
+        	processState('#rentAddState',res);
+        	layerBox(value,'rentAdd','租金追加调整审批',1,res.data.config.status);
 		}else if(type==12){
 			$('.status_2').hide();
 			$('#rentAdjustment').show();
@@ -339,11 +354,25 @@ $('.BtnDetail').click(function(){
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
-
+			$('#rentAdd').show();
+        	$('.rentAddHouseID').text(res.data.detail.HouseID);
+        	$('.rentAddBanID').text(res.data.detail.BanID);
+        	$('.rentAddAddress').text(res.data.detail.Address);
+        	$('.rentAddUseNature').text(res.data.detail.UseNature);
+        	$('.rentAddHouseUseArea').text(res.data.detail.HouseUseArea);
+        	$('.rentAddLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.rentAddTenantName').text(res.data.detail.TenantName);
+        	$('.rentAddTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.rentAddTenantTel').text(res.data.detail.TenantTel);
+        	$('.rentAddOwnerType').text(res.data.detail.OwnerType);
+        	$('.rentAddYear').text(res.data.detail.RentAddYear);
+        	$('.rentAddMonth').text(res.data.detail.RentAddMonth);
+        	$('.rentAddReason').text(res.data.detail.RentAddReason);
+        	processState('#rentAddState',res);
+        	layerBox(value,'rentAdd','租金追加调整审批',2);
 		}else if(type == 12){
 			$('.status_2').hide();
 			$('#rentAdjustment').show();
-			
         	$('.rentHouseID').text(res.data.detail.HouseID);
         	$('.rentType').text(res.data.detail.CancelType);
         	$('.rentUseNature').text(res.data.detail.UseNature);

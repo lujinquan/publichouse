@@ -1268,10 +1268,10 @@ $('#addApply').click(function() {
                             $('#cancelFloorID').text(res.data.FloorID);
                             $('#cancelOwnerType').text(res.data.OwnerType);
 
-                            var DOM = $('.cancel_BanNumber').eq(0).clone();
+                            var DOM = $('.cancel_BanNumber').eq($('.cancel_BanNumber').length - 1).clone();
                             $('#addBanNumber').empty();
                             for(var i = 0;i < res.data.Ban.length;i++){
-                                var ban_dom = DOM.clone();
+                                var ban_dom = DOM.clone().show();
                                 ban_dom.find('.banID').text(res.data.Ban[i].BanID);
                                 ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
                                 ban_dom.find('.banOwnerType').text(res.data.Ban[i].OwnerType);
@@ -1702,7 +1702,7 @@ $('#addApply').click(function() {
                             var DOM = $('.Rent_BanNumber').eq($('.Rent_BanNumber').length - 1).clone();
                             $('#addRent').empty();
                             for(var i = 0;i < res.data.Ban.length;i++){
-                                var ban_dom = DOM.clone();
+                                var ban_dom = DOM.clone().show();
                                 ban_dom.find('.banID').text(res.data.Ban[i].BanID);
                                 ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
                                 $('#addRent').append(ban_dom);
