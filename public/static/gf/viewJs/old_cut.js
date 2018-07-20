@@ -82,7 +82,7 @@ $('#cutOldButton').click(function(){
 	})
 });
 $('#cutdeleteOldButton').click(function(){
-	var id = $(".radioclass").attr('checked','checked').val();
+	var id = $("input:radio:checked").val();
 	console.log(id);
     if(id == null || id == ''){
         layer.msg('选择要删除的选项');
