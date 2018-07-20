@@ -36,6 +36,7 @@
                 <th class="table-check"></th>
         				<th class="table-id">#</th>
         				<th class="table-title table-th-length">楼栋编号</th>
+                <th class="table-title table-th-length">原编号</th>
                 <?php if(session('user_base_info.institution_level')!=3){ ;?>
         				<th class="table-th-length">机构名称</th>
                 <?php }; ?>
@@ -71,6 +72,18 @@
                   <input name="BanID" type="text" class="am-form-field" value="{$BanID}">
                 </div>
           	  </td>
+              <td>
+                <div class="am-input-group am-input-group-sm">
+                    <?php
+                        if($banOption != array()){
+                            $OldBanID = $banOption['OldBanID'];
+                        }else{
+                            $OldBanID = '';
+                        }
+                     ?>
+                  <input name="OldBanID" type="text" class="am-form-field" value="{$OldBanID}">
+                </div>
+              </td>
 
               <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
@@ -295,7 +308,7 @@
                 </td>
                 <td><?php echo ++$k; ?></td>
                 <td><?php echo $v['BanID']; ?></td>
-                <!-- <td><?php echo $v['OldBanID']; ?></td> -->
+                <td><?php echo $v['OldBanID']; ?></td>
                 <?php if(session('user_base_info.institution_level')!=3){ ;?>
                 <td class="am-hide-sm-only"><?php echo $v['TubulationID']; ?></td>
                 <?php }; ?>
