@@ -162,7 +162,6 @@ $('.BtnApprove').click(function(){
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
-			$('#rentAdd').show();
         	$('.rentAddHouseID').text(res.data.detail.HouseID);
         	$('.rentAddBanID').text(res.data.detail.BanID);
         	$('.rentAddAddress').text(res.data.detail.BanAddress);
@@ -199,9 +198,6 @@ $('.BtnApprove').click(function(){
 					noPass(value)
 				}
 		    })
-
-
-
 		}else if(type==12){
 			$('.status_2').hide();
 			$('#rentAdjustment').show();
@@ -378,7 +374,6 @@ $('.BtnDetail').click(function(){
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
-			$('#rentAdd').show();
         	$('.rentAddHouseID').text(res.data.detail.HouseID);
         	$('.rentAddBanID').text(res.data.detail.BanID);
         	$('.rentAddAddress').text(res.data.detail.BanAddress);

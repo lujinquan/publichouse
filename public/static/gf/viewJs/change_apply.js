@@ -1259,7 +1259,7 @@ $('#addApply').click(function() {
                             $('#cancelUseNature').text(res.data.UseNature);
                             $('#cancelDamageGrade').text(res.data.DamageGrade);
                             $('#cancelHouseUsearea').text(res.data.HouseUsearea);
-                            $('#cancelCoveredArea').text(res.data.CoveredArea);
+                            $('#cancelLeasedArea').text(res.data.LeasedArea);
                             $('#cancelHousePrerent').text(res.data.HousePrerent);
                             $('#cancelTenantName').text(res.data.TenantName);
                             $('#cancelTenantNumber').text(res.data.TenantNumber);
