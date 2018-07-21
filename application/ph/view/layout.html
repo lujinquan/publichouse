@@ -106,7 +106,8 @@
     </div>
   </div>
   <!-- sidebar end -->
-
+<!-- 版本version显示 -->
+<div class="admin-content" style="display:none;"></div>
   <!-- content start -->
   {block name="content"}
   <div class="admin-content">
@@ -364,7 +365,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;">© 2017 CTNM.</p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM. V1.4</p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -533,6 +534,7 @@
 <![endif]-->
 {include file="application/ph/view/notice/notice_info.html" /}
 {include file="application/ph/view/index/second_menu.html" /}
+{include file="application/ph/view/index/version.html" /}
 <script src="/public/static/gf/js/amazeui.min.js"></script>
 <script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
 <script src="/public/static/gf/js/app.js"></script>
@@ -542,7 +544,7 @@
   if(body_height < window_height){
     $("footer").css({'width':'100%','position':'fixed','bottom':'0'});
   }
-  $('.admin-sidebar').height($('.admin-content').height());
+  $('.admin-sidebar').height($('.admin-content:eq(1)').height());
 
   // $('.d-parent').click(function(){
   //   setTimeout(function(){
