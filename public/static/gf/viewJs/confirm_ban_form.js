@@ -501,7 +501,19 @@ $(".details_btn").click(function(){
 			};
 			$('p[id=BanID]').text(res.data.BanID);                 //楼栋编号
 			$('p[id=BanAddress]').text(res.data.BanAddress);       //楼栋地址
-			$('p[id=BanPropertyID]').text(res.data.BanPropertyID); //产权证号
+
+			$("#detailBanNumber").text(res.data.BanNumber);          //栋号
+			$("#detailEnterpriseRent").text(res.data.EnterpriseRent); //企业规租
+			$('#detailEnterprisePrice').text(res.data.EnterpriseOprice);//企业原价
+			$('#detailEnterpriseNumber').text(res.data.EnterpriseNum);//企业栋数
+			$("#detailPartyRent").text(res.data.PartyRent); //机关规租
+			$('#detailPartyPrice').text(res.data.PartyOprice);    //机关原价
+			$('#detailPartyNumber').text(res.data.PartyNum);          //机关栋数
+			$("#detailCivilRent").text(res.data.CivilRent); //民用规租
+			$('#detailCivilPrice').text(res.data.CivilOprice);          //民用原价
+			$('#detailCivilNumber').text(res.data.CivilNum);          //民用栋数
+
+			$('p[id=detailBanPropertyID]').text(res.data.BanPropertyID); //产权证号
 			$('p[id=BanYear]').text(res.data.BanYear);             //建造年份
 			$('p[id=DamageGrade]').text(res.data.DamageGrade);     //完损等级
 			$('p[id=OwnerType]').text(res.data.OwnerType);         //楼栋产别
@@ -514,6 +526,8 @@ $(".details_btn").click(function(){
 			$('p[id=BanFreeholdID]').text(res.data.BanFreeholdID); //不动产证号
 
 			$('#DetailsTotalHouseHolds').text(res.data.TotalHouseholds);
+			$('#detailBanRatio').text(res.data.BanRatio);
+
 			$('#detailsTotalArea').text(res.data.CoveredArea);
 			$('#detailActualArea').text(res.data.ActualArea);
 			$('#detailBanArea').text(res.data.BanArea);
@@ -525,17 +539,14 @@ $(".details_btn").click(function(){
 			$('#IfFirst').html(res.data.IfFirst);
 			$('p[id=BanLandID]').text(res.data.BanLandID);         //土地证号
 			$('p[id=BanUnitNum]').text(res.data.BanUnitNum);       //总单元数
-			$('p[id=CivilArea]').text(res.data.CivilArea);         //民建面
-			$('p[id=PartyArea]').text(res.data.PartyArea);         //机关建面
-			$('p[id=EnterpriseArea]').text(res.data.EnterpriseArea);         //企业建面
 			$('p[id=BanUsearea]').text(res.data.BanUsearea);       //使用面积
 			$('p[id=CutIf]').text(res.data.CutIf);                 //产权是否分隔
 			$('p[id=HistoryIf]').text(res.data.HistoryIf);         //是否历史优秀建筑
 			$('p[id=ProtectculturalIf]').text(res.data.ProtectculturalIf);  //是否文物保护建筑
 			$('p[id=ReformIf]').text(res.data.ReformIf);           //是否改造产
 			$('p[id=TotalArea]').text(res.data.TotalArea);         //合建面积
-			$('p[id=PropertySource]').text(res.data.PropertySource);         //产权来源
-			$('p[id=RemoveStatus]').text(res.data.RemoveStatus);         //拆迁状态
+			$('p[id=detailPropertySource]').text(res.data.PropertySource);         //产权来源
+			$('p[id=detailRemoveStatus]').text(res.data.RemoveStatus);         //拆迁状态
 			$('p[id=BanGpsXY]').text(res.data.BanGpsX+','+res.data.BanGpsY);         //经纬度
 			//记录
 			var ARecord = res.data.change_record;
