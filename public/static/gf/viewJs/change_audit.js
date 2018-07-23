@@ -555,7 +555,7 @@ function layerBox(value,id,name,operation,status){
         },
         yes:function(){
         	if(status == '1'){
-        		var formData = fileTotall.getArrayFormdata();
+        		var formData = fileTotall.getArrayFormdata() || new FormData();
         	}else{
         		var formData = new FormData();
         	}
