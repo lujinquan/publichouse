@@ -427,48 +427,25 @@
       <a class="am-btn am-btn-primary am-btn-sm" id="RentQueryData">查询</a>
     </div>
   </div>
-  <div class="am-u-sm-12">
-    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
-      <label class="label_style">使用性质：</label>
-      <label id="RentUseNature" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">完损等级：</label>
-      <label id="RentDamageGrade" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">产别：</label>
-      <label id="RentOwnerType" class="label_content label_p_style"></label>
-    </div>
+
+  <div class="am-form-group am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+          <thead style="display:block;">
+              <tr>
+                  <td style="width:100px;">#</td>
+                  <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
+                  <td style="width:200px;" class="am-hide-sm-only">房间间号</td>
+                  <td style="width:200px;" class="am-hide-sm-only">调整前使用面积</td>
+                  <td style="width:350px;" class="am-hide-sm-only">调整后使用面积</td>
+              </tr>
+          </thead>
+          <tbody id="rentDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+
+          </tbody>
+      </table>
   </div>
-  <div class="am-u-sm-12">
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">使用面积：</label>
-      <label id="RentHouseUsearea" class="label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">计租面积：</label>
-      <label id="RentLeasedArea" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">月租金：</label>
-       <label id="RentHousePrerent" class="label_content label_p_style"></label>
-    </div>
-  </div>
-  <div class="am-u-sm-12">
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">承租人：</label>
-      <label id="RentTenantName" class="label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">身份证号：</label>
-      <label id="RentTenantNumber" class="label_content label_p_style"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">联系电话：</label>
-       <label id="RentTenantTel" class="label_content label_p_style"></label>
-    </div>
-  </div>
+
 
   <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-12">
@@ -482,24 +459,34 @@
       <hr />
   </div>
   <div class="am-form-group am-u-sm-12">
-    <h2 class="label_title">基础信息：</h2>
+    <h2 class="label_title">租金信息：</h2>
   </div>
   <div id="addRent">
     <div class="Rent_BanNumber">
+
+
       <div class="am-u-sm-12">
         <div class="am-form-group am-u-sm-4">
-          <label class="label_style">楼栋编号：</label>
+          <label class="label_style" style="width:88px;">楼栋编号：</label>
           <label class="label_p_style banID"></label>
         </div>
-        <div class="am-form-group am-u-sm-4">
-          <label class="label_style">房屋地址：</label>
+        <div class="am-form-group am-u-sm-8">
+          <label class="label_style" style="width:88px;">房屋地址：</label>
           <label class="label_p_style HouseAdress"></label>
         </div>
+      </div>
+
+      <div class="am-u-sm-12">
         <div class="am-form-group am-u-sm-4">
-          <label class="label_style">增加金额：</label>
-          <input type="number" class="label_input addRentMoney" />
+          <label class="">调整前金额：</label>
+          <input type="number" class="label_input addRentBefore" />
+        </div>
+        <div class="am-form-group am-u-sm-8">
+          <label class="">调整后金额：</label>
+          <input type="number" class="label_input addRentAfter" />
         </div>
       </div>
+
       <div class="am-form-group am-u-sm-12" style="margin-top:20px;">
           <hr />
       </div>
@@ -525,8 +512,6 @@
         <hr />
     </div>
   </div>
-
-
 </form>
 
 
@@ -623,6 +608,114 @@
     <div class="am-form-group am-u-sm-12">
       <label class="label_style">异动事由：</label>
       <input class="label_input RentAddReason" style="width:476px;" />
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      <h2 class="label_title">资料上传：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label>其他(票据)：</label>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-5">
+          <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+          <input id="otherBills" type="file" name="otherBills" multiple>
+    </div>
+    <div id="otherBillsShow" class="am-u-md-12 img_content"></div>
+  </div>
+</form>
+
+<!-- 陈欠核销 -->
+<form id="oldCancel" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label id="houseLabel" class="label_style">房屋编号：</label>
+      <input type="number" id="getInfo_1" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="DQueryData">查询</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">楼栋编号：</label>
+      <label id="BanID" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label id="BanAddress" class="label_content label_p_style" style="width:476px;"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style"> 产别：</label>
+      <label id="OwnTypeD" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用性质：</label>
+      <label id="useNature" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 am-u-end">
+      <label class="label_style">月租金：</label>
+      <label id="monthRent" class="label_p_style"></label>
+    </div>
+
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用面积：</label>
+      <label id="HouseUsearea" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">计租面积：</label>
+      <label id="LeasedArea" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">联系电话：</label>
+      <label id="TenantTel" class="label_content label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">承租人：</label>
+      <label id="TenantName" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">身份证号：</label>
+      <label id="TenantNumber" class="label_content label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-form-group am-u-sm-12">
+      <h2 class="label_title">核销金额：</h2>
+  </div>
+
+  <div class="am-form-group am-u-md-12">
+    <div class="am-form-group am-u-sm-4">
+        <label class="label_style">减免证号：</label>
+        <input type="number" name="IDnumber" class="label_input" id="IDnumber" />
+    </div>
+    <div class="am-form-group am-u-sm-4">
+        <label class="label_style">以前月：</label>
+        <ul class="month_ul">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+        </ul>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+        <label class="">以前月核销总金额：</label>
+        
     </div>
   </div>
 </form>

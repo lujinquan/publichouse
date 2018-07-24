@@ -369,7 +369,7 @@ $('#addApply').click(function() {
                 resize: false,
                 zIndex: 100,
                 title: ['新增陈欠核销', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#derateApplyForm'),
+                content: $('#oldCancel'),
                 btn: ['确定', '取消'],
                 success: function() {
                     houseQuery.action('getInfo_1','1');
@@ -1620,6 +1620,16 @@ $('#addApply').click(function() {
                 btn: ['确定', '取消'],
                 success: function() {
                     houseQuery.action('getRentAdd','1');
+                    new file({
+                        button: "#otherBills",
+                        show: "#otherBillsShow",
+                        upButton: "#otherBillsUp",
+                        size: 1024,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "其他(票据)"
+                    });
                     $('#RentAddQueryData').off('click');
                     $('#RentAddQueryData').on('click', function() {
                         var HouseID = $("#getRentAdd").val()
@@ -1642,7 +1652,7 @@ $('#addApply').click(function() {
                     });
                 },
                 yes: function(thisIndex) {
-                    var formData = new FormData();
+                    var formData = fileTotall.getArrayFormdata();
                     formData.append("HouseID",$('#getRentAdd').val());
                     formData.append("RentAddYear",$('#RentAddYear').val());
                     formData.append("RentAddMonth",$('#RentAddMonth').val());

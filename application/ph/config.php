@@ -170,7 +170,7 @@ return [
     'PipeApplication' => '管段异动申请表',
 
     //租金追加调整
-    'AddApplication' => '追加租金报告',
+    'otherBills' => '其他(票据)',
 
     //租金调整
     'rentUploadReport' =>'规定租金调整报告',

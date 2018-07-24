@@ -178,6 +178,7 @@ $('.BtnApprove').click(function(){
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
         	processState('#rentAddState',res);
+        	metailShow('#rentAddPhotos',res);
 			var this_index = layer.open({
 		        type: 1,
 		        area: ['990px','780px'],
@@ -390,6 +391,7 @@ $('.BtnDetail').click(function(){
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
         	processState('#rentAddState',res);
+        	metailShow('#rentAddPhotos',res);
         	layerBox(value,'rentAdd','租金追加调整审批',2);
 		}else if(type == 12){
 			$('.status_2').hide();
