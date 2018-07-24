@@ -13,17 +13,17 @@ class ConfirmBanInfo extends Base
     public function index()
     {
         //所有公共设施
-        $faciLst = $this->BanInfoModel->get_all_facilities();
+        //$faciLst = $this->BanInfoModel->get_all_facilities();
         //所有的街道
         $areaTwo = $this->BanInfoModel->get_area(2);
         //所有的社区
         $areaThree = $this->BanInfoModel->get_area(3);
-        $banLst = $this->BanInfoModel->get_all_ban_lst();
+        $banLst = $this->BanInfoModel->get_all_ban_lst(array('eq' ,0));
         $this->assign([
             'banLst' => $banLst['arr'],
             'banLstObj' => $banLst['obj'],
             'banOption' => $banLst['option'],
-            'faciLst' => $faciLst,
+            //'faciLst' => $faciLst,
             'areaTwo' => $areaTwo,
             'areaThree' => $areaThree,
         ]);

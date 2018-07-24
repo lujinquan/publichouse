@@ -15,8 +15,6 @@ class RentUnpaid extends Base
 
         $rentLst = model('ph/RentCount') ->get_all_rent_order_lst(array('Type'=>2,));
 
-        //halt($rentLst['arr']);
-
         $this->assign([
             'rentLst' => $rentLst['arr'],
             'unpaidRents' => $rentLst['UnpaidRents'],
@@ -35,7 +33,7 @@ class RentUnpaid extends Base
 
         $ids = $_POST['value'];
 
-        return jsons('4002','由于短信付费，功能暂时关闭……');
+        return jsons('4002','由于短信需付费，功能暂时关闭……');
 
         if(!$ids){
 
@@ -97,81 +95,81 @@ class RentUnpaid extends Base
         return $bool?jsons('2000' ,'撤销成功'):jsons('4000' ,'往期订单无法撤销');
     }
 
-    /**
-     *  缴款
-     */
-    public function pay(){
+    // /**
+    //  *  缴款
+    //  */
+    // public function pay(){
 
-        $rentOrderID = input('RentOrderID');
+    //     $rentOrderID = input('RentOrderID');
 
-        if ($this->request->isPost()) {
-            $data = $this->request->post();
+    //     if ($this->request->isPost()) {
+    //         $data = $this->request->post();
 
-            $where['RentOrderID'] = array('eq', $data['RentOrderID']);
+    //         $where['RentOrderID'] = array('eq', $data['RentOrderID']);
 
-            $result = Db::name('rent_order')->where($where)->field('OrderDate, InstitutionID,InstitutionPID,OwnerType,UseNature ,HouseID,UnpaidRent, PaidRent ,ReceiveRent,Type')->find();
+    //         $result = Db::name('rent_order')->where($where)->field('OrderDate, InstitutionID,InstitutionPID,OwnerType,UseNature ,HouseID,UnpaidRent, PaidRent ,ReceiveRent,Type')->find();
 
-            if ($result['UnpaidRent'] < $data['cost']) {
+    //         if ($result['UnpaidRent'] < $data['cost']) {
 
-                return jsons('4003', '缴费金额不能超过欠缴金额');
+    //             return jsons('4003', '缴费金额不能超过欠缴金额');
 
-            } elseif ($result['UnpaidRent'] == $data['cost']) {
+    //         } elseif ($result['UnpaidRent'] == $data['cost']) {
 
-                Db::name('rent_order')->where($where)->update(['UnpaidRent' => 0, 'Type' => 3, 'PaidRent' => $result['ReceiveRent']]);
+    //             Db::name('rent_order')->where($where)->update(['UnpaidRent' => 0, 'Type' => 3, 'PaidRent' => $result['ReceiveRent']]);
 
-            } else {
-                Db::name('rent_order')->where($where)->setDec('UnpaidRent', $data['cost']);
-                Db::name('rent_order')->where($where)->setField('Type', 2);
-                Db::name('rent_order')->where($where)->setInc('PaidRent', $data['cost']);
+    //         } else {
+    //             Db::name('rent_order')->where($where)->setDec('UnpaidRent', $data['cost']);
+    //             Db::name('rent_order')->where($where)->setField('Type', 2);
+    //             Db::name('rent_order')->where($where)->setInc('PaidRent', $data['cost']);
 
-            }
+    //         }
 
-            $results = [
-                'RentOrderID' => $data['RentOrderID'],
-                'Rent' => $data['cost'],
-                'OrderDate' => $result['OrderDate'],
-                'InstitutionID' => $result['InstitutionID'],
-                'InstitutionPID' => $result['InstitutionPID'],
-                'HouseID' => $result['HouseID'],
-                'OwnerType' => $result['OwnerType'],
-                'UseNature' => $result['UseNature'],
-                'CreateDate' => date('Ym',time()),
-                'CreateUserID' => UID,
-                'CreateTime' => time(),
-            ];
-            //halt($results);
-            Db::name('rent_recovery')->insert($results);
+    //         $results = [
+    //             'RentOrderID' => $data['RentOrderID'],
+    //             'Rent' => $data['cost'],
+    //             'OrderDate' => $result['OrderDate'],
+    //             'InstitutionID' => $result['InstitutionID'],
+    //             'InstitutionPID' => $result['InstitutionPID'],
+    //             'HouseID' => $result['HouseID'],
+    //             'OwnerType' => $result['OwnerType'],
+    //             'UseNature' => $result['UseNature'],
+    //             'CreateDate' => date('Ym',time()),
+    //             'CreateUserID' => UID,
+    //             'CreateTime' => time(),
+    //         ];
+    //         //halt($results);
+    //         Db::name('rent_recovery')->insert($results);
 
-            return jsons('2000', '缴款成功');
+    //         return jsons('2000', '缴款成功');
 
-        }
+    //     }
 
 
-        $result = model('ph/RentCount')->get_one_rent_order_info($rentOrderID);
+    //     $result = model('ph/RentCount')->get_one_rent_order_info($rentOrderID);
 
-        //halt($result);
+    //     //halt($result);
 
-        $datas = [
-            'HousePrerent' => $result['HousePrerent'],  //规定租金
-            'CutRent' => $result['CutRent'],    //减免租金
-            'PumpCost' => $result['PumpCost'],    //泵费
-            'RepairCost' => $result['RepairCost'],  //维修费
-            'ReceiveRent' => $result['ReceiveRent'],  //应缴租金
-            'LateRent' => $result['LateRent'],  //滞纳金
-            'ReceiveRent' => $result['ReceiveRent'],  //应收租金
-            'PaidRent' => $result['PaidRent'],  //已缴租金
-            'UnpaidRent' => $result['UnpaidRent'],  //欠缴租金
-        ];
+    //     $datas = [
+    //         'HousePrerent' => $result['HousePrerent'],  //规定租金
+    //         'CutRent' => $result['CutRent'],    //减免租金
+    //         'PumpCost' => $result['PumpCost'],    //泵费
+    //         'RepairCost' => $result['RepairCost'],  //维修费
+    //         'ReceiveRent' => $result['ReceiveRent'],  //应缴租金
+    //         'LateRent' => $result['LateRent'],  //滞纳金
+    //         'ReceiveRent' => $result['ReceiveRent'],  //应收租金
+    //         'PaidRent' => $result['PaidRent'],  //已缴租金
+    //         'UnpaidRent' => $result['UnpaidRent'],  //欠缴租金
+    //     ];
 
-        return jsons('2000'  ,'获取成功' ,$datas);
-    }
+    //     return jsons('2000'  ,'获取成功' ,$datas);
+    // }
 
-    /**
-     *  明细
-     */
-    public function detail(){
+    // /**
+    //  *  明细
+    //  */
+    // public function detail(){
 
-    }
+    // }
 
 
 

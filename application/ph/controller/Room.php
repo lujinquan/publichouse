@@ -10,7 +10,7 @@ class Room extends Base
     public function index(){
         $rentPoint = Db::name('rent_cut_point')->select();
         $roomPoint = Db::name('room_type_point')->field('id ,RoomTypeName')->select();
-        $roomData = model('ph/Room')->get_all_room_lst(array('between' ,[1,9]));
+        $roomData = model('ph/Room')->get_all_room_lst(array('eq' ,1));
         //halt($roomData['arr']);
         $roomTypeData = Db::name('room_type_point')->field('id ,RoomTypeName')->select();
         $this->assign([

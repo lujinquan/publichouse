@@ -175,7 +175,9 @@ class Api extends Controller
 
         $arr = Db::name('room')->where('HouseID','like','%'.$houseID.'%')->group('BanID')->column('BanID');
 
-
+        $begin = date('Y',time()).'00';
+        $now = date('Ym',strtotime('-1 month'));
+        $data['Room'] = Db::name('rent_order')->where(['OrderDate'=>['between',[$begin,$now]],'HouseID'=>$houseID])->column('UnpaidRent');
 
         if($arr){
             $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.AreaFour as BanAddress,b.OwnerType')->select();
@@ -1323,27 +1325,79 @@ class Api extends Controller
     }
 
     public function test()
+    {
+        $roomid = input('RoomID');
+        $houseid = input('HouseID');
+        if($roomid){
+            $rent = count_room_rent($roomid);
+            echo '房间月租金：'.$rent.'<br/>';
+        }else{
+            //halt($houseid);
+            $rent = count_house_rent($houseid);
+            echo '房屋月租金：'.$rent;
+        }
+    }
+
+    /**
+     * [clearLog 清除系统日志，只保留最近一周的日志]
+     * @return [type] [description]
+     */
+    public function clearLog()
+    {
+        // 删除指定时间的日志(默认1周)
+        $timebf=config('timebf')?:604800;
+        //halt($timebf);
+        foreach (list_file(LOG_PATH) as $f) {
+            if ($f ['isDir']) {
+                foreach (list_file($f ['pathname'] . '/', '*.log') as $ff) {
+                    if ($ff ['isFile']) {
+                        //halt(date('Y-m-d H:i:s',$ff['mtime']));
+                        if (time() - $ff ['mtime'] > $timebf) {
+                            @unlink($ff ['pathname']);
+                        }
+                    }
+                }
+            }
+        }
+        echo 'ok';
+    }
+
+    public function count_houses()
     {   
         $housemodel = new HouseInfoModel;
 
-        $roommodel = new RoomModel;
-
         // $offset = 0;
         // $length = 10000;  
-        // $res = Db::name('house')->limit($offset,$length)->column('HouseID,ApprovedRent');
+        $res = Db::name('house')->column('HouseID,ApprovedRent');
         //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        $res = Db::name('room')->column('RoomID,RoomRentMonth');
+        //$res = Db::name('room')->column('RoomID,RoomRentMonth');
+        $j = 0;
         //$res = ['10900918250336'=>0];
         foreach($res as $k => $v){  
-             $s = 0;
-             $s = count_room_rent($k);
+             $j++;
+             $s = count_house_rent($k);
              //dump($k.'计算租金是：');halt($s);
-             $roommodel->save(['RoomRentMonth'=>$s],['RoomID'=>$k]);
+             $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
              //halt($k);
         }
 
-        halt('ok');
+        halt($j);
 
+    }
+
+    public function count_rooms()
+    {
+        $roommodel = new RoomModel;
+
+        $res = Db::name('room')->column('RoomID,RoomRentMonth');
+        $j = 0;
+ 
+        foreach($res as $k => $v){  
+             $j++;
+             $s = count_room_rent($k);
+             $roommodel->save(['RoomRentMonth'=>$s],['RoomID'=>$k]);
+        }
+        halt($j);
     }
 
     public function dingshiqi()

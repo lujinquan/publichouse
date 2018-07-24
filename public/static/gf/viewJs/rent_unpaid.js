@@ -44,6 +44,8 @@ $('#PressForMoney').click(function(){
 			if(res.retcode == "2000"){
 				layer.msg('批量操作成功！');
 				location.reload();
+			}else{
+				layer.msg(res.msg);
 			}
 		});
 	}

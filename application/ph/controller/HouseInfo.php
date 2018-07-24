@@ -67,7 +67,7 @@ class HouseInfo extends Base
             if (true !== $result) {
                 return jsons('4001', $result);
             }
-            $data['Status'] = 1;  //状态改为未确认状态
+            $data['Status'] = 0;  //状态改为未确认状态
             if ($_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     if ($v['error'] !== 0) {

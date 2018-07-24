@@ -330,11 +330,11 @@ class BanInfo extends Model
         return $data;
     }
 
-    //获取所有楼栋附近的公共设施目录
-    public function get_all_facilities(){
-        $data = Db::name('ban_facilities')->field('id,BanFacilities')->select();
-        return $data;
-    }
+    // //获取所有楼栋附近的公共设施目录
+    // public function get_all_facilities(){
+    //     $data = Db::name('ban_facilities')->field('id,BanFacilities')->select();
+    //     return $data;
+    // }
 
     public function get_all_cut_type(){
         $data = Db::name('cut_rent_type')->field('id,CutName')->select();
