@@ -35,23 +35,24 @@ $("#addTransfer").click(function(){
 				$('.label_input').val('');
 				$('.transfer_money').show();
 				$('.transfer_reason').show();
-				$('.fileUpLoad').hide();
-				$('#transferWay').change(function(){
-					var transferWay_value = $(this).val();
-					if(transferWay_value == '1'){
-						$('.transfer_money').show();
-						$('.transfer_reason').show();
-						$('.fileUpLoad').hide();
-					}else if(transferWay_value == '2'){
-						$('.transfer_money').hide();
-						$('.transfer_reason').show();
-						$('.fileUpLoad').hide();
-					}else{
-						$('.transfer_money').hide();
-						$('.transfer_reason').hide();
-						$('.fileUpLoad').show();
-					}
-				})
+				$('.fileUpLoad').show();
+
+				// $('#transferWay').change(function(){
+				// 	var transferWay_value = $(this).val();
+				// 	if(transferWay_value == '1'){
+				// 		$('.transfer_money').show();
+				// 		$('.transfer_reason').show();
+				// 		$('.fileUpLoad').hide();
+				// 	}else if(transferWay_value == '2'){
+				// 		$('.transfer_money').hide();
+				// 		$('.transfer_reason').show();
+				// 		$('.fileUpLoad').hide();
+				// 	}else{
+				// 		$('.transfer_money').hide();
+				// 		$('.transfer_reason').hide();
+				// 		$('.fileUpLoad').show();
+				// 	}
+				// })
 			},
 			yes:function(thisIndex){
 				var ID = $('#HouseIdInput').val();//房屋ID

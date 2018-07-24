@@ -1019,4 +1019,24 @@ text-decoration: underline;
 #houseQuery td,#houseQuery th,#banQuery td,#banQuery th,#tenantQuery td,#tenantQuery th{
   padding:0;
 }
-#houseQueryClick,#banQueryClick,#tenantQueryClick{border-radius:4px;} 
+#houseQueryClick,#banQueryClick,#tenantQueryClick{border-radius:4px;}
+
+.month_ul li{
+  width:18px;
+  height:18px;
+  margin:0px 0px 6px 10px;
+  text-align:center;
+  font-size:12px;
+  line-height:16px;
+  list-style:none;
+  display:inline-block;
+  vertical-align:middle;
+  border:1px solid #2E77EF;
+  border-radius:2px;
+  cursor:pointer;
+  color:#333;
+}
+.month_ul li.active{
+  color:#FFF;
+  background:#2E77EF;
+}
