@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,3,8,11,12])){
+            if(!in_array($data['type'],[1,3,4,8,11,12])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -79,7 +79,7 @@ class ChangeApply extends Base
                     //从表单传递进来的数据：房屋编号 ，减免类型， 证件号， 证件有效期
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeType'] = $data['type'];  //异动类型
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ProcessConfigName'] = $changeTypes[1];  //异动名称
                     $datas['TenantID'] = $one['TenantID']; //当前租户
                     $datas['OwnerType'] = $one['OwnerType']; //产别
@@ -113,7 +113,7 @@ class ChangeApply extends Base
                 case 2:  // 空租：目前情况是异动类型和流程控制线路的值相同
 
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
 
                     $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
@@ -168,20 +168,24 @@ class ChangeApply extends Base
                     break;
 
                 case 4:  // 陈欠核销,按户来，核销掉一段时间的账目
-
-                    //从表单传递进来的数据：房屋编号 ，减免类型， 证件号， 证件有效期
+//halt($data);
+                    
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['DateStart'] = date('Ym',strtotime($data['DateStart']));  //核销起始时间
-                    $datas['DateEnd'] = date('Ym',strtotime($data['DateEnd']));  //核销结束时间
-
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    //$datas['Remark'] = $data['cancelReason'];  //异动缘由
+                    $datas['Deadline'] = $data['oldCancelMonthBefore'];  //异动缘由
+                    $datas['OldMonthRent'] = $data['cancel_money'];  //核销的以前月的金额
+                    $datas['OldYearRent'] = $data['oldCancelYearBefore'];  //核销的以前年的金额
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
 
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');  //当前租户
-                    $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
 
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
-                    $datas['ProcessConfigType'] = 4;        //流程控制线路
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>4])->order('id desc')->value('id');        //找到最新的流程控制线路
+
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeType'] = $data['type'];   //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[4];  //异动名称
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'04'.$suffix;   //04代表陈欠核销
@@ -195,7 +199,7 @@ class ChangeApply extends Base
 
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
 
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
 
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');  //当前租户
 

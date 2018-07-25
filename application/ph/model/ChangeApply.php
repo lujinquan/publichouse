@@ -158,6 +158,31 @@ class ChangeApply extends Model
                         return jsons('4004','所选房屋产别不能超过一种');
                     }
                 break;
+                case 4:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋已经在陈欠核销异动订单中了');
+                    }
+                    $houseModel = new HouseModel;
+                    if(!($data['oldCancelYearBefore']) && !($data['oldCancelMonthBefore'])){
+                        return jsons('4000','未选择任何房屋');
+                    }
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    return $finds;
+                break;
                 case 8:
                     $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
                     if($ifin){

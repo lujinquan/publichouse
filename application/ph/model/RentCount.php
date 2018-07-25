@@ -315,7 +315,7 @@ class RentCount extends Model
         //$where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
         //$where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
         $where['OwnerType'] = array('neq', 6); // 6是生活用房
-        $where['HousePrerent'] = array('>', 0); // 规租大于0
+        //$where['HousePrerent'] = array('>', 0); // 规租大于0
         $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
 
         $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
@@ -374,6 +374,8 @@ class RentCount extends Model
 
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+
+        Db::name('order_config')->where(['ReceiveRent'=>0])->delete();
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
@@ -400,7 +402,7 @@ class RentCount extends Model
         $where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
         //$where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
         $where['OwnerType'] = array('neq', 6); // 6是生活用房
-        $where['HousePrerent'] = array('>', 0); // 规租大于0
+        //$where['HousePrerent'] = array('>', 0); // 规租大于0
         $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
 
         $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
@@ -459,6 +461,8 @@ class RentCount extends Model
 
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+
+        Db::name('order_config')->where(['ReceiveRent'=>0,'InsitutionID'=>$institutionID])->delete();
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
