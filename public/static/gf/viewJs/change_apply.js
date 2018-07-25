@@ -362,7 +362,6 @@ $('#addApply').click(function() {
             });
             break;
         case "4":
-            $(".WriteOff").show();
             layer.open({
                 type: 1,
                 area: ['990px', '600px'],
@@ -372,23 +371,27 @@ $('#addApply').click(function() {
                 content: $('#oldCancel'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    houseQuery.action('getInfo_1','1');
-                    $('#DQueryData').on("click", function() {
-                        var HouseID = $('#getInfo_1').val();
+                    houseQuery.action('oldCancelHouseID','1');
+                    $('#oldCancelQuery').on("click", function() {
+                        var HouseID = $('#oldCancelHouseID').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
                             layer.msg(res.msg);
-                            $("#BanID").text(res.data.BanID);
-                            $("#BanAddress").text(res.data.BanAddress);
-                            $("#CreateTime").text(res.data.CreateTime);
-                            $("#FloorID").text(res.data.FloorID);
-                            $("#HouseArea").text(res.data.HouseUsearea);
-                            $("#LeasedArea").text(res.data.LeasedArea);
-                            $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantNumber);
-                            $("#TenantTel").text(res.data.TenantTel);
-                            $('#OwnerTypec').text(res.data.OwnerType);
+                            $("#oldCancelBanID").text(res.data.BanID);
+                            $("#oldCancelBanAddress").text(res.data.BanAddress);
+                            $("#oldCanceluseNature").text(res.data.UseNature);
+                            $("#oldCancelHouseUsearea").text(res.data.HouseUsearea);
+                            $("#oldCancelLeasedArea").text(res.data.LeasedArea);
+                            $("#oldCancelTenantName").text(res.data.TenantName);
+                            $("#oldCancelTenantNumber").text(res.data.TenantNumber);
+                            $("#oldCancelTenantTel").text(res.data.TenantTel);
+                            $("#oldCancelOwnTypeD").text(res.data.OwnerType);
+                            $("#oldCancelmonthRent").text(res.data.HousePrerent);
+                            $('.month_ul li').removeClass('active');
+                            for(var i = 0;i < res.data.Room.length;i++){
+                                $('.month_ul li').eq(i).val(res.data.Room[i]);
+                            }
                         });
                     });
                     var eight = new file({
@@ -401,15 +404,33 @@ $('#addApply').click(function() {
                         Type: 1,
                         title: "暂停计租报告"
                     });
+                    $('.month_ul li').click(function(){
+                        if($(this).hasClass('active')){
+                            $(this).removeClass('active');
+                            $('.cancel_money').text(parseInt($('.cancel_money').text()) 
+                                - parseInt($(this).val()));
+                        }else{
+                            $(this).addClass('active');
+                            $('.cancel_money').text(parseInt($('.cancel_money').text()) 
+                                + parseInt($(this).val()));
+                        }
+                    });
                 },
-                yes: function(thisIndex) {
-                    if ($('#getInfo_1').val() == "") {
+                yes: function(thisIndex){
+                    if ($('#oldCancelHouseID').val() == "") {
                         layer.msg('房屋编号存在问题呢！！！');
                     } else {
-                        var formData = fileTotall.getArrayFormdata();
-                        formData.append("HouseID", $('#getInfo_1').val());
-                        formData.append("DateStart", $("input[name='DateStart']").val());
-                        formData.append("DateEnd", $("input[name='DateEnd']").val());
+                        var formData = new FormData();
+                        var oldCancelMonthBefore = [];
+                        for(var i = 0;i < $('.month_ul li').length;i++){
+                            if($('.month_ul li').eq(i).hasClass('active')){
+                                oldCancelMonthBefore.push($('.month_ul li').eq(i).text());
+                            }
+                        }
+                        formData.append("HouseID", $('#oldCancelHouseID').val());
+                        formData.append("oldCancelYearBefore",$('#oldCancelYearBefore').val());
+                        formData.append("oldCancelMonthBefore",oldCancelMonthBefore.join(','));
+                        formData.append("cancel_money",$('.cancel_money').text());
                         formData.append("type", 4);
                         $.ajax({
                             type: "post",
