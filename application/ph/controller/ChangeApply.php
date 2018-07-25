@@ -186,6 +186,7 @@ class ChangeApply extends Base
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    $datas['OrderDate'] = date('Ym', time());
                     $datas['ChangeType'] = $data['type'];   //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[4];  //异动名称
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'04'.$suffix;   //04代表陈欠核销

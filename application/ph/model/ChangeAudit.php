@@ -288,13 +288,13 @@ class ChangeAudit extends Model
     {   //陈欠核销
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID ,HouseID ,DateStart ,DateEnd')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OldMonthRent ,HouseID ,OldYearRent,Deadline')->find();
 
         $data = get_house_info($oneData['HouseID']);
 
-        $data['DateStart'] = $oneData['DateStart'];
-
-        $data['DateEnd'] = $oneData['DateEnd'];
+        $data['OldMonthRent'] = $oneData['OldMonthRent'];
+        $data['OldYearRent'] = $oneData['OldYearRent'];
+        $data['Deadline'] = $oneData['Deadline'];
 
         $data['type'] = 4;
 
