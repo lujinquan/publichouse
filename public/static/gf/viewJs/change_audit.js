@@ -93,14 +93,48 @@ $('.BtnApprove').click(function(){
 			metailShow('#pauseRentPhotos',res);
 			layerBox(value,'pause','暂停计租审批',1,res.data.config.status);
 		}else if(type == 4){
-				$(".breaks").hide();
-				$(".pause").hide();
-				$(".WriteOff").show();
-				$(".cancel").hide();
-				$('.Uhide').css('display','block');
-				$('.Ushow').css('display','none');
-				$('.WriteOffStartTime').text(res.data.detail.DateStart);
-				$('.WriteOffEndTime').text(res.data.detail. DateEnd);
+			$('.oldCancelHouseID').text(res.data.detail.HouseID);
+        	$('.oldCancelBanID').text(res.data.detail.BanID);
+        	$('.oldCancelAddress').text(res.data.detail.BanAddress);
+        	$('.oldCancelOwnertype').text(res.data.detail.OwnerTypes[0].OwnerType);
+        	$('.oldCancelUseNature').text(res.data.detail.UseNature);
+        	$('.oldCancelHouseUsearea').text(res.data.detail.HouseUsearea);
+        	$('.oldCancelLeasedArea').text(res.data.detail.LeasedArea);
+        	$('.oldCancelHousePrerent').text(res.data.detail.HousePrerent);
+        	$('.oldCancelTenantName').text(res.data.detail.TenantName);
+        	$('.oldCancelTenantNumber').text(res.data.detail.TenantNumber);
+        	$('.oldCancelTenantTel').text(res.data.detail.TenantTel);
+        	$('.oldCancelYear').text(res.data.detail.OldYearRent);
+        	$('.oldCancelMonth').text(res.data.detail.Deadline);
+        	$('.oldCancelMonthMoney').text(res.data.detail.OldMonthRent);
+			if(res.data.config.status == '1'){
+				$('.status_2').show();
+				new file({
+	                show: "#oldCancelBookShow",
+	                upButton: "#oldCancelBooktUp",
+	                size: 10240,
+	                url: "/ph/ChangeApply/add",
+	                button: "#oldCancelBook",
+	                ChangeOrderID: '',
+	                Type: 1,
+	                title: "陈欠核销情况说明报告"
+	            });
+	            new file({
+	                show: "#oldCancelOtherShow",
+	                upButton: "#oldCancelOtherUp",
+	                size: 10240,
+	                url: "/ph/ChangeApply/add",
+	                button: "#oldCancelOther",
+	                ChangeOrderID: '',
+	                Type: 1,
+	                title: "其它"
+	            });
+			}else{
+				$('.status_2').hide();
+			}
+			processState('#oldCancelState',res);
+			metailShow('#oldCancelPhotos',res);
+			layerBox(value,'oldCancel','陈欠核销详情',1,res.data.config.status);
 		}else if(type == 8){
 			$('.status_2').hide();
 			$('.cancel').show();
@@ -320,6 +354,7 @@ $('.BtnDetail').click(function(){
 			metailShow('#pauseRentPhotos',res);
 			layerBox(value,'pause','暂停计租详情',2);
 		}else if(type == 4){
+			$('.status_2').hide();
 			$('.oldCancelHouseID').text(res.data.detail.HouseID);
         	$('.oldCancelBanID').text(res.data.detail.BanID);
         	$('.oldCancelAddress').text(res.data.detail.BanAddress);
@@ -331,9 +366,9 @@ $('.BtnDetail').click(function(){
         	$('.oldCancelTenantName').text(res.data.detail.TenantName);
         	$('.oldCancelTenantNumber').text(res.data.detail.TenantNumber);
         	$('.oldCancelTenantTel').text(res.data.detail.TenantTel);
-        	$('.oldCancelYear').text();
-        	$('.oldCancelMonth').text();
-        	$('.oldCancelMonthMoney').text();
+        	$('.oldCancelYear').text(res.data.detail.OldYearRent);
+        	$('.oldCancelMonth').text(res.data.detail.Deadline);
+        	$('.oldCancelMonthMoney').text(res.data.detail.OldMonthRent);
 			processState('#oldCancelState',res);
 			metailShow('#oldCancelPhotos',res);
 			layerBox(value,'oldCancel','陈欠核销详情',2);

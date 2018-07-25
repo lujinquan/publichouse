@@ -108,8 +108,9 @@ return [
     'cancelUploadReport' => '注销报告',
 
 
-    //新增陈欠核销
-    'WriteOffReport' => '陈欠核销报告',
+    //陈欠核销
+    'oldCancelBook' => '陈欠核销情况说明报告',
+    'oldCancelOther' => '其它',
 
     //房改
     'CHouseApp_1' => '购买直管公有住房申请表',
