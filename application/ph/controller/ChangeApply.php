@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,3,4,8,11,12])){
+            if(!in_array($data['type'],[1,2,3,4,8,11,12])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -111,7 +111,7 @@ class ChangeApply extends Base
                     break;
 
                 case 2:  // 空租：目前情况是异动类型和流程控制线路的值相同
-
+halt($data);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
@@ -171,7 +171,7 @@ class ChangeApply extends Base
 //halt($data);
                     
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    //$datas['Remark'] = $data['cancelReason'];  //异动缘由
+                    $datas['Remark'] = $data['cancelReason'];  //异动缘由
                     $datas['Deadline'] = $data['oldCancelMonthBefore'];  //异动缘由
                     $datas['OldMonthRent'] = $data['cancel_money'];  //核销的以前月的金额
                     $datas['OldYearRent'] = $data['oldCancelYearBefore'];  //核销的以前年的金额

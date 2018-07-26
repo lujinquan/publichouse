@@ -687,11 +687,44 @@ class ChangeAudit extends Model
 
             case 4:  //陈欠核销异动完成后的，系统处理 （待完善，将所有满足条件的账抹平）
                 //将所有该房屋对应的时间段的租金订单全部修改为完全缴纳状态，注意已缴、欠缴、已缴状态
-                $oneDate = Db::name('change_order')->where('ChangeOrderID','eq',$changeOrderID)->field('HouseID,DateStart,DateEnd')->find();
+                $one = Db::name('change_order')->where('ChangeOrderID','eq',$changeOrderID)->find();
+
+                if($one['Deadline']){
+                    $e = explode($one['Deadline']);
+                    $year = date('Y',tine());
+                    $arr = [
+                     '1' => $year.'01',
+                     '2' => $year.'02',
+                     '3' => $year.'03',
+                     '4' => $year.'04',
+                     '5' => $year.'05',
+                     '6' => $year.'06',
+                     '7' => $year.'07',
+                     '8' => $year.'08',
+                     '9' => $year.'09',
+                     '10' => $year.'10',
+                     '11' => $year.'11',
+                     '12' => $year.'12',
+                    ];
+                    foreach($e as $v){
+                        Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>$arr[$v]])->update([
+                                'PaidRent' => ['exp','ReceiveRent'],
+                                'UnpaidRent' => 0,
+                                'Type' => 3,
+                        ]);
+                    }    
+                }else{
+                    Db::name('house')->where('HouseID',$one['HouseID'])->setDec('ArrearRent',$one['OldYearRent']);
+                }
+
                 $where['HouseID'] = ['eq',$oneDate['HouseID']];
                 $where['OrderDate'] = ['between',$oneDate['DateStart'].','.$oneDate['DateEnd']];
 
                 Db::name('rent_order')->where($where)->update(['Type'=>3,'UnpaidRent'=>0,'PaidRent'=>['exp','ReceiveRent']]);
+
+                $str = "( 4,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " . $one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,OldMonthRent,OldYearRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 
                 break;
             case 5:  //房改异动完成后的，系统处理
