@@ -230,21 +230,19 @@ class ChangeAudit extends Model
     public function get_one_detail($changeOrderID)
     {  //获取租金减免的详情
 
-        $houseID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,Remark')->find();
 
-        $data = get_house_info($houseID['HouseID']);
+        $data = get_house_info($oneData['HouseID']);
 
         $datas = Db::name('rent_cut_order')->alias('a')
             ->join('cut_rent_type b', 'a.CutType = b.id', 'left')->where('ChangeOrderID', 'eq', $changeOrderID)
             ->field('b.CutName ,a.IDnumber,a.MuchMonth')
             ->find();
-
-        $data['InflRent'] = $houseID['InflRent'];
+        $data['Remark'] = $oneData['Remark'];
+        $data['InflRent'] = $oneData['InflRent'];
         $data['CutName'] = $datas['CutName'];
         $data['IDnumber'] = $datas['IDnumber'];
         $data['MuchMonth'] = $datas['MuchMonth'];
-        //halt($data);
-
         $data['type'] = 1;
 
         return $data;
@@ -254,12 +252,10 @@ class ChangeAudit extends Model
     {   //空租
 
         //房屋编号
-        $houseID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
-
-        $data = get_house_info($houseID);
-
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark')->find();
+        $data = get_house_info($oneData['HouseID']);
+        $data['Remark'] = $oneData['Remark'];
         $data['type'] = 2;
-
         return $data;
     }
 
@@ -267,12 +263,11 @@ class ChangeAudit extends Model
     {   //暂停计租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,BanID,CreateTime')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,BanID,CreateTime,Remark')->find();
 
         $data['ban'] = get_ban_info($oneData['BanID']);
-
+        $data['Remark'] = $oneData['Remark'];
         $houses = explode(',',$oneData['HouseID']);
-
         $data['house'] = Db::name('house')->where(['HouseID'=>['in',$houses]])
                                      ->field('HouseID,TenantName,HousePrerent,BanAddress')
                                      ->select();
@@ -280,7 +275,6 @@ class ChangeAudit extends Model
         $data['CreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 3;
 
-        //halt($data);
         return $data;
     }
 
@@ -288,23 +282,19 @@ class ChangeAudit extends Model
     {   //陈欠核销
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OldMonthRent,HouseID')->find();
-
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OldMonthRent,HouseID,Remark')->find();
         $data = get_house_info($oneData['HouseID']);
-
+        $data['Remark'] = $oneData['Remark'];
         $data['type'] = 4;
-
         return $data;
     }
 
     public function get_five_detail($changeOrderID)
     {   //房改
 
-        //房屋编号
-        $houseID = self::where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
-
-        $data = get_house_info($houseID);
-
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark')->find();
+        $data = get_house_info($oneData['HouseID']);
+        $data['Remark'] = $oneData['Remark'];
         $data['type'] = 5;
 
         return $data;
@@ -385,29 +375,24 @@ class ChangeAudit extends Model
 
         //房屋编号
         $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CancelType')->find();
-
         $data = get_house_info($oneData['HouseID']);
-
         $data['CancelType'] = Db::name('cancel_type')->where('id', 'eq', $oneData['CancelType'])->value('Title');
-
         $data['Ban'] = json_decode($oneData['Deadline']);
-
         $data['Remark'] = $oneData['Remark'];
-
         $data['type'] = 8;
 
         return $data;
     }
 
     public function get_nine_detail($changeOrderID)
-    {   //房屋调整
+    {   
         //房屋编号
-        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage,Deadline')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage,Deadline,Remark')->find();
 
-        $data = get_ban_info($one['BanID']);
-        $data['NewDamage'] = get_damage($one['Damage']);
-        $data['DamageGrade'] = get_damage($one['Deadline']);
-
+        $data = get_ban_info($oneData['BanID']);
+        $data['NewDamage'] = get_damage($oneData['Damage']);
+        $data['DamageGrade'] = get_damage($oneData['Deadline']);
+        $data['Remark'] = $oneData['Remark'];
         $data['type'] = 9;
 
         return $data;
