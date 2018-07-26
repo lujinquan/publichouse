@@ -252,9 +252,11 @@ class ChangeAudit extends Model
     {   //空租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,TenantID')->find();
         $data = get_house_info($oneData['HouseID']);
+        //$tenatinfo = Db::name('tenant')->where('TenantID',$oneData['TenantID'])->field('')->find();
         $data['Remark'] = $oneData['Remark'];
+        $data['Tenant'] = Db::name('tenant')->where('TenantID',$oneData['TenantID'])->field('TenantID,TenantName,TenantTel,TenantNumber')->find();
         $data['type'] = 2;
         return $data;
     }
