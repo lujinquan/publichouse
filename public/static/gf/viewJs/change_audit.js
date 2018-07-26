@@ -50,12 +50,96 @@ $('.BtnApprove').click(function(){
 			metailShow('#deratePhotos',res);
 			layerBox(value,'derate','租金减免审批',1,res.data.config.status);
 		}else if(type == 2){
-			$(".breaks").hide();
-			$(".pause").hide();
-			$(".WriteOff").hide();
-			$(".cancel").hide();
-			$('.Uhide').css('display','block');
-			$('.Ushow').css('display','none');
+			$('.status_2').hide();
+			$(".emptyRentHouseID").text(res.data.detail.HouseID);
+			$(".emptyRentBanID").text(res.data.detail.BanID);
+            $(".emptyRentAddress").text(res.data.detail.BanAddress);
+            $(".emptyRentUseNature").text(res.data.detail.UseNature);
+            $(".emptyRentHouseUsearea").text(res.data.detail.HouseUsearea);
+            $(".emptyRentLeasedArea").text(res.data.detail.LeasedArea);
+            $(".emptyRentOwnertype").text(res.data.detail.OwnerType);
+            $(".emptyRentHousePrerent").text(res.data.detail.HousePrerent);
+            $(".emptyRentCreateTime").text(res.data.detail.CreateTime);
+            $(".emptyRentReason").text(res.data.detail.Remark);
+			$(".emptyRentTenantID").text(res.data.detail.Tenant.TenantID);
+			$(".emptyRentTenantName").text(res.data.detail.Tenant.TenantName);
+            $(".emptyRentTenantNumber").text(res.data.detail.Tenant.TenantNumber);
+            $(".emptyRentTenantTel").text(res.data.detail.Tenant.TenantTel);
+            if(res.data.detail.Tenant == ''){
+            	$('.empty_rent_cancel').hide();
+            	var title = '新增空租';
+            }else{
+            	$('.empty_rent_cancel').show();
+            	var title = '取消空租';
+            }
+            if(res.data.config.status == '1' && res.data.detail.Tenant == ''){
+				$('.status_2').show();
+			}else{
+				$('.status_2').hide();
+			}
+			new file({
+                show: "#descriptionReportShow",
+                upButton: "#descriptionReportUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#descriptionReport",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "空租情况说明报告"
+            });
+            new file({
+                show: "#personalCheckApplicationShow",
+                upButton: "#personalCheckApplicationUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#personalCheckApplication",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "个人退房申请"
+            });
+            new file({
+                show: "#unitCheckApplicationShow",
+                upButton: "#unitCheckApplicationUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#unitCheckApplication",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "单位退房申请"
+            });
+            new file({
+                show: "#tenantLeaseShow",
+                upButton: "#tenantLeaseUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#tenantLease",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "租户租约"
+            });
+            new file({
+                show: "#tenantIDFileShow",
+                upButton: "#tenantIDFileUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#tenantIDFile",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "租户身份证"
+            });
+            new file({
+                show: "#emptyRentOtherShow",
+                upButton: "#emptyRentOtherUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#emptyRentOther",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "其他"
+            });
+            processState('#emptyRentState',res);
+			metailShow('#emptyRentPhotos',res);
+			layerBox(value,'emptyRent',title,1,res.data.config.status);
 		}else if(type == 3){
 			new file({
                 show: "#pauseUploadReportShow",
@@ -329,24 +413,31 @@ $('.BtnDetail').click(function(){
 			layerBox(value,'derate','租金减免详情',2);
 		}else if(type == 2){
 			$('.status_2').hide();
-			$("#emptyRentHouseID").text(res.data.detail.HouseID);
-			$("#emptyRentBanID").text(res.data.detail.BanID);
-            $("#emptyRentAddress").text(res.data.detail.BanAddress);
-            $("#emptyRentUseNature").text(res.data.detail.UseNature);
-            $("#emptyRentHouseUsearea").text(res.data.detail.HouseUsearea);
-            $("#emptyRentLeasedArea").text(res.data.detail.LeasedArea);
-            $("#emptyRentOwnertype").text(res.data.detail.OwnerType);
-            $("#emptyRentHousePrerent").text(res.data.detail.HousePrerent);
-            $("#emptyRentCreateTime").text(res.data.detail.CreateTime);
-            $("#emptyRentReason").text(res.data.detail.HousePrerent);
+			$(".emptyRentHouseID").text(res.data.detail.HouseID);
+			$(".emptyRentBanID").text(res.data.detail.BanID);
+            $(".emptyRentAddress").text(res.data.detail.BanAddress);
+            $(".emptyRentUseNature").text(res.data.detail.UseNature);
+            $(".emptyRentHouseUsearea").text(res.data.detail.HouseUsearea);
+            $(".emptyRentLeasedArea").text(res.data.detail.LeasedArea);
+            $(".emptyRentOwnertype").text(res.data.detail.OwnerType);
+            $(".emptyRentHousePrerent").text(res.data.detail.HousePrerent);
+            $(".emptyRentCreateTime").text(res.data.detail.CreateTime);
+            $(".emptyRentReason").text(res.data.detail.Remark);
 
-			$("#emptyRentTenantID").text(res.data.detail.TenantID);
-			$("#emptyRentTenantName").text(res.data.detail.TenantName);
-            $("#emptyRentTenantNumber").text(res.data.detail.TenantNumber);
-            $("#emptyRentTenantTel").text(res.data.detail.TenantTel);
+			$(".emptyRentTenantID").text(res.data.detail.Tenant.TenantID);
+			$(".emptyRentTenantName").text(res.data.detail.Tenant.TenantName);
+            $(".emptyRentTenantNumber").text(res.data.detail.Tenant.TenantNumber);
+            $(".emptyRentTenantTel").text(res.data.detail.Tenant.TenantTel);
+            if(res.data.detail.Tenant == ''){
+            	$('.empty_rent_cancel').hide();
+            	var title = '新增空租';
+            }else{
+            	$('.empty_rent_cancel').show();
+            	var title = '取消空租';
+            }
             processState('#emptyRentState',res);
 			metailShow('#emptyRentPhotos',res);
-			layerBox(value,'emptyRent','空租详情',2);
+			layerBox(value,'emptyRent',title,2);
 		}else if(type == 3){
         	var house_str = '';
         	$('.pauseBanId').text(res.data.detail.ban.BanID);
