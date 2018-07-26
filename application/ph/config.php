@@ -96,7 +96,12 @@ return [
     'noticeBook' => '审通知书',
 
     //新增空租
-    'EmptyReport' => '空租报告',
+    'descriptionReport' => '空租情况说明报告',
+    'personalCheckApplication' => '个人退房申请',
+    'unitCheckApplication' => '单位退房申请',
+    'tenantLease' => '租户租约',
+    'tenantIDFile' => '租户身份证',
+    'emptyRentOther' => '其他',
 
     //新增暂停计租
     'pauseUploadReport' => '上传报告',

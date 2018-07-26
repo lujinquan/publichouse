@@ -44,6 +44,10 @@
           <label class="label_style">月租金：</label>
           <label class="label_content emptyRentHousePrerent"></label>
         </div>
+        <div class="am-u-sm-8">
+          <label class="label_style">备案时间：</label>
+          <label class="label_content emptyRentCreateTime"></label>
+        </div>
     </div>
     <div class="am-u-sm-12">
         <div class="am-u-sm-4">
@@ -52,16 +56,16 @@
         </div>
     </div>
 
-    <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-sm-12 empty_rent_cancel">
       <h2 class="label_title">租户信息：</h2>
     </div>
-    <div class="am-u-sm-12">
+    <div class="am-u-sm-12 empty_rent_cancel">
         <div class="am-u-sm-4">
           <label class="label_style">租户ID：</label>
           <label class="label_content emptyRentTenantID"></label>
         </div>
     </div>
-    <div class="am-u-sm-12">
+    <div class="am-u-sm-12 empty_rent_cancel">
         <div class="am-u-sm-4">
           <label class="label_style">租户姓名：</label>
           <label class="label_content emptyRentTenantName"></label>
@@ -89,13 +93,68 @@
         <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
             <div class="am-u-sm-12"><hr /></div>
             <div class="am-form-group am-u-sm-3">
-              <label>审通知书：</label>
+              <label>空租情况说明报告：</label>
             </div>
             <div class="am-form-group am-form-file am-u-md-5">
                   <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                  <input id="noticeBook" type="file" name="noticeBook" multiple>
+                  <input id="descriptionReport" type="file" name="descriptionReport" multiple>
             </div>
-            <div id="noticeBookShow" class="am-u-md-12 img_content"></div>
+            <div id="descriptionReportShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>个人退房申请：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="personalCheckApplication" type="file" name="personalCheckApplication" multiple>
+            </div>
+            <div id="personalCheckApplicationShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>单位退房申请：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="unitCheckApplication" type="file" name="unitCheckApplication" multiple>
+            </div>
+            <div id="unitCheckApplicationShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>租户租约：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="tenantLease" type="file" name="tenantLease" multiple>
+            </div>
+            <div id="tenantLeaseShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>租户身份证：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="tenantIDFile" type="file" name="tenantIDFile" multiple>
+            </div>
+            <div id="tenantIDFileShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>其他：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="emptyRentOther" type="file" name="emptyRentOther" multiple>
+            </div>
+            <div id="emptyRentOtherShow" class="am-u-md-12 img_content"></div>
         </div>
 
         <div class="am-form-group am-u-sm-12">

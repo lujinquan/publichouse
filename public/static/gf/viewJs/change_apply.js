@@ -2320,7 +2320,7 @@ function addEmptyRent(){
             } else {
                 var formData = new FormData();
                 formData.append("type", 2);
-                formData.append("emptyRentType",'新增空租');
+                formData.append("emptyRentType",1);//1为新增空租，2为取消空租
                 formData.append("HouseID", $('#emptyRentHouse').val());
                 formData.append("emptyRentReason", $('#emptyRentReason').val());
                 $.ajax({
@@ -2392,7 +2392,7 @@ function cancelEmptyRent(){
             } else {
                 var formData = new FormData();
                 formData.append("type", 2);
-                formData.append("emptyRentType",'取消空租');
+                formData.append("emptyRentType",2);
                 formData.append("HouseID", $('#emptyRentHouse').val());
                 formData.append("TenantID", $('#emptyRentTenantID').val());
                 formData.append("emptyRentReason", $('#emptyRentReason').val());
