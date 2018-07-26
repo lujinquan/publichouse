@@ -140,7 +140,33 @@ class ChangeApply extends Model
                     return $finds;
                 break;
                 case 2:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>2,'Status'=>['>',1],'OrderDate'=>date('Ym',time())])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋正在空租异动中');
+                    }
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+                    $houseModel = new HouseModel;
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,IfEmpty,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
 
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }  
+                    if($data['emptyRentType'] == 1 && $finds['IfEmpty'] == 1){ //新增空租
+                        return jsons('4002','房屋已为空租状态');
+                    }
+                    if($data['emptyRentType'] == 2 && $finds['IfEmpty'] == 0){ //取消空租
+                        return jsons('4002','房屋已为非空租状态');
+                    }
+                    if($data['emptyRentType'] == 2 && !$finds['TenantID'] && !$data['TenantID']){ //取消空租
+                        return jsons('4002','请完善租户信息');
+                    }
+                    return $finds;
                 break;
                 case 3:
 
@@ -172,7 +198,7 @@ class ChangeApply extends Model
                         'HouseID'=>$data['HouseID'],
                         'Status'=>1,
                         'HouseChangeStatus'=>0,
-                        ];
+                    ];
 
                     $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)

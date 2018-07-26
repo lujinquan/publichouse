@@ -111,14 +111,17 @@ class ChangeApply extends Base
                     break;
 
                 case 2:  // 空租：目前情况是异动类型和流程控制线路的值相同
-halt($data);
+
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
-                    $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');
 
-                    $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
+                    if($data['emptyRentType'] == 1){ //新增空租
 
-                    $datas['ChangeType'] = $data['type'];  //异动类型
+                    }else{
+                        $datas['TenantID'] = $data['TenantID'];
+                    }
+                    $datas['Remark'] = $data['emptyRentReason'];
+                    $datas['ChangeType'] = 2;  //异动类型
                     $datas['OwnerType'] = $one['OwnerType'];  //异动类型
                     $datas['UseNature'] = $one['UseNature'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[2];  //异动名称
@@ -126,6 +129,7 @@ halt($data);
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    $datas['OrderDate'] = date('Ym', time());
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'02'.$suffix;   //02代表空租
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
