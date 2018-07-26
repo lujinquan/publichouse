@@ -104,6 +104,9 @@ $('.BtnApprove').click(function(){
         	$('.oldCancelTenantName').text(res.data.detail.TenantName);
         	$('.oldCancelTenantNumber').text(res.data.detail.TenantNumber);
         	$('.oldCancelTenantTel').text(res.data.detail.TenantTel);
+        	$('.oldCancelReason').text(res.data.detail.oldCancelReason);
+
+
         	$('.oldCancelYear').text(res.data.detail.OldYearRent);
         	$('.oldCancelMonth').text(res.data.detail.Deadline);
         	$('.oldCancelMonthMoney').text(res.data.detail.OldMonthRent);
@@ -366,6 +369,9 @@ $('.BtnDetail').click(function(){
         	$('.oldCancelTenantName').text(res.data.detail.TenantName);
         	$('.oldCancelTenantNumber').text(res.data.detail.TenantNumber);
         	$('.oldCancelTenantTel').text(res.data.detail.TenantTel);
+        	
+			$('.oldCancelReason').text(res.data.detail.oldCancelReason);
+
         	$('.oldCancelYear').text(res.data.detail.OldYearRent);
         	$('.oldCancelMonth').text(res.data.detail.Deadline);
         	$('.oldCancelMonthMoney').text(res.data.detail.OldMonthRent);

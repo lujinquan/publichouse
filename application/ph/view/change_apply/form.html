@@ -686,6 +686,12 @@
       <label id="oldCancelTenantNumber" class="label_content label_p_style"></label>
     </div>
   </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">异动事由：</label>
+      <label id="oldCancelReason" class="label_p_style" style="width:480px;"></label>
+    </div>
+  </div>
 
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">核销金额：</h2>
@@ -715,6 +721,86 @@
     <div class="am-form-group am-u-sm-4">
         <label class="">以前月核销总金额：</label>
         <label class="cancel_money">0</label>元
+    </div>
+  </div>
+</form>
+
+<!-- 空租 -->
+<form id="emptyRent" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">房屋编号：</label>
+      <input type="number" id="emptyRentHouse" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="emptyRentQuery">查询</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">楼栋编号：</label>
+      <label id="emptyRentBanID" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label id="emptyRentBanAddress" class="label_p_style" style="width:476px;"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style"> 产别：</label>
+      <label id="emptyRentOwnTypeD" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">计租面积：</label>
+      <label id="emptyRentLeasedArea" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用面积：</label>
+      <label id="emptyRentHouseUsearea" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">使用性质：</label>
+      <label id="emptyRentUseNature" class="label_p_style"></label>
+    </div>    
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">月租金：</label>
+      <label id="emptyRentmonthRent" class="label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">异动事由：</label>
+      <input id="emptyRentReason" class="label_input" style="width:480px;">
+    </div>    
+  </div>
+
+  <div class="am-form-group am-u-sm-12 empty_rent_cancel">
+      <h2 class="label_title">租户信息：</h2>
+  </div>
+  <div class="am-u-sm-12 empty_rent_cancel">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">租户ID：</label>
+       <input type="number" id="emptyRentTenantID" class="label_input" placeholder="双击输入租户编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="emptyRentQueryTenantID">查询</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12 empty_rent_cancel">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">租户姓名：</label>
+      <label id="emptyRentTenantName" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">身份证号：</label>
+      <label id="emptyRentTenantNumber" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">联系电话：</label>
+      <label id="emptyRentTenantTel" class="label_p_style"></label>
     </div>
   </div>
 </form>

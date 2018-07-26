@@ -181,76 +181,25 @@ $('#addApply').click(function() {
             });
             break;
         case "2":
-            $(".EmptyRent").show();
             layer.open({
-                type: 1,
-                area: ['990px', '600px'],
-                resize: false,
-                zIndex: 100,
-                title: ['新增空租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#derateApplyForm'),
-                btn: ['确定', '取消'],
-                success: function() {
-                    houseQuery.action('getInfo_1','1');
-                    $('#DQueryData').on("click", function() {
-                        var HouseID = $('#getInfo_1').val();
-                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
-                            res = JSON.parse(res);
-                            $("#BanID").text(res.data.BanID);
-                            $("#BanAddress").text(res.data.BanAddress);
-                            $("#CreateTime").text(res.data.CreateTime);
-                            $("#FloorID").text(res.data.BanFloorNum);
-                            $("#HouseArea").text(res.data.HouseArea);
-                            $("#LeasedArea").text(res.data.LeasedArea);
-                            $("#TenantName").text(res.data.TenantName);
-                            $("#TenantNumber").text(res.data.TenantNumber);
-                            $("#TenantTel").text(res.data.TenantTel);
-                            $("#FloorID").text(res.data.FloorID);
-                        });
+                type:1,
+                area:['350px','200px'],
+                resize:false,
+                zIndex:100,
+                title:['空租','background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                content:"<div style='text-align:center;padding:50px 0;'><button id='addEmptyRent' style='background: #2e77ef;color: #FFF;border: none;padding: 10px 15px;border-radius: 2px;'>新增空租</button>\
+                <button id='cancelEmptyRent' style='background: #2e77ef;color:#FFF;border:none;padding:10px 15px;margin-left:20px;border-radius: 2px;'>取消空租</button></div>",
+                success:function(){
+                    $('#addEmptyRent').off('click');
+                    $('#addEmptyRent').click(function(){
+                        addEmptyRent();
                     });
-                    var six = new file({
-                        button: "#EmptyReport",
-                        show: "#EmptyReportShow",
-                        upButton: "#EmptyReportUp",
-                        size: 10240,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "空租报告"
+                    $('#cancelEmptyRent').off('click');
+                    $('#cancelEmptyRent').click(function(){
+                        cancelEmptyRent();
                     });
-                },
-                yes: function(thisIndex) {
-                    if ($('#getInfo_1').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
-                    } else {
-                        var formData = fileTotall.getArrayFormdata();
-                        formData.append("type", 2);
-                        formData.append("pause", $("input[name='pause']").val());
-                        formData.append("HouseID", $('#getInfo_1').val());
-                        $.ajax({
-                            type: "post",
-                            url: "/ph/ChangeApply/add",
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(res) {
-                                res = JSON.parse(res);
-                                layer.msg(res.msg);
-                                layer.close(thisIndex);
-                                location.reload();
-                            }
-                        });
-                    }
-                },
-                end: function() {
-                    $("input[type='text']").val('');
-                    $("input[type='number']").val('');
-                    $(".label_content").text('');
-                    $(".img_content").text('');
-                    $("select").val('');
-                    location.reload();
                 }
-            });
+            })
             break;
         case "3":
             $(".PauseRent").show();
@@ -431,6 +380,7 @@ $('#addApply').click(function() {
                         formData.append("oldCancelYearBefore",$('#oldCancelYearBefore').val());
                         formData.append("oldCancelMonthBefore",oldCancelMonthBefore.join(','));
                         formData.append("cancel_money",$('.cancel_money').text());
+                        formData.append("oldCancelReason",$('#oldCancelReason').val());
                         formData.append("type", 4);
                         $.ajax({
                             type: "post",
@@ -2335,3 +2285,139 @@ $('#rentMeterButton').click(function() {
         content: $('#RentForm')
     });
 });
+
+
+// 新增空租
+function addEmptyRent(){
+    $('.empty_rent_cancel').hide();
+    layer.open({
+        type: 1,
+        area: ['990px', '600px'],
+        resize: false,
+        zIndex: 100,
+        title: ['新增空租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#emptyRent'),
+        btn: ['确定', '取消'],
+        success: function() {
+            houseQuery.action('emptyRentHouse','1');
+            $('#emptyRentQuery').on("click", function() {
+                var HouseID = $('#emptyRentHouse').val();
+                $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                    res = JSON.parse(res);
+                    $("#emptyRentBanID").text(res.data.BanID);
+                    $("#emptyRentBanAddress").text(res.data.BanAddress);
+                    $("#emptyRentUseNature").text(res.data.UseNature);
+                    $("#emptyRentHouseUsearea").text(res.data.HouseUsearea);
+                    $("#emptyRentLeasedArea").text(res.data.LeasedArea);
+                    $("#emptyRentOwnTypeD").text(res.data.OwnerType);
+                    $("#emptyRentmonthRent").text(res.data.HousePrerent);
+                });
+            });
+        },
+        yes: function(thisIndex) {
+            if ($('#emptyRentHouse').val() == "") {
+                layer.msg('房屋编号存在问题呢！！！');
+            } else {
+                var formData = new FormData();
+                formData.append("type", 2);
+                formData.append("emptyRentType",'新增空租');
+                formData.append("HouseID", $('#emptyRentHouse').val());
+                formData.append("emptyRentReason", $('#emptyRentReason').val());
+                $.ajax({
+                    type: "post",
+                    url: "/ph/ChangeApply/add",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        layer.msg(res.msg);
+                        layer.close(thisIndex);
+                        location.reload();
+                    }
+                });
+            }
+        },
+        end: function() {
+            $("input[type='text']").val('');
+            $("input[type='number']").val('');
+            $(".label_content").text('');
+            $(".img_content").text('');
+            $("select").val('');
+            location.reload();
+        }
+    });
+}
+
+// 取消空租
+function cancelEmptyRent(){
+    $('.empty_rent_cancel').show();
+    layer.open({
+        type: 1,
+        area: ['990px', '600px'],
+        resize: false,
+        zIndex: 100,
+        title: ['取消空租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#emptyRent'),
+        btn: ['确定', '取消'],
+        success: function() {
+            houseQuery.action('emptyRentHouse','1');
+            tenantQuery.action('emptyRentTenantID','','1');
+            $('#emptyRentQuery').on("click", function() {
+                var HouseID = $('#emptyRentHouse').val();
+                $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                    res = JSON.parse(res);
+                    $("#emptyRentBanID").text(res.data.BanID);
+                    $("#emptyRentBanAddress").text(res.data.BanAddress);
+                    $("#emptyRentUseNature").text(res.data.UseNature);
+                    $("#emptyRentHouseUsearea").text(res.data.HouseUsearea);
+                    $("#emptyRentLeasedArea").text(res.data.LeasedArea);
+                    $("#emptyRentOwnTypeD").text(res.data.OwnerType);
+                    $("#emptyRentmonthRent").text(res.data.HousePrerent);
+                });
+            });
+            $('#emptyRentQueryTenantID').on("click", function() {
+                var TenantID = $('#emptyRentTenantID').val();
+                $.get('/ph/Api/get_tenant_info/TenantID/' + TenantID, function(res) {
+                    res = JSON.parse(res);
+                    $("#emptyRentTenantName").text(res.data.TenantName);
+                    $("#emptyRentTenantNumber").text(res.data.TenantNumber);
+                    $("#emptyRentTenantTel").text(res.data.TenantTel);
+                });
+            });
+        },
+        yes: function(thisIndex) {
+            if ($('#emptyRentHouse').val() == "") {
+                layer.msg('房屋编号存在问题呢！！！');
+            } else {
+                var formData = new FormData();
+                formData.append("type", 2);
+                formData.append("emptyRentType",'取消空租');
+                formData.append("HouseID", $('#emptyRentHouse').val());
+                formData.append("TenantID", $('#emptyRentTenantID').val());
+                formData.append("emptyRentReason", $('#emptyRentReason').val());
+                $.ajax({
+                    type: "post",
+                    url: "/ph/ChangeApply/add",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(res) {
+                        res = JSON.parse(res);
+                        layer.msg(res.msg);
+                        layer.close(thisIndex);
+                        location.reload();
+                    }
+                });
+            }
+        },
+        end: function() {
+            $("input[type='text']").val('');
+            $("input[type='number']").val('');
+            $(".label_content").text('');
+            $(".img_content").text('');
+            $("select").val('');
+            location.reload();
+        }
+    });
+}
