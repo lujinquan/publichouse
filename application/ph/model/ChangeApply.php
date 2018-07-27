@@ -191,9 +191,15 @@ class ChangeApply extends Model
                     }
                     $houseModel = new HouseModel;
                     if(!($data['oldCancelYearBefore']) && !($data['oldCancelMonthBefore'])){
-                        return jsons('4000','未选择任何房屋');
+                        return jsons('4000','请选择核销项');
                     }
-
+                    if($data['oldCancelYearBefore']){
+                        $v= Db::name('house')->where('HouseID',$data['HouseID'])->value('ArrearRent');
+                        if($data['oldCancelYearBefore'] > $v){
+                          return jsons('4000','年度核销金额超出欠缴金额');  
+                        }
+                        
+                    }
                     $findwhere = [
                         'HouseID'=>$data['HouseID'],
                         'Status'=>1,

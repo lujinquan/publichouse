@@ -693,8 +693,8 @@ class ChangeAudit extends Model
                 $one = Db::name('change_order')->where('ChangeOrderID','eq',$changeOrderID)->find();
 
                 if($one['Deadline']){
-                    $e = explode($one['Deadline']);
-                    $year = date('Y',tine());
+                    $e = strpos($one['Deadline'],',')?explode(',',$one['Deadline']):['0'=>$one['Deadline']];
+                    $year = date('Y',time());
                     $arr = [
                      '1' => $year.'01',
                      '2' => $year.'02',
@@ -719,11 +719,6 @@ class ChangeAudit extends Model
                 }else{
                     Db::name('house')->where('HouseID',$one['HouseID'])->setDec('ArrearRent',$one['OldYearRent']);
                 }
-
-                $where['HouseID'] = ['eq',$oneDate['HouseID']];
-                $where['OrderDate'] = ['between',$oneDate['DateStart'].','.$oneDate['DateEnd']];
-
-                Db::name('rent_order')->where($where)->update(['Type'=>3,'UnpaidRent'=>0,'PaidRent'=>['exp','ReceiveRent']]);
 
                 $str = "( 4,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " . $one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
 
