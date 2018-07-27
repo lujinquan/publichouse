@@ -645,19 +645,19 @@ class ChangeAudit extends Model
             case 2:  //空租异动完成后的，系统处理
                 //修改对应的房屋的状态为空租
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                if($one['TenantID']){
-                    $tenantName = Db::name('tenant')->where('TenantID',$one['TenantID'])->value('TenantName');
-                    Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 0, 'TenantID' => $one['TenantID'], 'TenantName' => $tenantName]);
-                    Db::name('rent_table')->where(['ChangeType'=>2,'HouseID'=>$one['HouseID']])->setField('InflRent',0);
-                }else{
-                    Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 1]);
-                    Db::name('rent_config')->where('HouseID', 'eq', $houseID)->delete();
-                    Db::name('rent_order')->where(['HouseID'=>['eq', $houseID],'OrderDate'=>date('Ym',time())])->delete();
+                // if($one['TenantID']){
+                //     $tenantName = Db::name('tenant')->where('TenantID',$one['TenantID'])->value('TenantName');
+                //     Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 0, 'TenantID' => $one['TenantID'], 'TenantName' => $tenantName]);
+                //     Db::name('rent_table')->where(['ChangeType'=>2,'HouseID'=>$one['HouseID']])->setField('InflRent',0);
+                // }else{
+                Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 1]);
+                Db::name('rent_config')->where('HouseID', 'eq', $houseID)->delete();
+                Db::name('rent_order')->where(['HouseID'=>['eq', $houseID],'OrderDate'=>date('Ym',time())])->delete();
 
-                    $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate'] .")";
+                $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate'] .")";
 
-                    Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
-                }  
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+                //}  
                 
                 break;
 
