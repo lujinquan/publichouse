@@ -181,25 +181,26 @@ $('#addApply').click(function() {
             });
             break;
         case "2":
-            layer.open({
-                type:1,
-                area:['350px','200px'],
-                resize:false,
-                zIndex:100,
-                title:['空租','background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content:"<div style='text-align:center;padding:50px 0;'><button id='addEmptyRent' style='background: #2e77ef;color: #FFF;border: none;padding: 10px 15px;border-radius: 2px;'>新增空租</button>\
-                <button id='cancelEmptyRent' style='background: #2e77ef;color:#FFF;border:none;padding:10px 15px;margin-left:20px;border-radius: 2px;'>取消空租</button></div>",
-                success:function(){
-                    $('#addEmptyRent').off('click');
-                    $('#addEmptyRent').click(function(){
-                        addEmptyRent();
-                    });
-                    $('#cancelEmptyRent').off('click');
-                    $('#cancelEmptyRent').click(function(){
-                        cancelEmptyRent();
-                    });
-                }
-            })
+            // layer.open({
+            //     type:1,
+            //     area:['350px','200px'],
+            //     resize:false,
+            //     zIndex:100,
+            //     title:['空租','background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+            //     content:"<div style='text-align:center;padding:50px 0;'><button id='addEmptyRent' style='background: #2e77ef;color: #FFF;border: none;padding: 10px 15px;border-radius: 2px;'>新增空租</button>\
+            //     <button id='cancelEmptyRent' style='background: #2e77ef;color:#FFF;border:none;padding:10px 15px;margin-left:20px;border-radius: 2px;'>取消空租</button></div>",
+            //     success:function(){
+            //         $('#addEmptyRent').off('click');
+            //         $('#addEmptyRent').click(function(){
+            //             addEmptyRent();
+            //         });
+            //         $('#cancelEmptyRent').off('click');
+            //         $('#cancelEmptyRent').click(function(){
+            //             cancelEmptyRent();
+            //         });
+            //     }
+            // })
+            addEmptyRent()
             break;
         case "3":
             $(".PauseRent").show();
@@ -337,9 +338,12 @@ $('#addApply').click(function() {
                             $("#oldCancelTenantTel").text(res.data.TenantTel);
                             $("#oldCancelOwnTypeD").text(res.data.OwnerType);
                             $("#oldCancelmonthRent").text(res.data.HousePrerent);
+                            $("#oldCancelYearBefore").val(res.data.ArrearRent);
                             $('.month_ul li').removeClass('active');
+                            $('.month_ul').empty();
                             for(var i = 0;i < res.data.Room.length;i++){
-                                $('.month_ul li').eq(i).val(res.data.Room[i]);
+                                var li_dom = '<li value='+res.data.Room[i].UnpaidRent+'>'+res.data.Room[i].OrderDate.substring(4)+'</li>';
+                                $('.month_ul').append(li_dom);
                             }
                         });
                     });
@@ -353,7 +357,7 @@ $('#addApply').click(function() {
                         Type: 1,
                         title: "暂停计租报告"
                     });
-                    $('.month_ul li').click(function(){
+                    $('.month_ul').on('click','li',function(){
                         if($(this).hasClass('active')){
                             $(this).removeClass('active');
                             $('.cancel_money').text(parseInt($('.cancel_money').text()) 
@@ -373,7 +377,7 @@ $('#addApply').click(function() {
                         var oldCancelMonthBefore = [];
                         for(var i = 0;i < $('.month_ul li').length;i++){
                             if($('.month_ul li').eq(i).hasClass('active')){
-                                oldCancelMonthBefore.push($('.month_ul li').eq(i).text());
+                                oldCancelMonthBefore.push(parseInt($('.month_ul li').eq(i).text()));
                             }
                         }
                         formData.append("HouseID", $('#oldCancelHouseID').val());
