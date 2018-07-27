@@ -230,7 +230,7 @@ class ChangeAudit extends Model
     public function get_one_detail($changeOrderID)
     {  //获取租金减免的详情
 
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,Remark')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('InflRent,HouseID,Remark,CreateTime')->find();
 
         $data = get_house_info($oneData['HouseID']);
 
@@ -243,6 +243,7 @@ class ChangeAudit extends Model
         $data['CutName'] = $datas['CutName'];
         $data['IDnumber'] = $datas['IDnumber'];
         $data['MuchMonth'] = $datas['MuchMonth'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 1;
 
         return $data;
@@ -252,11 +253,12 @@ class ChangeAudit extends Model
     {   //空租
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,TenantID')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,TenantID,CreateTime')->find();
         $data = get_house_info($oneData['HouseID']);
         //$tenatinfo = Db::name('tenant')->where('TenantID',$oneData['TenantID'])->field('')->find();
         $data['Remark'] = $oneData['Remark'];
         $data['Tenant'] = Db::name('tenant')->where('TenantID',$oneData['TenantID'])->field('TenantID,TenantName,TenantTel,TenantNumber')->find();
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 2;
         return $data;
     }
@@ -274,7 +276,7 @@ class ChangeAudit extends Model
                                      ->field('HouseID,TenantName,HousePrerent,BanAddress')
                                      ->select();
         $data['InflRent'] = $oneData['InflRent'];
-        $data['CreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 3;
 
         return $data;
@@ -284,9 +286,13 @@ class ChangeAudit extends Model
     {   //陈欠核销
 
         //房屋编号
-        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OldMonthRent,HouseID,Remark')->find();
+        $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OldMonthRent,HouseID,OldYearRent,Remark,Deadline,CreateTime')->find();
         $data = get_house_info($oneData['HouseID']);
+        $data['OldMonthRent'] = $oneData['OldMonthRent'];
+        $data['OldYearRent'] = $oneData['OldYearRent'];
+        $data['Deadline'] = $oneData['Deadline'];
         $data['Remark'] = $oneData['Remark'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 4;
         return $data;
     }
@@ -294,9 +300,10 @@ class ChangeAudit extends Model
     public function get_five_detail($changeOrderID)
     {   //房改
 
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,CreateTime')->find();
         $data = get_house_info($oneData['HouseID']);
         $data['Remark'] = $oneData['Remark'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 5;
 
         return $data;
@@ -376,11 +383,12 @@ class ChangeAudit extends Model
     {   //注销
 
         //房屋编号
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CancelType')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CancelType,CreateTime')->find();
         $data = get_house_info($oneData['HouseID']);
         $data['CancelType'] = Db::name('cancel_type')->where('id', 'eq', $oneData['CancelType'])->value('Title');
         $data['Ban'] = json_decode($oneData['Deadline']);
         $data['Remark'] = $oneData['Remark'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 8;
 
         return $data;
@@ -389,12 +397,13 @@ class ChangeAudit extends Model
     public function get_nine_detail($changeOrderID)
     {   
         //房屋编号
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage,Deadline,Remark')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage,Deadline,Remark,CreateTime')->find();
 
         $data = get_ban_info($oneData['BanID']);
         $data['NewDamage'] = get_damage($oneData['Damage']);
         $data['DamageGrade'] = get_damage($oneData['Deadline']);
         $data['Remark'] = $oneData['Remark'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 9;
 
         return $data;
