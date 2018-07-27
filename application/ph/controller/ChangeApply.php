@@ -175,7 +175,7 @@ class ChangeApply extends Base
 //halt($data);
                     
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['Remark'] = $data['cancelReason'];  //异动缘由
+                    $datas['Remark'] = $data['oldCancelReason'];  //异动缘由
                     $datas['Deadline'] = $data['oldCancelMonthBefore'];  //异动缘由
                     $datas['OldMonthRent'] = $data['cancel_money'];  //核销的以前月的金额
                     $datas['OldYearRent'] = $data['oldCancelYearBefore'];  //核销的以前年的金额
