@@ -360,12 +360,12 @@ $('#addApply').click(function() {
                     $('.month_ul').on('click','li',function(){
                         if($(this).hasClass('active')){
                             $(this).removeClass('active');
-                            $('.cancel_money').text(parseInt($('.cancel_money').text()) 
-                                - parseInt($(this).val()));
+                            $('.cancel_money').text((parseFloat($('.cancel_money').text())*100 
+                                - parseFloat($(this).attr('value'))*100)/100);
                         }else{
                             $(this).addClass('active');
-                            $('.cancel_money').text(parseInt($('.cancel_money').text()) 
-                                + parseInt($(this).val()));
+                            $('.cancel_money').text((parseFloat($('.cancel_money').text())*100
+                                + parseFloat($(this).attr('value'))*100)/100);
                         }
                     });
                 },
