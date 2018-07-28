@@ -484,6 +484,8 @@ class ChangeAudit extends Model
 
         $data = get_ban_info($one['BanID']);
 
+        $data['Remark'] = $one['Remark'];
+
         $data['beforeDamage'] = get_damage($jsons['beforeDamage']);
         $data['beforeStructure'] = get_structure($jsons['beforeStructure']);
         if($jsons['afterDamage']){
