@@ -478,15 +478,20 @@ class ChangeAudit extends Model
     public function get_fourteen_detail($changeOrderID)
     {
         //房屋编号
-        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,NewHouseID,RoomID')->find();
+        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
 
-        $data['OldHouseInfo'] = get_house_info($one['HouseID']);
+        $jsons = json_decode($one['Deadline'],true);
 
-        $data['NewHouseInfo'] = get_house_info($one['NewHouseID']);  //注销的房屋
+        $data = get_ban_info($one['BanID']);
 
-        $data['OldHouseInfo']['RoomNumbers'] = $data['OldHouseInfo']['RoomNumbers'] + $data['NewHouseInfo']['RoomNumbers'];
-
-        $data['NewHouseInfo']['RoomNumbers'] = array();
+        $data['beforeDamage'] = get_damage($jsons['beforeDamage']);
+        $data['beforeStructure'] = get_structure($jsons['beforeStructure']);
+        if($jsons['afterDamage']){
+            $data['afterDamage'] = get_damage($jsons['afterDamage']);   
+        }
+        if($jsons['afterStructure']){
+            $data['afterStructure'] = get_structure($jsons['afterStructure']);
+        }
 
         $data['type'] = 14;
 
@@ -892,13 +897,18 @@ class ChangeAudit extends Model
 
             case 14:  //并户异动完成后的，系统处理(并户后的面积，金额处理没做)
 
-                $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,NewHouseID,RoomID')->find();
-                Db::name('house')->where('HouseID','eq',$oneData['HouseID'])->setField('Status',1);
-                Db::name('house')->where('HouseID','eq',$oneData['NewHouseID'])->setField('Status',5);
-                Db::name('room')->where('HouseID','like','%'.$oneData['HouseID'].'%')->update(['HouseID'=>$oneData['NewHouseID'],'Status'=>1]);
-                $areaArr = count_house_area($oneData['NewHouseID']);
-                $rentArr = count_house_rent($oneData['NewHouseID']);
-                Db::name('house')->where('HouseID','eq',$oneData['NewHouseID'])->update(['HouseUsearea'=>$areaArr['HouseUsearea'],'LeasedArea'=>$areaArr['LeaseArea'],'ApprovedRent'=>$rentArr]);
+                $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                $jsons = json_decode($oneData['Deadline'],true);
+
+                if($jsons['afterDamage']){
+                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['DamageGrade'=>$one['afterDamage']]);
+                }
+                if($jsons['afterStructure']){
+                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['StructureType'=>$one['afterStructure']]);
+                }
+
+
                 break;
 
             default:

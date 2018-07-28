@@ -5,6 +5,7 @@ namespace app\ph\model;
 
 use think\Model;
 use app\ph\model\HouseInfo as HouseModel;
+use app\ph\model\BanInfo as BanModel;
 use think\Db;
 use think\Loader;
 use think\Config;
@@ -176,6 +177,22 @@ class ChangeApply extends Model
                     if(count($arrs) > 1){
                         return jsons('4004','所选房屋产别不能超过一种');
                     }
+
+                    $findwhere = [
+                        'HouseID'=>['in',$data['houseID']],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                    ];
+
+                    $finds = Db::name('house')->where($findwhere)
+                                            ->field('sum(HousePrerent) as HousePrerents,BanID,OwnerType,InstitutionID, InstitutionPID')
+                                            ->find();
+
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    return $finds;
+
                 break;
                 case 4:
                     $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
@@ -290,6 +307,30 @@ class ChangeApply extends Model
                     if(!$data['Ban']){
                         return jsons('4001','请完善异动信息');
                     }
+                    return $finds;
+                break;
+                case 14:
+                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['BanID']],'ChangeType'=>14,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    if($ifin){
+                        return jsons('4001','该楼栋已在楼栋调整异动单中……');
+                    }
+                    $banModel = new BanModel;
+
+                    $findwhere = [
+                        'BanID'=>$data['BanID'],
+                        'Status'=>1,
+                        ];
+
+                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature')
+                                      ->where($findwhere)
+                                      ->find();
+                    if(!$finds){
+                        return jsons('4002','楼栋状态异常');
+                    }
+                    if(!$data['afterAdjustDamageGrade'] && !$data['afterAdjustStructureType']){
+                        return jsons('4001','请完善异动信息');
+                    }
+                    //halt($finds);
                     return $finds;
                 break;
 

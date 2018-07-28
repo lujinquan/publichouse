@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,2,3,4,8,11,12])){
+            if(!in_array($data['type'],[1,2,3,4,8,11,12,14])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -136,33 +136,24 @@ class ChangeApply extends Base
                     break;
 
                 case 3:  // 暂停计租:目前有两种，一种是按户暂停，另一种是按楼栋，暂时都按照按户暂停
+                    $datas['InflRent'] = $one['HousePrerents'];
+                    $datas['BanID'] = $one['BanID'];
+                    $datas['HouseID'] = trim(implode(',',$data['houseID']),',');
+                    $datas['InstitutionID'] = $one['InstitutionID'];
+                    $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['OwnerType'] = $one['OwnerType'];
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
+                    $datas['ChangeType'] = $data['type'];  //异动类型
+                    $datas['ProcessConfigName'] = $changeTypes[3];  //异动名称
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
 
-                    $one = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])
-                                            ->field('sum(HousePrerent) as HousePrerents,BanID,OwnerType,InstitutionID, InstitutionPID')
-                                            ->find();
-                    $suffix = substr(uniqid(),-6);
-                    $result['InflRent'] = $one['HousePrerents'];
-                    $result['BanID'] = $one['BanID'];
-                    $result['Status'] = 2;
-                    $result['UserName'] = session('user_base_info.name');
-                    $result['UserNumber'] = UID;
-                    $result['CreateTime'] = time();
-                    $result['HouseID'] = trim(implode(',',$data['houseID']),',');
-                    $result['InstitutionID'] = $one['InstitutionID'];
-                    $result['InstitutionPID'] = $one['InstitutionPID'];
-                    $result['OwnerType'] = $one['OwnerType'];
-                    $result['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
-                    $result['ChangeType'] = $data['type'];  //异动类型
-                    $result['ProcessConfigName'] = $changeTypes[3];  //异动名称
-                    $result['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>3])->order('id desc')->value('id');        //找到最新的流程控制线路
-
-                    if(!$result['ProcessConfigType']){
+                    if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
-                    $result['OrderDate'] = date('Ym', time());
-                    $result['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
+                    $datas['OrderDate'] = date('Ym', time());
+                    $datas['ChangeOrderID'] = date('YmdHis', time()).'03'.$suffix;   //03代表暂停计租
 
-                    $res = Db::name('change_order')->insert($result);
+                    $res = Db::name('change_order')->insert($datas);
 
       
                     break;
@@ -512,26 +503,32 @@ class ChangeApply extends Base
                     Db::name('house')->where('HouseID','in',[$data['HouseID'],$data['SplitHouseID']])->setField('Status',3); //将两个房屋的状态改成异动中
                     break;
 
-                case 14:  // 并户
+                case 14:  //楼栋调整
                     
-                    $datas['HouseID'] = $data['HouseID'];  //分户原始房屋编号
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
+                    $datas['BanID'] = $data['BanID'];  //分户原始房屋编号
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
+                    $datas['Remark'] = $data['remark'];
+                    $datas['Deadline'] = json_encode([
+                        'beforeDamage'=> $one['DamageGrade'],
+                        'afterDamage'=> $data['afterAdjustDamageGrade']?:'',
+                        'beforeStructure'=> $one['StructureType'],
+                        'afterStructure'=> $data['afterAdjustStructureType']?:'',
+                    ]); 
 
-                    $datas['NewHouseID'] = $data['SplitHouseID']; //分户新增的房屋编号
-
-                    $datas['ChangeType'] = $data['type'];  //异动类型
+                    $datas['ChangeType'] = 14;  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[14];  //异动名称
-                    $datas['ProcessConfigType'] = 14;        //流程控制线路
-                    $datas['ChangeOrderID'] = date('YmdHis', time()).'13'.$suffix;   //13代表分户
-
-                    $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,UseNature,OwnerType,HousePrerent,AnathorOwnerType,AnathorHousePrerent')->find();
-                    $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
-                    $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
-
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>14])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
+                    $datas['ChangeOrderID'] = date('YmdHis', time()).'14'.$suffix;   
+                    $datas['OrderDate'] = date('Ym',time());
+                    $datas['InstitutionID'] = $one['TubulationID'];  //机构id
+                    $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
                     $res = Db::name('change_order')->insert($datas);
-                    Db::name('house')->where('HouseID','in',[$data['HouseID'],$data['SplitHouseID']])->setField('Status',3); //将两个房屋的状态改成异动中
+                    
                     break;
 
                     
