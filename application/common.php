@@ -522,7 +522,7 @@ function get_house_info($houseID){
 
 function get_ban_info($banID){
 
-    $map = 'BanAddress ,BanID ,DamageGrade,PreRent,StructureType ,BanAddress,UseNature ,BanFloorNum ,BanUsearea, TotalArea ,IfFirst,IfElevator, CoveredArea ,BanUnitNum ,OwnerType ,CreateTime ,TubulationID';
+    $map = 'BanAddress ,BanID ,DamageGrade,PreRent,StructureType ,BanAddress,UseNature ,BanFloorNum ,BanUsearea, TotalArea ,IfFirst,IfElevator, CoveredArea ,BanUnitNum ,OwnerType ,CreateTime ,TubulationID ,TotalOprice';
 
     $data = Db::name('ban')->where('BanID' ,'eq' ,$banID)->field($map)->find();
     $data['CreateTime'] = date('Y-m-d H:i:s',$data['CreateTime']);
@@ -695,14 +695,13 @@ function count_house_rent($houseid){
     $where['Status'] = array('eq',1);
     $where['RoomPublicStatus'] = array('<',3); //去掉3户共用的房间
 
-    $roomArr = Db::name('room')->where($where)->column('RoomID');
-//halt($roomArr);
+    //$roomArr = Db::name('room')->where($where)->column('RoomID');
+    $roomArr = Db::name('room')->where($where)->field('RoomID,RoomRentMonth')->select();
     if($roomArr){
         foreach ($roomArr as $value) {
-    //         if($value == 119525){
-    //     halt($value);
-    // }
-            $rent[] = count_room_rent($value);
+
+            //$rent[] = count_room_rent($value);
+            $rent[] = $value['RoomRentMonth'];
         }
         //dump($rent);
         $sumrent = array_sum($rent);
@@ -717,8 +716,7 @@ function count_house_rent($houseid){
     $jiaji = $houseAddRent?array_sum($houseAddRent):0;
 
     $houseRent = $sumrent + $jiaji;
-    //dump($rent);dump($sumrent);
-//halt($houseRent);
+
     return $houseRent;
 }
 
@@ -871,4 +869,64 @@ function array_no_space_str($arr){
     }
     return array();
 
+}
+
+/**
+ * 列出本地目录的文件
+ * @author rainfer <81818832@qq.com>
+ * @param string $path
+ * @param string $pattern
+ * @return array
+ */
+function list_file($path, $pattern = '*')
+{
+    if (strpos($pattern, '|') !== false) {
+        $patterns = explode('|', $pattern);
+    } else {
+        $patterns [0] = $pattern;
+    }
+    $i = 0;
+    $dir = array();
+    if (is_dir($path)) {
+        $path = rtrim($path, '/') . '/';
+    }
+    foreach ($patterns as $pattern) {
+        $list = glob($path . $pattern);
+        if ($list !== false) {
+            foreach ($list as $file) {
+                $dir [$i] ['filename'] = basename($file);
+                $dir [$i] ['path'] = dirname($file);
+                $dir [$i] ['pathname'] = realpath($file);
+                $dir [$i] ['owner'] = fileowner($file);
+                $dir [$i] ['perms'] = substr(base_convert(fileperms($file), 10, 8), -4);
+                $dir [$i] ['atime'] = fileatime($file);
+                $dir [$i] ['ctime'] = filectime($file);
+                $dir [$i] ['mtime'] = filemtime($file);
+                $dir [$i] ['size'] = filesize($file);
+                $dir [$i] ['type'] = filetype($file);
+                $dir [$i] ['ext'] = is_file($file) ? strtolower(substr(strrchr(basename($file), '.'), 1)) : '';
+                $dir [$i] ['isDir'] = is_dir($file);
+                $dir [$i] ['isFile'] = is_file($file);
+                $dir [$i] ['isLink'] = is_link($file);
+                $dir [$i] ['isReadable'] = is_readable($file);
+                $dir [$i] ['isWritable'] = is_writable($file);
+                $i++;
+            }
+        }
+    }
+    $cmp_func = create_function('$a,$b', '
+        if( ($a["isDir"] && $b["isDir"]) || (!$a["isDir"] && !$b["isDir"]) ){
+            return  $a["filename"]>$b["filename"]?1:-1;
+        }else{
+            if($a["isDir"]){
+                return -1;
+            }else if($b["isDir"]){
+                return 1;
+            }
+            if($a["filename"]  ==  $b["filename"])  return  0;
+            return  $a["filename"]>$b["filename"]?-1:1;
+        }
+        ');
+    usort($dir, $cmp_func);
+    return $dir;
 }
