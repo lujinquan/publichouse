@@ -59,7 +59,7 @@ $('.BtnApprove').click(function(){
             $(".emptyRentLeasedArea").text(res.data.detail.LeasedArea);
             $(".emptyRentOwnertype").text(res.data.detail.OwnerType);
             $(".emptyRentHousePrerent").text(res.data.detail.HousePrerent);
-            $(".emptyRentCreateTime").text(res.data.detail.CreateTime);
+            $(".emptyRentCreateTime").text(res.data.detail.OrderCreateTime);
             $(".emptyRentReason").text(res.data.detail.Remark);
 			$(".emptyRentTenantID").text(res.data.detail.Tenant.TenantID);
 			$(".emptyRentTenantName").text(res.data.detail.Tenant.TenantName);
@@ -156,7 +156,7 @@ $('.BtnApprove').click(function(){
         	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
         	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
         	$('.pauseInflRent').text(res.data.detail.InflRent);
-        	$('.pauseCreateTime').text(res.data.detail.CreateTime);
+        	$('.pauseCreateTime').text(res.data.detail.OrderCreateTime);
         	if(res.data.config.status == '1'){
 				$('.status_2').show();
 			}else{
@@ -239,7 +239,7 @@ $('.BtnApprove').click(function(){
         	$('.cancelUnitID').text(res.data.detail.UnitID);
         	$('.cancelFloorID').text(res.data.detail.FloorID);
         	$('.Remark').text(res.data.detail.Remark);
-        	$('.cancelCreateTime').text(res.data.detail.CreateTime);
+        	$('.cancelCreateTime').text(res.data.detail.OrderCreateTime);
         	var house_str = '';
         	for(var i = 0;i < res.data.detail.Ban.length;i++){
         		house_str += '<tr>\
@@ -421,7 +421,7 @@ $('.BtnDetail').click(function(){
             $(".emptyRentLeasedArea").text(res.data.detail.LeasedArea);
             $(".emptyRentOwnertype").text(res.data.detail.OwnerType);
             $(".emptyRentHousePrerent").text(res.data.detail.HousePrerent);
-            $(".emptyRentCreateTime").text(res.data.detail.CreateTime);
+            $(".emptyRentCreateTime").text(res.data.detail.OrderCreateTime);
             $(".emptyRentReason").text(res.data.detail.Remark);
 
 			$(".emptyRentTenantID").text(res.data.detail.Tenant.TenantID);
@@ -444,7 +444,7 @@ $('.BtnDetail').click(function(){
         	$('.pauseAddress').text(res.data.detail.ban.BanAddress);
         	$('.pauseOwnerType').text(res.data.detail.ban.OwnerType);
         	$('.pauseInflRent').text(res.data.detail.InflRent);
-        	$('.pauseCreateTime').text(res.data.detail.CreateTime);
+        	$('.pauseCreateTime').text(res.data.detail.OrderCreateTime);
         	$('.status_2').hide();
         	for(var i = 0;i < res.data.detail.house.length;i++){
         		house_str += '<tr>\
@@ -499,7 +499,7 @@ $('.BtnDetail').click(function(){
         	$('.cancelUnitID').text(res.data.detail.UnitID);
         	$('.cancelFloorID').text(res.data.detail.FloorID);
         	$('.Remark').text(res.data.detail.Remark);
-        	$('.cancelCreateTime').text(res.data.detail.CreateTime);
+        	$('.cancelCreateTime').text(res.data.detail.OrderCreateTime);
         	var house_str = '';
         	for(var i = 0;i < res.data.detail.Ban.length;i++){
         		house_str += '<tr>\
@@ -549,7 +549,6 @@ $('.BtnDetail').click(function(){
         	layerBox(value,'rentAdd','租金追加调整审批',2);
 		}else if(type == 12){
 			$('.status_2').hide();
-			$('#rentAdjustment').show();
         	$('.rentHouseID').text(res.data.detail.HouseID);
         	$('.rentType').text(res.data.detail.CancelType);
         	$('.rentUseNature').text(res.data.detail.UseNature);
@@ -689,9 +688,9 @@ function processState(id,res){
 	}
 	for(var k = 1;k <= RecordLength;k++){
 		if(res.data.record[k-1].Status == 2){
-			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].CreateTime+res.data.record[k-1].Step+"；</p>");
+			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].OrderCreateTime+res.data.record[k-1].Step+"；</p>");
 		}else{
-			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].CreateTime+res.data.record[k-1].Status+"，原因："+res.data.record[k-1].Reson+"；</p>");
+			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1].RoleName+"［"+res.data.record[k-1].UserNumber+"］于"+res.data.record[k-1].OrderCreateTime+res.data.record[k-1].Status+"，原因："+res.data.record[k-1].Reson+"；</p>");
 		}
 		FatherDom.append(RecordDom);
 	}
