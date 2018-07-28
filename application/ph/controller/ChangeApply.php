@@ -115,7 +115,7 @@ class ChangeApply extends Base
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
 
-                    
+                    $datas['InflRent'] = $one['HousePrerents'];
                     $datas['Remark'] = $data['emptyRentReason'];
                     $datas['ChangeType'] = 2;  //异动类型
                     $datas['OwnerType'] = $one['OwnerType'];  //异动类型
@@ -164,11 +164,11 @@ class ChangeApply extends Base
 
                     $res = Db::name('change_order')->insert($result);
 
-                
+      
                     break;
 
                 case 4:  // 陈欠核销,按户来，核销掉一段时间的账目
-//halt($data);
+                    //halt($data);
                     
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['Remark'] = $data['oldCancelReason'];  //异动缘由

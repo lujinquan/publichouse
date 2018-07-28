@@ -651,8 +651,8 @@ class ChangeAudit extends Model
                 //     Db::name('rent_table')->where(['ChangeType'=>2,'HouseID'=>$one['HouseID']])->setField('InflRent',0);
                 // }else{
                 Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 1]);
-                Db::name('rent_config')->where('HouseID', 'eq', $houseID)->delete();
-                Db::name('rent_order')->where(['HouseID'=>['eq', $houseID],'OrderDate'=>date('Ym',time())])->delete();
+                Db::name('rent_config')->where('HouseID', 'eq', $one['HouseID'])->delete();
+                Db::name('rent_order')->where(['HouseID'=>['eq', $one['HouseID']],'OrderDate'=>date('Ym',time())])->delete();
 
                 $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate'] .")";
 
