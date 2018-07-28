@@ -198,8 +198,8 @@ return [
     'SplitRent' => '租赁合同',
     'SplitAdvice' => '共同居住人意见书(签字)',
 
-    // 并户
-    'CancelApplication' => '并户申请书',
+    // 楼栋调整
+    'buildingAdjustOther' => '其它',
 
     //库字段映射
     'BanUnitNum' => '单元数',

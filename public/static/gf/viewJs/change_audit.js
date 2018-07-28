@@ -369,7 +369,38 @@ $('.BtnApprove').click(function(){
 		}else if(type==13){
 			
 		}else if(type==14){
-
+            $('#buildingAdjustBanID').text(res.data.detail.BanID);
+            $('#buildingAdjustAddress').text(res.data.detail.BanAddress);
+            $('#buildingAdjustOwnerType').text(res.data.detail.OwnerType);
+            $('#buildingAdjustBanUnitNum').text(res.data.detail.BanUnitNum);
+            $('#buildingAdjustCoveredArea').text(res.data.detail.CoveredArea);
+            $('#buildingAdjustTotalArea').text(res.data.detail.TotalArea);
+            $('#buildingAdjustBanUsearea').text(res.data.detail.BanUsearea);
+            $('#buildingAdjustTotalOprice').text(res.data.detail.TotalOprice);
+            $('#buildingAdjustBanPrerent').text(res.data.detail.PreRent);
+            $('#buildingAdjustReason').text(res.data.detail.Remark);
+            $('#beforeAdjustDamageGrade').text(res.data.detail.beforeDamage);
+            $('#beforeAdjustStructureType').text(res.data.detail.beforeStructure);
+            $('#afterAdjustDamageGrade').text(res.data.detail.afterDamage);
+            $('#afterAdjustStructureType').text(res.data.detail.afterStructure);
+            if(res.data.config.status == '1'){
+                $('.status_2').show();
+                new file({
+                    show: "#buildingAdjustOtherShow",
+                    upButton:"#buildingAdjustOtherUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    button: "#buildingAdjustOther",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "其它"
+                });
+            }else{
+                $('.status_2').hide();
+            }
+            processState('#buildingAdjustState',res);
+            metailShow('#buildingAdjustPhotos',res);
+            layerBox(value,'buildingAdjustment','楼栋调整',1,res.data.config.status);
 		}
 	});
 })
@@ -579,20 +610,20 @@ $('.BtnDetail').click(function(){
 		}else if(type==13){
 
 		}else if(type==14){
-            $('#buildingAdjustBanID').text(res.data.detail.HouseID);
-            $('#buildingAdjustAddress').text(res.data.detail.BanID);
-            $('#buildingAdjustOwnerType').text(res.data.detail.BanAddress);
-            $('#buildingAdjustBanUnitNum').text(res.data.detail.UseNature);
-            $('#buildingAdjustCoveredArea').text(res.data.detail.HouseUsearea);
-            $('#buildingAdjustTotalArea').text(res.data.detail.LeasedArea);
-            $('#buildingAdjustBanUsearea').text(res.data.detail.TenantName);
-            $('#buildingAdjustTotalOprice').text(res.data.detail.TenantNumber);
-            $('#buildingAdjustBanPrerent').text(res.data.detail.TenantTel);
-            $('#buildingAdjustReason').text(res.data.detail.OwnerTypes[0].OwnerType);
-            $('#beforeAdjustDamageGrade').text(res.data.detail.HousePrerent);
-            $('#beforeAdjustStructureType').text(res.data.detail.DamageGrade);
-            $('#afterAdjustDamageGrade').text(res.data.detail.OldYearRent);
-            $('#afterAdjustStructureType').text(res.data.detail.OldMonthRent);
+            $('#buildingAdjustBanID').text(res.data.detail.BanID);
+            $('#buildingAdjustAddress').text(res.data.detail.BanAddress);
+            $('#buildingAdjustOwnerType').text(res.data.detail.OwnerType);
+            $('#buildingAdjustBanUnitNum').text(res.data.detail.BanUnitNum);
+            $('#buildingAdjustCoveredArea').text(res.data.detail.CoveredArea);
+            $('#buildingAdjustTotalArea').text(res.data.detail.TotalArea);
+            $('#buildingAdjustBanUsearea').text(res.data.detail.BanUsearea);
+            $('#buildingAdjustTotalOprice').text(res.data.detail.TotalOprice);
+            $('#buildingAdjustBanPrerent').text(res.data.detail.PreRent);
+            $('#buildingAdjustReason').text(res.data.detail.Remark);
+            $('#beforeAdjustDamageGrade').text(res.data.detail.beforeDamage);
+            $('#beforeAdjustStructureType').text(res.data.detail.beforeStructure);
+            $('#afterAdjustDamageGrade').text(res.data.detail.afterDamage);
+            $('#afterAdjustStructureType').text(res.data.detail.afterStructure);
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);

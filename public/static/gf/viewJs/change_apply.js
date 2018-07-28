@@ -339,6 +339,7 @@ $('#addApply').click(function() {
                             $("#oldCancelOwnTypeD").text(res.data.OwnerType);
                             $("#oldCancelmonthRent").text(res.data.HousePrerent);
                             $("#oldCancelYearBefore").val(res.data.ArrearRent);
+                            $(".cancel_money").text('0');
                             $('.month_ul li').removeClass('active');
                             $('.month_ul').empty();
                             for(var i = 0;i < res.data.Room.length;i++){
@@ -360,7 +361,7 @@ $('#addApply').click(function() {
                     $('.month_ul').on('click','li',function(){
                         if($(this).hasClass('active')){
                             $(this).removeClass('active');
-                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'+'));
+                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'-'));
                         }else{
                             $(this).addClass('active');
                             $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'+'));
