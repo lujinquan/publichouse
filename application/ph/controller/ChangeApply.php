@@ -115,7 +115,7 @@ class ChangeApply extends Base
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
 
-                    $datas['InflRent'] = $one['HousePrerents'];
+                    $datas['InflRent'] = $one['HousePrerent'];
                     $datas['Remark'] = $data['emptyRentReason'];
                     $datas['ChangeType'] = 2;  //异动类型
                     $datas['OwnerType'] = $one['OwnerType'];  //异动类型
