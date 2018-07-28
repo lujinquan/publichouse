@@ -211,7 +211,7 @@ class Api extends Controller
 
         $banID = input('BanID');
 
-        $map = 'BanAddress ,BanID ,DamageGrade ,StructureType ,UseNature ,OwnerType ,BanUnitNum ,BanFloorNum ,TotalArea ,BanUsearea ,CoveredArea ,TubulationID ,CreateTime ,BanPrerent ,TotalOprice';
+        $map = 'BanAddress ,BanID ,DamageGrade ,StructureType ,UseNature ,OwnerType ,BanUnitNum ,BanFloorNum ,TotalArea ,BanUsearea ,CoveredArea ,TubulationID ,CreateTime ,PreRent,TotalOprice';
 
         $data = Db::name('ban')->where('BanID', 'eq', $banID)->field($map)->find();
 
