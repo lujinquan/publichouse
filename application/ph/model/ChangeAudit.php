@@ -903,10 +903,10 @@ class ChangeAudit extends Model
                 $jsons = json_decode($oneData['Deadline'],true);
 
                 if($jsons['afterDamage']){
-                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['DamageGrade'=>$one['afterDamage']]);
+                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['DamageGrade'=>$jsons['afterDamage']]);
                 }
                 if($jsons['afterStructure']){
-                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['StructureType'=>$one['afterStructure']]);
+                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['StructureType'=>$jsons['afterStructure']]);
                 }
 
 
