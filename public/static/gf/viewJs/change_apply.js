@@ -2336,8 +2336,10 @@ function addEmptyRent(){
                     success: function(res) {
                         res = JSON.parse(res);
                         layer.msg(res.msg);
-                        layer.close(thisIndex);
-                        location.reload();
+                        if(res.retcode == '2000'){
+                            layer.close(thisIndex);
+                            location.reload();
+                        }
                     }
                 });
             }
