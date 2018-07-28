@@ -896,7 +896,7 @@ class ChangeAudit extends Model
                 Db::name('house')->where('HouseID','eq',$oneData['HouseID'])->update(['HouseUsearea'=>$areaArr2['HouseUsearea'],'LeasedArea'=>$areaArr2['LeaseArea'],'ApprovedRent'=>$rentArr2]);
                 break;
 
-            case 14:  //并户异动完成后的，系统处理(并户后的面积，金额处理没做)
+            case 14:  //楼栋调整异动完成后的，系统处理(并户后的面积，金额处理没做)
 
                 $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
 
@@ -907,6 +907,15 @@ class ChangeAudit extends Model
                 }
                 if($jsons['afterStructure']){
                     Db::name('ban')->where('BanID',$oneData['BanID'])->update(['StructureType'=>$jsons['afterStructure']]);
+
+                    $roomArr = Db::name('room')->where('BanID',$oneData['BanID'])->column('RoomID,RoomRentMonth');
+                    if($roomArr){
+                        foreach($roomArr as $room){
+                            $roomrent = count_room_rent($k);
+                            Db::name('room')->where('RoomID',$k)->setField('RoomRentMonth',$roomrent);
+                        }
+                        
+                    }
                 }
 
 
