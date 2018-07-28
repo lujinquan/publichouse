@@ -1940,7 +1940,7 @@ $('#addApply').click(function() {
                             $("#buildingAdjustTotalArea").text(res.data.TotalArea);
                             $("#buildingAdjustBanUsearea").text(res.data.BanUsearea);
                             $("#buildingAdjustTotalOprice").text(res.data.TotalOprice);
-                            $("#buildingAdjustBanPrerent").text(res.data.BanPrerent);
+                            $("#buildingAdjustBanPrerent").text(res.data.PreRent);
                             $("#beforeAdjustDamageGrade").text(res.data.DamageGrade);
                             $("#beforeAdjustStructureType").text(res.data.StructureType);
                         });
