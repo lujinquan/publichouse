@@ -360,12 +360,11 @@ $('#addApply').click(function() {
                     $('.month_ul').on('click','li',function(){
                         if($(this).hasClass('active')){
                             $(this).removeClass('active');
-                            $('.cancel_money').text((parseFloat($('.cancel_money').text())*100 
-                                - parseFloat($(this).attr('value'))*100)/100);
+                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'+'));
                         }else{
                             $(this).addClass('active');
-                            $('.cancel_money').text((parseFloat($('.cancel_money').text())*100
-                                + parseFloat($(this).attr('value'))*100)/100);
+                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'+'));
+                                
                         }
                     });
                 },
@@ -2401,4 +2400,31 @@ function cancelEmptyRent(){
             location.reload();
         }
     });
+}
+
+// 目前只适用于加减法 浮点小数加减法
+function numberMethod(number1,number2,method){
+    var array_1 = number1.split('.');
+    var array_2 = number2.split('.');
+    var number = 0;
+    var multiple = 0;
+    var dot_diff_1 = 0;
+    var dot_diff_2 = 0;
+    array_1[1] = (array_1[1] == undefined ? '0' : array_1[1]);
+    array_2[1] = (array_2[1] == undefined ? '0' : array_2[1]);
+    if(array_1[1].length > array_2[1].length){
+        multiple = array_1[1].length;
+        dot_diff_2 = array_1[1].length - array_2[1].length;
+    }else{
+        multiple = array_2[1].length;
+        dot_diff_1 = array_2[1].length - array_1[1].length;
+    }
+    number1 = parseFloat(array_1[0]) * Math.pow(10,multiple)+parseFloat(array_1[1]) * Math.pow(10,dot_diff_1);
+    number2 = parseFloat(array_2[0]) * Math.pow(10,multiple)+parseFloat(array_2[1]) * Math.pow(10,dot_diff_2);
+    if(method == '+'){
+        number = (number1 + number2)/Math.pow(10,multiple);
+    }else if(method == '-'){
+        number = (number1 - number2)/Math.pow(10,multiple);
+    }
+    return number;
 }
