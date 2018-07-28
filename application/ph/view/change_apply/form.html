@@ -804,3 +804,101 @@
     </div>
   </div> -->
 </form>
+
+<!-- 楼栋调整 -->
+<form id="buildingAdjust" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">楼栋编号：</label>
+      <input type="number" id="buildingAdjustBan" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="buildingAdjustQuery">查询</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">房屋地址：</label>
+      <label id="buildingAdjustAddress" class="label_p_style" style="width:492px;"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style"> 产别：</label>
+      <label id="buildingAdjustOwnerType" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style"> 栋数：</label>
+      <label id="buildingAdjustBanUnitNum" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">占地面积：</label>
+      <label id="buildingAdjustCoveredArea" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">建筑面积：</label>
+      <label id="buildingAdjustTotalArea" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">使用面积：</label>
+      <label id="buildingAdjustBanUsearea" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">楼栋原价：</label>
+      <label id="buildingAdjustTotalOprice" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">楼栋租金：</label>
+      <label id="buildingAdjustBanPrerent" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">异动事由：</label>
+      <input id="buildingAdjustReason" class="label_input" style="width:492px;">
+    </div>    
+  </div>
+
+  <div class="am-form-group am-u-sm-12 empty_rent_cancel">
+      <h2 class="label_title">房屋调整：</h2>
+  </div>
+
+  <div class="am-u-sm-12 empty_rent_cancel">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style" style="width:100px;">调整前完损等级：</label>
+      <label id="beforeAdjustDamageGrade" class="label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style" style="width:100px;">调整前结构类别：</label>
+      <label id="beforeAdjustStructureType" class="label_p_style"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12 empty_rent_cancel">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style" style="width:100px;">调整后完损等级：</label>
+      <select id="afterAdjustDamageGrade" class="label_select">
+        <option>请选择</option>
+      </select>
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style" style="width:100px;">调整后结构类别：</label>
+      <select id="afterAdjustStructureType" class="label_select">
+        <option>请选择</option>
+      </select>
+    </div>
+  </div>
+
+</form>

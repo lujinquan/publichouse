@@ -1917,68 +1917,41 @@ $('#addApply').click(function() {
         case '14':
             layer.open({
                 type: 1,
-                area: ['990px', '700px'],
+                area: ['700px', '750px'],
                 resize: false,
                 zIndex: 100,
-                title: ['新增并户', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                content: $('#HouseHolds'),
+                title: ['新增楼栋调整', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                content: $('#buildingAdjust'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    houseQuery.action('HoldsHouseNum','1');
-                    $('#HoldsQueryy').off('click');
-                    $('#HoldsQuery').on('click', function() {
-                        var HouseID = $("#HoldsHouseNum").val();
-                        console.log(HouseID);
-                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                    banQuery.action('buildingAdjustBan','1');
+                    $('#buildingAdjustQuery').off('click');
+                    $('#buildingAdjustQuery').on('click', function() {
+                        var BanID = $("#buildingAdjustBan").val();
+                        console.log(BanID);
+                        $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
                             layer.msg(res.msg);
-                            $("#HoldsBanID").text(res.data.BanID);
-                            $("#HoldsBanAddress").text(res.data.BanAddress);
-                            $("#HoldsFloorID").text(res.data.FloorID);
-                            $("#HoldsTenantName").text(res.data.TenantName);
-                            $("#HoldsTenantTel").text(res.data.TenantTel);
-                            $("#HoldsTenantNumber").text(res.data.TenantNumber);
-                            $("#HoldsCreateTime").text(res.data.CreateTime);
-                            $("#HoldsHouseArea").text(res.data.HouseArea);
-                            $("#HoldsLeasedArea").text(res.data.LeasedArea);
+                            $("#buildingAdjustAddress").text(res.data.BanAddress);
+                            $("#buildingAdjustOwnerType").text(res.data.OwnerType);
+                            $("#buildingAdjustBanUnitNum").text(res.data.BanUnitNum);
+                            $("#buildingAdjustCoveredArea").text(res.data.CoveredArea);
+                            $("#buildingAdjustTotalArea").text(res.data.TotalArea);
+                            $("#buildingAdjustBanUsearea").text(res.data.BanUsearea);
+                            $("#buildingAdjustTotalOprice").text(res.data.TotalOprice);
+                            $("#buildingAdjustBanPrerent").text(res.data.BanPrerent);
+                            $("#beforeAdjustDamageGrade").text(res.data.DamageGrade);
+                            $("#beforeAdjustStructureType").text(res.data.StructureType);
                         });
-                    });
-                    houseQuery.action('CancelNum','1');
-                    $('#CancelQuery').off('click');
-                    $('#CancelQuery').on('click', function() {
-                        var HouseID = $("#CancelNum").val();
-                        console.log(HouseID);
-                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
-                            res = JSON.parse(res);
-                            console.log(res);
-                            layer.msg(res.msg);
-                            $("#CancelID").text(res.data.BanID);
-                            $("#CancelAddress").text(res.data.BanAddress);
-                            $("#CancelFloor").text(res.data.FloorID);
-                            $("#CancelName").text(res.data.TenantName);
-                            $("#CancelTel").text(res.data.TenantTel);
-                            $("#CancelNumber").text(res.data.TenantNumber);
-                            $("#CancelTime").text(res.data.CreateTime);
-                            $("#CancelArea").text(res.data.HouseArea);
-                            $("#CancelLeased").text(res.data.LeasedArea);
-                        });
-                    });
-                    new file({
-                        button: "#CancelApplication",
-                        show: "#CancelApplicationShow",
-                        upButton: "#CancelApplicationUp",
-                        size: 1024,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "异动申请书"
                     });
                 },
                 yes: function(thisIndex) {
-                    var formData = fileTotall.getArrayFormdata();
-                    formData.append("HouseID", $("#HoldsHouseNum").val());
-                    formData.append("SplitHouseID", $("#CancelNum").val());
+                    var formData = new FormData();
+                    formData.append("BanID", $("#buildingAdjustBan").val());
+                    formData.append("remark", $("#buildingAdjustReason").val());
+                    formData.append("afterAdjustDamageGrade", $("#afterAdjustDamageGrade").val());
+                    formData.append("afterAdjustStructureType", $("#afterAdjustStructureType").val());
                     formData.append("type", 14);
                     $.ajax({
                         type: "post",
@@ -1989,8 +1962,10 @@ $('#addApply').click(function() {
                         success: function(res) {
                             res = JSON.parse(res);
                             layer.msg(res.msg);
-                            layer.close(thisIndex);
-                            location.reload();
+                            if(res.retcode == '2000'){
+                                layer.close(thisIndex);
+                                location.reload();
+                            }
                         }
                     });
                 },

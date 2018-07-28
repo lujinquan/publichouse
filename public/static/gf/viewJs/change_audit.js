@@ -579,7 +579,23 @@ $('.BtnDetail').click(function(){
 		}else if(type==13){
 
 		}else if(type==14){
-
+            $('#buildingAdjustBanID').text(res.data.detail.HouseID);
+            $('#buildingAdjustAddress').text(res.data.detail.BanID);
+            $('#buildingAdjustOwnerType').text(res.data.detail.BanAddress);
+            $('#buildingAdjustBanUnitNum').text(res.data.detail.UseNature);
+            $('#buildingAdjustCoveredArea').text(res.data.detail.HouseUsearea);
+            $('#buildingAdjustTotalArea').text(res.data.detail.LeasedArea);
+            $('#buildingAdjustBanUsearea').text(res.data.detail.TenantName);
+            $('#buildingAdjustTotalOprice').text(res.data.detail.TenantNumber);
+            $('#buildingAdjustBanPrerent').text(res.data.detail.TenantTel);
+            $('#buildingAdjustReason').text(res.data.detail.OwnerTypes[0].OwnerType);
+            $('#beforeAdjustDamageGrade').text(res.data.detail.HousePrerent);
+            $('#beforeAdjustStructureType').text(res.data.detail.DamageGrade);
+            $('#afterAdjustDamageGrade').text(res.data.detail.OldYearRent);
+            $('#afterAdjustStructureType').text(res.data.detail.OldMonthRent);
+            processState('#buildingAdjustState',res);
+            metailShow('#buildingAdjustPhotos',res);
+            layerBox(value,'buildingAdjustment','楼栋调整',2);
 		}
 	});
 });
