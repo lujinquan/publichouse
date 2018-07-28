@@ -221,7 +221,7 @@ class Api extends Controller
         $data['TubulationID'] = get_institution($data['TubulationID']);
         $data['StructureType'] = get_structure($data['StructureType']);
         $data['CreateTime'] = date('Y-m-d H:i:s', $data['CreateTime']);
-
+//halt($data);
 
         return jsons('2000', '获取成功', $data);
     }

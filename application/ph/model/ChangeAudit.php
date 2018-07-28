@@ -483,7 +483,7 @@ class ChangeAudit extends Model
         $jsons = json_decode($one['Deadline'],true);
 
         $data = get_ban_info($one['BanID']);
-
+halt($data);
         $data['Remark'] = $one['Remark'];
 
         $data['beforeDamage'] = get_damage($jsons['beforeDamage']);
