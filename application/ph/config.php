@@ -169,8 +169,8 @@ return [
 
 
     //新增房屋调整
-    'homeCkeck' => '房屋勘察表',
-    'AdjustSurvey' => '图卡',
+    'adjustExplain' => '调整说明',
+    'HAOther' => '其它',
 
     //管段调整
     'PipeApplication' => '管段异动申请表',

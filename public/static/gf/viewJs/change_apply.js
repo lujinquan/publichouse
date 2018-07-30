@@ -1327,6 +1327,8 @@ $('#addApply').click(function() {
             break;
         case "9":
             var ban_length = 0;
+            $('.table_data_2').hide();
+            $('.table_data_3').hide();
             layer.open({
                 type: 1,
                 area: ['990px', '710px'],
@@ -1344,6 +1346,14 @@ $('#addApply').click(function() {
                             res = JSON.parse(res);
                             console.log(res.data.Ban);
                             ban_length = res.data.Ban.length;
+                            // if(ban_length == 2){
+                            //      $('.table_data_2').show();
+                            // }else if(ban_length == 3){
+                            //     $('.table_data_2').show();
+                            //     $('.table_data_3').show();
+                            // }
+                            $('.table_data_2').hide();
+                            $('.table_data_3').hide();
                             for(var i = 0; i < res.data.Ban.length;i++){
                                 $('.HABanID').eq(i).text(res.data.Ban[i].BanID);
                                 $('.HAAddress').eq(i).text(res.data.Ban[i].BanAddress);
@@ -1355,34 +1365,57 @@ $('#addApply').click(function() {
                                 $('.HAAfterLeasedArea').eq(i).val(res.data.Ban[i].BanUsearea);
                                 $('.HAAfterBanArea').eq(i).val(res.data.Ban[i].TotalArea);
                                 $('.HAAfterPrice').eq(i).val(res.data.Ban[i].TotalOprice);
+
+                                $('.table_data_'+(i+1)).show();
                             }
                             $('.HARent').off('input');
                             $('.HARent').on('input',function(){
                                 var this_index = $(this).index('.HARent');
                                 var number_1 = res.data.Ban[this_index].PreRent;
                                 var number_2 = $('.HARent').eq(this_index).val() || "0";
-                                $('.HAAfterRent').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                if(number_2 < 0){
+                                    number_2 = Math.abs(number_2).toString();
+                                    $('.HAAfterRent').eq(this_index).val(numberMethod(number_1,number_2,'-'));
+                                }else{
+                                    $('.HAAfterRent').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                }
+                                
                             });
                             $('.HALeasedArea').off('input');
                             $('.HALeasedArea').on('input',function(){
                                 var this_index = $(this).index('.HALeasedArea');
                                 var number_1 = res.data.Ban[this_index].BanUsearea;
                                 var number_2 = $('.HALeasedArea').eq(this_index).val() || "0";
-                                $('.HAAfterLeasedArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                if(number_2 < 0){
+                                    number_2 = Math.abs(number_2).toString();
+                                    $('.HAAfterLeasedArea').eq(this_index).val(numberMethod(number_1,number_2,'-'));
+                                }else{
+                                    $('.HAAfterLeasedArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                }
                             });
                             $('.HABanArea').off('input');
                             $('.HABanArea').on('input',function(){
                                 var this_index = $(this).index('.HABanArea');
                                 var number_1 = res.data.Ban[this_index].TotalArea;
                                 var number_2 = $('.HABanArea').eq(this_index).val() || "0";
-                                $('.HAAfterBanArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                if(number_2 < 0){
+                                    number_2 = Math.abs(number_2).toString();
+                                    $('.HAAfterBanArea').eq(this_index).val(numberMethod(number_1,number_2,'-'));
+                                }else{
+                                    $('.HAAfterBanArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                }
                             });
                             $('.HAPrice').off('input');
                             $('.HAPrice').on('input',function(){
                                 var this_index = $(this).index('.HAPrice');
                                 var number_1 = res.data.Ban[this_index].TotalOprice;
                                 var number_2 = $('.HAPrice').eq(this_index).val() || "0";
-                                $('.HAAfterPrice').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                if(number_2 < 0){
+                                    number_2 = Math.abs(number_2).toString();
+                                    $('.HAAfterPrice').eq(this_index).val(numberMethod(number_1,number_2,'-'));
+                                 }else{
+                                    $('.HAAfterPrice').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                                 }
                             });
                             layer.msg(res.msg);
                         });
@@ -1398,17 +1431,14 @@ $('#addApply').click(function() {
                         for(var i = 0;i < ban_length;i++){
                             formData.append("Ban["+i+"][BanID]", $('.HABanID').eq(i).text());
                             formData.append("Ban["+i+"][BanAddress]", $('.HAAddress').eq(i).text());
-
                             formData.append("Ban["+i+"][PreRent]", $('.HABeforeRent').eq(i).text());
                             formData.append("Ban["+i+"][BanUsearea]", $('.HABeforeLeasedArea').eq(i).text());
                             formData.append("Ban["+i+"][TotalArea]", $('.HABeforeBanArea').eq(i).text());
                             formData.append("Ban["+i+"][TotalOprice]", $('.HABeforePrice').eq(i).text());
-
                             formData.append("Ban["+i+"][PreRentChange]", $('.HARent').eq(i).val());
                             formData.append("Ban["+i+"][BanUseareaChange]", $('.HALeasedArea').eq(i).val());
                             formData.append("Ban["+i+"][TotalAreaChange]", $('.HABanArea').eq(i).val());
                             formData.append("Ban["+i+"][TotalOpriceChange]", $('.HAPrice').eq(i).val());
-
                             formData.append("Ban["+i+"][PreRentAfter]", $('.HAAfterRent').eq(i).val());
                             formData.append("Ban["+i+"][BanUseareaAfter]", $('.HAAfterLeasedArea').eq(i).val());
                             formData.append("Ban["+i+"][TotalAreaAfter]", $('.HAAfterBanArea').eq(i).val());

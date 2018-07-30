@@ -278,8 +278,59 @@ $('.BtnApprove').click(function(){
 
 		}else if(type == 7){//新发租
 
-		}else if(type == 9){//房屋调整(最后调整)
-
+		}else if(type == 9){//房屋调整
+            $('.houseAdjustHouseID').text(res.data.detail.HouseID);
+            $('.houseAdjustRemark').text(res.data.detail.Remark);
+            $('.houseAdjustCreateTime').text(res.data.detail.OrderCreateTime);
+            var banObj = res.data.detail.Ban;
+            var ban_info_clone = $('.ban_info').eq(0).clone();
+            $('.ban_info').remove();
+            for(var i = 0;i < banObj.length;i++){
+                var ban_info = ban_info_clone.clone();
+                ban_info.find('td').eq(0).text(banObj[i].BanID);
+                ban_info.find('td').eq(1).text(banObj[i].BanAddress);
+                ban_info.find('td').eq(2).text(banObj[i].PreRent);
+                ban_info.find('td').eq(3).text(banObj[i].PreRentChange);
+                ban_info.find('td').eq(4).text(banObj[i].PreRentAfter);
+                ban_info.find('td').eq(5).text(banObj[i].BanUsearea);
+                ban_info.find('td').eq(6).text(banObj[i].BanUseareaChange);
+                ban_info.find('td').eq(7).text(banObj[i].BanUseareaAfter);
+                ban_info.find('td').eq(8).text(banObj[i].TotalArea);
+                ban_info.find('td').eq(9).text(banObj[i].TotalAreaChange);
+                ban_info.find('td').eq(10).text(banObj[i].TotalAreaAfter);
+                ban_info.find('td').eq(11).text(banObj[i].TotalOprice);
+                ban_info.find('td').eq(12).text(banObj[i].TotalOpriceChange);
+                ban_info.find('td').eq(13).text(banObj[i].TotalOpriceAfter);
+                $('.adjusHouse_table').append(ban_info.show());
+            }
+            if(res.data.config.status == '1'){
+                $('.status_2').show();
+                new file({
+                    show: "#adjustExplainShow",
+                    upButton: "#adjustExplainUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    button: "#adjustExplain",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "调整说明"
+                });
+                new file({
+                    show: "#HAOtherShow",
+                    upButton: "#HAOtherUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    button: "#HAOther",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "其它"
+                });
+            }else{
+                $('.status_2').hide();
+            }
+            processState('#HAState',res);
+            metailShow('#HAPhotos',res);
+            layerBox(value,'houseAdjust','房屋调整审批',1,res.data.config.status);
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
@@ -555,8 +606,34 @@ $('.BtnDetail').click(function(){
 
 		}else if(type == 7){//新发租
 
-		}else if(type == 9){//房屋调整(最后调整)
-
+		}else if(type == 9){//房屋调整
+            $('.houseAdjustHouseID').text(res.data.detail.HouseID);
+            $('.houseAdjustRemark').text(res.data.detail.Remark);
+            $('.houseAdjustCreateTime').text(res.data.detail.OrderCreateTime);
+            var banObj = res.data.detail.Ban;
+            var ban_info_clone = $('.ban_info').eq(0).clone();
+            $('.ban_info').remove();
+            for(var i = 0;i < banObj.length;i++){
+                var ban_info = ban_info_clone.clone();
+                ban_info.find('td').eq(0).text(banObj[i].BanID);
+                ban_info.find('td').eq(1).text(banObj[i].BanAddress);
+                ban_info.find('td').eq(2).text(banObj[i].PreRent);
+                ban_info.find('td').eq(3).text(banObj[i].PreRentChange);
+                ban_info.find('td').eq(4).text(banObj[i].PreRentAfter);
+                ban_info.find('td').eq(5).text(banObj[i].BanUsearea);
+                ban_info.find('td').eq(6).text(banObj[i].BanUseareaChange);
+                ban_info.find('td').eq(7).text(banObj[i].BanUseareaAfter);
+                ban_info.find('td').eq(8).text(banObj[i].TotalArea);
+                ban_info.find('td').eq(9).text(banObj[i].TotalAreaChange);
+                ban_info.find('td').eq(10).text(banObj[i].TotalAreaAfter);
+                ban_info.find('td').eq(11).text(banObj[i].TotalOprice);
+                ban_info.find('td').eq(12).text(banObj[i].TotalOpriceChange);
+                ban_info.find('td').eq(13).text(banObj[i].TotalOpriceAfter);
+                $('.adjusHouse_table').append(ban_info.show());
+            }
+            processState('#HAState',res);
+            metailShow('#HAPhotos',res);
+            layerBox(value,'houseAdjust','房屋调整明细',2);
 		}else if(type == 10){//管段调整
 
 		}else if(type == 11){//租金追加调整
@@ -818,9 +895,9 @@ function noPass(value){
 }
 
 //计租表
-$('#rentMeterButton').click(function() {
+$('#rentMeterButton,#rentMaterQuery').click(function() {
     $('.RentExample:gt(0)').remove();
-    var HouseID = $('.derateHouseID').text();
+    var HouseID = $('.derateHouseID').text()||$('.houseAdjustHouseID').text();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);

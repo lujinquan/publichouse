@@ -19,7 +19,7 @@
   	</div>
 
     <div class="am-u-sm-12">
-        <div class="am-u-sm-4">
+        <div class="am-u-sm-12">
           <label class="label_style">异动事由：</label>
           <label class="label_content houseAdjustRemark"></label>
         </div>
@@ -38,10 +38,10 @@
     </div>
 
     <style>
-	  .adjusHouse tr,td,th{text-align:center;font-size:14px;padding:4px 20px;}
+	  .adjusHouse_table tr,.adjusHouse_table td,.adjusHouse_table th{text-align:center;font-size:14px;padding:4px 5px;}
   </style>
-    <div class="am-u-sm-12 ">
-    	<table class="adjusHouse" border="1" style="border:1px solid #D6E2F6;text-align:center;">
+    <div class="am-u-sm-12 " style="overflow-x:scroll">
+    	<table class="adjusHouse_table" border="1" style="width:1360px;border:1px solid #D6E2F6;text-align:center;">
     		<tr>
     			<th colspan="2" rowspan="2">楼栋编号</th>
     			<th colspan="2" rowspan="2">房屋地址</th>
@@ -64,21 +64,18 @@
     			<th>调整金额</th>
     			<th>调整后</th>
     		</tr>
-    		<tr class="ban_info">
+    		<tr class="ban_info" style="display:none;">
 				<td colspan="2" rowspan="1" class=""></td>
 				<td colspan="2" rowspan="1"></td>
 				<td></td>
 				<td></td>
 				<td></td>
-
 				<td></td>
 				<td></td>
 				<td></td>
-
 				<td></td>
 				<td></td>
 				<td></td>
-
 				<td></td>
 				<td></td>
 				<td></td>
@@ -87,15 +84,10 @@
     </div>
 
     <div class="am-u-md-12" style="padding-left:0;">
-        <div class="am-form-group am-u-sm-12">
-            <h2 class="label_title">查看附件：</h2>
+		<div class="am-form-group am-u-sm-12 status_2" style="margin-top:30px;display:none;">
+            <h2 class="label_title">上传附件：</h2>
         </div>
-        <div class="am-form-group am-u-sm-12">
-            <div id="HAPhotos" class="am-u-md-12" style="margin-bottom:30px;"></div>
-        </div>
-
         <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
-            <div class="am-u-sm-12"><hr /></div>
             <div class="am-form-group am-u-sm-3">
               <label>调整说明：</label>
             </div>
@@ -106,7 +98,6 @@
             <div id="adjustExplainShow" class="am-u-md-12 img_content"></div>
         </div>
         <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
-            <div class="am-u-sm-12"><hr /></div>
             <div class="am-form-group am-u-sm-3">
               <label>其它：</label>
             </div>
@@ -115,6 +106,12 @@
                   <input id="HAOther" type="file" name="HAOther" multiple>
             </div>
             <div id="HAOtherShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">查看附件：</h2>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <div id="HAPhotos" class="am-u-md-12" style="margin-bottom:30px;"></div>
         </div>
         <div class="am-form-group am-u-sm-12">
             <h2 class="label_title">审批状态：</h2>
