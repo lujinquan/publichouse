@@ -59,7 +59,7 @@ class HouseInfo extends Base
             }
             $maxHouseID = Db::name('house')->where('HouseID', 'like', $data['BanID'] . '%')->max('HouseID');
             if (!$maxHouseID) {
-                $data['HouseID'] = $data['BanID'] . '0001';
+                $data['HouseID'] = $data['BanID'] . '001';
             } else {
                 $data['HouseID'] = $maxHouseID + 1;
             }
@@ -88,6 +88,63 @@ class HouseInfo extends Base
                 return jsons('4000', '新增失败');
             }
         }
+    }
+
+    public function edit()
+    {
+        $houseID = input('HouseID');
+        if ($this->request->isPost()) {
+            $data = array_no_space_str($this->request->post());
+            //$data['Status'] = 0; //状态改为未确认状态
+            $one = Db::name('ban')->field('TubulationID ,InstitutionID ,OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
+            $data['InstitutionID'] = $one['TubulationID'];
+            $data['InstitutionPID'] = $one['InstitutionID'];
+            $data['OwnerType'] = $one['OwnerType'];
+            $data['BanAddress'] = $one['AreaFour'];
+            if ($data['TenantID']) {  //租户id可以先不填，如果填，则进行效验
+                $tenantName = Db::name('tenant')->where('TenantID', 'eq', $data['TenantID'])->value('TenantName');
+                if (!$tenantName) {
+                    return jsons('4001', '该租户不存在');
+                } else {
+                    $data['IfEmpty'] = 0;
+                    $data['TenantName'] = $tenantName;
+                }
+            }else{
+                $data['IfEmpty'] = 1;
+                $data['TenantName'] = '';
+            }
+            if ($_FILES['HouseImageIDS']['error'] == 0) {
+                foreach ($_FILES as $k => $v) {
+                    $HouseImageIDS[] = model('HouseInfo')->uploads($v, $k);
+                }
+                $data['HouseImageIDS'] = implode(',', $HouseImageIDS);   //返回的是该房屋的影像资料id
+            }
+            $result = $this->validate($data, 'HouseInfo');
+            if (true !== $result) {
+                return jsons('4001', $result);
+            }
+            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,TenantID,NonliveIf';
+            $oldOneData = Db::name('house')->field($fields)->where('HouseID', 'eq', $houseID)->find();
+            foreach($oldOneData as $k1=>$v1){
+                if($data[$k1] != $v1){
+                    $allData[$k1]['old'] = $v1;
+                    $allData[$k1]['new'] = $data[$k1];
+                    $allData[$k1]['name'] = Config::get($k1);
+                }
+            }
+            if ($houseInfo = HouseInfoModel::update($data)) {
+                if(!isset($allData)){$allData = array(); }
+                // 记录行为
+                action_log('HouseInfo_edit', UID, 2, '编号为:' . $data['HouseID'],json_encode($allData));
+                return jsons('2000', '修改成功');
+            } else {
+                return jsons('4000', '修改失败');
+            }
+        }
+        $data = Db::name('house')->where('HouseID', 'eq', $houseID)->find();
+        $data['OwnerType'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('OwnerType');
+        $data['HouseImageIDS'] = Db::name('upload_file')->where('id', 'eq', $data['HouseImageIDS'])->field('FileUrl ,FileTitle')->find();
+         return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
     }
 
     /**

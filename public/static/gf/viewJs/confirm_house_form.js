@@ -1,9 +1,9 @@
 // require.config({
-// 	baseUrl:"/public/static/gf/",
-// 	paths:{
-// 		"jquery":"js/jquery.min",
-// 		"layer":"layer/layer"
-// 	}
+//  baseUrl:"/public/static/gf/",
+//  paths:{
+//      "jquery":"js/jquery.min",
+//      "layer":"layer/layer"
+//  }
 // });
 //创建地图
 //创建地图
@@ -11,453 +11,398 @@ var map = new BMap.Map("mapHouse");
 map.centerAndZoom(new BMap.Point(114.334228, 30.560372), 15);
 map.enableScrollWheelZoom(true);
 /*房屋信息*/
-
 /*房屋新增*/
-$('.QBtn').click(function(){
-	queryData.action2(1,'DBanID');
+$('.QBtn').click(function() {
+    queryData.action2(1, 'DBanID');
 })
-$("#addHouse").click(function(){
-	$("#InputForm input[type='text']").val("");
-	// require(["layer","jquery"],function(layer){
-	// 	layer.config({	//真实layer的配置路径
-	// 		path:'/public/static/gf/layer/'
-	// 	});
-		var imgUp = $('#imgUp');
-		var imgShow = $('#imgShow');
-		readFile(imgUp,imgShow);
-		layer.open({
-			type:1,
-			area:['800px','600px'],
-			resize:false,
-			zIndex:100,
-			title:['添加房屋','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#houseForm'),
-			btn:['确定','取消'],
-			yes:function(thisIndex){
-				var data = new FormData($('#houseForm')[0]);
-				console.log(data);
-				$.ajax({
-					url:"/ph/HouseInfo/add",
-					type:"post",
-					data:data,
-					dataType:'JSON',
-					processData: false,
-					contentType: false
-				}).done(function(result){
-					console.log(result);
-					if(result.retcode == 2000){
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(thisIndex);
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.close(thisIndex);
-						layer.msg(result.msg);
-						location.reload();
-					}else{
-						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-						// 	layer.close(conIndex);
-						// 	location.reload();
-						// });
-						layer.msg(result.msg);
-					}
-				});
-			}
-		});
-	// })
+$("#addHouse").click(function() {
+    $("#InputForm input[type='text']").val("");
+    // require(["layer","jquery"],function(layer){
+    //  layer.config({  //真实layer的配置路径
+    //      path:'/public/static/gf/layer/'
+    //  });
+    var imgUp = $('#imgUp');
+    var imgShow = $('#imgShow');
+    readFile(imgUp, imgShow);
+    banQuery.action('DBanID','0,1');//楼栋查询器
+    tenantQuery.action('aTenantID','','0,1');
+    layer.open({
+        type: 1,
+        area: ['800px', '600px'],
+        resize: false,
+        zIndex: 100,
+        title: ['添加房屋', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#houseForm'),
+        btn: ['确定', '取消'],
+        yes: function(thisIndex) {
+            var data = new FormData($('#houseForm')[0]);
+            console.log(data);
+            $.ajax({
+                url: "/ph/ConfirmHouseInfo/add",
+                type: "post",
+                data: data,
+                dataType: 'JSON',
+                processData: false,
+                contentType: false
+            }).done(function(result) {
+                console.log(result);
+                if (result.retcode == 2000) {
+                    // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
+                    //  layer.close(thisIndex);
+                    //  layer.close(conIndex);
+                    //  location.reload();
+                    // });
+                    layer.close(thisIndex);
+                    layer.msg(result.msg);
+                    location.reload();
+                } else {
+                    // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
+                    //  layer.close(conIndex);
+                    //  location.reload();
+                    // });
+                    layer.msg(result.msg);
+                }
+            });
+        }
+    });
+    // })
 });
 /*修改房屋信息*/
-$('.QBtn2').click(function(){
-	queryData.action2(1,'BanI');
+$('.QBtn2').click(function() {
+    queryData.action2(1, 'BanI');
 })
-$("#reviseHouse").click(function(){
-	var obj = $('.checkId');
-	var objLength = $('.checkId').length;
-	for(var i = 0;i < obj.length;i++){
-		if(obj[i].checked){
-			var HouseID = obj.eq(i).val();
-		}
-	}
-	console.log(HouseID);
-	//var vanId = $('.checkId').eq(0).val();
-	// require(["layer","jquery"],function(layer){
-	// 	layer.config({	//真实layer的配置路径
-	// 		path:'/public/static/gf/layer/'
-	// 	});
-		if(HouseID == undefined){
-			layer.msg('请先选择要修改的信息');
-		}else{
-			$.get('/ph/ConfirmHouseInfo/edit/HouseID/'+HouseID,function(res){
-				res = JSON.parse(res);
-				console.log(res);
-				$("#mDHouseID").val(res.data.HouseID);          //房屋编号
-				$("#HouseI").prop("value",res.data.HouseID);          //隐藏域房屋编号
-				$("#BanI").prop("value",res.data.BanID);          //楼栋编号
-				$('#UnitI').prop("value",res.data.UnitID);        //单元号
-				$('#FloorI').prop("value",res.data.FloorID);     //楼层号
-				$('#DoorI').prop("value",res.data.DoorID);                //门牌号码
-				$('#PumpCos').prop("value",res.data.PumpCost);        //泵费
-				$('#RepairCos').prop("value",res.data.RepairCost);        //维修费
-				$('#HouseBas').prop("value",res.data.HouseBase);        //房屋基数
-				$('#OldOpric').prop("value",res.data.OldOprice);                //计算原价
-				$('#Opric').prop("value",res.data.Oprice);      //实际原价
-				$('#TenantI').prop("value",res.data.TenantID);        //租户ID
-				$('#LeasedAre').prop("value",res.data.LeasedArea);    //计租面积
-				$('#HouseUseare').prop("value",res.data.HouseUsearea);    //使用面积
-				$('#MHousePrerent').prop("value",res.data.HousePrerent);            //规定租金
-				$('#ReceiveRen').prop("value",res.data.ReceiveRent);          //应收租金
-				$('#RemitRen').prop("value",res.data.RemitRent);          //减免租金
-				$('#ArrearRen').prop("value",res.data.ArrearRent);          //欠租情况
-				$('#ArrearrentReaso').prop("value",res.data.ArrearrentReason);          //欠租情况
-				$('#HouseAre').prop("value",res.data.HouseArea);          //户建面
-				$('#ComprisingAre').prop("value",res.data.ComprisingArea);          //套内建面
-				//$('#ComprisingImg').prop("src",)
-				$("select[id='UseNature'] option[value='"+res.data.UseNature+"']").prop("selected","selected");   //使用性质
-				$("input[name='NonliveIf'][value='"+res.data.NonliveIf+"']").prop("checked","checked");   //是否住改非
-				$("#OwnerType").val(res.data.OwnerType);//产别
-				$('#mApprovedRent').val(res.data.ApprovedRent);
-				$("#mhall").val(res.data.Hall);
-				$("#mtoilet").val(res.data.Toilet);
-				$("#mkitchen").val(res.data.Kitchen);
-				$("#mInnerAisle").val(res.data.InnerAisle);
-				if(res.data.IfWater == '1'){
-					$("#mIfWater").prop('checked',true);
-				}else{
-					$("#mIfWater").prop('checked',false);
-				}
-				// if($("#mIfWater").prop('checked')==true){
-				// 	$("#mIfWater").val(1);
-				// }else{
-				// 	$("#mIfWater").val(0);
-				// }
-				$('#mwallcloth').val(res.data.WallpaperArea);
-				$('#mFloorTile').val(res.data.CeramicTileArea);
-				$('#mbathtub').val(res.data.BathtubNum);
-				$('#mbasin').val(res.data.BasinNum);
-				$('#mspace').val(res.data.BelowFiveNum);
-				$('#mattic').val(res.data.MoreFiveNum);
-				$('#imgChange').prop('src',res.data.HouseImageIDS.FileUrl);
-				
-				var imgReload = $('#imgReload');
-				var imgChange = $('#imgChange');
-				readFile(imgReload,imgChange);
-				layer.open({
-					type:1,
-					area:['800px','600px'],
-					resize:false,
-					zIndex:100,
-					title:['修改房屋','color:#FFF;font-size:1.6rem;font-weight:600;'],
-					content:$('#houseModifyForm'),
-					btn:['确定','取消'],
-					yes:function(thisIndex){
-						if($("#mIfWater").prop('checked')==true){
-					$("#mIfWater").val(1);
-				}else{
-					$("#mIfWater").val(0);
-				}
-						var data = new FormData($('#houseModifyForm')[0]);
-						data.append('IfWater',$("#mIfWater").val());
-						console.log(data);
-						$.ajax({
-							url:"/ph/ConfirmHouseInfo/edit",
-							type:"post",
-							data:data,
-							dataType:'JSON',
-							processData: false,
-		            		contentType: false
-						}).done(function(result){
-							console.log(result);
-							if(result.retcode == 2000){
-								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-								// 	layer.close(thisIndex);
-								// 	layer.close(conIndex);
-								// 	location.reload();
-								// });
-								layer.close(thisIndex);
-								layer.msg(result.msg);
-								location.reload();
-							}else{
-								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
-								// 	layer.close(conIndex);
-								// });
-								layer.msg(result.msg);
-							}
-						});
-					}
-				});
-			})
-		}
-	// })
+$("#reviseHouse").click(function() {
+    var obj = $('.checkId');
+
+    var objLength = $('.checkId').length;
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].checked) {
+            var HouseID = obj.eq(i).val();
+        }
+    }
+    console.log(HouseID);
+    banQuery.action('BanI','0,1');
+    //banQuery.action('BanI','2');
+    tenantQuery.action('TenantI','','0,1');
+    //var vanId = $('.checkId').eq(0).val();
+    // require(["layer","jquery"],function(layer){
+    //  layer.config({  //真实layer的配置路径
+    //      path:'/public/static/gf/layer/'
+    //  });
+    if (HouseID == undefined) {
+        layer.msg('请先选择要修改的信息');
+    } else {
+        $.get('/ph/ConfirmHouseInfo/edit/HouseID/' + HouseID, function(res) {
+            res = JSON.parse(res);
+            console.log(res);
+            $("#mDHouseID").val(res.data.HouseID); //房屋编号
+            $("#houseid").prop("value", res.data.HouseID); //隐藏域房屋编号
+            $("#HouseI").prop("value", res.data.HouseID);
+            $("#BanI").prop("value", res.data.BanID); //楼栋编号
+            $('#UnitI').prop("value", res.data.UnitID); //单元号
+            $('#FloorI').prop("value", res.data.FloorID); //楼层号
+            $('#DoorI').prop("value", res.data.DoorID); //门牌号码
+            $('#PumpCos').prop("value", res.data.PumpCost); //泵费
+            $('#RepairCos').prop("value", res.data.RepairCost); //维修费
+            $('#HouseBas').prop("value", res.data.HouseBase); //房屋基数
+            $('#OldOpric').prop("value", res.data.OldOprice); //计算原价
+            $('#Opric').prop("value", res.data.Oprice); //实际原价
+            $('#TenantI').prop("value", res.data.TenantID); //租户ID
+            $('#LeasedAre').prop("value", res.data.LeasedArea); //计租面积
+            $('#HouseUseare').prop("value", res.data.HouseUsearea); //使用面积
+            $('#MHousePrerent').prop("value", res.data.HousePrerent); //规定租金
+            $('#ReceiveRen').prop("value", res.data.ReceiveRent); //应收租金
+            $('#RemitRen').prop("value", res.data.RemitRent); //减免租金
+            $('#ArrearRen').prop("value", res.data.ArrearRent); //欠租情况
+            $('#ArrearrentReaso').prop("value", res.data.ArrearrentReason); //欠租情况
+            $('#HouseAre').prop("value", res.data.HouseArea); //户建面
+            $('#ComprisingAre').prop("value", res.data.ComprisingArea); //套内建面
+            $('#DiffRen').prop("value", res.data.DiffRent); //租差
+            $('#ProtocolRen').prop("value", res.data.ProtocolRent); //协议租金
+            $("select[id='UseNature'] option[value='" + res.data.UseNature + "']").prop("selected", "selected"); //使用性质
+            $("input[name='NonliveIf'][value='" + res.data.NonliveIf + "']").prop("checked", "checked"); //是否住改非
+            $("input[name='IfLeft'][value='" + res.data.IfLeft + "']").prop("checked", "checked"); //是否自遗
+            $("input[name='IfSuspend'][value='" + res.data.IfSuspend + "']").prop("checked", "checked"); //是否暂停计租
+            $("input[name='HouseChangeStatus'][value='" + res.data.HouseChangeStatus + "']").prop("checked", "checked"); //是否房改
+            $("#OwnerType").val(res.data.OwnerType); //产别
+            $('#mApprovedRent').val(res.data.ApprovedRent);
+            $("#mhall").val(res.data.Hall);
+            $("#mtoilet").val(res.data.Toilet);
+            $("#mkitchen").val(res.data.Kitchen);
+            $("#mInnerAisle").val(res.data.InnerAisle);
+            if (res.data.IfWater == '1') {
+                $("#mIfWater").prop('checked', true);
+            } else {
+                $("#mIfWater").prop('checked', false);
+            }
+            $('#mwallcloth').val(res.data.WallpaperArea);
+            $('#mFloorTile').val(res.data.CeramicTileArea);
+            $('#mbathtub').val(res.data.BathtubNum);
+            $('#mbasin').val(res.data.BasinNum);
+            $('#mspace').val(res.data.BelowFiveNum);
+            $('#mattic').val(res.data.MoreFiveNum);
+            $('#imgChange').prop('src', res.data.HouseImageIDS.FileUrl);
+            var imgReload = $('#imgReload');
+            var imgChange = $('#imgChange');
+            readFile(imgReload, imgChange);
+            layer.open({
+                type: 1,
+                area: ['800px', '600px'],
+                resize: false,
+                zIndex: 100,
+                title: ['修改房屋', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+                content: $('#houseModifyForm'),
+                btn: ['确定', '取消'],
+                yes: function(thisIndex) {
+                    if ($("#mIfWater").prop('checked') == true) {
+                        $("#mIfWater").val(1);
+                    } else {
+                        $("#mIfWater").val(0);
+                    }
+                    var data = new FormData($('#houseModifyForm')[0]);
+                    data.append('IfWater', $("#mIfWater").val());
+                    $.ajax({
+                        url: "/ph/ConfirmHouseInfo/edit",
+                        type: "post",
+                        data: data,
+                        dataType: 'JSON',
+                        processData: false,
+                        contentType: false
+                    }).done(function(result) {
+                        console.log(result);
+                        if (result.retcode == 2000) {
+                            // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
+                            //  layer.close(thisIndex);
+                            //  layer.close(conIndex);
+                            //  location.reload();
+                            // });
+                            layer.close(thisIndex);
+                            layer.msg(result.msg);
+                            location.reload();
+                        } else {
+                            // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
+                            //  layer.close(conIndex);
+                            // });
+                            layer.msg(result.msg);
+                        }
+                    });
+                }
+            });
+        })
+    }
+    // })
 });
 /*删除房屋信息*/
-$("#deleteHouse").click(function(){
-	var obj = $('.checkId');
-	var objLength = $('.checkId').length;
-	for(var i = 0;i < obj.length;i++){
-		if(obj[i].checked){
-			var HouseID = obj.eq(i).val();
-		}
-	}
-	// require(["layer","jquery"],function(){
-	// 	layer.config({
-	// 		path:'/public/static/gf/layer/',
-	// 		skin:'lan_class'
-	// 	});
-		if(HouseID == undefined){
-			layer.msg('请先选择要修改的信息');
-		}else{
-			layer.open({
-				type:1,
-				area:['600px','130px'],
-				title:['删除房屋','color:#FFF;font-size:1.6rem;font-weight:600;'],
-				content:$('#deleteChoose'),
-				// btn:['确定','取消'],
-				// yes:function(thisIndex){
-				// 	var oChecked='';
-				// 	if($('input[name=houseDeleteType]:checked').val()==undefined){
-				// 		oChecked='';
-						
-				// 	}else{
-				// 		oChecked=$('input[name=houseDeleteType]:checked').val();
-				// 	}
-				// 	layer.confirm('确定删除房屋信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
-				// 		$.get('/ph/ConfirmHouseInfo/delete/HouseID/'+HouseID+'/style/'+oChecked,function(result){
-				// 			result = JSON.parse(result);
-				// 			console.log(result);
-				// 			if(result.retcode  == '2000' ){
-				// 				layer.msg('删除成功');
-				// 				location.reload();
-				// 			}else{
-				// 				layer.msg(result.msg);
-				// 			}
-				// 		});
-				// 		layer.close(index);
-				// 		layer.close(thisIndex);
-				// 	});
-				// }
-			})
-		}
-	// })
+$("#deleteHouse").click(function() {
+    var obj = $('.checkId');
+    var objLength = $('.checkId').length;
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].checked) {
+            var HouseID = obj.eq(i).val();
+        }
+    }
+    // require(["layer","jquery"],function(){
+    //  layer.config({
+    //      path:'/public/static/gf/layer/',
+    //      skin:'lan_class'
+    //  });
+    if (HouseID == undefined) {
+        layer.msg('请先选择要修改的信息');
+    } else {
+        layer.open({
+            type: 1,
+            area: ['600px', '130px'],
+            title: ['删除房屋', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+            content: $('#deleteChoose'),
+        })
+    }
+    // })
 });
-$('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
-		var obj = $('.checkId');
-	var objLength = $('.checkId').length;
-	for(var i = 0;i < obj.length;i++){
-		if(obj[i].checked){
-			var HouseID = obj.eq(i).val();
-		}
-	}
-	var oV= $(this).val();
-	layer.confirm('确定房屋删除信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
-						$.get('/ph/ConfirmHouseInfo/delete/HouseID/'+HouseID+'/style/'+oV,function(result){
-							result = JSON.parse(result);
-							console.log(result);
-							if(result.retcode  == '2000' ){
-								layer.msg(result.msg);
-								location.reload();
-							}else{
-								layer.msg(result.msg);
-							}
-						})
-					})
+$('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function() {
+    var obj = $('.checkId');
+    var objLength = $('.checkId').length;
+    for (var i = 0; i < obj.length; i++) {
+        if (obj[i].checked) {
+            var HouseID = obj.eq(i).val();
+        }
+    }
+    var oV = $(this).val();
+    layer.confirm('确定房屋删除信息', {
+        title: '提示信息',
+        icon: '2',
+        skin: 'lan_class'
+    }, function(index) {
+        $.get('/ph/ConfirmHouseInfo/delete/HouseID/' + HouseID + '/style/' + oV, function(result) {
+            result = JSON.parse(result);
+            console.log(result);
+            if (result.retcode == '2000') {
+                layer.msg(result.msg);
+                location.reload();
+            } else {
+                layer.msg(result.msg);
+            }
+        })
+    })
 })
-
-$(".ConfirmHouseBtn").click(function(){
-
-	var houseID = $(this).val();
-
-	layer.confirm('请确认此房屋信息无误',{title:'提示信息',icon:'1',skin:'lan_class'},function(index){
-		$.get('/ph/ConfirmHouseInfo/confirm/HouseID/'+houseID,function(result){
-			result = JSON.parse(result);
-
-			if(result.retcode  == '2000' ){
-				layer.msg(result.msg);
-				location.reload();
-			}else{
-				layer.msg(result.msg);
-			}
-		});
-	});
-
+$(".ConfirmHouseBtn").click(function() {
+    var houseID = $(this).val();
+    layer.confirm('请确认此房屋信息无误', {
+        title: '提示信息',
+        icon: '1',
+        skin: 'lan_class'
+    }, function(index) {
+        $.get('/ph/ConfirmHouseInfo/confirm/HouseID/' + houseID, function(result) {
+            result = JSON.parse(result);
+            if (result.retcode == '2000') {
+                layer.msg(result.msg);
+                location.reload();
+            } else {
+                layer.msg(result.msg);
+            }
+        });
+    });
 });
-
 // $("#houseOut").click(function(){
-// 	$.get('/ph/HouseInfo/out',function(res){
-// 		console.log(res);
-// 	});
+//  $.get('/ph/HouseInfo/out',function(res){
+//      console.log(res);
+//  });
 // });
-
 /*房屋明细*/
-$(".HouseDetailBtn").click(function(){
-	$('#Drecord').html('');
-	var HouseID = $(this).val();
-	console.log(HouseID);
-	// require(["layer","jquery"],function(){
-	// 	layer.config({
-	// 		path:'/public/static/gf/layer/'
-	// 	});
-		$.get('/ph/HouseInfo/detail/HouseID/'+HouseID,function(res){
-			res = JSON.parse(res);
-			console.log(res);
-			$('p[id=HouseID]').text(res.data.HouseID);             //房屋编号
-			$('p[id=BanID]').text(res.data.BanID);                 //楼栋编号
-			$('p[id=InstitutionID]').text(res.data.InstitutionID);       //机构
-			$('p[id=UnitID]').text(res.data.UnitID); //单元号
-			$('p[id=FloorID]').text(res.data.FloorID);             //楼层号
-			$('p[id=HousePID]').text(res.data.HousePID);     //产权证号
-			$('p[id=DoorID]').text(res.data.DoorID);         //门牌号
-			$('p[id=HouseUsearea]').text(res.data.HouseUsearea);             //使用面积
-			$('p[id=NonliveIf]').text(res.data.NonliveIf); //是否住改非
-			$('p[id=LeasedArea]').text(res.data.LeasedArea);   //计租面积
-			$('#HousePrerent').text(res.data.HousePrerent);         //规定租金
-			$('p[id=ReceiveRent]').text(res.data.ReceiveRent);     //应收租金
-			$('p[id=RemitRent]').text(res.data.RemitRent); //减免租金
-			$('p[id=UseNature]').text(res.data.UseNature); //使用性质
-			$('p[id=PumpCost]').text(res.data.PumpCost);         //泵费
-			$('p[id=RepairCost]').text(res.data.RepairCost);       //维修费
-			$('p[id=HouseBase]').text(res.data.HouseBase);         //房屋基数
-			$('p[id=OldOprice]').text(res.data.OldOprice);         //计算原价
-			$('p[id=Oprice]').text(res.data.Oprice);         //实际原价
-			$('p[id=TenantID]').text(res.data.TenantID);       //租户姓名
-			$('p[id=ArrearRent]').text(res.data.ArrearRent);                 //欠租情况
-			$('p[id=ArrearrentReason]').text(res.data.ArrearrentReason);         //欠租原因
-			$('p[id=HouseArea]').text(res.data.HouseArea);  //户建面积
-			$('p[id=ComprisingArea]').text(res.data.ComprisingArea);           //套内建面
-			$('#ComprisingImg').attr('src',res.data.HouseImageIDS);		//图片影像
-			// $('.Countnumber').text(res.data.BanID);//楼栋编号	
-			$('#Countprice').text(res.data.PumpCost);//泵费	
-			$('#Countchat').text(res.data.RegulationRate);//层次调解率
-			$('#Countcut').text(res.data.RemitRent);//减免租金
-			$('#Commonliving').text(res.data.Hall);//厅堂
-			$('#Commonwc').text(res.data.Toilet);//卫生间
-			$('#Commonkit').text(res.data.Kitchen);//厨房
-			$('#Commonway').text(res.data.InnerAisle);//内走道
-			$('#Countrepaire').text(res.data.RepairCost);//维修费
-			$('#IfWater').text(res.data.IfWater);
-			$('#IfElevator').text(res.data.IfElevator);
-			$('#IfFirst').text(res.data.IfElevator);
-			//加计租金
-			$('#DMoreFiveNum').text(res.data.MoreFiveNum);
-			$('#DBelowFiveNum').text(res.data.BelowFiveNum);
-			$('#DBasinNum').text(res.data.BasinNum);
-			$('#DBathtubNum').text(res.data.BathtubNum);
-			$('#DCeramicTileArea').text(res.data.CeramicTileArea);
-			$('#DWallpaperArea').text(res.data.WallpaperArea);
-			var htmlC='';
-			var htmlC1='';
-			if(res.data.RoomDetail==undefined || res.data.RoomDetail==''){
-				console.log('1');
-				res.data.RoomDetail='';
-				
-			}else{
-			for(var i=0;i<res.data.RoomDetail.length;i++){
-			var aRoom1 = res.data.RoomDetail[i][0];
-			var aRoom2=res.data.RoomDetail[i][1];
-			htmlC+="<div class='am-u-md-12' style='border-bottom:1px solid black'>"+"<div class='am-u-md-6'>"+"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>楼栋编号：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom1[0]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>楼栋地址：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber' style='height:64px;'>"+aRoom1[4]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>单元：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom1[1]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>楼层号：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom1[2]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>共用情况：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom1[3]+"</p>"+
-				  "</div>"+
-				"</div>"+"</div>"+"<div class='am-u-md-6'>"
-				+"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>房间编号:</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<a style='cursor: pointer;' href='/ph/Room/index.html?RoomID="+aRoom2[0]+"'><p class='detail_p_style Countnumber'>"+aRoom2[0]+"</p></a>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>房间间号:</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style RoomNumber'>"+aRoom2[4]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>房间类型：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom2[1]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12'>"+
-				  "<label for='doc-select-8' class='label_style'>使用面积：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom2[2]+"</p>"+
-				  "</div>"+
-				"</div>"+
-				"<div class='am-form-group am-u-md-12' >"+
-				  "<label for='doc-select-8' class='label_style' style='margin-bottom: 32px;'>计租面积：</label>"+
-				  "<div class='am-u-md-8' style='float:left;'>"+
-						"<p class='detail_p_style Countnumber'>"+aRoom2[3]+"</p>"+
-				  "</div>"+
-				"</div>"+"</div>"+"</div>";
-				$('.add_1').html(htmlC);
-				// $('.add_2').html(htmlC1);
-			}
-
-		}
-		var ARecord = res.data.change_record;
-			var aHtml='';
-			if(ARecord&&ARecord.length!=0){
-				for(var i=0;i<ARecord.length;i++){
-					for(var j=0;j<4;j++){
-						aHtml=ARecord[i][1]+'完成'+'<a href="/ph/ChangeRecord/index?ChangeOrderID='+ARecord[i][0]+'" class="am-text-secondary" target="_blank">'+ARecord[i][2]+'</a>'+'异动，申请机构'+ARecord[i][3];
-					}
-
-					$('#Drecord').append("<li>"+aHtml+"</li>");
-					aHtml='';
-				}
-			}
-			
-			
-			$('p[id=xy]').text(res.data.BanGpsX+','+res.data.BanGpsY);           //套内建面
-			var pointer = new BMap.Point(res.data.BanGpsX,res.data.BanGpsY);
-			map.setCenter(pointer);
-			map.panBy(190,110);
-			//ModifyMap.panTo(pointer);
-			var marker = new BMap.Marker(pointer);
-	  		map.addOverlay(marker);
-	  		map.addEventListener("click",function(e){
-	  			var lng = e.point.lng;
-	  			var lat = e.point.lat;
-	  			$('#xy').val(lng +' , '+lat);
-	  			map.clearOverlays();
-	  			marker = new BMap.Marker(new BMap.Point(lng,lat));
-	  			map.addOverlay(marker);
-	  		});
-			
-			layer.open({
-				type:1,
-				area:['1500px','800px'],
-				resize:false,
-				title:['房屋明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-				content:$('#houseDetail')
-			});
-		})
-	// })
+$(".HouseDetailBtn").click(function() {
+    $('#Drecord').html('');
+    var HouseID = $(this).val();
+    console.log(HouseID);
+    // require(["layer","jquery"],function(){
+    //  layer.config({
+    //      path:'/public/static/gf/layer/'
+    //  });
+    $.get('/ph/ConfirmHouseInfo/detail/HouseID/' + HouseID, function(res) {
+        res = JSON.parse(res);
+        console.log(res);
+        $('p[id=HouseID]').text(res.data.HouseID); //房屋编号
+        $('p[id=BanID]').text(res.data.BanID); //楼栋编号
+        $('p[id=InstitutionID]').text(res.data.InstitutionID); //机构
+        $('p[id=UnitID]').text(res.data.UnitID); //单元号
+        $('p[id=FloorID]').text(res.data.FloorID); //楼层号
+        $('p[id=HousePID]').text(res.data.HousePID); //产权证号
+        $('p[id=DoorID]').text(res.data.DoorID); //门牌号
+        $('p[id=HouseUsearea]').text(res.data.HouseUsearea); //使用面积
+        $('p[id=NonliveIf]').text(res.data.NonliveIf); //是否住改非
+        $('p[id=LeasedArea]').text(res.data.LeasedArea); //计租面积
+        $('#HousePrerent').text(res.data.HousePrerent); //规定租金
+        $('p[id=ReceiveRent]').text(res.data.ReceiveRent); //应收租金
+        $('p[id=RemitRent]').text(res.data.RemitRent); //减免租金
+        $('p[id=UseNature]').text(res.data.UseNature); //使用性质
+        $('p[id=PumpCost]').text(res.data.PumpCost); //泵费
+        $('p[id=RepairCost]').text(res.data.RepairCost); //维修费
+        $('p[id=HouseBase]').text(res.data.HouseBase); //房屋基数
+        $('p[id=OldOprice]').text(res.data.OldOprice); //计算原价
+        $('p[id=Oprice]').text(res.data.Oprice); //实际原价
+        $('p[id=TenantID]').text(res.data.TenantID); //租户姓名
+        $('p[id=ArrearRent]').text(res.data.ArrearRent); //欠租情况
+        $('p[id=ArrearrentReason]').text(res.data.ArrearrentReason); //欠租原因
+        $('p[id=HouseArea]').text(res.data.HouseArea); //户建面积
+        $('p[id=ComprisingArea]').text(res.data.ComprisingArea); //套内建面
+        $('#ComprisingImg').attr('src', res.data.HouseImageIDS); //图片影像
+        // $('.Countnumber').text(res.data.BanID);//楼栋编号    
+        $('#Countprice').text(res.data.PumpCost); //泵费  
+        $('#Countchat').text(res.data.RegulationRate); //层次调解率
+        $('#Countcut').text(res.data.RemitRent); //减免租金
+        $('#Commonliving').text(res.data.Hall); //厅堂
+        $('#Commonwc').text(res.data.Toilet); //卫生间
+        $('#Commonkit').text(res.data.Kitchen); //厨房
+        $('#Commonway').text(res.data.InnerAisle); //内走道
+        $('#Countrepaire').text(res.data.RepairCost); //维修费
+        $('#IfWater').text(res.data.IfWater);
+        $('#IfElevator').text(res.data.IfElevator);
+        $('#IfFirst').text(res.data.IfElevator);
+        $('#DMoreFiveNum').text(res.data.MoreFiveNum);
+        $('#DBelowFiveNum').text(res.data.BelowFiveNum);
+        $('#DBasinNum').text(res.data.BasinNum);
+        $('#DBathtubNum').text(res.data.BathtubNum);
+        $('#DCeramicTileArea').text(res.data.CeramicTileArea);
+        $('#DWallpaperArea').text(res.data.WallpaperArea);
+        var htmlC = '';
+        var htmlC1 = '';
+        if (res.data.RoomDetail == undefined || res.data.RoomDetail == '') {
+            console.log('1');
+            res.data.RoomDetail = '';
+        } else {
+            for (var i = 0; i < res.data.RoomDetail.length; i++) {
+                var aRoom1 = res.data.RoomDetail[i][0];
+                var aRoom2 = res.data.RoomDetail[i][1];
+                htmlC += "<div class='am-u-md-12' style='border-bottom:1px solid black'>" + "<div class='am-u-md-6'>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>楼栋编号：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom1[0] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>楼栋地址：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber' style='height:64px;'>" + aRoom1[4] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>单元：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom1[1] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>楼层号：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom1[2] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>共用情况：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom1[3] + "</p>" + "</div>" + "</div>" + "</div>" + "<div class='am-u-md-6'>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>房间编号:</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<a style='cursor: pointer;' href='/ph/Room/index.html?RoomID=" + aRoom2[0] + "'><p class='detail_p_style Countnumber'>" + aRoom2[0] + "</p></a>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>房间间号:</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style RoomNumber'>" + aRoom2[4] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>房间类型：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom2[1] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12'>" + "<label for='doc-select-8' class='label_style'>使用面积：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom2[2] + "</p>" + "</div>" + "</div>" + "<div class='am-form-group am-u-md-12' >" + "<label for='doc-select-8' class='label_style' style='margin-bottom: 32px;'>计租面积：</label>" + "<div class='am-u-md-8' style='float:left;'>" + "<p class='detail_p_style Countnumber'>" + aRoom2[3] + "</p>" + "</div>" + "</div>" + "</div>" + "</div>";
+                $('.add_1').html(htmlC);
+                // $('.add_2').html(htmlC1);
+            }
+        }
+        var ARecord = res.data.change_record;
+        var aHtml = '';
+        if (ARecord && ARecord.length != 0) {
+            for (var i = 0; i < ARecord.length; i++) {
+                for (var j = 0; j < 4; j++) {
+                    aHtml = ARecord[i][1] + '完成' + '<a href="/ph/ChangeRecord/index?ChangeOrderID=' + ARecord[i][0] + '" class="am-text-secondary" target="_blank">' + ARecord[i][2] + '</a>' + '异动，申请机构' + ARecord[i][3];
+                }
+                $('#Drecord').append("<li>" + aHtml + "</li>");
+                aHtml = '';
+            }
+        }
+        if (res.data.IfWater) {
+            $('#Water').attr('checked', true);
+        } else {
+            $('#Water').attr('checked', false); //水
+        }
+        if (res.data.IfEmpty) {
+            $('#ifempty').attr('checked', true);
+        } else {
+            $('#ifempty').attr('checked', false); //空房
+        }
+        //          $('#Countrepaire').text(res.data.RepairCost);//居住第一层
+        $('p[id=xy]').text(res.data.BanGpsX + ',' + res.data.BanGpsY); //套内建面
+        var pointer = new BMap.Point(res.data.BanGpsX, res.data.BanGpsY);
+        map.setCenter(pointer);
+        map.panBy(190, 110);
+        //ModifyMap.panTo(pointer);
+        var marker = new BMap.Marker(pointer);
+        map.addOverlay(marker);
+        map.addEventListener("click", function(e) {
+            var lng = e.point.lng;
+            var lat = e.point.lat;
+            $('#xy').val(lng + ' , ' + lat);
+            map.clearOverlays();
+            marker = new BMap.Marker(new BMap.Point(lng, lat));
+            map.addOverlay(marker);
+        });
+        layer.open({
+            type: 1,
+            area: ['1000px', '600px'],
+            resize: false,
+            title: ['房屋明细', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+            content: $('#houseDetail')
+        });
+    })
+    // })
 });
+
+function readFile(fileUp, fileShow) {
+    if (typeof FileReader === 'undefined') {
+        fileShow.text('浏览器不支持！');
+    } else {
+        fileUp.on('change', function() {
+            var file = this.files[0];
+            if (!/image\/\w+/.test(file.type)) {
+                layer.msg('文件必须是图片！');
+                return false;
+            }
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function() {
+                fileShow.attr('src', this.result);
+            }
+        })
+    }
+}
+//计租表
 var RlengthBan = 0;
 $('.RentForm').click(function() {
     $('.RentExample:gt(0)').remove();
@@ -476,7 +421,8 @@ $('.RentForm').click(function() {
         $('.RentPoint').text(res.data.banDetail.NewPoint);
         $('.RentName').text(res.data.houseDetail.TenantName);
         $('.RentLayer').text(res.data.houseDetail.FloorID);
-        $('.RentUnit').text(res.data.houseDetail.UnitID);
+        // $('.RentUnit').text(res.data.houseDetail.UnitID);
+        $('.BanFloorNum').text(res.data.banDetail.BanFloorNum);
         $('.RentComprising').text(res.data.houseDetail.ComprisingArea);
         $('.RentWallpaper').text(res.data.houseDetail.WallpaperArea);
         $('.RentCeramic').text(res.data.houseDetail.CeramicTileArea);
@@ -556,7 +502,7 @@ $('.RentForm').click(function() {
                         Shtml += '<option>' + aH[h] + '</option>';
                     }
                 }
-                RentHtml += '<ul class="am-u-md-12 house_style RentDate ul-mr"><li style="width:10%" class="RentID">' + res.data.roomDetail[num][j].RoomID + '</li>' + '<li style="width:5%" class="RentNum">' + res.data.roomDetail[num][j].RoomNumber + '</li>' + '<li style="width:10%" class="RentBanA">' + res.data.roomDetail[num][j].BanID + '</li>' + '<li style="width:5%" class="RentPublic">' + res.data.roomDetail[num][j].RoomPublicStatus + '</li>' + '<li style="width:10%" class="RentHouse">' + aH[0] + '</li>' + '<li style="width:5%" class="RentU">' + res.data.roomDetail[num][j].UnitID + '</li>' + '<li style="width:5%" class="RentL">' + res.data.roomDetail[num][j].FloorID + '</li>' + '<li style="width:10%" class="RentArea">' + res.data.roomDetail[num][j].UseArea + '</li>' + '<li style="width:10%" class="RentCut">' + res.data.roomDetail[num][j].RentPoint + '</li>' + '<li style="width:5%" class="RentLeasedArea">' + res.data.roomDetail[num][j].LeasedArea + '</li>' + '<li style="width:10%" class="RentChat">' + res.data.roomDetail[num][j].FloorPoint + '</li>' + '<li style="width:5%" class="RentMp">' + res.data.roomDetail[num][j].RoomRentMonth + '</li>' + '<li style="width:5%" class="RentStatus">' + res.data.roomDetail[num][j].Status + '</li></ul>';
+                RentHtml += '<ul class="am-u-md-12 house_style RentDate ul-mr"><li style="width:9%" class="RentID">' + res.data.roomDetail[num][j].RoomID + '</li>' + '<li style="width:5%" class="RentNum">' + res.data.roomDetail[num][j].RoomNumber + '</li>' + '<li style="width:9%" class="RentBanA">' + res.data.roomDetail[num][j].BanID + '</li>' + '<li style="width:5%" class="RentPublic">' + res.data.roomDetail[num][j].RoomPublicStatus + '</li>' + '<li style="width:9%" class="RentHouse">' + aH[0] + '</li>' +'<li style="width:6%" class="RentPro">' + res.data.roomDetail[num][j].OwnerType + '</li>'+'<li style="width:6%" class="RentU">' + res.data.roomDetail[num][j].UnitID + '</li>' + '<li style="width:6%" class="RentL">' + res.data.roomDetail[num][j].FloorID + '</li>' + '<li style="width:7%" class="RentArea">' + res.data.roomDetail[num][j].UseArea + '</li>' + '<li style="width:7%" class="RentCut">' + res.data.roomDetail[num][j].RentPoint + '</li>' + '<li style="width:7%" class="RentLeasedArea">' + res.data.roomDetail[num][j].LeasedArea + '</li>' + '<li style="width:7%" class="RentChat">' + res.data.roomDetail[num][j].FloorPoint + '</li>' + '<li style="width:7%" class="RentMp">' + res.data.roomDetail[num][j].RoomRentMonth + '</li>' + '<li style="width:5%" class="RentStatus">' + res.data.roomDetail[num][j].Status + '</li></ul>';
                 $('.RoomDeT').eq(j).css('display', 'block');
                 $('.RoomDeT').eq(j).parent().children().eq(0).removeClass('nomal').addClass('active');
                 $('.pull').eq(j).prop('src', '/public/static/gf/icons/triU.png');
@@ -572,15 +518,15 @@ $('.RentForm').click(function() {
     layer.open({
         type: 1,
         skin: 'yue-class',
-        area: ['1500px', '800px'],
-        zIndex: 55,
+        area: ['1300px', '700px'],
+        zIndex: 1000,
         resize: false,
         title: ['计租表', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
         btn: ['打印','修改', '取消'],
         content: $('#RentForm'),
         yes: function(){
         	
-        		$('.layui-layer-btn0').prop({'href':'/ph/HouseInfo/pdf/HouseID/'+HouseID,'target':'_blank'});
+        		$('.layui-layer-btn0').prop({'href':'/ph/ConfirmHouseInfo/pdf/HouseID/'+HouseID,'target':'_blank'});
         	
         },
         btn2:function(thisIndex) {
@@ -588,7 +534,6 @@ $('.RentForm').click(function() {
             $.get('/ph/Api/get_edit_rent_table_detail/HouseID/' + HouseID, function(res) {
                 res = JSON.parse(res);
                 console.log(res);
-
                 $('.ModifyDetail:gt(0)').remove();
                  var HouseID= res.data.houseDetail.HouseID;
                 $('.RentWallpaperd').prop('value', res.data.houseDetail.WallpaperArea);
@@ -680,6 +625,7 @@ $('.RentForm').click(function() {
                 console.log(RentA);
                 var RentHtml2 = '';
                 var aStatus = [];
+                var aOwnT=[];
                 for (var a = 0; a < RentA.length; a++) {
                     var num = RentA[a];
                     
@@ -699,10 +645,16 @@ $('.RentForm').click(function() {
                         if (RentPointNum == 0) {
                             RentPointNum = 1;
                         }
-                        RentHtml2 += '<ul class="am-u-md-12 house_style exRoom ul-mr" style="height:35px;">' + '<li style="width:5%;height:35px"><input type="text" class="RoomStyle fontS1" readonly="readonly" name="MRoomID" value=' + res.data.roomDetail[num][j].RoomID + '></li>' + '<li style="width:3%" class="m5"><input type="text" class="fontS1" name="MRoomNumber" value=' + res.data.roomDetail[num][j].RoomNumber + '></li>' + '<li style="width:6%" class="m5"><input type="text"  name="MBanID" class="QueryBanID fontS1" value=' + res.data.roomDetail[num][j].BanID + '></li>' + '<li style="width:8%" class="m5"><input type="text"  name="MHouse1" class="QueryHouse fontS1" value=' + sRoom[0] + '></li>' + '<li style="width:8%" class="m5"><input type="text"  name="MHouse2" class="QueryHouse fontS1" value=' + sRoom[1] + '></li>' + '<li style="width:8%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[2] + '></li>' +'<li style="width:8%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[3] + '></li>'+ '<li style="width:8%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[4] + '></li>'+'<li style="width:3%" class="m5"><input type="text" class="fontS1"  name="MUnitID" value=' + res.data.roomDetail[num][j].UnitID + '></li>' + '<li style="width:3%" class="m5"><input type="text" class="fontS1"  name="MFloorID" value=' + res.data.roomDetail[num][j].FloorID + '></li>' + '<li style="width:5%" class="m5"><input type="text" name="MUseArea" class="fontS1" value=' + res.data.roomDetail[num][j].UseArea + '></li>' + '<li style="width:5%" class="m5"><input type="hidden"  value=' + RentPointNum + '><input type="text" readonly="readonly"  class="QueryCut fontS1" value=' + res.data.roomDetail[num][j].RentPoint + '></li>' + '<li style="width:5%;height:35px">' + res.data.roomDetail[num][j].LeasedArea + '</li>' + '<li style="width:5%;height:35px">' + res.data.roomDetail[num][j].FloorPoint + '</li>' + '<li style="width:5%;height:35px">' + res.data.roomDetail[num][j].RoomRentMonth + '</li>' + '<li style="width:5%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-style"></li>' + '</ul>';
+                        RentHtml2 += '<ul class="am-u-md-12 house_style exRoom ul-mr" style="height:35px;">' + '<li style="width:5%;height:35px"><input type="text" class="RoomStyle fontS1" readonly="readonly" name="MRoomID" value=' + res.data.roomDetail[num][j].RoomID + '></li>' + '<li style="width:3%" class="m5"><input type="text" class="fontS1" name="MRoomNumber" value=' + res.data.roomDetail[num][j].RoomNumber + '></li>' + '<li style="width:6%" class="m5"><input type="text"  name="MBanID" class="QueryBanID fontS1" value=' + res.data.roomDetail[num][j].BanID + '></li>' + '<li style="width:8%" class="m5"><input type="text"  name="MHouse1" class="QueryHouse fontS1" value=' + sRoom[0] + '></li>' + '<li style="width:7%" class="m5"><input type="text"  name="MHouse2" class="QueryHouse fontS1" value=' + sRoom[1] + '></li>' + '<li style="width:7%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[2] + '></li>' +'<li style="width:7%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[3] + '></li>'+ '<li style="width:7%" class="m5"><input type="text"  name="MHouse3" class="QueryHouse fontS1" value=' + sRoom[4] + '></li>'+'<li style="width:4%" class="m5"><select class="fontS1 MownT" name="MownT"><option class="fontS1" value="1">市属</option><option class="fontS1" value="2">区属</option><option class="fontS1" value="3">代管</option><option class="fontS1" value="4">预留</option><option class="fontS1" value="5">自管</option><option class="fontS1" value="6">生活</option><option class="fontS1" value="7">托管</option></select></li>'+'<li style="width:3%" class="m5"><input type="text" class="fontS1"  name="MUnitID" value=' + res.data.roomDetail[num][j].UnitID + '></li>' + '<li style="width:3%" class="m5"><input type="text" class="fontS1"  name="MFloorID" value=' + res.data.roomDetail[num][j].FloorID + '></li>' + '<li style="width:4%" class="m5"><input type="text" name="MUseArea" class="fontS1" value=' + res.data.roomDetail[num][j].UseArea + '></li>' + '<li style="width:4%" class="m5"><input type="hidden"  value=' + RentPointNum + '><input type="text" readonly="readonly"  class="QueryCut fontS1" value=' + res.data.roomDetail[num][j].RentPoint + '></li>' + '<li style="width:4%;height:35px">' + res.data.roomDetail[num][j].LeasedArea + '</li>' + '<li style="width:6%;height:35px">' + res.data.roomDetail[num][j].FloorPoint + '</li>'
+                            // +'<li style="width:4%;height:35px"><input type="text" class="fontS1" placeholder=' + res.data.roomDetail[num][j].RoomRentMonth + '></li>'
+                            +'<li style="width:4%;height:35px">' + res.data.roomDetail[num][j].RoomRentMonth + '</li>'
+                            +'<li style="width:3%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-style"></li>' + '</ul>';
+
                         $('.RoomDeTd').eq(num).css('display', 'block');
                         $('.RoomDeTd').eq(num).parent().children().eq(0).removeClass('nomal').addClass('active');
                         $('.pulld').eq(num).prop('src', '/public/static/gf/icons/triU.png');
+                        aOwnT.push(res.data.roomDetail[num][j].OwnerType);
+                        console.log(aOwnT);
                     } //小长度 
                     // for(var n=0;n<10;n++){
                         // for (var a = 0; a < RentA.length; a++) {
@@ -715,6 +667,8 @@ $('.RentForm').click(function() {
                                
                     $('.Mnum').eq(num).css('display', 'block');
                     $('.addRoom').eq(num).parent().before(RentHtml2);
+
+                    //$("#MownT option[value='"+res.data.roomDetail[num][j].OwnerType+"']").attr("select","selected"); 
                     RentHtml2 = '';
                     $('.RoomStyle').click(function() {
                         $(this).removeClass('am-field-valid');
@@ -725,6 +679,12 @@ $('.RentForm').click(function() {
                     // 
                 } //大长度
                 var aS = $('.delSD').length;
+               
+                for(var i=0;i<$(".MownT").length;i++){
+                    $(".MownT").eq(i).val(aOwnT[i]).attr('select','selected');
+
+                    console.log($(".MownT").eq(i).find('option'));
+                }
                 for (var n = 0; n < aS; n++) {
                     $('.delSD').eq(n).attr('index', n);
                 }
@@ -757,6 +717,7 @@ $('.RentForm').click(function() {
                 var Aname = [];
                 for (var l = 0; l < 10; l++) {
                     $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + '][]');
+                    $("." + l + " li select").attr('name', 'RoomType[' + l + '][]');
                 }
                 for (var n = 0; n < $('.QueryCut').length - 1; n++) {
                     $('#PriceForm').append($('.PriceBoxNum').eq(0).clone(true));
@@ -874,7 +835,7 @@ $('.RentForm').click(function() {
                         data.append('PriceBox' + i, arr);
                     }
                     $.ajax({
-                        url: "/ph/HouseInfo/renttable",
+                        url: "/ph/ConfirmHouseInfo/renttable",
                         type: "post",
                         data: data,
                         dataType: 'JSON',
@@ -940,6 +901,7 @@ $(document).on('click', '.addRoom', function() {
     // $(this).parent().parent().find('.exRoom').eq(0).css('display','none');
     for (var l = 0; l < 10; l++) {
         $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + '][]');
+        $("." + l + " li select").attr('name', 'RoomType[' + l + '][]');
     }
     for (var n = 0; n < $('.QueryBanID').length; n++) {
         banQuery.actionA('QueryBanID','','0,1',n);
@@ -1010,7 +972,7 @@ $('#bulkPrint').click(function() {
 	}
 	$.ajax({
 		  type: 'POST',
-		  url: '/ph/HouseInfo/pdf/',
+		  url: '/ph/ConfirmHouseInfo/pdf/',
 		  data: {' HouseArr': HouseArr},
 		
 		  dataType: JSON,
@@ -1019,21 +981,63 @@ $('#bulkPrint').click(function() {
 		  }
 		});
 });
-function readFile(fileUp,fileShow){
-	if(typeof FileReader === 'undefined'){
-		fileShow.text('浏览器不支持！');
-	}else{
-		fileUp.on('change',function(){
-			var file = this.files[0];
-			if(!/image\/\w+/.test(file.type)){
-				layer.msg('文件必须是图片！');
-				return false;
-			}
-			var reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = function(){
-				fileShow.attr('src',this.result);
-			}
-		})
-	}
-}
+
+// 收欠明细
+$('.BeInDebt').click(function(){
+    var HouseId = $(this).val();
+    var tenant_name = $(this).attr('data-tenantName');
+    layer.open({
+        type: 1,
+        area: ['1240px', '600px'],
+        resize: false,
+        title: ['收欠明细', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content: $('#BeInDebt'),
+        btn: ['确定', '取消'],
+        success:function(){
+            $('#BeBanID').text(HouseId);
+            $('#BeTenantName').text(tenant_name);
+            // 表格初始化
+            $(".debt input").val('');
+            $(".monthly_collection input").val('');
+            $(".year_collection input").val('');
+            $('#beDebt').val('');
+            // 表格初始化完成
+            $.get('/ph/Api/queryRentEntry/HouseID/'+HouseId,function(res){
+                res = JSON.parse(res);
+                console.log(res);
+                if(res.data.length != 0){
+                    var last_data = res.data.pop();
+                    $('#beDebt').val(last_data[1]);
+                    for(var i = 0;i < 12;i++){
+                        $(".debt input").eq(i).val(res.data[i][0]=="0.00"?'':res.data[i][0]);
+                        $(".monthly_collection input").eq(i).val(res.data[i][1]=="0.00"?'':res.data[i][1]);
+                        $(".year_collection input").eq(i).val(res.data[i][2]=="0.00"?'':res.data[i][2]);
+                    }
+                }
+            })
+        },
+        yes:function(thisIndex){
+            var data = [];
+            var current_arr = [];
+            var beDebt = $('#beDebt').val();
+            var last_arr = [HouseId,beDebt];
+            for(var i = 0;i < 12;i++){
+                current_arr = [];
+                current_arr.push($(".debt input").eq(i).val());
+                current_arr.push($(".monthly_collection input").eq(i).val());
+                current_arr.push($(".year_collection input").eq(i).val());
+                data.push(current_arr);
+            }
+            data.push(last_arr);
+            console.log(data);
+            $.post('/ph/HouseInfo/rentEntry',{data:data},function(res){
+                res = JSON.parse(res);
+                console.log(res);
+                if(res.retcode == '2000'){
+                    layer.close(thisIndex)
+                }
+                layer.msg(res.msg);
+            })
+        }
+    });
+})

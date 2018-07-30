@@ -143,7 +143,7 @@ $("#addBan").click(function(){
 				if(flag ==true){
 					flag = false;
 					$.ajax({
-						url:"/ph/BanInfo/add",
+						url:"/ph/ConfirmBanInfo/add",
 						type:"post",
 						data:data,
 						dataType:'JSON',
@@ -410,32 +410,32 @@ $("#deleteBan").click(function(){
 				area:['600px','130px'],
 				title:['删除楼栋','color:#FFF;font-size:1.6rem;font-weight:600;'],
 				content:$('#deleteChoose'),
-				// btn:['确定','取消'],
-				// yes:function(thisIndex){
-				// 	// var oChecked='';
-				// 	// if($('input[name=banDeleteType]:checked').val()==undefined){
-				// 	// 	oChecked='';
+				btn:['确定','取消'],
+				yes:function(thisIndex){
+					var oChecked='';
+					if($('input[name=banDeleteType]:checked').val()==undefined){
+						oChecked='';
 						
-				// 	// }else{
-				// 	// 	oChecked=$('input[name=banDeleteType]:checked').val();
-				// 	// }
-				// 						// console.log($('input[name=banDeleteType]:checked').val());
-				// 	// layer.confirm('确定楼栋删除信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
-				// 	// 	console.log($('input[name=banDeleteType]:checked').val());
-				// 	// 	$.get('/ph/ConfirmBanInfo/delete/BanID/'+BanID+'/style/'+oChecked,function(result){
-				// 	// 		result = JSON.parse(result);
-				// 	// 		console.log(result);
-				// 	// 		if(result.retcode  == '2000' ){
-				// 	// 			layer.msg(result.msg);
-				// 	// 			location.reload();
-				// 	// 		}else{
-				// 	// 			layer.msg(result.msg);
-				// 	// 		}
-				// 	// 	});
-				// 	// 	layer.close(index);
-				// 	// 	layer.close(thisIndex);
-				// 	// });
-				// }//
+					}else{
+						oChecked=$('input[name=banDeleteType]:checked').val();
+					}
+										console.log($('input[name=banDeleteType]:checked').val());
+					layer.confirm('确定楼栋删除信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
+						console.log($('input[name=banDeleteType]:checked').val());
+						$.get('/ph/ConfirmBanInfo/delete/BanID/'+BanID+'/style/'+oChecked,function(result){
+							result = JSON.parse(result);
+							console.log(result);
+							if(result.retcode  == '2000' ){
+								layer.msg(result.msg);
+								location.reload();
+							}else{
+								layer.msg(result.msg);
+							}
+						});
+						layer.close(index);
+						layer.close(thisIndex);
+					});
+				}//
 			})
 		}
 });

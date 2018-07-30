@@ -180,7 +180,7 @@ class Api extends Controller
         $data['Room'] = Db::name('rent_order')->where(['OrderDate'=>['between',[$begin,$now]],'HouseID'=>$houseID,'Type'=>2])->field('OrderDate,UnpaidRent')->select();
 
         if($arr){
-            $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.AreaFour as BanAddress,b.OwnerType')->select();
+            $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.AreaFour as BanAddress,a.PreRent,a.TotalArea,a.BanUsearea,a.TotalOprice,b.OwnerType')->select();
 
             //halt($data['BanDetail']);
         }else{

@@ -4,22 +4,30 @@
 	<li style="width:6%" class="m5"><input type="text" class="QueryBanID fontS1"></li>
 
 	<li style="width:8%" class="m5"><input type="text" class="QueryHouse fontS1"></li>
-	<li style="width:8%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
-	<li style="width:8%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
-	<li style="width:8%" class="m5"><input type="text" class="QueryHouse fontS1"></li>
-	<li style="width:8%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
-	
+	<li style="width:7%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
+	<li style="width:7%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
+	<li style="width:7%" class="m5"><input type="text" class="QueryHouse fontS1"></li>
+	<li style="width:7%" class="m5"><input type="text"  class="QueryHouse fontS1"></li>
+
+	<li style="width:4%" class="m5">
+		<select name="OwnerType" class="fontS1">
+		<option  value="" style="display:none"></option>
+			<?php foreach($owerLst as $k3 =>$v3){;?>
+					<option value="{$k3+1}"><?php echo $v3['OwnerType']; ?></option>
+			<?php }; ?>
+		</select>
+	</li>	
 	<li style="width:3%" class="m5"><input type="text" class="fontS1"></li>
 	<li style="width:3%" class="m5"><input type="text" class="fontS1"></li>
-	<li style="width:5%" class="m5"><input type="text" class="fontS1"></li>
-	<li style="width:5%" class="m5">
+	<li style="width:4%" class="m5"><input type="text" class="fontS1"></li>
+	<li style="width:4%" class="m5">
 	<input type="hidden">
-	<input type="text" class="QueryCut" readonly="readonly">
+	<input type="text" class="QueryCut fontS1" readonly="readonly">
 	</li>
-	<li style="width:5%;height:35px"></li>
-	<li style="width:5%;height:35px"></li>
-	<li style="width:5%;height:35px"></li>
-	<li style="width:5%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-styled"></li>
+	<li style="width:4%;height:35px"></li>
+	<li style="width:6%;height:35px"></li>
+	<li style="width:4%;height:35px"></li>
+	<li style="width:3%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-styled"></li>
 </ul>
 <input type="text" value="" name="AddRent[deleteRoom][]" class="deleteRoom" style="display:none">
 <form  id="RentFormM" class="am-form" data-am-validator style="display:none;font-size:1.4rem">
@@ -28,7 +36,7 @@
 	<div class="am-u-md-12">
 		<div class="am-u-md-2">
 			  <label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
-			  <div class="am-u-md-6">
+			  <div class="am-u-md-6" style="padding:0;">
 				<p class="detail_p_style RentBan" ></p>
 			  </div>
 		</div>
@@ -54,14 +62,14 @@
     <div class="am-u-md-12">
     	<div class="am-u-md-2">
 			  <label for="doc-vld-email-2" class="label_style">户名：</label>
-			  <div class="am-u-md-6">
+			  <div class="am-u-md-6" style="padding:0;">
 				<p class="detail_p_style RentName"></p>
 			  </div>
 		</div>
 		<div class="am-u-md-2">
-			  <label for="doc-vld-email-2" class="label_style">单元号：</label>
+			  <label for="doc-vld-email-2" class="label_style">楼层数量：</label>
 			  <div class="am-u-md-6">
-				<p class="detail_p_style RentUnit"></p>
+				<p class="detail_p_style BanFloorNum"></p>
 			  </div>
 		</div>
 		<div class="am-u-md-2">
@@ -89,18 +97,20 @@
 		    <li style="width:3%" class="m5">间号</li>
 		    <li style="width:6%" >绑定楼栋</li>
 		    <li style="width:8%" class="m5">绑定房屋</li>
-		    <li style="width:8%" class="m5">绑定房屋</li>
-		    <li style="width:8%" class="m5">绑定房屋</li>
-		    <li style="width:8%" class="m5">绑定房屋</li>
-		    <li style="width:8%" class="m5">绑定房屋</li>
+		    <li style="width:7%" class="m5">绑定房屋</li>
+		    <li style="width:7%" class="m5">绑定房屋</li>
+		    <li style="width:7%" class="m5">绑定房屋</li>
+		    <li style="width:7%" class="m5">绑定房屋</li>
+		    <li style="width:4%" class="m5">产别</li>
 		    <li style="width:3%" class="m5">单元号</li>
 		    <li style="width:3%" class="m5">层次</li>                                                                                     
-		    <li style="width:5%" class="m5">使用面积</li>
-		    <li style="width:5%" class="m5">基价折减</li>
-		    <li style="width:5%" >计租面积</li>
-		    <li style="width:5%" >层次调解率</li>
-		    <li style="width:5%" >月租金</li>
-		    <li style="width:5%" >状态</li>
+		    <li style="width:4%" class="m5">使用面积</li>
+		    <li style="width:4%" class="m5">基价折减</li>
+		    <li style="width:4%" >计租面积</li>
+		    <li style="width:6%" >层次调解率</li>
+<!-- 		    <li style="width:4%" >规定租金</li> -->
+		    <li style="width:4%" >月租金</li>
+		    <li style="width:3%" >状态</li>
     </ul>
     </div>
     <div class="am-u-md-12 text-center mb20 ModifyDetail" style='display:none;margin-bottom:5px'>
@@ -148,7 +158,7 @@
     			<div class="am-u-md-12">
     				<div class="am-u-md-6"><span class="w100">产别：</span>
     				<span class="w90 mr">
-    					<select name="AddRent[TypeS][OwnerType]" id="doc-select" class="ROwnerTypeS">
+    					<select name="AddRent[TypeS][OwnerType]" class="ROwnerTypeS">
 							<option value="0">请选择</option>
 							<?php foreach($owerLst as $k7 =>$v7){;?>
 							<option value="<?php echo $v7['id']; ?>"><?php echo $v7['OwnerType']; ?></option>

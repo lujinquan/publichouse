@@ -4,19 +4,16 @@
 		<!--<legend>添加楼栋</legend>-->
 		<div class="am-u-md-12">
 			<div class="am-form-group am-u-md-12">
-				<label>楼栋地址：</label>
+				<label>楼栋地址：</label>&nbsp;&nbsp;&nbsp;
 				<div class="inline_70">
 					<select ><option>武昌区</option></select>
 				</div>
-				<div class="inline_70">
+				<div style="width:120px;" class="inline_70">
 					<select name="AreaTwo" id="AreaTw" required>
 						<option  value="" style="display:none">请选择</option>
-<!-- 						<?php foreach($areaTwo as $k15 =>$v15){;?>
-						<option value="{$v15['id']}"><?php echo $v15['AreaTitle']; ?></option>
-						<?php }; ?> -->
 					</select>
 				</div>
-				<div class="inline_70">
+				<div style="width:120px;" class="inline_70">
 					<select name="AreaThree" id="AreaThre" required>
 						<option  value="" style="display:none">请选择</option>
 						<?php foreach($areaThree as $k16 =>$v16){;?>
@@ -24,20 +21,50 @@
 						<?php }; ?>
 					</select>
 				</div>
-				<input type="text" name="AreaFour" id="AreaFou" style="width:200px;display:inline-block;" />
+				<input type="text" name="AreaFour" id="AreaFou" style="width:215px;display:inline-block;" required/>
+				&nbsp;&nbsp;&nbsp;&nbsp;<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 		</div>
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
 			  <div class="am-u-md-8">
-				<input type="number" onfocus=this.blur() name="BanID" id="BanID" placeholder="楼栋编号" required/>
+				<input type="number" onfocus=this.blur() name="BanID" id="BanID" required/>
 			  </div>
+<!-- 			  <label>
+		        <input type="radio" name="BanSysID" value="1" checked>主楼栋
+		      </label> -->
 			</div>
+
+<!-- 			<div class="am-form-group am-u-md-12">
+				<label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
+				<div class="am-u-md-7">
+					<input type="number" name="AnathorBanID" id="AnathorBanID" />
+				</div>
+				<label>
+			        <input type="radio" name="BanSysID" value="2" />主楼栋
+			     </label>
+			</div> -->
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style">栋号：</label>
+			  <div class="am-u-md-8">
+				<input type="text" name="BanNumber" id="BanNumber" required/>
+			  </div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<!-- <div class="am-form-group am-u-md-12">
+			  <label for="" class="label_style">原编号：</label>
+			  <div class="am-u-md-8">
+				<input type="text" name="OldBanID" id="OldBanID" required/>
+			  </div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div> -->
 
 			<?php if(session('user_base_info.institution_level') < 3){;?>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-2" class="label_style">机构名称：</label>
+			  <label for="doc-select-8" class="label_style">机构名称：</label>
 			  <div class="am-u-md-8" style="float:left;">
 				<select name="TubulationID" id="tubulationID" >
 
@@ -64,109 +91,150 @@
 				</select>
 
 			  </div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			<?php }; ?>
 
 			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">产权证号：</label>
+				<label for="doc-select-8" class="label_style">企业建面：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BanPropertyID" id="BanPropertyID" placeholder="产权证号" required/>
+					<input type="number" name="EnterpriseArea" id="EnterpriseArea" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">企业规租：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="EnterpriseRent" id="EnterpriseRent" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">企业原价：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="EnterpriseOprice" id="EnterprisePrice" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">企业栋数：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="EnterpriseNum" id="EnterpriseNumber" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">机关建面：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="PartyArea" id="PartyArea" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">机关规租：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="PartyRent" id="PartyRent" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">机关原价：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="PartyOprice" id="PartyPrice" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">机关栋数：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="PartyNum" id="PartyNumber" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">民用建面：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="CivilArea" id="CivilArea" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">民用规租：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="CivilRent" id="CivilRent" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">民用原价：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="CivilOprice" id="CivilPrice" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">民用栋数：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="CivilNum" id="CivilNumber" minlength="1"  required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">使用面积：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="BanUsearea" id="BanUsearea" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+<!-- 			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">楼栋租金：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="PreRent" id="PreRent" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div> -->
+
+<!-- 			<div class="am-form-group am-u-md-12">
+				<label for="" class="label_style">楼栋原价：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TotalOprice" id="TotalOprice" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div> -->
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">占地面积：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="CoveredArea" id="editCoveredArea" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">证载面积：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="ActualArea" id="editActualArea" required/>
 				</div>
 			</div>
 
-
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-4" class="label_style">完损等级：</label>
-			  <div  class="am-u-md-8" style="float:left;">
-				<select name="DamageGrade" id="doc-select-4" class="DamageGraded" >
-					<?php foreach($damaLst as $k2 =>$v2){;?>
-					<option value="{$k2+1}"><?php echo $v2['DamageGrade']; ?></option>
-					<?php }; ?>
-				</select>
-			  </div>
+				<label for="doc-select-8" class="label_style">产权证号：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="BanPropertyID" id="BanPropertyID" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
-			
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="doc-select-8" class="label_style">是否改造产：</label>-->
-			  <!--<div class="am-u-md-8" style="float:left;">-->
-				<!--<select name="StructureType" id="doc-select-8" >-->
-						<!--<?php foreach($struLst as $k4 =>$v4){;?>-->
-						<!--<option value="{$k4+1}"><?php echo $v4['StructureType']; ?></option>-->
-						<!--<?php }; ?>-->
-				<!--</select>-->
-			  <!--</div>-->
-			<!--</div>-->
 
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" class="label_style">土地证号：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BanLandID" id="BanLandI" placeholder="土地证号" required/>
+					<input type="text" name="BanLandID" id="BanLandI" />
 				</div>
 			</div>			
-			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">不动产证号：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="BanFreeholdID" id="BanFreeholdI" placeholder="不动产证号" required/>
-				</div>
-			</div>	
-				
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">总户数：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="TotalHouseholds" id="TotalHouseholds" placeholder="总户数" required/>
-				</div>
-			</div>	
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="doc-select-8" class="label_style">影像资料：</label>-->
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" name="TotalHouseholds" id="doc-vld-email-3" placeholder="上传插件" required/>-->
-				<!--</div>-->
-			<!--</div>			-->
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="doc-select-8" class="label_style">附属设施：</label>-->
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" name="TotalHouseholds" id="doc-vld-email-3" placeholder="做成多选按钮" required/>-->
-				<!--</div>-->
-			<!--</div>-->
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">占地面积：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="CoveredArea" id="editCoveredArea" placeholder="占地面积" required/>
-				</div>
-			</div>
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">证载面积：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="ActualArea" id="editActualArea" placeholder="证载面积" required/>
-				</div>
-			</div>
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-name-2" class="label_style">企业建面：</label>
-			  <div class="am-u-md-8">
-				<input type="number" name="EnterpriseArea" id="EnterpriseArea" minlength="1" placeholder="输入企业建面" required/>
-			  </div>
-			</div>
-
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-email-2" class="label_style">机关建面：</label>
-			  <div class="am-u-md-8">
-				<input type="number" name="PartyArea" id="PartyArea" placeholder="机关建面" required/>
-			  </div>
-			</div>
-
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-url-2" class="label_style">民用建面：</label>
-			  <div class="am-u-md-8">
-				<input type="number" name="CivilArea" id="CivilArea" placeholder="民用建面" required/>
-			  </div>
-			</div>
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="doc-select-8" class="label_style">栋建面：</label>-->
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="number" name="BanArea" placeholder="栋建面" required/>-->
-				<!--</div>-->
-			<!--</div>-->
-					
+			
 		</div>
 		
 		<div class="am-u-md-6">
@@ -183,75 +251,114 @@
 			<!--</div>-->
 
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-5" class="label_style">产别：</label>
-			  <div class="am-u-md-8" style="float:left;">
-				<select name="OwnerType" id="ownerType" >
-					<?php foreach($owerLst as $k3 =>$v3){;?>
-					<option value="{$k3+1}"><?php echo $v3['OwnerType']; ?></option>
-					<?php }; ?>
-				</select>
-			  </div>
+				<label for="doc-select-4" class="label_style">完损等级：</label>
+				<div  class="am-u-md-8" style="float:left;">
+					<select name="DamageGrade" id="doc-select-4" class="DamageGraded" required>
+						<?php foreach($damaLst as $k2 =>$v2){;?>
+						<option value="{$k2+1}"><?php echo $v2['DamageGrade']; ?></option>
+						<?php }; ?>
+					</select>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 
 			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">建成年份：</label>
-				<div class="am-u-md-8" data-am-validator>
-					<input type="text" name="BanYear" id="BanYear" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" placeholder="建成年份"/>
-				</div>
+			  <label for="doc-select-5" class="label_style">楼栋产别：</label>
+			  <div class="am-u-md-8" style="float:left;">
+				<select name="OwnerType" id="ownerType" >
+					<?php foreach($owerLst as $k3 =>$v3){;?>
+					<option value="{$v3['id']}"><?php echo $v3['OwnerType']; ?></option>
+					<?php }; ?>
+				</select>
+			  </div>
+<!-- 				<i style="font-style: normal; color:red; vertical-align: middle;">*主</i> -->
 			</div>
+
+<!-- 			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-5" class="label_style">楼栋产别：</label>
+				<div class="am-u-md-8" style="float:left;">
+					<select name="AnathorOwnerType" id="AnathorOwnerType" >
+						<option value="0">请选择</option>
+						<?php foreach($owerLst as $k9 =>$v9){;?>
+						<option value="{$k9+1}"><?php echo $v9['OwnerType']; ?></option>
+						<?php }; ?>
+					</select>
+				</div>
+			</div> -->
 
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-7" class="label_style">使用性质：</label>
 			  <div class="am-u-md-8" style="float:left;">
-				<select name="UseNature" id="doc-select-7" class="UseNatured" >
+				<select name="UseNature" class="UseNatured" >
 					<option  value="" style="display:none">请选择</option>
 					<?php foreach($useNatureLst as $k5 =>$v5){ ;?>
 					<option value="<?php echo $v5['id']; ?>"><?php echo $v5['UseNature'];?></option>
 					<?php }; ?>
 				</select>
 			  </div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 
 			
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" class="label_style">结构类别：</label>
 			  <div class="am-u-md-8" style="float:left;">
-				<select name="StructureType" id="doc-select-8" class="StructureTyped" >
+				<select name="StructureType" class="StructureTyped" >
 						<?php foreach($struLst as $k4 =>$v4){;?>
 						<option value="{$k4+1}"><?php echo $v4['StructureType']; ?></option>
 						<?php }; ?>
 				</select>
 			  </div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">建成年份：</label>
+				<div class="am-u-md-8" data-am-validator>
+					<input type="text" name="BanYear" id="BanYear" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			<!--新加-->
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" class="label_style">单元数量：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BanUnitNum" id="BanUnitNum" placeholder="单元数量" required/>
+					<input type="number" name="BanUnitNum" id="BanUnitNum" required/>
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" class="label_style">楼层数量：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BanFloorNum" id="BanFloorNum" placeholder="总楼层数量" required/>
+					<input type="number" name="BanFloorNum" id="BanFloorNum" required/>
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" class="label_style">起始楼层：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BanFloorStart" id="BanFloorStart" placeholder="起始楼层数" required/>
+					<input type="number" name="BanFloorStart" id="BanFloorStart" required/>
 				</div>
 			</div>
-			
 
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" style="float:left;">是否历史优秀建筑：</label>
-				<div class="am-u-md-6">
-					<select name="HistoryIf" id="HistoryIf" required style="width:112%;">
-						<option  value="" style="display:none">请选择</option>
-						<option value="0">不是</option>
+			  <label for="doc-select-8" style="float:left;">拆迁状态：</label>
+				<div class="am-u-md-8">
+					<select name="RemoveStatus" id="RemoveStatus">
+						<option value="1">未拆迁</option>
+						<option value="2">已拆未下基数</option>
+						<option value="3">已拆且下基数</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" style="float:left;">建筑状态：</label>
+				<div class="am-u-md-8">
+					<select name="HistoryIf" id="HistoryIf">
+						<option value="0">非优秀</option>
 						<option value="1">市级</option>
 						<option value="2">区级</option>
 						<option value="3">省级</option>
@@ -260,18 +367,45 @@
 			</div>
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-8" style="float:left;">电梯状态：</label>
-				<div class="am-u-md-6">
-					<select name="IfElevator" id="doc-select-5" required style="width:112%;">
-						<!-- <option  value="" style="display:none">请选择</option> -->
+				<div class="am-u-md-8">
+					<select name="IfElevator" id="doc-select-5" class="IfElevatorM">
 						<option value="0">无电梯</option>
 						<option value="1">有电梯且免费</option>
 						<option value="2">有电梯需缴费</option>
-					</select>
+					 </select>
 				</div>
 			</div>
-			
+
 			<div class="am-form-group am-u-md-12">
-				<label class="label_style">是否改造产： </label>
+				<label for="doc-select-8" class="label_style">产权来源：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="PropertySource" id="PropertySource" placeholder="" />
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">不动产证：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="BanFreeholdID" id="BanFreeholdI" />
+				</div>
+			</div>	
+				
+			<div class="am-form-group am-u-md-12">
+			  <label for="doc-select-8" class="label_style">总户数：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="TotalHouseholds" id="TotalHouseholds" />
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" class="label_style">栋系数：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="BanRatio" id="BanRatio" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+
+			<div class="am-form-group am-u-md-12">
+				<label for="doc-select-8" style="float:left;">是否改造产：</label>
 				<div class="am-u-md-8">
 					<label class="am-radio-inline">
 						<input type="radio"  value="1" name="ReformIf" checked="checked" required> 是
@@ -280,10 +414,11 @@
 						<input type="radio" value="0" name="ReformIf"> 否
 					</label>
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" style="float:left;">是否文物保护单位：</label>
+			  <label for="doc-select-8" style="float:left;">是否文物保护：</label>
 			  <div class="am-u-md-6">
 					<label class="am-radio-inline">
 						<input type="radio"  value="1" name="ProtectculturalIf" required> 是
@@ -317,27 +452,6 @@
 		<hr class="am-u-md-11"/>
 
 		<div class="am-u-md-6">
-			
-			
-<!-- 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-age-2" class="label_style">使用面积：</label>
-			  <div class="am-u-md-8">
-				<input type="number" class="" name="BanUsearea"  id="BanUsearea" placeholder="使用面积" required />
-			  </div>
-			</div> -->
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="doc-vld-age-2" class="label_style">规定租金：</label>-->
-			  <!--<div class="am-u-md-8">-->
-				<!--<input type="number" class="" name="PreRent" id="PreRent" value="0.00" required />-->
-			  <!--</div>-->
-			<!--</div>-->
-			<!--<div class="am-form-group am-u-md-12">-->
-			  <!--<label for="" class="label_style">计算租金：</label>-->
-			  <!--<div class="am-u-md-8">-->
-				<!--<input type="number" class="" name="CountRent" id="" placeholder="0.00" value="" required />-->
-			  <!--</div>-->
-			<!--</div>-->
-
 			<div class="am-form-group am-u-md-12">
 			  <label for="editLandCertificate" style="float:left;">土地证电子版：</label>
 				<div class="am-form-group am-form-file am-u-md-8">
@@ -367,57 +481,18 @@
 
 		</div>
 		<div class="am-u-md-6">
-			<!--<div class="am-form-group am-u-md-12">-->
-				<!--<label for="doc-vld-age-2" class="label_style" >楼栋地址：</label>-->
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" class="" name="BanAddress" id="BanAddressRe" placeholder="楼栋地址" required />-->
-				<!--</div>-->
-			<!--</div>-->
 			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-age-2" class="label_style" >经纬度：</label>
+				<label for="doc-select-8" class="label_style" >经纬度：</label>
 				<div class="am-u-md-8">
-					<input type="text" class="" name="xy" id="xy" required />
+					<input type="text" name="xy" id="xy" required />
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			<div class="am-form-group am-u-md-12" id="ModifyMap" style="width:280px;height:262px;margin-top: 36px;
     margin-left: 14px;border:1px solid #D9D9D9;float:left;"></div>
 		</div>
-
-		<!--<hr class="am-u-md-11"/>
-
-		<div class="am-form-group am-u-md-12 padding_left">-->
-			<!--<label for="doc-vld-age-2" class="label_style" style="width:150px;">经纬度（地图接口）：</label>-->
-			<!--<div class="am-u-md-5">-->
-				<!--<input type="text" class=""  id="doc-vld-age-4" placeholder="规定租金" required />-->
-
-			<!--</div>-->
-
-			<!--<button style="padding-right:0.7rem" class="am-btn am-btn-default label_style" type="button">坐标拾取</button>-->
-
-		<!--</div>
-
-
-		<div class="am-form-group am-u-md-12 padding_left">
-			<label for="doc-vld-age-2" class="label_style">产权来源：</label>
-			<div class="am-u-md-9">
-				<input type="text" class="" name="PropertySource" id="PropertySource" placeholder="产权来源" required />
-			</div>
-		</div>
-
-		<hr class="am-u-md-11"/>-->
 		
-		<div class="am-form-group am-u-md-12 padding_left">
-		  <label>拆迁状态： </label>
-		  <label class="am-radio-inline">
-			<input type="radio"  value="1" name="RemoveStatus"> 未拆迁
-		  </label>
-		  <label class="am-radio-inline">
-			<input type="radio" value="2" name="RemoveStatus"> 已拆迁，未下基数
-		  </label>
-		  <label class="am-radio-inline">
-			<input type="radio" value="3" name="RemoveStatus">已拆迁，下基数
-		  </label>
-		</div>
+		
 	  </fieldset>
 
   </form>
