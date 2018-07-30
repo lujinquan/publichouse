@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,2,3,4,8,11,12,14])){
+            if(!in_array($data['type'],[1,2,3,4,8,9,11,12,14])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -370,25 +370,27 @@ class ChangeApply extends Base
 
                 case 9:  // 房屋调整,实际指的是楼栋
                     //halt($data);
-                    //从表单传递进来的数据：楼栋编号，楼栋完损等级
-                    $datas['BanID'] = $data['BanID'];  //楼栋编号
-                    $datas['Damage'] = $data['LevelChange'];  //楼栋完损等级
-                    $datas['Deadline'] = Db::name('ban')->where('BanID',$data['BanID'])->value('DamageGrade');
-                    if($datas['Damage'] == $datas['Deadline']){
-                        return jsons('4001','变更前后的完损等级不能相同');
-                    }
-                    $datas['ChangeType'] = $data['type'];  //异动类型
+                    $datas['Deadline'] = json_encode($data['Ban']);
+                    //halt($datas['Deadline']);
+                    $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['TenantID'] = $one['TenantID'];
+                    $datas['InstitutionID'] = $one['InstitutionID'];
+                    $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['OrderDate'] = date('Ym', time());  //订单期
+                    $datas['InflRent'] = $one['InflRent'];
+                    $datas['OwnerType'] = $one['OwnerType'];
+                    $datas['UseNature'] = $one['UseNature'];
+                    $datas['Remark'] = $data['Remark'];  //异动缘由
+                    $datas['ChangeType'] = 9;  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[9];  //异动名称
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-                    $one = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->field('TubulationID ,InstitutionID,OwnerType,UseNature')->find();
-                    //halt($one);
-                    $datas['ProcessConfigType'] = 9;        //流程控制线路
-                    $datas['ChangeOrderID'] = date('YmdHis', time()).'09'.$suffix;   //09代表房屋调整
-                    $datas['OwnerType'] = $one['OwnerType'];  //产别
-                    $datas['UseNature'] = $one['UseNature'];   //使用性质
-                    $datas['InstitutionID'] = $one['TubulationID'];  //机构id
-                    $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>9])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
+                    $datas['ChangeOrderID'] = date('YmdHis', time()).'09'.$suffix;   //08代表注销
                     $res = Db::name('change_order')->insert($datas);
+                    
 
                     break;
 

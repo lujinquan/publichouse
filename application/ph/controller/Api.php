@@ -189,6 +189,10 @@ class Api extends Controller
                 'BanID' => $data['BanID'],
                 'BanAddress' => $data['AreaFour'],
                 'OwnerType' => $data['OwnerType'],
+                'PreRent' => $data['PreRent'],
+                'TotalArea' => $data['TotalArea'],
+                'BanUsearea' => $data['BanUsearea'],
+                'TotalOprice' => $data['TotalOprice'],
            ]; 
         }
 

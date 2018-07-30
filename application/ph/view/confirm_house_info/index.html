@@ -27,9 +27,6 @@
                     <?php if(in_array(510,$threeMenu)){ ; ?>
                     <button type="button" id="deleteHouse" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 删除房屋</button>
                     <?php }; ?>
-                    <?php if(in_array(69,$threeMenu)){ ; ?>
-                    <a href="{:url('HouseInfo/pdf',['HouseID'=>$houseidss])}" target="_blank" class="am-btn d-btn-1188F0">批量打印</a>
-                    <?php }; ?>
                 </div>
             </div>
         </div>
@@ -63,7 +60,7 @@
                 </thead>
                 <tbody>
                 <!--查询-->
-                <form action="{:url('HouseInfo/index')}" method="post" id="queryForm" autocomplete="off" >
+                <form action="{:url('ConfirmHouseInfo/index')}" method="post" id="queryForm" autocomplete="off" >
                     <tr class="am-form-group am-form-inline am-form">
                         <td></td>
                         <td></td>
@@ -235,7 +232,7 @@
                                         class="DqueryIcon"></span>查询
                                 </button>
                                 <a id="clearHouseInfo" class="am-btn am-btn-xs am-text-primary ABtn"
-                                   href="/ph/HouseInfo/index"><span class="ResetIcon"></span>重置</a>
+                                   href="{:url('ConfirmHouseInfo/index')}"><span class="ResetIcon"></span>重置</a>
                             </div>
                         </td>
                     </tr>
@@ -279,7 +276,7 @@
                             </button>
                             <?php }; ?>
                             <?php if(in_array(57,$threeMenu)){ ; ?>
-                            <a href="{:url('TenantInfo/index',['TenantID'=>$v1['id'],])}" target="_blank" class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only ABtn">租户</a>
+                            <a href="{:url('ConfirmTenantInfo/index',['TenantID'=>$v1['id'],])}" target="_blank" class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only ABtn">租户</a>
                             <?php }; ?>
 
                             <button class="am-btn am-btn-default am-btn-xs am-text-primary RentForm" value="<?php echo $v1['HouseID']; ?>"> 计租表

@@ -260,6 +260,38 @@ class ChangeApply extends Model
                     }
                     return $finds;
                 break;
+                case 9:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>9,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋正在房屋调整异动订单中处理……');
+                    }
+
+                    $s = 0;
+                    foreach($data['Ban'] as $v){
+                        $s += $v['PreRentChange'];
+                    }
+                    $houseModel = new HouseModel;
+
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>1,
+                        'HouseChangeStatus'=>0,
+                        ];
+
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+                    if(!$finds){
+                        return jsons('4002','房屋状态异常');
+                    }
+                    
+                    $finds['InflRent'] = $s;
+
+                    if(!($data['HouseID'])){
+                        return jsons('4000','未选择任何房屋');
+                    }
+                    return $finds;
+                break;
                 case 11:
                     $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>11,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
                     //halt($ifin);

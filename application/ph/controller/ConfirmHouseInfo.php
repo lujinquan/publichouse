@@ -150,7 +150,7 @@ class ConfirmHouseInfo extends Base
     }
 
     /**
-     * 计租表直接修改【前期】
+     * 计租表修改
      */
     public function renttable()
     {
@@ -285,7 +285,7 @@ class ConfirmHouseInfo extends Base
                                 $datas['LeasedArea'] = 0;
                             }
                             if ($flag == 2) { //修改房间
-                                $datas['Status'] = 1;
+                                $datas['Status'] = 0;
                                 //halt($datas);
                                 Db::name('room')->update($datas);
                                 $tempRent = count_room_rent($datas['RoomID']);
@@ -308,7 +308,7 @@ class ConfirmHouseInfo extends Base
                         //halt($datas['RoomType']);
                         $maxid = Db::name('room')->max('RoomID');
                         $datas['RoomID'] = $maxid + 1;
-                        $datas['Status'] = 1;
+                        $datas['Status'] = 0;
                         $datas['RoomName'] = Db::name('room_type_point')->where('id',$datas['RoomType'])->value('RoomTypeName');
                         $datas['CreateUserID'] = session('user_base_info.uid');
                         $datas['CreateTime'] = time();

@@ -125,7 +125,7 @@ class ChangeAudit extends Base
 
             $find = Db::name('change_order')->where('ChangeOrderID',$data['ChangeOrderID'])->field('ChangeImageIDS,Status,ChangeType')->find();
 
-            if(in_array($find['ChangeType'] ,[1,2,3,4,8,12,14]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
+            if(in_array($find['ChangeType'] ,[1,2,3,4,8,9,12,14]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
 
                 if(isset($_FILES) && $_FILES){         
                     foreach($_FILES as $k1 => $v1){
@@ -133,7 +133,7 @@ class ChangeAudit extends Base
                     }
                     $ChangeImageIDS = implode(',', $ChangeImageIDS);  //返回的是使用权变更的影像资料id(多个以逗号隔开)
                     //halt($ChangeImageIDS);
-                    if(isset($ChangeImageIDS)){ //执行添加  
+                    if(isset($ChangeImageIDS)){ //执行添加
 
                         $changeImageIDS = $find['ChangeImageIDS']?$find['ChangeImageIDS'].','.$ChangeImageIDS:$ChangeImageIDS;    
 

@@ -4,29 +4,30 @@
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf">
-        <small class="am-text-sm">数据确认管理</small> > 
-        <small class="am-text-primary">租户确认</small>
-      </div>
+      <div class="am-fl am-cf"><small class="am-text-sm">房屋档案</small> > <small class="am-text-primary">租户信息</small></div>
     </div>
 
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group-xs">
-              <?php if(in_array(518,$threeMenu)){ ; ?>
+              <?php if(in_array(543,$threeMenu)){ ; ?>
+            <button type="button" id="addTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增租户</button>
+              <?php }; ?>
+              <?php if(in_array(545,$threeMenu)){ ; ?>
             <button type="button" id="reviseTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改租户</button>
               <?php }; ?>
-              <?php if(in_array(519,$threeMenu)){ ; ?>
+              <?php if(in_array(546,$threeMenu)){ ; ?>
             <button type="button" id="deleteTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 删除租户</button>
               <?php }; ?>
+              
           </div>
         </div>
       </div>
     </div>
 
     <div class="am-g">
-      <div class="am-u-sm-12 am-scrollable-horizontal">
+      <div class="am-scrollable-horizontal">
           <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
             <thead>
               <tr>
@@ -34,19 +35,20 @@
         				<th class="table-id">#</th>
         				<th class="table-title">租户编号</th>
         				<th class="table-author am-hide-sm-only">租户姓名</th>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <th class="table-author am-hide-sm-only">机构</th>
+                <?php }; ?>
         				<th class="table-date am-hide-sm-only">联系电话</th>
         				<th class="table-set">余额</th>
          				<th class="table-set">欠租情况</th>
-        				<th class="table-set">诚信分</th>
-        				<th class="table-set">微信号</th>
-        				<th class="table-set">QQ号</th>
-                <th class="table-set">银行卡号</th>
+        				<th class="table-set dong_none">诚信分</th>
+        				<th class="table-set dong_none">微信号</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody>
 		  <!--查询-->
-      <form id="queryForm" action="{:url('ConfirmTenantInfo/index')}" method="post"  autocomplete="off">
+      <form id="queryForm" action="{:url('ConfirmTenantInfo/index')}" method="post" autocomplete="off" >
 		    <tr class="am-form-group am-form-inline am-form">
               <td></td>
               <td></td>
@@ -63,42 +65,81 @@
               </div>
             </td>
               <td>
-				<div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantName = $tenantOption['TenantName'];
-                        }else{
-                            $TenantName = '';
-                        }
-                     ?>
-				  <input name="TenantName" type="text" class="am-form-field" value="{$TenantName}">
-				</div>
-			  </td>
+        				<div class="am-input-group am-input-group-sm">
+                            <?php
+                                if($tenantOption != array()){
+                                    $TenantName = $tenantOption['TenantName'];
+                                }else{
+                                    $TenantName = '';
+                                }
+                             ?>
+        				  <input name="TenantName" type="text" class="am-form-field" value="{$TenantName}">
+        				</div>
+        			  </td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
-				<div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantTel = $tenantOption['TenantTel'];
-                        }else{
-                            $TenantTel = '';
-                        }
-                     ?>
-				  <input name="TenantTel" type="text" class="am-form-field" value="{$TenantTel}">
-				</div>
-			  </td>
-          <td>
-    				<div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $TenantBalance = $tenantOption['TenantBalance'];
-                        }else{
-                            $TenantBalance = '';
-                        }
-                     ?>
-    				  <input name="TenantBalance" type="text" class="am-form-field" value="{$TenantBalance}">
-    				</div>
-  			  </td>
-          <td>
+                <div class="am-form-group search_input none-length">
+                    
+                    <select name="TubulationID">
+                        <option  value="" style="display:none">请选择</option>
+                        <?php if(session('user_base_info.institution_level')==1){;?>
+                        <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+                                <?php
+                                if($tenantOption != array()){
+                                    if($tenantOption['TubulationID'] == $v10['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                            <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+                        <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+                        <?php foreach($instLst as $k12 => $v12){ ; ?>
+                                <?php
+                                if($tenantOption != array()){
+                                    if($tenantOption['TubulationID'] == $v12['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+                        <?php }} ; ?>
+                    </select>
+                </div>
+              </td>
+              <?php } ; ?>
+                      <td>
+        				<div class="am-input-group am-input-group-sm">
+                            <?php
+                                if($tenantOption != array()){
+                                    $TenantTel = $tenantOption['TenantTel'];
+                                }else{
+                                    $TenantTel = '';
+                                }
+                             ?>
+        				  <input name="TenantTel" type="text" class="am-form-field" value="{$TenantTel}">
+        				</div>
+        			  </td>
+                  <td>
+            				<div class="am-input-group am-input-group-sm">
+                             <?php
+                                if($tenantOption != array()){
+                                    $TenantBalance = $tenantOption['TenantBalance'];
+                                }else{
+                                    $TenantBalance = '';
+                                }
+                             ?>
+            				  <input name="TenantBalance" type="text" class="am-form-field" value="{$TenantBalance}">
+            				</div>
+          			  </td>
+                <td>
                   <div class="am-input-group am-input-group-sm">
                       <?php
                         if($tenantOption != array()){
@@ -109,9 +150,8 @@
                      ?>
                       <input name="ArrearRent" type="text" class="am-form-field" value="{$ArrearRent}">
                   </div>
-
-  			  </td>
-                <td>
+  			        </td>
+                <td class="dong_none">
                     <div class="am-input-group am-input-group-sm">
                     <?php
                         if($tenantOption != array()){
@@ -124,7 +164,7 @@
                     </div>
 
                 </td>
-                <td>
+                <td class="dong_none">
                     <div class="am-input-group am-input-group-sm">
                     <?php
                         if($tenantOption != array()){
@@ -137,35 +177,11 @@
                     </div>
 
                 </td>
-                <td>
-                    <div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $TenantQQ = $tenantOption['TenantQQ'];
-                        }else{
-                            $TenantQQ = '';
-                        }
-                     ?>
-                        <input name="TenantQQ" type="text" class="am-form-field" value="{$TenantQQ}">
-                    </div>
-
-                </td>
-                <td>
-                    <div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $BankID = $tenantOption['BankID'];
-                        }else{
-                            $BankID = '';
-                        }
-                     ?>
-                        <input name="BankID" type="text" class="am-form-field" value="{$BankID}">
-                    </div>
-                </td>
+                
 			         <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:114px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
-                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/ConfirmTenantInfo/index.html"><span class="ResetIcon"></span>重置</a>
+                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="{:url('ConfirmTenantInfo/index')}"><span class="ResetIcon"></span>重置</a>
                 </div>
               </td>
             </tr>
@@ -174,7 +190,7 @@
 
 		  <?php foreach($tenantLst as $k1 => $v1){; ?>
 
-            <tr>
+            <tr class="check001">
                 <td>
                   <span class="piaochecked">
                     <input class="checkId radioclass" type="radio" name='choose' value="<?php echo $v1['TenantID']; ?>"/>
@@ -183,25 +199,21 @@
                 <td><?php echo ++$k1; ?></td>
                 <td><?php echo $v1['TenantID']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantName']; ?></td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
+                <?php }; ?>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantTel']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantBalance']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['ArrearRent']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantValue']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantWeChat']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantQQ']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['BankID']; ?></td>
-<!--                 <td class="am-hide-sm-only">ffff</td>
-                <td class="am-hide-sm-only">ffff</td> -->
-				  <td>
-					  <div class="am-btn-group am-btn-group-xs">
-                          <?php if(in_array(57,$threeMenu)){ ; ?>
-						    <button class="am-btn am-btn-default am-btn-xs am-text-primary details TenantDetailBtn" value="<?php echo $v1['TenantID']; ?>"> 明细</button>
-                          <?php }; ?>
-                          <?php if(in_array(520,$threeMenu)){ ; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary details ConfirmTenantBtn" value="<?php echo $v1['TenantID']; ?>"> 确认</button>
-                          <?php }; ?>
-                      </div>
-				  </td>
+                <td class="dong_none"><?php echo $v1['TenantValue']; ?></td>
+                <td class="dong_none"><?php echo $v1['TenantWeChat']; ?></td>
+        			  <td>
+        				  <div class="am-btn-group am-btn-group-xs">
+                                <?php if(in_array(57,$threeMenu)){ ; ?>
+        					    <button class="am-btn am-btn-default am-btn-xs am-text-primary details TenantDetailBtn" value="<?php echo $v1['TenantID']; ?>">明细</button>
+                                <?php }; ?>
+                  </div>
+        			  </td>
             </tr>
 
 		  <?php }; ?>
@@ -217,31 +229,31 @@
       </div>
     </div>
   </div>
+
   <!-- content end -->
-  <!-- 删除类型选择 -->
-   <!-- <div id="deleteChoose" style="display:none;text-align: center;">
+    <!-- <div id="deleteChoose" style="display:none;text-align: center;">
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="2">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="2">
       </span>
       <span>房改</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="3">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="3">
       </span>
       <span>拆迁，已注销</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="4">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="4">
       </span>
       <span>数据合并</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="5">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="5">
       </span>
       <span>数据作废</span>
   </div> -->
   <div id="deleteChoose" style="display:none; text-align: center; margin: 20px;">
-      <button id="HouseChange" class="am-btn am-btn-secondary " value="10" name="infoDeleteType" style="background: #0086ff;border:none">房改</button>
-      <button id="HouseRemove" class="am-btn am-btn-secondary" value="11" name="infoDeleteType" style="background: #0086ff;border:none">拆迁，已注销</button>
-      <button id="DateTogther" class="am-btn am-btn-secondary" value="12"  name="infoDeleteType"style="background: #0086ff;border:none">数据合并</button>
-      <button id="DateLose" class="am-btn am-btn-secondary" value="13"  name="infoDeleteType"style="background: #0086ff;border:none">数据作废</button>
+      <button id="HouseChange" class="am-btn am-btn-secondary " value="10" name="roomDeleteType" style="background: #0086ff;border:none">房改</button>
+      <button id="HouseRemove" class="am-btn am-btn-secondary" value="11" name="roomDeleteType" style="background: #0086ff;border:none">拆迁，已注销</button>
+      <button id="DateTogther" class="am-btn am-btn-secondary" value="12"  name="roomDeleteType"style="background: #0086ff;border:none">数据合并</button>
+      <button id="DateLose" class="am-btn am-btn-secondary" value="13"  name="roomDeleteType"style="background: #0086ff;border:none">数据作废</button>
   </div>
   {include file="application/ph/view/confirm_tenant_info/form.html" /}
   {include file="application/ph/view/confirm_tenant_info/detail.html" /}
@@ -249,5 +261,5 @@
 {/block}
 {block name="JsFile"}
 <script type="text/javascript" src="/public/static/gf/js/validation.js"></script>
-<script  type="text/javascript" src="/public/static/gf/viewJs/confirm_tenant_form.js" ></script>
+<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/confirm_tenant_form.js"></script>
 {/block}

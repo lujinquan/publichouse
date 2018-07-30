@@ -397,11 +397,10 @@ class ChangeAudit extends Model
     public function get_nine_detail($changeOrderID)
     {   
         //房屋编号
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage,Deadline,Remark,CreateTime')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CreateTime')->find();
 
-        $data = get_ban_info($oneData['BanID']);
-        $data['NewDamage'] = get_damage($oneData['Damage']);
-        $data['DamageGrade'] = get_damage($oneData['Deadline']);
+        $data = get_house_info($oneData['HouseID']);
+        $data['Ban'] = json_decode($oneData['Deadline']);
         $data['Remark'] = $oneData['Remark'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 9;
