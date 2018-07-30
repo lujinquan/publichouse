@@ -1326,66 +1326,94 @@ $('#addApply').click(function() {
             })
             break;
         case "9":
-            $(".Ahide").css("display", "none");
-            $(".Ahouse").text('楼栋编号：');
+            var ban_length = 0;
             layer.open({
                 type: 1,
-                area: ['990px', '700px'],
+                area: ['990px', '710px'],
                 resize: false,
                 zIndex: 100,
                 title: ['新增房屋调整', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                 content: $('#houseAdjust'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    banQuery.action('AdjustHouseID','1');
-                    $('#DAquery').off('click');
-                    $('#DAquery').on("click", function() {
-                        var BanID = $("#AdjustHouseID").val()
-                        $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
+                    houseQuery.action('houseAdjustHouse','1');
+                    $('#houseAdjustQuery').off('click');
+                    $('#houseAdjustQuery').on("click", function() {
+                        var houseID = $("#houseAdjustHouse").val()
+                        $.get('/ph/Api/get_house_info/HouseID/' + houseID, function(res) {
                             res = JSON.parse(res);
-                            console.log(res);
+                            console.log(res.data.Ban);
+                            ban_length = res.data.Ban.length;
+                            for(var i = 0; i < res.data.Ban.length;i++){
+                                $('.HABanID').eq(i).text(res.data.Ban[i].BanID);
+                                $('.HAAddress').eq(i).text(res.data.Ban[i].BanAddress);
+                                $('.HABeforeRent').eq(i).text(res.data.Ban[i].PreRent);
+                                $('.HABeforeLeasedArea').eq(i).text(res.data.Ban[i].BanUsearea);
+                                $('.HABeforeBanArea').eq(i).text(res.data.Ban[i].TotalArea);
+                                $('.HABeforePrice').eq(i).text(res.data.Ban[i].TotalOprice);
+                                $('.HAAfterRent').eq(i).val(res.data.Ban[i].PreRent);
+                                $('.HAAfterLeasedArea').eq(i).val(res.data.Ban[i].BanUsearea);
+                                $('.HAAfterBanArea').eq(i).val(res.data.Ban[i].TotalArea);
+                                $('.HAAfterPrice').eq(i).val(res.data.Ban[i].TotalOprice);
+                            }
+                            $('.HARent').off('input');
+                            $('.HARent').on('input',function(){
+                                var this_index = $(this).index('.HARent');
+                                var number_1 = res.data.Ban[this_index].PreRent;
+                                var number_2 = $('.HARent').eq(this_index).val() || "0";
+                                $('.HAAfterRent').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                            });
+                            $('.HALeasedArea').off('input');
+                            $('.HALeasedArea').on('input',function(){
+                                var this_index = $(this).index('.HALeasedArea');
+                                var number_1 = res.data.Ban[this_index].BanUsearea;
+                                var number_2 = $('.HALeasedArea').eq(this_index).val() || "0";
+                                $('.HAAfterLeasedArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                            });
+                            $('.HABanArea').off('input');
+                            $('.HABanArea').on('input',function(){
+                                var this_index = $(this).index('.HABanArea');
+                                var number_1 = res.data.Ban[this_index].TotalArea;
+                                var number_2 = $('.HABanArea').eq(this_index).val() || "0";
+                                $('.HAAfterBanArea').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                            });
+                            $('.HAPrice').off('input');
+                            $('.HAPrice').on('input',function(){
+                                var this_index = $(this).index('.HAPrice');
+                                var number_1 = res.data.Ban[this_index].TotalOprice;
+                                var number_2 = $('.HAPrice').eq(this_index).val() || "0";
+                                $('.HAAfterPrice').eq(this_index).val(numberMethod(number_1,number_2,'+'));
+                            });
                             layer.msg(res.msg);
-                            $("#ABanID").text(res.data.BanID);
-                            $("#ABanAddress").text(res.data.BanAddress);
-                            $("#AFloorID").text(res.data.BanFloorNum);
-                            $("#ACreateTime").text(res.data.CreateTime);
-                            $("#AHouseArea").text(res.data.HouseArea);
-                            $("#ALeasedArea").text(res.data.LeasedArea);
-                            $("#ATenantName").text(res.data.TenantName);
-                            $("#ATenantNumber").text(res.data.TenantNumber);
-                            $("#ATenantTel").text(res.data.TenantTel);
-                            $("#ADamageGrade").text(res.data.DamageGrade);
-                            $("#AStructureType").text(res.data.StructureType);
                         });
-                    });
-                    var Eleven = new file({
-                        button: "#AdjustSurvey",
-                        show: "#AdjustSurveyShow",
-                        upButton: "#AdjustSurveyUp",
-                        size: 1024,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "暂停计租报告"
-                    });
-                    var Twelve = new file({
-                        button: "#AdjustPic",
-                        show: "#AdjustPicShow",
-                        upButton: "#AdjustPicUp",
-                        size: 1024,
-                        url: "/ph/ChangeApply/add",
-                        ChangeOrderID: '',
-                        Type: 1,
-                        title: "暂停计租报告"
                     });
                 },
                 yes: function(thisIndex) {
-                    if ($('#AdjustHouseID').val() == "" || $("#ABanID").text() == "") {
+                    if ($('#houseAdjustHouse').val() == "") {
                         layer.msg('房屋编号存在问题呢！！！');
                     } else {
-                        var formData = fileTotall.getArrayFormdata();
-                        formData.append("BanID", $('#ABanID').text());
-                        formData.append("LevelChange", $("select[name='LevelChange']").val());
+                        var formData = new FormData();
+                        formData.append("HouseID", $('#houseAdjustHouse').val());
+                        formData.append("Remark", $('#houseAdjustReason').val());
+                        for(var i = 0;i < ban_length;i++){
+                            formData.append("Ban["+i+"][BanID]", $('.HABanID').eq(i).text());
+                            formData.append("Ban["+i+"][BanAddress]", $('.HAAddress').eq(i).text());
+
+                            formData.append("Ban["+i+"][PreRent]", $('.HABeforeRent').eq(i).text());
+                            formData.append("Ban["+i+"][BanUsearea]", $('.HABeforeLeasedArea').eq(i).text());
+                            formData.append("Ban["+i+"][TotalArea]", $('.HABeforeBanArea').eq(i).text());
+                            formData.append("Ban["+i+"][TotalOprice]", $('.HABeforePrice').eq(i).text());
+
+                            formData.append("Ban["+i+"][PreRentChange]", $('.HARent').eq(i).val());
+                            formData.append("Ban["+i+"][BanUseareaChange]", $('.HALeasedArea').eq(i).val());
+                            formData.append("Ban["+i+"][TotalAreaChange]", $('.HABanArea').eq(i).val());
+                            formData.append("Ban["+i+"][TotalOpriceChange]", $('.HAPrice').eq(i).val());
+
+                            formData.append("Ban["+i+"][PreRentAfter]", $('.HAAfterRent').eq(i).val());
+                            formData.append("Ban["+i+"][BanUseareaAfter]", $('.HAAfterLeasedArea').eq(i).val());
+                            formData.append("Ban["+i+"][TotalAreaAfter]", $('.HAAfterBanArea').eq(i).val());
+                            formData.append("Ban["+i+"][TotalOpriceAfter]", $('.HAAfterPrice').eq(i).val());
+                        }
                         formData.append("type", 9);
                         $.ajax({
                             type: "post",
@@ -1396,8 +1424,10 @@ $('#addApply').click(function() {
                             success: function(res) {
                                 res = JSON.parse(res);
                                 layer.msg(res.msg);
-                                layer.close(thisIndex);
-                                location.reload();
+                                if(res.retcode == "2000"){
+                                    layer.close(thisIndex);
+                                    location.reload();
+                                }
                             }
                         });
                     }
@@ -2156,11 +2186,11 @@ function tr_remove(houseID){
     }
 }
 //计租表
-$('#rentMeterButton').click(function() {
+$('#rentMeterButton,#rentMaterQuery').click(function() {
     $('.RentExample:gt(0)').remove();
     console.log($('.RoomDeT').hasClass('RentDate'));
 
-    var HouseID = $('#getInfo_1').val();
+    var HouseID = $('#getInfo_1').val() || $('#houseAdjustHouse').val();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);

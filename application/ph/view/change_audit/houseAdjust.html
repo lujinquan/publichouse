@@ -1,0 +1,124 @@
+<!-- 房屋调整-->
+<div id="houseAdjust" class="am-form" style="display:none;margin-top:1.6rem;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+
+    <div class="am-u-sm-12">
+        <div class="am-u-md-12">
+          <label class="label_style">房屋编号：</label>
+          <label class="label_content houseAdjustHouseID"></label>
+        </div>
+    </div>
+
+  	<div class="am-u-sm-12">
+    	<div class="am-form-group am-u-sm-12">
+      		<label class="label_style">计租表：</label>
+      		<a class="am-btn am-btn-primary am-btn-sm" id="rentMaterQuery">查看</a>
+    	</div>
+  	</div>
+
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          <label class="label_style">异动事由：</label>
+          <label class="label_content houseAdjustRemark"></label>
+        </div>
+    </div>
+
+
+    <div class="am-u-sm-12">
+        <div class="am-u-sm-4">
+          	<label class="label_style">备案时间：</label>
+          	<label class="label_content houseAdjustCreateTime"></label>
+        </div>
+    </div>
+
+    <div class="am-form-group am-u-sm-12">
+      <h2 class="label_title">楼栋信息：</h2>
+    </div>
+
+    <style>
+	  .adjusHouse tr,td,th{text-align:center;font-size:14px;padding:4px 20px;}
+  </style>
+    <div class="am-u-sm-12 ">
+    	<table class="adjusHouse" border="1" style="border:1px solid #D6E2F6;text-align:center;">
+    		<tr>
+    			<th colspan="2" rowspan="2">楼栋编号</th>
+    			<th colspan="2" rowspan="2">房屋地址</th>
+    			<th colspan="3" rowspan="1">租金</th>
+    			<th colspan="3" rowspan="1">计租面积</th>
+    			<th colspan="3" rowspan="1">建筑面积</th>
+    			<th colspan="3" rowspan="1">楼栋原价</th>
+    		</tr>
+			<tr>
+    			<th>调整前</th>
+    			<th>调整金额</th>
+    			<th>调整后</th>
+    			<th>调整前</th>
+    			<th>调整金额</th>
+    			<th>调整后</th>
+    			<th>调整前</th>
+    			<th>调整金额</th>
+    			<th>调整后</th>
+    			<th>调整前</th>
+    			<th>调整金额</th>
+    			<th>调整后</th>
+    		</tr>
+    		<tr class="ban_info">
+				<td colspan="2" rowspan="1" class=""></td>
+				<td colspan="2" rowspan="1"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+
+				<td></td>
+				<td></td>
+				<td></td>
+
+				<td></td>
+				<td></td>
+				<td></td>
+
+				<td></td>
+				<td></td>
+				<td></td>
+    		</tr>
+    	</table>
+    </div>
+
+    <div class="am-u-md-12" style="padding-left:0;">
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">查看附件：</h2>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <div id="HAPhotos" class="am-u-md-12" style="margin-bottom:30px;"></div>
+        </div>
+
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>调整说明：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="adjustExplain" type="file" name="adjustExplain" multiple>
+            </div>
+            <div id="adjustExplainShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>其它：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="HAOther" type="file" name="HAOther" multiple>
+            </div>
+            <div id="HAOtherShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">审批状态：</h2>
+        </div>
+        <div id="HAState" class="am-u-md-12" style="padding-left:3rem;"></div>
+    </div>
+</div>
