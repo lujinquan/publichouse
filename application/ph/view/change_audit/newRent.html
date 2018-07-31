@@ -1,0 +1,113 @@
+<!-- 楼栋调整-->
+<div id="buildingAdjustment" class="am-form" style="display:none;margin-top:1.6rem;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-4">
+      <label class="label_style">房屋编号：</label>
+      <label id="newRentHouseID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style"> 租户ID：</label>
+      <label id="newRentTenantID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style"> 承租人：</label>
+      <label id="newRentTenantName" class="label_content"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">身份证号：</label>
+      <label id="newRentTenantNumber" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">联系电话：</label>
+      <label id="newRentTenantTel" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">单元号：</label>
+      <label id="newRentUnitID" class="label_content"></label>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">层次：</label>
+      <label id="newRentFloorID" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">建筑面积：</label>
+      <label id="newRentHouseArea" class="label_content"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">房屋原价：</label>
+      <label id="newRentOldOprice" class="label_content"></label>
+    </div>  
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">异动事由：</label>
+      <label id="newRentReason" class="label_content" style="width:492px;"></label>
+    </div>
+  </div>
+
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">楼栋信息：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="newRentBanInfo">明细</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">计租表：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="newRentDetail">明细</a>
+    </div>
+  </div>
+
+
+  <div class="am-u-md-12" style="padding-left:0;">
+      <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+          <div class="am-u-sm-12"><hr /></div>
+          <h2 class="label_title">上传附件：</h2>
+      </div>
+      <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+          <div class="am-form-group am-u-sm-3">
+            <label>新发租情况说明：</label>
+          </div>
+          <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="newRentExplain" type="file" name="newRentExplain" multiple>
+          </div>
+          <div id="newRentExplainShow" class="am-u-md-12 img_content"></div>
+      </div>
+      <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+          <div class="am-form-group am-u-sm-3">
+            <label>其它：</label>
+          </div>
+          <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="newRentOther" type="file" name="newRentOther" multiple>
+          </div>
+          <div id="newRentOtherShow" class="am-u-md-12 img_content"></div>
+      </div>
+
+
+      <div class="am-u-sm-12"><hr /></div>
+      <div class="am-form-group am-u-sm-12">
+          <h2 class="label_title">查看附件：</h2>
+      </div>
+      <div class="am-form-group am-u-sm-12">
+          <div id="newRentPhotos" class="am-u-md-12" style="margin-bottom:30px;"></div>
+      </div>
+
+      <div class="am-form-group am-u-sm-12">
+          <h2 class="label_title">审批状态：</h2>
+      </div>
+      <div id="newRentState" class="am-u-md-12" style="padding-left:3rem;"></div>
+  </div>
+</div>

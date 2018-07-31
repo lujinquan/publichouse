@@ -1076,7 +1076,84 @@
         <td rowspan="1" colspan="1"><input type="number" value="0.00" class="HAPrice" /></td>
         <td rowspan="1" colspan="1"><input type="number" class="HAAfterPrice" /></td>
       </tr>
-
     </table>
+  </div>
+</form>
+
+<!-- 新发租 -->
+<form id="newRent" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">房屋编号：</label>
+      <input type="number" id="newRentHouseID" class="label_input" placeholder="双击输入房屋编号" />
+      <a class="am-btn am-btn-primary am-btn-sm" id="newRentQuery">查询</a>
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style"> 租户ID：</label>
+      <input class="label_input newRentTenentID" />
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style"> 承租人：</label>
+      <input class="label_input newRentTenent" />
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">身份证号：</label>
+      <input class="label_input newRentNumber" />
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">联系电话：</label>
+      <input class="label_input newRentTel" />
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">单元号：</label>
+      <input class="label_input newRentUnit" />
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">层次：</label>
+      <input class="label_input newRentFloor" />
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">建筑面积：</label>
+      <input class="label_input newRentBanArea" />
+    </div>
+    <div class="am-form-group am-u-sm-6">
+      <label class="label_style">房屋原价：</label>
+      <input class="label_input newRentPrice" />
+    </div>
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-sm-12">
+      <label class="label_style">异动事由：</label>
+      <input id="newRentReason" class="label_input" style="width:492px;">
+    </div>    
+  </div>
+
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">楼栋信息：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="newRentBanInfo">明细</a>
+    </div>
+  </div>
+  <div class="am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">计租表：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="newRentDetail">明细</a>
+    </div>
   </div>
 </form>

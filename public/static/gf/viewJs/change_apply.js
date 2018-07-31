@@ -922,296 +922,73 @@ $('#addApply').click(function() {
             });
             break;
         case "7":
-            var value = 1,
-                new_6_value = 1;
             var thisLayer = layer.open({
                 type: 1,
-                area: ['910px', '200px'],
+                area: ['700px', '700px'],
                 resize: false,
-                title: ['选择新发租类型', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                title: ['新发租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                 zIndex: 100,
-                content: "<button class='am-btn am-btn-secondary NLbtn' value='1'>空租新发租</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='2'>接管</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='3'>还建</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='4'>新建</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='5'>合建</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='6'>加改扩</button>\
-				<button class='am-btn am-btn-secondary NLbtn' value='9'>其他</button>",
+                content: $('#newRent'),
+                btn: ['确定', '取消'],
                 success: function() {
-                    $('.NLbtn').off('click');
-                    $('.NLbtn').on('click', function() {
-                        $('.addBuild').hide();
-                        value = $(this).val();
-                        console.log(value);
-                        layer.close(thisLayer);
-                        if (value != 6) {
-                            if (value != 1 && value != 6) {
-                                $('#NLIDName').text('楼栋编号：');
-                                $('.NLShow').hide();
-                                banQuery.action('NLHouseID','0');
-                            } else if (value == 1) {
-                                $('#NLIDName').text('房屋编号：');
-                                $('.NLShow').show();
-                                houseQuery.action('NLHouseID','1');
-                                tenantQuery.action('TenantInput','','0,1')
-                                $('#NLAquery').off('click');
-                                $('#NLAquery').on('click', function() {
-                                    var HouseID = $("#NLHouseID").val()
-                                    $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
-                                        res = JSON.parse(res);
-                                        console.log(res);
-                                        layer.msg(res.msg);
-                                        $("#NLBanAddress").text(res.data.BanAddress);
-                                        $("#NLUseNature").text(res.data.UseNature);
-                                        $("#NLFloorID").text(res.data.FloorID);
-                                        $("#NLOwnerType").text(res.data.OwnerType);
-                                        $("#NLStructureType").text(res.data.StructureType);
-                                        $("#NLHouseArea").text(res.data.HouseArea);
-                                        $("#NLDamageGrade").text(res.data.DamageGrade);
-                                        $("#FloorIDo").text(res.data.FloorID);
-                                        //$("#TenantTel").text(res.data.TenantTel);
-                                        //$("#BanAddress").text(res.data.BanAddress);
-                                    });
-                                });
-                                $('#TenantInput').off('blur');
-                                $('#TenantInput').on('blur', function() {
-                                    var TenantID = $(this).val();
-                                });
-                            }
-                            layer.open({
-                                type: 1,
-                                area: ['990px', '600px'],
-                                resize: false,
-                                zIndex: 100,
-                                title: ['新增新发租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                                content: $('#NewLease'),
-                                btn: ['确定', '取消'],
-                                success: function() {
-                                    new file({
-                                        button: "#NLApplication",
-                                        show: "#NLApplicationShow",
-                                        upButton: "#NLApplicationUp",
-                                        size: 1024,
-                                        url: "/ph/ChangeApply/add",
-                                        ChangeOrderID: '',
-                                        Type: 1,
-                                        title: "暂停计租报告"
-                                    });
-                                },
-                                yes: function(thisIndex) {
-                                    if ($('#NLHouseID').val() == "") {
-                                        layer.msg('房屋编号存在问题呢！！！');
-                                    } else {
-                                        var formData = fileTotall.getArrayFormdata();
-                                        if (value != 1 && value != 6) {
-                                            formData.append("BanID", $('#NLHouseID').val());
-                                        } else if (value == 7) {
-                                            //return false;
-                                            formData.append("BanID", $('#NLHouseID').val());
-                                            formData.append("HouseID", $('#NLHouseID_1').val());
-                                            
-                                        } else {
-                                            formData.append("HouseID", $('#NLHouseID').val());
-                                            formData.append("TenantID", $('#TenantInput').val());
-                                        }
-                                        formData.append("type", 7);
-                                        formData.append("value", value);
-                                        $.ajax({
-                                            type: "post",
-                                            url: "/ph/ChangeApply/add",
-                                            data: formData,
-                                            processData: false,
-                                            contentType: false,
-                                            success: function(res) {
-                                                res = JSON.parse(res);
-                                                layer.msg(res.msg);
-                                                layer.close(thisIndex);
-                                                location.reload();
-                                            }
-                                        });
-                                    }
-                                },
-                                end: function() {
-                                    $("input[type='text']").val('');
-                                    $("input[type='number']").val('');
-                                    $(".label_content").text('');
-                                    $(".img_content").text('');
-                                    $("select").val('');
+                   houseQuery.action('newRentHouseID','1');
+                   $('#newRentQuery').on("click", function() {
+                        var HouseID = $('#newRentHouseID').val();
+                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                            res = JSON.parse(res);
+                            console.log(res);
+                            $('.newRentTenentID').val(res.data.TenantID);
+                            $('.newRentTenent').val(res.data.TenantName);
+                            $('.newRentNumber').val(res.data.TenantNumber);
+                            $('.newRentTel').val(res.data.TenantTel);
+                            $('.newRentUnit').val(res.data.UnitID);
+                            $('.newRentFloor').val(res.data.FloorID);
+                            $('.newRentBanArea').val(res.data.HouseArea);
+                            $('.newRentPrice').val(res.data.OldOprice);
+                            $('#newRentBanInfo').attr('value',res.data.BanID);
+                        });
+                    });
+                },
+                yes: function(thisIndex) {
+                    if ($('#newRentHouseID').val() == "") {
+                        layer.msg('房屋编号存在问题呢！！！');
+                    }else{
+                        var formData = new FormData();
+                        formData.append("HouseID", $('#newRentHouseID').val());
+                        formData.append("Remark", $('#newRentReason').val());
+                        formData.append("TenantID",$('.newRentTenentID').val());
+                        formData.append("TenantName", $('.newRentTenent').val());
+                        formData.append("TenantNumber", $('.newRentNumber').val());
+                        formData.append("TenantTel", $('.newRentTel').val());
+                        formData.append("UnitID", $('.newRentUnit').val());
+                        formData.append("FloorID", $('.newRentFloor').val());
+                        formData.append("HouseArea", $('.newRentBanArea').val());
+                        formData.append("OldOprice", $('#newRentBanInfo').val());
+                        formData.append("type", 7);
+                        $.ajax({
+                            type: "post",
+                            url: "/ph/ChangeApply/add",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(res) {
+                                res = JSON.parse(res);
+                                layer.msg(res.msg);
+                                if(res.retcode == "2000"){
+                                    layer.close(thisIndex);
                                     location.reload();
                                 }
-                            });
-                        } else {
-                            var new_6 = layer.open({
-                                type: 1,
-                                area: ['400px', '200px'],
-                                resize: false,
-                                title: ['选择新发租类型', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                                zIndex: 100,
-                                content: "<button class='am-btn am-btn-secondary new_6_btn' value='7'>加建</button>\
-								<button class='am-btn am-btn-secondary new_6_btn' value='8'>扩建</button>",
-                                success: function() {
-                                    $('.new_6_btn').off('click');
-                                    $('.new_6_btn').on('click', function() {
-                                        new_6_value = $(this).val();
-                                        console.log(new_6_value);
-                                        $('.NLShow').hide();
-                                        if (new_6_value == "8") {
-                                            $('.move').hide();
-                                            $('#NLAquery').show();
-                                            $('.addBuild').hide();
-                                            houseQuery.action('NLHouseID','1');
-                                            $('.expand').show();
-                                            $('#NLAquery').click(function() {
-                                                $('.nomalRoom').children().remove();
-                                                $('.deleteRoom').children().remove();
-                                                $('.modifyRoom').children().remove();
-                                                $('.unconfirmedRoom').children().remove();
-                                                var HouseID = $('#NLHouseID').val();
-                                                $.get('/ph/Api/get_house_detail_status/HouseID/' + HouseID, function(res) {
-                                                    res = JSON.parse(res);
-                                                    // console.log(res.data.nomalRoom.length);
-                                                    if (res.data.nomalRoom) {
-                                                        var nR = res.data.nomalRoom;
-                                                        for (var n = 0; n < nR.length; n++) {
-                                                            $('.nomalRoom').append('<li>' + nR[n] + '</li>');
-                                                        }
-                                                    };
-                                                    if (res.data.deleteRoom) {
-                                                        var nR = res.data.deleteRoom;
-                                                        for (var n = 0; n < nR.length; n++) {
-                                                            $('.deleteRoom').append('<li>' + nR[n] + '</li>');
-                                                        }
-                                                    };
-                                                    if (res.data.editRoom) {
-                                                        console.log('aaaaa');
-                                                        var nR = res.data.editRoom;
-                                                        for (var n = 0; n < nR.length; n++) {
-                                                            $('.modifyRoom').append('<li>' + nR[n] + '</li>');
-                                                        }
-                                                    };
-                                                    if (res.data.unconfirmedRoom) {
-                                                        var nR = res.data.unconfirmedRoom;
-                                                        for (var n = 0; n < nR.length; n++) {
-                                                            $('.unconfirmedRoom').append('<li>' + nR[n] + '</li>');
-                                                        }
-                                                    };
-                                                })
-                                                $('.expand').on('click', 'li', function() {
-                                                    var val = $(this).text();
-                                                    console.log(val);
-                                                    $.get('/ph/Room/detail/RoomID/' + val, function(res) {
-                                                        res = JSON.parse(res);
-                                                        $("#DRoomID").text(res.data.RoomID);
-                                                        $("#DBanID").text(res.data.BanID);
-                                                        $("#DHouseID").text(res.data.HouseID);
-                                                        $("#DRoomType").text(res.data.RoomType);
-                                                        $("#DUnitID").text(res.data.UnitID);
-                                                        $("#DFloorID").text(res.data.FloorID);
-                                                        $("#DRentPoint").text(res.data.RentPoint);
-                                                        $("#DUseArea").text(res.data.UseArea);
-                                                        $("#DLeasedArea").text(res.data.LeasedArea);
-                                                        $("#DItems").text(res.data.Items);
-                                                        $("#DRoomNumber").text(res.data.RoomNumber);
-                                                        $('.BanAddress').text(res.data.BanAddress);
-                                                        $('#RoomNumber').text(res.data.RoomNumber);
-                                                        layer.open({
-                                                            type: 1,
-                                                            area: ['990px', '600px'],
-                                                            resize: false,
-                                                            zIndex: 100,
-                                                            title: ['房间明细', 'color:#FFF;font-size:1.6rem;font-weight:600;'],
-                                                            content: $('#RoomDetail'),
-                                                            btn: ['确定', '取消'],
-                                                            success: function() {}
-                                                        });
-                                                    })
-                                                });
-                                            })
-                                        } else {
-                                            $('.addBuild').show();
-                                            $('#NLIDName').text('楼栋编号：');
-                                            banQuery.action('NLHouseID','2');
-                                            houseQuery.action('NLHouseID_1','0');
-                                            houseQuery.action('NLHouseID_3','0');
-                                            houseQuery.action('NLHouseID_4','0');
-                                        }
-                                        layer.open({
-                                            type: 1,
-                                            area: ['990px', '600px'],
-                                            resize: false,
-                                            zIndex: 100,
-                                            title: ['新增新发租', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
-                                            content: $('#NewLease'),
-                                            btn: ['确定', '取消'],
-                                            success: function() {
-                                                new file({
-                                                    button: "#NLApplication",
-                                                    show: "#NLApplicationShow",
-                                                    upButton: "#NLApplicationUp",
-                                                    size: 1024,
-                                                    url: "/ph/ChangeApply/add",
-                                                    ChangeOrderID: '',
-                                                    Type: 1,
-                                                    title: "暂停计租报告"
-                                                });
-                                                new file({
-                                                    button: "#NLApplication2",
-                                                    show: "#NLApplicationShow2",
-                                                    upButton: "#NLApplicationUp",
-                                                    size: 1024,
-                                                    url: "/ph/ChangeApply/add",
-                                                    ChangeOrderID: '',
-                                                    Type: 1,
-                                                    title: "暂停计租报告"
-                                                });
-                                            },
-                                            yes: function(thisIndex) {
-                                                if ($('#NLHouseID').val() == "") {
-                                                    layer.msg('房屋编号存在问题呢！！！');
-                                                } else {
-                                                    var aL = $('.addB').children();
-                                                    var formData = fileTotall.getArrayFormdata();
-                                                    if(new_6_value == "8"){
-                                                        formData.append("HouseID", $('#NLHouseID').val());
-                                                    }else{
-                                                        formData.append("BanID", $('#NLHouseID').val());
-                                                    }
-                                                    formData.append("houseId[]", $('#NLHouseID_1').val());
-                                                    for (var l = 0; l < aL.length; l++) {
-                                                        var tem = aL.eq(l).find('input').val();
-                                                        formData.append("houseId[]", tem);
-                                                    }
-                                                    formData.append("type", 7);
-                                                    formData.append("value", new_6_value);
-                                                    $.ajax({
-                                                        type: "post",
-                                                        url: "/ph/ChangeApply/add",
-                                                        data: formData,
-                                                        processData: false,
-                                                        contentType: false,
-                                                        success: function(res) {
-                                                            res = JSON.parse(res);
-                                                            layer.msg(res.msg);
-                                                            layer.close(thisIndex);
-                                                            location.reload();
-                                                        }
-                                                    });
-                                                }
-                                            },
-                                            end: function() {
-                                                $("input[type='text']").val('');
-                                                $("input[type='number']").val('');
-                                                $(".label_content").text('');
-                                                $(".img_content").text('');
-                                                $("select").val('');
-                                                location.reload();
-                                            }
-                                        });
-                                    });
-                                }
-                            })
-                        }
-                    });
+                            }
+                        });
+                    }
+                },
+                end: function() {
+                    $("input[type='text']").val('');
+                    $("input[type='number']").val('');
+                    $(".label_content").text('');
+                    $(".img_content").text('');
+                    $("select").val('');
+                    location.reload();
                 }
             });
             break;
@@ -2216,11 +1993,10 @@ function tr_remove(houseID){
     }
 }
 //计租表
-$('#rentMeterButton,#rentMaterQuery').click(function() {
+$('#rentMeterButton,#rentMaterQuery,#newRentDetail').click(function() {
     $('.RentExample:gt(0)').remove();
     console.log($('.RoomDeT').hasClass('RentDate'));
-
-    var HouseID = $('#getInfo_1').val() || $('#houseAdjustHouse').val();
+    var HouseID = $('#getInfo_1').val() || $('#houseAdjustHouse').val() || $('#newRentHouseID').val();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);

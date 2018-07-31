@@ -484,9 +484,9 @@ $(".ConfirmBanBtn").click(function(){
 });
 //var allMap = new BMap.Map("allMap",{enableMapClick: false});
 
-$(".details_btn").click(function(){
+$(".details_btn,#newRentBanInfo").click(function(){
 	$('#Drecord').html('');
-	var BanID = $(this).val();
+	var BanID = $(this).val()||$(this).attr('value');
 	console.log(BanID);
 	// require(["layer","jquery"],function(){
 	// 	layer.config({
