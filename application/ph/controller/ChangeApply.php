@@ -44,7 +44,7 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,2,3,4,8,9,11,12,14])){
+            if(!in_array($data['type'],[1,2,3,4,7,8,9,11,12,14])){
                 return jsons('4001','程序正在升级中……');
             }
 
@@ -248,102 +248,28 @@ class ChangeApply extends Base
 
                     break;
 
-                case 7:  // 新发租  1空租新发租，2接管，3还建，4新建，5合建，6加改扩，7加建，8扩建，9,其他
+                case 7:  // 新发租 
 
-                    //halt($data);ban_temp
-                    if(isset($data['BanID'])){
-                        $one = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->field('OwnerType,InstitutionID ,TubulationID,UseNature')->find();
-                        $oldTotalArea = Db::name('ban_temp')->where('BanID', 'eq', $data['BanID'])->value('TotalArea');
-                        if(!$one) {return jsons('4004','楼栋编号不存在');}
-                        $datas['OwnerType'] = $one['OwnerType']; //产别
-                        $datas['UseNature'] = $one['UseNature'];
-                        $datas['InstitutionID'] = $one['TubulationID'];  //机构id
-                        $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
-                        $datas['AddRent'] = $oldTotalArea;
-                        
-                    }else{
-                        $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('OwnerType,InstitutionPID ,InstitutionID,UseNature')->find();
-                        $oldTotalArea = Db::name('house')->alias('a')->join('ban_temp b','a.BanID = b.BanID','left')->where('HouseID', 'eq', $data['HouseID'])->value('TotalArea');
-                        if(!$one) {return jsons('4004','房屋编号不存在');}
-                        $datas['OwnerType'] = $one['OwnerType']; //产别
-                        $datas['UseNature'] = $one['UseNature'];
-                        $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
-                        $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
-                        $datas['AddRent'] = $oldTotalArea;
-                        // Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->setField('Status',3);
-                        Db::name('house')->alias('a')->join('ban b','a.BanID = b.BanID','left')->where('HouseID', 'eq', $data['HouseID'])->update(['a.Status'=>3,'b.Status'=>3]);
-                    }
-
-
-                    if($data['value'] == 1){  //空租新发租(就是将一个新增的临时状态房屋，改为正式状态)
-                        $datas['HouseID'] = $data['HouseID'];  //新增的房屋编号
-                        $one = Db::name('house')->where('HouseID',$data['HouseID'])->field('InstitutionID,InstitutionPID,Status,UseNature')->find();
-
-                        Db::name('house')->where('HouseID',$data['HouseID'])->setField('Status',3);
-                        Db::name('room')->where('HouseID','like','%'.$data['HouseID'].'%')->setField('Status',3);
-
-                        $datas['TenantID'] = $data['TenantID'];  //租户id
-
-
-                    }elseif($data['value'] ==7){ //还要处理多个房屋编号,加改扩中的加建
-
-                        $datas['BanID'] = $data['BanID'];  //新增的楼栋编号
-
-                        $data['houseId'] = array_filter($data['houseId']); //数组去空
-
-                        foreach ($data['houseId'] as $houseids) {
-                            $statuss = Db::name('house')->where('HouseID',$houseids)->value('Status');
-                            if($statuss != 0){ return jsons('4003','加建的房屋必须为新增状态……');}
-                        }
-
-                        Db::name('house')->where('HouseID','in',$data['houseId'])->setField('Status',3); //将所有房屋的状态改成异动中，此时该房屋不能被修改
-
-                        $datas['HouseID'] = implode(',',$data['houseId']);
-
-
-
-                    }elseif($data['value'] ==8){ //加改扩中的扩建
-
-                        //$data['HouseID']
-                        $option['HouseID'] = array('like','%'.$data['HouseID'].'%');
-                        $option['Status'] = array('neq',1);
-                        $houseStatus = Db::name('Room')->where($option)->find();
-                        if(!$houseStatus){
-                            return jsons('4003','该房屋不符合改建异动类型……');
-                        }else{
-                            Db::name('Room')->where(['HouseID'=>['like','%'.$data['HouseID'].'%'],'Status'=>['neq',1]])->setField('Status',3); //将异常状态下的房间的状态改成异动中，此时这些房间不能被修改
-                        }
-
-                        $datas['HouseID'] = $data['HouseID'];  //新增的房间id
-
-                    }else{
-
-                        $datas['BanID'] = $data['BanID'];  //新增的楼栋编号
-                        $houseStatus = Db::name('ban')->where('BanID',$data['BanID'])->value('Status');
-                        if($houseStatus != 0){ return jsons('4003','楼栋必须为新增状态……');}
-                        Db::name('ban')->where('BanID', 'eq', $data['BanID'])->setField('Status',3);
-                        Db::name('house')->where('BanID','eq',$data['BanID'])->setField('Status',3);
-                        Db::name('room')->where('BanID','eq',$data['BanID'])->setField('Status',3);
-                        
-                    }
-
-                    $datas['UseNature'] = $one['UseNature'];
-                    $datas['NewSendRentType'] = $data['value'];  //新发租类型：如接管，还建……
-                    $datas['ChangeType'] = $data['type'];  //异动类型为新发租
+                    $datas['OrderDate'] = date('Ym',time());
+                    $datas['Remark'] = $data['Remark'];  //异动缘由
+                    $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['InflRent'] = $one['HousePrerent'];
+                    $datas['TenantID'] = $one['TenantID'];
+                    $datas['UseNature'] = $one['UseNature']; 
+                    $datas['OwnerType'] = $one['OwnerType'];  //新发租类型：如接管，还建……
+                    $datas['ChangeType'] = 7;  //异动类型为新发租
                     $datas['ProcessConfigName'] = $changeTypes[7];  //异动名称
-                    $datas['ChangeImageIDS'] = $ChangeImageIDS;  //附件集
-                    $datas['ProcessConfigType'] = 7;   //流程控制线路
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?:'';  //附件集
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>7])->order('id desc')->value('id');//流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'07'.$suffix;   //07代表新发租
 
-
                     $res = Db::name('change_order')->insert($datas);
-
-
-
                     break;
 
                 case 8:  // 注销
-//halt($data);
 
                     $datas['Deadline'] = json_encode($data['Ban']);
                     //halt($datas['Deadline']);

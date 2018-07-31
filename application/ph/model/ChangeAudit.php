@@ -827,8 +827,64 @@ class ChangeAudit extends Model
                 break;
 
             case 9:  //房屋调整异动完成后的，系统处理
-                $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,Damage')->find();
-                Db::name('ban')->where('BanID',$oneData['BanID'])->update(['DamageGrade'=>$oneData['Damage']]);
+                $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+                $arr = json_decode($oneData['Deadline'],true);
+                foreach($arr as $a){
+                    switch($a['UseNature']){
+                        case 1:
+                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                                [
+                                    'CivilArea' => $a['TotalAreaAfter'],
+                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilRent' => $a['PreRentAfter'],
+                                    'BanUsearea' => $a['BanUseAreaAfter'],
+                                ]
+                            );
+                        break;
+                           
+                        case 2:
+                         
+                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                                [
+                                    'CivilArea' => $a['TotalAreaAfter'],
+                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilRent' => $a['PreRentAfter'],
+                                ]
+                            );
+                        break;
+            
+                        case 3:
+                            
+                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                                [
+                                    'CivilArea' => $a['TotalAreaAfter'],
+                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilRent' => $a['PreRentAfter'],
+                                ]
+                            );
+                        break;
+
+                    }
+                }
+                Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent+'.$oneData['InflRent']]]);
+
+                $str = "( 9,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+ 
+                //修改租金配置表,删除不可用状态房屋对应的租金配置记录
+                Db::name('rent_config')->where('HouseID', 'eq', $oneData['HouseID'])->update([
+                        'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
+                        'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                    ]);
+                //删除该房屋本月订单
+                Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update([
+                        'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
+                        'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                        'PaidRent' => 0,
+                        'UnpaidRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                        'Type' => 1,
+                    ]);
                 break;
             case 10:  //管段调整异动完成后的，系统处理 （待完善）
                 //修改对应的楼栋所属的管段，注意此时关联到，该楼栋下所有的房屋，房间对应的所属管段机构的相应调整
