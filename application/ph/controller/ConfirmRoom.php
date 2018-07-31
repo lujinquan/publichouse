@@ -24,10 +24,38 @@ class ConfirmRoom extends Base
         return $this->fetch();
     }
 
+    public function add(){
+        if ($this->request->isPost()) {
+            $data = array_no_space_str($this->request->post());
+
+            check($data['BanID']);
+            // 验证
+            $result = $this->validate($data,'Room');
+            if(true !== $result) {
+                return jsons('4001',$result);
+            }
+            $maxid = Db::name('room')->max('RoomID');
+            $data['RoomID'] = $maxid + 1;
+            $datas = model('ph/Room')->add($data);
+            $datas['Status'] = 1;  //状态改为未确认状态
+            if ($roomInfo = RoomModel::create($datas)) {
+                // 记录行为
+                //action_log('BanInfo_add', UID ,1, '编号为:'.$data['BanID']);
+                return jsons('2000','新增成功');
+            } else {
+                return jsons('4000','新增失败');
+            }
+        }
+    }
+
     public function edit(){
         $roomID = input('RoomID');
         if($this->request->isPost()){
             $data = array_no_space_str($this->request->post());
+
+            $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');
+
+            check($banid);
             //halt($data);
             $datas = model('ph/Room')->edit($data);  //1是为了区分添加和修改的，因为修改中的RoomID是不需要拼接的
             $datas['Status'] = 1; //状态改为未确认状态
@@ -66,6 +94,11 @@ class ConfirmRoom extends Base
     //注意：这是假删除，只是改变了该条记录的状态值，，同时将关联数据回滚
     public function delete(){
         $roomID = input('RoomID');
+
+        $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');
+
+        check($banid);
+
         $style = input('style');
         if(!$roomID || !$style){
             return jsons(4004 ,'参数异常……');
@@ -82,26 +115,26 @@ class ConfirmRoom extends Base
         }
     }
 
-    /**
-     * 房间确认，由临时状态变为可用状态
-     */
-    public function confirm(){
-        $roomID = input('RoomID');
-        if(!$roomID) return jsons('4000','参数缺失');
-        $res = Db::name('room')->where('RoomID', 'eq', $roomID)->setField('Status',1);
-        if($res){
-            $houseids = Db::name('room')->where('RoomID', 'eq', $roomID)->value('HouseID');
-            if($houseids){
-                $houseArr = explode(',',$houseids);
-                foreach ($houseArr as $house) {
-                    $temphouse = count_house_rent($house);
-                    Db::name('house')->where('HouseID', 'eq', $house)->setField('ApprovedRent',$temphouse);
-                }
-            }
-            return jsons('2000','确认成功！');
-        }else{
-            return jsons('4000','确认失败！');
-        }
-    }
+    // /**
+    //  * 房间确认，由临时状态变为可用状态
+    //  */
+    // public function confirm(){
+    //     $roomID = input('RoomID');
+    //     if(!$roomID) return jsons('4000','参数缺失');
+    //     $res = Db::name('room')->where('RoomID', 'eq', $roomID)->setField('Status',1);
+    //     if($res){
+    //         $houseids = Db::name('room')->where('RoomID', 'eq', $roomID)->value('HouseID');
+    //         if($houseids){
+    //             $houseArr = explode(',',$houseids);
+    //             foreach ($houseArr as $house) {
+    //                 $temphouse = count_house_rent($house);
+    //                 Db::name('house')->where('HouseID', 'eq', $house)->setField('ApprovedRent',$temphouse);
+    //             }
+    //         }
+    //         return jsons('2000','确认成功！');
+    //     }else{
+    //         return jsons('4000','确认失败！');
+    //     }
+    // }
 
 }

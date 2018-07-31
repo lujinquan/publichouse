@@ -17,17 +17,46 @@ class ConfirmTenantInfo extends Base
         $tenantLst = $this -> TenantInfoModel ->get_all_tenant_lst();
         //所有机构
         $instLst = $this -> BanInfoModel ->get_all_institution();
-
-        //dump($tenantLst);exit;
-
         $this->assign([
             'tenantLst'  => $tenantLst['arr'],
             'tenantLstObj'  => $tenantLst['obj'],
             'tenantOption'  => $tenantLst['option'],
             'instLst' => $instLst,
         ]);
-
         return $this->fetch();
+    }
+
+    public function  add(){
+        // 保存数据
+        if ($this->request->isPost()) {
+            $data = array_no_space_str($this->request->post());
+            $maxid = Db::name('tenant')->max('TenantID');
+            $result = $this->validate($data,'TenantInfo');
+            if(true !== $result) {
+                return jsons('4001',$result);
+
+            }
+            $data['InstitutionID'] = session('user_base_info.institution_id');
+
+            $data['InstitutionPID'] = Db::name('institution')->where('id','eq',$data['InstitutionID'])->value('pid');
+
+            $data['TenantValue'] = $data['TenantValue']?$data['TenantValue']:100;
+            $data['CreateUserID'] = UID;
+            if($maxid){
+               $data['TenantID'] = $maxid + 1; 
+            }else{
+               $data['TenantID'] = 10000;
+            }
+            $data['Status'] = 0;
+            if ($tenantInfo = TenantInfoModel::create($data)) {
+                // 记录行为
+                action_log('TenantInfo_add', UID  ,3 , '编号为:'.$data['TenantID']);
+                return jsons('2000' ,'新增成功');
+            } else {
+                return jsons('2000' ,'新增失败');
+            }
+        }
+        echo '没有数据！';
     }
 
     public function  edit(){
@@ -39,7 +68,7 @@ class ConfirmTenantInfo extends Base
             if(true !== $result) {
                 return jsons('4001',$result);
             }
-            $data['Status'] = 1; //状态改为未确认状态
+            $data['Status'] = 0; //状态改为未确认状态
             $data['UpdateTime'] = time();
             $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
             $oldOneData = Db::name('tenant')->field($fields)->where('TenantID', 'eq', $tenantID)->find();
@@ -87,6 +116,10 @@ class ConfirmTenantInfo extends Base
             return jsons(4004 ,'参数异常……');
         }else{
             $houseid = Db::name('house')->where('TenantID',$tenantID)->value('HouseID');
+
+            $banid = Db::name('house')->where('HouseID',$houseid)->value('BanID');
+            check($banid);
+
             if($houseid){
                 return jsons(4001 ,'该租户已绑定编号为：'.$houseid.'的房屋，请先解绑！');
             }
@@ -114,21 +147,21 @@ class ConfirmTenantInfo extends Base
         }
     }
 
-    /**
-     * 租户确认，由临时状态变为可用状态
-     */
-    public function confirm(){
-        $tenantID = input('TenantID');
+    // /**
+    //  * 租户确认，由临时状态变为可用状态
+    //  */
+    // public function confirm(){
+    //     $tenantID = input('TenantID');
 
-        if(!$tenantID) return jsons('4000','参数缺失');
+    //     if(!$tenantID) return jsons('4000','参数缺失');
 
-        $res = Db::name('tenant')->where('TenantID', 'eq', $tenantID)->setField('Status',1);
-        if($res){
-            return jsons('2000','确认成功！');
-        }else{
-            return jsons('4000','确认失败！');
-        }
+    //     $res = Db::name('tenant')->where('TenantID', 'eq', $tenantID)->setField('Status',1);
+    //     if($res){
+    //         return jsons('2000','确认成功！');
+    //     }else{
+    //         return jsons('4000','确认失败！');
+    //     }
 
-    }
+    // }
 
 }

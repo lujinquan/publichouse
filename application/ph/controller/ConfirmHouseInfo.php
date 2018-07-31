@@ -42,6 +42,9 @@ class ConfirmHouseInfo extends Base
         // 保存数据
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
+
+            check($data['BanID']);
+
             $dataOne = Db::name('ban')->field('TubulationID,InstitutionID,BanAddress,AreaFour')->where('BanID', 'eq', $data['BanID'])->find();
             $data['InstitutionID'] = $dataOne['TubulationID'];
             $data['InstitutionPID'] = $dataOne['InstitutionID'];
@@ -97,6 +100,9 @@ class ConfirmHouseInfo extends Base
         $houseID = input('HouseID');
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
+
+            check($data['BanID']);
+            
             //$data['Status'] = 0; //状态改为未确认状态
             $one = Db::name('ban')->field('TubulationID ,InstitutionID ,OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
             $data['InstitutionID'] = $one['TubulationID'];
@@ -156,6 +162,8 @@ class ConfirmHouseInfo extends Base
     {
         if ($this->request->isPost()) {
             $data = $this->request->post();
+
+            check($data['BanID']);
             //halt($data);
             //验证数据合法性
             /*如果有未确认状态的要删除的房间则，再次删除*/
@@ -377,6 +385,11 @@ class ConfirmHouseInfo extends Base
     public function delete()
     {
         $houseID = input('HouseID');
+
+        $banid = Db::name('house')->where('HouseID',$houseID)->value('BanID');
+        
+        check($banid);
+
         $style = input('style');
         if(!$houseID || !$style){
             return jsons(4004 ,'参数异常……');
@@ -400,18 +413,18 @@ class ConfirmHouseInfo extends Base
         }
     }
 
-    /**
-     * 房屋确认，由临时状态变为可用状态
-     */
-    public function confirm()
-    {
-        $houseID = input('HouseID');
-        if (!$houseID) return jsons('4000', '参数缺失');
-        $res = Db::name('house')->where('HouseID', 'eq', $houseID)->setField('Status', 1);
-        if ($res) {
-            return jsons('2000', '确认成功！');
-        } else {
-            return jsons('4000', '确认失败！');
-        }
-    }
+    // /**
+    //  * 房屋确认，由临时状态变为可用状态
+    //  */
+    // public function confirm()
+    // {
+    //     $houseID = input('HouseID');
+    //     if (!$houseID) return jsons('4000', '参数缺失');
+    //     $res = Db::name('house')->where('HouseID', 'eq', $houseID)->setField('Status', 1);
+    //     if ($res) {
+    //         return jsons('2000', '确认成功！');
+    //     } else {
+    //         return jsons('4000', '确认失败！');
+    //     }
+    // }
 }
