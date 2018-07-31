@@ -277,7 +277,46 @@ $('.BtnApprove').click(function(){
 		}else if(type == 6){//维修
 
 		}else if(type == 7){//新发租
-
+            $('#newRentHouseID').text(res.data.detail.HouseID);
+            $('#newRentTenantID').text(res.data.detail.TenantID);
+            $('#newRentTenantName').text(res.data.detail.TenantName);
+            $('#newRentTenantNumber').text(res.data.detail.TenantNumber);
+            $('#newRentTenantTel').text(res.data.detail.TenantTel);
+            $('#newRentUnitID').text(res.data.detail.UnitID);
+            $('#newRentFloorID').text(res.data.detail.FloorID);
+            $('#newRentHouseArea').text(res.data.detail.HouseArea);
+            $('#newRentReason').text(res.data.detail.Remark);
+            $('#newRentBanInfo').attr('value',res.data.detail.BanID);
+            $('#newRentDetail').attr('value',res.data.detail.HouseID);
+            $('#createTime').text(res.data.detail.OrderCreateTime);
+            if(res.data.config.status == '1'){
+                $('.status_2').show();
+                new file({
+                    show: "#newRentExplainShow",
+                    upButton: "#newRentExplainUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    button: "#newRentExplain",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "新发租情况说明"
+                });
+                new file({
+                    show: "#newRentOtherShow",
+                    upButton: "#newRentOtherUp",
+                    size: 10240,
+                    url: "/ph/ChangeApply/add",
+                    button: "#newRentOther",
+                    ChangeOrderID: '',
+                    Type: 1,
+                    title: "其它"
+                });
+            }else{
+                $('.status_2').hide();
+            }
+            processState('#newRentState',res);
+            metailShow('#newRentPhotos',res);
+            layerBox(value,'newRent','新发租审批',1,res.data.config.status);
 		}else if(type == 9){//房屋调整
             $('.houseAdjustHouseID').text(res.data.detail.HouseID);
             $('.houseAdjustRemark').text(res.data.detail.Remark);
@@ -605,7 +644,21 @@ $('.BtnDetail').click(function(){
 		}else if(type == 6){//维修
 
 		}else if(type == 7){//新发租
-
+            $('#newRentHouseID').text(res.data.detail.HouseID);
+            $('#newRentTenantID').text(res.data.detail.TenantID);
+            $('#newRentTenantName').text(res.data.detail.TenantName);
+            $('#newRentTenantNumber').text(res.data.detail.TenantNumber);
+            $('#newRentTenantTel').text(res.data.detail.TenantTel);
+            $('#newRentUnitID').text(res.data.detail.UnitID);
+            $('#newRentFloorID').text(res.data.detail.FloorID);
+            $('#newRentHouseArea').text(res.data.detail.HouseArea);
+            $('#newRentReason').text(res.data.detail.Remark);
+            $('#newRentBanInfo').attr('value',res.data.detail.BanID);
+            $('#newRentDetail').attr('value',res.data.detail.HouseID);
+            $('#createTime').text(res.data.detail.OrderCreateTime);
+            processState('#newRentState',res);
+            metailShow('#newRentPhotos',res);
+            layerBox(value,'newRent','新发租',2);
 		}else if(type == 9){//房屋调整
             $('.houseAdjustHouseID').text(res.data.detail.HouseID);
             $('.houseAdjustRemark').text(res.data.detail.Remark);
@@ -895,9 +948,9 @@ function noPass(value){
 }
 
 //计租表
-$('#rentMeterButton,#rentMaterQuery').click(function() {
+$('#rentMeterButton,#rentMaterQuery,#newRentDetail').click(function() {
     $('.RentExample:gt(0)').remove();
-    var HouseID = $('.derateHouseID').text()||$('.houseAdjustHouseID').text();
+    var HouseID = $('.derateHouseID').text()||$('.houseAdjustHouseID').text()||$(this).attr('value');
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);

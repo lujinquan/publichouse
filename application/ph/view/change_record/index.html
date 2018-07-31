@@ -227,7 +227,7 @@
                         <div class="am-btn-group am-btn-group-xs">
                             <?php if(in_array(368,$threeMenu)){ ; ?>
                             <!--                       <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove" value="1">审批</button> -->
-                            <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">明细
+                            <button class="am-btn am-btn-default am-text-primary am-btn-xs details am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">明细
                             </button>
                             <?php }; ?>
                         </div>
@@ -257,9 +257,14 @@
 {include file="application/ph/view/change_audit/buildingAdjustment.html" /}
 {include file="application/ph/view/change_audit/RoomDetail.html" /}
 {include file="application/ph/view/change_audit/houseAdjust.html" /}
+{include file="application/ph/view/change_audit/newRent.html" /}
+
+{include file="application/ph/view/ban_info/detail.html" /}
 {include file="application/ph/view/house_info/RentForm.html" /}
 {/block}
 {block name="JsFile"}
+<script src="https://api.map.baidu.com/api?v=2.0&ak=2xlodrKVRyFNeopCajiMTfgIOr8dnUAe"></script>
 <script type="text/javascript" src="/public/static/gf/js/viewer.min.js"></script>
 <script type="text/javascript" src="/public/static/gf/viewJs/change_audit.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/ban_form.js"></script>
 {/block}

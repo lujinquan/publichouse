@@ -221,13 +221,13 @@
               <td>
                   <div class="am-btn-group am-btn-group-xs">
                       <?php if(in_array(368,$threeMenu)){ ; ?>
-                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
+                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
                       <?php }; ?>
                       <?php if(in_array(369,$threeMenu)){ ; ?>
                       <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnApprove {$IfProcess}" value="<?php echo $v['ChangeOrderID']; ?>">审批</button>
                       <?php }; ?>
                       <?php if(in_array(534,$threeMenu)){ ; ?>
-                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details details_btn am-hide-sm-only BtnDelete" value="<?php echo $v['ChangeOrderID']; ?>">删除</button>
+                      <button class="am-btn am-btn-default am-text-primary am-btn-xs details am-hide-sm-only BtnDelete" value="<?php echo $v['ChangeOrderID']; ?>">删除</button>
                       <?php }; ?>
                   </div>
               </td>
@@ -258,6 +258,7 @@
   {include file="application/ph/view/change_audit/buildingAdjustment.html" /}
   {include file="application/ph/view/change_audit/RoomDetail.html" /}
   {include file="application/ph/view/change_audit/houseAdjust.html" /}
+  {include file="application/ph/view/change_audit/newRent.html" /}
 
   {include file="application/ph/view/ban_info/detail.html" /}
   {include file="application/ph/view/house_info/RentForm.html" /}

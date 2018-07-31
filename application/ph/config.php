@@ -188,8 +188,8 @@ return [
     'reformDevide' => 5,
 
     // 新发租
-    'NLApplication' => '异动申请表',
-    'NLApplication2' => '异动申请表',
+    'newRentExplain' => '新发租情况说明',
+    'newRentOther' => '其它',
 
     // 分户
     'SplitApplication' => '书面申请(双方)',
