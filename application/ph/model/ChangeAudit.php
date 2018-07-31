@@ -745,6 +745,7 @@ class ChangeAudit extends Model
                 Db::name('ban')->update($res);
                 Db::name('room')->where('BanID',$banid)->update(['OwnerType'=>$findOne['OwnerType']]);
                 break;
+
             case 7:  //新发租异动完成后的，系统处理
                 
                 $findOne = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
@@ -753,7 +754,16 @@ class ChangeAudit extends Model
                 }else{
                     //空租新发租
                     Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
+
+                    $v = Db::name('house')->where('HouseID',$findOne['HouseID'])->find();
+
                     Db::name('room')->where('HouseID','like','%'.$findOne['HouseID'].'%')->setField('Status',1);
+
+                    $str1 .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID']."," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'] .",1," . $receiveRent . "," . $receiveRent . "," . $historyUnpaidRent . "," . UID . "," . time() . "),";
+
+                    Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str1, ','));
+
+                    $sql = "insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent from ph_rent_config where InstitutionID = $institutionID)";
                 }
 
                 $str = "( 7,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
