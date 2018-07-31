@@ -963,7 +963,7 @@ $('#addApply').click(function() {
                         formData.append("UnitID", $('.newRentUnit').val());
                         formData.append("FloorID", $('.newRentFloor').val());
                         formData.append("HouseArea", $('.newRentBanArea').val());
-                        formData.append("OldOprice", $('#newRentBanInfo').val());
+                        formData.append("OldOprice", $('.newRentPrice').val());
                         formData.append("type", 7);
                         $.ajax({
                             type: "post",
