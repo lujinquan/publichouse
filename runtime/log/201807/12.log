@@ -1,0 +1,174 @@
+[ 2018-07-12T08:09:52+08:00 ] [ error ] [8]未定义变量: data
+
+---------------------------------------------------------------
+[ 2018-07-12T08:09:53+08:00 ] [ error ] [8]未定义变量: data
+
+---------------------------------------------------------------
+[ 2018-07-12T08:10:20+08:00 ] [ error ] [8]未定义变量: data
+
+---------------------------------------------------------------
+[ 2018-07-12T08:49:53+08:00 ] [ error ] [8]未定义数组索引: InstitutionID
+
+---------------------------------------------------------------
+[ 2018-07-12T08:49:55+08:00 ] [ error ] [8]未定义数组索引: InstitutionID
+
+---------------------------------------------------------------
+[ 2018-07-12T08:49:58+08:00 ] [ error ] [8]未定义数组索引: InstitutionID
+
+---------------------------------------------------------------
+[ 2018-07-12T08:53:39+08:00 ] [ error ] [8]未定义数组索引: InstitutionID
+
+---------------------------------------------------------------
+[ 2018-07-12T08:54:15+08:00 ] [ error ] [8]未定义数组索引: InstitutionID
+
+---------------------------------------------------------------
+[ 2018-07-12T17:08:05+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:08:07+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:08:11+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:02+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:04+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:05+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:06+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:06+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:07+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:07+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:08+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:08+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:08+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:09+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:09+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:13+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:16+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:18+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:09:31+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:13+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:13+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:13+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:15+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:15+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:16+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:16+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:39+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:42+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:42+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:42+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:43+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:44+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:51+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:51+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:10:52+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:10+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:11+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:12+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:16+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:18+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:19+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:19+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:11:20+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:12:17+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------
+[ 2018-07-12T17:14:10+08:00 ] [ error ] [0]method not exist:think\db\Query->get_one_rent_order_info
+
+---------------------------------------------------------------

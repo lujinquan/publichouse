@@ -1,0 +1,1376 @@
+[ 2018-06-03T00:17:00+08:00 ] 10.105.193.9 187.75.118.162 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019623s][吞吐率：50.96req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T00:26:31+08:00 ] 10.105.193.9 103.59.132.86 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.026371s][吞吐率：37.92req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T00:30:23+08:00 ] 10.105.193.9 119.147.207.152 GET /index.action
+[ log ] 118.25.128.122/index.action [运行时间：0.011734s][吞吐率：85.22req/s] [内存消耗：1,519.48kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index.action',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T01:48:37+08:00 ] 10.105.193.9 213.5.194.114 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019226s][吞吐率：52.01req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T02:13:39+08:00 ] 10.105.193.9 114.215.45.101 GET /
+[ log ] 58.87.68.211:80/ [运行时间：0.019402s][吞吐率：51.54req/s] [内存消耗：2,594.22kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'identity',
+  'connection' => 'Close',
+  'host' => '58.87.68.211:80',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T02:49:01+08:00 ] 10.105.193.9 106.75.92.187 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.031511s][吞吐率：31.73req/s] [内存消耗：2,594.58kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept' => 'application/json, text/plain, */*',
+  'accept-charset' => 'GBK,utf-8;q=0.7,*;q=0.3',
+  'accept-language' => 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
+  'accept-encoding' => 'gzip, deflate, br',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T04:46:32+08:00 ] 10.105.193.9 101.226.64.174 GET /user/Publics/signin
+[ log ] 118.25.128.122/user/Publics/signin [运行时间：0.020607s][吞吐率：48.53req/s] [内存消耗：2,596.75kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T05:14:20+08:00 ] 10.105.193.9 187.214.213.10 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019874s][吞吐率：50.32req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T06:53:16+08:00 ] 10.105.193.9 80.82.70.187 GET /cache/global/img/gs.gif
+[ log ] www.baidu.com/cache/global/img/gs.gif [运行时间：0.011869s][吞吐率：84.25req/s] [内存消耗：1,519.20kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'cache',
+    1 => 'global',
+    2 => 'img',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'if-modified-since' => 'Thu, 19 Apr 2012 09:51:20 GMT',
+  'user-agent' => 'Mozilla',
+  'host' => 'www.baidu.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T07:24:12+08:00 ] 10.105.193.9 60.191.38.78 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.020699s][吞吐率：48.31req/s] [内存消耗：2,594.44kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T08:19:51+08:00 ] 10.105.193.9 189.149.135.253 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.022473s][吞吐率：44.50req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T08:36:26+08:00 ] 10.105.193.9 177.19.50.175 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.020265s][吞吐率：49.35req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T09:19:20+08:00 ] 10.105.193.9 183.131.83.50 GET /manager/html
+[ log ] 118.25.128.122/manager/html [运行时间：0.011509s][吞吐率：86.89req/s] [内存消耗：1,520.52kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'manager',
+    1 => 'html',
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'authorization' => 'Basic Og==',
+  'user-agent' => 'Mozilla/3.0 (compatible; Indy Library)',
+  'accept' => 'text/html, */*',
+  'host' => '118.25.128.122',
+  'content-type' => 'text/html',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T09:44:26+08:00 ] 10.105.193.9 112.90.82.196 GET /
+[ log ] 118.25.128.122/ [运行时间：0.018873s][吞吐率：52.99req/s] [内存消耗：2,594.63kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T10:07:28+08:00 ] 10.105.193.9 59.110.6.177 GET /
+[ log ] 58.87.68.23:80/ [运行时间：0.022087s][吞吐率：45.28req/s] [内存消耗：2,594.21kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'identity',
+  'connection' => 'Close',
+  'host' => '58.87.68.23:80',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T10:18:15+08:00 ] 10.105.193.9 201.114.160.16 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.023998s][吞吐率：41.67req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T10:33:02+08:00 ] 10.105.193.9 222.137.57.218 GET /
+[ log ] 118.25.128.122/ [运行时间：0.019494s][吞吐率：51.30req/s] [内存消耗：2,594.07kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T10:34:01+08:00 ] 10.105.193.9 189.159.16.226 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.028876s][吞吐率：34.63req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T11:44:25+08:00 ] 10.105.193.9 178.151.169.100 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.022268s][吞吐率：44.91req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T12:16:11+08:00 ] 10.105.193.9 78.158.170.193 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.025897s][吞吐率：38.61req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T12:19:32+08:00 ] 10.105.193.9 187.151.218.67 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019280s][吞吐率：51.87req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T12:34:36+08:00 ] 10.105.193.9 87.5.185.229 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.021020s][吞吐率：47.57req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T13:57:02+08:00 ] 10.105.193.9 84.232.190.207 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019516s][吞吐率：51.24req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T14:06:01+08:00 ] 10.105.193.9 189.225.201.61 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019088s][吞吐率：52.39req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T14:06:01+08:00 ] 10.105.193.9 189.225.201.61 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019088s][吞吐率：52.39req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T16:20:01+08:00 ] 10.105.193.9 80.82.70.187 GET /cache/global/img/gs.gif
+[ log ] www.baidu.com/cache/global/img/gs.gif [运行时间：0.013278s][吞吐率：75.31req/s] [内存消耗：1,519.20kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'cache',
+    1 => 'global',
+    2 => 'img',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'if-modified-since' => 'Thu, 19 Apr 2012 09:51:20 GMT',
+  'user-agent' => 'Mozilla',
+  'host' => 'www.baidu.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T16:49:32+08:00 ] 10.105.193.9 189.132.40.93 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.026772s][吞吐率：37.35req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T16:49:32+08:00 ] 10.105.193.9 189.132.40.93 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019498s][吞吐率：51.29req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T17:05:00+08:00 ] 10.105.193.9 189.130.228.51 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.022239s][吞吐率：44.97req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T17:18:22+08:00 ] 10.105.193.9 218.21.96.128 GET /
+[ log ] 118.25.128.122/ [运行时间：0.020328s][吞吐率：49.19req/s] [内存消耗：2,594.53kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'user-agent' => 'Mozilla/5.0 (Windows NT 5.1; rv:9.0.1) Gecko/20100101 Firefox/9.0.1',
+  'accept-language' => 'en-US;q=0.6,en;q=0.4',
+  'accept-encoding' => 'deflate, gzip, identity',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T17:18:24+08:00 ] 10.105.193.9 218.21.96.128 GET /HNAP1/
+[ log ] 118.25.128.122/HNAP1/ [运行时间：0.012327s][吞吐率：81.12req/s] [内存消耗：1,521.08kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'HNAP1',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=a6cge9vp69t2a190cijimj6to3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 5.1; rv:9.0.1) Gecko/20100101 Firefox/9.0.1',
+  'referer' => 'http://118.25.128.122/',
+  'accept-language' => 'en-US;q=0.6,en;q=0.4',
+  'accept-encoding' => 'deflate, gzip, identity',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T17:51:19+08:00 ] 10.105.193.9 80.247.240.120 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.024180s][吞吐率：41.36req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T18:05:09+08:00 ] 10.105.193.9 116.62.176.205 GET /
+[ log ] 58.87.73.175:80/ [运行时间：0.030440s][吞吐率：32.85req/s] [内存消耗：2,594.22kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'identity',
+  'connection' => 'Close',
+  'host' => '58.87.73.175:80',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T18:22:12+08:00 ] 10.105.193.9 189.132.20.38 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.018611s][吞吐率：53.73req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T18:22:12+08:00 ] 10.105.193.9 189.132.20.38 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.021678s][吞吐率：46.13req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T20:23:31+08:00 ] 10.105.193.9 213.6.148.54 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.021550s][吞吐率：46.40req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T20:58:22+08:00 ] 10.105.193.9 112.90.82.236 GET /
+[ log ] 118.25.128.122/ [运行时间：0.019228s][吞吐率：52.01req/s] [内存消耗：2,594.63kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T21:18:09+08:00 ] 10.105.193.9 31.14.231.190 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.018680s][吞吐率：53.53req/s] [内存消耗：2,594.22kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'host' => '118.25.128.122:80',
+  'user-agent' => 'curl/7.40.0',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-03T23:10:12+08:00 ] 10.105.193.9 103.206.224.156 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.019955s][吞吐率：50.11req/s] [内存消耗：2,594.30kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------

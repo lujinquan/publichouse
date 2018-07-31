@@ -1,0 +1,1330 @@
+[ 2018-06-05T20:00:51+08:00 ] 10.105.193.9 101.226.68.215 GET /user/Publics/signin.html
+[ log ] ph.ctnmit.com/user/Publics/signin.html [运行时间：0.019185s][吞吐率：52.12req/s] [内存消耗：2,598.67kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://ph.ctnmit.com/ph/RentPre/index',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => 'ph.ctnmit.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:07:04+08:00 ] 10.105.193.9 112.90.82.236 GET /ph/OldCutRent/detail/id/82
+[ log ] 118.25.128.122/ph/OldCutRent/detail/id/82 [运行时间：0.156667s][吞吐率：6.38req/s] [内存消耗：2,896.05kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'OldCutRent',
+    2 => 'detail',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'id' => '82',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.106760s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002272s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001984s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002000s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002166s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002009s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002184s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.002019s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002148s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.002001s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002152s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.002009s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T20:07:05+08:00 ] 10.105.193.9 112.90.82.236 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.019639s][吞吐率：50.92req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/OldCutRent/detail/id/82',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:09:50+08:00 ] 10.105.193.9 119.147.207.152 GET /ph/ChangeAudit/detail/ChangeOrderID/20180522153221015bef92
+[ log ] 118.25.128.122/ph/ChangeAudit/detail/ChangeOrderID/20180522153221015bef92 [运行时间：0.052976s][吞吐率：18.88req/s] [内存消耗：2,895.73kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'ChangeAudit',
+    2 => 'detail',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'ChangeOrderID' => '20180522153221015bef92',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007562s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002223s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001997s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001989s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002135s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002013s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002125s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.001968s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002116s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001958s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002079s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.001945s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T20:09:50+08:00 ] 10.105.193.9 183.57.53.196 GET /ph/HouseReport/index
+[ log ] 118.25.128.122/ph/HouseReport/index [运行时间：0.125830s][吞吐率：7.95req/s] [内存消耗：2,899.84kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'HouseReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.074991s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002228s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002027s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002005s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002236s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002033s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002199s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.002058s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.005339s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.002031s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002209s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.002058s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T20:09:50+08:00 ] 10.105.193.9 119.147.207.152 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.023478s][吞吐率：42.59req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/ChangeAudit/detail/ChangeOrderID/20180522153221015bef92',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:09:50+08:00 ] 10.105.193.9 183.57.53.196 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.019306s][吞吐率：51.80req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/HouseReport/index',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:10:24+08:00 ] 10.105.193.9 119.147.207.144 GET /ph/OldCutRent/index.html
+[ log ] 118.25.128.122/ph/OldCutRent/index.html [运行时间：0.147602s][吞吐率：6.77req/s] [内存消耗：2,895.39kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'OldCutRent',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.099658s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002262s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001981s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001956s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002196s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002023s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002149s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.002015s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002111s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001973s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002134s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.001982s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T20:10:24+08:00 ] 10.105.193.9 119.147.207.144 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.020984s][吞吐率：47.65req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/OldCutRent/index.html',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:12:33+08:00 ] 10.105.193.9 141.212.122.128 GET /
+[ log ] 118.25.128.122/ [运行时间：0.022653s][吞吐率：44.14req/s] [内存消耗：2,594.59kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-encoding' => 'gzip',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 zgrab/0.x',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:33:36+08:00 ] 10.105.193.9 119.147.207.144 GET /ph/OldCutRent/detail/id/87
+[ log ] 118.25.128.122/ph/OldCutRent/detail/id/87 [运行时间：0.150526s][吞吐率：6.64req/s] [内存消耗：2,896.05kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'OldCutRent',
+    2 => 'detail',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'id' => '87',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.104937s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002182s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001931s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001947s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002093s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.001963s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002133s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.001933s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002088s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001921s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002061s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.001925s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T20:33:36+08:00 ] 10.105.193.9 119.147.207.144 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.020012s][吞吐率：49.97req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/OldCutRent/detail/id/87',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T20:35:05+08:00 ] 10.105.193.9 112.90.82.236 GET /ph/Api/get_all_ban_info
+[ log ] ph.ctnmit.com/ph/Api/get_all_ban_info [运行时间：0.236960s][吞吐率：4.22req/s] [内存消耗：2,678.67kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'Api',
+    2 => 'get_all_ban_info',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => 'ph.ctnmit.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\ph\controller\Api->get_all_ban_info[ /usr/share/nginx/publichouse/application/ph/controller/Api.php ]
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.074448s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban` [ RunTime:0.002548s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `ph_ban` WHERE  `Status` = 1 LIMIT 1 [ RunTime:0.003233s ]
+[ sql ] [ SQL ] SELECT `BanID`,`DamageGrade`,`StructureType`,`OwnerType`,`UseNature`,`BanAddress` FROM `ph_ban` WHERE  `Status` = 1 LIMIT 0,15 [ RunTime:0.002057s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002196s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001992s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002099s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001973s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002148s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001970s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002127s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001997s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001987s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001971s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001994s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001950s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002006s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001983s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001975s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002004s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002010s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.002005s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.002009s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002049s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002031s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.002004s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001975s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002064s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.002088s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.002097s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.002017s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002010s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001961s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001958s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001989s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002025s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.002026s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001974s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.002008s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001999s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001974s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001972s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 5 LIMIT 1 [ RunTime:0.001939s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001984s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001970s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001986s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001990s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001971s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001951s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001941s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001969s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001957s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001961s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001976s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001992s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 3 LIMIT 1 [ RunTime:0.001988s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001990s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001936s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001998s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001962s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.001988s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001936s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001963s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.002008s ]
+[ sql ] [ SQL ] SELECT `DamageGrade` FROM `ph_ban_damage_grade` WHERE  `id` = 4 LIMIT 1 [ RunTime:0.002010s ]
+[ sql ] [ SQL ] SELECT `OwnerType` FROM `ph_ban_owner_type` WHERE  `id` = 1 LIMIT 1 [ RunTime:0.001996s ]
+[ sql ] [ SQL ] SELECT `StructureType` FROM `ph_ban_structure_type` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001977s ]
+[ sql ] [ SQL ] SELECT `UseNature` FROM `ph_use_nature` WHERE  `id` = 2 LIMIT 1 [ RunTime:0.001949s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T21:05:34+08:00 ] 10.105.193.9 101.226.68.215 GET /ph/RentAnalysisReport/index
+[ log ] 118.25.128.122/ph/RentAnalysisReport/index [运行时间：0.173544s][吞吐率：5.76req/s] [内存消耗：2,896.53kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentAnalysisReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.128784s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002235s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001946s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001903s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002099s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.001963s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002106s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.001923s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002082s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001923s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002110s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.001947s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T21:05:34+08:00 ] 10.105.193.9 101.226.68.215 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.019037s][吞吐率：52.53req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/RentAnalysisReport/index',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:06:32+08:00 ] 10.105.193.9 119.147.207.152 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.019874s][吞吐率：50.32req/s] [内存消耗：2,597.13kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:16:13+08:00 ] 10.105.193.9 189.129.150.147 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.022231s][吞吐率：44.98req/s] [内存消耗：2,594.62kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:16:13+08:00 ] 10.105.193.9 189.129.150.147 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.022467s][吞吐率：44.51req/s] [内存消耗：2,594.62kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:18:45+08:00 ] 10.105.193.9 112.90.82.236 GET /ph/RentPayable/index
+[ log ] 118.25.128.122/ph/RentPayable/index [运行时间：0.175859s][吞吐率：5.69req/s] [内存消耗：2,908.56kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentPayable',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.129536s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002252s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002004s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002019s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002189s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002060s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002130s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.001979s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002127s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001974s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002132s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.002009s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T21:18:45+08:00 ] 10.105.193.9 112.90.82.236 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.021144s][吞吐率：47.29req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/RentPayable/index',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:20:49+08:00 ] 10.105.193.9 45.32.118.142 GET /
+[ log ] cn.iac-worldwide.com/ [运行时间：0.022571s][吞吐率：44.30req/s] [内存消耗：2,594.42kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'host' => 'cn.iac-worldwide.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:26:50+08:00 ] 10.105.193.9 106.11.225.134 GET /
+[ log ] ph.ctnmit.com/ [运行时间：0.019537s][吞吐率：51.19req/s] [内存消耗：2,595.29kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'keep-alive',
+  'accept' => 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2',
+  'host' => 'ph.ctnmit.com',
+  'pragma' => 'no-cache',
+  'cache-control' => 'no-cache',
+  'user-agent' => 'Mozilla/5.0 (iPad; CPU OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+  'accept-encoding' => 'gzip',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T21:28:50+08:00 ] 10.105.193.9 112.90.82.236 GET /ph/BanInfo/index
+[ log ] 118.25.128.122/ph/BanInfo/index [运行时间：0.197264s][吞吐率：5.07req/s] [内存消耗：2,904.68kb] [文件加载：61]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'BanInfo',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.146992s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002270s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.001997s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002044s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002159s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002005s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002149s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.001997s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002170s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001989s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002148s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.001974s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T21:28:50+08:00 ] 10.105.193.9 112.90.82.236 GET /user/Publics/signin.html
+[ log ] 118.25.128.122/user/Publics/signin.html [运行时间：0.021973s][吞吐率：45.51req/s] [内存消耗：2,598.85kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'user',
+    1 => 'Publics',
+    2 => 'signin',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'connection' => 'Close',
+  'user-agent' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13G35 QQ/6.5.3.410 V1_IPH_SQ_6.5.3_1_APP_A Pixel/750 Core/UIWebView NetType/2G Mem/117',
+  'accept-language' => 'zh-cn',
+  'accept' => '*/*',
+  'referer' => 'http://118.25.128.122/ph/BanInfo/index',
+  'accept-encoding' => 'deflate, gzip',
+  'host' => '118.25.128.122',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T22:24:16+08:00 ] 10.105.193.9 27.17.90.49 GET /ph/SystemLog/RentReportCache
+[ log ] ph.ctnmit.com/ph/SystemLog/RentReportCache [运行时间：0.298741s][吞吐率：3.35req/s] [内存消耗：5,653.13kb] [文件加载：63]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'SystemLog',
+    2 => 'RentReportCache',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=i8c7dnq45tc0fcraviiuh1drm1; uaid=832c9e39bcc2f02197b2e7da150cf086',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ph.ctnmit.com/ph/RentReport/index.html',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'accept' => '*/*',
+  'connection' => 'keep-alive',
+  'host' => 'ph.ctnmit.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\SystemLog->RentReportCache[ /usr/share/nginx/publichouse/application/ph/controller/SystemLog.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.102664s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002291s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002130s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002039s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002215s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002071s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002259s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.002013s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002204s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.002045s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002161s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.002031s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.002238s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/SystemLog/RentReportCache' LIMIT 1 [ RunTime:0.002095s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid` FROM `ph_institution` [ RunTime:0.002071s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.002064s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.002218s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.002012s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_old_rent` [ RunTime:0.002288s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(PayRent) as PayRents FROM `ph_old_rent` WHERE  `OldPayMonth` = 201802  AND `PayYear` = 2018  AND `PayMonth` BETWEEN '201801' AND '201801' GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002217s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(PayRent) as PayRents FROM `ph_old_rent` WHERE  `PayYear` = 2018  AND `OldPayMonth` BETWEEN 201801 AND 201802 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002144s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(PayRent) as PayRents FROM `ph_old_rent` WHERE  `PayYear` < 2018  AND `OldPayMonth` = 201802 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002131s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(PayRent) as PayRents FROM `ph_old_rent` WHERE  `PayYear` < 2018  AND `OldPayMonth` BETWEEN 201801 AND 201802 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002153s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_rent_order` [ RunTime:0.002390s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents FROM `ph_rent_order` WHERE  `OrderDate` = 201802 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.029726s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_house` [ RunTime:0.002522s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(ArrearRent) as ArrearRents,sum(DiffRent) as DiffRents,sum(HousePrerent) as HousePrerents FROM `ph_house` WHERE  `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.024206s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_change_order` [ RunTime:0.002355s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(InflRent) as InflRents,`ChangeType` FROM `ph_change_order` WHERE  `CancelType` <> 1  AND `ChangeType` <> 1  AND `OrderDate` = 201802  AND `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID,ChangeType [ RunTime:0.003106s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(InflRent) as InflRents,`ChangeType` FROM `ph_change_order` WHERE  `CancelType` <> 1  AND `ChangeType` <> 1  AND `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID,ChangeType [ RunTime:0.004404s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(InflRent) as InflRents FROM `ph_change_order` WHERE  `OrderDate` = 201802  AND `CancelType` = 1  AND `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002936s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(InflRent) as InflRents FROM `ph_change_order` WHERE  `DateEnd` >= 201802  AND `CutType` = 5  AND `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.002994s ]
+[ sql ] [ SQL ] SELECT `UseNature`,`OwnerType`,`InstitutionID`,sum(InflRent) as InflRents FROM `ph_change_order` WHERE  `DateEnd` >= 201802  AND `ChangeType` = 1  AND `CutType` <> 5  AND `Status` = 1 GROUP BY UseNature,OwnerType,InstitutionID [ RunTime:0.003212s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T22:24:20+08:00 ] 10.105.193.9 27.17.90.49 POST /ph/RentReport/index.html
+[ log ] ph.ctnmit.com/ph/RentReport/index.html [运行时间：0.077949s][吞吐率：12.83req/s] [内存消耗：3,379.83kb] [文件加载：65]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'ph',
+    1 => 'RentReport',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=i8c7dnq45tc0fcraviiuh1drm1; uaid=832c9e39bcc2f02197b2e7da150cf086',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://ph.ctnmit.com/ph/RentReport/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'upgrade-insecure-requests' => '1',
+  'origin' => 'http://ph.ctnmit.com',
+  'cache-control' => 'max-age=0',
+  'content-length' => '40',
+  'connection' => 'keep-alive',
+  'host' => 'ph.ctnmit.com',
+)
+[ info ] [ PARAM ] array (
+  'OwnerType' => '5',
+  'TubulationID' => '8',
+  'month' => '2018-02',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ RUN ] app\ph\controller\RentReport->index[ /usr/share/nginx/publichouse/application/ph/controller/RentReport.php ]
+[ info ] [ CACHE ] INIT file
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/ph/view/rent_report/index.html [ array (
+  0 => 'left_menu',
+  1 => 'nowMvc',
+  2 => 'nowID',
+  3 => 'userBaseInfo',
+  4 => 'threeMenu',
+  5 => 'insArr',
+  6 => 'owerArr',
+  7 => 'owerLst',
+  8 => 'damaLst',
+  9 => 'struLst',
+  10 => 'useNatureLst',
+  11 => 'useRoles',
+  12 => 'instLst',
+  13 => 'allInstitutions',
+  14 => 'cutTypeLst',
+  15 => 'rentReportOption',
+  16 => 'institutionid',
+  17 => 'ownerType',
+  18 => 'month',
+  19 => 'result',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.007217s ] mysql:dbname=PH;host=sh-cdb-r8lcilx2.sql.tencentcdb.com;port=63889;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_owner_type` [ RunTime:0.002286s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002019s ]
+[ sql ] [ SQL ] SELECT `id`,`OwnerType` FROM `ph_ban_owner_type` [ RunTime:0.002041s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_institution` [ RunTime:0.002224s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution` FROM `ph_institution` [ RunTime:0.002036s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_structure_type` [ RunTime:0.002234s ]
+[ sql ] [ SQL ] SELECT `id`,`StructureType` FROM `ph_ban_structure_type` [ RunTime:0.002002s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_ban_damage_grade` [ RunTime:0.002134s ]
+[ sql ] [ SQL ] SELECT `id`,`DamageGrade` FROM `ph_ban_damage_grade` [ RunTime:0.001998s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_use_nature` [ RunTime:0.002159s ]
+[ sql ] [ SQL ] SELECT `id`,`UseNature` FROM `ph_use_nature` [ RunTime:0.002080s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_admin_menu` [ RunTime:0.002306s ]
+[ sql ] [ SQL ] SELECT `pid` FROM `ph_admin_menu` WHERE  `UrlValue` = 'ph/RentReport/index' LIMIT 1 [ RunTime:0.002084s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid` FROM `ph_institution` [ RunTime:0.002030s ]
+[ sql ] [ SQL ] SELECT `id`,`Institution`,`pid`,`Level` FROM `ph_institution` [ RunTime:0.002006s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `ph_cut_rent_type` [ RunTime:0.002162s ]
+[ sql ] [ SQL ] SELECT `id`,`CutName` FROM `ph_cut_rent_type` [ RunTime:0.001994s ]
+
+---------------------------------------------------------------
+[ 2018-06-05T23:27:49+08:00 ] 10.105.193.9 189.131.196.202 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.021477s][吞吐率：46.56req/s] [内存消耗：2,594.62kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-05T23:41:03+08:00 ] 10.105.193.9 201.103.25.216 GET /
+[ log ] 118.25.128.122:80/ [运行时间：0.018734s][吞吐率：53.38req/s] [内存消耗：2,594.62kb] [文件加载：54]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => '',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'content-length' => '0',
+  'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.7 (KHTML, like Gecko) Version/9.1.2 Safari/601.7.7',
+  'host' => '118.25.128.122:80',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ RUN ] app\user\controller\Publics->signin[ /usr/share/nginx/publichouse/application/user/controller/Publics.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => 'ph',
+  'prefix' => 'ph_admin_',
+  'type' => '',
+  'expire' => '10000000',
+  'auto_start' => true,
+  'path' => '/usr/share/nginx/publichouse/runtime/session/',
+)
+[ info ] [ VIEW ] /usr/share/nginx/publichouse/application/user/view/publics/signin.html [ array (
+) ]
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------

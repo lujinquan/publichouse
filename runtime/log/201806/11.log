@@ -1,0 +1,60 @@
+[ 2018-06-11T23:25:26+08:00 ] 10.105.193.9 27.18.212.77 GET /public/static/gf/viewjs/index_notice_page.js
+[ log ] ph.ctnmit.com/public/static/gf/viewjs/index_notice_page.js [运行时间：0.012024s][吞吐率：83.17req/s] [内存消耗：1,528.73kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'static',
+    2 => 'gf',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=i8c7dnq45tc0fcraviiuh1drm1; uaid=7272bcf46f3733ca6eb1041b0dc55c24',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate, br',
+  'referer' => 'https://ph.ctnmit.com/ph/index/index.html',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'ph.ctnmit.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'viewjs' => 'index_notice_page.js',
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
+[ 2018-06-11T23:25:27+08:00 ] 10.105.193.9 27.18.212.77 GET /public/static/gf/viewjs/index_notice_page.js
+[ log ] ph.ctnmit.com/public/static/gf/viewjs/index_notice_page.js [运行时间：0.011534s][吞吐率：86.70req/s] [内存消耗：1,528.79kb] [文件加载：40]
+[ info ] [ LANG ] /usr/share/nginx/publichouse/thinkphp/lang/zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'public',
+    1 => 'static',
+    2 => 'gf',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'PHPSESSID=i8c7dnq45tc0fcraviiuh1drm1; uaid=7272bcf46f3733ca6eb1041b0dc55c24',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate, br',
+  'referer' => 'https://ph.ctnmit.com/ph/index/index.html',
+  'accept' => '*/*',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36',
+  'connection' => 'keep-alive',
+  'host' => 'ph.ctnmit.com',
+  'content-type' => '',
+  'content-length' => '',
+)
+[ info ] [ PARAM ] array (
+  'viewjs' => 'index_notice_page.js',
+)
+[ info ] [ LOG ] INIT File
+
+---------------------------------------------------------------
