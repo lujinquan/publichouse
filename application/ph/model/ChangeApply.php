@@ -224,6 +224,27 @@ class ChangeApply extends Model
                     }
                     return $finds;
                 break;
+                case 7:
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>7,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该房屋已经在新发租异动订单中了');
+                    }
+                    $houseModel = new HouseModel;
+                    
+                    $findwhere = [
+                        'HouseID'=>$data['HouseID'],
+                        'Status'=>0,
+                        'HouseChangeStatus'=>0,
+                    ];
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                                        ->where($findwhere)
+                                        ->find();
+
+                    if(!$finds){
+                        return jsons('4002','房屋状态需为异动状态');
+                    }
+                    return $finds;
+                break;
                 case 8:
                     $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
                     if($ifin){
