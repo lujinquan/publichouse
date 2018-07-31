@@ -356,33 +356,24 @@ class ChangeAudit extends Model
     }
 
     public function get_seven_detail($changeOrderID)
-    {   //新发租
+    {   
 
-        //房屋编号
-        $value = self::where('ChangeOrderID', 'eq', $changeOrderID)->value('NewSendRentType');
+        //新发租
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,CreateTime')->find();
 
-        if ($value == 1 || $value == 8) {
-            $houseid = self::where('ChangeOrderID', 'eq', $changeOrderID)->value('HouseID');
-            $banid = Db::name('house')->where('HouseID',$houseid)->value('BanID');
-            $data = model('ph/BanInfo')->get_one_ban_detail_info($banid);
+        $data = get_house_info($oneData['HouseID']);
 
-        } else {
-            $banid = self::where('ChangeOrderID', 'eq', $changeOrderID)->value('BanID');
-            $data = model('ph/BanInfo')->get_one_ban_detail_info($banid);
-        }
-
-        if (!isset($data)) $data = [];
-
-        $data['value'] = Db::name('new_sendrent_type')->where('id', 'eq', $value)->value('NewRentType');
+        $data['Remark'] = $oneData['Remark'];
+        $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 7;
 
         return $data;
     }
 
     public function get_eight_detail($changeOrderID)
-    {   //注销
+    {   
 
-        //房屋编号
+        //注销
         $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Deadline,Remark,CancelType,CreateTime')->find();
         $data = get_house_info($oneData['HouseID']);
         $data['CancelType'] = Db::name('cancel_type')->where('id', 'eq', $oneData['CancelType'])->value('Title');
@@ -755,18 +746,19 @@ class ChangeAudit extends Model
                 Db::name('room')->where('BanID',$banid)->update(['OwnerType'=>$findOne['OwnerType']]);
                 break;
             case 7:  //新发租异动完成后的，系统处理
-                $year = date('Y', time());
+                
                 $findOne = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
                 if($findOne['BanID']){ //楼栋相关的新发租
                     Db::name('ban')->where('BanID',$findOne['BanID'])->setField('Status',1);
-                    Db::name('house')->where('BanID',$findOne['BanID'])->setField('Status',1);
-                    Db::name('room')->where('BanID',$findOne['BanID'])->setField('Status',1);
-                }else{ //空租新发租
-                    //Db::name('house')->where('HouseID',$findOne['HouseID'])->setField('Status',1);
-                    Db::name('house')->alias('a')->join('ban b','a.BanID = b.BanID','left')->where('HouseID',$findOne['HouseID'])->update(['a.Status'=>1,'b.Status'=>1]);
-                    Db::name('room')->where('HouseID','like','%'.$findOne['BanID'].'%')->setField('Status',1);
+                }else{
+                    //空租新发租
+                    Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
+                    Db::name('room')->where('HouseID','like','%'.$findOne['HouseID'].'%')->setField('Status',1);
                 }
-                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['DateStart' => $year]);
+
+                $str = "( 7,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 break;
 
             case 8:  //注销异动完成后的，系统处理
@@ -830,24 +822,24 @@ class ChangeAudit extends Model
                 $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
                 $arr = json_decode($oneData['Deadline'],true);
                 foreach($arr as $a){
-                    switch($a['UseNature']){
+                    switch($oneData['UseNature']){
                         case 1:
-                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                            Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
                                     'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilOprice' => $a['TotalOpriceAfter'],
                                     'CivilRent' => $a['PreRentAfter'],
-                                    'BanUsearea' => $a['BanUseAreaAfter'],
+                                    'BanUsearea' => $a['BanUseareaAfter'],
                                 ]
                             );
                         break;
                            
                         case 2:
                          
-                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                            Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
                                     'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilOprice' => $a['TotalOpriceAfter'],
                                     'CivilRent' => $a['PreRentAfter'],
                                 ]
                             );
@@ -855,10 +847,10 @@ class ChangeAudit extends Model
             
                         case 3:
                             
-                            Db::name('ban')->where('BanID',$a['banID'])->update(
+                            Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
                                     'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOPriceAfter'],
+                                    'CivilOprice' => $a['TotalOpriceAfter'],
                                     'CivilRent' => $a['PreRentAfter'],
                                 ]
                             );

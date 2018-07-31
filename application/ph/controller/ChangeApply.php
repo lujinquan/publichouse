@@ -249,7 +249,10 @@ class ChangeApply extends Base
                     break;
 
                 case 7:  // 新发租 
-
+                    $flag = Db::name('ban')->where('BanID',$one['BanID'])->value('Status');
+                    if($flag == 0){
+                        $data['BanID'] = $one['BanID'];
+                    }
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['Remark'] = $data['Remark'];  //异动缘由
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
@@ -257,6 +260,8 @@ class ChangeApply extends Base
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['UseNature'] = $one['UseNature']; 
                     $datas['OwnerType'] = $one['OwnerType'];  //新发租类型：如接管，还建……
+                    $datas['InstitutionID'] = $one['TubulationID'];  //机构id
+                    $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
                     $datas['ChangeType'] = 7;  //异动类型为新发租
                     $datas['ProcessConfigName'] = $changeTypes[7];  //异动名称
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?:'';  //附件集
