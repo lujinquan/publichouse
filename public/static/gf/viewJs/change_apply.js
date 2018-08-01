@@ -931,7 +931,7 @@ $('#addApply').click(function() {
                 content: $('#newRent'),
                 btn: ['确定', '取消'],
                 success: function() {
-                   houseQuery.action('newRentHouseID','1');
+                   houseQuery.action('newRentHouseID','0');
                    $('#newRentQuery').on("click", function() {
                         var HouseID = $('#newRentHouseID').val();
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
