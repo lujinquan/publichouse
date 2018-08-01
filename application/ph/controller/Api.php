@@ -1330,16 +1330,27 @@ class Api extends Controller
 
     public function test()
     {
-        $roomid = input('RoomID');
-        $houseid = input('HouseID');
-        if($roomid){
-            $rent = count_room_rent($roomid);
-            echo '房间月租金：'.$rent.'<br/>';
-        }else{
-            //halt($houseid);
-            $rent = count_house_rent($houseid);
-            echo '房屋月租金：'.$rent;
+        $a = Db::name('room')->field('HouseID,BanID')->select();
+        foreach($a as $b){
+            $s = strpos($b['HouseID'],',');
+            if($s){
+                $e = explode(',',$b['HouseID']);
+                foreach($e as $f){
+                    $arr[$f][] = $b['BanID'];
+                }
+            }else{
+                $arr[$b['HouseID']][] = $b['BanID'];
+            }
+            
         }
+        foreach($arr as $i => &$r){
+            $r = array_unique($r);
+            if(count($r) > 1){
+                $m[$i] = $r;
+            }
+        }
+        halt(isset($m)?$m:0);
+
     }
 
     /**

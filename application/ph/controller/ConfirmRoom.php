@@ -58,7 +58,7 @@ class ConfirmRoom extends Base
             check($banid);
             //halt($data);
             $datas = model('ph/Room')->edit($data);  //1是为了区分添加和修改的，因为修改中的RoomID是不需要拼接的
-            $datas['Status'] = 1; //状态改为未确认状态
+            $datas['Status'] = 0; //状态改为未确认状态
             $fields = 'UnitID,FloorID,BanID,UseArea,RentPointIDS';
             $oldOneData = Db::name('room')->field($fields)->where('RoomID', 'eq', $roomID)->find();
             foreach($oldOneData as $k1=>$v1){
@@ -113,6 +113,12 @@ class ConfirmRoom extends Base
                 return jsons(4000 ,'删除失败，参数异常！');
             }
         }
+    }
+
+    public function detail(){
+        $roomID = input('RoomID');
+        $datas = model('ph/Room')->get_one_room_detail_info($roomID);
+        return jsons('2000' ,'获取成功' ,$datas);
     }
 
     // /**

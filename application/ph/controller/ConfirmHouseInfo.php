@@ -413,6 +413,16 @@ class ConfirmHouseInfo extends Base
         }
     }
 
+    public function detail()
+    {
+        $houseID = input('HouseID');
+        if ($houseID) {
+            $houseDetail = $this->HouseInfoModel->get_one_house_detail_info($houseID);
+            return jsons(2000, '获取成功', $houseDetail);
+        }
+        return jsons('4000', '获取失败');
+    }
+
     // /**
     //  * 房屋确认，由临时状态变为可用状态
     //  */
