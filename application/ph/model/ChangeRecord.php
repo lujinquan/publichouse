@@ -104,7 +104,7 @@ class ChangeRecord extends Model
 
         $where['IfShow'] = array('eq',1);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field('id')->where($where)->order('FinishTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 
