@@ -48,6 +48,13 @@ function getnextMonthDays($date){
     return $date;
 }
 
+function check($banid){
+    $flag = Db::name('change_order')->where(['BanID'=>$banid,'OrderDate'=>date('Ym')])->find();
+    if($flag){
+        return jsons('4000','所属楼栋已在异动单中数据不能修改');
+    }
+}
+
 // 应用公共文件
 function tree($data,$pid=0,$level=0){
     //定义一个静态数组型变量
