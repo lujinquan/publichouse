@@ -45,9 +45,10 @@ class ConfirmHouseInfo extends Base
 
             check($data['BanID']);
 
-            $dataOne = Db::name('ban')->field('TubulationID,InstitutionID,BanAddress,AreaFour')->where('BanID', 'eq', $data['BanID'])->find();
+            $dataOne = Db::name('ban')->field('TubulationID,InstitutionID,BanAddress,OwnerType,AreaFour')->where('BanID', 'eq', $data['BanID'])->find();
             $data['InstitutionID'] = $dataOne['TubulationID'];
             $data['InstitutionPID'] = $dataOne['InstitutionID'];
+            $data['OwnerType'] = $dataOne['OwnerType'];
             $data['BanAddress'] = $dataOne['AreaFour'];
             if (!$data['InstitutionID']) {
                 return jsons('4000', '楼栋编号不存在');
@@ -162,8 +163,8 @@ class ConfirmHouseInfo extends Base
     {
         if ($this->request->isPost()) {
             $data = $this->request->post();
-
-            check($data['BanID']);
+            $banid = Db::name('house')->where('HouseID',$data['AddRent']['HouseID'])->value('BanID');
+            check($banid);
             //halt($data);
             //验证数据合法性
             /*如果有未确认状态的要删除的房间则，再次删除*/

@@ -156,7 +156,7 @@ class Api extends Controller
         if (!$houseID) {
             return jsons('4000', '未传入房屋编号参数');
         }
-        $map = 'a.*,b.DamageGrade ,b.StructureType ,b.AreaFour,b.BanAddress ,b.CoveredArea ,c.TenantTel,c.TenantNumber';
+        $map = 'a.*,b.DamageGrade ,b.StructureType ,b.AreaFour,b.PreRent,b.TotalArea,b.TotalOprice,b.BanUsearea,b.BanAddress ,b.CoveredArea ,c.TenantTel,c.TenantNumber';
         //承租人姓名
         $data = Db::name('house')->alias('a')
             ->join('ban b', 'a.BanID = b.BanID', 'left')

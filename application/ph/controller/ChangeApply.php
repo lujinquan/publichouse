@@ -264,7 +264,7 @@ class ChangeApply extends Base
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
                     $datas['ChangeType'] = 7;  //异动类型为新发租
                     $datas['ProcessConfigName'] = $changeTypes[7];  //异动名称
-                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?:'';  //附件集
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>7])->order('id desc')->value('id');//流程控制线路
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
