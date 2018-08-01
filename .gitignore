@@ -1,5 +1,6 @@
 *
 !.gitignore
-database.php
+application/database.php
+application/config.php
 runtime/*
-config.php
+thinkphp/*
