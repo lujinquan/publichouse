@@ -69,7 +69,7 @@ class ConfirmHouseInfo extends Base
             } else {
                 $data['HouseID'] = $maxHouseID + 1;
             }
-            $result = $this->validate($data, 'HouseInfo');
+            $result = $this->validate($data, 'ConfirmHouseInfo');
             if (true !== $result) {
                 return jsons('4001', $result);
             }
@@ -260,12 +260,12 @@ class ConfirmHouseInfo extends Base
                         //halt($flag);
                         if ($flag == 1 && $v5[13] == 0) {  //啥都没改，还是正常状态
                             //halt(1);
-                            $datas['Status'] = 1;
+                            $datas['Status'] = 0;
                         }else{
                             //halt(2);
                             //halt($diffHouses);
                             if ($v5[13] == 1) { //删除中状态
-                                $datas['Status'] = 4;
+                                $datas['Status'] = 0;
                                 $flag = 3;
                             }
                             //修改，或者删除，要回滚面积
@@ -346,7 +346,7 @@ class ConfirmHouseInfo extends Base
             //halt(1);
             /*正式开始处理房间信息集*/
             $houseArr = [
-                'Status' => 1, //此阶段全部调整为1状态
+                'Status' => 0, //此阶段全部调整为1状态
                 'HouseID' => $data['AddRent']['HouseID'],
                 'WallpaperArea' => $data['AddRent']['RentWallpaper'],
                 'CeramicTileArea' => $data['AddRent']['RentCeramic'],

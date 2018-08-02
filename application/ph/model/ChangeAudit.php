@@ -851,9 +851,9 @@ class ChangeAudit extends Model
                          
                             Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
-                                    'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOpriceAfter'],
-                                    'CivilRent' => $a['PreRentAfter'],
+                                    'EnterpriseArea' => $a['TotalAreaAfter'],
+                                    'EnterpriseOprice' => $a['TotalOpriceAfter'],
+                                    'EnterpriseRent' => $a['PreRentAfter'],
                                 ]
                             );
                         break;
@@ -862,18 +862,29 @@ class ChangeAudit extends Model
                             
                             Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
-                                    'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOpriceAfter'],
-                                    'CivilRent' => $a['PreRentAfter'],
+                                    'PartyArea' => $a['TotalAreaAfter'],
+                                    'PartyOprice' => $a['TotalOpriceAfter'],
+                                    'PartyRent' => $a['PreRentAfter'],
                                 ]
                             );
                         break;
 
                     }
-                }
-                Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent+'.$oneData['InflRent']]]);
 
-                $str = "( 9,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
+                    Db::name('ban')->where('BanID',$a['BanID'])->update(
+                        [
+                            'TotalArea' => $a['TotalAreaAfter'],
+                            'TotalOprice' => $a['TotalOpriceAfter'],
+                            'PreRent' => $a['PreRentAfter'],
+                            'BanUsearea' => $a['BanUseareaAfter'],
+                        ]
+                    );
+                }
+
+                // Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent+'.$oneData['InflRent']]]);
+                
+                //房屋调整合并到 调整里面，所以是12
+                $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
  
