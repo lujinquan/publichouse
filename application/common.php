@@ -865,6 +865,8 @@ function array_merge_add($arr1,$arr2){
 
 }
 
+
+
 function array_no_space_str($arr){
     if((array)$arr){
         foreach($arr as &$v){

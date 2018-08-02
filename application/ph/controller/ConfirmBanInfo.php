@@ -31,10 +31,11 @@ class ConfirmBanInfo extends Base
             $data = array_no_space_str($this->request->post());
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
             // 验证
-            $result = $this->validate($data, 'BanInfo');
+            $result = $this->validate($data, 'ConfirmBanInfo');
             if (true !== $result) {
                 return jsons('4001', $result);
             }
+
             if ($_FILES  && !isset($datas)) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     if($v['error'] !== 0){
@@ -46,9 +47,7 @@ class ConfirmBanInfo extends Base
                     $data['BanImageIDS'] = implode(',', $BanImageIDS);
                 }
             }
-            if(!$data['xy']){
-                return jsons('4002' ,'请输入经纬度');
-            }
+            
             $arr = explode(',', $data['xy']);
             $areas = Db::name('area')->column('id,Code');
             $areaTwo = Db::name('area')->where('id', 'eq', $data['AreaTwo'])->value('AreaTitle');
@@ -66,9 +65,12 @@ class ConfirmBanInfo extends Base
             $data['Status'] = 0; 
             $data['TotalArea'] = $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea']; 
             $data['TotalNum'] = $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum']; 
+            if($data['TotalNum'] > 1){
+                return jsons('4000','合栋数在0-1之间');
+            }
             $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent']; 
             $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
-
+            
             if ($ban->allowField(true)->save($data)) {
                 // 记录行为
                 action_log('BanInfo_add', UID, 1, '编号为:' . $data['BanID']);
