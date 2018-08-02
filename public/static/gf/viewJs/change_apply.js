@@ -1031,8 +1031,12 @@ $('#addApply').click(function() {
                             }
                             //$('.cancel_BanNumber:eq(0)').remove();
                             $('.cancelPrent').eq(0).val(res.data.HousePrerent);
-                            $('.cancelHouseUsearea').eq(0).val(res.data.HouseUsearea);
+                            $('.cancelHouseUsearea').eq(0).val(res.data.LeasedArea);
 
+                            $('.houseArea').on('input propertychange',function(){
+                                var number = parseFloat(res.data.TotalOprice)/parseFloat(res.data.TotalArea)*parseFloat($(this).val());
+                                $('.housePrice').val(number.toFixed(2));
+                            });
                         });
                     });
                     new file({
@@ -1993,10 +1997,10 @@ function tr_remove(houseID){
     }
 }
 //计租表
-$('#rentMeterButton,#rentMaterQuery,#newRentDetail').click(function() {
+$('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelRentMeter').click(function() {
     $('.RentExample:gt(0)').remove();
     console.log($('.RoomDeT').hasClass('RentDate'));
-    var HouseID = $('#getInfo_1').val() || $('#houseAdjustHouse').val() || $('#newRentHouseID').val();
+    var HouseID = $('#getInfo_1').val() || $('#houseAdjustHouse').val() || $('#newRentHouseID').val()||$('#getcancel').val();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);
