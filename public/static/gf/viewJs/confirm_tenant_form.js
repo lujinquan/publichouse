@@ -30,7 +30,7 @@ $("#addTenant").click(function(){
 				var data = new FormData($('#TenantForm')[0]);
 				console.log(data);
 				$.ajax({
-					url:"/ph/TenantInfo/add",
+					url:"/ph/ConfirmTenantInfo/add",
 					type:"post",
 					data:data,
 					dataType:'JSON',
