@@ -758,7 +758,7 @@ class ChangeAudit extends Model
                 Db::name('room')->where('HouseID',$findOne['HouseID'])->setField('Status',1);
 
                 if($v['TenantID']){
-                    Db::name('tenant')->where('TenantID',$findOne['TenantID'])->setField('Status',1);
+                    Db::name('tenant')->where('TenantID',$v['TenantID'])->setField('Status',1);
                 }
 
                 $str1 = "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID']."," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . ",0,0,'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'] .",1," . $v['HousePrerent'] . "," . $v['HousePrerent'] . ",0," . UID . "," . time() . "),";
