@@ -1330,26 +1330,32 @@ class Api extends Controller
 
     public function test()
     {
-        $a = Db::name('room')->field('HouseID,BanID')->select();
-        foreach($a as $b){
-            $s = strpos($b['HouseID'],',');
-            if($s){
-                $e = explode(',',$b['HouseID']);
-                foreach($e as $f){
-                    $arr[$f][] = $b['BanID'];
-                }
-            }else{
-                $arr[$b['HouseID']][] = $b['BanID'];
-            }
+
+        // $a = 0.17;
+        // $b = 0.04;
+        // //$c = 0.1;
+        // dump($a + $b);
+        // halt(array_bcadd([$a,$b]));
+        // $a = Db::name('room')->field('HouseID,BanID')->select();
+        // foreach($a as $b){
+        //     $s = strpos($b['HouseID'],',');
+        //     if($s){
+        //         $e = explode(',',$b['HouseID']);
+        //         foreach($e as $f){
+        //             $arr[$f][] = $b['BanID'];
+        //         }
+        //     }else{
+        //         $arr[$b['HouseID']][] = $b['BanID'];
+        //     }
             
-        }
-        foreach($arr as $i => &$r){
-            $r = array_unique($r);
-            if(count($r) > 1){
-                $m[$i] = $r;
-            }
-        }
-        halt(isset($m)?$m:0);
+        // }
+        // foreach($arr as $i => &$r){
+        //     $r = array_unique($r);
+        //     if(count($r) > 1){
+        //         $m[$i] = $r;
+        //     }
+        // }
+        // halt(isset($m)?$m:0);
 
     }
 

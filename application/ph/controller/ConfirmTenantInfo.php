@@ -12,7 +12,6 @@ class ConfirmTenantInfo extends Base
 
     public function index()
     {
-
         //所有租户基础信息
         $tenantLst = $this -> TenantInfoModel ->get_all_tenant_lst();
         //所有机构
@@ -27,18 +26,30 @@ class ConfirmTenantInfo extends Base
     }
 
     public function  add(){
-        // 保存数据
+
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
             $maxid = Db::name('tenant')->max('TenantID');
+
+            if(session('user_base_info.institution_level') != 3){
+                return jsons('4001','请登录房管员账号添加租户信息');
+            }
+
             $result = $this->validate($data,'TenantInfo');
             if(true !== $result) {
                 return jsons('4001',$result);
 
             }
+
             $data['InstitutionID'] = session('user_base_info.institution_id');
 
             $data['InstitutionPID'] = Db::name('institution')->where('id','eq',$data['InstitutionID'])->value('pid');
+
+            //检查是否重名
+            $tenantName = Db::name('tenant')->where(['TenantName'=>$data['TenantName'],'InstitutionID'=>$data['InstitutionID'],'Status'=>['between',[0,1]]])->find();
+            if($tenantName){
+                return jsons('4000','租户名已存在！');
+            }
 
             $data['TenantValue'] = $data['TenantValue']?$data['TenantValue']:100;
             $data['CreateUserID'] = UID;
@@ -48,6 +59,7 @@ class ConfirmTenantInfo extends Base
                $data['TenantID'] = 10000;
             }
             $data['Status'] = 0;
+
             if ($tenantInfo = TenantInfoModel::create($data)) {
                 // 记录行为
                 action_log('TenantInfo_add', UID  ,3 , '编号为:'.$data['TenantID']);
@@ -56,11 +68,11 @@ class ConfirmTenantInfo extends Base
                 return jsons('2000' ,'新增失败');
             }
         }
-        echo '没有数据！';
+        
     }
 
     public function  edit(){
-        $tenantID = input('TenantID');
+
         if($this->request->isPost()){
             $data = array_no_space_str($this->request->post());
 
@@ -68,100 +80,58 @@ class ConfirmTenantInfo extends Base
             if(true !== $result) {
                 return jsons('4001',$result);
             }
-            $data['Status'] = 0; //状态改为未确认状态
             $data['UpdateTime'] = time();
-            $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
-            $oldOneData = Db::name('tenant')->field($fields)->where('TenantID', 'eq', $tenantID)->find();
-            foreach($oldOneData as $k1=>$v1){
-                if($data[$k1] != $v1){
-                    $allData[$k1]['old'] = $v1;
-                    $allData[$k1]['new'] = $data[$k1];
-                    $allData[$k1]['name'] = Config::get($k1);
-                }
+            $old = Db::name('tenant')->where('TenantID',$data['TenantID'])->field('TenantName,InstitutionID')->find();
+
+            $tenantName = Db::name('tenant')->where([
+                'TenantName'=>$data['TenantName'],
+                'TenantID'=>['neq',$data['TenantID']],
+                'InstitutionID'=>$old['InstitutionID'],
+                'Status'=>['between',[0,1]],
+                ])->find();
+
+            if($tenantName){
+                return jsons('4000','租户名已存在！');
             }
-            $data['InstitutionID'] = session('user_base_info.institution_id');
-            $data['InstitutionPID'] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('pid');
-
+        
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
-            if ($res >0 || $res===0 ) {
 
-                if($data['TenantName']){  //修改了租户的姓名后，将房屋里面绑定的该租户id的租户姓名同时改掉，后续可删掉此功能
+            if ($res !== false) {
+                if($data['TenantName']){  
+                    //修改了租户的姓名后，将房屋里面绑定的该租户id的租户姓名同时改掉，后续可删掉此功能
                     Db::name('house')->where('TenantID',$data['TenantID'])->setField('TenantName',$data['TenantName']);
                 }
-
-                if(!isset($allData)){ $allData = array(); }
-                // 记录行为
-                action_log('TenantInfo_edit', UID  ,3 , '编号为:'.$data['TenantID'],json_encode($allData));
                 return jsons('2000' ,'更新成功');
             }else{
-                return jsons('4000' ,'更新失败，参数异常');
+                return jsons('4000' ,'更新失败');
             }
         }
 
-        $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID ,  TenantQQ , TenantWeChat , TenantValue';
-
-        $data = Db::name('tenant')->field($map)->where('TenantID','eq',$tenantID)->find();
-
-        if($data){
-            return jsons('2000','获取成功',$data);
-        }
-
-        return jsons('4000','获取失败');
+        $data = Db::name('tenant')->where('TenantID','eq',input('TenantID'))->find();
+        
+        return $data?jsons('2000','获取成功',$data):jsons('4000','获取失败');
     }
+
 
     public function  delete(){
         $tenantID = input('TenantID');
-        $style = input('style');
-        if(!$tenantID || !$style){
-            return jsons(4004 ,'参数异常……');
-        }else{
-            $houseid = Db::name('house')->where('TenantID',$tenantID)->value('HouseID');
 
-            $banid = Db::name('house')->where('HouseID',$houseid)->value('BanID');
-            check($banid);
+        $houseid = Db::name('house')->where('TenantID',$tenantID)->value('HouseID');
+        $banid = Db::name('house')->where('HouseID',$houseid)->value('BanID');
+        check($banid);
 
-            if($houseid){
-                return jsons(4001 ,'该租户已绑定编号为：'.$houseid.'的房屋，请先解绑！');
-            }
-            $res = Db::name('tenant')->where('TenantID' ,'eq' ,$tenantID)->setField('Status',$style);
-            if($res){
-                // 记录行为
-                action_log('TenantInfo_delete', UID  ,3 , '编号为:'.$tenantID);
-                return jsons(2000 ,'删除成功');
-            }else{
-                return jsons(4000 ,'删除失败，参数异常！');
-            }
+        if($houseid){
+            return jsons(4001 ,'该租户已绑定编号为：'.$houseid.'的房屋，请先解绑！');
         }
+        $res = Db::name('tenant')->where('TenantID' ,'eq' ,$tenantID)->delete();
+
+        return $res?jsons(2000 ,'删除成功'):jsons(4000 ,'删除失败，参数异常！');     
     }
 
     public function detail(){
-        $tenantID = input('TenantID');
-
-        if($tenantID){
-
-            //所有楼栋基础信息
-            $tenantDetail = $this -> TenantInfoModel ->get_one_ban_detail_info($tenantID);
-
-            return jsons(2000,'获取成功',$tenantDetail);
-
-        }
+        $tenantDetail = $this -> TenantInfoModel ->get_one_ban_detail_info(input('TenantID'));
+        return jsons(2000,'获取成功',$tenantDetail);      
     }
 
-    // /**
-    //  * 租户确认，由临时状态变为可用状态
-    //  */
-    // public function confirm(){
-    //     $tenantID = input('TenantID');
-
-    //     if(!$tenantID) return jsons('4000','参数缺失');
-
-    //     $res = Db::name('tenant')->where('TenantID', 'eq', $tenantID)->setField('Status',1);
-    //     if($res){
-    //         return jsons('2000','确认成功！');
-    //     }else{
-    //         return jsons('4000','确认失败！');
-    //     }
-
-    // }
 
 }

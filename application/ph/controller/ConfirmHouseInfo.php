@@ -98,7 +98,7 @@ class ConfirmHouseInfo extends Base
 
     public function edit()
     {
-        $houseID = input('HouseID');
+        
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
@@ -132,26 +132,16 @@ class ConfirmHouseInfo extends Base
             if (true !== $result) {
                 return jsons('4001', $result);
             }
-            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,TenantID,NonliveIf';
-            $oldOneData = Db::name('house')->field($fields)->where('HouseID', 'eq', $houseID)->find();
-            foreach($oldOneData as $k1=>$v1){
-                if($data[$k1] != $v1){
-                    $allData[$k1]['old'] = $v1;
-                    $allData[$k1]['new'] = $data[$k1];
-                    $allData[$k1]['name'] = Config::get($k1);
-                }
-            }
-            if ($houseInfo = HouseInfoModel::update($data)) {
-                if(!isset($allData)){$allData = array(); }
-                // 记录行为
-                action_log('HouseInfo_edit', UID, 2, '编号为:' . $data['HouseID'],json_encode($allData));
+           
+            
+            if ($houseInfo = HouseInfoModel::update($data)) {     
                 return jsons('2000', '修改成功');
             } else {
                 return jsons('4000', '修改失败');
             }
         }
-        $data = Db::name('house')->where('HouseID', 'eq', $houseID)->find();
-        $data['OwnerType'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('OwnerType');
+
+        $data = Db::name('house')->where('HouseID', 'eq', input('HouseID'))->find();
         $data['HouseImageIDS'] = Db::name('upload_file')->where('id', 'eq', $data['HouseImageIDS'])->field('FileUrl ,FileTitle')->find();
          return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
     }

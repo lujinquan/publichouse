@@ -865,7 +865,17 @@ function array_merge_add($arr1,$arr2){
 
 }
 
-
+function array_bcadd($arr = array()){
+    if(count($arr) > 1){
+        $j = 0;
+        foreach($arr as $s){
+            $j = bcadd($s , $j , 2);
+        }
+    }else{
+        $j = $arr[0];
+    }
+    return $j;
+}
 
 function array_no_space_str($arr){
     if((array)$arr){
