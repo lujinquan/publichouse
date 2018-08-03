@@ -937,14 +937,14 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            $('.newRentTenentID').val(res.data.TenantID);
-                            $('.newRentTenent').val(res.data.TenantName);
-                            $('.newRentNumber').val(res.data.TenantNumber);
-                            $('.newRentTel').val(res.data.TenantTel);
-                            $('.newRentUnit').val(res.data.UnitID);
-                            $('.newRentFloor').val(res.data.FloorID);
-                            $('.newRentBanArea').val(res.data.HouseArea);
-                            $('.newRentPrice').val(res.data.OldOprice);
+                            $('.newRentTenentID').text(res.data.TenantID);
+                            $('.newRentTenent').text(res.data.TenantName);
+                            $('.newRentNumber').text(res.data.TenantNumber);
+                            $('.newRentTel').text(res.data.TenantTel);
+                            $('.newRentUnit').text(res.data.UnitID);
+                            $('.newRentFloor').text(res.data.FloorID);
+                            $('.newRentBanArea').text(res.data.HouseArea);
+                            $('.newRentPrice').text(res.data.OldOprice);
                             $('#newRentBanInfo').attr('value',res.data.BanID);
                         });
                     });
