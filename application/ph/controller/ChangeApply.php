@@ -248,10 +248,11 @@ class ChangeApply extends Base
 
                     break;
 
-                case 7:  // 新发租 
+                case 7:  // 新发租
+
                     $flag = Db::name('ban')->where('BanID',$one['BanID'])->value('Status');
                     if($flag == 0){
-                        $data['BanID'] = $one['BanID'];
+                        $datas['BanID'] = $one['BanID'];
                     }
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['Remark'] = $data['Remark'];  //异动缘由

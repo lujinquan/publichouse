@@ -749,25 +749,25 @@ class ChangeAudit extends Model
             case 7:  //新发租异动完成后的，系统处理
                 
                 $findOne = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                if($findOne['BanID']){ //楼栋相关的新发租
-                    Db::name('ban')->where('BanID',$findOne['BanID'])->setField('Status',1);
-                }else{
-                    //空租新发租
-                    Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
+                
+                Db::name('ban')->where('BanID',$findOne['BanID'])->setField('Status',1);
+                Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
 
-                    $v = Db::name('house')->where('HouseID',$findOne['HouseID'])->find();
+                $v = Db::name('house')->where('HouseID',$findOne['HouseID'])->find();
 
-                    Db::name('room')->where('HouseID','like','%'.$findOne['HouseID'].'%')->setField('Status',1);
+                Db::name('room')->where('HouseID',$findOne['HouseID'])->setField('Status',1);
 
-                    $str1 = "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID']."," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . ",0,0,'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'] .",1," . $v['HousePrerent'] . "," . $v['HousePrerent'] . ",0," . UID . "," . time() . "),";
-
-                    Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str1, ','));
-
-                    Db::execute("insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent from ph_rent_config where HouseID = ".$findOne['HouseID'].")");
-
-                    Db::execute('update ph_rent_order set OrderDate = "' . date('Ym') . '" , CreateTime = '.time().', CreateUserID = '.UID.',Type = 1, RentOrderID = concat(HouseID ,OwnerType, ' . '"' . date('Ym') . '")  where HouseID = ' . $findOne['HouseID']); 
-   
+                if($v['TenantID']){
+                    Db::name('tenant')->where('TenantID',$findOne['TenantID'])->setField('Status',1);
                 }
+
+                $str1 = "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID']."," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . ",0,0,'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'] .",1," . $v['HousePrerent'] . "," . $v['HousePrerent'] . ",0," . UID . "," . time() . "),";
+
+                Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str1, ','));
+
+                Db::execute("insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent from ph_rent_config where HouseID = ".$findOne['HouseID'].")");
+
+                Db::execute('update ph_rent_order set OrderDate = "' . date('Ym') . '" , CreateTime = '.time().', CreateUserID = '.UID.',Type = 1, RentOrderID = concat(HouseID ,OwnerType, ' . '"' . date('Ym') . '")  where HouseID = ' . $findOne['HouseID']); 
 
                 $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . ", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . $findOne['OrderDate']. ")";
 
@@ -886,21 +886,22 @@ class ChangeAudit extends Model
                 //房屋调整合并到 调整里面，所以是12
                 $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
 
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+                Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
  
-                //修改租金配置表,删除不可用状态房屋对应的租金配置记录
-                Db::name('rent_config')->where('HouseID', 'eq', $oneData['HouseID'])->update([
-                        'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
-                        'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                    ]);
-                //删除该房屋本月订单
-                Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update([
-                        'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
-                        'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                        'PaidRent' => 0,
-                        'UnpaidRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                        'Type' => 1,
-                    ]);
+                // //修改租金配置表,删除不可用状态房屋对应的租金配置记录
+                // Db::name('rent_config')->where('HouseID', 'eq', $oneData['HouseID'])->update([
+                //         'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
+                //         'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                //     ]);
+                // //删除该房屋本月订单
+                // Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update([
+                //         'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
+                //         'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                //         'PaidRent' => 0,
+                //         'UnpaidRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
+                //         'Type' => 1,
+                //     ]);
+                
                 break;
             case 10:  //管段调整异动完成后的，系统处理 （待完善）
                 //修改对应的楼栋所属的管段，注意此时关联到，该楼栋下所有的房屋，房间对应的所属管段机构的相应调整

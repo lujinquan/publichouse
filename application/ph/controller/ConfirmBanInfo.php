@@ -88,7 +88,7 @@ class ConfirmBanInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
-            check($data['BanID']);
+            check('',$data['BanID']);
 
             $tempdatas = Db::name('ban')->where('BanID', 'eq', $banID)->find();
             $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
@@ -158,7 +158,7 @@ class ConfirmBanInfo extends Base
     public function delete()
     {
         $banID = input('BanID');
-        check($banID);
+        check('',$banID);
         $style = input('style');
         if(!$banID || !$style){
             return jsons(4004 ,'参数异常……');

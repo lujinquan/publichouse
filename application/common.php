@@ -48,10 +48,15 @@ function getnextMonthDays($date){
     return $date;
 }
 
-function check($banid){
-    $flag = Db::name('change_order')->where(['BanID'=>$banid,'OrderDate'=>date('Ym')])->find();
-    if($flag){
-        return jsons('4000','所属楼栋已在异动单中数据不能修改');
+function check($houseid,$banid){
+    if($houseid){
+        $flag = Db::name('change_order')->where(['HouseID'=>$houseid,'OrderDate'=>date('Ym'),'ChangeType'=>7,'Status'=>['>',0]])->find();
+    }
+    if($banid){
+        $flag = Db::name('change_order')->where(['BanID'=>$banid,'OrderDate'=>date('Ym'),'ChangeType'=>7,'Status'=>['>',0]])->find();
+    }
+    if(isset($flag) && $flag){
+        return jsons('4000','正在异动单中数据不能修改');
     }
 }
 
