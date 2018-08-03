@@ -749,11 +749,66 @@ class ChangeAudit extends Model
             case 7:  //新发租异动完成后的，系统处理
                 
                 $findOne = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                
-                Db::name('ban')->where('BanID',$findOne['BanID'])->setField('Status',1);
+
                 Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
 
                 $v = Db::name('house')->where('HouseID',$findOne['HouseID'])->find();
+                
+                Db::name('ban')->where('BanID',$findOne['BanID'])->update([
+                    'Status'=>1
+
+                    ]);
+
+                switch($findOne['UseNature']){
+                    case 1:
+                        Db::name('ban')->where('BanID',$v['BanID'])->update(
+                            [
+                                'CivilArea' => ['exp','CivilArea+'.$v['HouseArea']],
+                                'CivilOprice' => ['exp','CivilOprice+'.$v['OldOprice']],
+                                'CivilRent' => ['exp','CivilRent+'.$v['HousePrerent']],
+                                'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
+                            ]
+                        );
+                    break;
+                       
+                    case 2:
+                     
+                        Db::name('ban')->where('BanID',$v['BanID'])->update(
+                            [
+                                'EnterpriseArea' => ['exp','EnterpriseArea+'.$v['HouseArea']],
+                                'EnterpriseOprice' => ['exp','EnterpriseOprice+'.$v['OldOprice']],
+                                'EnterpriseRent' => ['exp','EnterpriseRent+'.$v['HousePrerent']],
+                            ]
+                        );
+                    break;
+        
+                    case 3:
+                        
+                        Db::name('ban')->where('BanID',$v['BanID'])->update(
+                            [
+                                'PartyArea' => ['exp','PartyArea+'.$v['HouseArea']],
+                                'PartyOprice' => ['exp','PartyOprice+'.$v['OldOprice']],
+                                'PartyRent' => ['exp','PartyRent+'.$v['HousePrerent']],
+                            ]
+                        );
+                    break;
+
+                }
+
+                Db::name('ban')->where('BanID',$v['BanID'])->update(
+                        [
+                            'TotalArea' => ['exp','TotalArea+'.$v['HouseArea']],
+                            'TotalOprice' => ['exp','TotalOprice+'.$v['OldOprice']],
+                            'PreRent' => ['exp','PreRent+'.$v['HousePrerent']],
+                            'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
+                        ]
+                    );
+                    
+
+                Db::name('house')->where('HouseID',$findOne['HouseID'])->update(['Status'=>1]);
+
+                $v = Db::name('house')->where('HouseID',$findOne['HouseID'])->find();
+
 
                 Db::name('room')->where('HouseID',$findOne['HouseID'])->setField('Status',1);
 
