@@ -29,6 +29,8 @@ return [
 
     //使用权变更
     //
+    "paidRecordSheet"=>"有偿转让备案单",
+
     "transferApplication"=>"书面申请报告",
     "approveApplyReport"=>"书面申请报告",
     "acquittance"=>"收据",

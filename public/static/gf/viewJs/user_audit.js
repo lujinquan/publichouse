@@ -269,6 +269,8 @@ $('.BtnApprove').click(function(){
 			}else{
 				$('.IfFacade').text('是');
 			}
+
+
 			processState('#approveState',res);
 			metailShow('#layer-photos-demo',res);
 			layer.open({
@@ -415,11 +417,7 @@ function AddInfo(ID,status,detail){
 			$('.fileUploadContent').empty();
 		},
 		yes:function(thisIndex){
-			if(status == "1"){
-				var formData = new FormData();
-			}else{
-				var formData = fileTotall.getArrayFormdata();
-			}
+			var formData = fileTotall.getArrayFormdata();
 			formData.append('ChangeOrderID',ID);
 			if(status== '1'){
 				formData.append('IfReform',$("input[name='IfReform']:checked").val());
@@ -582,6 +580,15 @@ function status_1_2(ID,res){
 			$("input[name='IfRepair'][value="+res.data.detail.IfRepair+"]").attr('checked','checked');
 			$("input[name='IfCollection'][value="+res.data.detail.IfCollection+"]").attr('checked','checked');
 			$("input[name='IfFacade'][value="+res.data.detail.IfFacade+"]").attr('checked','checked');
+			new file({
+				button:"#paidRecordSheet",
+				show:"#paidRecordSheetShow",
+				upButton:"#paidRecordSheetUp",
+				size:10240,
+				url:"/ph/UserAudit/supply",
+				ChangeOrderID:res.data.detail.ChangeOrderID,
+				title:"有偿转让备案单"
+			});
 		}else if(res.data.config.status == '2'){//房调员补充资料
 			$('.status_2').hide();
 			$('.status_3').show();

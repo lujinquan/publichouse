@@ -366,12 +366,12 @@ $('#tenantQuery').on("keydown",function(e){
 
 // 楼栋查询开始 调用方式：banQuery.action(id,status);
 var banQuery = {
-       Institution : $('#banOne').val()||'',
+       Institution : $('#queryOne').val()||'',
        BanAddress : $('#banTwo').val()||'',
        pageNum : $('#banPageNum').val()|| 1,
        status:0,
        init:function(){
-         this.Institution = $.trim($('#banOne').val())||'';
+         this.Institution = $.trim($('#queryOne').val())||'';
          this.BanAddress = $.trim($('#banTwo').val())||'';
        },
        show : function(id){

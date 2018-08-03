@@ -285,6 +285,7 @@ $('.BtnApprove').click(function(){
             $('#newRentUnitID').text(res.data.detail.UnitID);
             $('#newRentFloorID').text(res.data.detail.FloorID);
             $('#newRentHouseArea').text(res.data.detail.HouseArea);
+            $('#newRentOldOprice').text(res.data.detail.OldOprice);
             $('#newRentReason').text(res.data.detail.Remark);
             $('#newRentBanInfo').attr('value',res.data.detail.BanID);
             $('#newRentDetail').attr('value',res.data.detail.HouseID);
@@ -652,6 +653,7 @@ $('.BtnDetail').click(function(){
             $('#newRentUnitID').text(res.data.detail.UnitID);
             $('#newRentFloorID').text(res.data.detail.FloorID);
             $('#newRentHouseArea').text(res.data.detail.HouseArea);
+            $('#newRentOldOprice').text(res.data.detail.OldOprice);
             $('#newRentReason').text(res.data.detail.Remark);
             $('#newRentBanInfo').attr('value',res.data.detail.BanID);
             $('#newRentDetail').attr('value',res.data.detail.HouseID);
