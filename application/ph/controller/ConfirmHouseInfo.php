@@ -128,7 +128,7 @@ class ConfirmHouseInfo extends Base
                 }
                 $data['HouseImageIDS'] = implode(',', $HouseImageIDS);   //返回的是该房屋的影像资料id
             }
-            $result = $this->validate($data, 'HouseInfo');
+            $result = $this->validate($data, 'ConfirmHouseInfo');
             if (true !== $result) {
                 return jsons('4001', $result);
             }

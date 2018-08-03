@@ -113,7 +113,7 @@ class ConfirmBanInfo extends Base
             unset($data['xy']);
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
             $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
-            $result = $this->validate($data,'BanInfo');
+            $result = $this->validate($data,'ConfirmBanInfo');
             if(true !== $result){
                 return jsons('4001' ,$result);
             }
