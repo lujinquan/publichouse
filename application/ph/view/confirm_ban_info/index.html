@@ -154,23 +154,16 @@
                   <input name="BanPropertyID" type="text" class="am-form-field" value="{$BanPropertyID}">
                 </div>
               </td>
-              <td>
+              <td class="dong_none">
                 <div class="am-input-group am-input-group-sm" style="width:150px;">
                     <?php
                          if($banOption != array()){
-                            $DateStart = $banOption['DateStart'];
-                            $DateEnd = $banOption['DateEnd'];
+                            $BanYear = $banOption['BanYear'];
                         }else{
-                            $DateStart = '';
-                            $DateEnd = '';
+                            $BanYear = '';
                         }
                      ?>
-                     <div class="am-u-sm-6" style="padding:0;">
-                          <input style="width:70px;" name="DateStart" value="{$DateStart}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
-                     </div>
-                     <div class="am-u-sm-6" style="padding:0;">
-                          <input style="width:70px;" name="DateEnd" value="{$DateEnd}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
-                     </div>
+                    <input style="width:140px;" name="BanYear" value="{$BanYear}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" >
                 </div>
               </td>
               <td>

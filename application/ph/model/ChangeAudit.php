@@ -77,9 +77,6 @@ class ChangeAudit extends Model
             if ($searchForm['OwnerType']) {  //检索变更类型
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            // if ($searchForm['UseNature']) {  //检索变更类型
-            //     $where['UseNature'] = array('eq', $searchForm['UseNature']);
-            // }
             if ($searchForm['InflRent']) {  //检索变更类型
                 $where['InflRent'] = array('eq', $searchForm['InflRent']);
             }
@@ -95,24 +92,6 @@ class ChangeAudit extends Model
 
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
-            
-            // if ($searchForm['DateStart'] && $searchForm['DateEnd']) {  //检索大于等于起始时间，且小于等于结束时间
-            //     $start = strtotime($searchForm['DateStart']);
-            //     $end = strtotime($searchForm['DateEnd']);
-            //     //dump($start);dump($end);exit;
-            //     if ($start < $end) {
-            //         $where['CreateTime'] = array('between', $start . "," . $end);
-            //     }
-            // }
-            // if ($searchForm['DateStart'] && empty($searchForm['DateEnd'])) { //检索大于等于起始时间
-            //     $start = strtotime($searchForm['DateStart']);
-            //     //dump($start);exit;
-            //     $where['CreateTime'] = array('egt', $start);
-            // }
-            // if ($searchForm['DateEnd'] && empty($searchForm['DateStart'])) { //检索小于等于结束时间
-            //     $end = strtotime($searchForm['DateEnd']);
-            //     $where['CreateTime'] = array('elt', $end);
-            // }
 
         }
 
@@ -312,47 +291,7 @@ class ChangeAudit extends Model
 
     public function get_six_detail($changeOrderID)
     {   //维修
-
-        //楼栋编号
-        //$banID = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('BanID');
-
-        //$maps = 'RepairType ,OwnerType ,StructureType ,UseNature ,TotalArea ,CoveredArea ,DamageGrade ,RepairReson ,BanUnitNum ,BanFloorNum';
-
-        $oneNew = Db::name('repair_change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-
-        $banID = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('BanID');
-
-        $oneNew['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $banID)->value('BanAddress');
-        $oneNew['BanID'] = $banID;
-        $oneNew['OwnerType'] = get_owner($oneNew['OwnerType']);
-
-        $oneNew['Structure'] = get_structure($oneNew['StructureType']);
-
-        $oneNew['UseNature'] = get_usenature($oneNew['UseNature']);
-
-        $oneNew['DamageGrade'] = get_damage($oneNew['DamageGrade']);
-
-        $oneNew['OldOwnerType'] = get_owner($oneNew['OldOwnerType']);
-
-        $oneNew['OldStructure'] = get_structure($oneNew['OldStructureType']);
-
-        $oneNew['OldUseNature'] = get_usenature($oneNew['OldUseNature']);
-
-        $oneNew['OldDamageGrade'] = get_damage($oneNew['OldDamageGrade']);
-
-        if ($oneNew['RepairType'] == 1) {
-
-            $oneNew['RepairType'] = '翻修';
-
-        } else {
-
-            $oneNew['RepairType'] = '重建';
-        }
-
-        $oneNew['type'] = 6;
-
-        return $oneNew;
-
+        return '';
     }
 
     public function get_seven_detail($changeOrderID)
@@ -640,13 +579,9 @@ class ChangeAudit extends Model
 
                 break;
             case 2:  //空租异动完成后的，系统处理
-                //修改对应的房屋的状态为空租
+
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                // if($one['TenantID']){
-                //     $tenantName = Db::name('tenant')->where('TenantID',$one['TenantID'])->value('TenantName');
-                //     Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 0, 'TenantID' => $one['TenantID'], 'TenantName' => $tenantName]);
-                //     Db::name('rent_table')->where(['ChangeType'=>2,'HouseID'=>$one['HouseID']])->setField('InflRent',0);
-                // }else{
+                
                 Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 1]);
                 Db::name('rent_config')->where('HouseID', 'eq', $one['HouseID'])->delete();
                 Db::name('rent_order')->where(['HouseID'=>['eq', $one['HouseID']],'OrderDate'=>date('Ym',time())])->delete();
@@ -654,7 +589,6 @@ class ChangeAudit extends Model
                 $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
-                //}  
                 
                 break;
 
@@ -959,7 +893,7 @@ class ChangeAudit extends Model
                 
                 break;
             case 10:  //管段调整异动完成后的，系统处理 （待完善）
-                //修改对应的楼栋所属的管段，注意此时关联到，该楼栋下所有的房屋，房间对应的所属管段机构的相应调整
+
                 $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,HouseID,NewInstitutionID')->find();
                 $pid = Db::name('institution')->where('id', 'eq', $oneData['NewInstitutionID'])->value('pid');
                 $map['InstitutionID'] = $pid;
@@ -1044,7 +978,6 @@ class ChangeAudit extends Model
                         
                     }
                 }
-
 
                 break;
 

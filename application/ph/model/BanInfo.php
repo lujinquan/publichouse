@@ -87,16 +87,16 @@ class BanInfo extends Model
             if ($searchForm['BanID']) {  //模糊检索楼栋编号
                 $where['BanID'] = array('like', '%'.$searchForm['BanID'].'%');
             }
-            if ($searchForm['OldBanID']) {  //模糊检索楼栋编号
+            if (isset($searchForm['OldBanID']) && $searchForm['OldBanID']) {  //模糊检索楼栋编号
                 $where['BanID'] = array('like', '%'.$searchForm['OldBanID'].'%');
             }
-            if ($searchForm['AreaFour']) {  //模糊检索楼栋地址
+            if (isset($searchForm['AreaFour']) && $searchForm['AreaFour']) {  //模糊检索楼栋地址
                 $where['AreaFour'] = array('like', '%'.$searchForm['AreaFour'].'%');
             }
-            if ($searchForm['TotalArea']) {  //模糊检索合建面
+            if (isset($searchForm['TotalArea']) && $searchForm['TotalArea']) {  //模糊检索合建面
                 $where['TotalArea'] = array('like', '%'.$searchForm['TotalArea'].'%');
             }
-            if ($searchForm['BanPropertyID']) {  //模糊检索产权证号
+            if (isset($searchForm['BanPropertyID']) && $searchForm['BanPropertyID']) {  //模糊检索产权证号
                 $where['BanPropertyID'] = array('like', '%'.$searchForm['BanPropertyID'].'%');
             }
             if($searchForm['BanYear']){  //检索大于等于起始时间，且小于等于结束时间     
