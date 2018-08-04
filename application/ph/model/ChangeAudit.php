@@ -794,7 +794,7 @@ class ChangeAudit extends Model
                         break;
 
                     }
-                    Db::name('ban')->where('BanID',$v['BanID'])->update(
+                    Db::name('ban')->where('BanID',$v['banID'])->update(
                         [
                             'TotalArea' => ['exp','TotalArea-'.$v['houseArea']],
                             'TotalOprice' => ['exp','TotalOprice-'.$v['housePrice']],
