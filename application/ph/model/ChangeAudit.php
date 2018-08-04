@@ -794,6 +794,14 @@ class ChangeAudit extends Model
                         break;
 
                     }
+                    Db::name('ban')->where('BanID',$v['BanID'])->update(
+                        [
+                            'TotalArea' => ['exp','TotalArea-'.$v['houseArea']],
+                            'TotalOprice' => ['exp','TotalOprice-'.$v['housePrice']],
+                            'PreRent' => ['exp','PreRent-'.$v['cancelPrent']],
+                            'BanUsearea' => ['exp','BanUsearea-'.$v['cancelHouseUsearea']],
+                        ]
+                    );
                     
                 }
                 //修改对应的楼栋底下的房屋的状态为注销
@@ -966,8 +974,8 @@ class ChangeAudit extends Model
                     $roomArr = Db::name('room')->where('BanID',$oneData['BanID'])->column('RoomID,RoomRentMonth');
                     if($roomArr){
                         foreach($roomArr as $room){
-                            $roomrent = count_room_rent($k);
-                            Db::name('room')->where('RoomID',$k)->setField('RoomRentMonth',$roomrent);
+                            $roomrent = count_room_rent($room);
+                            Db::name('room')->where('RoomID',$room)->setField('RoomRentMonth',$roomrent);
                         }
                         
                     }
