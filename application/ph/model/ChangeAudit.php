@@ -665,19 +665,7 @@ class ChangeAudit extends Model
                 break;
 
             case 6:  //维修异动完成后的，系统处理
-                $banid = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->value('BanID');
-                $findOne = Db::name('repair_change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('OwnerType,UseNature,StructureType,BanUnitNum,DamageGrade,CoveredArea,TotalArea,BanFloorNum')->find();
-                $res['BanID'] = $banid;
-                $res['OwnerType'] = $findOne['OwnerType'];
-                $res['UseNature'] = $findOne['UseNature'];
-                $res['StructureType'] = $findOne['StructureType'];
-                $res['BanUnitNum'] = $findOne['BanUnitNum'];
-                $res['DamageGrade'] = $findOne['DamageGrade'];
-                $res['CoveredArea'] = $findOne['CoveredArea'];
-                $res['TotalArea'] = $findOne['TotalArea'];
-                $res['BanFloorNum'] = $findOne['BanFloorNum'];
-                Db::name('ban')->update($res);
-                Db::name('room')->where('BanID',$banid)->update(['OwnerType'=>$findOne['OwnerType']]);
+                
                 break;
 
             case 7:  //新发租异动完成后的，系统处理
@@ -828,10 +816,10 @@ class ChangeAudit extends Model
                         case 1:
                             Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
-                                    'CivilArea' => $a['TotalAreaAfter'],
-                                    'CivilOprice' => $a['TotalOpriceAfter'],
-                                    'CivilRent' => $a['PreRentAfter'],
-                                    'BanUsearea' => $a['BanUseareaAfter'],
+                                    'CivilArea' => ['exp','CivilArea+'.$a['TotalAreaChange']],
+                                    'CivilOprice' => ['exp','CivilOprice+'.$a['TotalOpriceChange']],
+                                    'CivilRent' => ['exp','CivilRent+'.$a['PreRentChange']],
+                                    'BanUsearea' => ['exp','BanUsearea+'.$a['BanUseareaChange']],
                                 ]
                             );
                         break;
@@ -840,9 +828,9 @@ class ChangeAudit extends Model
                          
                             Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
-                                    'EnterpriseArea' => $a['TotalAreaAfter'],
-                                    'EnterpriseOprice' => $a['TotalOpriceAfter'],
-                                    'EnterpriseRent' => $a['PreRentAfter'],
+                                    'EnterpriseArea' => ['exp','EnterpriseArea+'.$a['TotalAreaChange']],
+                                    'EnterpriseOprice' => ['exp','EnterpriseOprice+'.$a['TotalOpriceChange']],
+                                    'EnterpriseRent' => ['exp','EnterpriseRent+'.$a['PreRentChange']],
                                 ]
                             );
                         break;
@@ -851,9 +839,9 @@ class ChangeAudit extends Model
                             
                             Db::name('ban')->where('BanID',$a['BanID'])->update(
                                 [
-                                    'PartyArea' => $a['TotalAreaAfter'],
-                                    'PartyOprice' => $a['TotalOpriceAfter'],
-                                    'PartyRent' => $a['PreRentAfter'],
+                                    'PartyArea' => ['exp','PartyArea+'.$a['TotalAreaChange']],
+                                    'PartyOprice' => ['exp','PartyOprice+'.$a['TotalOpriceChange']],
+                                    'PartyRent' => ['exp','PartyRent+'.$a['PreRentChange']],
                                 ]
                             );
                         break;
@@ -870,7 +858,13 @@ class ChangeAudit extends Model
                     );
                 }
 
-                // Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent+'.$oneData['InflRent']]]);
+                $findHouse = Db::name('house')->where('HouseID',$oneData['HouseID'])->find();
+
+                $rentOrder = Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->find();
+
+                $change = $findHouse['HousePrerent'] - $rentOrder['HousePrerent'];
+
+                $receive = $rentOrder['ReceiveRent'] + $change;
                 
                 //房屋调整合并到 调整里面，所以是12
                 $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
@@ -878,18 +872,18 @@ class ChangeAudit extends Model
                 Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
  
                 // //修改租金配置表,删除不可用状态房屋对应的租金配置记录
-                // Db::name('rent_config')->where('HouseID', 'eq', $oneData['HouseID'])->update([
-                //         'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
-                //         'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                //     ]);
-                // //删除该房屋本月订单
-                // Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update([
-                //         'HousePrerent' => ['exp','HousePrerent+'.$oneData['InflRent']],
-                //         'ReceiveRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                //         'PaidRent' => 0,
-                //         'UnpaidRent' => ['exp','ReceiveRent+'.$oneData['InflRent']],
-                //         'Type' => 1,
-                //     ]);
+                Db::name('rent_config')->where('HouseID', 'eq', $oneData['HouseID'])->update([
+                        'HousePrerent' => $findHouse['HousePrerent'],
+                        'ReceiveRent' => $receive,
+                    ]);
+                //删除该房屋本月订单
+                Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update([
+                        'HousePrerent' => $findHouse['HousePrerent'],
+                        'ReceiveRent' => $receive,
+                        'PaidRent' => 0,
+                        'UnpaidRent' => $receive,
+                        'Type' => 1,
+                ]);
                 
                 break;
             case 10:  //管段调整异动完成后的，系统处理 （待完善）
