@@ -22,7 +22,6 @@ class PropertyReport extends Base
             1 => '市属',
             2 => '区属',
             5 => '自管',
-            6 => '生活',
             11 => '所有产别',
         ];
         //初始条件
