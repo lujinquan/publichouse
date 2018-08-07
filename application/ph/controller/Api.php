@@ -284,7 +284,7 @@ class Api extends Controller
         //获取顶部所属楼栋信息
         $result['banDetail'] = get_ban_info($result['houseDetail']['BanID']);
         //获取所拥有的房间信息
-        $rooms = Db::name('room')->field('RoomID,OwnerType,RoomNumber,RoomType,BanID,HouseID,UnitID,FloorID,UseArea,RentPoint,RentPointIDS,LeasedArea,RoomRentMonth,Status,RoomPublicStatus')
+        $rooms = Db::name('room')->field('RoomID,OwnerType,RoomNumber,RoomType,BanID,HouseID,UnitID,FloorID,UseArea,RoomPrerent,RentPoint,RentPointIDS,LeasedArea,RoomRentMonth,Status,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status' => ['<', 5]])
             ->select();
         $roomTypeNames = Db::name('room_type_point')->column('id,RoomTypeName');
