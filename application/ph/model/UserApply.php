@@ -6,7 +6,6 @@ use app\user\model\Role as RoleModel;
 use think\Model;
 use think\Exception;
 use think\Loader;
-use think\Config;
 use think\Db;
 
 class UserApply extends Model
@@ -206,7 +205,7 @@ class UserApply extends Model
 
     public function uploads($file,$k1){
 
-        $title = Config::get($k1); //上传文件标题
+        $title = config($k1); //上传文件标题
 
         Loader::import('uploads.Uploads',EXTEND_PATH);
 

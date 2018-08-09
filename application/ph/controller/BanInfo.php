@@ -1,6 +1,5 @@
 <?php
 namespace app\ph\controller;
-
 use think\Cache;
 use think\helper\Hash;
 use think\Request;
@@ -136,7 +135,7 @@ class BanInfo extends Base
                 if($data[$k1] != $v1){
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
-                    $allData[$k1]['name'] = Config::get($k1);
+                    $allData[$k1]['name'] = config($k1);
                 }
             }
             //halt($data);

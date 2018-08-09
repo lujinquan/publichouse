@@ -3,7 +3,6 @@ namespace app\ph\controller;
 
 use think\Cache;
 use think\helper\Hash;
-use think\Config;
 use app\ph\model\TenantInfo as TenantInfoModel;
 use think\Db;
 
@@ -84,7 +83,7 @@ class TenantInfo extends Base
                 if($data[$k1] != $v1){
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
-                    $allData[$k1]['name'] = Config::get($k1);
+                    $allData[$k1]['name'] = config($k1);
                 }
             }
             $data['InstitutionID'] = session('user_base_info.institution_id');

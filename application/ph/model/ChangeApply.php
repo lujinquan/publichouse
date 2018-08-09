@@ -8,7 +8,6 @@ use app\ph\model\HouseInfo as HouseModel;
 use app\ph\model\BanInfo as BanModel;
 use think\Db;
 use think\Loader;
-use think\Config;
 use util\Tree;
 
 class ChangeApply extends Model
@@ -45,7 +44,7 @@ class ChangeApply extends Model
 
     public function uploads($file,$k1,$type){
 
-        $title = Config::get($k1); //上传文件标题
+        $title = config($k1); //上传文件标题
 
         Loader::import('uploads.Uploads',EXTEND_PATH);
 

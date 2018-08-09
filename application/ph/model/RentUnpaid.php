@@ -10,7 +10,6 @@ namespace app\ph\model;
 
 use think\Model;
 use think\Exception;
-use think\Config;
 use think\Db;
 
 class RentUnpaid extends Model
@@ -23,11 +22,11 @@ class RentUnpaid extends Model
                                     ->field('a.TenantID ,a.TenantName,b.TenantBalance')
                                     ->select();
 
-        $AppKey = Config::get('AppKey');
+        $AppKey = config('AppKey');
 
-        $AppSecret = Config::get('AppSecret');
+        $AppSecret = config('AppSecret');
 
-        $templateNumber = Config::get('TemplateNumber');
+        $templateNumber = config('TemplateNumber');
 
         $serverAPI = new \SendMessage\ServerAPI($AppKey,$AppSecret,'fsockopen');
 

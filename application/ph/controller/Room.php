@@ -63,7 +63,7 @@ class Room extends Base
                 if($data[$k1] != $v1){
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
-                    $allData[$k1]['name'] = Config::get($k1);
+                    $allData[$k1]['name'] = config($k1);
                 }
             }
             $oldHouses = Db::name('room')->where('RoomID','eq',$data['RoomID'])->value('HouseID');

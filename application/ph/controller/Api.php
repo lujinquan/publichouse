@@ -347,7 +347,7 @@ class Api extends Controller
         $result['banDetail'] = get_ban_info($result['houseDetail']['BanID']);
 
         //获取所拥有的房间信息
-        $rooms = Db::name('room')->field('RoomID,OwnerType,RoomNumber,RoomType,BanID,HouseID,UnitID,FloorID,UseArea,RentPoint,RentPointIDS,LeasedArea,RoomRentMonth,Status')
+        $rooms = Db::name('room')->field('RoomID,OwnerType,RoomNumber,RoomType,BanID,HouseID,UnitID,FloorID,UseArea,RentPoint,RoomPrerent,RentPointIDS,LeasedArea,RoomRentMonth,Status')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status' => ['<', 5]])
             ->select();
         //halt($rooms);
@@ -989,7 +989,7 @@ class Api extends Controller
             foreach ($newOneData as $k1 => $v1) {
                 $allData[$i]['old'] = $v1;
                 $allData[$i]['new'] = $v1;
-                $allData[$i]['name'] = Config::get($k1);
+                $allData[$i]['name'] = config($k1);
                 $allData[$i]['status'] = 0;
                 $i++;
             }
@@ -997,7 +997,7 @@ class Api extends Controller
             foreach ($oldOneData as $k1 => $v1) {
                 $allData[$i]['old'] = $v1;
                 $allData[$i]['new'] = $newOneData[$k1];
-                $allData[$i]['name'] = Config::get($k1);
+                $allData[$i]['name'] = config($k1);
                 if ($newOneData[$k1] != $v1) {
                     $allData[$i]['status'] = 1;
                 } else {
@@ -1025,7 +1025,7 @@ class Api extends Controller
                 }
                 $allData[$i]['old'] = $v1;
                 $allData[$i]['new'] = $v1;
-                $allData[$i]['name'] = Config::get($k1);
+                $allData[$i]['name'] = config($k1);
                 $allData[$i]['status'] = 0;
                 $i++;
             }
@@ -1033,7 +1033,7 @@ class Api extends Controller
             foreach ($oldOneData as $k1 => $v1) {
                 $allData[$i]['old'] = $v1;
                 $allData[$i]['new'] = $newOneData[$k1];
-                $allData[$i]['name'] = Config::get($k1);
+                $allData[$i]['name'] = config($k1);
                 if ($newOneData[$k1] != $v1) {
                     $allData[$i]['status'] = 1;
                 } else {

@@ -8,7 +8,6 @@ namespace app\ph\controller;
 use think\Cache;
 use think\helper\Hash;
 use think\Db;
-use think\Config;
 
 class StatisticalReport extends Base
 {
@@ -139,7 +138,7 @@ class StatisticalReport extends Base
      * 大修计划和小计
      */
     public function get_large_pending_approval(){
-        $largeData = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'egt', Config::get('middleDevide'))->select();
+        $largeData = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'egt', config('middleDevide'))->select();
         $largeCount = array(
             'BanNumBefore' => 0,
             'FloorNumBefore' => 0,
@@ -169,7 +168,7 @@ class StatisticalReport extends Base
      * 中修计划和小计
      */
     public function get_middle_pending_approval(){
-        $middleData = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'lt', Config::get('middleDevide'))->select();
+        $middleData = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'lt', config('middleDevide'))->select();
         $middleCount = array(
             'BanNumBefore' => 0,
             'FloorNumBefore' => 0,
@@ -231,10 +230,10 @@ class StatisticalReport extends Base
         $data = null;
         switch ($param) {
             case 'large':
-                $data = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'egt', Config::get('middleDevide'))->select();
+                $data = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'egt', config('middleDevide'))->select();
                 break;
             case 'middle':
-                $data = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'lt', Config::get('middleDevide'))->select();
+                $data = Db::name('repair_middle')->where('State', '待审批')->where('PlanCost', 'lt', config('middleDevide'))->select();
                 break;
             case 'total':
                 $data = Db::name('repair_middle')->where('State', '待审批')->select();
@@ -359,8 +358,8 @@ class StatisticalReport extends Base
         $end = date('Y-m-d 00:00:00', strtotime("$start +1 month -1 day"));
         $lastMonthEnd = date('Y-m-d 00:00:00',strtotime("$start -1 day"));
         $lastMonthStart = date('Y-m-d 00:00:00',strtotime("$start -1 month"));
-        $nokdata = Db::name('repair_middle')->where('State', 'not in', ['待审批', '已审批', '完成'])->where('ApplyTime', 'elt', $lastMonthEnd)->where('DamageGradeBefore', 'egt', Config::get('reformDevide'))->select();
-        $okdata = Db::name('repair_middle')->where('State', '完成')->where('EndDate', 'between',[$lastMonthStart ,$lastMonthEnd])->where('DamageGradeBefore', 'egt', Config::get('reformDevide'))->select();
+        $nokdata = Db::name('repair_middle')->where('State', 'not in', ['待审批', '已审批', '完成'])->where('ApplyTime', 'elt', $lastMonthEnd)->where('DamageGradeBefore', 'egt', config('reformDevide'))->select();
+        $okdata = Db::name('repair_middle')->where('State', '完成')->where('EndDate', 'between',[$lastMonthStart ,$lastMonthEnd])->where('DamageGradeBefore', 'egt', config('reformDevide'))->select();
         // 总计
         $totalCount = array(
             'BanNum' => 0,

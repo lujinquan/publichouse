@@ -9,7 +9,6 @@
 namespace app\ph\model;
 
 use think\Model;
-use think\Config;
 use think\Exception;
 use think\Db;
 use think\Loader;
@@ -302,7 +301,7 @@ class HouseInfo extends Model
     public function uploads($file, $k1)
     {
 
-        $title = Config::get($k1); //上传文件标题
+        $title = config($k1); //上传文件标题
 
         Loader::import('uploads.Uploads', EXTEND_PATH);
 
@@ -344,7 +343,7 @@ class HouseInfo extends Model
         $sort = Db::name('room_type_point')->column('Sort,id');
 
         foreach ($data['RoomType'] as $k1 => $v1) {
-            $arr = array_chunk($v1, 14, false); //每11个分组
+            $arr = array_chunk($v1, 15, false);
             foreach ($arr as $v2) {
                 $v2[] = $sort[$k1+1];  //加1正好是房间类型的id
                 $roomArr[] = $v2; //注意这个$roomArr是所有房间信息的集合，很重要
