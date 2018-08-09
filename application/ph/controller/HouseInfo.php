@@ -206,7 +206,7 @@ class HouseInfo extends Base
                     $institutionArr = Db::name('ban')->field('InstitutionID,TubulationID,OwnerType,BanAddress')->where('BanID', $v5[2])->find();
                     $houses = array_filter(array($v5[3], $v5[4], $v5[5],$v5[6],$v5[7])); //将传入的房屋编号放入数组并去空
                     $diffHouses = array_merge(array_diff($houses, array($data['AddRent']['HouseID'])));
-                    $one = Db::name('room_type_point')->where('id', $v5[14])->field('RoomTypeName,Point')->find();
+                    $one = Db::name('room_type_point')->where('id', $v5[15])->field('RoomTypeName,Point')->find();
                     $datas = [
                         'RoomID' => $v5[0],
                         'InstitutionID' => $institutionArr['TubulationID'],
@@ -258,8 +258,9 @@ class HouseInfo extends Base
                                 Db::name('house')->where('HouseID', 'in', $houses)->setInc('PublicRent', 0.5);
                                 $datas['LeasedArea'] = 0;
                             }
-//halt($datas);
+
                             Db::name('room')->update($datas);
+
                             $tempRent = count_room_rent($datas['RoomID']);
                             
                             Db::name('room')->where('RoomID', $datas['RoomID'])->setField('RoomRentMonth', $tempRent);
