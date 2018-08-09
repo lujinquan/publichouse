@@ -154,7 +154,7 @@ class HouseInfo extends Base
     {
         if ($this->request->isPost()) {
             $data = $this->request->post();
-            halt($data);
+            //halt($data);
             //验证数据合法性
             /*如果有未确认状态的要删除的房间则，再次删除*/
             if (isset($data['AddRent']['deleteRoom'])) {
