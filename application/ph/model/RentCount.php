@@ -399,7 +399,7 @@ class RentCount extends Model
         $where['Status'] = array('eq', 1);    //房屋必须是可用状态
         $where['IfEmpty'] = array('eq', 0);    // 是否空租
         $where['IfSuspend'] = array('eq', 0);  // 是否暂停计租
-        $where['InstitutionID'] = array('eq', $institutionID);  // 2或者3，紫阳所，粮道所
+        $where['InstitutionID'] = array('eq', $institutionID);  // 管段
         //$where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
         $where['OwnerType'] = array('neq', 6); // 6是生活用房
         //$where['HousePrerent'] = array('>', 0); // 规租大于0
@@ -407,18 +407,18 @@ class RentCount extends Model
 
         $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
         $houseData = Db::name('house')->field($fields)->where($where)->select();
-        
+ 
         $changeData = Db::name('change_order')->where(['Status'=>1,'ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
 
         $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
 
-        //halt($rentData);
+        //halt($changedata);
 
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
         }
 
-        //halt($changedata);
+        
 
         $str = '';
 
@@ -462,7 +462,7 @@ class RentCount extends Model
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
-        Db::name('order_config')->where(['ReceiveRent'=>0,'InsitutionID'=>$institutionID])->delete();
+        Db::name('rent_config')->where(['ReceiveRent'=>0,'InstitutionID'=>$institutionID])->delete();
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
