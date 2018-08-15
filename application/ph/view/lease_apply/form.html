@@ -1,0 +1,648 @@
+<style type="text/css">
+    input {
+        border: none;
+        height: 25px;
+        outline: none;
+        width: 120px;
+        padding: 5px;
+        font-size: 14px;
+    }
+    .outerControl .textContent {
+        border: 1px solid #333333;
+        padding: 0 74px 50px 74px;
+        margin: 0px auto;
+        margin-top: 50px;
+    }
+    .textinput {
+        background-color: #ffffff;
+        border-top: solid 1px #a7b5bc;
+        border-left: solid 1px #a7b5bc;
+        border-right: solid 1px #ced9df;
+        border-bottom: solid 1px #ced9df;
+        color: #333333;
+        width: 200px;
+        height: 28px;
+        line-height: 28px;
+    }
+    .outerControl table{width:100%;border-spacing:0;border-top:1px solid #ccc;border-right:1px solid #ccc;text-align: center;}
+    .outerControl td,.outerControl th{height:24px;border-left:1px solid #ccc;border-bottom:1px solid #ccc;font-size:12px;}
+    .pzqk input{width:80px;}
+    .fwClass tr td input {
+        width: 120px;
+        height: 28px;
+        line-height: 28px;
+    }
+</style>
+<div id="leaseAdd" class="outerControl" style="margin-left:125px;margin-top:20px;display:none;">
+        <form id="MyForm" style="width:950px;">
+            <!-- 基本信息 -->
+            <div class="am-form-group am-u-md-12" style="padding-left:0;">
+                <h2 class="label_title">租约申请：</h2>
+            </div>
+            <div class="am-u-md-8" style="margin-bottom:20px;">
+                <label class="label_style">房屋编号：</label>
+                <input type="text" class="label_input" id="HouseIdInput" placeholder="房屋编号" required/>
+                <a class="am-btn am-btn-primary am-btn-sm" id="queryAction_1">查询</a>
+            </div>
+            <div class="am-u-md-4">
+                租直NO:
+                <input type="text" name="ZY_NO" id="ZY_NO" value="租直昌市02-201800392" class="validate[required] textinput" style="text-decoration: underline; font-family: 微软雅黑; font-size: 13px;" truetype="textinput" yzid="1">
+            </div>
+            <table border="1" cellspacing="" cellpadding="">
+                <tbody><tr>
+                    <td colspan="8">
+                        <input type="hidden" id="ZGGF_LDBH" name="ZGGF_LDBH" value="0201020005" truetype="hidden">
+                        <input type="hidden" id="ZGGF_JGBM" name="ZGGF_JGBM" value="25010402002" truetype="hidden">
+                        <input type="hidden" id="HU_ID" name="HU_ID" value="1000066046" truetype="hidden">
+                        <input type="hidden" id="ZGGF_ZHXM" name="ZGGF_ZHXM" truetype="hidden">
+                        <input type="hidden" id="ZGGF_YSYMJ" name="ZGGF_YSYMJ" value="16.20" truetype="hidden">
+                        <input type="hidden" id="ZGGF_YJZMJ" name="ZGGF_YJZMJ" truetype="hidden">
+                        
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2">房屋坐落</td>
+                    <td rowspan="2">
+                        <textarea style="width: 200px; height: 50px; font-size: 13px; border: none; outline: none; font-family: 微软雅黑;" name="ZGGF_FWDZ" id="ZGGF_FWDZ" class="validate[required] textarea" truetype="textarea" yzid="2">解放路252号</textarea></td>
+                    <td rowspan="2" style="width: 40px;">结构</td>
+                    <td rowspan="2">
+                        <input type="text" style="width: 150px; font-family: 微软雅黑; font-size: 13px;" name="ZGGF_JGLBNAME" id="ZGGF_JGLBNAME" value="砖木二等" truetype="textinput" class="textinput">
+                        <input type="hidden" name="ZGGF_JGLB" id="ZGGF_JGLB" value="砖木二等" truetype="hidden">
+                    </td>
+                    <td style="width: 50px;">房屋层</td>
+                    <td>
+                        <input type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="ZGGF_FWC" id="ZGGF_FWC" value="2" truetype="textinput" class="textinput"></td>
+                </tr>
+                <tr>
+                    <td>居住层</td>
+                    <td>
+                        <input type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="ZGGF_JZC" id="ZGGF_JZC" value="1" truetype="textinput" class="textinput"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">承租人姓名</td>
+                    <td rowspan="2">
+                        <input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_CZR" id="ZGGF_CZR" value="徐山谷" class="validate[required] textinput" truetype="textinput" yzid="3"></td>
+                    <td colspan="2">身份证号</td>
+                    <td colspan="4">
+                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_CZRCARDID" id="ZGGF_CZRCARDID" value="000000000000000000" maxlength="18" truetype="textinput" class="textinput"></td>
+                </tr>
+                <tr>
+                     <td colspan="2">承租人电话</td>
+                    <td colspan="4">
+                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_DH" id="ZGGF_DH" value="15072417079" maxlength="11" truetype="textinput" class="textinput"></td>
+                </tr>
+                <tr>
+                    <td>承租人代表/监护人 姓名</td>
+                    <td>
+                        <input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_JHRXM" id="ZGGF_JHRXM" truetype="textinput" class="textinput"></td>
+                    <td colspan="2">监护人身份证号</td>
+                    <td colspan="4">
+                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_JHRCARDID" id="ZGGF_JHRCARDID" maxlength="18" truetype="textinput" class="textinput"></td>
+                </tr>
+                <tr>
+                    <td colspan="6">注：承租人代表/监护人无处置、转让、房改、征收等权利</td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="height: 400px; font-size: 24px;">
+                        <div style="float: left; margin: 0 130px 50px 75px;">
+                            <span>出租人：（甲方）</span><br>
+                            <span style="color:red;font-size:14px;">区公司审核后在此盖章</span>
+                            
+                        </div>
+                        <div style="float: right; margin: 0 75px 50px 50px;">
+                            <span>承租人：（乙方）</span><br>
+                          
+                            <span style="color:red;font-size:14px;">打印证件时在此签字</span>
+                           
+                        </div>
+                        <div style="clear: both;"></div>
+                        
+                        <div style="float: right; margin: 0 75px 50px 50px;">
+                            <span>承租人代表/监护人签章：</span><br>
+                            <input style="height: 30px; width: 200px;" type="" name="" value="">
+                        </div>
+                        <div style="clear: both;"></div>
+                        <div style="float: right; margin: 0 75px 50px 50px;">
+                            租约签订日期<input style="width: 50px;" type="" name="ZGGF_QDSTARTDATE_YEAR" id="ZGGF_QDSTARTDATE_YEAR" value="2018" class="validate[required]" yzid="4">年<input style="width: 30px;" type="" name="ZGGF_QDSTARTDATE_MONTH" id="ZGGF_QDSTARTDATE_MONTH" value="05" class="validate[required]" yzid="5">月<input style="width: 30px;" type="" name="ZGGF_QDSTARTDATE_DAY" id="ZGGF_QDSTARTDATE_DAY" value="16" class="validate[required]" yzid="6">日
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+            <!-- 评 租 情 况 记 载 -->
+            <hr style="margin-top:30px;" />
+            <div class="am-form-group am-u-md-12" style="padding-left:0;">
+                <h2 class="label_title">评租情况记载：</h2>
+            </div>
+            <table class="pzqk" border="1" cellspacing="" cellpadding="">
+                <tbody><tr>
+                    <th colspan="2">部位</th>
+                    <th>间号</th>
+                    <th>实有面积（m²）</th>
+                    <th>计租面积（m²）</th>
+                    <th>租金（元）</th>
+                    <th colspan="2">项目</th>
+                    <th>单价（元）</th>
+                    <th>数量（m²）（件、个）</th>
+                    <th>租金（元）</th>
+                </tr>
+                <tr>
+                    <td rowspan="4" colspan="2">卧室</td>
+                    <td>
+                        <input class="jianhao textinput" type="text" name="WS_JHO1" id="WS_JHO1" value="15" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="" name="WS_SM1" id="WS_SM1" value="16.20" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="7"></td>
+                    <td>
+                        <input type="" name="WS_JM1" id="WS_JM1" value="16.20" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="8"></td>
+                    <td>
+                        <input type="" name="WS_YZJ1" id="WS_YZJ1" value="13.61" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="9"></td>
+                    <td rowspan="4">三户以上共用</td>
+                    <td>厅（堂）</td>
+                    <td>0.50/个</td>
+                    <td>
+                        <input type="" name="WSTT_SL" id="WSTT_SL" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="10"></td>
+                    <td>
+                        <input type="" name="WSTT_ZJ" id="WSTT_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="11"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="jianhao" type="" name="WS_JHO2" id="WS_JHO2" value="3"></td>
+                    <td>
+                        <input type="" name="WS_SM2" id="WS_SM2" value="7.56" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="12"></td>
+                    <td>
+                        <input type="" name="WS_JM2" id="WS_JM2" value="7.56" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="13"></td>
+                    <td>
+                        <input type="" name="WS_YZJ2" id="WS_YZJ2" value="5.67" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="14"></td>
+                    <td>厨房</td>
+                    <td>0.50/个</td>
+                    <td>
+                        <input type="" name="CF_SL" id="CF_SL" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="15"></td>
+                    <td>
+                        <input type="" name="CF_ZJ" id="CF_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="16"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="jianhao textinput" type="text" name="WS_JHO3" id="WS_JHO3" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="" name="WS_SM3" id="WS_SM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="17"></td>
+                    <td>
+                        <input type="" name="WS_JM3" id="WS_JM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="18"></td>
+                    <td>
+                        <input type="" name="WS_YZJ3" id="WS_YZJ3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="19"></td>
+                    <td>卫生间</td>
+                    <td>0.50/个</td>
+                    <td>
+                        <input type="" name="WSJ_SL" id="WSJ_SL" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="20"></td>
+                    <td>
+                        <input type="" name="WSJ_ZJ" id="WSJ_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="21"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="jianhao" type="" name="WS_JHO4" id="WS_JHO4"></td>
+                    <td>
+                        <input type="" name="WS_SM4" id="WS_SM4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="22"></td>
+                    <td>
+                        <input type="" name="WS_JM4" id="WS_JM4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="23"></td>
+                    <td>
+                        <input type="" name="WS_YZJ4" id="WS_YZJ4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="24"></td>
+                    <td>室内走道</td>
+                    <td>0.50/个</td>
+                    <td>
+                        <input type="" name="DOW_SL" id="DOW_SL" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="25"></td>
+                    <td>
+                        <input type="" name="DOW_ZJ" id="DOW_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="26"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">厅堂</td>
+                    <td><input type="text" name="TYPE1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="TIN_JHO1" id="TIN_JHO1"></td>
+                    <td>
+                        <input type="" name="TIN_SM1" id="TIN_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="27"></td>
+                    <td>
+                        <input type="" name="TIN_JM1" id="TIN_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="28"></td>
+                    <td>
+                        <input type="" name="TIN_YZJ1" id="TIN_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="29"></td>
+                    <td rowspan="2">高1至1.7米搁楼</td>
+                    <td>5m²以下</td>
+                    <td>0.50/个</td>
+                    <td>
+                        <input type="" name="TTGL_SL1" id="TTGL_SL1" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="30"></td>
+                    <td>
+                        <input type="" name="TTGL_ZJ1" id="TTGL_ZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="31"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="TYPE2" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="TIN_JHO2" id="TIN_JHO2"></td>
+                    <td>
+                        <input type="" name="TIN_SM2" id="TIN_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="32"></td>
+                    <td>
+                        <input type="" name="TIN_JM2" id="TIN_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="33"></td>
+                    <td>
+                        <input type="" name="TIN_YZJ2" id="TIN_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="34"></td>
+                    <td>5m²以上</td>
+                    <td>1.00/个</td>
+                    <td>
+                        <input type="" name="TTGL_SL2" id="TTGL_SL2" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="35"></td>
+                    <td>
+                        <input type="" name="TTGL_ZJ2" id="TTGL_ZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="36"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">厨房</td>
+                    <td><input type="text" name="TYPE3" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="CF_JHO1" id="CF_JHO1" value="2"></td>
+                    <td>
+                        <input type="" name="CF_SM1" id="CF_SM1" value="3" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="37"></td>
+                    <td>
+                        <input type="" name="CF_JM1" id="CF_JM1" value="3" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="38"></td>
+                    <td>
+                        <input type="" name="CF_YZJ1" id="CF_YZJ1" value="2.25" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="39"></td>
+                     <td colspan="2"><input type="text" name="ECGS_NAME" id="ECGS_NAME" value="二次供水" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ECGS_DW" id="ECGS_DW" value="0.08/m2" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="" name="ECGS_SL" id="ECGS_SL" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" yzid="40"></td>
+                    <td>
+                        <input type="" name="ECGS_ZJ" id="ECGS_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" yzid="41"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="TYPE4" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="CF_JHO2" id="CF_JHO2"></td>
+                    <td>
+                        <input type="" name="CF_SM2" id="CF_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="42"></td>
+                    <td>
+                        <input type="" name="CF_JM2" id="CF_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="43"></td>
+                    <td>
+                        <input type="" name="CF_YZJ2" id="CF_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="44"></td>
+                    <td colspan="2"><input type="text" name="MP_NAME" id="MP_NAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="MP_DW" id="MP_DW" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="" name="MP_SL" id="MP_SL" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" yzid="45"></td>
+                    <td>
+                        <input type="" name="MP_ZJ" id="MP_ZJ" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" yzid="46"></td>
+                    
+                </tr>
+                <tr>
+                    <td rowspan="2">卫生间</td>
+                    <td><input type="text" name="TYPE5" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="WSJ_JHO1" id="WSJ_JHO1"></td>
+                    <td>
+                        <input type="" name="WSJ_SM1" id="WSJ_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="47"></td>
+                    <td>
+                        <input type="" name="WSJ_JM1" id="WSJ_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="48"></td>
+                    <td>
+                        <input type="" name="WSJ_YZJ1" id="WSJ_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="49"></td>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="TYPE6" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="WSJ_JHO2" id="WSJ_JHO2"></td>
+                    <td>
+                        <input type="" name="WSJ_SM2" id="WSJ_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="50"></td>
+                    <td>
+                        <input type="" name="WSJ_JM2" id="WSJ_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="51"></td>
+                    <td>
+                        <input type="" name="WSJ_YZJ2" id="WSJ_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="52"></td>
+                    <td colspan="2"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">室内走道</td>
+                    <td><input type="text" name="TYPE7" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="DOW_JHO1" id="DOW_JHO1"></td>
+                    <td>
+                        <input type="" name="DOW_SM1" id="DOW_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="53"></td>
+                    <td>
+                        <input type="" name="DOW_JM1" id="DOW_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="54"></td>
+                    <td>
+                        <input type="" name="DOW_YZJ1" id="DOW_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="55"></td>
+                    <td></td>
+                    <td style="font-weight:bold;">间号</td>
+                    <td style="font-weight:bold;">实有面积（m²）</td>
+                    <td style="font-weight:bold;">计租面积（m²）</td>
+                    <td style="font-weight:bold;">租金（元）</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="TYPE8" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input class="jianhao" type="" name="DOW_JHO2" id="DOW_JHO2"></td>
+                    <td>
+                        <input type="" name="DOW_SM2" id="DOW_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="56"></td>
+                    <td>
+                        <input type="" name="DOW_JM2" id="DOW_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="57"></td>
+                    <td>
+                        <input type="" name="DOW_YZJ2" id="DOW_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="58"></td>
+                    <td>高1.7至2.2米搁楼</td>
+                    <td>
+                        <input class="jianhao" type="" name="GL_JHO1" id="GL_JHO1"></td>
+                    <td>
+                        <input type="" name="GL_SM1" id="GL_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="59"></td>
+                    <td>
+                        <input type="" name="GL_JM1" id="GL_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="60"></td>
+                    <td>
+                        <input type="" name="GL_YZJ1" id="GL_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="61"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="3">封闭阳台</td>
+                    <td>
+                        <input class="jianhao" type="" name="FBYT_JHO1" id="FBYT_JHO1"></td>
+                    <td>
+                        <input type="" name="FBYT_SM1" id="FBYT_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="62"></td>
+                    <td>
+                        <input type="" name="FBYT_JM1" id="FBYT_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="63"></td>
+                    <td>
+                        <input type="" name="FBYT_YZJ1" id="FBYT_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="64"></td>
+                    <td rowspan="3">无封闭阳台</td>
+                    <td>
+                        <input class="jianhao" type="" name="WFBYT_JHO1" id="WFBYT_JHO1"></td>
+                    <td>
+                        <input type="" name="WFBYT_SM1" id="WFBYT_SM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="65"></td>
+                    <td>
+                        <input type="" name="WFBYT_JM1" id="WFBYT_JM1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="66"></td>
+                    <td>
+                        <input type="" name="WFBYT_YZJ1" id="WFBYT_YZJ1" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="67"></td>
+                </tr>
+
+               <tr>
+                     <td>
+                        <input class="jianhao" type="" name="FBYT_JHO2" id="FBYT_JHO2"></td>
+                    <td>
+                        <input type="" name="FBYT_SM2" id="FBYT_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="68"></td>
+                    <td>
+                        <input type="" name="FBYT_JM2" id="FBYT_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="69"></td>
+                    <td>
+                        <input type="" name="FBYT_YZJ2" id="FBYT_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="70"></td>
+                   <td>
+                        <input class="jianhao" type="" name="WFBYT_JHO2" id="WFBYT_JHO2"></td>  
+                   <td>
+                        <input type="" name="WFBYT_SM2" id="WFBYT_SM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="71"></td>
+                    <td>
+                        <input type="" name="WFBYT_JM2" id="WFBYT_JM2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="72"></td>
+                    <td>
+                        <input type="" name="WFBYT_YZJ2" id="WFBYT_YZJ2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="73"></td>
+                </tr>
+                <tr>
+                     <td>
+                        <input class="jianhao" type="" name="FBYT_JHO3" id="FBYT_JHO3"></td>
+                    <td>
+                        <input type="" name="FBYT_SM3" id="FBYT_SM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="74"></td>
+                    <td>
+                        <input type="" name="FBYT_JM3" id="FBYT_JM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="75"></td>
+                    <td>
+                        <input type="" name="FBYT_YZJ3" id="FBYT_YZJ3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="76"></td>
+                    <td>
+                        <input class="jianhao" type="" name="WFBYT_JHO3" id="WFBYT_JHO3"></td> 
+                    <td>
+                        <input type="" name="WFBYT_SM3" id="WFBYT_SM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="77"></td>
+                    <td>
+                        <input type="" name="WFBYT_JM3" id="WFBYT_JM3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="78"></td>
+                    <td>
+                        <input type="" name="WFBYT_YZJ3" id="WFBYT_YZJ3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="79"></td>
+                </tr>
+                
+                 <tr>
+                    <td colspan="2"> <input type="text" name="ZGGF_FJLX1" id="ZGGF_FJLX1" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJH1" id="ZGGF_FJH1" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FSM1" id="ZGGF_FSM1" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJM1" id="ZGGF_FJM1" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FYZJ1" id="ZGGF_FYZJ1" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td colspan="2" rowspan="4">合计</td>
+                    <td rowspan="4"></td>
+                    <td rowspan="4">
+                        <input type="" name="ZGGF_HJRIGHTSL1" id="ZGGF_HJRIGHTSL1" value="" readonly="true"></td>
+                    <td rowspan="4">
+                        <input type="" name="ZGGF_HJRIGHTZJ2" id="ZGGF_HJRIGHTZJ2" value="" readonly="true"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"> <input type="text" name="ZGGF_FJLX2" id="ZGGF_FJLX2" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJH2" id="ZGGF_FJH2" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FSM2" id="ZGGF_FSM2" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJM2" id="ZGGF_FJM2" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FYZJ2" id="ZGGF_FYZJ2" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"> <input type="text" name="ZGGF_FJLX3" id="ZGGF_FJLX3" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJH3" id="ZGGF_FJH3" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FSM3" id="ZGGF_FSM3" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJM3" id="ZGGF_FJM3" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FYZJ3" id="ZGGF_FYZJ3" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"> <input type="text" name="ZGGF_FJLX4" id="ZGGF_FJLX4" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJH4" id="ZGGF_FJH4" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FSM4" id="ZGGF_FSM4" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FJM4" id="ZGGF_FJM4" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input type="text" name="ZGGF_FYZJ4" id="ZGGF_FYZJ4" value="0" onblur="gethj1()" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">合计</td>
+                    <td>
+                        <input class="jianhao" type="" name="" value=""></td>
+                    <td>
+                        <input type="" name="ZGGF_HJLEFTSM1" id="ZGGF_HJLEFTSM1" value="" readonly="true"></td>
+                    <td>
+                        <input type="" name="ZGGF_HJLEFTJM1" id="ZGGF_HJLEFTJM1" value="" readonly="true"></td>
+                    <td>
+                        <input type="" name="ZGGF_HJLEFTZJ1" id="ZGGF_HJLEFTZJ1" value="" readonly="true"></td>
+                    <td colspan="2">核定月租金</td>
+                    <td colspan="3">
+                        ¥<input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="ZGGF_GDZJ" id="ZGGF_GDZJ" value="21.50" class="validate[custom[onlyNumberWide]] textinput" onblur="gethdyzj()" truetype="textinput" yzid="80">元</td>
+                </tr>
+                <tr>
+                    <td colspan="11">资料员：<input style="width: 120px; margin-right: 30px;" type="" name="ZGGF_TXR" id="ZGGF_TXR">
+                        &nbsp;  &nbsp;  &nbsp;
+                        经管所长：<input style="width: 120px; margin-right: 30px;" type="" name="ZGGF_HDR" id="ZGGF_HDR">
+                        &nbsp;  &nbsp;  &nbsp;
+                        经管科长：<input style="width: 120px; margin-right: 30px;" type="" name="ZGGF_KZSHR" id="ZGGF_KZSHR" value="">
+                    </td>
+                </tr>
+            </tbody></table>
+            <!-- 房屋构件设备点交记载 -->
+            <hr style="margin-top:30px;" />
+            <div class="am-form-group am-u-md-12" style="padding-left:0;">
+                <h2 class="label_title">房屋构件设备点交记载：</h2>
+            </div>
+            <table class="fwClass" border="1" cellspacing="" cellpadding="">
+                <tbody><tr>
+                    <td>名称</td>
+                    <td>数量</td>
+                    <td>附注</td>
+                    <td></td>
+                    <td>名称</td>
+                    <td>数量</td>
+                    <td>附注</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ZGGF_MNAME" id="ZGGF_MNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_MSL" id="ZGGF_MSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="81" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_MFZ" id="ZGGF_MFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="ZGGF_SBNAME" id="ZGGF_SBNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SBSL" id="ZGGF_SBSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="82" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SBFZ" id="ZGGF_SBFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ZGGF_CNAME" id="ZGGF_CNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_CSL" id="ZGGF_CSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="83" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_CFZ" id="ZGGF_CFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="ZGGF_DPQNAME" id="ZGGF_DPQNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DPQSL" id="ZGGF_DPQSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="84" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DPQFZ" id="ZGGF_DPQFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ZGGF_BLNAME" id="ZGGF_BLNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_BLSL" id="ZGGF_BLSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="85" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_BLFZ" id="ZGGF_BLFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="ZGGF_SLTNAME" id="ZGGF_SLTNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SLTSL" id="ZGGF_SLTSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="86" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SLTFZ" id="ZGGF_SLTFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ZGGF_DDTNAME" id="ZGGF_DDTNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DDTSL" id="ZGGF_DDTSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="87" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DDTFZ" id="ZGGF_DDTFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="ZGGF_NAME1" id="ZGGF_NAME1" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SL1" id="ZGGF_SL1" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="88" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_FZ1" id="ZGGF_FZ1" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="ZGGF_DDBNAME" id="ZGGF_DDBNAME" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DDBSL" id="ZGGF_DDBSL" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="89" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_DDBFZ" id="ZGGF_DDBFZ" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td></td>
+                    <td>
+                        <input type="text" name="ZGGF_NAME2" id="ZGGF_NAME2" value="" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_SL2" id="ZGGF_SL2" value="" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="90" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td>
+                        <input type="text" name="ZGGF_FZ2" id="ZGGF_FZ2" value="" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                </tr>
+                <tr>
+                    <td colspan="7">
+                        <p style="margin: 60px 0 30px 0;"><span style="font-size: 20px; width: 50px; border-bottom: 3px double #333333;">附记</span></p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                        <p>&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <!-- 约定事项 -->
+            <hr style="margin-top:30px;" />
+            <div class="am-form-group am-u-md-12" style="padding-left:0;">
+                <h2 class="label_title">约定事项：</h2>
+            </div>
+            <div class="textContent">
+                <p style="margin: 60px 0 30px 0; text-align: center;"><span style="font-size: 24px; width: 50px; border-bottom: 3px double #333333;">约定事项</span></p>
+                <p>1、承租人代表履行直管公房的看管义务、负责缴纳租金等事项。</p>
+                <p>2、监护人代未成年人、无民事行为能力或限制民事行为能力人的承租人履行直管公房的看管义务、负责缴纳租金等事项，待被监护人成年或具备完全民事行为能力时，办理承租人过户手续。</p>
+                <p>3、出租人（下称甲方）和承租人（下称乙方）应遵守《武汉市房产管理条例》和租约约定的相关规定。</p>
+                <p>4、对房屋的自然损坏或合同约定由甲方修缮的，甲方负责修复。不及时修复，致使房屋发生破坏性事故，造成乙方财产损失或者人身伤害的，甲方应当承担赔偿责任。</p>
+                <p>5、乙方应当合理使用房屋及附属设施，不得擅自拆改，扩建或增添。确需变动的，必须征得甲方同意并签订书面合同。</p>
+                <p>6、乙方不得在室内堆放易燃易爆物品，家庭用电负荷必须与房屋配备电表容量相匹配，如乙方使用不当造成房屋损坏或人身财产损失的，由乙方负责修复或赔偿。</p>
+                <p>7、乙方应于本月月底前交付当月租金，不得拖欠；逾期未交，房管所下达催缴通知单仍未缴纳的，乙方除应支付拖欠租金外，还应按月支付欠租总额3%的违约金。</p>
+                <p>8、乙方有下列行为之一的，甲方有权终止合同，收回房屋：</p>
+                <p>（1）将承租的房屋擅自转租的；</p>
+                <p>（2）将承租的房屋转让、转借他人或擅自调换使用的；</p>
+                <p>（3）将承租的房屋擅自拆改结构或改变用途的；</p>
+                <p>（4）拖欠租金累计六个月以上的；</p>
+                <p>（5）利用承租房屋进行违法活动。</p>
+                <p></p>
+                <p style="text-align: right; margin-top: 40px;">武汉市住房保障和房屋管理局印制</p>
+            </div>
+            <p style="text-align: center;">
+                <input type="hidden" id="ZY_ID" name="ZY_ID" value="4ff0beadb0704926a1be7c544fbb020e" truetype="hidden">
+                <input type="hidden" id="ZGGF_FILE" name="ZGGF_FILE" truetype="hidden">
+                <input type="hidden" id="ZGGF_HZYY" name="ZGGF_HZYY" truetype="hidden">
+                <input type="hidden" id="czr1" truetype="hidden">
+                <input type="hidden" id="czr" name="czr" truetype="hidden">
+                <input type="hidden" id="gdzjxt" name="gdzjxt" truetype="hidden">
+                <input type="hidden" id="hidstream" name="hidstream" value="" truetype="hidden">
+                <input type="hidden" id="gdzjhj1" name="gdzjhj1" truetype="hidden" value="21.53">
+                <input type="hidden" id="gdzjhj2" name="gdzjhj2" truetype="hidden" value="0">
+                <input type="hidden" id="ZGGF_BY2" name="ZGGF_BY2" truetype="hidden">
+                <input type="hidden" id="ZGGF_BY3" name="ZGGF_BY3" truetype="hidden">
+            </p>
+
+            <hr style="margin-top:30px;" />
+            <div class="am-form-group am-u-md-12">
+                <h2 class="label_title">附件上传：</h2>
+            </div>
+            <div class="am-u-md-12 fileUpLoad">
+                <div class="am-u-md-4">
+                    <p>计租表：</p>
+                </div>
+                <div class="am-form-group am-form-file am-u-md-8">
+                    <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                    <input id="transferApplication" type="file" name="transferApplication" multiple>
+                </div>
+                <div id="transferApplicationShow" class="am-u-md-12"></div>
+            </div>
+            <div class="am-u-md-12 fileUpLoad">
+                <div class="am-u-md-4">
+                    <p>住宅租约：</p>
+                </div>
+                <div class="am-form-group am-form-file am-u-md-8">
+                    <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                    <input id="transferApplication" type="file" name="transferApplication" multiple>
+                </div>
+                <div id="transferApplicationShow" class="am-u-md-12"></div>
+            </div>
+            <div class="am-u-md-12 fileUpLoad">
+                <div class="am-u-md-4">
+                    <p>身份证：</p>
+                </div>
+                <div class="am-form-group am-form-file am-u-md-8">
+                    <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                    <input id="transferApplication" type="file" name="transferApplication" multiple>
+                </div>
+                <div id="transferApplicationShow" class="am-u-md-12"></div>
+            </div>
+            <div class="am-u-md-12">
+                <label class="label_style">换租原因：</label>
+                <input type="text" class="label_input" value="老证换新证" required/>
+            </div>
+
+        </form>
+</div>
