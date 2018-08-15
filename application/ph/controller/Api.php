@@ -807,70 +807,6 @@ class Api extends Controller
         }
     }
 
-//    public function get_all_ban_info(){
-//
-//        if ($this->request->isPost()) {
-//
-//            $map = $this->request->post();
-//        }
-//
-//        $currentUserInstitutionID = session('user_base_info.institution_id');
-//
-//        $currentUserLevel = session('user_base_info.institution_level');
-//
-//        if($currentUserLevel == 3){  //用户为管段级别，则直接查询
-//
-//            $where['InstitutionID'] = array('eq' ,$currentUserInstitutionID);
-//
-//        }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-//
-//            $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
-//
-//        }else{    //用户为公司级别，则获取所有子管段
-//
-//        }
-//
-//        $where['Status'] = array('eq' ,1);
-//
-//        if(isset($map['InstitutionID']) && $map['InstitutionID']){ //楼栋机构查询
-//
-//            $level = Db::name('institution')->where('id','eq',$map['InstitutionID'])->value('Level');
-//            //dump($level);exit;
-//            if($level == 3) {
-//                $where['InstitutionID'] = array('eq', $map['InstitutionID']);
-//            }elseif($level == 2){
-//                $where['InstitutionPID'] = array('eq', $map['InstitutionID']);
-//            }
-//        }
-//
-//        if(isset($map['BanAddress']) && $map['BanAddress']){  //模糊检索楼栋地址
-//
-//            $where['BanAddress'] = array('like', '%'.$map['BanAddress'].'%');
-//
-//        }
-//
-//        if(isset($map['TenantName']) && $map['TenantName']){  //模糊检索租户姓名
-//
-//            $where['TenantName'] = array('like', '%'.$map['TenantName'].'%');
-//
-//        }
-//
-//        if(!isset($where)) $where =1;
-//
-//        $data = Db::name('ban')
-//            //->join('ban b' ,'a.BanID = b.BanID','left')
-//            ->where($where)
-//            ->field('BanID ,BanAddress')
-//            //->select();
-//            ->paginate(config('paginate.list_rows'))
-//            ->toArray();
-//
-//        $data['totalPage'] = ceil($data['total']/$data['per_page']);
-//
-//        return jsons('2000' ,'获取成功' ,$data);
-//
-//    }
-
 
     public function edit_password()
     {
@@ -1347,32 +1283,6 @@ class Api extends Controller
     public function test()
     {
 
-        // $a = 0.17;
-        // $b = 0.04;
-        // //$c = 0.1;
-        // dump($a + $b);
-        // halt(array_bcadd([$a,$b]));
-        // $a = Db::name('room')->field('HouseID,BanID')->select();
-        // foreach($a as $b){
-        //     $s = strpos($b['HouseID'],',');
-        //     if($s){
-        //         $e = explode(',',$b['HouseID']);
-        //         foreach($e as $f){
-        //             $arr[$f][] = $b['BanID'];
-        //         }
-        //     }else{
-        //         $arr[$b['HouseID']][] = $b['BanID'];
-        //     }
-            
-        // }
-        // foreach($arr as $i => &$r){
-        //     $r = array_unique($r);
-        //     if(count($r) > 1){
-        //         $m[$i] = $r;
-        //     }
-        // }
-        // halt(isset($m)?$m:0);
-
     }
 
     /**
@@ -1435,65 +1345,6 @@ class Api extends Controller
              $roommodel->save(['RoomRentMonth'=>$s],['RoomID'=>$k]);
         }
         halt($j);
-    }
-
-    public function dingshiqi()
-    {
-
-        ignore_user_abort(TRUE);    //关掉浏览器，PHP脚本也可以继续执行.
-        set_time_limit(0);        // 通过set_time_limit(0)可以让程序无限制的执行下去
-        $i = 1;
-        $cacheTime = 3600 * 24 * 360;
-        do {                         //当循环结束时脚本也就结束了
-            $nowDate = date('d', time());
-            $nowMonth = date('Ym', time());
-            $nowMonth = '201801';
-            $nowYear = date('Y', time());
-
-            if ($nowYear === '2018') {  //每个月的1号，开始执行生成报表程序
-                Debug::remark('begin');
-
-//                //1、【测试ok】产权统计报表，按年缓存，3.467774s
-//                $PropertyReportdata = model('ph/PropertyReport')->index();
-//                Cache::store('file')->set('PropertyReport' . $nowYear, json_encode($PropertyReportdata), $cacheTime);
-
-//                //2、【测试ok】房屋统计报表，230.078125s
-//                $HouseReportdata = model('ph/HouseReport')->index();
-//                Cache::store('file')->set('HouseReport' . $nowMonth, json_encode($HouseReportdata), $cacheTime);
-
-                // //3、【测试ok】月租金报表，35.386719s
-                // $RentReportdata = model('ph/RentReport')->index();
-                // Cache::store('file')->set('RentReport' . $nowMonth, json_encode($RentReportdata), $cacheTime);
-
-//                //4、【测试ok】租金分析报表，10.304688s
-//                $RentAnalysisReportdata = model('ph/RentAnalysisReport')->index();
-//                Cache::store('file')->set('RentAnalysisReport' . $nowMonth, json_encode($RentAnalysisReportdata), $cacheTime);
-//
-//                //5、【测试ok】代托管收支明细报表，1.724609s
-//                $InOutdata = model('ph/InOutReport')->index();
-//                Cache::store('file')->set('InOutReport' . $nowMonth, json_encode($InOutdata), $cacheTime);
-//
-//                //6、【测试ok】核减租金汇总表，10.236328s
-//                $RentCutReportdata = model('ph/RentCutReport')->index();
-//                Cache::store('file')->set('RentCutReport' . $nowMonth, json_encode($RentCutReportdata), $cacheTime);
-//
-//                //7、【测试ok】缓存危严房基本情况，消耗0.063476s
-//                $DangerousReportdata = model('ph/DangerousReport')->index();
-//                Cache::store('file')->set('DangerousReport' . $nowMonth, json_encode($DangerousReportdata), $cacheTime);
-
-
-                Debug::remark('end');
-                echo Debug::getRangeTime('begin', 'end') . 's';
-
-                exit;
-
-            }
-
-            sleep(60 * 60 * 24);// 等待1天，相当于每隔1天再次循环一次
-
-
-        } while ($i == 1);
-
     }
 
     /**
@@ -1575,5 +1426,47 @@ class Api extends Controller
         Db::name('rent_config')->where(['ReceiveRent'=>0])->delete();
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+    }
+
+    public function lease_house_info()
+    {
+        $houseid = input('HouseID');
+
+        $result = [];
+
+        $result['house'] = Db::name('house')->alias('a')
+                                      ->join('ban b','a.BanID = b.BanID','left')
+                                      ->join('tenant c','a.TenantID = c.TenantID','left')
+                                      ->join('ban_structure_type d','b.StructureType = d.id','left')
+                                      ->field('a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost')
+                                      ->where('a.HouseID',$houseid)
+                                      ->find();
+
+        if(empty($result['house'])){
+            return jsons('4000','参数错误');
+        }
+
+        $rooms = Db::name('room')->field('RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
+            ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
+            ->select();
+
+        if(empty($rooms)){
+            $rooms = array();
+        }else{
+            foreach($rooms as &$v){
+                switch ($v['RoomPublicStatus']) {
+                    case 1:
+                        $v['RoomPublicStatus'] = '独';
+                        break;
+                    default:
+                        $v['RoomPublicStatus'] = '共';
+                        break;
+                }
+            }
+        }
+        
+        $result['room'] = $rooms;
+
+        return jsons('2000', '获取成功', $result);
     }
 }
