@@ -723,18 +723,24 @@ function count_house_rent($houseid){
 
     //halt($sumrent);
     //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
-    $houseAddRent = Db::name('house')->field('PublicRent')->where('HouseID',$houseid)->find();
+    $find = Db::name('house')->field('PublicRent,UseNature')->where('HouseID',$houseid)->find();
 
-    $jiaji = $houseAddRent?array_sum($houseAddRent):0;
+    $jiaji = $find['PublicRent']?$find['PublicRent']:0;
 
     $houseRent = $sumrent + $jiaji;
+
+    if($find['UseNature'] == 1){
+        $houseRent = round($houseRent,1);
+    }else{
+        $houseRent = round($houseRent,2);
+    }
 
     return $houseRent;
 }
 
 function count_room_rent($roomid){
     //初始数据
-    $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RentPoint,RoomType,FloorID,BanID,RoomPublicStatus')->find();
+    $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RentPoint,RoomType,UseNature,FloorID,BanID,RoomPublicStatus')->find();
     $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
 
     if($roomOne['RoomPublicStatus'] > 2){ //三户共用直接无租金
@@ -846,13 +852,6 @@ function array_merge_adds($arr1,$arr2,$arr3,$arr4,$arr5,$arr6,$arr7,$arr8,$arr9,
             $adds12 = bcadd($adds8 , $adds9 , 2);
             $adds13 = bcadd($adds10 , $adds11 , 2);
             $re[$k1][$k2] = bcadd($adds12 , $adds13 , 2);
-            // $re[$k1][$k2] = 0;
-            // for($e = 2; $e <16; $e++){
-            //     $s = $arr.$e;
-            //     $re[$k1][$k2] += $arr.$s[]
-            // }
-
-            //$re[$k1][$k2] = $ar + $arr2[$k1][$k2] + $arr3[$k1][$k2]+ $arr4[$k1][$k2]+ $arr5[$k1][$k2]+ $arr6[$k1][$k2]+ $arr7[$k1][$k2]+ $arr8[$k1][$k2]+ $arr9[$k1][$k2]+ $arr10[$k1][$k2]+ $arr11[$k1][$k2]+ $arr12[$k1][$k2]+ $arr13[$k1][$k2]+ $arr14[$k1][$k2]+ $arr15[$k1][$k2];
         }
     }
     return $re;
@@ -897,7 +896,6 @@ function array_no_space_str($arr){
 
 /**
  * 列出本地目录的文件
- * @author rainfer <81818832@qq.com>
  * @param string $path
  * @param string $pattern
  * @return array

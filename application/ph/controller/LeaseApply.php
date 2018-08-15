@@ -38,11 +38,11 @@ class LeaseApply extends Base
      * @description
      */
     public function add(){
-        // if ($this->request->isPost()) {
+        if ($this->request->isPost()) {
 
-        //     $data = $this->request->post();
+            $data = $this->request->post();
 
-        //     //halt($data);
+            halt($data);
 
         //     if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType'])) {
         //         return jsons('4005' ,'请完善相关信息！');
