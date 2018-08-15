@@ -24,83 +24,148 @@
                 <th class="table-check"></th>
     				<th class="table-id">#</th>
     				<th class="table-type">房屋编号</th>
+            <?php if(session('user_base_info.institution_level')!=3){ ;?>
     				<th class="table-type">机构名称</th>
+            <?php }; ?>
     				<th class="table-author am-hide-sm-only">产别</th>
-            		<th class="table-set">房屋地址</th>
+            <th class="table-set">房屋地址</th>
     				<th class="table-date am-hide-sm-only">结构</th>
-	                <th class="table-set">房屋层</th>
-	                <th class="table-set">居住层</th>
-	                <th class="table-set">承租人</th>
+	          <th class="table-set">房屋层</th>
+	          <th class="table-set">居住层</th>
+	          <th class="table-set">承租人</th>
     				<th class="table-set">流程状态</th>
     				<th class="table-set" style="width:114px;">操作</th>
               	</tr>
           </thead>
           <tbody>
 		  <!--查询-->
-          <form action="{:url('UserApply/index')}" method="post">
+          <form action="{:url('LeaseApply/index')}" method="post">
 		    <tr class="am-form-group am-form-inline">
               <td></td>
               <td></td>
-              <td>
-                <div class="am-input-group am-input-group-sm">
-
-                  <input style="width:122px;" type="text" name="ChangeOrderID" class="am-form-field" value="">
-                </div>
-              </td>
+              
               <td>
         				<div class="am-g am-input-group am-input-group-sm">
 
         				  <input style="width:122px;" type="text" name="HouseID" class="am-form-field" value="">
         				</div>
         			</td>
-             <td>
-                  <div class="am-form-group am-form" style="width:70px;">
-                      <select name="OwnerType">
-                          <option  value="" style="display:none">请选择</option>
+             
 
-                          <option value="" ></option>
-                          
-                      </select>
-                  </div>
-              </td> 
-
-              	<td>
-                  <div class="am-form-group am-form" style="width:100px;">
-                      <select name="TubulationID">
-                          <option  value="" style="display:none">请选择</option>
-                          <option value=""></option>
-                          <option value="" ></option>
-                      </select>
-                  </div>
-        		</td>
-       
-	            <td>
-	                <div class="am-form-group am-form" style="width:70px;">
-
-	                    <select name="ChangeType" id="doc-select-5">
-	                        <option  value="" style="display:none">请选择</option>
-	 
-	                        <option value=""> </option>
-	                     
-	                    </select>
-	                </div>
-	           	</td>
-         
-                <td>
-        			<div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-        		</td>
-               <td>
-        			<div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-        		</td>
+              <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
-                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+                  <div class="am-g am-input-group am-input-group-sm">
+                      
+                      <select name="TubulationID">
+                          <option value="" style="display:none">请选择</option>
+                          <?php if(session('user_base_info.institution_level')==1){;?>
+                          <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+                          <?php
+                      if(isset($leaseOption['TubulationID'])){
+                          if($leaseOption['TubulationID'] == $v10['id']){
+                              $select ='selected';
+                          }else{
+                              $select ='';
+                          }
+                      }else{
+                          $select ='';
+                      }
+                      ?>
+                          <option value="<?php echo $v10['id']; ?>"
+                                  {$select}><?php echo $v10['Institution']; ?></option>
+                          <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+                          <?php foreach($instLst as $k12 => $v12){ ; ?>
+                          <?php
+                      if(isset($leaseOption['TubulationID'])){
+                          if($leaseOption['TubulationID'] == $v12['id']){
+                              $select ='selected';
+                          }else{
+                              $select ='';
+                          }
+                      }else{
+                          $select ='';
+                      }
+                      ?>
+                          <option value="<?php echo $v12['id']; ?>"
+                                  {$select}><?php echo $v12['Institution']; ?></option>
+                          <?php }} ; ?>
+                      </select>
+                  </div>
+              </td>
+              <?php } ; ?>
+
+
+       
+             <td>
+                  <div class="am-form-group search_input">
+                      <select name="OwnerType">
+                          <option value="" style="display:none">请选择</option>
+                          <?php foreach($owerLst as $k3 =>$v3){;?>
+
+                            <?php
+                            if(isset($houseOption['OwnerType'])){
+                                if($houseOption['OwnerType'] == $v3['id']){
+                                    $select ='selected';
+                                }else{
+                                    $select ='';
+                                }
+                            }else{
+                                $select ='';
+                            }
+                            ?>
+
+                          <option value="<?php echo $v3['id']; ?>" {$select}>
+                              <?php echo $v3['OwnerType']; ?>
+                          </option>
+                          <?php }; ?>
+                      </select>
+                  </div>
+              </td>
+
+              <td>
+                <div class="am-g am-input-group am-input-group-sm">
+
+                  <input style="width:122px;" type="text" name="BanAddress" class="am-form-field" value="">
+                </div>
+              </td>
+
+              <td>
+                <div class="am-form-group search_input">
+                    <select name="StructureType">
+                        <option  value="" style="display:none">请选择</option>
+                        <?php foreach($struLst as $k4 =>$v4){;?>
+                        <?php
+                            if(isset($leaseOption['StructureType'])){
+                                if($leaseOption['StructureType'] == $v4['id']){
+                                    $select ='selected';
+                                }else{
+                                    $select ='';
+                                }
+                            }else{
+                                $select ='';
+                            }
+                            ?>
+                        <option value="<?php echo $v4['id']; ?>" {$select} ><?php echo $v4['StructureType']; ?></option>
+                        <?php }; ?>
+                    </select>
+                </div>
+              </td>
+         
+              <td>
+        			   <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+        		  </td>
+              <td>
+        			   <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+        		  </td>
+              <td>
+                  <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
               </td>
 
               	<td>
         			<div class="am-input-group am-input-group-sm" style="width:130px;">
-	                    <div class="am-u-sm-6" style="padding:0;">
-	                          <input style="width:130px;" name="CreateTime" value="" type="text" class="am-form-field" data-am-datepicker value="">
-	                    </div>
+                  <div class="am-u-sm-6" style="padding:0;">
+                        <input style="width:130px;" name="CreateTime" value="" type="text" class="am-form-field" data-am-datepicker value="">
+                  </div>
         			</div>
         		</td>
               <td>
@@ -112,23 +177,25 @@
             </tr>
         </form>
 		<!---查询-->
-
+        <?php foreach($leaseLst as $k => $v){; ?>
             <tr class="check001">
                 <td>
                   <span class="piaochecked">
                     <input class="checkId radioclass" type="radio" value="" />
                   </span>
                  </td>
-                <td>9527</td>
-                <td>好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td class="am-hide-sm-only">好滴哇</td>
-                <td><a href="#">8855</a></td>
+                <td>{$k+1}</td>
+                <td><?php echo $v['HouseID']; ?></td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <td><?php echo $v['InstitutionID']; ?></td>
+                <?php }; ?>
+                <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['OwnerType']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['StructureType']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['InstitutionID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['FloorNum']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['FloorID']; ?></td>
+                <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail" value="">详情</button>
@@ -138,7 +205,7 @@
                     </div>
                 </td>
             </tr>
-  
+        <?php }; ?>
 
           </tbody>
         </table>
