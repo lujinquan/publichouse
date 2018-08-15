@@ -725,7 +725,7 @@ function count_house_rent($houseid){
     //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
     $find = Db::name('house')->field('PublicRent,UseNature')->where('HouseID',$houseid)->find();
 
-    $jiaji = $find['PublicRent']?array_sum($find['PublicRent']):0;
+    $jiaji = $find['PublicRent']?$find['PublicRent']:0;
 
     $houseRent = $sumrent + $jiaji;
 
