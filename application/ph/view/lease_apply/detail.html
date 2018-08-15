@@ -3,7 +3,7 @@
   .detail td,.detail th{height:24px;border-left:1px solid #ccc;border-bottom:1px solid #ccc;font-size:12px;}
 </style>
 <div id="leaseDetail" class="detail" style="width:1100px;padding-left:20px;display:none;">
-        <form id="MyForm" width="1091px">
+        <form id="MyDetail" width="1091px">
             <!--startprint2-->
             
             <!-- 基本信息 -->
@@ -79,49 +79,45 @@
                     <input type="hidden" id="HU_ID" name="HU_ID" value="1000058916" truetype="hidden">
 
                     <p class="topHeader" style="text-align: right;">
-                        租直NO:&nbsp;&nbsp;&nbsp;租直昌市01-201802512
-                        <input type="hidden" name="ZY_NO" id="ZY_NO" value="租直昌市01-201802512" style="text-decoration: underline;height:24px;line-height:24px;" truetype="hidden">
+                        租直NO:&nbsp;&nbsp;&nbsp;<span id="detailNO">租直昌市01-201802512</span>
                     </p>
                     <table id="table1" cellspacing="" cellpadding="" style="height:611px;box-sizing:border-box">
                         <tbody><tr>
                             <td rowspan="2" style="width: 80px;">房屋坐落</td>
-                            <td rowspan="2" colspan="2" style="width: 130px;">
-                                紫阳路180号</td>
+                            <td id="detailAddress" rowspan="2" colspan="2" style="width: 130px;">紫阳路180号</td>
                             <td rowspan="2" style="width: 20px;">结构</td>
-                            <td rowspan="2" style="width: 30px;">
+                            <td id="detailStruct" rowspan="2" style="width: 30px;">
                                 钢混
-                                
-                                <input type="hidden" name="ZGGF_JGLB" id="ZGGF_JGLB" value="钢混" truetype="hidden">
                             </td>
                             <td style="width: 30px;">房屋层</td>
-                            <td style="width: 10px;">
-                                8</td>
+                            <td id="detailHouseFloor" style="width: 10px;">
+                                8
+                            </td>
                         </tr>
                         <tr>
                             <td>居住层</td>
-                            <td>
-                                3</td>
+                            <td id="detailLiveFloor">3</td>
                         </tr>
                         <tr>
                             <td style="height:48px;" rowspan="2">承租人姓名</td>
-                            <td style="width: 150px;height:48px;" rowspan="2">
+                            <td id="detailRentName" style="width: 150px;height:48px;" rowspan="2">
                                 吴昊</td>
                             <td style="width: 30px;height:48px;">身份证号</td>
-                            <td colspan="4" style="height:48px;">
+                            <td id="detailRentNumber" colspan="4" style="height:48px;">
                                 420106198110220425</td>
                         </tr>
                         <tr>
                             
                             <td style="width: 30px;height:48px;">承租人电话</td>
-                            <td colspan="4" style="height:48px;">
+                            <td id="detailRentTel" colspan="4" style="height:48px;">
                                 13971481139</td>
                         </tr>
                         <tr>
                             <td rowspan="2">承租人代表/监护人 姓名</td>
-                            <td rowspan="2">
+                            <td id="detailRentName1" rowspan="2">
                                 </td>
                               <td>身份证号</td>
-                        <td colspan="4">
+                        <td id="detailRentNumber1" colspan="4">
                         
                         </td>
                             
@@ -163,7 +159,7 @@
                                 </div>
                                 <div style="clear: both;"></div>
                                 <div style="float: right; margin: -50px 40px 10px 50px;">
-                                    租约签订日期&nbsp;&nbsp;2018 年07 月02 日
+                                    租约签订日期&nbsp;&nbsp;<span id="detailYear">2018</span> 年<span id="detailMonth">07</span> 月<span id="detailDay">02</span> 日
                                 </div>
                             </td>
                         </tr>
@@ -191,161 +187,151 @@
                         </tr>
                         <tr>
                             <td rowspan="4" colspan="2">卧室</td>
-                            <td>
+                            <td id="detailRoom1_data1">
                                 47
-                                <input class="jianhao" type="hidden" name="WS_JHO1" id="WS_JHO1" value="47" truetype="hidden"></td>
-                            <td>
+                            </td>
+                            <td id="detailRoom1_data2">
                                 11.48
-                                <input type="hidden" name="WS_SM1" id="WS_SM1" value="11.48" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="1"></td>
-                            <td>
+                            </td>
+                            <td id="detailRoom1_data3">
                                 11.48
-                                <input type="hidden" name="WS_JM1" id="WS_JM1" value="11.48" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="2"></td>
-                            <td>
+                            </td>
+                            <td id="detailRoom1_data4">
                                 18.08
-                                <input type="hidden" name="WS_YZJ1" id="WS_YZJ1" value="18.08" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="3"></td>
+                            </td>
                             <td rowspan="4" style="width: 75px;">三户以上共用</td>
                             <td style="width: 78px;">厅(堂)</td>
                             <td>0.50/个</td>
-                            <td>
-                                
-                                <input type="hidden" name="WSTT_SL" id="WSTT_SL" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="4"></td>
-                            <td>
-                                
-                                <input type="hidden" name="WSTT_ZJ" id="WSTT_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="5"></td>
+                            <td id="detailRoom1_data5"></td>
+                            <td id="detailRoom1_data6"></td>
                         </tr>
                         <tr>
-                            <td>
+                            <td id="detailRoom2_data1">
                                 48
-                                <input class="jianhao" type="hidden" name="WS_JHO2" id="WS_JHO2" value="48" truetype="hidden"></td>
-                            <td>
+                            </td>
+                            <td id="detailRoom2_data2">
                                 11.48
-                                <input type="hidden" name="WS_SM2" id="WS_SM2" value="11.48" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="6"></td>
-                            <td>
-                                11.48<input type="hidden" name="WS_JM2" id="WS_JM2" value="11.48" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="7"></td>
-                            <td>
+                            </td>
+                            <td id="detailRoom2_data3">
+                                11.48
+                            </td>
+                            <td id="detailRoom2_data4">
                                 18.08
-                                <input type="hidden" name="WS_YZJ2" id="WS_YZJ2" value="18.08" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="8"></td>
+                            </td>
                             <td>厨房</td>
                             <td>0.50/个</td>
-                            <td>
-                                <input type="hidden" name="CF_SL" id="CF_SL" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" truetype="hidden" yzid="9"></td>
-                            <td>
-                                <input type="hidden" name="CF_ZJ" id="CF_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" truetype="hidden" yzid="10"></td>
+                            <td id="detailRoom2_data5"></td>
+                            <td id="detailRoom2_data6"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <input class="jianhao" type="hidden" name="WS_JHO3" id="WS_JHO3" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="WS_SM3" id="WS_SM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="11"></td>
-                            <td>
-                                <input type="hidden" name="WS_JM3" id="WS_JM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="12"></td>
-                            <td>
-                                <input type="hidden" name="WS_YZJ3" id="WS_YZJ3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="13"></td>
+                            <td id="detailRoom3_data1"></td>
+                            <td id="detailRoom3_data2"></td>
+                            <td id="detailRoom3_data3"></td>
+                            <td id="detailRoom3_data4"></td>
                             <td>卫生间</td>
                             <td>0.50/个</td>
-                            <td>
-                                <input type="hidden" name="WSJ_SL" id="WSJ_SL" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" truetype="hidden" yzid="14"></td>
-                            <td>
-                                <input type="hidden" name="WSJ_ZJ" id="WSJ_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" truetype="hidden" yzid="15"></td>
+                            <td id="detailRoom3_data5">
+                        
+                            <td id="detailRoom3_data6">
+      
+                            </td>
                         </tr>
                         <tr>
-                            <td>
-                                <input class="jianhao" type="hidden" name="WS_JHO4" id="WS_JHO4" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="WS_SM4" id="WS_SM4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="16"></td>
-                            <td>
-                                <input type="hidden" name="WS_JM4" id="WS_JM4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="17"></td>
-                            <td>
-                                <input type="hidden" name="WS_YZJ4" id="WS_YZJ4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="18"></td>
+                            <td id="detailRoom4_data1"></td>
+                            <td id="detailRoom4_data2"></td>
+                            <td id="detailRoom4_data3"></td>
+                            <td id="detailRoom4_data4"></td>
                             <td>室内走道</td>
                             <td>0.50/个</td>
-                            <td>
-                                <input type="hidden" name="DOW_SL" id="DOW_SL" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" truetype="hidden" yzid="19"></td>
-                            <td>
-                                <input type="hidden" name="DOW_ZJ" id="DOW_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" truetype="hidden" yzid="20"></td>
+                            <td id="detailRoom4_data5">
+               
+                            <td id="detailRoom4_data6">
+                                
+                            </td>
                         </tr>
                         <tr>
                             <td rowspan="2" style="width: 75px;">厅堂</td>
                             <td>独</td>
-                            <td>
-                                46<input class="jianhao" type="hidden" name="TIN_JHO1" id="TIN_JHO1" value="46" truetype="hidden"></td>
-                            <td>
-                                23.69<input type="hidden" name="TIN_SM1" id="TIN_SM1" value="23.69" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="21"></td>
-                            <td>
-                                23.69<input type="hidden" name="TIN_JM1" id="TIN_JM1" value="23.69" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="22"></td>
-                            <td>
-                                35.57<input type="hidden" name="TIN_YZJ1" id="TIN_YZJ1" value="35.57" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="23"></td>
+                            <td id="detailRoom5_data2">
+                                46
+                            </td>
+                            <td id="detailRoom5_data3">
+                                23.69</td>
+                            <td id="detailRoom5_data4">
+                                23.69</td>
+                            <td id="detailRoom5_data5">
+                                35.57</td>
                             <td rowspan="2">高1至1.7米搁楼</td>
                             <td>5m²以下</td>
                             <td>0.50/个</td>
-                            <td>
-                                <input type="hidden" name="TTGL_SL1" id="TTGL_SL1" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" truetype="hidden" yzid="24"></td>
-                            <td>
-                                <input type="hidden" name="TTGL_ZJ1" id="TTGL_ZJ1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" truetype="hidden" yzid="25"></td>
+                            <td id="detailRoom5_data6">
+                                </td>
+                            <td id="detailRoom5_data7">
+                                </td>
                         </tr>
                         <tr>
                             <td>共</td>
-                            <td>
-                                <input class="jianhao" type="hidden" name="TIN_JHO2" id="TIN_JHO2" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="TIN_SM2" id="TIN_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="26"></td>
-                            <td>
-                                <input type="hidden" name="TIN_JM2" id="TIN_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="27"></td>
-                            <td>
-                                <input type="hidden" name="TIN_YZJ2" id="TIN_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="28"></td>
+                            <td id="detailRoom6_data2">
+                                </td>
+                            <td id="detailRoom6_data3">
+                                </td>
+                            <td id="detailRoom6_data4">
+                                </td>
+                            <td id="detailRoom6_data5">
+                                </td>
                             <td>5m²以上</td>
                             <td>1.00/个</td>
-                            <td>
-                                <input type="hidden" name="TTGL_SL2" id="TTGL_SL2" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" truetype="hidden" yzid="29"></td>
-                            <td>
-                                <input type="hidden" name="TTGL_ZJ2" id="TTGL_ZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" truetype="hidden" yzid="30"></td>
+                            <td id="detailRoom6_data6">
+                               </td>
+                            <td id="detailRoom6_data7">
+                              </td>
                         </tr>
                         <tr>
                             <td rowspan="2">厨房</td>
                             <td>独</td>
-                            <td>
-                                45<input class="jianhao" type="hidden" name="CF_JHO1" id="CF_JHO1" value="45" truetype="hidden"></td>
-                            <td>
-                                2.64<input type="hidden" name="CF_SM1" id="CF_SM1" value="2.64" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="31"></td>
-                            <td>
-                                2.64<input type="hidden" name="CF_JM1" id="CF_JM1" value="2.64" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="32"></td>
-                            <td>
-                                4.16<input type="hidden" name="CF_YZJ1" id="CF_YZJ1" value="4.16" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="33"></td>
+                            <td id="detailRoom7_data2">
+                                45</td>
+                            <td id="detailRoom7_data3">
+                                2.64</td>
+                            <td id="detailRoom7_data4">
+                                2.64</td>
+                            <td id="detailRoom7_data5">
+                                4.16</td>
                             <td colspan="2">二次供水<input type="hidden" name="ECGS_NAME" id="ECGS_NAME" value="二次供水" truetype="hidden"></td>
                             <td>0.08/m2<input type="hidden" name="ECGS_DW" id="ECGS_DW" value="0.08/m2" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="ECGS_SL" id="ECGS_SL" value="" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" onblur="gethj2()" truetype="hidden" yzid="34"></td>
-                            <td>
-                                <input type="hidden" name="ECGS_ZJ" id="ECGS_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" truetype="hidden" yzid="35"></td>
+                            <td id="detailRoom7_data6">
+                                </td>
+                            <td id="detailRoom7_data7">
+                                </td>
                         </tr>
                         <tr>
                             <td>共</td>
-                            <td>
-                                <input class="jianhao" type="hidden" name="CF_JHO2" id="CF_JHO2" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="CF_SM2" id="CF_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="36"></td>
-                            <td>
-                                <input type="hidden" name="CF_JM2" id="CF_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="37"></td>
-                            <td>
-                                <input type="hidden" name="CF_YZJ2" id="CF_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="38"></td>
-                            <td colspan="2"><input type="hidden" name="MP_NAME" id="MP_NAME" value="" truetype="hidden"></td>
-                            <td><input type="hidden" name="MP_DW" id="MP_DW" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="MP_SL" id="MP_SL" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" truetype="hidden" yzid="39"></td>
-                            <td>
-                                <input type="hidden" name="MP_ZJ" id="MP_ZJ" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" truetype="hidden" yzid="40"></td>
+                            <td id="detailRoom8_data2">
+                                </td>
+                            <td id="detailRoom8_data3">
+                                </td>
+                            <td id="detailRoom8_data4">
+                                </td>
+                            <td id="detailRoom8_data5">
+                                </td>
+                            <td id="detailRoom8_data6" colspan="2"><input type="hidden" name="MP_NAME" id="MP_NAME" value="" truetype="hidden"></td>
+                            <td id="detailRoom8_data7"></td>
+                            <td id="detailRoom8_data8">
+                                </td>
+                            <td id="detailRoom8_data9">
+                                </td>
                         </tr>
                         <tr>
                             <td rowspan="2">卫生间</td>
                             <td>独</td>
-                            <td>
-                                44<input class="jianhao" type="hidden" name="WSJ_JHO1" id="WSJ_JHO1" value="44" truetype="hidden"></td>
-                            <td>
-                                2.23<input type="hidden" name="WSJ_SM1" id="WSJ_SM1" value="2.23" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="41"></td>
-                            <td>
-                                2.23<input type="hidden" name="WSJ_JM1" id="WSJ_JM1" value="2.23" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="42"></td>
-                            <td>
-                                3.35<input type="hidden" name="WSJ_YZJ1" id="WSJ_YZJ1" value="3.35" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="43"></td>
+                            <td id="detailRoom9_data2">
+                                44</td>
+                            <td id="detailRoom9_data3">
+                                2.23</td>
+                            <td id="detailRoom9_data4">
+                                2.23</td>
+                            <td id="detailRoom9_data5">
+                                3.35</td>
                             <td colspan="2"></td>
                             <td></td>
                             <td></td>
@@ -353,14 +339,14 @@
                         </tr>
                         <tr>
                             <td>共</td>
-                            <td>
-                                <input class="jianhao" type="hidden" name="WSJ_JHO2" id="WSJ_JHO2" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="WSJ_SM2" id="WSJ_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="44"></td>
-                            <td>
-                                <input type="hidden" name="WSJ_JM2" id="WSJ_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="45"></td>
-                            <td>
-                                <input type="hidden" name="WSJ_YZJ2" id="WSJ_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="46"></td>
+                            <td id="detailRoom10_data2">
+                                </td>
+                            <td id="detailRoom10_data3">
+                                </td>
+                            <td id="detailRoom10_data4">
+                                </td>
+                            <td id="detailRoom10_data5">
+                                </td>
                             <td></td>
                             <td style="font-weight:bold;">间号</td>
                             <td style="font-weight:bold;">实有面积(m²)</td>
@@ -370,75 +356,74 @@
                         <tr>
                             <td rowspan="2">室内走道</td>
                             <td>独</td>
-                            <td>
-                                <input class="jianhao" type="hidden" name="DOW_JHO1" id="DOW_JHO1" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="DOW_SM1" id="DOW_SM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="47"></td>
-                            <td>
-                                <input type="hidden" name="DOW_JM1" id="DOW_JM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="48"></td>
-                            <td>
-                                <input type="hidden" name="DOW_YZJ1" id="DOW_YZJ1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="49"></td>
+                            <td id="detailRoom11_data2">
+                                </td>
+                            <td id="detailRoom11_data3">
+                                </td>
+                            <td id="detailRoom11_data4">
+                                </td>
+                            <td id="detailRoom11_data5">
+                                </td>
                             <td rowspan="3">无封闭阳台</td>
-                           <td>
-                        47-1<input class="jianhao" type="hidden" name="WFBYT_JHO1" id="WFBYT_JHO1" value="47-1" truetype="hidden"></td>
-                    <td>
-                        4.34<input type="hidden" name="WFBYT_SM1" id="WFBYT_SM1" value="4.34" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="50"></td>
-                    <td>
-                        2.17<input type="hidden" name="WFBYT_JM1" id="WFBYT_JM1" value="2.17" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="51"></td>
-                    <td>
-                        3.42<input type="hidden" name="WFBYT_YZJ1" id="WFBYT_YZJ1" value="3.42" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="52"></td>
-                             
+                           <td id="detailRoom13_data5">
+                        47-1</td>
+                            <td id="detailRoom13_data6">
+                                4.34</td>
+                            <td id="detailRoom13_data7">
+                                2.17</td>
+                            <td id="detailRoom13_data8">
+                                3.42</td>
                         </tr>
                         <tr>
                             <td>共</td>
-                            <td>
-                                <input class="jianhao" type="hidden" name="DOW_JHO2" id="DOW_JHO2" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="DOW_SM2" id="DOW_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="53"></td>
-                            <td>
-                                <input type="hidden" name="DOW_JM2" id="DOW_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="54"></td>
-                            <td>
+                            <td id="detailRoom12_data2">
+                               </td>
+                            <td id="detailRoom12_data3">
+                                </td>
+                            <td id="detailRoom12_data4">
+                                </td>
+                            <td id="detailRoom12_data5">
                                 <input type="hidden" name="DOW_YZJ2" id="DOW_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="55"></td>
-                             <td>
+                            <td id="detailRoom14_data5">
                         <input class="jianhao" type="hidden" name="WFBYT_JHO2" id="WFBYT_JHO2" value="" truetype="hidden"></td>
-                    <td>
+                    <td id="detailRoom14_data6">
                         <input type="hidden" name="WFBYT_SM2" id="WFBYT_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="56"></td>
-                    <td>
+                    <td id="detailRoom14_data7">
                         <input type="hidden" name="WFBYT_JM2" id="WFBYT_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="57"></td>
-                    <td>
+                    <td id="detailRoom14_data8">
                         <input type="hidden" name="WFBYT_YZJ2" id="WFBYT_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="58"></td>
                             
                         </tr>
                         
                        <tr>
                     <td colspan="2" rowspan="3">封闭阳台</td>
-                    <td>
+                    <td id="detailRoom13_data1">
                         <input class="jianhao" type="hidden" name="FBYT_JHO1" id="FBYT_JHO1" value="" truetype="hidden"></td>
-                    <td>
+                    <td id="detailRoom13_data2">
                         <input type="hidden" name="FBYT_SM1" id="FBYT_SM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="59"></td>
-                    <td>
+                    <td id="detailRoom13_data3">
                         <input type="hidden" name="FBYT_JM1" id="FBYT_JM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="60"></td>
-                    <td>
+                    <td id="detailRoom13_data4">
                         <input type="hidden" name="FBYT_YZJ1" id="FBYT_YZJ1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="61"></td>
-                    <td>
+                    <td id="detailRoom15_data5">
                         <input class="jianhao" type="hidden" name="WFBYT_JHO3" id="WFBYT_JHO3" value="" truetype="hidden"></td>
-                    <td>
+                    <td id="detailRoom15_data6">
                         <input type="hidden" name="WFBYT_SM3" id="WFBYT_SM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="62"></td>
-                    <td>
+                    <td id="detailRoom15_data7">
                         <input type="hidden" name="WFBYT_JM3" id="WFBYT_JM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="63"></td>
-                    <td>
+                    <td id="detailRoom15_data8">
                         <input type="hidden" name="WFBYT_YZJ3" id="WFBYT_YZJ3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="64"></td>
                            
                 </tr>
 
                <tr>
-                     <td>
+                     <td id="detailRoom14_data1">
                         <input class="jianhao" type="hidden" name="FBYT_JHO2" id="FBYT_JHO2" value="" truetype="hidden"></td>
-                    <td>
+                    <td id="detailRoom14_data2">
                         <input type="hidden" name="FBYT_SM2" id="FBYT_SM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="65"></td>
-                    <td>
+                    <td id="detailRoom14_data3">
                         <input type="hidden" name="FBYT_JM2" id="FBYT_JM2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="66"></td>
-                    <td>
+                    <td id="detailRoom14_data4">
                         <input type="hidden" name="FBYT_YZJ2" id="FBYT_YZJ2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="67"></td>
                      <td> <input type="hidden" name="ZGGF_FJLX4" id="ZGGF_FJLX4" value="" truetype="hidden"></td>
                             <td> <input type="hidden" name="ZGGF_FJH4" id="ZGGF_FJH4" value="" truetype="hidden"></td>
@@ -447,64 +432,59 @@
                             <td><input type="hidden" name="ZGGF_FYZJ4" id="ZGGF_FYZJ4" value="" truetype="hidden"></td>
                 </tr>
                 <tr>
-                     <td>
+                     <td id="detailRoom15_data1">
                         <input class="jianhao" type="hidden" name="FBYT_JHO3" id="FBYT_JHO3" value="" truetype="hidden"></td>
-                    <td>
+                    <td id="detailRoom15_data2">
                         <input type="hidden" name="FBYT_SM3" id="FBYT_SM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="68"></td>
-                    <td>
+                    <td id="detailRoom15_data3">
                         <input type="hidden" name="FBYT_JM3" id="FBYT_JM3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="69"></td>
-                    <td>
+                    <td id="detailRoom15_data4">
                         <input type="hidden" name="FBYT_YZJ3" id="FBYT_YZJ3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="70"></td>
                       <td><input type="hidden" name="ZGGF_FJLX1" id="ZGGF_FJLX1" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="ZGGF_FJH1" id="ZGGF_FJH1" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="ZGGF_FSM1" id="ZGGF_FSM1" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="ZGGF_FJM1" id="ZGGF_FJM1" value="" truetype="hidden"></td>
-                            <td>
-                                <input type="hidden" name="ZGGF_FYZJ1" id="ZGGF_FYZJ1" value="" truetype="hidden"></td>
+                        <td><input type="hidden" name="ZGGF_FJH1" id="ZGGF_FJH1" value="" truetype="hidden"></td>
+                        <td><input type="hidden" name="ZGGF_FSM1" id="ZGGF_FSM1" value="" truetype="hidden"></td>
+                        <td><input type="hidden" name="ZGGF_FJM1" id="ZGGF_FJM1" value="" truetype="hidden"></td>
+                        <td><input type="hidden" name="ZGGF_FYZJ1" id="ZGGF_FYZJ1" value="" truetype="hidden"></td>
                 </tr>
                         <tr>
                             <td colspan="2">高1.7至2.2米搁楼</td>
-                            <td>
+                            <td id="detailRoom12_data6">
                         <input class="jianhao" type="hidden" name="GL_JHO1" id="GL_JHO1" value="" truetype="hidden"></td>
-                            <td>
+                            <td id="detailRoom12_data7">
                                 <input type="hidden" name="GL_SM1" id="GL_SM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="71"></td>
-                            <td>
+                            <td id="detailRoom12_data8">
                                 <input type="hidden" name="GL_JM1" id="GL_JM1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="72"></td>
-                            <td>
+                            <td id="detailRoom12_data9">
                                 <input type="hidden" name="GL_YZJ1" id="GL_YZJ1" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" truetype="hidden" yzid="73"></td>
-                           
-                             <td> <input type="hidden" name="ZGGF_FJLX3" id="ZGGF_FJLX3" value="" truetype="hidden"></td>
+                            <td> <input type="hidden" name="ZGGF_FJLX3" id="ZGGF_FJLX3" value="" truetype="hidden"></td>
                             <td><input type="hidden" name="ZGGF_FJH3" id="ZGGF_FJH3" value="" truetype="hidden"></td>
                             <td><input type="hidden" name="ZGGF_FSM3" id="ZGGF_FSM3" value="" truetype="hidden"></td>
                             <td><input type="hidden" name="ZGGF_FJM3" id="ZGGF_FJM3" value="" truetype="hidden"></td>
                             <td><input type="hidden" name="ZGGF_FYZJ3" id="ZGGF_FYZJ3" value="" truetype="hidden"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"> <input type="hidden" name="ZGGF_FJLX2" id="ZGGF_FJLX2" value="" truetype="hidden"></td>
-                            <td><input type="hidden" name="ZGGF_FJH2" id="ZGGF_FJH2" value="" truetype="hidden"></td>
-                            <td><input type="hidden" name="ZGGF_FSM2" id="ZGGF_FSM2" value="" truetype="hidden"></td>
-                            <td><input type="hidden" name="ZGGF_FJM2" id="ZGGF_FJM2" value="" truetype="hidden"></td>
-                            <td><input type="hidden" name="ZGGF_FYZJ2" id="ZGGF_FYZJ2" value="" truetype="hidden"></td>
+                            <td colspan="2" id="detailRoom16_data1"> <input type="hidden" name="ZGGF_FJLX2" id="ZGGF_FJLX2" value="" truetype="hidden"></td>
+                            <td id="detailRoom16_data2"><input type="hidden" name="ZGGF_FJH2" id="ZGGF_FJH2" value="" truetype="hidden"></td>
+                            <td id="detailRoom16_data3"><input type="hidden" name="ZGGF_FSM2" id="ZGGF_FSM2" value="" truetype="hidden"></td>
+                            <td id="detailRoom16_data4"><input type="hidden" name="ZGGF_FJM2" id="ZGGF_FJM2" value="" truetype="hidden"></td>
+                            <td id="detailRoom16_data5"><input type="hidden" name="ZGGF_FYZJ2" id="ZGGF_FYZJ2" value="" truetype="hidden"></td>
                             <td colspan="2">合计</td>
-                            <td>
+                            <td id="detailRoom16_data6">
                                 <input type="hidden" name="" value="" truetype="hidden"></td>
-                            <td id="ZGGF_HJRIGHTSL1">
+                            <td id="detailRoom16_data7">
                                 
                             </td>
-                            <td id="ZGGF_HJRIGHTZJ2"></td>
-                </tr>
+                            <td id="detailRoom16_data8"></td>
+                        </tr>
                         <tr>
                             <td colspan="2">合计</td>
-                            <td>
+                            <td id="detailRoom20_data1">
                                 <input class="jianhao" type="hidden" name="" value="" truetype="hidden"></td>
-                            <td id="ZGGF_HJLEFTSM1">55.86</td>
-                            <td id="ZGGF_HJLEFTJM1">53.69</td>
-                            <td id="ZGGF_HJLEFTZJ1">82.70</td>
+                            <td id="detailRoom20_data2">55.86</td>
+                            <td id="detailRoom20_data3">53.69</td>
+                            <td id="detailRoom20_data4">82.70</td>
                             <td colspan="2">核定月租金</td>
-                            <td colspan="3">
+                            <td id="detailRoom20_data5" colspan="3">
                                 ¥82.70 元</td>
                         </tr>
                         <tr>
@@ -531,49 +511,49 @@
                             <td>附注</td>
                         </tr>
                         <tr>
+                            <td id="detailDev1_data1"></td>
+                            <td id="detailDev1_data2"></td>
+                            <td id="detailDev1_data3"></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="detailDev1_data4"></td>
+                            <td id="detailDev1_data5"></td>
+                            <td id="detailDev1_data6"></td>
                         </tr>
                         <tr>
+                            <td id="detailDev2_data1"></td>
+                            <td id="detailDev2_data2"></td>
+                            <td id="detailDev2_data3"></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="detailDev2_data4"></td>
+                            <td id="detailDev2_data5"></td>
+                            <td id="detailDev2_data6"></td>
                         </tr>
                         <tr>
+                            <td id="detailDev3_data1"></td>
+                            <td id="detailDev3_data2"></td>
+                            <td id="detailDev3_data3"></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="detailDev3_data4"></td>
+                            <td id="detailDev3_data5"></td>
+                            <td id="detailDev3_data6"></td>
                         </tr>
                         <tr>
+                            <td id="detailDev4_data1"></td>
+                            <td id="detailDev4_data2"></td>
+                            <td id="detailDev4_data3"></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="detailDev4_data4"></td>
+                            <td id="detailDev4_data5"></td>
+                            <td id="detailDev4_data6"></td>
                         </tr>
                         <tr>
+                            <td id="detailDev5_data1"></td>
+                            <td id="detailDev5_data2"></td>
+                            <td id="detailDev5_data3"></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="detailDev5_data4"></td>
+                            <td id="detailDev5_data5"></td>
+                            <td id="detailDev5_data6"></td>
                         </tr>
                         <tr>
                             <td id="fjtdheight" colspan="7" style="vertical-align: top; box-sizing: border-box; height: 451px;">
