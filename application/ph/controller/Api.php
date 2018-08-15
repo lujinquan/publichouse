@@ -1446,7 +1446,7 @@ class Api extends Controller
             return jsons('4000','参数错误');
         }
 
-        $rooms = Db::name('room')->field('RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
+        $rooms = Db::name('room')->field('RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
             ->select();
 
