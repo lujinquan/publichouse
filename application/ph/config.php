@@ -193,6 +193,10 @@ return [
     'newRentExplain' => '新发租情况说明',
     'newRentOther' => '其它',
 
+    // 租约申请
+    'leaseApplication1' => '计租表',
+    'leaseApplication2' => '住宅租约',
+    'leaseApplication3' => '身份证',
     // 分户
     'SplitApplication' => '书面申请(双方)',
     'SplitRegister' => '户口簿',
