@@ -81,7 +81,7 @@ class LeaseApply extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         if(!$map) $map='ChangeOrderID ,HouseID ,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,CreateTime ,Status';
-        $data = $this->alias('a')->field($map)->where('id','eq',$id)->find();
+        $data = $this->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
             return array();
@@ -89,9 +89,11 @@ class LeaseApply extends Model
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
         
-        $data['StatusValue'] = $data['Status'];
+        //$data['StatusValue'] = $data['Status'];
         
-        $data['Status'] = '待';
+        $re = $this->order_config_detail($data['ChangeOrderID'],$data['Status']);
+
+        $data['Status'] = '待'.$re['RoleName'].$re['Title'];
 
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['StructureType'] = get_structure($data['StructureType']);
@@ -110,7 +112,8 @@ class LeaseApply extends Model
      * @return array [ RoleName  下一步操作的角色名称 ， Title  下一步操作的步骤标题 ]
      */
     public function order_config_detail($changeOrderID ,$status){
-        $config = Db::name('use_change_order')->alias('a')
+        //halt($changeOrderID);
+        $config = Db::name('lease_change_order')->alias('a')
                                               ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
                                               ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
                                               ->field('b.id, b.Title ,b.Total')
@@ -120,7 +123,7 @@ class LeaseApply extends Model
         $maps['Total'] = array('eq',$status);
 
         $res = Db::name('process_config')->where($maps)->field('RoleName ,Title ,RoleID')->find();
-
+//halt($config);
         return $res;
 
     }

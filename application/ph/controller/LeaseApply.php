@@ -64,7 +64,7 @@ class LeaseApply extends Base
             $datas['TenantID'] = $one['TenantID']; //新租户id
             $datas['TenantName'] = $one['TenantName']; //新租户名称
             $datas['HouseID'] = $data['houseID'];
-            $datas['ChangeImagesIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:''; 
+            $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:''; 
             $datas['ChangeOrderID'] = date('YmdHis', time()).'101'.substr(uniqid(),-5);
             $datas['CreateTime'] = time();
 
