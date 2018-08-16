@@ -166,17 +166,17 @@ class LeaseAudit extends Model
      * @return array [ config 配置信息， status 现在进行到哪一个  ]
      */
     public function process_imgs_url($changeOrderID){
-        $IDS = Db::name('use_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('ChangeImageIDS');
+        $IDS = Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('ChangeImageIDS');
         $images = explode(',' ,$IDS);
 
         if(!$images){
 
-            jsons('4004' ,'请先上传相关图片');
+            return array();
+        }else{
+
+            $urls = Db::name('upload_file')->where('id' ,'in' ,$images)->field('FileUrl ,FileTitle')->select();
+            return $urls;
         }
-
-        $urls = Db::name('upload_file')->where('id' ,'in' ,$images)->field('FileUrl ,FileTitle')->select();
-
-        return $urls;
 
     }
 
@@ -188,13 +188,11 @@ class LeaseAudit extends Model
      */
     public function process_status($changeOrderID){
 
-        $process = Db::name('use_change_order')->alias('a')
-                                               ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
-                                               ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
-                                               ->field('b.Total, b.id ,a.Status')
-                                               ->find();
+        $process = Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)
+                                                 ->field('ProcessConfigType , Status')
+                                                 ->find();
 
-        $datas['config'] = Db::name('process_config')->where('pid','eq',$process['id'])
+        $datas['config'] = Db::name('process_config')->where('pid','eq',$process['ProcessConfigType'])
                                                      ->order('Total asc')
                                                      ->column('RoleName');
 
@@ -212,57 +210,83 @@ class LeaseAudit extends Model
      */
     public function process_record($changeOrderID){
 
-        //获取，当前审批流程的名称、总步骤数、提交资料人员id ，提交时间
-        $process = Db::name('use_change_order')->alias('a')
-                                               ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
-                                               ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
-                                               ->field('b.Total, b.Title , b.id ,a.Status ,a.UserNumber ,a.CreateTime')
+        $one = Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)
+                                               ->field('Child,ProcessConfigType')
                                                ->find();
 
-        $where['pid'] = array('eq' ,$process['id']);
-        $where['Total'] = array('eq' ,1);
+        $oneData = json_decode($one['Child'],true);
 
-        $one = Db::name('process_config')->where($where)->field('RoleName ,Title')->find();
+        $result = [];
 
+        foreach($oneData as $v){
 
-        $first['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$process['UserNumber'])->value('UserName');
+             $map['pid'] = array('eq',$one['ProcessConfigType']);
+             $map['Total'] = array('eq' ,$v['Step']);
 
-        $first['CreateTime'] = date('Y-m-d H:i:s' ,$process['CreateTime']);
+            $four = Db::name('process_config')->where($map)->value('Title');  //操作内容
+            $one = Db::name('process_config')->where($map)->value('RoleName');  //角色名称
+            $two = Db::name('admin_user')->where('Number' ,'eq' ,$v['UserNumber'])->value('UserName'); //操作人
+            $three = date('Y年m月d日 H时i分s秒' ,$v['CreateTime']);
 
-        $first['Reson'] = '';
-
-        $first['RoleName'] = $one['RoleName'];
-
-        $first['Step'] = $one['Title'];
-
-        $first['Status'] = 2;
-
-        //获取，所有子订单的，机构id，状态，理由，用户编号，审核时间： 注意在使用权变更中补充资料视为审核
-        $record = Db::name('use_child_order')->where('FatherOrderID' ,'eq' ,$changeOrderID)
-                                             ->field('Status ,Step ,Reson ,UserNumber ,CreateTime')
-                                             ->order('CreateTime asc')
-                                             ->select();
-
-
-
-        foreach($record as $k3 => &$v3){
-
-            $map['pid'] = array('eq',$process['id']);
-            $map['Total'] = array('eq' ,$v3['Step']);
-
-            if($v3['Status'] == 3){
-                $v3['Status'] = '不通过';
+            if($v['IfValid'] == 1){
+                $result[] = $one.$two.'于'.$three.'执行'.$four.'操作';
+            }else{
+               $result[] = $one.$two.'于'.$three.'执行'.$four.'操作失败，原因：'.$v['Reson'];
             }
-
-            $v3['Step'] = Db::name('process_config')->where($map)->value('Title');  //操作内容
-            $v3['RoleName'] = Db::name('process_config')->where($map)->value('RoleName');  //角色名称
-            $v3['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$v3['UserNumber'])->value('UserName'); //操作人
-            $v3['CreateTime'] = date('Y-m-d H:i:s' ,$v3['CreateTime']);
         }
 
-        array_unshift($record,$first);
+        return $result;
 
-        return $record;
+        // //获取，当前审批流程的名称、总步骤数、提交资料人员id ，提交时间
+        // $process = Db::name('lease_change_order')->alias('a')
+        //                                        ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+        //                                        ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
+        //                                        ->field('b.Total, b.Title , b.id ,a.Status ,a.UserNumber ,a.CreateTime')
+        //                                        ->find();
+
+        // $where['pid'] = array('eq' ,$process['id']);
+        // $where['Total'] = array('eq' ,1);
+
+        // $one = Db::name('process_config')->where($where)->field('RoleName ,Title')->find();
+
+        // $first['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$process['UserNumber'])->value('UserName');
+
+        // $first['CreateTime'] = date('Y-m-d H:i:s' ,$process['CreateTime']);
+
+        // $first['Reson'] = '';
+
+        // $first['RoleName'] = $one['RoleName'];
+
+        // $first['Step'] = $one['Title'];
+
+        // $first['Status'] = 2;
+
+        // //获取，所有子订单的，机构id，状态，理由，用户编号，审核时间： 注意在使用权变更中补充资料视为审核
+        // $record = Db::name('use_child_order')->where('FatherOrderID' ,'eq' ,$changeOrderID)
+        //                                      ->field('Status ,Step ,Reson ,UserNumber ,CreateTime')
+        //                                      ->order('CreateTime asc')
+        //                                      ->select();
+
+
+
+        // foreach($record as $k3 => &$v3){
+
+        //     $map['pid'] = array('eq',$process['id']);
+        //     $map['Total'] = array('eq' ,$v3['Step']);
+
+        //     if($v3['Status'] == 3){
+        //         $v3['Status'] = '不通过';
+        //     }
+
+        //     $v3['Step'] = Db::name('process_config')->where($map)->value('Title');  //操作内容
+        //     $v3['RoleName'] = Db::name('process_config')->where($map)->value('RoleName');  //角色名称
+        //     $v3['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$v3['UserNumber'])->value('UserName'); //操作人
+        //     $v3['CreateTime'] = date('Y-m-d H:i:s' ,$v3['CreateTime']);
+        // }
+
+        // array_unshift($record,$first);
+
+        //return $record;
     }
 
     /**
