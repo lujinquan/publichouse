@@ -196,17 +196,102 @@ $('.BtnDetail').click(function(){
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+houseID,function(res){
 				var res = JSON.parse(res);
-				
+				console.log(res);
 				var data = res.data.detail;
 				console.log(data);
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
 				}
+				processState('#leaseApplyState',res);
+            	metailShow('#leaseApplyPhotos',res);
 			})
+			
 		},
 		yes:function(){
 
 		}
 	})
 })
+
+$('.BtnDel').click(function(){
+	var ChangeOrderID = $(this).val();
+	console.log(ChangeOrderID);
+	$.get('/ph/LeaseAudit/delete/ChangeOrderID/'+ChangeOrderID,function(res){
+		var res = JSON.parse(res);
+		console.log(res);
+
+	})
+})
+
+
+//查看附件函数
+function metailShow(id,res){
+	var ImgLength = res.data.urls.length;
+	var img_title = [];
+	var	img_array = [];
+	res.data.urls.forEach(function(data){
+		var index = img_title.indexOf(data.FileTitle);
+		if(index < 0){
+			img_title.push(data.FileTitle);
+			img_array[img_array.length] = [];
+			img_array[img_array.length - 1].push(data.FileUrl);
+		}else{
+			img_array[index].push(data.FileUrl);
+		}
+	});
+	var FatherDom = $(id);
+	FatherDom.empty();
+	for(var i = 0; i < img_title.length; i++){
+		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
+		FatherDom.append(title_dom);
+		for(var j = 0;j < img_array[i].length;j++){
+			var ImgDom = $("<li style='width:100px;display:inline-block;'><img style='width:100px;' layer-pid="+i+" data-original="+
+				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/></li>");
+			FatherDom.append(ImgDom);
+		}
+	}
+	
+	// layer.photos({
+	//   photos: id
+	//   ,anim: 5
+	// });
+	$(id+' img').click(function(){
+		console.log(id);
+		var viewer = new Viewer($(id)[0],{
+				hidden:function(){
+					viewer.destroy();
+				}
+			}
+		);
+	})
+}
+//流程配置函数
+function processState(id,res){
+	var ConfigLength = res.data.config.config.length;
+	var RecordLength = res.data.record.length;
+	var FatherDom = $(id);
+	var status = parseInt(res.data.config.status) * 2 - 1;
+	FatherDom.empty();
+	for(var i = 0; i < ConfigLength;i++){
+		var SpanDom = $('<span class="process_style">'+res.data.config.config[i]+'</span><span><i class="am-icon-lg am-icon-long-arrow-right" +\
+			style="margin:auto 4px;"></i></span>');
+		FatherDom.append(SpanDom);
+	}
+	FatherDom.find('span').last().remove();
+	for(var j = 0; j < status; j++){
+		if(j % 2== 0){
+			FatherDom.find('span').eq(j).addClass('process_style_active');
+		}else{
+			FatherDom.find('span').eq(j).find('i').addClass('line_style');
+		}
+	}
+	for(var k = 1;k <= RecordLength;k++){
+		if(res.data.record[k-1].Status == 2){
+			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1]+"；</p>");
+		}else{
+			var RecordDom = $("<p style='font-weight:600;'>"+k+"."+res.data.record[k-1]+"；</p>");
+		}
+		FatherDom.append(RecordDom);
+	}
+}

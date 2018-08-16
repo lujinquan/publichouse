@@ -1,6 +1,8 @@
 {extend name="layout" /}
 {block name="title"}<title>租约审核</title>{/block}
 {block name="content"}
+  <link rel="stylesheet" href="/public/static/gf/css/iconfont.css">
+  <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
  <div class="admin-content">
     <div class="am-cf am-padding">
       <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约申请</small></div>
@@ -200,7 +202,7 @@
                         </button>
                         <?php }; ?>
                         <?php if(in_array(559,$threeMenu)){ ; ?>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="<?php echo $v['ChangeOrderID']; ?>">
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print1" value="<?php echo $v['ChangeOrderID']; ?>">
                           租约打印
                         </button>
                         <?php }; ?>
@@ -219,15 +221,6 @@
                           明细
                         </button>
                         <?php }; ?>
-
-
-
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only uploadPic" value="<?php echo $v['ChangeOrderID']; ?>">
-                          上传签字图片
-                        </button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="<?php echo $v['ChangeOrderID']; ?>">
-                          信息单打印
-                        </button>
                     </div>
                 </td>
             </tr>
@@ -250,7 +243,7 @@
 {block name="print"}
   {include file="application/ph/view/lease_apply/detail.html" /}
   {include file="application/ph/view/lease_audit/print2.html" /}
-  <div id="uploadPicDiv">
+  <div id="uploadPicDiv" style="display:none;">
       <div class="am-u-md-12 fileUpLoad">
           <div class="am-u-md-5">
               <p>租约签字图片：</p>
@@ -265,6 +258,7 @@
 {/block}
 
 {block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js"></script>
 <script type="text/javascript" src="/public/static/gf/viewJs/lease_audit.js"></script>
 <script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script>
 {/block}
