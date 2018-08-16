@@ -159,6 +159,7 @@ $('.addLease').click(function(){
 			data.delete('leaseApplication1');
 			data.delete('leaseApplication2');
 			data.delete('leaseApplication3');
+			data.append('houseID',$('#leaseHouseInput').val());
 			$.ajax({
                 type: "post",
                 url: "/ph/LeaseApply/add",
