@@ -1,5 +1,6 @@
 $('.addLease').click(function(){
 	houseQuery.action('leaseHouseInput','1');
+
 	layer.open({
 		type:1,
 		area:['1200px','750px'],
@@ -180,6 +181,8 @@ $('.addLease').click(function(){
 })
 
 $('.BtnDetail').click(function(){
+	var houseID = $(this).val();
+	console.log(houseID)
 	layer.open({
 		type:1,
 		area:['1100px','750px'],
@@ -189,7 +192,16 @@ $('.BtnDetail').click(function(){
 		content:$('#leaseDetail'),
 		btn:['确认','取消'],
 		success:function(){
-
+			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+houseID,function(res){
+				var res = JSON.parse(res);
+				
+				var data = res.data.detail;
+				console.log(data);
+				for(var key in data){
+					var name_id = key.replace(/apply/,'detail');
+					$('#'+name_id).text(data[key]);
+				}
+			})
 		},
 		yes:function(){
 
