@@ -107,7 +107,7 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   {block name="content"}
   <div class="admin-content">
@@ -532,6 +532,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+{block name="print"}
+{/block}
+
 {include file="application/ph/view/notice/notice_info.html" /}
 {include file="application/ph/view/index/second_menu.html" /}
 {include file="application/ph/view/index/version.html" /}

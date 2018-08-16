@@ -15,7 +15,7 @@ $('.addLease').click(function(){
 					res = JSON.parse(res);
 					console.log(res);
 					$('#applyNO').val(res.data.house.Szno);
-					$('#applyAdress').val(res.data.house.BanAddress);
+					$('#applyAddress').val(res.data.house.BanAddress);
 					$('#applyStruct').val(res.data.house.StructureType);
 					$('#applyHouseFloor').val(res.data.house.BanFloorNum);
 					$('#applyLiveFloor').val(res.data.house.FloorID);
@@ -29,7 +29,10 @@ $('.addLease').click(function(){
 					$('#applyRoom5_data6').val(res.data.house.BelowFiveNum);
 					$('#applyRoom6_data6').val(res.data.house.MoreFiveNum);
 					$('#applyRoom7_data9').val(res.data.house.PumpCost);
-
+					$('#applyRoom20_data2').val(res.data.house.TotalUseArea);
+					$('#applyRoom20_data3').val(res.data.house.TotalLeaseArea);
+					$('#applyRoom20_data4').val(res.data.house.TotalRoomMonth);
+					$('#applyRoom20_data5').val(res.data.house.TotalRoomMonth);
 					var ws = 1;
 					var fb = 13;
 					var wfb = 13;
@@ -179,10 +182,9 @@ $('.addLease').click(function(){
 		}
 	})
 })
-
 $('.BtnDetail').click(function(){
 	var houseID = $(this).val();
-	console.log(houseID)
+	console.log(houseID);
 	layer.open({
 		type:1,
 		area:['1100px','750px'],
