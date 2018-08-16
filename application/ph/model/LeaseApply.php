@@ -13,7 +13,7 @@ class LeaseApply extends Model
     // 设置当前模型对应的完整数据表名称
     protected $table = '__LEASE_CHANGE_ORDER__';
 
-    public function get_all_use_lst(){
+    public function get_all_lease_lst(){
 
         //筛选出只属于当前机构的申请
         

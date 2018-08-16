@@ -145,9 +145,9 @@ class LeaseAudit extends Base
      */
     public function detail(){
 
-        // $changeOrderID = input('ChangeOrderID'); //变更编号
+        $changeOrderID = input('ChangeOrderID'); //变更编号
 
-        // $res['detail'] = model('ph/UserAudit')->get_change_detail_info($changeOrderID);
+        $res['detail'] = model('ph/LeaseAudit')->get_change_detail_info($changeOrderID);
 
         // $res['config'] = model('ph/UserAudit')->process_status($changeOrderID);
 
@@ -155,9 +155,9 @@ class LeaseAudit extends Base
 
         // $res['record'] = model('ph/UserAudit')->process_record($changeOrderID);
 
-        // //halt($res);
+        //halt($res);
 
-        // return jsons('2000' ,'获取成功' ,$res);
+        return jsons('2000' ,'获取成功' ,$res);
     }
 
     /**

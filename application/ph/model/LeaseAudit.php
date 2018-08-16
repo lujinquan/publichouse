@@ -22,50 +22,8 @@ class LeaseAudit extends Model
      */
     public function get_change_detail_info($changeOrderID){
 
-        //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
-
-        //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
-        $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea')
-            ->where('HouseID' ,'eq' ,$orderData['HouseID'])
-            ->find();
-
-        //联系电话 ，当前租户姓名 ，身份证号码
-        $tenantOldData = Db::name('tenant')->field('TenantTel ,TenantName ,TenantNumber')
-            ->where('TenantID' ,'eq' ,$orderData['OldTenantID'])
-            ->find();
-
-        //联系电话 ，当前租户姓名 ，身份证号码
-        $tenantNewData = Db::name('tenant')->field('TenantTel ,TenantName ,TenantNumber')
-            ->where('TenantID' ,'eq' ,$orderData['NewTenantID'])
-            ->find();
-
-        $data['ChangeOrderID'] = $changeOrderID;
-        $data['HouseID'] = $orderData['HouseID'];
-        $data['ChangeType'] = Db::name('use_change_type')->where('id',$orderData['ChangeType'])->value('UseChangeTitle');
-        $data['OwnerType'] = get_owner($orderData['OwnerType']);
-        $data['UseNature'] = get_usenature($orderData['UseNature']);
-        $data['ChangeReason'] = $orderData['ChangeReason'];
-        $data['TransferRent'] = $orderData['TransferRent'];
-        $data['IfReform'] = $orderData['IfReform'];   //是否属代、托、改造产
-        $data['IfRepair'] = $orderData['IfRepair'];   //是否是五年内新翻覆修房屋
-        $data['IfCollection'] = $orderData['IfCollection'];  //是否属于征收范围内房屋
-        $data['IfFacade'] = $orderData['IfFacade'];     //是否属门面营业用房
-        $data['IfCheck'] = $orderData['IfCheck'];     //房屋结构查验是否通过
-        $data['BanAddress'] = $houseData['BanAddress']?$houseData['BanAddress']:'';   //楼栋地址
-        $data['FloorID'] = $houseData['FloorID']?$houseData['FloorID']:'';   //楼层号
-        $data['TenantID'] = $houseData['TenantID']?$houseData['TenantID']:'';   //租户编号
-        $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'';  //计租面积
-        $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'';      //实有面积
-        $data['CreateTime'] = date('Y-m-d H:i:s' ,$orderData['CreateTime']);   //备案时间
-        $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'';  //租户联系方式
-        $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'';  //租户姓名
-        $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'';  //租户身份证号码
-        $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'';  //租户联系方式
-        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'';  //租户姓名
-        $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'';  //租户身份证号码
-
-        return $data;
+        $deadline = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->value('Deadline');
+        return json_decode($deadline,true);
 
 
     }
