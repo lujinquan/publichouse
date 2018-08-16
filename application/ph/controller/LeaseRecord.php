@@ -21,16 +21,12 @@ class LeaseRecord extends Base
      */
     public function index(){
 
-        // $data = model('ph/UserRecord') -> get_all_record_lst();
-
-        // $useChanges = Db::name('use_change_type')->field('id, UseChangeTitle')->select();
-
-        // $this -> assign([
-        //     'useChanges'=> $useChanges,
-        //     'changeLst' => $data['arr'],
-        //     'changeLstObj' => $data['obj'],
-        //     'changeOption' => $data['option'],
-        // ]);
+        $data = model('ph/LeaseRecord')->get_all_lease_lst();
+        $this -> assign([    
+            'leaseLst' => $data['arr'],
+            'leaseLstObj' => $data['obj'],
+            'leaseOption' => $data['option'],
+        ]);
 
         return $this->fetch();
     }

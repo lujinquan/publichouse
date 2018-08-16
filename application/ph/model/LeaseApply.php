@@ -80,7 +80,7 @@ class LeaseApply extends Model
 
     public function get_one_change_info($id = '' ,$map=''){
 
-        if(!$map) $map='ChangeOrderID ,HouseID ,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,ProcessConfigType,HouseID ,TenantName,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,CreateTime ,Status';
         $data = $this->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
@@ -91,7 +91,7 @@ class LeaseApply extends Model
         
         //$data['StatusValue'] = $data['Status'];
         
-        $re = $this->order_config_detail($data['ChangeOrderID'],$data['Status']);
+        $re = $this->order_config_detail($data['ProcessConfigType'],$data['Status']);
 
         $data['Status'] = '待'.$re['RoleName'].$re['Title'];
 
@@ -111,21 +111,16 @@ class LeaseApply extends Model
      * @param  $status  主订单状态
      * @return array [ RoleName  下一步操作的角色名称 ， Title  下一步操作的步骤标题 ]
      */
-    public function order_config_detail($changeOrderID ,$status){
-        //halt($changeOrderID);
-        $config = Db::name('lease_change_order')->alias('a')
-                                              ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
-                                              ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
-                                              ->field('b.id, b.Title ,b.Total')
-                                              ->find();
+    public function order_config_detail($processid ,$status){
+
+        $config = Db::name('process_config')->where('id','eq',$processid)->field('id ,Total')->find();
 
         $maps['pid'] = array('eq',$config['id']);
         $maps['Total'] = array('eq',$status);
 
         $res = Db::name('process_config')->where($maps)->field('RoleName ,Title ,RoleID')->find();
-//halt($config);
-        return $res;
 
+        return $res;
     }
 
     public function order_config($changeOrderID ){
@@ -134,10 +129,7 @@ class LeaseApply extends Model
             ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
             ->value('Total');
 
-
-
         return $config;
-
     }
 
     /**
