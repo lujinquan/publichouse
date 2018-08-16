@@ -145,14 +145,12 @@ class LeaseAudit extends Base
 
         $res['detail'] = model('ph/LeaseAudit')->get_change_detail_info($changeOrderID);
 
-        // $res['config'] = model('ph/UserAudit')->process_status($changeOrderID);
+        $res['config'] = model('ph/LeaseAudit')->process_status($changeOrderID);
 
-        // $res['urls'] = model('ph/UserAudit')->process_imgs_url($changeOrderID);
+        $res['urls'] = model('ph/LeaseAudit')->process_imgs_url($changeOrderID);
 
-        // $res['record'] = model('ph/UserAudit')->process_record($changeOrderID);
-
-        //halt($res);
-
+        $res['record'] = model('ph/LeaseAudit')->process_record($changeOrderID);
+        
         return jsons('2000' ,'获取成功' ,$res);
     }
 
