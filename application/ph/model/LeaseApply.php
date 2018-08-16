@@ -95,6 +95,8 @@ class LeaseApply extends Model
 
         $data['Status'] = '待'.$re['RoleName'].$re['Title'];
 
+        $data['ProcessRoleID'] = $re['RoleID'];
+
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['StructureType'] = get_structure($data['StructureType']);
 

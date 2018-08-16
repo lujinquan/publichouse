@@ -163,7 +163,17 @@
             </tr>
         </form>
 		<!---查询-->
-          <?php foreach($leaseLst as $k => $v){; ?>
+          <?php foreach($leaseLst as $k => $v){
+
+            if(in_array($v['ProcessRoleID'],$useRoles)){
+
+              $IfProcess = '';
+            }else{
+
+              $IfProcess = 'not-process';
+            }
+
+          ?>
             <tr class="check001">
                 <td>
                   <span class="piaochecked">
@@ -185,7 +195,7 @@
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
                         <?php if(in_array(563,$threeMenu)){ ; ?>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only examine" value="<?php echo $v['ChangeOrderID']; ?>">
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only examine {$IfProcess}" value="<?php echo $v['ChangeOrderID']; ?>">
                           审核
                         </button>
                         <?php }; ?>

@@ -213,13 +213,13 @@
                         <td><div style="min-width:60px;"></div></td>
                         <td>
                         <div class="am-input-group am-input-group-sm" style="width:130px;">
-                                <?php
-                        if($changeOption != array()){
-                            $CreateTime = $changeOption['CreateTime'];  
-                        }else{
-                            $CreateTime = '';
-                        }
-                     ?>
+                         <?php
+                            if($changeOption != array()){
+                                $CreateTime = $changeOption['CreateTime'];  
+                            }else{
+                                $CreateTime = '';
+                            }
+                         ?>
                         <div class="am-u-sm-6" style="padding:0;">
                               <input style="width:130px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
                         </div>
