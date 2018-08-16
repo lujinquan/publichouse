@@ -184,8 +184,26 @@
                 <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">打印</button>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDel" value="">删除</button>
+                        <?php if(in_array(559,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">
+                          租约打印
+                        </button>
+                        <?php }; ?>
+                        <?php if(in_array(560,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">
+                          信息单打印
+                        </button>
+                        <?php }; ?>
+                        <?php if(in_array(561,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">
+                          上传签字图片
+                        </button>
+                        <?php }; ?>
+                        <?php if(in_array(562,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDel" value="">
+                          明细
+                        </button>
+                        <?php }; ?>
                     </div>
                 </td>
             </tr>
@@ -194,9 +212,9 @@
           </tbody>
         </table>
 		<div class="am-cf">
-          共1000条记录
+          共{$leaseLstObj->total()}条记录
           <div class="am-fr">
-             
+          {$leaseLstObj->render()}
           </div>
       </div>
       </div>

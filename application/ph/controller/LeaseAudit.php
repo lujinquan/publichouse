@@ -161,7 +161,7 @@ class LeaseAudit extends Base
      * @author Mr.Lu
      * @description
      */
-    public function process(){
+    public function leasePrint(){
    
         // if($this->request->isPost()) {
 
