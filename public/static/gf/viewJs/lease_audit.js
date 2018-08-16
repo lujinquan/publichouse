@@ -12,7 +12,6 @@ $('.examine').click(function(event){
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+ChangeOrderID,function(res){
 				var res = JSON.parse(res);
-				
 				var data = res.data.detail;
 				console.log(data);
 				for(var key in data){
@@ -38,7 +37,7 @@ $('.print2').click(function(event){
 	var ChangeOrderID = $(this).val();
 	$('.admin-content').addClass('am-print-hide');
 	console.log(ChangeOrderID);
-	layer.open({
+	var print2 = layer.open({
 		type:1,
 		area:['750px','700px'],
 		resize:false,
@@ -56,20 +55,21 @@ $('.print2').click(function(event){
 					$('#'+name_id).text(data[key]);
 				}
 			})
+			$('#print2').show();
 		},
 		yes:function(){
-
-			
+			layer.closeAll();
+		},
+		btn2:function(){
+			$('#print2').show();
 			bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
 			sprnstr="<!--startprint-->";//设置打印开始区域  
 			eprnstr="<!--endprint-->";//设置打印结束区域  
 			prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html  
 			prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
-			window.document.body.innerHTML=prnhtml;  
-			window.print(); 
-		},
-		btn2:function(){
-
+			window.document.body.innerHTML=prnhtml;
+			setTimeout("window.print()",100);
+			window.document.body.innerHTML=bdhtml;
 		}
 	})
 });
@@ -97,7 +97,51 @@ $('.detail_btn').click(function(event){
 		}
 	})
 })
+// 上传签字图片
+$('.uploadPic').click(function(){
+	event.stopPropagation();
+	var ChangeOrderID = $(this).val();
+	layer.open({
+		type:1,
+		area:['400px','300px'],
+		resize:false,
+		zIndex:100,
+		title:['上传签字图片','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		content:$('#uploadPicDiv'),
+		btn:['确认','取消'],
+		success:function(){
+			new file({
+                show: "#uploadPicShow",
+                upButton:"#uploadPicUp",
+                size: 10240,
+                url: "/ph/ChangeApply/add",
+                button: "#uploadPic",
+                ChangeOrderID: '',
+                Type: 1,
+                title: "其它"
+            })
+		},
+		yes:function(){
+			var formData = fileTotall.getArrayFormdata();
+			formData.append('ChangeOrderID',ChangeOrderID);
+			$.ajax({
+		        type:"post",
+		        url:'/ph/LeaseAudit/process/',
+		        data:formData,
+		        processData:false,
+		        contentType:false,
+		        success:function(res){
+		            res = JSON.parse(res);
+		               console.log(res);
+		            layer.msg(res.msg);
+		            // layer.close(this_index);
+		            // location.reload();
+		        }
+			})
+		}
+	})
 
+})
 
 
 
@@ -114,8 +158,8 @@ function processPass(formData,this_index){
             res = JSON.parse(res);
                console.log(res);
             layer.msg(res.msg);
-            layer.close(this_index);
-            location.reload();
+            // layer.close(this_index);
+            // location.reload();
         }
 	})
 }

@@ -197,6 +197,9 @@ return [
     'leaseApplication1' => '计租表',
     'leaseApplication2' => '住宅租约',
     'leaseApplication3' => '身份证',
+    'uploadPic' => '租约签字图片',
+
+    
     // 分户
     'SplitApplication' => '书面申请(双方)',
     'SplitRegister' => '户口簿',

@@ -210,6 +210,11 @@
                         </button>
                         <?php }; ?>
 
+
+
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only uploadPic" value="<?php echo $v['ChangeOrderID']; ?>">
+                          上传签字图片
+                        </button>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="<?php echo $v['ChangeOrderID']; ?>">
                           信息单打印
                         </button>
@@ -235,8 +240,21 @@
 {block name="print"}
   {include file="application/ph/view/lease_apply/detail.html" /}
   {include file="application/ph/view/lease_audit/print2.html" /}
+  <div id="uploadPicDiv">
+      <div class="am-u-md-12 fileUpLoad">
+          <div class="am-u-md-5">
+              <p>租约签字图片：</p>
+          </div>
+          <div class="am-form-group am-form-file am-u-md-7">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="uploadPic" type="file" name="uploadPic" multiple>
+          </div>
+          <div id="uploadPicShow" class="am-u-md-12"></div>
+      </div>
+  </div>
 {/block}
 
 {block name="JsFile"}
 <script type="text/javascript" src="/public/static/gf/viewJs/lease_audit.js"></script>
+<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script>
 {/block}
