@@ -184,6 +184,11 @@
                 <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
+                        <?php if(in_array(563,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">
+                          审核
+                        </button>
+                        <?php }; ?>
                         <?php if(in_array(559,$threeMenu)){ ; ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="">
                           租约打印

@@ -161,6 +161,35 @@ class LeaseAudit extends Base
      * @author Mr.Lu
      * @description
      */
+    public function process(){
+   
+        // if($this->request->isPost()) {
+
+        //     $data = $this->request->post();
+
+        //     model('ph/UserAudit')->check_process($data['ChangeOrderID']);
+
+        //     if(!isset($data['reson'])) $data['reson']='';
+       
+        //     $result = model('ph/UserAudit')->create_child_order($data['ChangeOrderID'], $data['reson']);
+
+        //     if($result === true){
+
+        //         return jsons('2000' ,'审核完成');
+        //     }else{
+
+        //         return jsons('4000' ,'审核异常');
+        //     }
+            
+        // }
+
+    }
+
+    /**
+     * @title 审核(此处的审核有别与补充资料)
+     * @author Mr.Lu
+     * @description
+     */
     public function leasePrint(){
    
         // if($this->request->isPost()) {
