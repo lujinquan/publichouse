@@ -1446,6 +1446,10 @@ class Api extends Controller
             return jsons('4000','参数错误');
         }
 
+        $result['house']['TotalUseArea'] = 0;
+        $result['house']['TotalLeaseArea'] = 0;
+        $result['house']['TotalRoomMonth'] = 0;
+
         $rooms = Db::name('room')->field('RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
             ->select();
@@ -1453,7 +1457,13 @@ class Api extends Controller
         if(empty($rooms)){
             $rooms = array();
         }else{
+            $i = 0;
+            $j = 0;
+            $k = 0;
             foreach($rooms as &$v){
+                $i += $v['UseArea'];
+                $j += $v['LeasedArea'];
+                $k += $v['RoomRentMonth'];
                 switch ($v['RoomPublicStatus']) {
                     case 1:
                         $v['RoomPublicStatus'] = '独';
@@ -1463,6 +1473,9 @@ class Api extends Controller
                         break;
                 }
             }
+            $result['house']['TotalUseArea'] = $i;
+            $result['house']['TotalLeaseArea'] = $j;
+            $result['house']['TotalRoomMonth'] = $k;
         }
         
         $result['room'] = $rooms;
