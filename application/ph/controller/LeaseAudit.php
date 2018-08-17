@@ -94,9 +94,18 @@ class LeaseAudit extends Base
 
         model('ph/LeaseAudit')->check_process($ChangeOrderID);
 
+        $findOne = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->find();
+
+        if($findOne['QrcodeUrl']){
+            //删除过期的二维码
+            @unlink($_SERVER['DOCUMENT_ROOT'].$findOne['QrcodeUrl']);
+        }
+
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 
-        Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setField('PrintTime',time());
+        $qrcodeUrl = model('ph/LeaseAudit')->qrcode();
+
+        Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->update(['PrintTime'=>time(),'QrcodeUrl'=>$qrcodeUrl]);
 
         return $re?jsons('2000' ,'操作完成'):jsons('4000' ,'操作失败');
 
@@ -137,7 +146,7 @@ class LeaseAudit extends Base
 
             if($re){
                 $result = model('ph/LeaseAudit')->create_child_order($data['ChangeOrderID'], '');
-                return jsons('4000','上传成功');
+                return jsons('2000','上传成功');
             }else{
                 return jsons('4000','上传失败');
             }
