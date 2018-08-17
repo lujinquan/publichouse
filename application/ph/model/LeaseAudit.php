@@ -192,17 +192,17 @@ class LeaseAudit extends Model
      */
     public function process_record($changeOrderID){
 
-        $one = Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)
+        $oneFind = Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)
                                                ->field('Child,ProcessConfigType')
                                                ->find();
 
-        $oneData = json_decode($one['Child'],true);
+        $oneData = json_decode($oneFind['Child'],true);
 
         $result = [];
 
         foreach($oneData as $v){
 
-             $map['pid'] = array('eq',$one['ProcessConfigType']);
+             $map['pid'] = array('eq',$oneFind['ProcessConfigType']);
              $map['Total'] = array('eq' ,$v['Step']);
 
             $four = Db::name('process_config')->where($map)->value('Title');  //操作内容

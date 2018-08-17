@@ -989,7 +989,7 @@ class Api extends Controller
         Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
 
         $value = '公房测试二维码';          //二维码内容
-        $errorCorrectionLevel = 'L';    //容错级别 
+        $errorCorrectionLevel = 'H';    //容错级别 
         $matrixPointSize = 5;           //生成图片大小
 
         $qrcode = new \QRcode;
