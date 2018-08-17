@@ -152,7 +152,7 @@ class LeaseAudit extends Model
         $s = [
                 'Step' => $total['Status'],
                 'Reson' => $reson,
-                'IfValid' => $reson?1:0,
+                'IfValid' => $reson?0:1,
                 'UserNumber' => UID,
                 'CreateTime' => time(),
             ];
@@ -254,7 +254,7 @@ class LeaseAudit extends Model
             }
         }
 
-        return $result;
+        return array_reverse($result);
     }
 
     /**

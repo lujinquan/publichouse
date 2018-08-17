@@ -92,7 +92,7 @@ class LeaseAudit extends Base
 
         $ChangeOrderID = input('ChangeOrderID');
 
-        model('ph/LeaseAudit')->check_process($data['ChangeOrderID']);
+        model('ph/LeaseAudit')->check_process($ChangeOrderID);
 
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 
