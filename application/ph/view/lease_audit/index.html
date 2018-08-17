@@ -30,7 +30,7 @@
                 <th class="table-set">打印时间</th>
                 <th class="table-set">打印次数</th>
                 <?php }; ?>
-                <th class="table-set" style="width:114px;">操作</th>
+                <th class="table-set" style="">操作</th>
               </tr>
           </thead>
           <tbody>
@@ -46,7 +46,7 @@
               </td>
               <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
-                  <div class="am-g am-input-group am-input-group-sm">
+                  <div class="am-form-group  am-form search_input">
                       
                       <select name="TubulationID">
                           <option value="" style="display:none">请选择</option>
@@ -164,7 +164,7 @@
               </td>
               <?php }; ?>
               <td>
-                <div class="am-btn-group am-btn-group-xs" style="width:114px;">
+                <div class="am-btn-group am-btn-group-xs" style="width:136px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
                   <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/UserApply/index.html"><span class="ResetIcon"></span>重置</a>
                 </div>

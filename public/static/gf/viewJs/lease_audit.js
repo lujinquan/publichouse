@@ -41,6 +41,7 @@ $('.examine').click(function(event){
 })
 $('.print1').click(function(){
 	event.stopPropagation();
+	$('.admin-main').addClass('am-print-hide');
 	var ChangeOrderID = $(this).val();
 	var this_index = layer.open({
 		type:1,
@@ -116,6 +117,7 @@ $('.print2').click(function(event){
 					var name_id = key.replace(/apply/,'printer_2_');
 					$('#'+name_id).text(data[key]);
 				}
+				$('#picCode_2').prop('src',data.QrcodeUrl);
 			})
 		},
 		yes:function(){
@@ -167,6 +169,8 @@ $('.detail_btn').click(function(event){
 					$('#imghid').hide();
 					$('#picCode').hide();
 				}
+				// 隐藏流程和附件查看
+				$('.print1_hide').show();
 				processState('#leaseApplyState',res);
             	metailShow('#leaseApplyPhotos',res);
 			})
@@ -234,8 +238,8 @@ function processPass(formData,this_index){
             res = JSON.parse(res);
                console.log(res);
             layer.msg(res.msg);
-            // layer.close(this_index);
-            // location.reload();
+            layer.close(this_index);
+            location.reload();
         }
 	})
 }
@@ -278,7 +282,8 @@ function noPass(value){
     var afterPrint = function() {
         console.log('Functionality to run after printing');
 		$('.outerControl').hide();
-		$('#leaseDetail').hide()
+		$('#leaseDetail').hide();
+		location.reload();
     };
 
     if (window.matchMedia) {
