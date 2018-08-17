@@ -135,16 +135,14 @@ class LeaseAudit extends Model
 
         // 若终审不通过,这里不存在，因为最后一个人没有权限不通过或通过
         }elseif($status == $total['Total'] && $reson != ''){
-
             //终审不通过则状态改为 0
             //self::where($where)->setField('Status',0);
             exit;
-        // 若终审通过，这里不存在
+        // 若终审通过
         }elseif($status == $total['Total'] && $reson == ''){
-            exit;
+            
             //终审通过则状态改为  1
-            //self::where($where)->setField('Status',1);
-
+            self::where($where)->setField('Status',1);
         }
 
         $child = json_decode($total['Child'],true);
