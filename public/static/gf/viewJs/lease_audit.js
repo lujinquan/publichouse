@@ -56,18 +56,18 @@ $('.print1').click(function(){
 			})
 		},
 		yes:function(){
-			layer.close(this_index);
-			$('#leaseDetail').show();
-			setTimeout(function(){$('#leaseDetail').show()},300);
-			$('#leaseDetail').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
-			
-			// bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
-			// sprnstr="<!--startprint-->";//设置打印开始区域  
-			// eprnstr="<!--endprint-->";//设置打印结束区域  
-			// prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html  
-			// prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
-			// window.document.body.innerHTML=prnhtml;
-			 setTimeout("window.print()",300);
+			$.get('/ph/LeaseAudit/leasePrint/ChangeOrderID/'+ChangeOrderID,function(res){
+				res = JSON.parse(res);
+				if(res.retcode == '2000'){
+					layer.close(this_index);
+					$('#leaseDetail').show();
+					setTimeout(function(){$('#leaseDetail').show()},300);
+					$('#leaseDetail').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
+					 setTimeout("window.print()",500);
+				}else{
+					layer.msg(res.msg);
+				}
+			})
 		},
 		btn2:function(){
 			
@@ -111,7 +111,7 @@ $('.print2').click(function(event){
 			// prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html  
 			// prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
 			// window.document.body.innerHTML=prnhtml;
-			 setTimeout("window.print()",300);
+			 setTimeout("window.print()",500);
 		},
 		btn2:function(){
 			
@@ -151,7 +151,7 @@ $('.uploadPic').click(function(){
 	var ChangeOrderID = $(this).val();
 	layer.open({
 		type:1,
-		area:['400px','300px'],
+		area:['700px','500px'],
 		resize:false,
 		zIndex:100,
 		title:['上传签字图片','color:#FFF;font-size:1.6rem;font-weight:600;'],
@@ -174,12 +174,12 @@ $('.uploadPic').click(function(){
 			formData.append('ChangeOrderID',ChangeOrderID);
 			$.ajax({
 		        type:"post",
-		        url:'/ph/LeaseAudit/process/',
+		        url:'/ph/LeaseAudit/uploadSign',
 		        data:formData,
 		        processData:false,
 		        contentType:false,
 		        success:function(res){
-		            res = JSON.parse(res);
+		            // res = JSON.parse(res);
 		               console.log(res);
 		            layer.msg(res.msg);
 		            // layer.close(this_index);
