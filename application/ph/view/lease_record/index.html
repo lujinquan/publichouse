@@ -1,6 +1,8 @@
 {extend name="layout" /}
 {block name="title"}<title>租约申请</title>{/block}
 {block name="content"}
+  <link rel="stylesheet" href="/public/static/gf/css/iconfont.css">
+  <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
   <div class="admin-content">
     <div class="am-cf am-padding">
       <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约记录</small></div>
@@ -198,7 +200,7 @@
                 <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDetail" value="<?php echo $v['ChangeOrderID']; ?>">详情</button>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only detail_btn" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
                     </div>
                 </td>
             </tr>
@@ -216,9 +218,9 @@
     </div>
   </div>
 
-
+  {include file="application/ph/view/lease_apply/detail.html" /}
 {/block}
 {block name="JsFile"}
-<script type="text/javascript" src=""></script>
-
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/lease_audit.js"></script>
 {/block}
