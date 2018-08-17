@@ -988,13 +988,33 @@ class Api extends Controller
 
         Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
 
-        $value = '公房测试二维码';          //二维码内容
+        $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
+
+        $value = 'http://web.ph.com/erweima/'.$code;          //二维码内容
         $errorCorrectionLevel = 'H';    //容错级别 
         $matrixPointSize = 5;           //生成图片大小
+        $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$code.'.png';
 
         $qrcode = new \QRcode;
 
-        $qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2);
+        //$qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2); 
+        $qrcode::png($value,$filename,$errorCorrectionLevel, $matrixPointSize, 2);
+
+        return $filename;
+    }
+
+    public function codeCert()
+    {
+        $route = $this->request->route();
+
+        $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$route['name'].'.png';
+
+        if(is_file($filename)){
+            echo '认证成功';
+        }else{
+            echo '认证失败';
+        }
+        
     }
 
     public function pdf()

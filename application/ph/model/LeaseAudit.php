@@ -22,10 +22,36 @@ class LeaseAudit extends Model
      */
     public function get_change_detail_info($changeOrderID){
 
-        $deadline = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->value('Deadline');
-        return json_decode($deadline,true);
+        $find = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->field('QrcodeUrl,Deadline')->find();
 
+        $result = $find['Deadline']?json_decode($find['Deadline'],true):array();
 
+        $result['QrcodeUrl'] = $find['QrcodeUrl']; 
+
+        return $result;
+    }
+
+    //不需要调试模式，ob_end_clean() 不能去掉否则乱码
+    public function qrcode()
+    {
+        ob_end_clean();
+
+        Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
+
+        $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
+
+        $value = 'http://web.ph.com/erweima/'.$code;          //二维码内容
+        $errorCorrectionLevel = 'H';    //容错级别 
+        $matrixPointSize = 5;           //生成图片大小
+        $url = '/uploads/qrcode/'.$code.'.png';
+        $filename = $_SERVER['DOCUMENT_ROOT'].$url;
+
+        $qrcode = new \QRcode;
+
+        //$qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2); 
+        $qrcode::png($value,$filename,$errorCorrectionLevel, $matrixPointSize, 2);
+
+        return $url;
     }
 
     public function uploads($file,$k1){
@@ -92,7 +118,14 @@ class LeaseAudit extends Model
         //若中间审核通过
         if($status < $total['Total'] && $reson == '') {
 
+            if($status == 4){ //当经管科审核完成后
+                
+                $qrcodeUrl = $this->qrcode();
+            }
+
             self::where($where)->setInc('Status',1); //步骤递进
+
+
 
         //若中间审核不通过
         }elseif($status < $total['Total'] && $reson != ''){
@@ -129,6 +162,10 @@ class LeaseAudit extends Model
         $jsonChild = json_encode($child);
 
         $re = Db::name('lease_change_order')->where($where)->setField('Child',$jsonChild);
+
+        if(isset($qrcodeUrl)){
+            self::where($where)->setField('QrcodeUrl',$qrcodeUrl);
+        }
 
         return $re?true:false;
 

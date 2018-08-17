@@ -96,6 +96,8 @@ class LeaseAudit extends Base
 
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 
+        Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setField('PrintTime',time());
+
         return $re?jsons('2000' ,'操作完成'):jsons('4000' ,'操作失败');
 
     }
@@ -126,6 +128,9 @@ class LeaseAudit extends Base
                 $ChangeImageIDS = implode(',', $ChangeImageIDS);  //返回的是使用权变更的影像资料id(多个以逗号隔开)
 
             }
+
+
+
         }
     }
 }

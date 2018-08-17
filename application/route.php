@@ -17,6 +17,10 @@ return [
         ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
+    '[erweima]'     => [
+    	//':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
+        ':name'   => ['ph/Api/codeCert', ['method' => 'get'], ['id' => '\w+$']],
+    ],
 
     //登录入口绑定，例如输入web.gf.com/index/1
     //'index/:id'   =>  ['user/Publics/signin',['method'=>'get'],['id'=>'\d+']],

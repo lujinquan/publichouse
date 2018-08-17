@@ -26,6 +26,10 @@
                 <th class="table-set">居住层</th>
                 <th class="table-set">承租人</th>
                 <th class="table-set">流程状态</th>
+                <?php if(in_array(101,$useRoles)){ ;?>
+                <th class="table-set">打印时间</th>
+                <th class="table-set">打印次数</th>
+                <?php }; ?>
                 <th class="table-set" style="width:114px;">操作</th>
               </tr>
           </thead>
@@ -139,23 +143,26 @@
 
   
          
-                <td>
-        			<div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-        		</td>
-               <td>
-        			<div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-        		</td>
+              <td>
+        			 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+        		  </td>
+              <td>
+        			 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+        		  </td>
               <td>
                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
               </td>
-
-              	<td>
-        			<div class="am-input-group am-input-group-sm" style="width:130px;">
-	                    <div class="am-u-sm-6" style="padding:0;">
-	                          <input style="width:130px;" name="CreateTime" value="" type="text" class="am-form-field" data-am-datepicker value="">
-	                    </div>
-        			</div>
-        		</td>
+              <td>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+              <?php if(in_array(101,$useRoles)){ ;?>
+              <td>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+              <td>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+              <?php }; ?>
               <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:114px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
@@ -193,7 +200,11 @@
                 <td class="am-hide-sm-only"><?php echo $v['FloorNum']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['FloorID']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
-                <td><a href="#"><?php echo $v['Status']; ?></a></td>
+                <td ><a href="#"><?php echo $v['Status']; ?></a></td>
+                <?php if(in_array(101,$useRoles)){ ;?>
+                <td class="am-hide-sm-only"><?php echo $v['PrintTime']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['PrintTimes']; ?></td>
+                <?php }; ?>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
                         <?php if(in_array(563,$threeMenu)){ ; ?>
