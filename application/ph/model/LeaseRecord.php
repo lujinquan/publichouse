@@ -3,6 +3,7 @@
 namespace app\ph\model;
 
 use app\user\model\Role as RoleModel;
+use app\user\model\LeaseAudit as LeaseAuditModel;
 use think\Model;
 use think\Exception;
 use think\Db;
@@ -79,7 +80,7 @@ class LeaseRecord extends Model
 
     public function get_one_change_info($id = '' ,$map=''){
 
-        if(!$map) $map='ChangeOrderID ,ProcessConfigType,HouseID ,TenantName,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,ProcessConfigType,HouseID ,TenantName,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,PrintTimes,PrintTime,CreateTime ,Status';
         $data = $this->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
@@ -87,16 +88,18 @@ class LeaseRecord extends Model
         }
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
-        
-        //$data['StatusValue'] = $data['Status'];
-        
-        $re = $this->order_config_detail($data['ProcessConfigType'],$data['Status']);
+     
+        if($data['Status'] == 1){
+            $data['Status'] = '成功';
+        }
 
-        $data['Status'] = '待'.$re['RoleName'].$re['Title'];
+        if($data['Status'] === 0){
+            $data['Status'] = '失败';
+        }
 
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['StructureType'] = get_structure($data['StructureType']);
-
+        $data['PrintTime'] =  $data['PrintTime']?date('Y-m-d H:i:s' ,$data['PrintTime']):'';
         $data['CreateTime'] = date('Y-m-d H:i:s' ,$data['CreateTime']);
 
         return $data;
