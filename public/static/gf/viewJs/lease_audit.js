@@ -18,6 +18,13 @@ $('.examine').click(function(event){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
 				}
+				if(data.QrcodeUrl != ""){
+					$('#imghid').show();
+					$('#picCode').show().prop('src',data.QrcodeUrl);
+				}else{
+					$('#imghid').hide();
+					$('#picCode').hide();
+				}
 				processState('#leaseApplyState',res);
             	metailShow('#leaseApplyPhotos',res);
 			})
@@ -42,7 +49,7 @@ $('.print1').click(function(){
 		zIndex:100,
 		title:['租约打印','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:$('#leaseDetail'),
-		btn:['通过','不通过'],
+		btn:['打印','取消'],
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+ChangeOrderID,function(res){
 				var res = JSON.parse(res);
@@ -52,18 +59,30 @@ $('.print1').click(function(){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
 				}
+				if(data.QrcodeUrl != ""){
+					$('#imghid').show();
+					$('#picCode').show().prop('src',data.QrcodeUrl);
+				}else{
+					$('#imghid').hide();
+					$('#picCode').hide();
+				}
+				// 隐藏流程和附件查看
 				$('.print1_hide').hide();
+
 			})
 		},
 		yes:function(){
 			$.get('/ph/LeaseAudit/leasePrint/ChangeOrderID/'+ChangeOrderID,function(res){
 				res = JSON.parse(res);
+				console.log(res);
 				if(res.retcode == '2000'){
 					layer.close(this_index);
-					$('#leaseDetail').show();
-					setTimeout(function(){$('#leaseDetail').show()},300);
+					setTimeout(function(){
+						$('#leaseDetail').show();
+						setTimeout("window.print()",500);
+					},300);
 					$('#leaseDetail').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
-					 setTimeout("window.print()",500);
+					 
 				}else{
 					layer.msg(res.msg);
 				}
@@ -101,8 +120,10 @@ $('.print2').click(function(event){
 		},
 		yes:function(){
 			layer.close(print2);
-			$('.outerControl').show();
-			setTimeout(function(){$('.outerControl').show()},300);
+			setTimeout(function(){
+				$('.outerControl').show();
+				setTimeout("window.print()",500);
+			},300);
 			$('.outerControl').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
 			
 			// bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
@@ -111,7 +132,7 @@ $('.print2').click(function(event){
 			// prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html  
 			// prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html 
 			// window.document.body.innerHTML=prnhtml;
-			 setTimeout("window.print()",500);
+			 
 		},
 		btn2:function(){
 			
@@ -138,6 +159,13 @@ $('.detail_btn').click(function(event){
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
+				}
+				if(data.QrcodeUrl != ""){
+					$('#imghid').show();
+					$('#picCode').show().prop('src',data.QrcodeUrl);
+				}else{
+					$('#imghid').hide();
+					$('#picCode').hide();
 				}
 				processState('#leaseApplyState',res);
             	metailShow('#leaseApplyPhotos',res);

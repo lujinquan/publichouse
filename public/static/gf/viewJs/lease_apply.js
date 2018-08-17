@@ -174,7 +174,6 @@ $('.addLease').click(function(){
                     res = JSON.parse(res);
                     layer.msg(res.msg);
                     if(res.retcode == '2000'){
-                        
                         location.reload();
                     }
                 }
@@ -203,6 +202,13 @@ $('.BtnDetail').click(function(){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
 				}
+				if(data.QrcodeUrl != ""){
+					$('#imghid').show();
+					$('#picCode').show().prop('src',data.QrcodeUrl);
+				}else{
+					$('#imghid').hide();
+					$('#picCode').hide();
+				}
 				processState('#leaseApplyState',res);
             	metailShow('#leaseApplyPhotos',res);
 			})
@@ -217,10 +223,12 @@ $('.BtnDetail').click(function(){
 $('.BtnDel').click(function(){
 	var ChangeOrderID = $(this).val();
 	console.log(ChangeOrderID);
-	$.get('/ph/LeaseAudit/delete/ChangeOrderID/'+ChangeOrderID,function(res){
+	$.get('/ph/LeaseApply/delete/ChangeOrderID/'+ChangeOrderID,function(res){
 		var res = JSON.parse(res);
 		console.log(res);
-
+		if(res.retcode == '2000'){
+			location.reload();
+		}
 	})
 })
 
