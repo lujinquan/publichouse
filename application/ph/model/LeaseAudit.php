@@ -40,7 +40,7 @@ class LeaseAudit extends Model
 
         $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
 
-        $value = 'http://web.ph.com/erweima/'.$code;          //二维码内容
+        $value = 'http://check.ctnmit.com/erweima/'.$code;          //二维码内容
         $errorCorrectionLevel = 'H';    //容错级别 
         $matrixPointSize = 5;           //生成图片大小
         $url = '/uploads/qrcode/'.$code.'.png';
@@ -245,12 +245,12 @@ class LeaseAudit extends Model
             $four = Db::name('process_config')->where($map)->value('Title');  //操作内容
             $one = Db::name('process_config')->where($map)->value('RoleName');  //角色名称
             $two = Db::name('admin_user')->where('Number' ,'eq' ,$v['UserNumber'])->value('UserName'); //操作人
-            $three = date('Y年m月d日 H时i分s秒' ,$v['CreateTime']);
+            $three = date('Y-m-d H:i:s' ,$v['CreateTime']);
 
             if($v['IfValid'] == 1){
-                $result[] = $one.$two.'于'.$three.'执行'.$four.'操作';
+                $result[] = $one.' '.$two.' 于'.$three.' '.$four;
             }else{
-               $result[] = $one.$two.'于'.$three.'执行'.$four.'操作失败，原因：'.$v['Reson'];
+               $result[] = $one.' '.$two.' 于'.$three.' '.$four.'失败，原因：'.$v['Reson'];
             }
         }
 

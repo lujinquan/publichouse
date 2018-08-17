@@ -39,12 +39,19 @@ class LeaseApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
 
+            $f = Db::name('lease_change_order')->where(['HouseID'=>$data['houseID'],'Status'=>['>',0]])->find();
+
+            if($f){
+                return jsons('4000','请勿重复申请');
+            }
+
             if (isset($_FILES) && $_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('LeaseApply')->uploads($v, $k);
                 }
                 $ChangeImageIDS = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
             }
+
 
             $one = Db::name('house')->alias('a')
                                   ->join('ban b','a.BanID = b.BanID','left')
