@@ -226,6 +226,7 @@ $('.BtnDel').click(function(){
 	$.get('/ph/LeaseApply/delete/ChangeOrderID/'+ChangeOrderID,function(res){
 		var res = JSON.parse(res);
 		console.log(res);
+		layer.msg(res.msg);
 		if(res.retcode == '2000'){
 			location.reload();
 		}
