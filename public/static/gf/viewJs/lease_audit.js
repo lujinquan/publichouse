@@ -211,11 +211,13 @@ $('.uploadPic').click(function(){
 		        processData:false,
 		        contentType:false,
 		        success:function(res){
-		            // res = JSON.parse(res);
-		               console.log(res);
+		            res = JSON.parse(res);
+		            console.log(res);
 		            layer.msg(res.msg);
-		            // layer.close(this_index);
-		            // location.reload();
+		            if(res.retcode == '2000'){
+		               	location.reload();
+		            }
+		            
 		        }
 			})
 		}
