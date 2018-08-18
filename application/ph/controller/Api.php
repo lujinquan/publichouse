@@ -1026,26 +1026,24 @@ class Api extends Controller
     <!-- <script src="/public/static/gf/js/jquery.min.js"></script> -->
 
     <style>
-        header{margin-top:40px;margin-bottom:20px;font-size:20px;text-align:center;}
-        table{width:100%;border-left:1px solid #666;border-top:1px solid #666;}
-        table td{border-right:1px solid #666;border-bottom:1px solid #666;height:20px;font-size:14px;}
-        table tr{height:40px;}
+        body{width:100%;margin:0;padding:0;background:url('/public/static/gf/img/750_success.jpg') no-repeat;background-size:cover;}
+        header{margin-top:80px;margin-bottom:20px;font-size:22px;text-align:center;}
+        table{width:74%;margin:0 13%;font-size:14px;}
+        table td{height:20px;font-size:14px;}
+        tr>td+td{text-align:right;}
+        table tr{height:30px;}
     </style>
 </head>
 <body>
-    <header>武汉市公有房屋住宅租约防伪鉴定书</header>
+    <header>防伪鉴定证书</header>
     <table cellspacing="0" cellpadding="0" >
         <tr>
-            <td width="25%">租直NO</td>
+            <td width="31%">租直NO</td>
             <td>租直昌区01-201878924</td>
         </tr>
         <tr>
             <td>房屋编号</td>
             <td>100500700010029</td>
-        </tr>
-        <tr>
-            <td>房屋坐落</td>
-            <td>新桥街14#</td>
         </tr>
         <tr>
             <td>结构类别</td>
@@ -1071,8 +1069,11 @@ class Api extends Controller
             <td>租约签订日期</td>
             <td>2018年07月02日</td>
         </tr>
-        <tr>
-            <td colspan="2" style="text-align:center;">鉴定单位：武汉市住房保障和房屋管理局</td>
+        <tr style="height:100px;">
+            <td colspan="2" style="position:relative;text-align:right;">
+                武汉市住房保障和房屋管理局
+                <img style="width:90px;position:absolute;top:20px;right:20%;" src="/public/static/gf/img/zhang08.png" />
+            </td>
         </tr>
     </table>
 </body>
@@ -1087,26 +1088,35 @@ $info = <<<EOF
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge,
+    chrome=1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <meta name="Description" content=""/>
     <meta name="keywords" content=""/>
-    <title>无效租约信息单</title>
+    <title></title>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="/public/static/gf/js/jquery.min.js"></script> -->
+
     <style>
-        header{margin-top:40px;margin-bottom:20px;font-size:20px;text-align:center;}
-        table{width:100%;border-left:1px solid #666;border-top:1px solid #666;}
-        table td{border-right:1px solid #666;border-bottom:1px solid #666;height:20px;font-size:14px;}
-        table tr{height:40px;}
+        body{width:100%;margin:0;padding:0;background:url('/public/static/gf/img/750_fail.jpg') no-repeat;background-size:cover;}
+        header{margin-top:80px;margin-bottom:20px;font-size:22px;text-align:center;}
+        table{width:74%;margin:0 13%;font-size:14px;}
+        table td{height:20px;font-size:14px;}
+        tr>td+td{text-align:right;}
+        table tr{height:30px;}
     </style>
 </head>
 <body>
-    <header>武汉市公有房屋住宅租约防伪鉴定书</header>
+    <header>防伪鉴定证书</header>
     <table cellspacing="0" cellpadding="0" >
-        <tr style="height:350px;text-align:center;">
-            <td style="font-size:24px;">此租约鉴定无效</td>
-        </tr>
         <tr>
-            <td style="text-align:center;">鉴定单位：武汉市住房保障和房屋管理局</td>
+            <td style="height:230px;font-size:16px;text-align:center;">此租约鉴定无效</td>
+        </tr>
+        <tr style="height:100px;">
+            <td colspan="2" style="position:relative;text-align:right;">
+                武汉市住房保障和房屋管理局
+                <img style="width:90px;position:absolute;top:20px;right:20%;" src="/public/static/gf/img/zhang08.png" />
+            </td>
         </tr>
     </table>
 </body>
@@ -1578,6 +1588,9 @@ EOF;
         $result['house']['ToiletRent'] = 0;
         $result['house']['AisleRent'] = 0;
         $result['house']['KitchenRent'] = 0;
+
+        $result['house']['BelowFiveNumRent'] = 0.5 * $result['house']['BelowFiveNum'];
+        $result['house']['MoreFiveNumRent'] = 1 * $result['house']['MoreFiveNum'];
 
         $rooms = Db::name('room')->field('RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
