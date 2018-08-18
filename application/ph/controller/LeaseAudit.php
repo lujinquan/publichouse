@@ -106,7 +106,10 @@ class LeaseAudit extends Base
 
         $val = Db::name('config')->where('id',1)->value('Value');
 
-        $newSzno = substr($findOne['Szno'],0,7). $val;
+        $str = strpos($findOne['Szno'],'-')+1;
+        $newSzno = substr($findOne['Szno'],0,$str). $val;
+
+        //halt($newSzno);
 
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 

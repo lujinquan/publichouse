@@ -88,7 +88,6 @@ class LeaseRecord extends Model
         }
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
-     
         
         $data['Status'] = $data['Status']?'成功':'失败';
  
