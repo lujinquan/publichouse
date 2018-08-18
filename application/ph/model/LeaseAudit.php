@@ -108,7 +108,7 @@ class LeaseAudit extends Model
         $total = Db::name('lease_change_order')->alias('a')
                                              ->join('process_config b' ,'a.ProcessConfigType = b.id' ,'left')
                                              ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
-                                             ->field('a.Child,a.Status,b.Total')
+                                             ->field('a.Deadline,a.Child,a.Status,b.Total')
                                              ->find();
 
         $where['ChangeOrderID'] = array('eq' ,$changeOrderID);
@@ -116,13 +116,21 @@ class LeaseAudit extends Model
         //判断当前流程
         $status = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->value('Status');
 
+        $deadline = json_decode($total['Deadline'],true);
+
         //若中间审核通过
         if($status < $total['Total'] && $reson == '') {
 
-            if($status == 4){ //当经管科审核完成后
-                
+            if($status == 2){  //当资料员审核完成后
+                $deadline['applyRoom21_data1'] = session('user_base_info.name');
+            }elseif($status == 3){  //当行政所长审核完成后
+                $deadline['applyRoom21_data2'] = session('user_base_info.name');
+            }elseif($status == 4){  //当经管科审核完成后
+                $deadline['applyRoom21_data3'] = session('user_base_info.name');
                 $qrcodeUrl = $this->qrcode();
             }
+
+            Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->setField('Deadline',json_encode($deadline));
 
             self::where($where)->setInc('Status',1); //步骤递进
 

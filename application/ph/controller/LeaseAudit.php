@@ -114,7 +114,7 @@ class LeaseAudit extends Base
 
         Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->update(['PrintTime'=>time(),'QrcodeUrl'=>$qrcodeUrl,'Szno'=>$newSzno]);
 
-        return $re?jsons('2000' ,'操作完成',['QrcodeUrl'=>$qrcodeUrl,'Szno'=>$val]):jsons('4000' ,'操作失败');
+        return $re?jsons('2000' ,'操作完成',['QrcodeUrl'=>$qrcodeUrl,'Szno'=>$newSzno]):jsons('4000' ,'操作失败');
 
     }
 
