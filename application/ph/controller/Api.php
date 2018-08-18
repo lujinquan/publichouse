@@ -1574,6 +1574,10 @@ EOF;
         $result['house']['TotalUseArea'] = 0;
         $result['house']['TotalLeaseArea'] = 0;
         $result['house']['TotalRoomMonth'] = 0;
+        $result['house']['HallRent'] = 0;
+        $result['house']['ToiletRent'] = 0;
+        $result['house']['AisleRent'] = 0;
+        $result['house']['KitchenRent'] = 0;
 
         $rooms = Db::name('room')->field('RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
@@ -1585,28 +1589,51 @@ EOF;
             $i = 0;
             $j = 0;
             $k = 0;
+            $result['house']['Hall'] = 0;
+            $result['house']['Toilet'] = 0;
+            $result['house']['Aisle'] = 0;
+            $result['house']['Kitchen'] = 0;
             foreach($rooms as &$v){
-                $i += $v['UseArea'];
-                $j += $v['LeasedArea'];
-                $k += $v['RoomRentMonth'];
                 switch ($v['RoomPublicStatus']) {
                     case 1:
                         $v['RoomPublicStatus'] = '独';
+                        $i += $v['UseArea'];
+                        $j += $v['LeasedArea'];
+                        $k += $v['RoomRentMonth'];
                         break;
                     case 2:
                         $v['RoomPublicStatus'] = '共';
+                        $i += $v['UseArea'];
+                        $j += $v['LeasedArea'];
+                        $k += $v['RoomRentMonth'];
                         break;
                     default:
-                        // if(){
-
-                        // }
+                        if($v['RoomType'] == 1){ //三户共用厅堂
+                            $result['house']['Hall'] += 1;
+                        }elseif($v['RoomType'] == 2){ //三户共用卫生间
+                            $result['house']['Toilet'] += 1;
+                        }elseif($v['RoomType'] == 3){ //三户共用室内走道
+                            $result['house']['Aisle'] += 1;
+                        }elseif($v['RoomType'] == 6){ //三户共用厨房
+                            $result['house']['Kitchen'] += 1;
+                        }
                         break;
                 }
+
+                
             }
+
+            $result['house']['HallRent'] = 0.5 * $result['house']['Hall'];
+            $result['house']['ToiletRent'] = 0.5 * $result['house']['Toilet'];
+            $result['house']['AisleRent'] = 0.5 * $result['house']['Aisle'];
+            $result['house']['KitchenRent'] = 0.5 * $result['house']['Kitchen'];
+
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
             $result['house']['TotalRoomMonth'] = $k;
         }
+
+        $result['house']['PumpCost'] = round(0.08 * $result['house']['TotalLeaseArea'],1);
         
         $result['room'] = $rooms;
 
