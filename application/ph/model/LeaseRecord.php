@@ -89,14 +89,9 @@ class LeaseRecord extends Model
 
         $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
      
-        if($data['Status'] == 1){
-            $data['Status'] = '成功';
-        }
-
-        if($data['Status'] === 0){
-            $data['Status'] = '失败';
-        }
-
+        
+        $data['Status'] = $data['Status']?'成功':'失败';
+ 
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['StructureType'] = get_structure($data['StructureType']);
         $data['PrintTime'] =  $data['PrintTime']?date('Y-m-d H:i:s' ,$data['PrintTime']):'';
