@@ -1604,7 +1604,7 @@ EOF;
             $k = 0;
             $result['house']['Hall'] = 0;
             $result['house']['Toilet'] = 0;
-            $result['house']['Aisle'] = 0;
+            $result['house']['InnerAisle'] = 0;
             $result['house']['Kitchen'] = 0;
             foreach($rooms as &$v){
                 switch ($v['RoomPublicStatus']) {
@@ -1626,7 +1626,7 @@ EOF;
                         }elseif($v['RoomType'] == 2){ //三户共用卫生间
                             $result['house']['Toilet'] += 1;
                         }elseif($v['RoomType'] == 3){ //三户共用室内走道
-                            $result['house']['Aisle'] += 1;
+                            $result['house']['InnerAisle'] += 1;
                         }elseif($v['RoomType'] == 6){ //三户共用厨房
                             $result['house']['Kitchen'] += 1;
                         }
@@ -1638,7 +1638,7 @@ EOF;
 
             $result['house']['HallRent'] = 0.5 * $result['house']['Hall'];
             $result['house']['ToiletRent'] = 0.5 * $result['house']['Toilet'];
-            $result['house']['AisleRent'] = 0.5 * $result['house']['Aisle'];
+            $result['house']['InnerAisleRent'] = 0.5 * $result['house']['InnerAisle'];
             $result['house']['KitchenRent'] = 0.5 * $result['house']['Kitchen'];
 
             $result['house']['TotalUseArea'] = $i;
