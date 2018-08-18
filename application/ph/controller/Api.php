@@ -1606,19 +1606,21 @@ EOF;
             $result['house']['Toilet'] = 0;
             $result['house']['InnerAisle'] = 0;
             $result['house']['Kitchen'] = 0;
-            foreach($rooms as &$v){
+            foreach($rooms as $v){
                 switch ($v['RoomPublicStatus']) {
                     case 1:
                         $v['RoomPublicStatus'] = '独';
                         $i += $v['UseArea'];
                         $j += $v['LeasedArea'];
                         $k += $v['RoomRentMonth'];
+                        $room[] = $v;
                         break;
                     case 2:
                         $v['RoomPublicStatus'] = '共';
                         $i += $v['UseArea'];
                         $j += $v['LeasedArea'];
                         $k += $v['RoomRentMonth'];
+                        $room[] = $v;
                         break;
                     default:
                         if($v['RoomType'] == 1){ //三户共用厅堂
@@ -1648,7 +1650,7 @@ EOF;
 
         $result['house']['PumpCost'] = round(0.08 * $result['house']['TotalLeaseArea'],1);
         
-        $result['room'] = $rooms;
+        $result['room'] = isset($room)?$room:array();
 
         return jsons('2000', '获取成功', $result);
     }
