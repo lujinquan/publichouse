@@ -1,6 +1,8 @@
 $('.addLease').click(function(){
 	houseQuery.action('leaseHouseInput','1');
-
+	$('#applyYear').val(getYear());
+	$('#applyMonth').val(getMonth());
+	$('#applyDay').val(getDay());
 	layer.open({
 		type:1,
 		area:['1200px','750px'],
@@ -304,3 +306,19 @@ function processState(id,res){
 		FatherDom.append(RecordDom);
 	}
 }
+
+function getDay(){
+	return new Date().getDate();
+}
+
+function getMonth(){
+	return new Date().getMonth();
+}
+
+function getYear(){
+	var date = new Date();
+	var year = date.getFullYear();
+	return year;
+}
+
+console.log(getDay());

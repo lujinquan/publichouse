@@ -76,6 +76,7 @@ $('.print1').click(function(){
 			$.get('/ph/LeaseAudit/leasePrint/ChangeOrderID/'+ChangeOrderID,function(res){
 				res = JSON.parse(res);
 				console.log(res);
+				$('#picCode').show().prop('src',res.data.QrcodeUrl);
 				if(res.retcode == '2000'){
 					layer.close(this_index);
 					setTimeout(function(){
