@@ -318,7 +318,7 @@ function getDay(){
 }
 
 function getMonth(){
-	return new Date().getMonth();
+	return (new Date().getMonth() + 1);
 }
 
 function getYear(){
