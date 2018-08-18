@@ -56,10 +56,13 @@ class LeaseApply extends Base
             $one = Db::name('house')->alias('a')
                                   ->join('ban b','a.BanID = b.BanID','left')
                                   ->join('tenant c','a.TenantID = c.TenantID','left')
-                                  ->field('a.BanAddress,a.InstitutionID,a.InstitutionPID,a.UseNature,a.OwnerType,b.StructureType,b.BanFloorNum,a.FloorID,c.TenantID,c.TenantName')
+                                  ->field('a.Szno,a.BanAddress,a.InstitutionID,a.InstitutionPID,a.UseNature,a.OwnerType,b.StructureType,b.BanFloorNum,a.FloorID,c.TenantID,c.TenantName')
                                   ->where('a.HouseID',$data['houseID'])
-                                  ->find();   
+                                  ->find();  
 
+            $val = Db::name('config')->where('id',1)->value('Value'); 
+             
+            $datas['Szno'] = $one['Szno'].$val;
             $datas['InstitutionID'] = $one['InstitutionID'];
             $datas['InstitutionPID'] = $one['InstitutionPID'];
             $datas['BanAddress'] = $one['BanAddress'];

@@ -96,6 +96,10 @@ class LeaseAudit extends Base
 
         $findOne = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->find();
 
+        
+
+        halt($jsons);
+
         if($findOne['QrcodeUrl']){
             //删除过期的二维码
             @unlink($_SERVER['DOCUMENT_ROOT'].$findOne['QrcodeUrl']);
@@ -104,13 +108,17 @@ class LeaseAudit extends Base
         //计数+1
         Db::name('config')->where('id',1)->setInc('Value',1);
 
+        $val = Db::name('config')->where('id',1)->value('Value');
+
+        $newSzno = substr($findOne['Szno'],0,7). $val;
+
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 
         $qrcodeUrl = model('ph/LeaseAudit')->qrcode();
 
-        Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->update(['PrintTime'=>time(),'QrcodeUrl'=>$qrcodeUrl]);
+        Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->update(['PrintTime'=>time(),'QrcodeUrl'=>$qrcodeUrl,'Szno'=>$newSzno]);
 
-        return $re?jsons('2000' ,'操作完成',['QrcodeUrl'=>$qrcodeUrl]):jsons('4000' ,'操作失败');
+        return $re?jsons('2000' ,'操作完成',['QrcodeUrl'=>$qrcodeUrl,'Szno'=>$val]):jsons('4000' ,'操作失败');
 
     }
 
