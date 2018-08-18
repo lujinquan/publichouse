@@ -151,8 +151,8 @@ class LeaseAudit extends Base
                 return jsons('4001','请上传图片');
             }
 
-            if($oldChangeOrderID){
-                $newChangeOrderID = $oldChangeOrderID.','.$ChangeImageIDS;
+            if($find['ChangeImageIDS']){
+                $newChangeOrderID = $find['ChangeImageIDS'].','.$ChangeImageIDS;
             }else{
                 $newChangeOrderID = $ChangeImageIDS;
             }
