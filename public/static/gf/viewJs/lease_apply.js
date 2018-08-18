@@ -25,11 +25,18 @@ $('.addLease').click(function(){
 					$('#applyRentNumber').val(res.data.house.TenantNumber);
 					$('#applyRentTel').val(res.data.house.TenantTel);
 					$('#applyRoom1_data5').val(res.data.house.Hall);
+					$('#applyRoom1_data6').val(res.data.house.HallRent);
 					$('#applyRoom2_data5').val(res.data.house.Kitchen);
+					$('#applyRoom2_data6').val(res.data.house.KitchenRent);
 					$('#applyRoom3_data5').val(res.data.house.Toilet);
+					$('#applyRoom3_data6').val(res.data.house.ToiletRent);
 					$('#applyRoom4_data5').val(res.data.house.InnerAisle);
+					$('#applyRoom4_data6').val(res.data.house.InnerAisleRent);
 					$('#applyRoom5_data6').val(res.data.house.BelowFiveNum);
+					$('#applyRoom5_data7').val(res.data.house.BelowFiveNumRent);
 					$('#applyRoom6_data6').val(res.data.house.MoreFiveNum);
+					$('#applyRoom6_data7').val(res.data.house.MoreFiveNumRent);
+					$('#applyRoom7_data8').val(res.data.house.TotalLeaseArea);
 					$('#applyRoom7_data9').val(res.data.house.PumpCost);
 					$('#applyRoom20_data2').val(res.data.house.TotalUseArea);
 					$('#applyRoom20_data3').val(res.data.house.TotalLeaseArea);
@@ -197,9 +204,8 @@ $('.BtnDetail').click(function(){
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+houseID,function(res){
 				var res = JSON.parse(res);
-				console.log(res);
 				var data = res.data.detail;
-				console.log(data);
+				data.applyNO = data.Szno;
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);

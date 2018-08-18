@@ -14,6 +14,9 @@ $('.examine').click(function(event){
 				var res = JSON.parse(res);
 				var data = res.data.detail;
 				console.log(data);
+
+				data.applyNO = data.Szno;
+
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
@@ -56,6 +59,9 @@ $('.print1').click(function(){
 				var res = JSON.parse(res);
 				var data = res.data.detail;
 				console.log(data);
+
+				data.applyNO = data.Szno;
+
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
@@ -77,6 +83,7 @@ $('.print1').click(function(){
 				res = JSON.parse(res);
 				console.log(res);
 				$('#picCode').show().prop('src',res.data.QrcodeUrl);
+				$('#detailNO').text(res.data.Szno);
 				if(res.retcode == '2000'){
 					layer.close(this_index);
 					setTimeout(function(){
@@ -114,6 +121,7 @@ $('.print2').click(function(event){
 				var res = JSON.parse(res);
 				var data = res.data.detail;
 				console.log(data);
+				data.applyNO = data.Szno;
 				for(var key in data){
 					var name_id = key.replace(/apply/,'printer_2_');
 					$('#'+name_id).text(data[key]);
@@ -159,6 +167,9 @@ $('.detail_btn').click(function(event){
 				console.log(res);
 				var data = res.data.detail;
 				console.log(data);
+
+				data.applyNO = data.Szno;
+
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
 					$('#'+name_id).text(data[key]);
