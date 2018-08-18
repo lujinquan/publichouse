@@ -981,27 +981,27 @@ class Api extends Controller
         return jsons('2000', '获取成功', $allData);
     }
 
-    //不需要调试模式，ob_end_clean() 不能去掉否则乱码
-    public function qrcode()
-    {
-        ob_end_clean();
+    // //不需要调试模式，ob_end_clean() 不能去掉否则乱码
+    // public function qrcode()
+    // {
+    //     ob_end_clean();
 
-        Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
+    //     Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
 
-        $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
+    //     $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
 
-        $value = 'http://web.ph.com/erweima/'.$code;          //二维码内容
-        $errorCorrectionLevel = 'H';    //容错级别 
-        $matrixPointSize = 5;           //生成图片大小
-        $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$code.'.png';
+    //     $value = 'http://web.ph.com/erweima/'.$code;          //二维码内容
+    //     $errorCorrectionLevel = 'H';    //容错级别 
+    //     $matrixPointSize = 5;           //生成图片大小
+    //     $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$code.'.png';
 
-        $qrcode = new \QRcode;
+    //     $qrcode = new \QRcode;
 
-        //$qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2); 
-        $qrcode::png($value,$filename,$errorCorrectionLevel, $matrixPointSize, 2);
+    //     //$qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2); 
+    //     $qrcode::png($value,$filename,$errorCorrectionLevel, $matrixPointSize, 2);
 
-        return $filename;
-    }
+    //     return $filename;
+    // }
 
     public function codeCert()
     {
@@ -1010,9 +1010,14 @@ class Api extends Controller
         $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$route['name'].'.png';
 
         if(is_file($filename)){
-            echo '认证成功';
+            echo <<<EOF
+            
+
+            <h2>认证成功</h2>
+
+EOF;
         }else{
-            echo '认证失败';
+            echo '<h2>认证失败</h2>';
         }
         
     }
@@ -1466,6 +1471,10 @@ class Api extends Controller
             return jsons('4000','参数错误');
         }
 
+        $val = Db::name('config')->where('id',1)->value('Value');
+
+        $result['house']['Szno'] = $result['house']['Szno'].$val;
+        
         $result['house']['TotalUseArea'] = 0;
         $result['house']['TotalLeaseArea'] = 0;
         $result['house']['TotalRoomMonth'] = 0;

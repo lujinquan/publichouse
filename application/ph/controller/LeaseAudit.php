@@ -101,13 +101,16 @@ class LeaseAudit extends Base
             @unlink($_SERVER['DOCUMENT_ROOT'].$findOne['QrcodeUrl']);
         }
 
+        //计数+1
+        Db::name('config')->where('id',1)->setInc('Value',1);
+
         $re = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->setInc('PrintTimes',1);
 
         $qrcodeUrl = model('ph/LeaseAudit')->qrcode();
 
         Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->update(['PrintTime'=>time(),'QrcodeUrl'=>$qrcodeUrl]);
 
-        return $re?jsons('2000' ,'操作完成'):jsons('4000' ,'操作失败');
+        return $re?jsons('2000' ,'操作完成',['QrcodeUrl'=>$qrcodeUrl]):jsons('4000' ,'操作失败');
 
     }
 
@@ -118,6 +121,12 @@ class LeaseAudit extends Base
             $data = $this->request->post();
 
             $changeOrderID = $data['ChangeOrderID'];  //变更编号
+
+            $find = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->field('ChangeImageIDS,PrintTimes')->find();
+
+            if($find['PrintTimes'] == 0){
+                return jsons('4000','请先打印签字后再上传');
+            }
 
             if(isset($_FILES) && $_FILES){ //由于目前前端的多文件上传一次只上传一个标题的多张图片，所以目前  $_FILES  只有一个元素，故 $ChangeImageIDS 只是一个字符串
 
@@ -133,8 +142,6 @@ class LeaseAudit extends Base
             if(!isset($ChangeImageIDS)){
                 return jsons('4001','请上传图片');
             }
-
-            $oldChangeOrderID = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->value('ChangeImageIDS');
 
             if($oldChangeOrderID){
                 $newChangeOrderID = $oldChangeOrderID.','.$ChangeImageIDS;
