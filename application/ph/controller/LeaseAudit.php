@@ -96,10 +96,6 @@ class LeaseAudit extends Base
 
         $findOne = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->find();
 
-        
-
-        halt($jsons);
-
         if($findOne['QrcodeUrl']){
             //删除过期的二维码
             @unlink($_SERVER['DOCUMENT_ROOT'].$findOne['QrcodeUrl']);
