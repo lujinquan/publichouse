@@ -1010,16 +1010,112 @@ class Api extends Controller
         $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$route['name'].'.png';
 
         if(is_file($filename)){
-            echo <<<EOF
-            
+            $info = <<<EOF
 
-            <h2>认证成功</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge,
+    chrome=1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="Description" content=""/>
+    <meta name="keywords" content=""/>
+    <title></title>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <!-- <script src="/public/static/gf/js/jquery.min.js"></script> -->
+
+    <style>
+        header{margin-top:40px;margin-bottom:20px;font-size:20px;text-align:center;}
+        table{width:100%;border-left:1px solid #666;border-top:1px solid #666;}
+        table td{border-right:1px solid #666;border-bottom:1px solid #666;height:20px;font-size:14px;}
+        table tr{height:40px;}
+    </style>
+</head>
+<body>
+    <header>武汉市公有房屋住宅租约防伪鉴定书</header>
+    <table cellspacing="0" cellpadding="0" >
+        <tr>
+            <td width="25%">租直NO</td>
+            <td>租直昌区01-201878924</td>
+        </tr>
+        <tr>
+            <td>房屋编号</td>
+            <td>100500700010029</td>
+        </tr>
+        <tr>
+            <td>房屋坐落</td>
+            <td>新桥街14#</td>
+        </tr>
+        <tr>
+            <td>结构类别</td>
+            <td>砖混一等</td>
+        </tr>
+        <tr>
+            <td>房屋层</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>居住层</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>承租人姓名</td>
+            <td>冬冬</td>
+        </tr>
+        <tr>
+            <td>承租人身份证</td>
+            <td>冬冬</td>
+        </tr>
+        <tr>
+            <td>租约签订日期</td>
+            <td>2018年07月02日</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align:center;">鉴定单位：武汉市住房保障和房屋管理局</td>
+        </tr>
+    </table>
+</body>
+</html>
 
 EOF;
         }else{
-            echo '<h2>认证失败</h2>';
+
+$info = <<<EOF
+            
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="Description" content=""/>
+    <meta name="keywords" content=""/>
+    <title>无效租约信息单</title>
+    <style>
+        header{margin-top:40px;margin-bottom:20px;font-size:20px;text-align:center;}
+        table{width:100%;border-left:1px solid #666;border-top:1px solid #666;}
+        table td{border-right:1px solid #666;border-bottom:1px solid #666;height:20px;font-size:14px;}
+        table tr{height:40px;}
+    </style>
+</head>
+<body>
+    <header>武汉市公有房屋住宅租约防伪鉴定书</header>
+    <table cellspacing="0" cellpadding="0" >
+        <tr style="height:350px;text-align:center;">
+            <td style="font-size:24px;">此租约鉴定无效</td>
+        </tr>
+        <tr>
+            <td style="text-align:center;">鉴定单位：武汉市住房保障和房屋管理局</td>
+        </tr>
+    </table>
+</body>
+</html>
+
+EOF;
         }
-        
+
+        echo $info;
     }
 
     public function pdf()
@@ -1497,8 +1593,13 @@ EOF;
                     case 1:
                         $v['RoomPublicStatus'] = '独';
                         break;
-                    default:
+                    case 2:
                         $v['RoomPublicStatus'] = '共';
+                        break;
+                    default:
+                        // if(){
+
+                        // }
                         break;
                 }
             }
