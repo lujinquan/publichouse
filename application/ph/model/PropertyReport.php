@@ -207,7 +207,7 @@ class PropertyReport extends Model
         $ownertypess = [1,2,5,11]; //市、区、自、全部
         foreach ($ownertypess as $own) {
 
-            for ($d = 4; $d >0; $d--) { 
+            for ($d = 4; $d >0; $d--) {
                 //公司和所，从1到3（1公司，2紫阳，3粮道），注意顺序公司的数据由所加和得来，所以是3、2、1的顺序
                 if($own < 10 && $d ==3){ //粮道所，的市、区、自
                     $result[$own][$d] = array_merge_adds($result[$own][19],$result[$own][20],$result[$own][21],$result[$own][22],$result[$own][23],$result[$own][24],$result[$own][25],$result[$own][26],$result[$own][27],$result[$own][28],$result[$own][29],$result[$own][30],$result[$own][31],$result[$own][32],$result[$own][33]);
