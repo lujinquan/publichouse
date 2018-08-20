@@ -23,7 +23,7 @@ $('.addLease').click(function(){
 					$('#applyLiveFloor').val(res.data.house.FloorID);
 					$('#applyRentName').val(res.data.house.TenantName);
 					$('#applyRentNumber').val(res.data.house.TenantNumber);
-					// $('#applyRentTel').val(res.data.house.TenantTel);
+					$('#applyRentTel').val(res.data.house.TenantTel);
 					$('#applyRoom1_data5').val(res.data.house.Hall);
 					$('#applyRoom1_data6').val(res.data.house.HallRent);
 					$('#applyRoom2_data5').val(res.data.house.Kitchen);

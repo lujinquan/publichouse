@@ -82,6 +82,7 @@ $('.print1').click(function(){
 			$.get('/ph/LeaseAudit/leasePrint/ChangeOrderID/'+ChangeOrderID,function(res){
 				res = JSON.parse(res);
 				console.log(res);
+				$('#detailRentTel').text('');
 				$('#picCode').show().prop('src',res.data.QrcodeUrl);
 				$('#detailNO').text(res.data.Szno);
 				if(res.retcode == '2000'){
