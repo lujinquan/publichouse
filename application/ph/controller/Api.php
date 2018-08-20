@@ -1007,7 +1007,18 @@ class Api extends Controller
     {
         $route = $this->request->route();
 
-        $filename = $_SERVER['DOCUMENT_ROOT'].'/uploads/qrcode/'.$route['name'].'.png';
+        $upload = '/uploads/qrcode/'.$route['name'].'.png';
+
+        $filename = $_SERVER['DOCUMENT_ROOT'].$upload;
+
+        $find = Db::name('lease_change_order')->where('QrcodeUrl',$upload)->find();
+        if(!$find){
+            $find = Db::name('lease_change_order')->where('QrcodeUrl','like','%'.$route['name'].'%')->find();
+        }
+
+        $detail = json_decode($find['Deadline'],true);
+
+        $date = $detail['applyYear'].'年'.$detail['applyMonth'].'月'.$detail['applyDay'].'日';
 
         if(is_file($filename)){
             $info = <<<EOF
@@ -1039,35 +1050,35 @@ class Api extends Controller
     <table cellspacing="0" cellpadding="0" >
         <tr>
             <td width="31%">租直NO</td>
-            <td>租直昌区01-201878924</td>
+            <td>{$find['Szno']}</td>
         </tr>
         <tr>
             <td>房屋编号</td>
-            <td>100500700010029</td>
+            <td>{$find['HouseID']}</td>
         </tr>
         <tr>
             <td>结构类别</td>
-            <td>砖混一等</td>
+            <td>{$detail['applyStruct']}</td>
         </tr>
         <tr>
             <td>房屋层</td>
-            <td>1</td>
+            <td>{$find['FloorNum']}</td>
         </tr>
         <tr>
             <td>居住层</td>
-            <td>1</td>
+            <td>{$find['FloorID']}</td>
         </tr>
         <tr>
             <td>承租人姓名</td>
-            <td>冬冬</td>
+            <td>{$find['TenantName']}</td>
         </tr>
         <tr>
             <td>承租人身份证</td>
-            <td>冬冬</td>
+            <td>{$detail['applyRentNumber']}</td>
         </tr>
         <tr>
             <td>租约签订日期</td>
-            <td>2018年07月02日</td>
+            <td>{$date}</td>
         </tr>
         <tr style="height:100px;">
             <td colspan="2" style="position:relative;text-align:right;">

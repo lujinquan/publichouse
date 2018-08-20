@@ -6,14 +6,14 @@ use think\helper\Hash;
 use think\Db;
 
 /**
- * @title 使用权变更审核控制器
+ * @title 租约管理控制器
  * @author Mr.Lu
  * @description
  */
 class LeaseAudit extends Base
 {
     /**
-     * @title 使用权变更审核主页
+     * @title 租约管理主页
      * @author Mr.Lu
      * @description
      */
@@ -95,6 +95,7 @@ class LeaseAudit extends Base
         model('ph/LeaseAudit')->check_process($ChangeOrderID);
 
         $findOne = Db::name('lease_change_order')->where('ChangeOrderID',$ChangeOrderID)->find();
+
 
         if($findOne['QrcodeUrl']){
             //删除过期的二维码
