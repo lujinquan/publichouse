@@ -23,7 +23,7 @@ $('.addLease').click(function(){
 					$('#applyLiveFloor').val(res.data.house.FloorID);
 					$('#applyRentName').val(res.data.house.TenantName);
 					$('#applyRentNumber').val(res.data.house.TenantNumber);
-					$('#applyRentTel').val(res.data.house.TenantTel);
+					// $('#applyRentTel').val(res.data.house.TenantTel);
 					$('#applyRoom1_data5').val(res.data.house.Hall);
 					$('#applyRoom1_data6').val(res.data.house.HallRent);
 					$('#applyRoom2_data5').val(res.data.house.Kitchen);
@@ -158,25 +158,19 @@ $('.addLease').click(function(){
 		    });
 		},
 		yes:function(){
-			var data = new FormData($('#MyForm')[0]);
+			var data = $('#MyForm').serializeArray();;
 			var formData = fileTotall.getArrayFormdata();
-			if(formData){
-				var ent = formData.entries(); //不兼容IE
-				while(item = ent.next()){
-					if(item.done){
-						break;
-					}
-					data.append(item.value[0],item.value[1]);
-				}
+			if(!formData){
+				formData = new FormData();
 			}
-			data.delete('leaseApplication1');
-			data.delete('leaseApplication2');
-			data.delete('leaseApplication3');
-			data.append('houseID',$('#leaseHouseInput').val());
+			for(var i = 0;i < data.length;i++){
+				formData.append(data[i].name,data[i].value);
+			}
+			formData.append('houseID',$('#leaseHouseInput').val());
 			$.ajax({
                 type: "post",
                 url: "/ph/LeaseApply/add",
-                data: data,
+                data: formData,
                 processData: false,
                 contentType: false,
                 success: function(res) {
