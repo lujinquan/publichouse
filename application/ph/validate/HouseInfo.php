@@ -17,8 +17,6 @@ class HouseInfo extends Validate
         'UseNature|使用性质'  => 'require',
         'UnitID|单元号'  => 'require',
         'FloorID|楼层号'  => 'require',
-        'DiffRent|租差'  => 'require',
-        'ProtocolRent|协议租金'  => 'require',
 
     ];
 
