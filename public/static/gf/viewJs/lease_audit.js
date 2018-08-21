@@ -52,7 +52,7 @@ $('.print1').click(function(){
 		resize:false,
 		zIndex:100,
 		title:['租约打印','color:#FFF;font-size:1.6rem;font-weight:600;'],
-		content:$('#leaseDetail'),
+		content:$('#leaseprint_1_'),
 		btn:['打印','取消'],
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+ChangeOrderID,function(res){
@@ -63,35 +63,31 @@ $('.print1').click(function(){
 				data.applyNO = data.Szno;
 
 				for(var key in data){
-					var name_id = key.replace(/apply/,'detail');
-					$('#'+name_id).text(data[key]);
+					var name_id_print = key.replace(/apply/,'print_1_');
+					$('#'+name_id_print).text(data[key]);
 				}
 				if(data.QrcodeUrl != ""){
-					$('#imghid').show();
-					$('#picCode').show().prop('src',data.QrcodeUrl);
+					$('#print_1_imghid').show();
+					$('#print_1_picCode').show().prop('src',data.QrcodeUrl);
 				}else{
-					$('#imghid').hide();
-					$('#picCode').hide();
+					$('#print_1_imghid').hide();
+					$('#print_1_picCode').hide();
 				}
-				// 隐藏流程和附件查看
-				$('.print1_hide').hide();
-
 			})
 		},
 		yes:function(){
 			$.get('/ph/LeaseAudit/leasePrint/ChangeOrderID/'+ChangeOrderID,function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				$('#detailRentTel').text('');
-				$('#picCode').show().prop('src',res.data.QrcodeUrl);
-				$('#detailNO').text(res.data.Szno);
+				$('#print_1_picCode').show().prop('src',res.data.QrcodeUrl);
+				$('#print_1_NO').text(res.data.Szno);
 				if(res.retcode == '2000'){
 					layer.close(this_index);
 					setTimeout(function(){
-						$('#leaseDetail').show();
+						$('#leaseprint_1_').show();
 						setTimeout("window.print()",500);
 					},300);
-					$('#leaseDetail').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
+					$('#leaseprint_1_').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
 					 
 				}else{
 					layer.msg(res.msg);
