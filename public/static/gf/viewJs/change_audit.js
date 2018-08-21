@@ -950,9 +950,9 @@ function noPass(value){
 }
 
 //计租表
-$('#rentMeterButton,#rentMaterQuery,#newRentDetail').click(function() {
+$('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(function() {
     $('.RentExample:gt(0)').remove();
-    var HouseID = $('.derateHouseID').text()||$('.houseAdjustHouseID').text()||$(this).attr('value');
+    var HouseID = $('.derateHouseID').text()||$('.houseAdjustHouseID').text()||$(this).attr('value')||$('.cancelHouseID').text();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
         console.log(res);
