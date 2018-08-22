@@ -46,7 +46,7 @@
             </div>
             <div class="am-u-md-4">
                 租直NO:
-                <input type="text" id="applyNO" value="" class="validate[required] textinput" style="text-decoration: underline; font-family: 微软雅黑; font-size: 13px;" truetype="textinput" yzid="1">
+                <input readonly type="text" id="applyNO" value="" class="validate[required] textinput" style="text-decoration: underline; font-family: 微软雅黑; font-size: 13px;" truetype="textinput" yzid="1">
             </div>
             <table border="1" cellspacing="" cellpadding="">
                 <tbody>
@@ -56,37 +56,37 @@
                         <textarea style="width: 200px; height: 50px; font-size: 13px; border: none; outline: none; font-family: 微软雅黑;" name="applyAddress" id="applyAddress" class="validate[required] textarea" truetype="textarea" yzid="2"></textarea></td>
                     <td rowspan="2" style="width: 40px;">结构</td>
                     <td rowspan="2">
-                        <input type="text" style="width: 150px; font-family: 微软雅黑; font-size: 13px;" name="applyStruct" id="applyStruct" value="" truetype="textinput" class="textinput">
+                        <input readonly type="text" style="width: 150px; font-family: 微软雅黑; font-size: 13px;" name="applyStruct" id="applyStruct" value="" truetype="textinput" class="textinput">
                     </td>
                     <td style="width: 50px;">房屋层</td>
                     <td>
-                        <input type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="applyHouseFloor" id="applyHouseFloor" value="" truetype="textinput" class="textinput"></td>
+                        <input readonly type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="applyHouseFloor" id="applyHouseFloor" value="" truetype="textinput" class="textinput"></td>
                 </tr>
                 <tr>
                     <td>居住层</td>
                     <td>
-                        <input type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="applyLiveFloor" id="applyLiveFloor" value="" truetype="textinput" class="textinput"></td>
+                        <input readonly type="text" style="width: 100px; font-family: 微软雅黑; font-size: 13px;" name="applyLiveFloor" id="applyLiveFloor" value="" truetype="textinput" class="textinput"></td>
                 </tr>
                 <tr>
                     <td rowspan="2">承租人姓名</td>
                     <td rowspan="2">
-                        <input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentName" id="applyRentName" value="" class="validate[required] textinput" truetype="textinput" yzid="3"></td>
+                        <input readonly style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentName" id="applyRentName" value="" class="validate[required] textinput" truetype="textinput" yzid="3"></td>
                     <td colspan="2">身份证号</td>
                     <td colspan="4">
-                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentNumber" id="applyRentNumber" value="" maxlength="18" truetype="textinput" class="textinput"></td>
+                        <input readonly style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentNumber" id="applyRentNumber" value="" maxlength="18" truetype="textinput" class="textinput"></td>
                 </tr>
                 <tr>
                      <td colspan="2">承租人电话</td>
                     <td colspan="4">
-                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentTel" id="applyRentTel" value="" maxlength="11" truetype="textinput" class="textinput"></td>
+                        <input readonly style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentTel" id="applyRentTel" value="" maxlength="11" truetype="textinput" class="textinput"></td>
                 </tr>
                 <tr>
                     <td>承租人代表/监护人 姓名</td>
                     <td>
-                        <input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentName1" id="applyRentName1" truetype="textinput" class="textinput"></td>
+                        <input readonly style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentName1" id="applyRentName1" truetype="textinput" class="textinput"></td>
                     <td colspan="2">监护人身份证号</td>
                     <td colspan="4">
-                        <input style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentNumber1" id="applyRentNumber1" maxlength="18" truetype="textinput" class="textinput"></td>
+                        <input readonly style="width: 300px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRentNumber1" id="applyRentNumber1" maxlength="18" truetype="textinput" class="textinput"></td>
                 </tr>
                 <tr>
                     <td colspan="6">注：承租人代表/监护人无处置、转让、房改、征收等权利</td>
@@ -112,7 +112,13 @@
                         </div>
                         <div style="clear: both;"></div>
                         <div style="float: right; margin: 0 75px 50px 50px;">
-                            租约签订日期<input style="width: 50px;" type="" name="applyYear" id="applyYear" value="2018" class="validate[required]" yzid="4">年<input style="width: 30px;" type="" name="applyMonth" id="applyMonth" value="08" class="validate[required]" yzid="5">月<input style="width: 30px;" type="" name="applyDay" id="applyDay" value="16" class="validate[required]" yzid="6">日
+                            租约签订日期
+                            <input style="width: 50px;" name="applyYear" id="applyYear" value="2018" class="validate[required]" yzid="4">
+                            年
+                            <input style="width: 30px;" name="applyMonth" id="applyMonth" value="08" class="validate[required]" yzid="5">
+                            月
+                            <input style="width: 30px;" name="applyDay" id="applyDay" value="16" class="validate[required]" yzid="6">
+                            日
                         </div>
                     </td>
                 </tr>
@@ -137,116 +143,116 @@
                 <tr>
                     <td rowspan="4" colspan="2">卧室</td>
                     <td>
-                        <input class="jianhao textinput" type="text" name="applyRoom1_data1" id="applyRoom1_data1" value="" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                        <input readonly class="jianhao textinput" type="text" name="applyRoom1_data1" id="applyRoom1_data1" value="" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input type="" name="applyRoom1_data2" id="applyRoom1_data2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="7"></td>
+                        <input readonly type="" name="applyRoom1_data2" id="applyRoom1_data2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="7"></td>
                     <td>
-                        <input type="" name="applyRoom1_data3" id="applyRoom1_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="8"></td>
+                        <input readonly type="" name="applyRoom1_data3" id="applyRoom1_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="8"></td>
                     <td>
-                        <input type="" name="applyRoom1_data4" id="applyRoom1_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="9"></td>
+                        <input readonly type="" name="applyRoom1_data4" id="applyRoom1_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="9"></td>
                     <td rowspan="4">三户以上共用</td>
                     <td>厅（堂）</td>
                     <td>0.50/个</td>
                     <td>
-                        <input type="" name="applyRoom1_data5" id="applyRoom1_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="10"></td>
+                        <input readonly type="" name="applyRoom1_data5" id="applyRoom1_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="10"></td>
                     <td>
-                        <input type="" name="applyRoom1_data6" id="applyRoom1_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="11"></td>
+                        <input readonly type="" name="applyRoom1_data6" id="applyRoom1_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="11"></td>
                 </tr>
                 <tr>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom2_data1" id="applyRoom2_data1" value=""></td>
+                        <input readonly class="jianhao" type="" name="applyRoom2_data1" id="applyRoom2_data1" value=""></td>
                     <td>
-                        <input type="" name="applyRoom2_data2" id="applyRoom2_data2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="12"></td>
+                        <input readonly type="" name="applyRoom2_data2" id="applyRoom2_data2" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="12"></td>
                     <td>
-                        <input type="" name="applyRoom2_data3" id="applyRoom2_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="13"></td>
+                        <input readonly type="" name="applyRoom2_data3" id="applyRoom2_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="13"></td>
                     <td>
-                        <input type="" name="applyRoom2_data4" id="applyRoom2_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="14"></td>
+                        <input readonly type="" name="applyRoom2_data4" id="applyRoom2_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="14"></td>
                     <td>厨房</td>
                     <td>0.50/个</td>
                     <td>
-                        <input type="" name="applyRoom2_data5" id="applyRoom2_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="15"></td>
+                        <input readonly type="" name="applyRoom2_data5" id="applyRoom2_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="15"></td>
                     <td>
-                        <input type="" name="applyRoom2_data6" id="applyRoom2_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="16"></td>
+                        <input readonly type="" name="applyRoom2_data6" id="applyRoom2_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="16"></td>
                 </tr>
                 <tr>
                     <td>
-                        <input class="jianhao textinput" type="text" name="applyRoom3_data1" id="applyRoom3_data1" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                        <input readonly class="jianhao textinput" type="text" name="applyRoom3_data1" id="applyRoom3_data1" truetype="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input type="" name="applyRoom3_data2" id="applyRoom3_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="17"></td>
+                        <input readonly type="" name="applyRoom3_data2" id="applyRoom3_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="17"></td>
                     <td>
-                        <input type="" name="applyRoom3_data3" id="applyRoom3_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="18"></td>
+                        <input readonly type="" name="applyRoom3_data3" id="applyRoom3_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="18"></td>
                     <td>
-                        <input type="" name="applyRoom3_data4" id="applyRoom3_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="19"></td>
+                        <input readonly type="" name="applyRoom3_data4" id="applyRoom3_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="19"></td>
                     <td>卫生间</td>
                     <td>0.50/个</td>
                     <td>
-                        <input type="" name="applyRoom3_data5" id="applyRoom3_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="20"></td>
+                        <input readonly type="" name="applyRoom3_data5" id="applyRoom3_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="20"></td>
                     <td>
-                        <input type="" name="applyRoom3_data6" id="applyRoom3_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="21"></td>
+                        <input readonly type="" name="applyRoom3_data6" id="applyRoom3_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="21"></td>
                 </tr>
                 <tr>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom4_data1" id="applyRoom4_data1"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom4_data1" id="applyRoom4_data1"></td>
                     <td>
-                        <input type="" name="applyRoom4_data2" id="applyRoom4_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="22"></td>
+                        <input readonly type="" name="applyRoom4_data2" id="applyRoom4_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="22"></td>
                     <td>
-                        <input type="" name="applyRoom4_data3" id="applyRoom4_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="23"></td>
+                        <input readonly type="" name="applyRoom4_data3" id="applyRoom4_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="23"></td>
                     <td>
-                        <input type="" name="applyRoom4_data4" id="applyRoom4_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="24"></td>
+                        <input readonly type="" name="applyRoom4_data4" id="applyRoom4_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="24"></td>
                     <td>室内走道</td>
                     <td>0.50/个</td>
                     <td>
-                        <input type="" name="applyRoom4_data5" id="applyRoom4_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="25"></td>
+                        <input readonly type="" name="applyRoom4_data5" id="applyRoom4_data5" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="25"></td>
                     <td>
-                        <input type="" name="applyRoom4_data6" id="applyRoom4_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="26"></td>
+                        <input readonly type="" name="applyRoom4_data6" id="applyRoom4_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="26"></td>
                 </tr>
                 <tr>
                     <td rowspan="2">厅堂</td>
-                    <td><input type="text" name="applyRoom5_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom5_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom5_data2" id="applyRoom5_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom5_data2" id="applyRoom5_data2"></td>
                     <td>
-                        <input type="" name="applyRoom5_data3" id="applyRoom5_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="27"></td>
+                        <input readonly type="" name="applyRoom5_data3" id="applyRoom5_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="27"></td>
                     <td>
-                        <input type="" name="applyRoom5_data4" id="applyRoom5_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="28"></td>
+                        <input readonly type="" name="applyRoom5_data4" id="applyRoom5_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="28"></td>
                     <td>
-                        <input type="" name="applyRoom5_data5" id="applyRoom5_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="29"></td>
+                        <input readonly type="" name="applyRoom5_data5" id="applyRoom5_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="29"></td>
                     <td rowspan="2">高1至1.7米搁楼</td>
                     <td>5m²以下</td>
                     <td>0.50/个</td>
                     <td>
-                        <input type="" name="applyRoom5_data6" id="applyRoom5_data6" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="30"></td>
+                        <input readonly type="" name="applyRoom5_data6" id="applyRoom5_data6" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="30"></td>
                     <td>
-                        <input type="" name="applyRoom5_data7" id="applyRoom5_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="31"></td>
+                        <input readonly type="" name="applyRoom5_data7" id="applyRoom5_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="31"></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="applyRoom6_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom6_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom6_data2" id="applyRoom6_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom6_data2" id="applyRoom6_data2"></td>
                     <td>
-                        <input type="" name="applyRoom6_data3" id="applyRoom6_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="32"></td>
+                        <input readonly type="" name="applyRoom6_data3" id="applyRoom6_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="32"></td>
                     <td>
-                        <input type="" name="applyRoom6_data4" id="applyRoom6_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="33"></td>
+                        <input readonly type="" name="applyRoom6_data4" id="applyRoom6_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="33"></td>
                     <td>
-                        <input type="" name="applyRoom6_data5" id="applyRoom6_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="34"></td>
+                        <input readonly type="" name="applyRoom6_data5" id="applyRoom6_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="34"></td>
                     <td>5m²以上</td>
                     <td>1.00/个</td>
                     <td>
-                        <input type="" name="applyRoom6_data6" id="applyRoom6_data6" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="35"></td>
+                        <input readonly type="" name="applyRoom6_data6" id="applyRoom6_data6" value="0" class="validate[custom[onlyNumber]]" inputmode="positiveDecimal" yzid="35"></td>
                     <td>
-                        <input type="" name="applyRoom6_data7" id="applyRoom6_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="36"></td>
+                        <input readonly type="" name="applyRoom6_data7" id="applyRoom6_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1();gethj2()" yzid="36"></td>
                 </tr>
                 <tr>
                     <td rowspan="2">厨房</td>
-                    <td><input type="text" name="applyRoom7_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom7_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom7_data2" id="applyRoom7_data2" value=""></td>
+                        <input readonly class="jianhao" type="" name="applyRoom7_data2" id="applyRoom7_data2" value=""></td>
                     <td>
-                        <input type="" name="applyRoom7_data3" id="applyRoom7_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="37"></td>
+                        <input readonly type="" name="applyRoom7_data3" id="applyRoom7_data3" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="37"></td>
                     <td>
-                        <input type="" name="applyRoom7_data4" id="applyRoom7_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="38"></td>
+                        <input readonly type="" name="applyRoom7_data4" id="applyRoom7_data4" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="38"></td>
                     <td>
-                        <input type="" name="applyRoom7_data5" id="applyRoom7_data5" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="39"></td>
+                        <input readonly type="" name="applyRoom7_data5" id="applyRoom7_data5" value="" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="39"></td>
                      <td colspan="2">
                         <input type="text" name="applyRoom7_data6" id="applyRoom7_data6" value="二次供水" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;">
                     </td>
@@ -259,15 +265,15 @@
                         <input type="" name="applyRoom7_data9" id="applyRoom7_data9" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj2()" yzid="41"></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="applyRoom8_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom8_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom8_data2" id="applyRoom8_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom8_data2" id="applyRoom8_data2"></td>
                     <td>
-                        <input type="" name="applyRoom8_data3" id="applyRoom8_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="42"></td>
+                        <input readonly type="" name="applyRoom8_data3" id="applyRoom8_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="42"></td>
                     <td>
-                        <input type="" name="applyRoom8_data4" id="applyRoom8_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="43"></td>
+                        <input readonly type="" name="applyRoom8_data4" id="applyRoom8_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="43"></td>
                     <td>
-                        <input type="" name="applyRoom8_data5" id="applyRoom8_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="44"></td>
+                        <input readonly type="" name="applyRoom8_data5" id="applyRoom8_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="44"></td>
                     <td colspan="2">
                         <input type="text" name="applyRoom8_data6" id="applyRoom8_data6" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;">
                     </td>
@@ -280,30 +286,30 @@
                 </tr>
                 <tr>
                     <td rowspan="2">卫生间</td>
-                    <td><input type="text" name="applyRoom9_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom9_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom9_data2" id="applyRoom9_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom9_data2" id="applyRoom9_data2"></td>
                     <td>
-                        <input type="" name="applyRoom9_data3" id="applyRoom9_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="47"></td>
+                        <input readonly type="" name="applyRoom9_data3" id="applyRoom9_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="47"></td>
                     <td>
-                        <input type="" name="applyRoom9_data4" id="applyRoom9_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="48"></td>
+                        <input readonly type="" name="applyRoom9_data4" id="applyRoom9_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="48"></td>
                     <td>
-                        <input type="" name="applyRoom9_data5" id="applyRoom9_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="49"></td>
+                        <input readonly type="" name="applyRoom9_data5" id="applyRoom9_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="49"></td>
                     <td colspan="2"></td>
                     <td></td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="applyRoom10_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom10_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom10_data2" id="applyRoom10_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom10_data2" id="applyRoom10_data2"></td>
                     <td>
-                        <input type="" name="applyRoom10_data3" id="applyRoom10_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="50"></td>
+                        <input readonly type="" name="applyRoom10_data3" id="applyRoom10_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="50"></td>
                     <td>
-                        <input type="" name="applyRoom10_data4" id="applyRoom10_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="51"></td>
+                        <input readonly type="" name="applyRoom10_data4" id="applyRoom10_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="51"></td>
                     <td>
-                        <input type="" name="applyRoom10_data5" id="applyRoom10_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="52"></td>
+                        <input readonly type="" name="applyRoom10_data5" id="applyRoom10_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="52"></td>
                     <td colspan="2"></td>
                     <td></td>
                     <td></td>
@@ -311,15 +317,15 @@
                 </tr>
                 <tr>
                     <td rowspan="2">室内走道</td>
-                    <td><input type="text" name="applyRoom11_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom11_data1" value="独" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom11_data2" id="applyRoom11_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom11_data2" id="applyRoom11_data2"></td>
                     <td>
-                        <input type="" name="applyRoom11_data3" id="applyRoom11_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="53"></td>
+                        <input readonly type="" name="applyRoom11_data3" id="applyRoom11_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="53"></td>
                     <td>
-                        <input type="" name="applyRoom11_data4" id="applyRoom11_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="54"></td>
+                        <input readonly type="" name="applyRoom11_data4" id="applyRoom11_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="54"></td>
                     <td>
-                        <input type="" name="applyRoom11_data5" id="applyRoom11_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="55"></td>
+                        <input readonly type="" name="applyRoom11_data5" id="applyRoom11_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="55"></td>
                     <td></td>
                     <td style="font-weight:bold;">间号</td>
                     <td style="font-weight:bold;">实有面积（m²）</td>
@@ -327,81 +333,81 @@
                     <td style="font-weight:bold;">租金（元）</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="applyRoom12_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                    <td><input readonly type="text" name="applyRoom12_data1" value="共" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom12_data2" id="applyRoom12_data2"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom12_data2" id="applyRoom12_data2"></td>
                     <td>
-                        <input type="" name="applyRoom12_data3" id="applyRoom12_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="56"></td>
+                        <input readonly type="" name="applyRoom12_data3" id="applyRoom12_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="56"></td>
                     <td>
-                        <input type="" name="applyRoom12_data4" id="applyRoom12_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="57"></td>
+                        <input readonly type="" name="applyRoom12_data4" id="applyRoom12_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="57"></td>
                     <td>
-                        <input type="" name="applyRoom12_data5" id="applyRoom12_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="58"></td>
+                        <input readonly type="" name="applyRoom12_data5" id="applyRoom12_data5" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="58"></td>
                     <td>高1.7至2.2米搁楼</td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom12_data6" id="applyRoom12_data6"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom12_data6" id="applyRoom12_data6"></td>
                     <td>
-                        <input type="" name="applyRoom12_data7" id="applyRoom12_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="59"></td>
+                        <input readonly type="" name="applyRoom12_data7" id="applyRoom12_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="59"></td>
                     <td>
-                        <input type="" name="applyRoom12_data8" id="applyRoom12_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="60"></td>
+                        <input readonly type="" name="applyRoom12_data8" id="applyRoom12_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="60"></td>
                     <td>
-                        <input type="" name="applyRoom12_data9" id="applyRoom12_data9" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="61"></td>
+                        <input readonly type="" name="applyRoom12_data9" id="applyRoom12_data9" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="61"></td>
                 </tr>
                 <tr>
                     <td colspan="2" rowspan="3">封闭阳台</td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom13_data1" id="applyRoom13_data1"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom13_data1" id="applyRoom13_data1"></td>
                     <td>
-                        <input type="" name="applyRoom13_data2" id="applyRoom13_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="62"></td>
+                        <input readonly type="" name="applyRoom13_data2" id="applyRoom13_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="62"></td>
                     <td>
-                        <input type="" name="applyRoom13_data3" id="applyRoom13_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="63"></td>
+                        <input readonly type="" name="applyRoom13_data3" id="applyRoom13_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="63"></td>
                     <td>
-                        <input type="" name="applyRoom13_data4" id="applyRoom13_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="64"></td>
+                        <input readonly type="" name="applyRoom13_data4" id="applyRoom13_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="64"></td>
                     <td rowspan="3">无封闭阳台</td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom13_data5" id="applyRoom13_data5"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom13_data5" id="applyRoom13_data5"></td>
                     <td>
-                        <input type="" name="applyRoom13_data6" id="applyRoom13_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="65"></td>
+                        <input readonly type="" name="applyRoom13_data6" id="applyRoom13_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="65"></td>
                     <td>
-                        <input type="" name="applyRoom13_data7" id="applyRoom13_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="66"></td>
+                        <input readonly type="" name="applyRoom13_data7" id="applyRoom13_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="66"></td>
                     <td>
-                        <input type="" name="applyRoom13_data8" id="applyRoom13_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="67"></td>
+                        <input readonly type="" name="applyRoom13_data8" id="applyRoom13_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="67"></td>
                 </tr>
 
                <tr>
                      <td>
-                        <input class="jianhao" type="" name="applyRoom14_data1" id="applyRoom14_data1"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom14_data1" id="applyRoom14_data1"></td>
                     <td>
-                        <input type="" name="applyRoom14_data2" id="applyRoom14_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="68"></td>
+                        <input readonly type="" name="applyRoom14_data2" id="applyRoom14_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="68"></td>
                     <td>
-                        <input type="" name="applyRoom14_data3" id="applyRoom14_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="69"></td>
+                        <input readonly type="" name="applyRoom14_data3" id="applyRoom14_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="69"></td>
                     <td>
-                        <input type="" name="applyRoom14_data4" id="applyRoom14_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="70"></td>
+                        <input readonly type="" name="applyRoom14_data4" id="applyRoom14_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="70"></td>
                    <td>
-                        <input class="jianhao" type="" name="applyRoom14_data5" id="applyRoom14_data5"></td>  
+                        <input readonly class="jianhao" type="" name="applyRoom14_data5" id="applyRoom14_data5"></td>  
                    <td>
-                        <input type="" name="applyRoom14_data6" id="applyRoom14_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="71"></td>
+                        <input readonly type="" name="applyRoom14_data6" id="applyRoom14_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="71"></td>
                     <td>
-                        <input type="" name="applyRoom14_data7" id="applyRoom14_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="72"></td>
+                        <input readonly type="" name="applyRoom14_data7" id="applyRoom14_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="72"></td>
                     <td>
-                        <input type="" name="applyRoom14_data8" id="applyRoom14_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="73"></td>
+                        <input readonly type="" name="applyRoom14_data8" id="applyRoom14_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="73"></td>
                 </tr>
                 <tr>
                      <td>
-                        <input class="jianhao" type="" name="applyRoom15_data1" id="applyRoom15_data1"></td>
+                        <input readonly class="jianhao" type="" name="applyRoom15_data1" id="applyRoom15_data1"></td>
                     <td>
-                        <input type="" name="applyRoom15_data2" id="applyRoom15_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="74"></td>
+                        <input readonly type="" name="applyRoom15_data2" id="applyRoom15_data2" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="74"></td>
                     <td>
-                        <input type="" name="applyRoom15_data3" id="applyRoom15_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="75"></td>
+                        <input readonly type="" name="applyRoom15_data3" id="applyRoom15_data3" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="75"></td>
                     <td>
-                        <input type="" name="applyRoom15_data4" id="applyRoom15_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="76"></td>
+                        <input readonly type="" name="applyRoom15_data4" id="applyRoom15_data4" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="76"></td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom15_data5" id="applyRoom15_data5"></td> 
+                        <input readonly class="jianhao" type="" name="applyRoom15_data5" id="applyRoom15_data5"></td> 
                     <td>
-                        <input type="" name="applyRoom15_data6" id="applyRoom15_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="77"></td>
+                        <input readonly type="" name="applyRoom15_data6" id="applyRoom15_data6" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="77"></td>
                     <td>
-                        <input type="" name="applyRoom15_data7" id="applyRoom15_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="78"></td>
+                        <input readonly type="" name="applyRoom15_data7" id="applyRoom15_data7" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="78"></td>
                     <td>
-                        <input type="" name="applyRoom15_data8" id="applyRoom15_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="79"></td>
+                        <input readonly type="" name="applyRoom15_data8" id="applyRoom15_data8" value="0" class="validate[custom[onlyNumberWide]]" inputmode="positiveDecimal" onblur="gethj1()" yzid="79"></td>
                 </tr>
                 
                  <tr>
@@ -422,13 +428,13 @@
                     </td>
                     <td colspan="2" rowspan="4">合计</td>
                     <td rowspan="4">
-                        <input type="" name="applyRoom16_data6" id="applyRoom16_data6" value="" readonly="true">
+                        <input readonly type="" name="applyRoom16_data6" id="applyRoom16_data6" value="" readonly="true">
                     </td>
                     <td rowspan="4">
-                        <input type="" name="applyRoom16_data7" id="applyRoom16_data7" value="" readonly="true">
+                        <input readonly type="" name="applyRoom16_data7" id="applyRoom16_data7" value="" readonly="true">
                     </td>
                     <td rowspan="4">
-                        <input type="" name="applyRoom16_data8" id="applyRoom16_data8" value="">
+                        <input readonly type="" name="applyRoom16_data8" id="applyRoom16_data8" value="">
                     </td>
                 </tr>
                 <tr>
@@ -485,23 +491,23 @@
                 <tr>
                     <td colspan="2">合计</td>
                     <td>
-                        <input class="jianhao" type="" name="applyRoom20_data1" id="applyRoom20_data1"></td>
+                        <input readonly class="jianhao" name="applyRoom20_data1" id="applyRoom20_data1"></td>
                     <td>
-                        <input type="" name="applyRoom20_data2" id="applyRoom20_data2" value="" readonly="true"></td>
+                        <input readonly type="" name="applyRoom20_data2" id="applyRoom20_data2" value="" readonly="true"></td>
                     <td>
-                        <input type="" name="applyRoom20_data3" id="applyRoom20_data3" value="" readonly="true"></td>
+                        <input readonly type="" name="applyRoom20_data3" id="applyRoom20_data3" value="" readonly="true"></td>
                     <td>
-                        <input type="" name="applyRoom20_data4" id="applyRoom20_data4" value="" readonly="true"></td>
+                        <input readonly type="" name="applyRoom20_data4" id="applyRoom20_data4" value="" readonly="true"></td>
                     <td colspan="2">核定月租金</td>
                     <td colspan="3">
-                        ¥<input style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRoom20_data5" id="applyRoom20_data5" value="" class="validate[custom[onlyNumberWide]] textinput" onblur="gethdyzj()" truetype="textinput" yzid="80">元</td>
+                        ¥<input readonly style="width: 150px; font-family: 微软雅黑; font-size: 13px;" type="text" name="applyRoom20_data5" id="applyRoom20_data5" value="" class="validate[custom[onlyNumberWide]] textinput" onblur="gethdyzj()" truetype="textinput" yzid="80">元</td>
                 </tr>
                 <tr>
-                    <td colspan="11">资料员：<input style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data1" id="applyRoom21_data1">
+                    <td colspan="11">资料员：<input readonly style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data1" id="applyRoom21_data1">
                         &nbsp;  &nbsp;  &nbsp;
-                        经管所长：<input style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data2" id="applyRoom21_data2">
+                        经管所长：<input readonly style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data2" id="applyRoom21_data2">
                         &nbsp;  &nbsp;  &nbsp;
-                        经管科长：<input style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data3" id="applyRoom21_data3" value="">
+                        经管科长：<input readonly style="width: 120px; margin-right: 30px;" type="" name="applyRoom21_data3" id="applyRoom21_data3" value="">
                     </td>
                 </tr>
             </tbody></table>
@@ -591,7 +597,7 @@
                     <td>
                         <input type="text" name="applyDev5_data4" id="applyDev5_data4" value="" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
-                        <input type="text" name="applyDev5_data5" id="applyDev5_data5" value="" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="90" style="font-family: 微软雅黑; font-size: 13px;"></td>
+                        <input type="text" name="applyDev5_data5" id="applyDev5_data5" value="0" class="validate[custom[onlyNumber]] textinput" truetype="textinput" yzid="90" style="font-family: 微软雅黑; font-size: 13px;"></td>
                     <td>
                         <input type="text" name="applyDev5_data6" id="applyDev5_data6" value="" truetype="textinput" class="textinput" style="font-family: 微软雅黑; font-size: 13px;"></td>
                 </tr>
@@ -626,17 +632,17 @@
                 <p style="text-align: right; margin-top: 40px;">武汉市住房保障和房屋管理局印制</p>
             </div>
             <p style="text-align: center;">
-<!--                 <input type="hidden" id="ZY_ID" name="ZY_ID" value="4ff0beadb0704926a1be7c544fbb020e" truetype="hidden">
-                <input type="hidden" id="ZGGF_FILE" name="ZGGF_FILE" truetype="hidden">
-                <input type="hidden" id="ZGGF_HZYY" name="ZGGF_HZYY" truetype="hidden">
-                <input type="hidden" id="czr1" truetype="hidden">
-                <input type="hidden" id="czr" name="czr" truetype="hidden">
-                <input type="hidden" id="gdzjxt" name="gdzjxt" truetype="hidden">
-                <input type="hidden" id="hidstream" name="hidstream" value="" truetype="hidden">
-                <input type="hidden" id="gdzjhj1" name="gdzjhj1" truetype="hidden" value="21.53">
-                <input type="hidden" id="gdzjhj2" name="gdzjhj2" truetype="hidden" value="0">
-                <input type="hidden" id="ZGGF_BY2" name="ZGGF_BY2" truetype="hidden">
-                <input type="hidden" id="ZGGF_BY3" name="ZGGF_BY3" truetype="hidden"> -->
+<!--                 <input readonly type="hidden" id="ZY_ID" name="ZY_ID" value="4ff0beadb0704926a1be7c544fbb020e" truetype="hidden">
+                <input readonly type="hidden" id="ZGGF_FILE" name="ZGGF_FILE" truetype="hidden">
+                <input readonly type="hidden" id="ZGGF_HZYY" name="ZGGF_HZYY" truetype="hidden">
+                <input readonly type="hidden" id="czr1" truetype="hidden">
+                <input readonly type="hidden" id="czr" name="czr" truetype="hidden">
+                <input readonly type="hidden" id="gdzjxt" name="gdzjxt" truetype="hidden">
+                <input readonly type="hidden" id="hidstream" name="hidstream" value="" truetype="hidden">
+                <input readonly type="hidden" id="gdzjhj1" name="gdzjhj1" truetype="hidden" value="21.53">
+                <input readonly type="hidden" id="gdzjhj2" name="gdzjhj2" truetype="hidden" value="0">
+                <input readonly type="hidden" id="ZGGF_BY2" name="ZGGF_BY2" truetype="hidden">
+                <input readonly type="hidden" id="ZGGF_BY3" name="ZGGF_BY3" truetype="hidden"> -->
             </p>
 
         </form>
@@ -650,7 +656,7 @@
                 </div>
                 <div class="am-form-group am-form-file am-u-md-8">
                     <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                    <input id="leaseApplication1" type="file" name="leaseApplication1" multiple>
+                    <input readonly id="leaseApplication1" type="file" name="leaseApplication1" multiple>
                 </div>
                 <div id="leaseApplication1_Show" class="am-u-md-12"></div>
             </div>
@@ -660,7 +666,7 @@
                 </div>
                 <div class="am-form-group am-form-file am-u-md-8">
                     <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                    <input id="leaseApplication2" type="file" name="leaseApplication2" multiple>
+                    <input readonly id="leaseApplication2" type="file" name="leaseApplication2" multiple>
                 </div>
                 <div id="leaseApplication2_Show" class="am-u-md-12"></div>
             </div>
@@ -670,12 +676,12 @@
                 </div>
                 <div class="am-form-group am-form-file am-u-md-8">
                     <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                    <input id="leaseApplication3" type="file" name="leaseApplication3" multiple>
+                    <input readonly id="leaseApplication3" type="file" name="leaseApplication3" multiple>
                 </div>
                 <div id="leaseApplication3_Show" class="am-u-md-12"></div>
             </div>
             <div class="am-u-md-12">
                 <label class="label_style">换租原因：</label>
-                <input type="text" class="label_input" name="leaseReason" value="老证换新证" required/>
+                <input readonly type="text" class="label_input" name="leaseReason" value="老证换新证" required/>
             </div>
 </div>
