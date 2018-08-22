@@ -43,11 +43,13 @@ class PropertyReport extends Model
         $xinfaWhere = [
             'OwnerType' => array('in',[1,2,3,5,7]),
             'ChangeType' => array('eq',7),
+            'Status' => array('eq',1),
         ];
 
         $zhuxiaoWhere = [
             'OwnerType' => array('in',[1,2,3,5,7]),
             'ChangeType' => array('eq',8),
+            'Status' => array('eq',1),
         ];
         
         $propertyData = Db::name('ban')->field('OwnerType,TubulationID,sum(TotalNum) as totalNums, sum(TotalArea) as totalAreas')
@@ -61,7 +63,7 @@ class PropertyReport extends Model
                               ->select();
 
         $xinfaChangeData = Db::name('rent_table')->field('OwnerType,InstitutionID,NewLeaseType, sum(Area) as areas, sum(ChangeNum) as changeNums')
-                              ->where($zhuxiaoWhere)
+                              ->where($xinfaWhere)
                               ->group('OwnerType,InstitutionID,NewLeaseType')
                               ->select();
 
@@ -165,6 +167,10 @@ class PropertyReport extends Model
                     $result[$owners][$a][5][0] = $dengjidata[$owners][$a]['totalNums']; //登记楼栋
                     $result[$owners][$a][5][1] = $dengjidata[$owners][$a]['totalAreas']; //登记建筑面积
                 }
+
+                // if($a == 14 && $owners == 2){
+                //     halt($xinfaChangedata[$owners][$a]);
+                // }
                
                 $result[$owners][$a][1][0] = $xinfaChangedata[$owners][$a][1]['changeNums'] + $xinfaChangedata[$owners][$a][2]['changeNums'] +$xinfaChangedata[$owners][$a][3]['changeNums'] +$xinfaChangedata[$owners][$a][4]['changeNums'] +$xinfaChangedata[$owners][$a][5]['changeNums'] +$xinfaChangedata[$owners][$a][6]['changeNums']; //新发楼栋
                 $result[$owners][$a][1][1] = $xinfaChangedata[$owners][$a][1]['areas'] + $xinfaChangedata[$owners][$a][2]['areas'] +$xinfaChangedata[$owners][$a][3]['areas'] +$xinfaChangedata[$owners][$a][4]['areas'] +$xinfaChangedata[$owners][$a][5]['areas'] +$xinfaChangedata[$owners][$a][6]['areas']; //新发建筑面积
