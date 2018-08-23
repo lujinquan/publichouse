@@ -730,7 +730,7 @@ class ChangeAudit extends Model
                             'TotalArea' => ['exp','TotalArea+'.$v['HouseArea']],
                             'TotalOprice' => ['exp','TotalOprice+'.$v['OldOprice']],
                             'PreRent' => ['exp','PreRent+'.$v['HousePrerent']],
-                            'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
+                            //'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
                         ]
                     );
                     
@@ -868,7 +868,7 @@ class ChangeAudit extends Model
                             'TotalArea' => $a['TotalAreaAfter'],
                             'TotalOprice' => $a['TotalOpriceAfter'],
                             'PreRent' => $a['PreRentAfter'],
-                            'BanUsearea' => $a['BanUseareaAfter'],
+                            //'BanUsearea' => $a['BanUseareaAfter'],
                         ]
                     );
                 }
