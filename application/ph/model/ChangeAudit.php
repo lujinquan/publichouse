@@ -86,9 +86,17 @@ class ChangeAudit extends Model
 
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
 
+                $c = substr_count($searchForm['CreateTime'],'-');
+                
                 $starttime = strtotime($searchForm['CreateTime']);
 
-                $endtime = $starttime + 3600*24;
+                if($c == 2){
+                    $endtime = $starttime + 3600*24;
+                }elseif($c == 1){
+                    $endtime = $starttime + 3600*24*30;
+                }else{
+                    $endtime = $starttime + 3600*24*365;
+                }             
 
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
@@ -480,7 +488,7 @@ class ChangeAudit extends Model
         } elseif ($reson != '') {
 
             //终审不通过则状态改为 0
-            self::where($where)->setField('Status', 0);
+            self::where($where)->update(['Status' => 0, 'FinishTime' => time()]);
 
             $datas['Status'] = 3;
 
@@ -722,7 +730,7 @@ class ChangeAudit extends Model
                             'TotalArea' => ['exp','TotalArea+'.$v['HouseArea']],
                             'TotalOprice' => ['exp','TotalOprice+'.$v['OldOprice']],
                             'PreRent' => ['exp','PreRent+'.$v['HousePrerent']],
-                            'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
+                            //'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
                         ]
                     );
                     
@@ -799,7 +807,6 @@ class ChangeAudit extends Model
                             'TotalArea' => ['exp','TotalArea-'.$v['houseArea']],
                             'TotalOprice' => ['exp','TotalOprice-'.$v['housePrice']],
                             'PreRent' => ['exp','PreRent-'.$v['cancelPrent']],
-                            'BanUsearea' => ['exp','BanUsearea-'.$v['cancelHouseUsearea']],
                         ]
                     );
                     
@@ -861,7 +868,7 @@ class ChangeAudit extends Model
                             'TotalArea' => $a['TotalAreaAfter'],
                             'TotalOprice' => $a['TotalOpriceAfter'],
                             'PreRent' => $a['PreRentAfter'],
-                            'BanUsearea' => $a['BanUseareaAfter'],
+                            //'BanUsearea' => $a['BanUseareaAfter'],
                         ]
                     );
                 }

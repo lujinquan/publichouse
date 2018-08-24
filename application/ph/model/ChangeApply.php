@@ -166,7 +166,7 @@ class ChangeApply extends Model
                     if(!($data['houseID'])){
                         return jsons('4000','未选择任何房屋');
                     }
-                    $houseids = Db::name('change_order')->where(['HouseID'=>['in',$data['houseID']],'ChangeType'=>3])->column('HouseID');
+                    $houseids = Db::name('change_order')->where(['HouseID'=>['in',$data['houseID']],'ChangeType'=>3,'Status'=>['>',1]])->column('HouseID');
                     if($houseids){
                         $implodeHouses = implode(',',$houseids);
                         return jsons('4005','该房屋:'.$implodeHouses.'已经在暂停异动中了');

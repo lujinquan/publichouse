@@ -156,6 +156,41 @@ class PropertyReport extends Model
 
                     $result[$owners][$a][5][0] = $dengjidata[1][$a]['totalNums'] + $dengjidata[3][$a]['totalNums'] + $dengjidata[7][$a]['totalNums']; //登记楼栋
                     $result[$owners][$a][5][1] = $dengjidata[1][$a]['totalAreas'] + $dengjidata[3][$a]['totalAreas'] + $dengjidata[7][$a]['totalAreas']; //登记建筑面积
+
+                    $result[$owners][$a][1][0] = $xinfaChangedata[1][$a][1]['changeNums'] + $xinfaChangedata[1][$a][2]['changeNums'] +$xinfaChangedata[1][$a][3]['changeNums'] +$xinfaChangedata[1][$a][4]['changeNums'] +$xinfaChangedata[1][$a][5]['changeNums'] +$xinfaChangedata[1][$a][6]['changeNums'] + $xinfaChangedata[3][$a][1]['changeNums'] + $xinfaChangedata[3][$a][2]['changeNums'] +$xinfaChangedata[3][$a][3]['changeNums'] +$xinfaChangedata[3][$a][4]['changeNums'] +$xinfaChangedata[3][$a][5]['changeNums'] +$xinfaChangedata[3][$a][6]['changeNums'] +$xinfaChangedata[7][$a][1]['changeNums'] + $xinfaChangedata[7][$a][2]['changeNums'] +$xinfaChangedata[7][$a][3]['changeNums'] +$xinfaChangedata[7][$a][4]['changeNums'] +$xinfaChangedata[7][$a][5]['changeNums'] +$xinfaChangedata[7][$a][6]['changeNums']; //新发楼栋
+                    
+                    $result[$owners][$a][1][1] = $xinfaChangedata[1][$a][1]['areas'] + $xinfaChangedata[1][$a][2]['areas'] +$xinfaChangedata[1][$a][3]['areas'] +$xinfaChangedata[1][$a][4]['areas'] +$xinfaChangedata[1][$a][5]['areas'] +$xinfaChangedata[1][$a][6]['areas'] +$xinfaChangedata[3][$a][1]['areas'] + $xinfaChangedata[3][$a][2]['areas'] +$xinfaChangedata[3][$a][3]['areas'] +$xinfaChangedata[3][$a][4]['areas'] +$xinfaChangedata[3][$a][5]['areas'] +$xinfaChangedata[3][$a][6]['areas'] +$xinfaChangedata[7][$a][1]['areas'] + $xinfaChangedata[7][$a][2]['areas'] +$xinfaChangedata[7][$a][3]['areas'] +$xinfaChangedata[7][$a][4]['areas'] +$xinfaChangedata[7][$a][5]['areas'] +$xinfaChangedata[7][$a][6]['areas']; //新发建筑面积
+
+                    $result[$owners][$a][1][2] = $zhuxiaoChangedata[1][$a][1]['changeNums'] + $zhuxiaoChangedata[1][$a][2]['changeNums'] +$zhuxiaoChangedata[1][$a][3]['changeNums'] +$zhuxiaoChangedata[1][$a][4]['changeNums'] +$zhuxiaoChangedata[1][$a][5]['changeNums'] +$zhuxiaoChangedata[1][$a][6]['changeNums'] +$zhuxiaoChangedata[3][$a][1]['changeNums'] + $zhuxiaoChangedata[3][$a][2]['changeNums'] +$zhuxiaoChangedata[3][$a][3]['changeNums'] +$zhuxiaoChangedata[3][$a][4]['changeNums'] +$zhuxiaoChangedata[3][$a][5]['changeNums'] +$zhuxiaoChangedata[3][$a][6]['changeNums'] +$zhuxiaoChangedata[7][$a][1]['changeNums'] + $zhuxiaoChangedata[7][$a][2]['changeNums'] +$zhuxiaoChangedata[7][$a][3]['changeNums'] +$zhuxiaoChangedata[7][$a][4]['changeNums'] +$zhuxiaoChangedata[7][$a][5]['changeNums'] +$zhuxiaoChangedata[7][$a][6]['changeNums']; //注销楼栋
+
+                    $result[$owners][$a][1][3] = $zhuxiaoChangedata[1][$a][1]['areas'] + $zhuxiaoChangedata[1][$a][2]['areas'] +$zhuxiaoChangedata[1][$a][3]['areas'] +$zhuxiaoChangedata[1][$a][4]['areas'] +$zhuxiaoChangedata[1][$a][5]['areas'] +$zhuxiaoChangedata[1][$a][6]['areas'] +$zhuxiaoChangedata[3][$a][1]['areas'] + $zhuxiaoChangedata[3][$a][2]['areas'] +$zhuxiaoChangedata[3][$a][3]['areas'] +$zhuxiaoChangedata[3][$a][4]['areas'] +$zhuxiaoChangedata[3][$a][5]['areas'] +$zhuxiaoChangedata[3][$a][6]['areas'] +$zhuxiaoChangedata[7][$a][1]['areas'] + $zhuxiaoChangedata[7][$a][2]['areas'] +$zhuxiaoChangedata[7][$a][3]['areas'] +$zhuxiaoChangedata[7][$a][4]['areas'] +$zhuxiaoChangedata[7][$a][5]['areas'] +$zhuxiaoChangedata[7][$a][6]['areas']; //注销建筑面积
+
+                    $result[$owners][$a][2][0] = $xinfaChangedata[1][$a][1]['changeNums'] +$xinfaChangedata[3][$a][1]['changeNums'] +$xinfaChangedata[7][$a][1]['changeNums']; //接管栋数
+                    $result[$owners][$a][2][1] = $xinfaChangedata[1][$a][1]['areas'] +$xinfaChangedata[3][$a][1]['areas'] +$xinfaChangedata[7][$a][1]['areas']; //接管建面
+                    $result[$owners][$a][2][2] = $xinfaChangedata[1][$a][4]['changeNums'] +$xinfaChangedata[3][$a][4]['changeNums'] +$xinfaChangedata[7][$a][4]['changeNums']; //合建栋数
+                    $result[$owners][$a][2][3] = $xinfaChangedata[1][$a][4]['areas'] +$xinfaChangedata[3][$a][4]['areas'] +$xinfaChangedata[7][$a][4]['areas']; //合建建面
+                    $result[$owners][$a][2][4] = $zhuxiaoChangedata[1][$a][1]['changeNums'] +$zhuxiaoChangedata[3][$a][1]['changeNums'] +$zhuxiaoChangedata[7][$a][1]['changeNums']; //出售栋数
+                    $result[$owners][$a][2][5] = $zhuxiaoChangedata[1][$a][1]['areas'] +$zhuxiaoChangedata[3][$a][1]['areas'] +$zhuxiaoChangedata[7][$a][1]['areas']; //出售建面
+                    $result[$owners][$a][2][6] = $zhuxiaoChangedata[1][$a][4]['changeNums'] +$zhuxiaoChangedata[3][$a][4]['changeNums'] +$zhuxiaoChangedata[7][$a][4]['changeNums']; //灭失栋数
+                    $result[$owners][$a][2][7] = $zhuxiaoChangedata[1][$a][4]['areas'] +$zhuxiaoChangedata[3][$a][4]['areas'] +$zhuxiaoChangedata[7][$a][4]['areas']; //灭失建面
+
+                    $result[$owners][$a][3][0] = $xinfaChangedata[1][$a][2]['changeNums'] +$xinfaChangedata[3][$a][2]['changeNums'] +$xinfaChangedata[7][$a][2]['changeNums']; //还建栋数
+                    $result[$owners][$a][3][1] = $xinfaChangedata[1][$a][2]['areas'] +$xinfaChangedata[3][$a][2]['areas'] +$xinfaChangedata[7][$a][2]['areas']; //还建建面
+                    $result[$owners][$a][3][2] = $xinfaChangedata[1][$a][5]['changeNums'] +$xinfaChangedata[3][$a][5]['changeNums'] +$xinfaChangedata[7][$a][5]['changeNums']; //加改扩栋数
+                    $result[$owners][$a][3][3] = $xinfaChangedata[1][$a][5]['areas'] +$xinfaChangedata[3][$a][5]['areas'] +$xinfaChangedata[7][$a][5]['areas']; //加改扩建面
+                    $result[$owners][$a][3][4] = $zhuxiaoChangedata[1][$a][2]['changeNums'] +$zhuxiaoChangedata[3][$a][2]['changeNums'] +$zhuxiaoChangedata[7][$a][2]['changeNums']; //危改拆除栋数
+                    $result[$owners][$a][3][5] = $zhuxiaoChangedata[1][$a][2]['areas'] +$zhuxiaoChangedata[3][$a][2]['areas'] +$zhuxiaoChangedata[7][$a][2]['areas']; //危改拆除建面
+                    $result[$owners][$a][3][6] = $zhuxiaoChangedata[1][$a][5]['changeNums'] +$zhuxiaoChangedata[3][$a][5]['changeNums'] +$zhuxiaoChangedata[7][$a][5]['changeNums']; //房屋划转栋数
+                    $result[$owners][$a][3][7] = $zhuxiaoChangedata[1][$a][5]['areas'] +$zhuxiaoChangedata[3][$a][5]['areas'] +$zhuxiaoChangedata[7][$a][5]['areas']; //房屋划转建面
+
+                    $result[$owners][$a][4][0] = $xinfaChangedata[1][$a][3]['changeNums'] +$xinfaChangedata[3][$a][3]['changeNums'] +$xinfaChangedata[7][$a][3]['changeNums']; //新建栋数
+                    $result[$owners][$a][4][1] = $xinfaChangedata[1][$a][3]['areas'] +$xinfaChangedata[3][$a][3]['areas'] +$xinfaChangedata[7][$a][3]['areas']; //新建建面
+                    $result[$owners][$a][4][2] = $xinfaChangedata[1][$a][6]['changeNums'] +$xinfaChangedata[3][$a][6]['changeNums'] +$xinfaChangedata[7][$a][6]['changeNums']; //其他扩栋数
+                    $result[$owners][$a][4][3] = $xinfaChangedata[1][$a][6]['areas'] +$xinfaChangedata[3][$a][6]['areas'] +$xinfaChangedata[7][$a][6]['areas']; //其他建面
+                    $result[$owners][$a][4][4] = $zhuxiaoChangedata[1][$a][3]['changeNums'] +$zhuxiaoChangedata[3][$a][3]['changeNums'] +$zhuxiaoChangedata[7][$a][3]['changeNums']; //落私发还栋数
+                    $result[$owners][$a][4][5] = $zhuxiaoChangedata[1][$a][3]['areas'] +$zhuxiaoChangedata[3][$a][3]['areas'] +$zhuxiaoChangedata[7][$a][3]['areas']; //落私发还建面
+                    $result[$owners][$a][4][6] = $zhuxiaoChangedata[1][$a][6]['changeNums'] +$zhuxiaoChangedata[3][$a][6]['changeNums'] +$zhuxiaoChangedata[7][$a][6]['changeNums']; //其他栋数
+                    $result[$owners][$a][4][7] = $zhuxiaoChangedata[1][$a][6]['areas'] +$zhuxiaoChangedata[3][$a][6]['areas'] +$zhuxiaoChangedata[7][$a][6]['areas']; //其他建面
                 }else{
                     $result[$owners][$a][0][0] = $propertydata[$owners][$a]['totalNums']; //市属楼栋
                     $result[$owners][$a][0][1] = $propertydata[$owners][$a]['totalAreas']; //年增加建筑面积
@@ -166,45 +201,45 @@ class PropertyReport extends Model
 
                     $result[$owners][$a][5][0] = $dengjidata[$owners][$a]['totalNums']; //登记楼栋
                     $result[$owners][$a][5][1] = $dengjidata[$owners][$a]['totalAreas']; //登记建筑面积
+                
+
+                    // if($a == 14 && $owners == 2){
+                    //     halt($xinfaChangedata[$owners][$a]);
+                    // }
+                   
+                    $result[$owners][$a][1][0] = $xinfaChangedata[$owners][$a][1]['changeNums'] + $xinfaChangedata[$owners][$a][2]['changeNums'] +$xinfaChangedata[$owners][$a][3]['changeNums'] +$xinfaChangedata[$owners][$a][4]['changeNums'] +$xinfaChangedata[$owners][$a][5]['changeNums'] +$xinfaChangedata[$owners][$a][6]['changeNums']; //新发楼栋
+                    $result[$owners][$a][1][1] = $xinfaChangedata[$owners][$a][1]['areas'] + $xinfaChangedata[$owners][$a][2]['areas'] +$xinfaChangedata[$owners][$a][3]['areas'] +$xinfaChangedata[$owners][$a][4]['areas'] +$xinfaChangedata[$owners][$a][5]['areas'] +$xinfaChangedata[$owners][$a][6]['areas']; //新发建筑面积
+                    $result[$owners][$a][1][2] = $zhuxiaoChangedata[$owners][$a][1]['changeNums'] + $zhuxiaoChangedata[$owners][$a][2]['changeNums'] +$zhuxiaoChangedata[$owners][$a][3]['changeNums'] +$zhuxiaoChangedata[$owners][$a][4]['changeNums'] +$zhuxiaoChangedata[$owners][$a][5]['changeNums'] +$zhuxiaoChangedata[$owners][$a][6]['changeNums']; //注销楼栋
+                    $result[$owners][$a][1][3] = $zhuxiaoChangedata[$owners][$a][1]['areas'] + $zhuxiaoChangedata[$owners][$a][2]['areas'] +$zhuxiaoChangedata[$owners][$a][3]['areas'] +$zhuxiaoChangedata[$owners][$a][4]['areas'] +$zhuxiaoChangedata[$owners][$a][5]['areas'] +$zhuxiaoChangedata[$owners][$a][6]['areas']; //注销建筑面积
+
+                    $result[$owners][$a][2][0] = $xinfaChangedata[$owners][$a][1]['changeNums']; //接管栋数
+                    $result[$owners][$a][2][1] = $xinfaChangedata[$owners][$a][1]['areas']; //接管建面
+                    $result[$owners][$a][2][2] = $xinfaChangedata[$owners][$a][4]['changeNums']; //合建栋数
+                    $result[$owners][$a][2][3] = $xinfaChangedata[$owners][$a][4]['areas']; //合建建面
+                    $result[$owners][$a][2][4] = $zhuxiaoChangedata[$owners][$a][1]['changeNums']; //出售栋数
+                    $result[$owners][$a][2][5] = $zhuxiaoChangedata[$owners][$a][1]['areas']; //出售建面
+                    $result[$owners][$a][2][6] = $zhuxiaoChangedata[$owners][$a][4]['changeNums']; //灭失栋数
+                    $result[$owners][$a][2][7] = $zhuxiaoChangedata[$owners][$a][4]['areas']; //灭失建面
+
+                    $result[$owners][$a][3][0] = $xinfaChangedata[$owners][$a][2]['changeNums']; //还建栋数
+                    $result[$owners][$a][3][1] = $xinfaChangedata[$owners][$a][2]['areas']; //还建建面
+                    $result[$owners][$a][3][2] = $xinfaChangedata[$owners][$a][5]['changeNums']; //加改扩栋数
+                    $result[$owners][$a][3][3] = $xinfaChangedata[$owners][$a][5]['areas']; //加改扩建面
+                    $result[$owners][$a][3][4] = $zhuxiaoChangedata[$owners][$a][2]['changeNums']; //危改拆除栋数
+                    $result[$owners][$a][3][5] = $zhuxiaoChangedata[$owners][$a][2]['areas']; //危改拆除建面
+                    $result[$owners][$a][3][6] = $zhuxiaoChangedata[$owners][$a][5]['changeNums']; //房屋划转栋数
+                    $result[$owners][$a][3][7] = $zhuxiaoChangedata[$owners][$a][5]['areas']; //房屋划转建面
+
+                    $result[$owners][$a][4][0] = $xinfaChangedata[$owners][$a][3]['changeNums']; //新建栋数
+                    $result[$owners][$a][4][1] = $xinfaChangedata[$owners][$a][3]['areas']; //新建建面
+                    $result[$owners][$a][4][2] = $xinfaChangedata[$owners][$a][6]['changeNums']; //其他扩栋数
+                    $result[$owners][$a][4][3] = $xinfaChangedata[$owners][$a][6]['areas']; //其他建面
+                    $result[$owners][$a][4][4] = $zhuxiaoChangedata[$owners][$a][3]['changeNums']; //落私发还栋数
+                    $result[$owners][$a][4][5] = $zhuxiaoChangedata[$owners][$a][3]['areas']; //落私发还建面
+                    $result[$owners][$a][4][6] = $zhuxiaoChangedata[$owners][$a][6]['changeNums']; //其他栋数
+                    $result[$owners][$a][4][7] = $zhuxiaoChangedata[$owners][$a][6]['areas']; //其他建面
+                
                 }
-
-                // if($a == 14 && $owners == 2){
-                //     halt($xinfaChangedata[$owners][$a]);
-                // }
-               
-                $result[$owners][$a][1][0] = $xinfaChangedata[$owners][$a][1]['changeNums'] + $xinfaChangedata[$owners][$a][2]['changeNums'] +$xinfaChangedata[$owners][$a][3]['changeNums'] +$xinfaChangedata[$owners][$a][4]['changeNums'] +$xinfaChangedata[$owners][$a][5]['changeNums'] +$xinfaChangedata[$owners][$a][6]['changeNums']; //新发楼栋
-                $result[$owners][$a][1][1] = $xinfaChangedata[$owners][$a][1]['areas'] + $xinfaChangedata[$owners][$a][2]['areas'] +$xinfaChangedata[$owners][$a][3]['areas'] +$xinfaChangedata[$owners][$a][4]['areas'] +$xinfaChangedata[$owners][$a][5]['areas'] +$xinfaChangedata[$owners][$a][6]['areas']; //新发建筑面积
-                $result[$owners][$a][1][2] = $zhuxiaoChangedata[$owners][$a][1]['changeNums'] + $zhuxiaoChangedata[$owners][$a][2]['changeNums'] +$zhuxiaoChangedata[$owners][$a][3]['changeNums'] +$zhuxiaoChangedata[$owners][$a][4]['changeNums'] +$zhuxiaoChangedata[$owners][$a][5]['changeNums'] +$zhuxiaoChangedata[$owners][$a][6]['changeNums']; //注销楼栋
-                $result[$owners][$a][1][3] = $zhuxiaoChangedata[$owners][$a][1]['areas'] + $zhuxiaoChangedata[$owners][$a][2]['areas'] +$zhuxiaoChangedata[$owners][$a][3]['areas'] +$zhuxiaoChangedata[$owners][$a][4]['areas'] +$zhuxiaoChangedata[$owners][$a][5]['areas'] +$zhuxiaoChangedata[$owners][$a][6]['areas']; //注销建筑面积
-
-                $result[$owners][$a][2][0] = $xinfaChangedata[$owners][$a][1]['changeNums']; //接管栋数
-                $result[$owners][$a][2][1] = $xinfaChangedata[$owners][$a][1]['areas']; //接管建面
-                $result[$owners][$a][2][2] = $xinfaChangedata[$owners][$a][4]['changeNums']; //合建栋数
-                $result[$owners][$a][2][3] = $xinfaChangedata[$owners][$a][4]['areas']; //合建建面
-                $result[$owners][$a][2][4] = $zhuxiaoChangedata[$owners][$a][1]['changeNums']; //出售栋数
-                $result[$owners][$a][2][5] = $zhuxiaoChangedata[$owners][$a][1]['areas']; //出售建面
-                $result[$owners][$a][2][6] = $zhuxiaoChangedata[$owners][$a][4]['changeNums']; //灭失栋数
-                $result[$owners][$a][2][7] = $zhuxiaoChangedata[$owners][$a][4]['areas']; //灭失建面
-
-                $result[$owners][$a][3][0] = $xinfaChangedata[$owners][$a][2]['changeNums']; //还建栋数
-                $result[$owners][$a][3][1] = $xinfaChangedata[$owners][$a][2]['areas']; //还建建面
-                $result[$owners][$a][3][2] = $xinfaChangedata[$owners][$a][5]['changeNums']; //加改扩栋数
-                $result[$owners][$a][3][3] = $xinfaChangedata[$owners][$a][5]['areas']; //加改扩建面
-                $result[$owners][$a][3][4] = $zhuxiaoChangedata[$owners][$a][2]['changeNums']; //危改拆除栋数
-                $result[$owners][$a][3][5] = $zhuxiaoChangedata[$owners][$a][2]['areas']; //危改拆除建面
-                $result[$owners][$a][3][6] = $zhuxiaoChangedata[$owners][$a][5]['changeNums']; //房屋划转栋数
-                $result[$owners][$a][3][7] = $zhuxiaoChangedata[$owners][$a][5]['areas']; //房屋划转建面
-
-                $result[$owners][$a][4][0] = $xinfaChangedata[$owners][$a][3]['changeNums']; //新建栋数
-                $result[$owners][$a][4][1] = $xinfaChangedata[$owners][$a][3]['areas']; //新建建面
-                $result[$owners][$a][4][2] = $xinfaChangedata[$owners][$a][6]['changeNums']; //其他扩栋数
-                $result[$owners][$a][4][3] = $xinfaChangedata[$owners][$a][6]['areas']; //其他建面
-                $result[$owners][$a][4][4] = $zhuxiaoChangedata[$owners][$a][3]['changeNums']; //落私发还栋数
-                $result[$owners][$a][4][5] = $zhuxiaoChangedata[$owners][$a][3]['areas']; //落私发还建面
-                $result[$owners][$a][4][6] = $zhuxiaoChangedata[$owners][$a][6]['changeNums']; //其他栋数
-                $result[$owners][$a][4][7] = $zhuxiaoChangedata[$owners][$a][6]['areas']; //其他建面
-                
-                
 
             }
         }
@@ -226,8 +261,8 @@ class PropertyReport extends Model
                 }elseif($own == 11 && $d == 1){
                     $result[$own][$d] = array_merge_add($result[$own][2] ,$result[$own][3]);
                 }
-
             }
+
         }
 
         foreach($result as &$res){
