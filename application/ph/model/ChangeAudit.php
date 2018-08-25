@@ -620,7 +620,7 @@ class ChangeAudit extends Model
                 }else{
                     $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->setField('IfSuspend', 1);
                     $housearr = $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->find();
-                    $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. ")";
+                    $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $housearr['InstitutionID'] . "," . $housearr['InstitutionPID'] . "," . $housearr['HousePrerent'] . ", " . $housearr['OwnerType'] . "," . $housearr['UseNature'] . "," . $changeFind['OrderDate']. ")";
                 }
 //halt($str);
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeOrderID,ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
