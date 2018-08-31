@@ -45,7 +45,7 @@ $('.addLease').click(function(){
 					$('#applyRoom20_data2').val(res.data.house.TotalUseArea);
 					$('#applyRoom20_data3').val(res.data.house.TotalLeaseArea);
 					$('#applyRoom20_data4').val(res.data.house.TotalRoomMonth);
-					$('#applyRoom20_data5').val(res.data.house.TotalRoomMonth);
+					$('#applyRoom20_data5').val(res.data.house.HeDingRoomMonth);
 					var ws = 1;
 					var fb = 13;
 					var wfb = 13;
