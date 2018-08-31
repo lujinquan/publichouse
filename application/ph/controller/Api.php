@@ -1685,7 +1685,8 @@ EOF;
 
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
-            $result['house']['TotalRoomMonth'] = ($result['house']['UseNature'] == 1)?round($k,1):$k;
+            $result['house']['TotalRoomMonth'] = $k;
+            $result['house']['HeDingRoomMonth'] = ($result['house']['UseNature'] == 1)?round($k,1):$k;
         }
 
         $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
