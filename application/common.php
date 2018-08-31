@@ -760,9 +760,9 @@ function count_room_rent($roomid){
     //计算租金= 计租面积 * 实际基价 * 结构基价 * 基价折减率 * 架空率 * 层次调解率
     $roomRent = $roomOne['LeasedArea'] * $roomOne['RentPoint'] * $structureTypePoint * $emptyPoint * $floorPoint;
 
-    if($roomOne['RoomPublicStatus'] == 2){ //被两户共用了，就只取一半
-        $roomRent = $roomRent / 2;
-    }
+    // if($roomOne['RoomPublicStatus'] == 2){ //被两户共用了，就只取一半
+    //     $roomRent = $roomRent / 2;
+    // }
 
     return round($roomRent,2);
 }
