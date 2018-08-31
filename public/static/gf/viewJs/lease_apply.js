@@ -36,7 +36,11 @@ $('.addLease').click(function(){
 					$('#applyRoom5_data7').val(res.data.house.BelowFiveNumRent);
 					$('#applyRoom6_data6').val(res.data.house.MoreFiveNum);
 					$('#applyRoom6_data7').val(res.data.house.MoreFiveNumRent);
-					$('#applyRoom7_data8').val(res.data.house.TotalLeaseArea);
+					if(parseInt(res.data.house.PumpCost) != 0){
+						$('#applyRoom7_data8').val(res.data.house.TotalLeaseArea);
+					}else{
+						$('#applyRoom7_data8').val(0);
+					}
 					$('#applyRoom7_data9').val(res.data.house.PumpCost);
 					$('#applyRoom20_data2').val(res.data.house.TotalUseArea);
 					$('#applyRoom20_data3').val(res.data.house.TotalLeaseArea);
