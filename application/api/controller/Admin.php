@@ -16,6 +16,16 @@ use think\Debug;
  */
 class Admin extends Controller
 {
+    public function api()
+    {
+        //halt(date('Y-m-d'));
+        $month = '201712';
+        $RentReport = Cache::store('file')->get('HouseReport'.$month);
+        $row['data'] = $RentReport;
+        $row['type'] = '月租金报表'.$month;
+        //Db::name('report')->insert($row);
+        halt($RentReport);
+    }
 
     /**
      * 小程序主页接口【公告、应缴金额、已缴金额】
