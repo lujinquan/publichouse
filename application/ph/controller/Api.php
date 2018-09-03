@@ -1674,8 +1674,7 @@ EOF;
                         }
                         break;
                 }
-
-                
+             
             }
 
             $result['house']['HallRent'] = 0.5 * $result['house']['Hall'];
