@@ -64,7 +64,7 @@ $('.print1').click(function(){
 
 				for(var key in data){
 					var name_id_print = key.replace(/apply/,'print_1_');
-					$('#'+name_id_print).text(data[key]);
+					$('#'+name_id_print).text(data[key] == "0"?" " : data[key]);
 				}
 				if(data.QrcodeUrl != ""){
 					$('#print_1_imghid').show();
