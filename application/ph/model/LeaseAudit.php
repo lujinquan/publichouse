@@ -42,8 +42,8 @@ class LeaseAudit extends Model
         $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
 
         $value = 'https://ph.ctnmit.com/erweima/'.$code;          //二维码内容
-        $errorCorrectionLevel = 'Q';    //容错级别 
-        $matrixPointSize = 5;           //生成图片大小
+        $errorCorrectionLevel = 'L';    //容错级别 
+        $matrixPointSize = 6;           //生成图片大小
         $url = '/uploads/qrcode/'.$code.'.png';
         $filename = $_SERVER['DOCUMENT_ROOT'].$url;
 
