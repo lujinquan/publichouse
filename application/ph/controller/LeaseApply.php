@@ -37,8 +37,8 @@ class LeaseApply extends Base
      */
     public function add(){
         if ($this->request->isPost()) {
-            $data = $this->request->post();
-
+            // $data = $this->request->post();
+            $data = array_no_space_str($this->request->post());
             $f = Db::name('lease_change_order')->where(['HouseID'=>$data['houseID'],'Status'=>['>',0]])->find();
 
             if($f){
