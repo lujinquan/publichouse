@@ -1057,6 +1057,10 @@ class Api extends Controller
             <td>{$find['HouseID']}</td>
         </tr>
         <tr>
+            <td>房屋地址</td>
+            <td>{$find['BanAddress']}</td>
+        </tr>
+        <tr>
             <td>结构类别</td>
             <td>{$detail['applyStruct']}</td>
         </tr>
