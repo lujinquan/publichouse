@@ -232,7 +232,7 @@ $('.BtnApprove').click(function(){
 		}else{
 			$('.APhouseId').text(res.data.detail.HouseID);
 			$('.APcreateTime').text(res.data.detail.CreateTime);
-			$('.APhouseArea').text(res.data.detail.HouseArea);
+			$('.APhouseArea').text(res.data.detail.HouseUsearea);
 			$('.APleasedArea').text(res.data.detail.LeasedArea);
 			$('.APhouseAddress').text(res.data.detail.BanAddress);
 			$('.APtransferRent').text(res.data.detail.TransferRent);
@@ -341,7 +341,7 @@ $('.BtnDetail').click(function(){
 			$('.houseHide').css('display','block');
 		}
 		$('.APcreateTime').text(res.data.detail.CreateTime);
-		$('.APhouseArea').text(res.data.detail.HouseArea);
+		$('.APhouseArea').text(res.data.detail.HouseUsearea);
 		$('.APhouseId').text(res.data.detail.HouseID);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
 		$('#approveName').text(res.data.detail.ChangeType);
