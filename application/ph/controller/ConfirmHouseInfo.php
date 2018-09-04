@@ -150,7 +150,7 @@ class ConfirmHouseInfo extends Base
     public function renttable()
     {
         if ($this->request->isPost()) {
-            $data = $this->request->post();
+            $data = array_no_space_str($this->request->post());
             check($data['AddRent']['HouseID'],'');
             //halt($data);
             //验证数据合法性
