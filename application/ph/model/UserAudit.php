@@ -26,7 +26,7 @@ class UserAudit extends Model
         $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
-        $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea')
+        $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea ,HouseUsearea')
             ->where('HouseID' ,'eq' ,$orderData['HouseID'])
             ->find();
 
@@ -57,6 +57,7 @@ class UserAudit extends Model
         $data['TenantID'] = $houseData['TenantID']?$houseData['TenantID']:'';   //租户编号
         $data['LeasedArea'] = $houseData['LeasedArea']?$houseData['LeasedArea']:'';  //计租面积
         $data['HouseArea'] = $houseData['HouseArea']?$houseData['HouseArea']:'';      //实有面积
+        $data['HouseUsearea'] = $houseData['HouseUsearea']?$houseData['HouseUsearea']:'';      //使用面积
         $data['CreateTime'] = date('Y-m-d H:i:s' ,$orderData['CreateTime']);   //备案时间
         $data['OldTenantTel'] = $tenantOldData['TenantTel']?$tenantOldData['TenantTel']:'';  //租户联系方式
         $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'';  //租户姓名
