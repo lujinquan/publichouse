@@ -12,11 +12,11 @@
 	<li style="width:4%" class="m5">
 		<select name="OwnerType" class="fontS1">
 		<option  value="" style="display:none"></option>
-			<?php foreach($owerLst as $k3 =>$v3){;?>
-					<option value="{$k3+1}"><?php echo $v3['OwnerType']; ?></option>
+			<?php foreach($owerLst as $v3){;?>
+					<option value="{$v3['id']}"><?php echo $v3['OwnerType']; ?></option>
 			<?php }; ?>
 		</select>
-	</li>	
+	</li>
 	<li style="width:3%" class="m5"><input type="text" class="fontS1"></li>
 	<li style="width:3%" class="m5"><input type="text" class="fontS1"></li>
 	<li style="width:4%" class="m5"><input type="text" class="fontS1"></li>
@@ -26,7 +26,7 @@
 	</li>
 	<li style="width:4%;height:35px"></li>
 	<li style="width:6%;height:35px"></li>
-	<li style="width:4%;height:35px"><input type="text"  class="QueryHouse fontS1"></li>
+	<li style="width:4%;height:35px"><input type="text"  class="fontS1"></li>
 	<li style="width:5%;height:35px"></li>
 	<li style="width:3%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-styled"></li>
 </ul>
