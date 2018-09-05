@@ -144,25 +144,7 @@
               </td>
 
               <td>
-                <div class="am-form-group  am-form search_input">
-                    <select name="StructureType">
-                        <option  value="" style="display:none">请选择</option>
-                        <?php foreach($struLst as $k4 =>$v4){;?>
-                        <?php
-                            if(isset($leaseOption['StructureType'])){
-                                if($leaseOption['StructureType'] == $v4['id']){
-                                    $select ='selected';
-                                }else{
-                                    $select ='';
-                                }
-                            }else{
-                                $select ='';
-                            }
-                            ?>
-                        <option value="<?php echo $v4['id']; ?>" {$select} ><?php echo $v4['StructureType']; ?></option>
-                        <?php }; ?>
-                    </select>
-                </div>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
               </td>
          
               <td>

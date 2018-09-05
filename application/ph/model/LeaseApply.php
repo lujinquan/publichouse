@@ -43,7 +43,9 @@ class LeaseApply extends Model
                     $where['InstitutionPID'] = array('eq', $searchForm['TubulationID']);
                 }
             }
-            
+            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //检索产别
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
             if (isset($searchForm['HouseID']) && $searchForm['HouseID']) {  //检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
