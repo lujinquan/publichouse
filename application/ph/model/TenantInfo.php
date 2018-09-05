@@ -133,7 +133,7 @@ class TenantInfo extends Model
             $where = 1;
         }
 
-        $TenantIdList['obj'] = self::field('TenantID')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $TenantIdList['obj'] = self::field('TenantID')->where($where)->order('TenantID desc')->paginate(config('paginate.list_rows'));
 
         //dump(TenantInfo::getLastSql());exit;
 
