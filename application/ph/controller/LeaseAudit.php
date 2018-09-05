@@ -20,7 +20,7 @@ class LeaseAudit extends Base
     public function index(){
 
         $data = model('ph/LeaseApply') -> get_all_lease_lst();
-
+        //halt($data['option']);
         //$leaseChanges = Db::name('use_change_type')->field('id, UseChangeTitle')->select();
 
         $this -> assign([    

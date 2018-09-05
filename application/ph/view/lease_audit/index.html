@@ -35,13 +35,20 @@
           </thead>
           <tbody>
 		  <!--查询-->
-          <form action="{:url('LeaseApply/index')}" method="post">
+          <form action="{:url('LeaseAudit/index')}" method="post">
 		    <tr class="am-form-group am-form-inline">
               <td></td>
               <td></td>
               <td>
                 <div class="am-g am-input-group am-input-group-sm">
-                  <input style="width:122px;" type="text" name="HouseID" class="am-form-field" value="">
+                    <?php
+                        if($leaseOption != array()){
+                            $HouseID = $leaseOption['HouseID'];
+                        }else{
+                            $HouseID = '';
+                        }
+                     ?>
+                  <input style="width:122px;" type="text" name="HouseID" class="am-form-field" value="{$HouseID}">
                 </div>
               </td>
               <?php if(session('user_base_info.institution_level')!=3){ ;?>
@@ -93,8 +100,8 @@
                         <?php foreach($owerLst as $k3 =>$v3){;?>
 
                           <?php
-                          if(isset($houseOption['OwnerType'])){
-                              if($houseOption['OwnerType'] == $v3['id']){
+                          if(isset($leaseOption['OwnerType'])){
+                              if($leaseOption['OwnerType'] == $v3['id']){
                                   $select ='selected';
                               }else{
                                   $select ='';
@@ -114,8 +121,14 @@
 
               <td>
         				<div class="am-g am-input-group am-input-group-sm">
-
-        				  <input style="width:122px;" type="text" name="HouseID" class="am-form-field" value="">
+                  <?php
+                        if($leaseOption != array()){
+                            $BanAddress = $leaseOption['BanAddress'];
+                        }else{
+                            $BanAddress = '';
+                        }
+                     ?>
+        				  <input style="width:122px;" type="text" name="BanAddress" class="am-form-field" value="{$BanAddress}">
         				</div>
         			</td>
 
@@ -143,14 +156,24 @@
 
   
          
-              <td>
-        			 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-        		  </td>
+             
               <td>
         			 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
         		  </td>
               <td>
                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+              <td>
+                <div class="am-g am-input-group am-input-group-sm">
+                <?php
+                        if($leaseOption != array()){
+                            $TenantName = $leaseOption['TenantName'];
+                        }else{
+                            $TenantName = '';
+                        }
+                     ?>
+                  <input style="width:122px;" type="text" name="TenantName" class="am-form-field" value="{$TenantName}">
+                </div>
               </td>
               <td>
                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
