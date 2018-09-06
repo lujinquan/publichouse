@@ -21,6 +21,7 @@ class LeaseApply extends Base
     public function index(){
 
         $data = model('ph/LeaseApply') -> get_all_lease_lst();
+        
         $this -> assign([
             'leaseLst' => $data['arr'],
             'leaseLstObj' => $data['obj'],

@@ -1667,7 +1667,7 @@ EOF;
                         $room[] = $v;
                         break;
                     default:
-                        if($v['RoomType'] == 1){ //三户共用厅堂
+                        if($v['RoomType'] == 5){ //三户共用厅堂
                             $result['house']['Hall'] += 1;
                         }elseif($v['RoomType'] == 2){ //三户共用卫生间
                             $result['house']['Toilet'] += 1;
