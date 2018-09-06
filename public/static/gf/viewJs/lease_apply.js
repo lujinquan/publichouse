@@ -45,6 +45,7 @@ $('.addLease').click(function(){
 					}else{
 						$('#applyRoom7_data8').val(0);
 					}
+
 					$('#applyRoom7_data9').val(res.data.house.PumpCost);
 					$('#applyRoom20_data2').val(res.data.house.TotalUseArea);
 					$('#applyRoom20_data3').val(res.data.house.TotalLeaseArea);
@@ -132,6 +133,32 @@ $('.addLease').click(function(){
 								break;
 						}
 					}
+					$('.input_remark').off('blur');
+				    $('.input_remark').blur(function(){
+				    	var str_new = $('.remark label').text() + $('.remark select option:selected').text() + $('.input_remark').val();
+				    	
+				    	if(res.data.house.Recorde != ''){
+				    		str_new = str_new + ',' + res.data.house.Recorde;
+				    	}
+				    	$('.applyText_other').val(str_new);
+				    	console.log(str_new);
+				    });
+
+
+				    var recorde_array = res.data.house.Recorde.split(';');
+					for(var i = 0,length = recorde_array.length;i < length; i++){
+						$('.remark').append($('<p>'+recorde_array[i]+'</p>'));
+					}
+				    $('.remark select').off('change');
+				    $('.remark select').change(function(){
+				    	if($(this).val() == "3" || $(this).val() == "4"){
+				    		$.get('/ph/Api/lease_use?HouseID'+$('#leaseHouseInput').val(),function(res){
+				    			res = JSON.parse(res);
+				    			console.log(res);
+				    			$('.input_remark').val(res.data.recorde);
+				    		})
+				    	}
+				    })
 				})
 			})
 			new file({
@@ -174,6 +201,8 @@ $('.addLease').click(function(){
 			for(var i = 0;i < data.length;i++){
 				formData.append(data[i].name,data[i].value);
 			}
+
+
 			formData.append('houseID',$('#leaseHouseInput').val());
 			$.ajax({
                 type: "post",
