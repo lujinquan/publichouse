@@ -1617,6 +1617,24 @@ EOF;
                                       ->where('a.HouseID',$houseid)
                                       ->find();
 
+        // $s = [
+        //     '1' => '老证换新证',
+        //     '2' => '遗失补发',
+        //     '3' => '亲属转让',
+        //     '4' => '正常过户',
+        //     '5' => '新发租',
+        //     '6' => '其他',
+        // ];
+
+        // if($recorde){
+        //     foreach($recorde as &$r){
+        //         $r['CreateTime'] = date('Y年m月d日',$r['CreateTime']);
+        //         $r['Type'] = $s[$r['Type']];
+        //     }
+        // }
+
+        $result['house']['Recorde'] = Db::name('lease_change_order')->where('HouseID',$houseid)->order('CreateTime desc')->value('Recorde');
+
         if(empty($result['house'])){
             return jsons('4000','参数错误');
         }
@@ -1696,6 +1714,14 @@ EOF;
         
         $result['room'] = isset($room)?$room:array();
 
+        return jsons('2000', '获取成功', $result);
+    }
+
+    public function lease_use()
+    {
+        $houseid = input('HouseID');
+        $row = Db::name('use_change_order')->where('HouseID',$houseid)->order('CreateTime desc')->field('OldTenantName,NewTenantName')->find();
+        $result['recorde'] = $row?$row['OldTenantName'].'转让给'.$row['NewTenantName']:'';
         return jsons('2000', '获取成功', $result);
     }
 }
