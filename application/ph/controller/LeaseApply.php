@@ -62,7 +62,7 @@ class LeaseApply extends Base
                                   ->find();  
 
             $val = Db::name('config')->where('id',1)->value('Value'); 
-            $datas['Recorde'] = $one['Recorde'];
+            $datas['Recorde'] = $data['Recorde'];
             $datas['Szno'] = $one['Szno'].$val;
             $datas['InstitutionID'] = $one['InstitutionID'];
             $datas['InstitutionPID'] = $one['InstitutionPID'];

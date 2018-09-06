@@ -6,7 +6,7 @@ $('.examine').click(function(event){
 		area:['1100px','750px'],
 		resize:false,
 		zIndex:100,
-		title:['租约详情','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		title:['租约审批','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:$('#leaseDetail'),
 		btn:['通过','不通过'],
 		success:function(){
@@ -16,10 +16,17 @@ $('.examine').click(function(event){
 				console.log(data);
 
 				data.applyNO = data.Szno;
-
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
-					$('#'+name_id).text(data[key]);
+					if(key.indexOf('Text_other') > -1){
+						var recorde_array = data[key].split(';');
+						$('#detailText_other').empty();
+						for(var i = 0,length = recorde_array.length;i < length; i++){
+							$('#detailText_other').append($('<p>'+recorde_array[i]+'</p>'));
+						}
+					}else{
+						$('#'+name_id).text(data[key]);
+					}
 				}
 				if(data.QrcodeUrl != ""){
 					$('#imghid').show();
@@ -64,7 +71,15 @@ $('.print1').click(function(){
 
 				for(var key in data){
 					var name_id_print = key.replace(/apply/,'print_1_');
-					$('#'+name_id_print).text(data[key] == "0"?" " : data[key]);
+					if(key.indexOf('Text_other') > -1){
+						var recorde_array = data[key].split(';');
+						$('#print_1_Text_other').empty();
+						for(var i = 0,length = recorde_array.length;i < length; i++){
+							$('#print_1_Text_other').append($('<p>'+recorde_array[i]+'</p>'));
+						}
+					}else{
+						$('#'+name_id_print).text(data[key] == "0"?" " : data[key]);
+					}
 				}
 				if(data.QrcodeUrl != ""){
 					$('#print_1_imghid').show();
@@ -169,7 +184,15 @@ $('.detail_btn').click(function(event){
 
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
-					$('#'+name_id).text(data[key]);
+					if(key.indexOf('Text_other') > -1){
+						var recorde_array = data[key].split(';');
+						$('#detailText_other').empty();
+						for(var i = 0,length = recorde_array.length;i < length; i++){
+							$('#detailText_other').append($('<p>'+recorde_array[i]+'</p>'));
+						}
+					}else{
+						$('#'+name_id).text(data[key]);
+					}
 				}
 				if(data.QrcodeUrl != ""){
 					$('#imghid').show();

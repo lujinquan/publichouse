@@ -138,7 +138,7 @@ $('.addLease').click(function(){
 				    	var str_new = $('.remark label').text() + $('.remark select option:selected').text() + $('.input_remark').val();
 				    	
 				    	if(res.data.house.Recorde != ''){
-				    		str_new = str_new + ',' + res.data.house.Recorde;
+				    		str_new = str_new + ';' + res.data.house.Recorde;
 				    	}
 				    	$('.applyText_other').val(str_new);
 				    	console.log(str_new);
@@ -154,9 +154,12 @@ $('.addLease').click(function(){
 				    	if($(this).val() == "3" || $(this).val() == "4"){
 				    		$.get('/ph/Api/lease_use?HouseID'+$('#leaseHouseInput').val(),function(res){
 				    			res = JSON.parse(res);
-				    			console.log(res);
-				    			$('.input_remark').val(res.data.recorde);
+				    			$('.input_remark').val(res.data.recorde).show();
 				    		})
+				    	}else if($(this).val() == "6"){
+				    		$('.input_remark').show();
+				    	}else{
+				    		$('.input_remark').hide();
 				    	}
 				    })
 				})
@@ -239,7 +242,16 @@ $('.BtnDetail').click(function(){
 				data.applyNO = data.Szno;
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
-					$('#'+name_id).text(data[key]);
+					if(key.indexOf('Text_other') > -1){
+						var recorde_array = data[key].split(';');
+						$('#detailText_other').empty();
+						for(var i = 0,length = recorde_array.length;i < length; i++){
+							$('#detailText_other').append($('<p>'+recorde_array[i]+'</p>'));
+						}
+						console.log(recorde_array);
+					}else{
+						$('#'+name_id).text(data[key]);
+					}
 				}
 				if(data.QrcodeUrl != ""){
 					$('#imghid').show();
