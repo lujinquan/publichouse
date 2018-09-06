@@ -27,11 +27,16 @@
     .outerControl table{width:100%;border-spacing:0;border-top:1px solid #ccc;border-right:1px solid #ccc;text-align: center;}
     .outerControl td,.outerControl th{height:24px;border-left:1px solid #ccc;border-bottom:1px solid #ccc;font-size:12px;}
     .pzqk input{width:80px;}
-    .fwClass tr td input {
+    .fwClass input {
         width: 120px;
         height: 28px;
         line-height: 28px;
     }
+    .remark{width:100%;height:250px;padding:5px;border:1px solid #ccc;text-align:left;}
+    .remark label{font-size:14px;font-weight:400;}
+    .remark select,.remark input{width:150px;height:26px;margin-left:20px;border:1px solid #ccc;}
+    .remark>input{width:300px;line-height:26px;}
+    .remark p{font-size:14px;}
 </style>
 <div id="leaseAdd" class="outerControl" style="margin-left:125px;margin-top:20px;display:none;">
         <form id="MyForm" style="width:950px;">
@@ -604,7 +609,28 @@
                 <tr>
                     <td colspan="7">
                         <p style="margin: 60px 0 30px 0;"><span style="font-size: 20px; width: 50px; border-bottom: 3px double #333333;">附记</span></p>
-                        <textarea name="applyText_other" style="width:100%;height:250px;border:none;"></textarea>
+                        <div class="remark">
+                            <label>
+                                <span class="applyYear"></span>年
+                                <span class="applyMonth"></span>月
+                                <span class="applyDay"></span>日
+                            </label>
+                            <select>
+                                <option>请选择</option>
+                                <option value="1">老证换新证</option>
+                                <option value="2">遗失补发</option>
+                                <option value="3">亲属转让</option>
+                                <option value="4">正常过户</option>
+                                <option value="5">新发租</option>
+                                <option value="6">其他</option>
+                            </select>
+                            <input placeholder="备注" />
+                            <p>2018年9月6日 正常过户 张三装让给历史</p>
+                        </div>
+                        
+                        <!-- <textarea name="applyText_other" style="width:100%;height:250px;border:none;">
+
+                        </textarea> -->
                     </td>
                 </tr>
             </tbody></table>

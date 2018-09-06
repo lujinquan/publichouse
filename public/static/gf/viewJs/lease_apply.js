@@ -3,6 +3,10 @@ $('.addLease').click(function(){
 	$('#applyYear').val(getYear());
 	$('#applyMonth').val(getMonth());
 	$('#applyDay').val(getDay());
+
+	$('.applyYear').text(getYear());
+	$('.applyMonth').text(getMonth());
+	$('.applyDay').text(getDay());
 	layer.open({
 		type:1,
 		area:['1200px','750px'],
