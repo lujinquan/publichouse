@@ -220,8 +220,8 @@ $('.addLease').click(function(){
 				formData.append(data[i].name,data[i].value);
 			}
 
-
 			formData.append('houseID',$('#leaseHouseInput').val());
+			formData.append('applyReason',$('.applyReason').val());
 			$.ajax({
                 type: "post",
                 url: "/ph/LeaseApply/add",
@@ -254,6 +254,7 @@ $('.BtnDetail').click(function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+houseID,function(res){
 				var res = JSON.parse(res);
 				var data = res.data.detail;
+				console.log(data);
 				data.applyNO = data.Szno;
 				for(var key in data){
 					var name_id = key.replace(/apply/,'detail');
