@@ -135,7 +135,9 @@ $('.addLease').click(function(){
 					}
 					$('.input_remark').off('blur');
 				    $('.input_remark').blur(function(){
-				    	var str_new = $('.remark label').text() + $('.remark select option:selected').text() + $('.input_remark').val();
+				    	var str_new = $('.remark label').text() + '&nbsp&nbsp'
+				    	 + $('.remark select option:selected').text() + '&nbsp&nbsp'
+				    	 + $('.input_remark').val();
 				    	
 				    	if(res.data.house.Recorde != ''){
 				    		str_new = str_new + ';' + res.data.house.Recorde;
@@ -163,7 +165,9 @@ $('.addLease').click(function(){
 				    	}
 
 
-				    	var str_new = $('.remark label').text() + $('.remark select option:selected').text() + $('.input_remark').val();
+				    	var str_new = $('.remark label').text() + '&nbsp&nbsp' 
+				    	+ $('.remark select option:selected').text() + '&nbsp&nbsp' 
+				    	+ $('.input_remark').val();
 				    	
 				    	if(res.data.house.Recorde != ''){
 				    		str_new = str_new + ';' + res.data.house.Recorde;
@@ -171,7 +175,7 @@ $('.addLease').click(function(){
 				    	$('.applyText_other').val(str_new);
 				    	console.log(str_new);
 
-				    	
+
 				    })
 				})
 			})
@@ -245,7 +249,7 @@ $('.BtnDetail').click(function(){
 		zIndex:100,
 		title:['租约详情','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:$('#leaseDetail'),
-		btn:['确认','取消'],
+		// btn:['确认','取消'],
 		success:function(){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+houseID,function(res){
 				var res = JSON.parse(res);
@@ -275,9 +279,6 @@ $('.BtnDetail').click(function(){
             	metailShow('#leaseApplyPhotos',res);
 			})
 			
-		},
-		yes:function(){
-
 		}
 	})
 })
