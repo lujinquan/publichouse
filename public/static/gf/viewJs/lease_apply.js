@@ -161,6 +161,17 @@ $('.addLease').click(function(){
 				    	}else{
 				    		$('.input_remark').hide();
 				    	}
+
+
+				    	var str_new = $('.remark label').text() + $('.remark select option:selected').text() + $('.input_remark').val();
+				    	
+				    	if(res.data.house.Recorde != ''){
+				    		str_new = str_new + ';' + res.data.house.Recorde;
+				    	}
+				    	$('.applyText_other').val(str_new);
+				    	console.log(str_new);
+
+				    	
 				    })
 				})
 			})
