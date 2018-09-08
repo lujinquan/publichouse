@@ -58,7 +58,7 @@ class ConfirmBanInfo extends Base
             $data['BanGpsX'] = $arr[0]; 
             $data['BanGpsY'] = $arr[1]; 
             $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid'); 
-            $data['BanID'] = $maxBanID?$maxBanID + 1:$banID . '0001';
+            $data['BanID'] = $maxBanID?$maxBanID + 1:$banID . '001';
             $data['BanAddress'] = $areaTwo . $areaThree . $data['AreaFour']; 
             $data['CreateUserID'] = UID;
             $data['Status'] = 0; 
