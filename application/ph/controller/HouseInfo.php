@@ -59,7 +59,7 @@ class HouseInfo extends Base
             }
             $maxHouseID = Db::name('house')->where('HouseID', 'like', $data['BanID'] . '%')->max('HouseID');
             if (!$maxHouseID) {
-                $data['HouseID'] = $data['BanID'] . '001';
+                $data['HouseID'] = $data['BanID'] . '0001';
             } else {
                 $data['HouseID'] = $maxHouseID + 1;
             }
