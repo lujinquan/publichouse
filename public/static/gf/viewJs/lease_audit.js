@@ -49,7 +49,7 @@ $('.examine').click(function(event){
 		}
 	})
 })
-$('.print1').click(function(){
+$('.print1').click(function(event){
 	event.stopPropagation();
 	$('.admin-main').addClass('am-print-hide');
 	var ChangeOrderID = $(this).val();
