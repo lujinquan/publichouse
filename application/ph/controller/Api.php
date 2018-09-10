@@ -1706,8 +1706,8 @@ EOF;
 
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
-            $result['house']['TotalRoomMonth'] = $k;
-            $result['house']['HeDingRoomMonth'] = ($result['house']['UseNature'] == 1)?round($k,1):$k;
+            $result['house']['TotalRoomMonth'] = count_house_rent($houseid);
+            $result['house']['HeDingRoomMonth'] = ($result['house']['UseNature'] == 1)?round($result['house']['TotalRoomMonth'],1):$result['house']['TotalRoomMonth'];
         }
 
         $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
