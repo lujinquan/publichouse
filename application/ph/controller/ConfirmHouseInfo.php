@@ -28,8 +28,8 @@ class ConfirmHouseInfo extends Base
             'houseLstObj' => $houseLst['obj'],
             'houseOption' => $houseLst['option'],
             //'HousePrerentSum' => $houseLst['HousePrerentSum'],
-            'HouseUseareaSum' => $houseLst['HouseUseareaSum'],
-            'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
+            //'HouseUseareaSum' => $houseLst['HouseUseareaSum'],
+            //'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
             //'HouseAreaSum' => $houseLst['HouseAreaSum'],
             //'ArrearRentSum' => $houseLst['ArrearRentSum'],
         ]);

@@ -124,8 +124,8 @@ class HouseInfo extends Model
 
         $HouseIdList['obj'] = self::field('HouseID')->where($where)->order('CreateTime desc,HouseID desc')->paginate(config('paginate.list_rows'));
         //$HouseIdList['HousePrerentSum'] = self::field('HouseID')->where($where)->sum('HousePrerent');
-        $HouseIdList['HouseUseareaSum'] = self::field('HouseID')->where($where)->sum('HouseUsearea');
-        $HouseIdList['LeasedAreaSum'] = self::field('HouseID')->where($where)->sum('LeasedArea');
+        //$HouseIdList['HouseUseareaSum'] = self::field('HouseID')->where($where)->sum('HouseUsearea');
+        //$HouseIdList['LeasedAreaSum'] = self::field('HouseID')->where($where)->sum('LeasedArea');
         //$HouseIdList['HouseAreaSum'] = self::field('HouseID')->where($where)->sum('HouseArea');
         //$HouseIdList['ArrearRentSum'] = self::field('HouseID')->where($where)->sum('ArrearRent');
 
