@@ -52,6 +52,7 @@
                     <th class="table-set">产别</th>
                     <th class="table-set">使用性质</th>
                     <th class="table-set">规定月租金</th>
+                    <th class="table-title">计算租金</th>
                     <th class="table-set dong_none">单元号</th>
                     <th class="table-set dong_none">楼层号</th>
                     <th class="table-set">使用面积</th>
@@ -208,7 +209,9 @@
                                 <input name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}">
                             </div>
                         </td>
-
+                        <td>
+                            <div style="width:50px;"></div>
+                        </td>
                         <td class="dong_none">
                             <div style="width:120px;">总规租：{$HousePrerentSum}</div>
                         </td>
@@ -265,6 +268,7 @@
                     
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
+                    <td class="am-hide-sm-only" {if ($v1['HousePrerent'] != $v1['ApprovedRent'])}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HouseUsearea']; ?></td>
