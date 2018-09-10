@@ -705,7 +705,7 @@ function count_house_rent($houseid){
     
     $where['HouseID'] = array('like','%'.$houseid.'%');
     $where['Status'] = array('eq',1);
-    $where['RoomPublicStatus'] = array('<',3); //去掉3户共用的房间
+    //$where['RoomPublicStatus'] = array('<',3); //去掉3户共用的房间
 
     //$roomArr = Db::name('room')->where($where)->column('RoomID');
     $roomArr = Db::name('room')->where($where)->field('RoomID,RoomRentMonth')->select();
@@ -723,9 +723,9 @@ function count_house_rent($houseid){
 
     //halt($sumrent);
     //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
-    $find = Db::name('house')->field('PublicRent,UseNature')->where('HouseID',$houseid)->find();
+    $find = Db::name('house')->field('PlusRent,ProtocolRent,DiffRent,UseNature')->where('HouseID',$houseid)->find();
 
-    $jiaji = $find['PublicRent']?$find['PublicRent']:0;
+    $jiaji = $find['ProtocolRent'] + $find['DiffRent'] + $find['PlusRent'];
 
     $houseRent = $sumrent + $jiaji;
 
