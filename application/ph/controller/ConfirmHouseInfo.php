@@ -27,11 +27,11 @@ class ConfirmHouseInfo extends Base
             'houseLst' => $houseLst['arr'],
             'houseLstObj' => $houseLst['obj'],
             'houseOption' => $houseLst['option'],
-            'HousePrerentSum' => $houseLst['HousePrerentSum'],
+            //'HousePrerentSum' => $houseLst['HousePrerentSum'],
             'HouseUseareaSum' => $houseLst['HouseUseareaSum'],
             'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
-            'HouseAreaSum' => $houseLst['HouseAreaSum'],
-            'ArrearRentSum' => $houseLst['ArrearRentSum'],
+            //'HouseAreaSum' => $houseLst['HouseAreaSum'],
+            //'ArrearRentSum' => $houseLst['ArrearRentSum'],
         ]);
         return $this->fetch();
     }
