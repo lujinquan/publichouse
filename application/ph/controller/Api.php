@@ -1720,7 +1720,7 @@ EOF;
     public function lease_use()
     {
         $houseid = input('HouseID');
-        $row = Db::name('use_change_order')->where('HouseID',$houseid)->order('CreateTime desc')->field('OldTenantName,NewTenantName')->find();
+        $row = Db::name('use_change_order')->where(['HouseID'=>$houseid,'Status'=>1])->order('CreateTime desc')->field('OldTenantName,NewTenantName')->find();
         $result['recorde'] = $row?$row['OldTenantName'].'转让给'.$row['NewTenantName']:'';
         return jsons('2000', '获取成功', $result);
     }
