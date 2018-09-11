@@ -213,7 +213,7 @@
                           审核
                         </button>
                         <?php }; ?>
-                        <?php if(in_array(559,$threeMenu)){ ; ?>
+                        <?php if(in_array(559,$threeMenu) && ($IfProcess === '')){ ; ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print1" value="<?php echo $v['ChangeOrderID']; ?>">
                           租约打印
                         </button>
@@ -223,7 +223,7 @@
                           信息单打印
                         </button>
                         <?php }; ?>
-                        <?php if(in_array(561,$threeMenu)){ ; ?>
+                        <?php if(in_array(561,$threeMenu) && ($IfProcess === '')){ ; ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only uploadPic" value="<?php echo $v['ChangeOrderID']; ?>">
                           上传签字图片
                         </button>
