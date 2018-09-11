@@ -55,7 +55,15 @@ class LeaseApply extends Model
             if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索房屋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
-            
+            if (isset($searchForm['if_show']) && $searchForm['if_show']) {  //检索房屋地址
+                if($searchForm['if_show'] == 1){
+                    $where['PrintTime'] = array('>', 0);
+                }else{
+                    $where['PrintTime'] = array('eq', 0);
+                }
+                //$where['BanAddress'] = array('like', '%'.$searchForm['if_show'].'%');
+            }
+
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
                 $starttime = strtotime($searchForm['CreateTime']);
                 $endtime = $starttime + 3600*24;
@@ -67,6 +75,10 @@ class LeaseApply extends Model
 //halt($where);
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
+        $idsWhere = $where;
+        $idsWhere['PrintTime'] = array('>', 0);
+        //halt($idsWhere);
+        $ChangeList['ids'] = self::where($idsWhere)->value('count(id) as ids');
         $arr = $ChangeList['obj']->all();
 
         if(!$arr){
