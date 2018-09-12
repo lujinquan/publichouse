@@ -710,7 +710,7 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where('Status',1)->limit(100)->select();
+        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where('Status',1)->limit(500)->select();
 
         $rData = Db::name('room')->field('RoomID,LeasedArea,RoomType,HouseID')->where('Status',1)->limit(100)->select();
         $a = [];
@@ -963,69 +963,35 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $dataRoom = Db::name('room')->alias('a')->join('ban b','a.BanID = b.BanID','left')->->field('a.HouseID,a.BanID,a.UseArea,a.RoomType,a.RoomNumber,a.LeasedArea,a.RentPoint,a.RoomRentMonth,a.BanPropertyID')->where('a.Status',1)->limit(100)->select();
+        $datas = Db::name('room')->alias('a')->join('ban b','a.BanID = b.BanID','left')->field('a.HouseID,a.BanID,a.UseArea,a.RoomType,a.FloorID,a.RoomNumber,a.LeasedArea,a.RentPoint,a.RoomRentMonth,b.BanFloorNum,b.BanPropertyID,b.StructureType')->where('a.Status',1)->limit(500)->select();
 
-        $dataHouse = Db::name('house')->column('HouseID')
+        $dataHouse = Db::name('house')->column('HouseID,TenantName');
 
-        foreach($dataRoom as $d){
-            $houseid = explode(',',$r['HouseID']);
+        $roomTypes = Db::name('room_type_point')->column('id,RoomTypeName,Point');
+
+        $structTypes = Db::name('ban_structure_type')->column('id,NewPoint');
+        $data = [];
+        foreach($datas as $d){
+            $houseid = explode(',',$d['HouseID']);
+            
             foreach($houseid as $h){
                 
-                $a[] = [
+                $data[] = [
                     'HouseID'=>$h, //房屋编号
-                    'TenantName'=>$h, //租户姓名
+                    'TenantName'=>$dataHouse[$h], //租户姓名
                     'DoorID'=>'', //门牌号码
                     'BanPropertyID'=>$d['BanPropertyID'], //产权证号
-                    'RoomType'=>$d['RoomType'], //房间类型
+                    'RoomType'=>$roomTypes[$d['RoomType']]['RoomTypeName'], //房间类型
                     'RoomNumber'=>$d['RoomNumber'], //间号
                     'UseArea'=>$d['UseArea'], //实有面积
-                    'RentPoint'=>100 - (100 * $d['RentPoint']), //基价折减率
+                    'Point'=>100 - (100 * $roomTypes[$d['RoomType']]['Point']), //面积折减
                     'LeasedArea'=>$d['LeasedArea'], //计租面积
-                    'RoomRentMonth'=>$d['RoomRentMonth'], //计租面积
+                    'RentPoint'=>100 - (100 * $d['RentPoint']), //基价折减率
+                    'Rpoint'=>$structTypes[$d['StructureType']], //实际基价
+                    'Cpoint'=> get_floor_point($d['FloorID'],$d['BanFloorNum'],0), //层次调解率
+                    'RoomRentMonth'=>$d['RoomRentMonth'], //月租金
                 ];
             }
-        }
-
-        $rData = Db::name('room')->field('RoomID,LeasedArea,RoomType,HouseID')->where('Status',1)->limit(100)->select();
-        $a = [];
-        foreach($rData as $r){
-            $houseid = explode(',',$r['HouseID']);
-            foreach($houseid as $h){
-                
-                $a[$h][$r['RoomType']][] = $r['LeasedArea'];
-            }
-        }
-
-        $c = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.HouseID = b.HouseID','left')->where(['a.ChangeType'=>1,'a.Status'=>1,'a.DateEnd'=>['>',201808]])->column('a.HouseID,a.CutType,a.InflRent,b.IDnumber');
-
-        //halt($c);
-
-        // foreach($a as $b){
-        //     $s[$b['HouseID']][$b['RoomType']][] = $b['LeasedArea'];
-        // }
-        $insts = Db::name('institution')->column('id,Institution');
-
-        foreach($data as &$d){
-            if($d['TenantName']){
-                $d['n'] = 1;
-            }else{
-                $d['n'] = 0;
-            }
-            if(isset($c[$d['HouseID']])){
-               $d['CutType'] = $c[$d['HouseID']]['CutType'];
-               $d['InflRent'] = $c[$d['HouseID']]['InflRent'];
-               $d['IDnumber'] = $c[$d['HouseID']]['IDnumber'];
-            }else{
-               $d['CutType'] = '';
-               $d['InflRent'] = '';
-               $d['IDnumber'] = ''; 
-            }
-            $d['wosi'] = isset($a[$d['HouseID']][1])?array_sum($a[$d['HouseID']][1]):0; //卧室面积
-            $d['wei'] = isset($a[$d['HouseID']][2])?array_sum($a[$d['HouseID']][2]):0; //卫生间面积
-            $d['dow'] = isset($a[$d['HouseID']][3])?array_sum($a[$d['HouseID']][3]):0; //室内走道
-            $d['tin'] = isset($a[$d['HouseID']][5])?array_sum($a[$d['HouseID']][5]):0; //厅堂
-            $d['zu'] = isset($a[$d['HouseID']][6])?array_sum($a[$d['HouseID']][6]):0;  //厨房
-            $d['InstitutionID'] = $insts[$d['InstitutionID']];
         }
 
         //halt($data);
@@ -1071,23 +1037,10 @@ class HouseInfo extends Model
         $objActSheet->getColumnDimension('K')->setWidth(16);
         $objActSheet->getColumnDimension('L')->setWidth(16);
         $objActSheet->getColumnDimension('M')->setWidth(16);
-        $objActSheet->getColumnDimension('N')->setWidth(16);
-        $objActSheet->getColumnDimension('O')->setWidth(16);
-        $objActSheet->getColumnDimension('P')->setWidth(16);
-        $objActSheet->getColumnDimension('Q')->setWidth(16);
-        $objActSheet->getColumnDimension('R')->setWidth(16);
-        $objActSheet->getColumnDimension('S')->setWidth(16);
-        $objActSheet->getColumnDimension('T')->setWidth(16);
-        $objActSheet->getColumnDimension('U')->setWidth(16);
-        $objActSheet->getColumnDimension('V')->setWidth(16);
-        $objActSheet->getColumnDimension('W')->setWidth(16);
-        $objActSheet->getColumnDimension('X')->setWidth(16);
-        $objActSheet->getColumnDimension('Y')->setWidth(16);
-        $objActSheet->getColumnDimension('Z')->setWidth(16);
 
         //设置母标题栏,合并第一行，并文字居中，加粗显示
-        $objActSheet->mergeCells('A1:Z1');
-        $objActSheet->setCellValue('A1', convertUTF8('房屋数据'));
+        $objActSheet->mergeCells('A1:M1');
+        $objActSheet->setCellValue('A1', convertUTF8('计租表数据'));
         $objActSheet->getStyle('A1')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);  //设置
 
@@ -1095,33 +1048,19 @@ class HouseInfo extends Model
         //$objPHPExcel->getActiveSheet()->unmergeCells('A1:F1');    // 拆分
 
         //设置子标题栏
-        $objActSheet->setCellValue('A2', convertUTF8('所属机构管段'));
-        $objActSheet->setCellValue('B2', convertUTF8('房屋编号'));
-        $objActSheet->setCellValue('C2', convertUTF8('楼栋编号'));
-        $objActSheet->setCellValue('D2', convertUTF8('门牌号码'));
-        $objActSheet->setCellValue('E2', convertUTF8('使用面积'));
-        $objActSheet->setCellValue('F2', convertUTF8('卧室面积'));
-        $objActSheet->setCellValue('G2', convertUTF8('单元号'));
-        $objActSheet->setCellValue('H2', convertUTF8('居住层'));
-        $objActSheet->setCellValue('I2', convertUTF8('厅堂面积'));
-        $objActSheet->setCellValue('J2', convertUTF8('厨房面积'));
-        $objActSheet->setCellValue('K2', convertUTF8('卫生间面积'));
-        $objActSheet->setCellValue('L2', convertUTF8('规定租金'));
-        $objActSheet->setCellValue('M2', convertUTF8('原价'));
-        $objActSheet->setCellValue('N2', convertUTF8('室内走道面积'));
-        $objActSheet->setCellValue('O2', convertUTF8('租户姓名'));
-        $objActSheet->setCellValue('P2', convertUTF8('泵费'));
-        $objActSheet->setCellValue('Q2', convertUTF8('房屋基数'));
-        $objActSheet->setCellValue('R2', convertUTF8('企业规租'));
-        $objActSheet->setCellValue('S2', convertUTF8('机关规租'));
-        $objActSheet->setCellValue('T2', convertUTF8('民用规租'));
-        $objActSheet->setCellValue('U2', convertUTF8('建筑面积'));
-        $objActSheet->setCellValue('V2', convertUTF8('户数'));
-        $objActSheet->setCellValue('W2', convertUTF8('减免金额'));
-        $objActSheet->setCellValue('X2', convertUTF8('低保证号'));
-        $objActSheet->setCellValue('Y2', convertUTF8('减免类型'));
-        $objActSheet->setCellValue('Z2', convertUTF8('基数租差'));
-        
+        $objActSheet->setCellValue('A2', convertUTF8('房屋编号'));
+        $objActSheet->setCellValue('B2', convertUTF8('租户姓名'));
+        $objActSheet->setCellValue('C2', convertUTF8('门牌号码'));
+        $objActSheet->setCellValue('D2', convertUTF8('产权证号'));
+        $objActSheet->setCellValue('E2', convertUTF8('房间类型'));
+        $objActSheet->setCellValue('F2', convertUTF8('间号'));
+        $objActSheet->setCellValue('G2', convertUTF8('实有面积'));
+        $objActSheet->setCellValue('H2', convertUTF8('面积折减率'));
+        $objActSheet->setCellValue('I2', convertUTF8('计租面积'));
+        $objActSheet->setCellValue('J2', convertUTF8('基价折减率'));
+        $objActSheet->setCellValue('K2', convertUTF8('实际基价'));
+        $objActSheet->setCellValue('L2', convertUTF8('层次调解率'));
+        $objActSheet->setCellValue('M2', convertUTF8('月租金'));
 
         $objActSheet->getStyle('A2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);  //批量居中
         $objActSheet->getStyle('B2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -1136,48 +1075,22 @@ class HouseInfo extends Model
         $objActSheet->getStyle('K2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objActSheet->getStyle('L2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objActSheet->getStyle('M2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('N2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('O2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('P2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('Q2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('R2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('S2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('T2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('U2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('V2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('W2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('X2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('Y2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-        $objActSheet->getStyle('Z2')->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $count = count($data) + 2;  //下标为2的留给子标题栏
         for ($i = 3; $i <= $count; $i++) {
-            $objActSheet->setCellValue('A' . $i, convertUTF8($data[$i - 3]['InstitutionID']));    //所属机构管段
-            $objActSheet->setCellValue('B' . $i, ' ' . convertUTF8($data[$i - 3]['HouseID']) . ' ');  //房屋编号
-            $objActSheet->setCellValue('C' . $i, convertUTF8($data[$i - 3]['BanID']));       //楼栋编号
-            $objActSheet->setCellValue('D' . $i, convertUTF8($data[$i - 3]['DoorID']));         //门牌号码
-            $objActSheet->setCellValue('E' . $i, convertUTF8($data[$i - 3]['HouseUsearea'])); //使用面积
-            $objActSheet->setCellValue('F' . $i, convertUTF8($data[$i - 3]['wosi']));    //卧室面积
-            $objActSheet->setCellValue('G' . $i, convertUTF8($data[$i - 3]['UnitID']));    //单元号
-            $objActSheet->setCellValue('H' . $i, convertUTF8($data[$i - 3]['FloorID']));          //居住层
-            $objActSheet->setCellValue('I' . $i, convertUTF8($data[$i - 3]['tin']));          //厅堂面积
-            $objActSheet->setCellValue('J' . $i, convertUTF8($data[$i - 3]['zu']));    //厨房面积
-            $objActSheet->setCellValue('K' . $i, convertUTF8($data[$i - 3]['wei']));    //卫生间面积
-            $objActSheet->setCellValue('L' . $i, convertUTF8($data[$i - 3]['HousePrerent']));          //规定租金
-            $objActSheet->setCellValue('M' . $i, '');          //原价,
-            $objActSheet->setCellValue('N' . $i, convertUTF8($data[$i - 3]['dow']));          //室内走道面积
-            $objActSheet->setCellValue('O' . $i, convertUTF8($data[$i - 3]['TenantName']));          //租户姓名
-            $objActSheet->setCellValue('P' . $i, convertUTF8($data[$i - 3]['PumpCost']));          //泵费
-            $objActSheet->setCellValue('Q' . $i, '');          //房屋基数
-            $objActSheet->setCellValue('R' . $i, '');          //企规租
-            $objActSheet->setCellValue('S' . $i, '');          //机关规租
-            $objActSheet->setCellValue('T' . $i, '');          //民用规租
-            $objActSheet->setCellValue('U' . $i, '');          //建筑面积
-            $objActSheet->setCellValue('V' . $i, convertUTF8($data[$i - 3]['n']));          //户数
-            $objActSheet->setCellValue('W' . $i, convertUTF8($data[$i - 3]['InflRent']));          //减免金额
-            $objActSheet->setCellValue('X' . $i, ' ' . convertUTF8($data[$i - 3]['IDnumber']) . ' ');          //低保证号
-            $objActSheet->setCellValue('Y' . $i, convertUTF8($data[$i - 3]['CutType']));          //减免类型
-            $objActSheet->setCellValue('Z' . $i, convertUTF8($data[$i - 3]['DiffRent']));          //基数租差
+            $objActSheet->setCellValue('A' . $i, ' ' . convertUTF8($data[$i - 3]['HouseID']) . ' ');    //所属机构管段
+            $objActSheet->setCellValue('B' . $i, convertUTF8($data[$i - 3]['TenantName']));  //房屋编号
+            $objActSheet->setCellValue('C' . $i, convertUTF8($data[$i - 3]['DoorID']));       //楼栋编号
+            $objActSheet->setCellValue('D' . $i, convertUTF8($data[$i - 3]['BanPropertyID']));         //门牌号码
+            $objActSheet->setCellValue('E' . $i, convertUTF8($data[$i - 3]['RoomType'])); //使用面积
+            $objActSheet->setCellValue('F' . $i, convertUTF8($data[$i - 3]['RoomNumber']));    //卧室面积
+            $objActSheet->setCellValue('G' . $i, convertUTF8($data[$i - 3]['UseArea']));    //单元号
+            $objActSheet->setCellValue('H' . $i, convertUTF8($data[$i - 3]['Point']));          //居住层
+            $objActSheet->setCellValue('I' . $i, convertUTF8($data[$i - 3]['LeasedArea']));          //厅堂面积
+            $objActSheet->setCellValue('J' . $i, convertUTF8($data[$i - 3]['RentPoint']));    //厨房面积
+            $objActSheet->setCellValue('K' . $i, convertUTF8($data[$i - 3]['Rpoint']));    //卫生间面积
+            $objActSheet->setCellValue('L' . $i, convertUTF8($data[$i - 3]['Cpoint']));          //规定租金
+            $objActSheet->setCellValue('M' . $i, convertUTF8($data[$i - 3]['RoomRentMonth']));          //原价,
 
             $objActSheet->getStyle('A' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);  //批量居中
             $objActSheet->getStyle('B' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -1192,19 +1105,6 @@ class HouseInfo extends Model
             $objActSheet->getStyle('K' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $objActSheet->getStyle('L' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $objActSheet->getStyle('M' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('N' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('O' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('P' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('Q' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('R' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('S' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('T' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('U' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('V' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('W' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('X' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('Y' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-            $objActSheet->getStyle('Z' . $i)->getAlignment()->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         }
 
 
@@ -1213,7 +1113,7 @@ class HouseInfo extends Model
 
         /*------------这种是保存到浏览器下载位置（客户端）-------------------*/
 
-        $filename = '房屋_' . date('YmdHis', time()) . '.xlsx';    //定义文件名
+        $filename = '计租表_' . date('YmdHis', time()) . '.xlsx';    //定义文件名
 
         header("Pragma: public");
         header("Expires: 0");
