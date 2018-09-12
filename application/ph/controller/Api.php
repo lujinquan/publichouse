@@ -1428,36 +1428,15 @@ EOF;
 
     public function test()
     {
-        // $arr = Db::name('house')->where(['Status'=>1,'RechargeRent'=>['>',0]])->column('HouseID,RechargeRent');
-
-        // $rent = Db::name('rent_order')->where(['Type'=>3,'OrderDate'=>'201807'])->column('HouseID,PaidRent');
-        // $i = 1;
-        // foreach($arr as $k => $v){
-        //     if(isset($rent[$k]) && ($v > $rent[$k])){
-        //         $i++;
-        //         Db::name('rent_order')->where(['HouseID'=>$k,'OrderDate'=>'201807'])->update(['IfPaidable'=>1]);
-        //         Db::name('house')->where('HouseID',$k)->setDec('RechargeRent',$rent[$k]);
-        //         //exit;
-        //     }
-        // }
-        // $arr = Db::name('house')->where(['Status'=>1,'RechargeRent'=>['>',0]])->field('HouseID,TenantID,RechargeRent')->select();
-
-        // $rent = Db::name('tenant')->column('TenantID,TenantBalance');
-        // $i = 1;
-        // foreach($arr as  $v){
-        //         if(isset($rent[$v['TenantID']])){
-        //             //halt(1);
-        //             $i++;
-        //          Db::name('tenant')->where(['TenantID'=>$v['TenantID']])->setInc('TenantBalance',$v['RechargeRent']);
-        //         }
-                
-        //         //Db::name('house')->where('HouseID',$k)->setDec('RechargeRent',$rent[$k]);
-        //         //exit;
-            
-        // }
-        // halt($i);
-        // exit;
-        //halt($rent);
+    	$f = input('f');
+    	if($f === 'ban'){
+    		model('ph/HouseInfo')->ban_out();
+    	}elseif($f === 'house'){
+    		model('ph/HouseInfo')->house_out();
+    	}elseif($f === 'room'){
+    		model('ph/HouseInfo')->room_out();
+    	}
+    	
     }
 
     /**
