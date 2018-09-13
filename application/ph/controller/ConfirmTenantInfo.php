@@ -90,9 +90,9 @@ class ConfirmTenantInfo extends Base
                 'Status'=>['between',[0,1]],
                 ])->find();
 
-            if($tenantName){
-                return jsons('4000','租户名已存在！');
-            }
+            // if($tenantName){
+            //     return jsons('4000','租户名已存在！');
+            // }
         
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
 
