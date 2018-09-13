@@ -404,5 +404,5 @@ function dataURLtoFile(dataurl, filename) {//base64转换成文件
 	while(n--){
 	  u8arr[n] = bstr.charCodeAt(n);
 	}
-	return new File(u8arr, filename+'.jpg', {type:mime});
+	return new File([u8arr], filename+'.jpg', {type:mime});
 }
