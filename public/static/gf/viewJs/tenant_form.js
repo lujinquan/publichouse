@@ -100,7 +100,7 @@ $("#reviseTenant").click(function(){
 				$('#TenantValu').prop("value",res.data.TenantValue);    //租户诚信值
 				$("input[name='TenantSex'][value='"+res.data.TenantSex+"']").attr("checked","checked");   //租户性别
 
-				$('#IDCardFaceM').prop('src','dsfa ');
+				$('#IDCardFaceM').prop('src','dsfa');
 				$('#IDCardReverseM').prop('src','fdsfasd ');
 
 				layer.open({
@@ -386,6 +386,11 @@ function ImgToBase64(file, maxLen, callBack) {
         var ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
+        if(img.width < img.height){
+        	ctx.translate(img.width/2,img.height/2);
+	        ctx.rotate(Math.PI/2);
+	        ctx.translate(-img.width/2,-img.height/2);
+        }
         ctx.drawImage(img, 0, 0, img.width, img.height);
         var base64 = canvas.toDataURL('image/jpeg', 0.9);
         callBack(base64);
@@ -399,5 +404,5 @@ function dataURLtoFile(dataurl, filename) {//base64转换成文件
 	while(n--){
 	  u8arr[n] = bstr.charCodeAt(n);
 	}
-	return new File(u8arr, filename, {type:mime});
+	return new File(u8arr, filename+'.jpg', {type:mime});
 }
