@@ -1463,7 +1463,7 @@ EOF;
         echo 'ok';
     }
 
-    public function count_houses()
+    public function room()
     {   
         $housemodel = new HouseInfoModel;
 

@@ -12,6 +12,7 @@ use think\Model;
 use think\Exception;
 use think\Db;
 use think\Loader;
+use think\Cache;
 
 class HouseInfo extends Model
 {
@@ -401,7 +402,7 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $data = Db::name('ban')->field('TubulationID,BanID,AreaFour,OwnerType,BanPropertyID,BanYear,DamageGrade,StructureType,PropertySource,UseNature,BanArea,BanUsearea,EnterpriseNum,EnterpriseArea,EnterpriseOprice,EnterpriseRent,PartyNum,PartyArea,PartyOprice,PartyRent,CivilNum,CivilArea,CivilOprice,CivilRent,BanPrerent,TotalOprice,BanFloorNum')->where('Status',1)->limit(5)->select();
+        $data = Db::name('ban')->field('TubulationID,BanID,AreaFour,OwnerType,BanPropertyID,BanYear,DamageGrade,StructureType,PropertySource,UseNature,BanArea,BanUsearea,EnterpriseNum,EnterpriseArea,EnterpriseOprice,EnterpriseRent,PartyNum,PartyArea,PartyOprice,PartyRent,CivilNum,CivilArea,CivilOprice,CivilRent,PreRent,TotalOprice,BanFloorNum')->where('Status',1)->select();
 
         $insts = Db::name('institution')->column('id,Institution');
 
@@ -644,7 +645,7 @@ class HouseInfo extends Model
             $objActSheet->setCellValue('X' . $i, convertUTF8($data[$i - 3]['CivilArea']));          //民建面
             $objActSheet->setCellValue('Y' . $i, convertUTF8($data[$i - 3]['CivilOprice']));          //民原价
             $objActSheet->setCellValue('Z' . $i, convertUTF8($data[$i - 3]['CivilRent']));          //民规租
-            $objActSheet->setCellValue('AA' . $i, convertUTF8($data[$i - 3]['BanPrerent']));          //合计规租
+            $objActSheet->setCellValue('AA' . $i, convertUTF8($data[$i - 3]['PreRent']));          //合计规租
             $objActSheet->setCellValue('AB' . $i, convertUTF8($data[$i - 3]['TotalOprice']));          //合计原价
             $objActSheet->setCellValue('AC' . $i, convertUTF8($data[$i - 3]['BanFloorNum']));          //总层数
 
@@ -710,9 +711,9 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where('Status',1)->limit(500)->select();
+        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where('Status',1)->select();
 
-        $rData = Db::name('room')->field('RoomID,LeasedArea,RoomType,HouseID')->where('Status',1)->limit(100)->select();
+        $rData = Db::name('room')->field('RoomID,LeasedArea,RoomType,HouseID')->where('Status',1)->select();
         $a = [];
         foreach($rData as $r){
             $houseid = explode(',',$r['HouseID']);
@@ -963,38 +964,44 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $datas = Db::name('room')->alias('a')->join('ban b','a.BanID = b.BanID','left')->field('a.HouseID,a.BanID,a.UseArea,a.RoomType,a.FloorID,a.RoomNumber,a.LeasedArea,a.RentPoint,a.RoomRentMonth,b.BanFloorNum,b.BanPropertyID,b.StructureType')->where('a.Status',1)->limit(500)->select();
+        // $datas = Db::name('room')->alias('a')->join('ban b','a.BanID = b.BanID','left')->field('a.HouseID,a.BanID,a.UseArea,a.RoomType,a.FloorID,a.RoomNumber,a.LeasedArea,a.RentPoint,a.RoomRentMonth,b.BanFloorNum,b.BanPropertyID,b.StructureType')->where(['a.Status'=>1,'a.RoomPublicStatus'=>['<',3]])->select();
 
-        $dataHouse = Db::name('house')->column('HouseID,TenantName');
+        // $dataHouse = Db::name('house')->column('HouseID,TenantName');
 
-        $roomTypes = Db::name('room_type_point')->column('id,RoomTypeName,Point');
+        // $roomTypes = Db::name('room_type_point')->column('id,RoomTypeName,Point');
 
-        $structTypes = Db::name('ban_structure_type')->column('id,NewPoint');
-        $data = [];
-        foreach($datas as $d){
-            $houseid = explode(',',$d['HouseID']);
+        // $structTypes = Db::name('ban_structure_type')->column('id,NewPoint');
+        // $data = [];
+        // foreach($datas as $d){
+        //     $houseid = explode(',',$d['HouseID']);
             
-            foreach($houseid as $h){
-                
-                $data[] = [
-                    'HouseID'=>$h, //房屋编号
-                    'TenantName'=>$dataHouse[$h], //租户姓名
-                    'DoorID'=>'', //门牌号码
-                    'BanPropertyID'=>$d['BanPropertyID'], //产权证号
-                    'RoomType'=>$roomTypes[$d['RoomType']]['RoomTypeName'], //房间类型
-                    'RoomNumber'=>$d['RoomNumber'], //间号
-                    'UseArea'=>$d['UseArea'], //实有面积
-                    'Point'=>100 - (100 * $roomTypes[$d['RoomType']]['Point']), //面积折减
-                    'LeasedArea'=>$d['LeasedArea'], //计租面积
-                    'RentPoint'=>100 - (100 * $d['RentPoint']), //基价折减率
-                    'Rpoint'=>$structTypes[$d['StructureType']], //实际基价
-                    'Cpoint'=> get_floor_point($d['FloorID'],$d['BanFloorNum'],0), //层次调解率
-                    'RoomRentMonth'=>$d['RoomRentMonth'], //月租金
-                ];
-            }
-        }
+        //     foreach($houseid as $h){
+        //         // if(!isset($structTypes[$d['StructureType']])){
+        //         //         halt($d['BanID']);
+        //         //     }
+        //         $data[] = [
+        //             'HouseID'=>$h, //房屋编号
+        //             'TenantName'=>isset($dataHouse[$h])?$dataHouse[$h]:'', //租户姓名
+        //             'DoorID'=>'', //门牌号码
+        //             'BanPropertyID'=>$d['BanPropertyID'], //产权证号
+        //             'RoomType'=>$roomTypes[$d['RoomType']]['RoomTypeName'], //房间类型
+        //             'RoomNumber'=>$d['RoomNumber'], //间号
+        //             'UseArea'=>$d['UseArea'], //实有面积
+        //             'Point'=>100 - (100 * $roomTypes[$d['RoomType']]['Point']), //面积折减
+        //             'LeasedArea'=>$d['LeasedArea'], //计租面积
+        //             'RentPoint'=>100 - (100 * $d['RentPoint']), //基价折减率
 
-        //halt($data);
+        //             'Rpoint'=>$structTypes[$d['StructureType']], //实际基价
+        //             'Cpoint'=> get_floor_point($d['FloorID'],$d['BanFloorNum'],0), //层次调解率
+        //             'RoomRentMonth'=>$d['RoomRentMonth'], //月租金
+        //         ];
+        //     }
+        // }
+
+        // //halt($data);
+        // $res = Cache::store('file')->set('room_data' . date('Y', time()), json_encode($data), 0);exit;
+
+        $data = json_decode(Cache::store('file')->get('room_data2018'),true);
 
         $objWriter = new \PHPExcel_Writer_Excel2007($objPHPExcel); //保存excel—2007格式
 
@@ -1013,7 +1020,7 @@ class HouseInfo extends Model
         $objActSheet = $objPHPExcel->getActiveSheet();
 
         //设置当前活动sheet的名称
-        $objActSheet->setTitle('房屋明细');
+        $objActSheet->setTitle('计租表明细');
 
         //设置对齐方式
         //$objActSheet->getStyle('I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); //单个单元设置对齐方式

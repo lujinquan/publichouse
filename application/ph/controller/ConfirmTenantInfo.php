@@ -47,9 +47,9 @@ class ConfirmTenantInfo extends Base
 
             //检查是否重名
             $tenantName = Db::name('tenant')->where(['TenantName'=>$data['TenantName'],'InstitutionID'=>$data['InstitutionID'],'Status'=>['between',[0,1]]])->find();
-            if($tenantName){
-                return jsons('4000','租户名已存在！');
-            }
+            // if($tenantName){
+            //     return jsons('4000','租户名已存在！');
+            // }
 
             $data['TenantValue'] = $data['TenantValue']?$data['TenantValue']:100;
             $data['CreateUserID'] = UID;
