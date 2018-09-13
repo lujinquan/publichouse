@@ -1465,25 +1465,29 @@ EOF;
 
     public function room()
     {   
-        $housemodel = new HouseInfoModel;
-
-        // $offset = 0;
-        // $length = 10000;  
-        $res = Db::name('house')->column('HouseID,ApprovedRent');
-        //$res = Db::name('house')->where('ApprovedRent','=',0)->column('HouseID,ApprovedRent');
-        //$res = Db::name('room')->column('RoomID,RoomRentMonth');
-        $j = 0;
-        //$res = ['10900918250336'=>0];
-        foreach($res as $k => $v){  
-             $j++;
-             $s = count_house_rent($k);
-             //dump($k.'计算租金是：');halt($s);
-             $housemodel->save(['ApprovedRent'=>$s],['HouseID'=>$k]);
-             //halt($k);
+        $like1 = '房管所';
+        $like2 = '紫阳所';
+        $like3 = '粮道所';
+        $res = Db::name('house')->whereOr('TenantName','like','%'.$like1.'%')->whereOr('TenantName','like','%'.$like2.'%')->whereOr('TenantName','like','%'.$like3.'%')->field('HouseID,OwnerType,TenantName,TenantID')->select();
+//halt($res);
+        $rooms = Db::name('room')->where('Status',1)->field('RoomID,HouseID')->select();
+        foreach($rooms as $r){
+            $h = explode(',',$r['HouseID']);
+            foreach($h as $i){
+                $a[] = $i;
+                
+            }
         }
-
-        halt($j);
-
+        foreach($res as $s){
+            if(!in_array($s['HouseID'],$a) && $s['OwnerType'] == 6){
+                $b[] = $s['HouseID'];
+                $c[] = $s['TenantID'];
+            }
+        }
+        //halt($b);      
+        $result = Db::name('house')->delete($b);
+        $result = Db::name('tenant')->delete($c);
+        //halt($result);
     }
 
     public function count_rooms()

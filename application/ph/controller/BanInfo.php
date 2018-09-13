@@ -43,7 +43,7 @@ class BanInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
-            // 验证
+            //验证
             $result = $this->validate($data, 'BanInfo');
             if (true !== $result) {
                 return jsons('4001', $result);

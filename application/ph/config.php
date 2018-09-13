@@ -96,6 +96,8 @@ return [
     'houseSecurity' => '住房保障申请表',
     'nonCardinality' => '非基数异动核算凭单',
     'noticeBook' => '审通知书',
+    'IDCardFace' => '身份证正面',
+    'IDCardReverse' => '身份证反面',
 
     //新增空租
     'descriptionReport' => '空租情况说明报告',

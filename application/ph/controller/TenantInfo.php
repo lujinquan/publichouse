@@ -33,10 +33,19 @@ class TenantInfo extends Base
         // 保存数据
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
-//            if($_FILES['TenantImageIDS']){   //当上传图片
-//                $fileID = $this -> TenantInfoModel -> uploads($_FILES['TenantImageIDS']);  //返回的是该租户的影像资料id(目前只能上传一张，所以只有一个id)
-//                $data['TenantImageIDS'] = $fileID;  //写入数据表
-//            }
+            if ($_FILES) {   //文件上传
+                //halt($_FILES);
+                foreach ($_FILES as $k => $v) {
+                    if($v['error'] !== 0){
+                        continue;
+                    }
+
+                    $TenantImageIDS[$k] = model('TenantInfo')->uploads($v, $k);
+                }
+                if(isset($TenantImageIDS)){
+                    $data['TenantImageIDS'] = json_encode($TenantImageIDS);
+                }
+            }
             $maxid = Db::name('tenant')->max('TenantID');
             $result = $this->validate($data,'TenantInfo');
             if(true !== $result) {
@@ -105,9 +114,16 @@ class TenantInfo extends Base
             }
         }
 
-        $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID ,  TenantQQ , TenantWeChat , TenantValue';
+        $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID , TenantImageIDS, TenantQQ , TenantWeChat , TenantValue';
 
         $data = Db::name('tenant')->field($map)->where('TenantID','eq',$tenantID)->find();
+        if($data['TenantImageIDS']){
+            $r = json_decode($data['TenantImageIDS'],true);
+            //halt($r);
+            $data['IDCardFace'] = Db::name('upload_file')->where('id',$r['IDCardFace'])->value('FileUrl');
+            $data['IDCardReverse'] = Db::name('upload_file')->where('id',$r['IDCardReverse'])->value('FileUrl');  
+        }
+        
 
         if($data){
             return jsons('2000','获取成功',$data);

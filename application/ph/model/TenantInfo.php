@@ -186,8 +186,9 @@ class TenantInfo extends Model
         return $data;
     }
 
-    public function uploads($file){
+    public function uploads($file ,$k){
 
+        $title = config($k); //上传文件标题
         Loader::import('uploads.Uploads',EXTEND_PATH);
 
         $fileUpload = new \FileUpload();
@@ -196,8 +197,7 @@ class TenantInfo extends Model
         $fileUpload->set('path',$_SERVER['DOCUMENT_ROOT'].'/uploads/tenant/'); //设置保存的路径
         $fileUpload->set('maxsize',1000000); //限制上传文件大小
         $fileUpload->set('israndname',true); //设置是否随机重命名文件， false不随机
-
-        $res = $fileUpload->upload('TenantImageIDS');
+        $res = $fileUpload->upload($k);
 
         if($res !== true){
 
@@ -206,61 +206,19 @@ class TenantInfo extends Model
         }else{  //上传成功
 
             $data['FileUrl']= '/uploads/tenant/'.$fileUpload->getFileName();          //写入到数据库中的地址和存放地址 $targetPath 不一样
+            $data['FileTitle'] = $title;
             $data['FileType'] = 1;        //图片类型
             $data['FileUse'] = 3;         //用途：租户
-            $data['UploadUserID'] = session('user_base_info.uid');
+            $data['UploadUserID'] = UID;
             $data['UploadTime'] = time();
             $result = Db::name('upload_file')->insert($data);    //返回受影响的记录数，通常为1
             if($result == 1) {
-                return $fileID = Db::name('upload_file')->getLastInsID();
+                $fileID = Db::name('upload_file')->getLastInsID();
+                return $fileID;
             }
 
         }
-        //dump($res);exit;
 
-//        $tempFile = $file['tmp_name'];             //临时文件路径(含文件名)
-//
-//        //dump($file);exit;
-//
-//        $targetFolder = '/uploads/tenant';
-//
-//        $targetPath = $_SERVER['DOCUMENT_ROOT'] . $targetFolder;     //新文件存放路径D:/phpStudy/WWW/upload
-//
-//        //$targetPath = 'localhost/upload';
-//
-//        $targetFile = rtrim($targetPath,'/') . '/' . $file['name'];//新文件路径(含文件名)
-//
-//        //var_dump($targetFile);exit;
-//
-//        $maxSize = 2*1024*1024;
-//        if($file['size'] > $maxSize){
-//            return jsons('4001' ,'文件大小不能超过2M');
-//        }
-//
-//        $fileTypes = array('jpg','jpeg','gif','png');
-//        $fileParts = pathinfo($file['name']);   // 验证文件类型
-//
-//        if (in_array($fileParts['extension'],$fileTypes)) {
-//
-//            $res = move_uploaded_file($tempFile,$targetFile);  //移动临时文件到指定路径下方法，php自带的，返回bool值
-//
-//        } else {
-//            echo jsons('4002' ,'文件类型不合法');
-//        }
-//        if($res == false){
-//            return jsons('4003','上传失败，未知错误');
-//        }else{  //执行入附件库操作
-//
-//            $data['FileUrl']= $targetFolder.'/'.$file['name'];          //写入到数据库中的地址和存放地址 $targetPath 不一样
-//            $data['FileType'] = 1;        //图片类型
-//            $data['FileUse'] = 3;         //用途：租户
-//            $data['UploadUserID'] = session('user_base_info.uid');
-//            $result = Db::name('upload_file')->insert($data);    //返回受影响的记录数，通常为1
-//            if($result == 1){
-//                return $fileID = Db::name('upload_file')->getLastInsID();
-//            }
-//
-//        }
     }
 
 }
