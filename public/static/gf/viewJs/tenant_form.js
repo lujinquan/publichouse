@@ -83,7 +83,7 @@ $("#reviseTenant").click(function(){
 		if(TenantID == undefined){
 			layer.msg('请先选择要修改的信息');
 		}else{
-			$.get('/ph/ConfirmTenantInfo/edit/TenantID/'+TenantID,function(res){
+			$.get('/ph/TenantInfo/edit/TenantID/'+TenantID,function(res){
 				res = JSON.parse(res);
 				console.log(res);
 				$("#TenantI").prop("value",res.data.TenantID);          //租户id
@@ -100,8 +100,8 @@ $("#reviseTenant").click(function(){
 				$('#TenantValu').prop("value",res.data.TenantValue);    //租户诚信值
 				$("input[name='TenantSex'][value='"+res.data.TenantSex+"']").attr("checked","checked");   //租户性别
 
-				$('#IDCardFaceM').prop('src','dsfa');
-				$('#IDCardReverseM').prop('src','fdsfasd ');
+				$('#IDCardFaceM').prop('src',res.data.IDCardFace);
+				$('#IDCardReverseM').prop('src',res.data.IDCardReverse);
 
 				layer.open({
 					type:1,
