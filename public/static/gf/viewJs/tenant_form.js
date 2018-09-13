@@ -14,9 +14,7 @@ $("#addTenant").click(function(){
 	// 	layer.config({	//真实layer的配置路径
 	// 		path:'/public/static/gf/layer/'
 	// 	});
-		var imgUp = $('#imgUp');
-		var imgShow = $('#imgShow');
-		readFile(imgUp,imgShow);
+
 		layer.open({
 			type:1,
 			area:['800px','600px'],
@@ -101,10 +99,10 @@ $("#reviseTenant").click(function(){
 				$('#BanNam').prop("value",res.data.BankName);    //银行名称
 				$('#TenantValu').prop("value",res.data.TenantValue);    //租户诚信值
 				$("input[name='TenantSex'][value='"+res.data.TenantSex+"']").attr("checked","checked");   //租户性别
-				//影像上传修改
-				var imgReload = $('#imgReload');
-				var imgChange = $('#imgChange');
-				readFile(imgReload,imgChange);
+
+				$('#IDCardFaceM').prop('src',);
+				$('#IDCardReverseM').prop('src',);
+
 				layer.open({
 					type:1,
 					area:['800px','600px'],
@@ -114,8 +112,11 @@ $("#reviseTenant").click(function(){
 					content:$('#tenantModifyForm'),
 					btn:['确定','取消'],
 					yes:function(thisIndex){
+						$('#imgUpM').prop('name','');
+						$('#imgDownM').prop('name','');
 						var data = new FormData($('#tenantModifyForm')[0]);
-						console.log(data);
+						data.append('IDCardFace',dataURLtoFile($('#IDCardFaceM').prop('src'),'IDCardFace'));
+						data.append('IDCardReverse',dataURLtoFile($('#IDCardReverseM').prop('src'),'IDCardReverse'));
 						$.ajax({
 							url:"/ph/ConfirmTenantInfo/edit",
 							type:"post",
@@ -337,7 +338,24 @@ $(function (){
             $("#IDCardReverse")[0].src = base64;//预览页面上预留一个img元素，载入base64
             //$("#IDCardFace")[0].width = 300;//设定宽高，不然会自动按照压缩过的图片宽高设定，有可能超出预想的范围。
         });
-    })
+    });
+
+    $("#imgUpM").change(function () {
+        var file = $(this)[0].files[0];//获取input file控件选择的文件
+        ImgToBase64(file, 720, function (base64) {
+            $("#IDCardFaceM")[0].src = base64;//预览页面上预留一个img元素，载入base64
+            //$("#IDCardFace")[0].width = 300;//设定宽高，不然会自动按照压缩过的图片宽高设定，有可能超出预想的范围。
+        });
+    });
+
+    $("#imgDownM").change(function () {
+        var file = $(this)[0].files[0];//获取input file控件选择的文件
+        ImgToBase64(file, 720, function (base64) {
+            $("#IDCardReverseM")[0].src = base64;//预览页面上预留一个img元素，载入base64
+            //$("#IDCardFace")[0].width = 300;//设定宽高，不然会自动按照压缩过的图片宽高设定，有可能超出预想的范围。
+        });
+    });
+
 })
 
 function ImgToBase64(file, maxLen, callBack) {
