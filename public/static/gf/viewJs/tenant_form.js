@@ -100,8 +100,8 @@ $("#reviseTenant").click(function(){
 				$('#TenantValu').prop("value",res.data.TenantValue);    //租户诚信值
 				$("input[name='TenantSex'][value='"+res.data.TenantSex+"']").attr("checked","checked");   //租户性别
 
-				$('#IDCardFaceM').prop('src',);
-				$('#IDCardReverseM').prop('src',);
+				$('#IDCardFaceM').prop('src','dsfa ');
+				$('#IDCardReverseM').prop('src','fdsfasd ');
 
 				layer.open({
 					type:1,
