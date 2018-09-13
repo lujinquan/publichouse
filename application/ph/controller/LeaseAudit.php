@@ -25,6 +25,7 @@ class LeaseAudit extends Base
 
         $this -> assign([    
             'leaseLst' => $data['arr'],
+            'ids' => $data['ids'],
             'leaseLstObj' => $data['obj'],
             'leaseOption' => $data['option'],
             //'leaseChanges' => $

@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
  <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约申请</small></div>
+      <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约申请</small>&nbsp;&nbsp;<span style="font-size:14px;">租约已打印<i style="font-style:normal;color:red;">{$ids}</i>份</span></div>
     </div>
 
     <div class="am-g">
@@ -139,7 +139,9 @@
         			 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
         		  </td>
               <td>
-                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+                <div class="am-input-group am-input-group-sm" style="width:60px;">
+                  
+                </div>
               </td>
               <td>
                 <div class="am-g am-input-group am-input-group-sm">
@@ -158,7 +160,13 @@
               </td>
               <?php if(in_array(101,$useRoles)){ ;?>
               <td>
-                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+                <div class="am-form-group  am-form search_input">
+                  <select name="if_show">
+                        <option value="" style="display:none">请选择</option>
+                        <option value='1' {if(isset($leaseOption['if_show']) && ($leaseOption['if_show'] == 1))}selected{/if}>有</option>
+                        <option value='2' {if(isset($leaseOption['if_show']) && ($leaseOption['if_show'] == 2))}selected{/if}>无</option>    
+                    </select>
+                </div>
               </td>
               <td>
                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
@@ -167,7 +175,7 @@
               <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:136px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
-                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/UserApply/index.html"><span class="ResetIcon"></span>重置</a>
+                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/LeaseAudit/index.html"><span class="ResetIcon"></span>重置</a>
                 </div>
               </td>
             </tr>
