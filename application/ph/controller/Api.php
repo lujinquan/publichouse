@@ -1439,6 +1439,10 @@ EOF;
     	
     }
 
+    // public function jisuan(){
+    //     Db::name('house')->where('HouseID'=>)->select();
+    // }
+
     /**
      * [clearLog 清除系统日志，只保留最近一周的日志]
      * @return [type] [description]
@@ -1494,13 +1498,31 @@ EOF;
     {
         $roommodel = new RoomModel;
 
-        $res = Db::name('room')->column('RoomID,RoomRentMonth');
+        $res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(3000)->column('RoomID,RoomRentMonth');
+        $j = 0;
+ //halt($res);
+        foreach($res as $k => $v){  
+             $j++;
+             $s = count_room_rent($k);
+             //dump($k);dump($v);halt($s);
+             //$roommodel->save(['Extra'=>2,'RoomRentMonth'=>$s],['RoomID'=>$k]);
+             Db::name('room')->where('RoomID',$k)->update(['Extra'=>2,'RoomRentMonth'=>$s]);
+        }
+        halt($j);
+    }
+
+    public function count_houses()
+    {
+        $roommodel = new HouseInfoModel;
+
+        $res = Db::name('house')->where(['Extra'=>1,'Status'=>1])->limit(500)->column('HouseID,ApprovedRent');
         $j = 0;
  
         foreach($res as $k => $v){  
              $j++;
-             $s = count_room_rent($k);
-             $roommodel->save(['RoomRentMonth'=>$s],['RoomID'=>$k]);
+             $s = count_house_rent($k);
+             //dump($v);halt($s);
+             $roommodel->save(['Extra'=>2,'ApprovedRent'=>$s,'HouseID'=>$k]);
         }
         halt($j);
     }
