@@ -225,40 +225,39 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 $(".TenantDetailBtn").click(function(){
 	var TenantID = $(this).val();
 	console.log(TenantID);
-	// require(["layer","jquery"],function(){
-	// 	layer.config({
-	// 		path:'/public/static/gf/layer/'
-	// 	});
-		$.get('/ph/TenantInfo/detail/TenantID/'+TenantID,function(res){
-			console.log(res);
-			res = JSON.parse(res);
-			$('#TenantID').text(res.data.TenantID); //租户id
-			$('#TenantName').text(res.data.TenantName); //租户名称
-			$('#TenantTel').text(res.data.TenantTel); //租户电话
-			$('#TenantAge').text(res.data.TenantAge); //年龄
-			$('#TenantSex').text(res.data.TenantSex); //性别
-			$('#TenantBalance').text(res.data.TenantBalance); //余额
-			$('#ArrearRent').text(res.data.ArrearRent); //欠租情况
-			$('#TenantNumber').text(res.data.TenantNumber); //身份证号码
-			$('#BankName').text(res.data.BankName); //银行名称
-			// console.log($('#BanName'));
-			$('#BankID').text(res.data.BankID); //银行卡号
-			$('#TenantQQ').text(res.data.TenantQQ);  //QQ号
-			$('#TenantWeChat').text(res.data.TenantWeChat);  //微信号
-			$('#TenantValue').text(res.data.TenantValue); //诚信值
-			$('#CreateTime').text(res.data.CreateTime); //登记时间
-			$('#CreateUserID').text(res.data.CreateUserID); //登记人名称
-			$('#UpdateTime').text(res.data.UpdateTime); //最后更新时间
-			$('#InstitutionName').text(res.data.InstitutionName); //登记机构
-			layer.open({
-				type:1,
-				area:['800px','600px'],
-				resize:false,
-				title:['租户明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-				content:$('#TenantDetail')
-			});
-		})
-	// })
+	$.get('/ph/TenantInfo/edit/TenantID/'+TenantID,function(res){
+		res = JSON.parse(res);
+		console.log(res);
+		$('#TenantID').text(res.data.TenantID); //租户id
+		$('#TenantName').text(res.data.TenantName); //租户名称
+		$('#TenantTel').text(res.data.TenantTel); //租户电话
+		$('#TenantAge').text(res.data.TenantAge); //年龄
+		$('#TenantSex').text(res.data.TenantSex); //性别
+		$('#TenantBalance').text(res.data.TenantBalance); //余额
+		$('#ArrearRent').text(res.data.ArrearRent); //欠租情况
+		$('#TenantNumber').text(res.data.TenantNumber); //身份证号码
+		$('#BankName').text(res.data.BankName); //银行名称
+		// console.log($('#BanName'));
+		$('#BankID').text(res.data.BankID); //银行卡号
+		$('#TenantQQ').text(res.data.TenantQQ);  //QQ号
+		$('#TenantWeChat').text(res.data.TenantWeChat);  //微信号
+		$('#TenantValue').text(res.data.TenantValue); //诚信值
+		$('#CreateTime').text(res.data.CreateTime); //登记时间
+		$('#CreateUserID').text(res.data.CreateUserID); //登记人名称
+		$('#UpdateTime').text(res.data.UpdateTime); //最后更新时间
+		$('#InstitutionName').text(res.data.InstitutionName); //登记机构
+
+		$('#IDCardFaceDetail').prop('src',res.data.IDCardFace);
+		$('#IDCardReverseDetail').prop('src',res.data.IDCardReverse);
+
+		layer.open({
+			type:1,
+			area:['800px','600px'],
+			resize:false,
+			title:['租户明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			content:$('#TenantDetail')
+		});
+	})
 });
 
 var startDate = new Date(1991, 11, 17);
