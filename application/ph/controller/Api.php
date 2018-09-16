@@ -1535,9 +1535,9 @@ EOF;
     {
         $roommodel = new RoomModel;
 
-        //$res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(1000)->column('RoomID,RoomRentMonth');
+        $res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(2000)->column('RoomID,RoomRentMonth');
 
-        $res = Db::name('room')->where('InstitutionID',22)->order('RoomID')->column('RoomID,RoomRentMonth');
+        //$res = Db::name('room')->where('InstitutionID',22)->order('RoomID')->column('RoomID,RoomRentMonth');
         $j = 0;
  //halt($res);
         foreach($res as $k => $v){  
@@ -1554,9 +1554,9 @@ EOF;
     {
         $roommodel = new HouseInfoModel;
 
-        //$res = Db::name('house')->where(['Extra'=>1,'Status'=>1])->limit(500)->column('HouseID,ApprovedRent');
+        $res = Db::name('house')->where(['Extra'=>1,'Status'=>1])->limit(2000)->column('HouseID,ApprovedRent');
         
-        $res = Db::name('house')->where(['InstitutionID'=>22,'Status'=>1])->column('HouseID,ApprovedRent');
+        //$res = Db::name('house')->where(['InstitutionID'=>22,'Status'=>1])->column('HouseID,ApprovedRent');
         $j = 0;
  
         foreach($res as $k => $v){  
