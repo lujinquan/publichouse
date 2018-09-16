@@ -1535,7 +1535,7 @@ EOF;
     {
         $roommodel = new RoomModel;
 
-        $res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(2000)->column('RoomID,RoomRentMonth');
+        $res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(3000)->column('RoomID,RoomRentMonth');
 
         //$res = Db::name('room')->where('InstitutionID',22)->order('RoomID')->column('RoomID,RoomRentMonth');
         $j = 0;
@@ -1563,7 +1563,8 @@ EOF;
              $j++;
              $s = count_house_rent($k);
              //dump($v);halt($s);
-             $roommodel->save(['Extra'=>2,'ApprovedRent'=>$s],['HouseID'=>$k]);
+             Db::name('house')->where('HouseID',$k)->update(['Extra'=>2,'ApprovedRent'=>$s]);
+             //$roommodel->save(['Extra'=>2,'ApprovedRent'=>$s],['HouseID'=>$k]);
         }
         halt($j);
     }
