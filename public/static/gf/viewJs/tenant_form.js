@@ -398,10 +398,16 @@ function ImgToBase64(file, maxLen, callBack) {
 }
 
 function dataURLtoFile(dataurl, filename) {//base64转换成文件
-	var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-	bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-	while(n--){
-	  u8arr[n] = bstr.charCodeAt(n);
+	console.log(dataurl);
+	if(dataurl == ''){
+		return '';
+	}else{
+		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+		  u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename+'.jpg', {type:mime});
 	}
-	return new File([u8arr], filename+'.jpg', {type:mime});
+
 }
