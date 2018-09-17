@@ -1428,12 +1428,16 @@ EOF;
 
     public function test()
     {
-        $houses = Db::name('house')->where(['Status'=>1])->column('HouseID');
+        $houses = Db::name('house')->where(['Status'=>1,'Extra'=>2])->limit('2000')->column('HouseID');
+        //$houses = Db::name('house')->where(['HouseID'=>'10400827092125'])->column('HouseID');
+        $i = 1;
         foreach($houses as $h){
             $a = count_house_area($h);
-            dump($h);halt($a);
-            Db::name('house')->update(['HouseUsearea'=>$a['HouseUsearea'],'LeasedArea'=>$a['LeaseArea']],['HouseID',$h]);
+            $i++;
+            //dump($h);halt($a);
+            Db::name('house')->where('HouseID',$h)->update(['HouseUsearea'=>$a['HouseUsearea'],'LeasedArea'=>$a['LeaseArea'],'Extra'=>3]);
         }
+        halt($i);
         exit;
     	$f = input('f');
     	if($f === 'ban'){
