@@ -400,7 +400,7 @@ function ImgToBase64(file, maxLen, callBack) {
 }
 
 function dataURLtoFile(dataurl, filename) {//base64转换成文件
-	console.log(dataurl);
+
 	if(dataurl.indexOf('data') == -1){
 		return '';
 	}else{
