@@ -45,6 +45,9 @@ class TenantInfo extends Base
                 if(isset($TenantImageIDS)){
                     $data['TenantImageIDS'] = json_encode($TenantImageIDS);
                 }
+            }else{
+                unset($data['IDCardFace']);
+                unset($data['IDCardReverse']);
             }
             $maxid = Db::name('tenant')->max('TenantID');
             $result = $this->validate($data,'TenantInfo');
