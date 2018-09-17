@@ -10,6 +10,8 @@
 var flag =true;
 $("#addTenant").click(function(){
 	$("#InputForm input[type='text']").val("");
+	$("#InputForm input[type='number']").val("");
+	$("#InputForm img").prop('src','');
 	// require(["layer","jquery"],function(layer){
 	// 	layer.config({	//真实layer的配置路径
 	// 		path:'/public/static/gf/layer/'
@@ -118,7 +120,7 @@ $("#reviseTenant").click(function(){
 						data.append('IDCardFace',dataURLtoFile($('#IDCardFaceM').prop('src'),'IDCardFace'));
 						data.append('IDCardReverse',dataURLtoFile($('#IDCardReverseM').prop('src'),'IDCardReverse'));
 						$.ajax({
-							url:"/ph/ConfirmTenantInfo/edit",
+							url:"/ph/TenantInfo/edit",
 							type:"post",
 							data:data,
 							dataType:'JSON',
@@ -209,7 +211,7 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 	}
 	var oV= $(this).val();
 	layer.confirm('确定租户删除信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
-						$.get('/ph/ConfirmTenantInfo/delete/TenantID/'+TenantID+'/style/'+oV,function(result){
+						$.get('/ph/TenantInfo/delete/TenantID/'+TenantID+'/style/'+oV,function(result){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
