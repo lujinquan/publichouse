@@ -1432,7 +1432,7 @@ EOF;
         foreach($houses as $h){
             $a = count_house_area($h);
             dump($h);halt($a);
-            Db::name('house')->update(['HouseUsearea'=>$a['HouseUsearea'],'LeasedArea'=>$a['LeaseArea']],['HouseID',$h])
+            Db::name('house')->update(['HouseUsearea'=>$a['HouseUsearea'],'LeasedArea'=>$a['LeaseArea']],['HouseID',$h]);
         }
         exit;
     	$f = input('f');
