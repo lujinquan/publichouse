@@ -95,26 +95,4 @@ class ConfirmRoom extends Base
         return jsons('2000' ,'获取成功' ,$datas);
     }
 
-    // /**
-    //  * 房间确认，由临时状态变为可用状态
-    //  */
-    // public function confirm(){
-    //     $roomID = input('RoomID');
-    //     if(!$roomID) return jsons('4000','参数缺失');
-    //     $res = Db::name('room')->where('RoomID', 'eq', $roomID)->setField('Status',1);
-    //     if($res){
-    //         $houseids = Db::name('room')->where('RoomID', 'eq', $roomID)->value('HouseID');
-    //         if($houseids){
-    //             $houseArr = explode(',',$houseids);
-    //             foreach ($houseArr as $house) {
-    //                 $temphouse = count_house_rent($house);
-    //                 Db::name('house')->where('HouseID', 'eq', $house)->setField('ApprovedRent',$temphouse);
-    //             }
-    //         }
-    //         return jsons('2000','确认成功！');
-    //     }else{
-    //         return jsons('4000','确认失败！');
-    //     }
-    // }
-
 }
