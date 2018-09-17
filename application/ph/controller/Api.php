@@ -1428,6 +1428,43 @@ EOF;
 
     public function test()
     {
+        // $houses = Db::name('house')->where('InstitutionID',22)->limit(10)->column('HouseID');
+        // foreach($houses as $h){
+        //     $s = Db::name('room')->where('HouseID','like','%'.$h.'%')->group('RoomType')->having('count(RoomID) > 1')->column('RoomID');
+        //     foreach($s as $l){
+        //         $a[$l['RoomType']][] = $l;
+        //     }
+        //     if($s){
+        //         $a[] = $s;
+        //     }
+        //     //foreach(){}
+        // }
+        // halt($a);
+        // exit;
+//         $rooms = Db::name('room')->where(['RoomPublicStatus'=>['>',1]])->column('RoomID,HouseID,InstitutionID');
+//         $houses = Db::name('house')->column('HouseID,InstitutionID');
+//         $a = [];
+//         $i = 1;
+//         //halt($rooms);
+//         foreach($rooms as $k=>$r){
+//             $h = substr($r['HouseID'],0,strpos($r['HouseID'],','));
+            
+//             if(isset($houses[$h])){
+//                 if($k == 128953){
+// dump($r['InstitutionID']);dump($houses[$h]);halt($h);
+//                 }
+//                 if($r['InstitutionID'] != $houses[$h]){
+//                     $i++;
+//                     Db::name('room')->where('RoomID',$k)->setField('InstitutionID',$houses[$h]);
+//                 }
+//             }else{
+//                 $a[$k] = $r;
+//             }
+            
+            
+//         }
+//         halt($a);
+        exit;
     	$f = input('f');
     	if($f === 'ban'){
     		model('ph/HouseInfo')->ban_out();
@@ -1499,6 +1536,8 @@ EOF;
         $roommodel = new RoomModel;
 
         $res = Db::name('room')->where('Extra',1)->order('RoomID')->limit(3000)->column('RoomID,RoomRentMonth');
+
+        //$res = Db::name('room')->where('InstitutionID',22)->order('RoomID')->column('RoomID,RoomRentMonth');
         $j = 0;
  //halt($res);
         foreach($res as $k => $v){  
@@ -1515,14 +1554,17 @@ EOF;
     {
         $roommodel = new HouseInfoModel;
 
-        $res = Db::name('house')->where(['Extra'=>1,'Status'=>1])->limit(500)->column('HouseID,ApprovedRent');
+        $res = Db::name('house')->where(['Extra'=>1,'Status'=>1])->limit(2000)->column('HouseID,ApprovedRent');
+        
+        //$res = Db::name('house')->where(['InstitutionID'=>22,'Status'=>1])->column('HouseID,ApprovedRent');
         $j = 0;
  
         foreach($res as $k => $v){  
              $j++;
              $s = count_house_rent($k);
              //dump($v);halt($s);
-             $roommodel->save(['Extra'=>2,'ApprovedRent'=>$s,'HouseID'=>$k]);
+             Db::name('house')->where('HouseID',$k)->update(['Extra'=>2,'ApprovedRent'=>$s]);
+             //$roommodel->save(['Extra'=>2,'ApprovedRent'=>$s],['HouseID'=>$k]);
         }
         halt($j);
     }
