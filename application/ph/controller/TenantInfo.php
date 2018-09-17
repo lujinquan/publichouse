@@ -33,6 +33,13 @@ class TenantInfo extends Base
         // 保存数据
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
+            
+            $maxid = Db::name('tenant')->max('TenantID');
+            $result = $this->validate($data,'TenantInfo');
+            if(true !== $result) {
+                return jsons('4001',$result);
+
+            }
             if ($_FILES) {   //文件上传
                 //halt($_FILES);
                 foreach ($_FILES as $k => $v) {
@@ -48,12 +55,6 @@ class TenantInfo extends Base
             }else{
                 unset($data['IDCardFace']);
                 unset($data['IDCardReverse']);
-            }
-            $maxid = Db::name('tenant')->max('TenantID');
-            $result = $this->validate($data,'TenantInfo');
-            if(true !== $result) {
-                return jsons('4001',$result);
-
             }
             $data['InstitutionID'] = session('user_base_info.institution_id');
 
@@ -84,8 +85,25 @@ class TenantInfo extends Base
             $data = array_no_space_str($this->request->post());
 
             $result = $this->validate($data,'TenantInfo');
+
             if(true !== $result) {
                 return jsons('4001',$result);
+            }
+            if ($_FILES) {   //文件上传
+                //halt($_FILES);
+                foreach ($_FILES as $k => $v) {
+                    if($v['error'] !== 0){
+                        continue;
+                    }
+
+                    $TenantImageIDS[$k] = model('TenantInfo')->uploads($v, $k);
+                }
+                if(isset($TenantImageIDS)){
+                    $data['TenantImageIDS'] = json_encode($TenantImageIDS);
+                }
+            }else{
+                unset($data['IDCardFace']);
+                unset($data['IDCardReverse']);
             }
             $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
