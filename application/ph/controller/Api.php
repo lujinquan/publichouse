@@ -1464,6 +1464,11 @@ EOF;
             
 //         }
 //         halt($a);
+        $houses = Db::name('house')->where(['Status'=>1])->column('HouseID');
+        foreach($houses as $h){
+            $a = count_house_area($h);
+            dump($h);halt($a);
+        }
         exit;
     	$f = input('f');
     	if($f === 'ban'){

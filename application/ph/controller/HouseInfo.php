@@ -240,7 +240,7 @@ class HouseInfo extends Base
                                 Db::name('house')->where('HouseID', 'eq', $findOne['HouseID'])->setDec('LeasedArea', $findOne['LeasedArea']);
                             } elseif ($findOne['RoomPublicStatus'] == 2) {    //两户共用的房屋
                                 $findHouses = explode(',', $findOne['HouseID']);
-                                Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('HouseUsearea', $findOne['UseArea'] / 2);
+                                Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('HouseUsearea', $findOne['UseArea']);
                                 Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('LeasedArea', $findOne['LeasedArea'] / 2);
                             } elseif ($findOne['RoomPublicStatus'] > 2) {
                                 Db::name('house')->where('HouseID', 'in', $houses)->setDec('PublicRent', 0.5);
@@ -252,8 +252,8 @@ class HouseInfo extends Base
                                 Db::name('house')->where('HouseID', 'eq', $datas['HouseID'])->setInc('LeasedArea', $datas['LeasedArea']);
                             } elseif ($datas['RoomPublicStatus'] == 2) {
                                 $datas['LeasedArea'] = $datas['LeasedArea'] / 2;
-                                Db::name('house')->where('HouseID', 'in', $houses)->setInc('HouseUsearea', $datas['UseArea'] / 2);
-                                Db::name('house')->where('HouseID', 'in', $houses)->setInc('LeasedArea', $datas['LeasedArea'] / 2);
+                                Db::name('house')->where('HouseID', 'in', $houses)->setInc('HouseUsearea', $datas['UseArea']);
+                                Db::name('house')->where('HouseID', 'in', $houses)->setInc('LeasedArea', $datas['LeasedArea']);
                             } elseif ($datas['RoomPublicStatus'] > 2) {
                                 Db::name('house')->where('HouseID', 'in', $houses)->setInc('PublicRent', 0.5);
                                 $datas['LeasedArea'] = 0;
@@ -287,8 +287,8 @@ class HouseInfo extends Base
                             Db::name('house')->where('HouseID', 'eq', $datas['HouseID'])->setInc('LeasedArea', $datas['LeasedArea']);
                         } elseif ($datas['RoomPublicStatus'] == 2) {
                             $datas['LeasedArea'] = $datas['LeasedArea'] / 2;
-                            Db::name('house')->where('HouseID', 'in', $houses)->setInc('HouseUsearea', $datas['UseArea'] / 2);
-                            Db::name('house')->where('HouseID', 'in', $houses)->setInc('LeasedArea', $datas['LeasedArea'] / 2);
+                            Db::name('house')->where('HouseID', 'in', $houses)->setInc('HouseUsearea', $datas['UseArea']);
+                            Db::name('house')->where('HouseID', 'in', $houses)->setInc('LeasedArea', $datas['LeasedArea']);
                         } elseif ($datas['RoomPublicStatus'] > 2) {
                             $datas['LeasedArea'] = 0;
                             Db::name('house')->where('HouseID', 'in', $houses)->setInc('PublicRent', 0.5); //三户共用的加5毛钱

@@ -53,8 +53,8 @@ class TenantInfo extends Base
                     $data['TenantImageIDS'] = json_encode($TenantImageIDS);
                 }
             }else{
-                unset($data['IDCardFace']);
-                unset($data['IDCardReverse']);
+                @unset($data['IDCardFace']);
+                @unset($data['IDCardReverse']);
             }
             $data['InstitutionID'] = session('user_base_info.institution_id');
 
@@ -102,8 +102,8 @@ class TenantInfo extends Base
                     $data['TenantImageIDS'] = json_encode($TenantImageIDS);
                 }
             }else{
-                unset($data['IDCardFace']);
-                unset($data['IDCardReverse']);
+                @unset($data['IDCardFace']);
+                @unset($data['IDCardReverse']);
             }
             $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
