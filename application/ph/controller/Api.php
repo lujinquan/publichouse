@@ -1428,42 +1428,16 @@ EOF;
 
     public function test()
     {
-        // $houses = Db::name('house')->where('InstitutionID',22)->limit(10)->column('HouseID');
-        // foreach($houses as $h){
-        //     $s = Db::name('room')->where('HouseID','like','%'.$h.'%')->group('RoomType')->having('count(RoomID) > 1')->column('RoomID');
-        //     foreach($s as $l){
-        //         $a[$l['RoomType']][] = $l;
-        //     }
-        //     if($s){
-        //         $a[] = $s;
-        //     }
-        //     //foreach(){}
-        // }
-        // halt($a);
-        // exit;
-//         $rooms = Db::name('room')->where(['RoomPublicStatus'=>['>',1]])->column('RoomID,HouseID,InstitutionID');
-//         $houses = Db::name('house')->column('HouseID,InstitutionID');
-//         $a = [];
-//         $i = 1;
-//         //halt($rooms);
-//         foreach($rooms as $k=>$r){
-//             $h = substr($r['HouseID'],0,strpos($r['HouseID'],','));
-            
-//             if(isset($houses[$h])){
-//                 if($k == 128953){
-// dump($r['InstitutionID']);dump($houses[$h]);halt($h);
-//                 }
-//                 if($r['InstitutionID'] != $houses[$h]){
-//                     $i++;
-//                     Db::name('room')->where('RoomID',$k)->setField('InstitutionID',$houses[$h]);
-//                 }
-//             }else{
-//                 $a[$k] = $r;
-//             }
-            
-            
-//         }
-//         halt($a);
+        $houses = Db::name('house')->where(['Status'=>1,'Extra'=>2])->limit('2000')->column('HouseID');
+        //$houses = Db::name('house')->where(['HouseID'=>'10400827092125'])->column('HouseID');
+        $i = 1;
+        foreach($houses as $h){
+            $a = count_house_area($h);
+            $i++;
+            //dump($h);halt($a);
+            Db::name('house')->where('HouseID',$h)->update(['HouseUsearea'=>$a['HouseUsearea'],'LeasedArea'=>$a['LeaseArea'],'Extra'=>3]);
+        }
+        halt($i);
         exit;
     	$f = input('f');
     	if($f === 'ban'){

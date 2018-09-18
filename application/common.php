@@ -813,7 +813,7 @@ function count_house_area($houseid){
     if(in_array($houseid,array(666,888,999))){
         return array('HouseUsearea' =>0, 'LeaseArea' =>0);
     }else{
-        $roomidArr = Db::name('room')->where('HouseID','like','%'.$houseid.'%')->field('RoomID,UseArea,LeasedArea')->select();
+        $roomidArr = Db::name('room')->where(['HouseID'=>['like','%'.$houseid.'%'],'RoomPublicStatus'=>['<',3]])->field('RoomID,UseArea,LeasedArea')->select();
         if($roomidArr){
             foreach ($roomidArr as $v) {
                 $useAreaArr[] = $v['UseArea'];
