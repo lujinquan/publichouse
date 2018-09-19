@@ -450,7 +450,7 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 	}
 	var oV= $(this).val();
 	layer.confirm('确定楼栋删除信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
-						$.get('/ph/ConfirmBanInfo/delete/BanID/'+BanID+'/style/'+oV,function(result){
+						$.get('/ph/BanInfo/delete/BanID/'+BanID+'/style/'+oV,function(result){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
