@@ -36,7 +36,7 @@ $("#addHouse").click(function() {
         btn: ['确定', '取消'],
         yes: function(thisIndex) {
             var data = new FormData($('#houseForm')[0]);
-            console.log(data);
+            // console.log(data);
             $.ajax({
                 url: "/ph/HouseInfo/add",
                 type: "post",
@@ -45,7 +45,7 @@ $("#addHouse").click(function() {
                 processData: false,
                 contentType: false
             }).done(function(result) {
-                console.log(result);
+                // console.log(result);
                 if (result.retcode == 2000) {
                     // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
                     //  layer.close(thisIndex);
@@ -80,7 +80,7 @@ $("#reviseHouse").click(function() {
             var HouseID = obj.eq(i).val();
         }
     }
-    console.log(HouseID);
+    // console.log(HouseID);
     banQuery.action('BanI','0,1');
     //banQuery.action('BanI','2');
     tenantQuery.action('TenantI','','0,1');
@@ -94,7 +94,7 @@ $("#reviseHouse").click(function() {
     } else {
         $.get('/ph/HouseInfo/edit/HouseID/' + HouseID, function(res) {
             res = JSON.parse(res);
-            console.log(res);
+            // console.log(res);
             $("#mDHouseID").val(res.data.HouseID); //房屋编号
             $("#houseid").prop("value", res.data.HouseID); //隐藏域房屋编号
             $("#HouseI").prop("value", res.data.HouseID);
@@ -169,7 +169,7 @@ $("#reviseHouse").click(function() {
                         processData: false,
                         contentType: false
                     }).done(function(result) {
-                        console.log(result);
+                        // console.log(result);
                         if (result.retcode == 2000) {
                             // layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
                             //  layer.close(thisIndex);
@@ -234,7 +234,7 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function() {
     }, function(index) {
         $.get('/ph/HouseInfo/delete/HouseID/' + HouseID + '/style/' + oV, function(result) {
             result = JSON.parse(result);
-            console.log(result);
+            // console.log(result);
             if (result.retcode == '2000') {
                 layer.msg(result.msg);
                 location.reload();
@@ -271,14 +271,14 @@ $(".ConfirmHouseBtn").click(function() {
 $(".HouseDetailBtn").click(function() {
     $('#Drecord').html('');
     var HouseID = $(this).val();
-    console.log(HouseID);
+    // console.log(HouseID);
     // require(["layer","jquery"],function(){
     //  layer.config({
     //      path:'/public/static/gf/layer/'
     //  });
     $.get('/ph/HouseInfo/detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
-        console.log(res);
+        // console.log(res);
         $('p[id=HouseID]').text(res.data.HouseID); //房屋编号
         $('p[id=BanID]').text(res.data.BanID); //楼栋编号
         $('p[id=InstitutionID]').text(res.data.InstitutionID); //机构
@@ -325,7 +325,6 @@ $(".HouseDetailBtn").click(function() {
         var htmlC = '';
         var htmlC1 = '';
         if (res.data.RoomDetail == undefined || res.data.RoomDetail == '') {
-            console.log('1');
             res.data.RoomDetail = '';
         } else {
             for (var i = 0; i < res.data.RoomDetail.length; i++) {
@@ -406,7 +405,6 @@ function readFile(fileUp, fileShow) {
 var RlengthBan = 0;
 $('.RentForm').click(function() {
     $('.RentExample:gt(0)').remove();
-    console.log($('.RoomDeT').hasClass('RentDate'));
     // if($('ul').hasClass('RentDate')){
     //  var RentHtml='';
     // $('.RentDate').innerHTML(RentHtml);
@@ -414,7 +412,7 @@ $('.RentForm').click(function() {
     var HouseID = $(this).val();
     $.get('/ph/Api/get_rent_table_detail/HouseID/' + HouseID, function(res) {
         res = JSON.parse(res);
-        console.log(res);
+        // console.log(res);
         $('.RentBan').text(res.data.banDetail.BanID);
         $('.RentStructure').text(res.data.banDetail.StructureType);
         $('.RentAddress').text(res.data.banDetail.BanAddress);
@@ -534,7 +532,7 @@ $('.RentForm').click(function() {
             layer.close(thisIndex);
             $.get('/ph/Api/get_edit_rent_table_detail/HouseID/' + HouseID, function(res) {
                 res = JSON.parse(res);
-                console.log(res);
+                // console.log(res);
                 $('.ModifyDetail:gt(0)').remove();
                  var HouseID= res.data.houseDetail.HouseID;
                 $('.RentWallpaperd').prop('value', res.data.houseDetail.WallpaperArea);
@@ -623,7 +621,6 @@ $('.RentForm').click(function() {
                 for (var i in RentRoom) {
                     RentA.push(i);
                 }
-                console.log(RentA);
                 var RentHtml2 = '';
                 var aStatus = [];
                 var aOwnT=[];
@@ -654,7 +651,6 @@ $('.RentForm').click(function() {
                         $('.RoomDeTd').eq(num).parent().children().eq(0).removeClass('nomal').addClass('active');
                         $('.pulld').eq(num).prop('src', '/public/static/gf/icons/triU.png');
                         aOwnT.push(res.data.roomDetail[num][j].OwnerType);
-                        console.log(aOwnT);
                     } //小长度 
                     // for(var n=0;n<10;n++){
                         // for (var a = 0; a < RentA.length; a++) {
@@ -683,7 +679,7 @@ $('.RentForm').click(function() {
                 for(var i=0;i<$(".MownT").length;i++){
                     $(".MownT").eq(i).val(aOwnT[i]).attr('select','selected');
 
-                    console.log($(".MownT").eq(i).find('option'));
+                    // console.log($(".MownT").eq(i).find('option'));
                 }
                 for (var n = 0; n < aS; n++) {
                     $('.delSD').eq(n).attr('index', n);
@@ -816,7 +812,6 @@ $('.RentForm').click(function() {
                 btn: ['保存', '取消'],
                 content: $('#RentFormM'),
                 yes: function() {
-                    
                     var data = new FormData($('#RentFormM')[0]);
                     data.append('AddRent[RIfWater]', $(".RentWd").val());
                     data.append('AddRent[HouseID]', HouseID);
@@ -939,7 +934,7 @@ $(document).on('click', '.addRoom', function() {
 $(document).on('click', '.del-styled', function() {
     var RoomIndex = $(this).parent().parent().index('.exRoom');
     $('#PriceForm table').eq(RoomIndex - 1).remove();
-    console.log(RoomIndex);
+    // console.log(RoomIndex);
     $(this).parent().parent().remove();
 });
 $('.RoomStyle').click(function() {
@@ -1004,7 +999,7 @@ $('.BeInDebt').click(function(){
             // 表格初始化完成
             $.get('/ph/Api/queryRentEntry/HouseID/'+HouseId,function(res){
                 res = JSON.parse(res);
-                console.log(res);
+                // console.log(res);
                 if(res.data.length != 0){
                     var last_data = res.data.pop();
                     $('#beDebt').val(last_data[1]);
@@ -1029,10 +1024,10 @@ $('.BeInDebt').click(function(){
                 data.push(current_arr);
             }
             data.push(last_arr);
-            console.log(data);
+            // console.log(data);
             $.post('/ph/HouseInfo/rentEntry',{data:data},function(res){
                 res = JSON.parse(res);
-                console.log(res);
+                // console.log(res);
                 if(res.retcode == '2000'){
                     layer.close(thisIndex)
                 }
