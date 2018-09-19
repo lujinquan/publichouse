@@ -1728,8 +1728,8 @@ EOF;
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
             $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k;
-            $result['house']['TotalRoomMonth'] = $s;
-            $result['house']['HeDingRoomMonth'] = ($result['house']['UseNature'] == 1)?round($s,1):$s;
+            $result['house']['TotalRoomMonth'] = round($s,1);
+            $result['house']['HeDingRoomMonth'] = round($s,1);
         }
 
         $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;

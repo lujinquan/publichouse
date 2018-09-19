@@ -132,6 +132,7 @@ class HouseInfo extends Base
                     $allData[$k1]['name'] = config($k1);
                 }
             }
+            //halt($data);
             if ($houseInfo = HouseInfoModel::update($data)) {
                 if(!isset($allData)){$allData = array(); }
                 // 记录行为

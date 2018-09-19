@@ -50,7 +50,7 @@ class LeaseApply extends Model
         }
 
         $ChangeList['option'] =array();
-        if($searchForm = input('post.')) {
+        if($searchForm = input('param.')) {
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
             }
