@@ -1733,7 +1733,8 @@ EOF;
         }
 
         $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
-        
+        $result['house']['HeDingRoomMonth'] = $result['house']['HeDingRoomMonth'] + $result['house']['PumpCost'];
+
         $result['room'] = isset($room)?$room:array();
 
         return jsons('2000', '获取成功', $result);

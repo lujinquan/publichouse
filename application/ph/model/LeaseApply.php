@@ -25,6 +25,30 @@ class LeaseApply extends Model
             $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
         }
 
+        $where['Status'] = array('not in' ,[0,1]);
+
+        $roleid = json_decode(session('user_base_info.role'));
+
+        switch($roleid[0]){
+            case 112:
+                $where['Status'] = array('eq',6);
+            break;
+            case 116:
+                $where['Status'] = array('eq',2);
+            break;
+            case 111:
+                $where['Status'] = array('eq',3);
+            break;
+            case 563:
+                $where['Status'] = array('eq',4);
+            break;
+            case 101:
+                $where['Status'] = array('eq',5);
+            break;
+            default:
+            break;
+        }
+
         $ChangeList['option'] =array();
         if($searchForm = input('post.')) {
             foreach ($searchForm as &$val) { //去首尾空格
@@ -63,7 +87,30 @@ class LeaseApply extends Model
                 }
                 //$where['BanAddress'] = array('like', '%'.$searchForm['if_show'].'%');
             }
-
+            if (isset($searchForm['admin_is']) && $searchForm['admin_is']) {  //检索房屋地址
+               
+                switch($searchForm['admin_is']){
+                    case 112:
+                        $where['Status'] = array('eq',6);
+                    break;
+                    case 116:
+                        $where['Status'] = array('eq',2);
+                    break;
+                    case 111:
+                        $where['Status'] = array('eq',3);
+                    break;
+                    case 563:
+                        $where['Status'] = array('eq',4);
+                    break;
+                    case 101:
+                        $where['Status'] = array('eq',5);
+                    break;
+                    default:
+                        $where['Status'] = array('not in' ,[0,1]);
+                    break;
+                }
+               
+            }
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
                 $starttime = strtotime($searchForm['CreateTime']);
                 $endtime = $starttime + 3600*24;
@@ -71,8 +118,8 @@ class LeaseApply extends Model
             }
         }
 
-        $where['Status'] = array('not in' ,[0,1]);
-//halt($where);
+        //halt($searchForm); 
+
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $idsWhere = $where;

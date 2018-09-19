@@ -156,11 +156,82 @@
                 </div>
               </td>
               <td>
-                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+                <div class="am-form-group  am-form search_input">
+                  <select name="admin_is">
+                        <option value="" style="display:none">请选择</option>
+                        <option value='112' 
+                          {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '112')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('112',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >房管员</option>
+                        <option value='116' 
+                        {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '116')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('116',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >资料员</option>
+                        <option value='111' 
+                        {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '111')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('111',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >经管所长</option>
+                        <option value='563' 
+                        {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '563')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('563',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >经管科</option>
+                        <option value='101' 
+                        {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '101')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('101',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >经租会计</option>
+                        <option value='1' 
+                        {if(isset($leaseOption['admin_is']))} 
+                            {if($leaseOption['admin_is'] === '1')}
+                            selected
+                            {/if}
+                          {else /}
+                            {if(in_array('1',json_decode(session('user_base_info.role'))))}
+                            selected 
+                            {/if}
+                          {/if}
+                        >全部</option>  
+                  </select>
+                </div>
               </td>
+                
               <?php if(in_array(101,$useRoles)){ ;?>
               <td>
-                <div class="am-form-group  am-form search_input">
+                <div class="am-form-group am-form search_input">
                   <select name="if_show">
                         <option value="" style="display:none">请选择</option>
                         <option value='1' {if(isset($leaseOption['if_show']) && ($leaseOption['if_show'] == 1))}selected{/if}>有</option>
@@ -172,6 +243,7 @@
                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
               </td>
               <?php }; ?>
+
               <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:136px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
@@ -224,11 +296,6 @@
                         <?php if(in_array(559,$threeMenu) && ($IfProcess === '')){ ; ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print1" value="<?php echo $v['ChangeOrderID']; ?>">
                           租约打印
-                        </button>
-                        <?php }; ?>
-                        <?php if(in_array(560,$threeMenu)){ ; ?>
-                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="<?php echo $v['ChangeOrderID']; ?>">
-                          信息单打印
                         </button>
                         <?php }; ?>
                         <?php if(in_array(561,$threeMenu) && ($IfProcess === '')){ ; ?>

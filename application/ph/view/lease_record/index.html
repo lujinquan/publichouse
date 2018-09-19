@@ -198,6 +198,11 @@
                 <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
+                        <?php if(in_array(560,$threeMenu) && $v['Status'] == '成功'){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only print2" value="<?php echo $v['ChangeOrderID']; ?>">
+                          信息单打印
+                        </button>
+                        <?php }; ?>
                         <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only detail_btn" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
                     </div>
                 </td>

@@ -22,7 +22,8 @@ class LeaseAudit extends Base
         $data = model('ph/LeaseApply') -> get_all_lease_lst();
         //halt($data['option']);
         //$leaseChanges = Db::name('use_change_type')->field('id, UseChangeTitle')->select();
-
+// $s = json_decode(session('user_base_info.role'));
+// halt($s);
         $this -> assign([    
             'leaseLst' => $data['arr'],
             'ids' => $data['ids'],
