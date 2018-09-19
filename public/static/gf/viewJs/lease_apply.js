@@ -174,8 +174,6 @@ $('.addLease').click(function(){
 				    	}
 				    	$('.applyText_other').val(str_new);
 				    	console.log(str_new);
-
-
 				    })
 				})
 			})
@@ -236,6 +234,20 @@ $('.addLease').click(function(){
                     }
                 }
             });
+		},
+		btn2:function(){
+			$('#MyForm input').val('');
+			$('#MyForm select').val('请选择');
+			$('#leaseApplication1_Show').empty();
+			$('#leaseApplication2_Show').empty();
+			$('#leaseApplication3_Show').empty();
+		},
+		cancel:function(){
+			$('#MyForm input').val('');
+			$('#MyForm select').val('请选择');
+			$('#leaseApplication1_Show').empty();
+			$('#leaseApplication2_Show').empty();
+			$('#leaseApplication3_Show').empty();
 		}
 	})
 })
