@@ -289,8 +289,19 @@ class Api extends Controller
             ->select();
         $roomTypeNames = Db::name('room_type_point')->column('id,RoomTypeName');
         $sort = Db::name('room_type_point')->column('id,Sort');
-
+        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         foreach ($rooms as $key => $value) {
+            if(isset($roomAmend[$value['RoomID']])){
+                $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
+                $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
+                
+                if($value['RoomRentMonth'] == 0){
+                    //halt($value['RoomRentMonth']);
+                    $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
+                    Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
+                }
+            }
+      
             $value['RentPoint'] = (100 - $value['RentPoint'] * 100) . '%';
             $value['OwnerType'] = get_owner($value['OwnerType']);
             $value['FloorPoint'] = ((get_floor_point($value['FloorID'], $result['banDetail']['BanFloorNum'], $result['banDetail']['IfElevator'])) * 100) . '%'; 
@@ -354,7 +365,18 @@ class Api extends Controller
         $roomTypeNames = Db::name('room_type_point')->order('Sort asc')->column('Sort,RoomTypeName');
         $sort = Db::name('room_type_point')->column('id,Sort');
         $result['roomTypes'] = $roomTypeNames;
+        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         foreach ($rooms as $key => $value) {
+            if(isset($roomAmend[$value['RoomID']])){
+                $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
+                $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
+                
+                if($value['RoomRentMonth'] == 0){
+                    //halt($value['RoomRentMonth']);
+                    $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
+                    Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
+                }
+            }
             $value['RentPoint'] = (100 - $value['RentPoint'] * 100) . '%';
             $value['FloorPoint'] = ((get_floor_point($value['FloorID'], $result['banDetail']['BanFloorNum'], $result['banDetail']['IfElevator'])) * 100) . '%';
             $value['RoomName'] = $roomTypeNames[$value['RoomType']];
@@ -1675,9 +1697,11 @@ EOF;
         $result['house']['BelowFiveNumRent'] = 0.5 * $result['house']['BelowFiveNum'];
         $result['house']['MoreFiveNumRent'] = 1 * $result['house']['MoreFiveNum'];
 
-        $rooms = Db::name('room')->field('RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
+        $rooms = Db::name('room')->field('RoomID,RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
             ->select();
+
+        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
 
         if(empty($rooms)){
             $rooms = array();
@@ -1689,7 +1713,12 @@ EOF;
             $result['house']['Toilet'] = 0;
             $result['house']['InnerAisle'] = 0;
             $result['house']['Kitchen'] = 0;
-            foreach($rooms as $v){
+            foreach($rooms as &$v){
+                $row = Db::name('room_amend')->where(['RoomID'=>$v['RoomID'],'HouseID'=>$houseid])->find();
+                if($row){
+                   $v['LeasedArea'] = $row['LeasedArea'];
+                   $v['RoomRentMonth'] = $row['RoomRentMonth'];
+                }
                 switch ($v['RoomPublicStatus']) {
                     case 1:
                         $v['RoomPublicStatus'] = '独';

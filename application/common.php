@@ -738,7 +738,8 @@ function count_house_rent($houseid){
     return $houseRent;
 }
 
-function count_room_rent($roomid){
+function count_room_rent($roomid , $houseid = ''){
+
     //初始数据
     $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RentPoint,RoomType,UseNature,FloorID,BanID,RoomPublicStatus')->find();
     $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
@@ -754,8 +755,14 @@ function count_room_rent($roomid){
     $emptyPoint = $banOne['IfFirst']?0.98:1;
 
     //if($roomid = '121640'){
-//dump($roomOne['LeasedArea']);dump($roomOne['RentPoint']);dump($structureTypePoint);dump($emptyPoint);halt($floorPoint);
+    //dump($roomOne['LeasedArea']);dump($roomOne['RentPoint']);dump($structureTypePoint);dump($emptyPoint);halt($floorPoint);
     //}
+    if($houseid){
+        $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
+        if($roomRent){
+            $roomOne['LeasedArea'] = $roomRent;
+        }
+    }
     
     //计算租金= 计租面积 * 实际基价 * 结构基价 * 基价折减率 * 架空率 * 层次调解率
     $roomRent = $roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint;
