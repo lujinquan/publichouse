@@ -13,7 +13,7 @@ class LeaseApply extends Model
     // 设置当前模型对应的完整数据表名称
     protected $table = '__LEASE_CHANGE_ORDER__';
 
-    public function get_all_lease_lst(){
+    public function get_all_lease_lst($flag = ''){
 
         //筛选出只属于当前机构的申请
         
@@ -27,27 +27,31 @@ class LeaseApply extends Model
 
         $where['Status'] = array('not in' ,[0,1]);
 
-        $roleid = json_decode(session('user_base_info.role'));
+        if($flag == ''){
+            $roleid = json_decode(session('user_base_info.role'));
 
-        switch($roleid[0]){
-            case 112:
-                $where['Status'] = array('eq',6);
-            break;
-            case 116:
-                $where['Status'] = array('eq',2);
-            break;
-            case 111:
-                $where['Status'] = array('eq',3);
-            break;
-            case 563:
-                $where['Status'] = array('eq',4);
-            break;
-            case 101:
-                $where['Status'] = array('eq',5);
-            break;
-            default:
-            break;
+            switch($roleid[0]){
+                case 112:
+                    $where['Status'] = array('eq',6);
+                break;
+                case 116:
+                    $where['Status'] = array('eq',2);
+                break;
+                case 111:
+                    $where['Status'] = array('eq',3);
+                break;
+                case 563:
+                    $where['Status'] = array('eq',4);
+                break;
+                case 101:
+                    $where['Status'] = array('eq',5);
+                break;
+                default:
+                break;
+            }
         }
+
+        
 
         $ChangeList['option'] =array();
         if($searchForm = input('param.')) {

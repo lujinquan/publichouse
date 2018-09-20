@@ -20,7 +20,7 @@ class LeaseApply extends Base
      */
     public function index(){
 
-        $data = model('ph/LeaseApply') -> get_all_lease_lst();
+        $data = model('ph/LeaseApply') -> get_all_lease_lst($flag = 'apply');
         
         $this -> assign([
             'leaseLst' => $data['arr'],
