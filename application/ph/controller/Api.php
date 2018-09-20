@@ -1654,7 +1654,7 @@ EOF;
         //     }
         // }
 
-        $result['house']['Recorde'] = Db::name('lease_change_order')->where('HouseID',$houseid)->order('CreateTime desc')->value('Recorde');
+        $result['house']['Recorde'] = Db::name('lease_change_order')->where(['HouseID'=>$houseid,'Status'=>1])->order('CreateTime desc')->value('Recorde');
 
         if(empty($result['house'])){
             return jsons('4000','参数错误');
