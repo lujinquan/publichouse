@@ -914,6 +914,34 @@ class HouseInfo extends Base
 
     }
 
+    public function delete()
+    {
+        $houseID = input('HouseID');
+        check($houseID,'');
+
+        $style = input('style');
+        if(!$houseID || !$style){
+            return jsons(4004 ,'参数异常……');
+        }else{
+            $res = Db::name('house')->where('HouseID', 'eq', $houseID)->setField('Status',$style);
+            if ($res) {
+                $roomIDS = Db::name('room')->where('HouseID',$houseID)->column('RoomID');
+                foreach($roomIDS as $roomid){
+                    $houseid = Db::name('room')->where('RoomID',$roomid)->value('RoomPublicStatus');
+                    if ($houseid == 1) {
+                        Db::name('room')->where('RoomID',$roomid)->setField('Status',$style);
+                    }
+                }
+                //当假删房屋后，同时将房屋下的所有房间假删掉
+                // 记录行为
+                action_log('HouseInfo_delete', UID, 2, '编号为:' . $houseID);
+                return jsons(2000, '删除成功');
+            } else {
+                return jsons(4000, '删除失败，参数异常！');
+            }
+        }
+    }
+
     public function out()
     {
         $this->HouseInfoModel->out();
