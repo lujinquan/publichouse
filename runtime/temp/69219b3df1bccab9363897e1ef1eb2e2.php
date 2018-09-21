@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:8:{s:79:"/usr/share/nginx/publichouse/application/ph/view/confirm_tenant_info/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:49:"application/ph/view/confirm_tenant_info/form.html";i:1528342025;s:51:"application/ph/view/confirm_tenant_info/detail.html";i:1528342025;s:51:"application/ph/view/confirm_tenant_info/modify.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1532308676;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:8:{s:79:"/usr/share/nginx/publichouse/application/ph/view/confirm_tenant_info/index.html";i:1533511343;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:49:"application/ph/view/confirm_tenant_info/form.html";i:1533511343;s:51:"application/ph/view/confirm_tenant_info/detail.html";i:1533511343;s:51:"application/ph/view/confirm_tenant_info/modify.html";i:1533511343;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1533542784;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -108,34 +108,34 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf">
-        <small class="am-text-sm">数据确认管理</small> > 
-        <small class="am-text-primary">租户确认</small>
-      </div>
+      <div class="am-fl am-cf"><small class="am-text-sm">房屋档案</small> > <small class="am-text-primary">租户信息</small></div>
     </div>
 
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group-xs">
-              <?php if(in_array(518,$threeMenu)){ ; ?>
+              <?php if(in_array(543,$threeMenu)){ ; ?>
+            <button type="button" id="addTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增租户</button>
+              <?php }; if(in_array(545,$threeMenu)){ ; ?>
             <button type="button" id="reviseTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-edit"></span> 修改租户</button>
-              <?php }; if(in_array(519,$threeMenu)){ ; ?>
+              <?php }; if(in_array(546,$threeMenu)){ ; ?>
             <button type="button" id="deleteTenant" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-trash-o"></span> 删除租户</button>
               <?php }; ?>
+              
           </div>
         </div>
       </div>
     </div>
 
     <div class="am-g">
-      <div class="am-u-sm-12 am-scrollable-horizontal">
+      <div class="am-scrollable-horizontal">
           <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
             <thead>
               <tr>
@@ -143,19 +143,20 @@
         				<th class="table-id">#</th>
         				<th class="table-title">租户编号</th>
         				<th class="table-author am-hide-sm-only">租户姓名</th>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <th class="table-author am-hide-sm-only">机构</th>
+                <?php }; ?>
         				<th class="table-date am-hide-sm-only">联系电话</th>
         				<th class="table-set">余额</th>
          				<th class="table-set">欠租情况</th>
-        				<th class="table-set">诚信分</th>
-        				<th class="table-set">微信号</th>
-        				<th class="table-set">QQ号</th>
-                <th class="table-set">银行卡号</th>
+        				<th class="table-set dong_none">诚信分</th>
+        				<th class="table-set dong_none">微信号</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
           <tbody>
 		  <!--查询-->
-      <form id="queryForm" action="<?php echo url('ConfirmTenantInfo/index'); ?>" method="post"  autocomplete="off">
+      <form id="queryForm" action="<?php echo url('ConfirmTenantInfo/index'); ?>" method="post" autocomplete="off" >
 		    <tr class="am-form-group am-form-inline am-form">
               <td></td>
               <td></td>
@@ -172,42 +173,77 @@
               </div>
             </td>
               <td>
-				<div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantName = $tenantOption['TenantName'];
-                        }else{
-                            $TenantName = '';
-                        }
-                     ?>
-				  <input name="TenantName" type="text" class="am-form-field" value="<?php echo $TenantName; ?>">
-				</div>
-			  </td>
+        				<div class="am-input-group am-input-group-sm">
+                            <?php
+                                if($tenantOption != array()){
+                                    $TenantName = $tenantOption['TenantName'];
+                                }else{
+                                    $TenantName = '';
+                                }
+                             ?>
+        				  <input name="TenantName" type="text" class="am-form-field" value="<?php echo $TenantName; ?>">
+        				</div>
+        			  </td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
               <td>
-				<div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantTel = $tenantOption['TenantTel'];
-                        }else{
-                            $TenantTel = '';
-                        }
-                     ?>
-				  <input name="TenantTel" type="text" class="am-form-field" value="<?php echo $TenantTel; ?>">
-				</div>
-			  </td>
-          <td>
-    				<div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $TenantBalance = $tenantOption['TenantBalance'];
-                        }else{
-                            $TenantBalance = '';
-                        }
-                     ?>
-    				  <input name="TenantBalance" type="text" class="am-form-field" value="<?php echo $TenantBalance; ?>">
-    				</div>
-  			  </td>
-          <td>
+                <div class="am-form-group search_input none-length">
+                    
+                    <select name="TubulationID">
+                        <option  value="" style="display:none">请选择</option>
+                        <?php if(session('user_base_info.institution_level')==1){;foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; 
+                                if($tenantOption != array()){
+                                    if($tenantOption['TubulationID'] == $v10['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                            <option value="<?php echo $v10['id']; ?>" <?php echo $select; ?>><?php echo $v10['Institution']; ?></option>
+                        <?php }}}elseif(session('user_base_info.institution_level')==2){; foreach($instLst as $k12 => $v12){ ; 
+                                if($tenantOption != array()){
+                                    if($tenantOption['TubulationID'] == $v12['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                        <option value="<?php echo $v12['id']; ?>" <?php echo $select; ?>><?php echo $v12['Institution']; ?></option>
+                        <?php }} ; ?>
+                    </select>
+                </div>
+              </td>
+              <?php } ; ?>
+                      <td>
+        				<div class="am-input-group am-input-group-sm">
+                            <?php
+                                if($tenantOption != array()){
+                                    $TenantTel = $tenantOption['TenantTel'];
+                                }else{
+                                    $TenantTel = '';
+                                }
+                             ?>
+        				  <input name="TenantTel" type="text" class="am-form-field" value="<?php echo $TenantTel; ?>">
+        				</div>
+        			  </td>
+                  <td>
+            				<div class="am-input-group am-input-group-sm">
+                             <?php
+                                if($tenantOption != array()){
+                                    $TenantBalance = $tenantOption['TenantBalance'];
+                                }else{
+                                    $TenantBalance = '';
+                                }
+                             ?>
+            				  <input name="TenantBalance" type="text" class="am-form-field" value="<?php echo $TenantBalance; ?>">
+            				</div>
+          			  </td>
+                <td>
                   <div class="am-input-group am-input-group-sm">
                       <?php
                         if($tenantOption != array()){
@@ -218,9 +254,8 @@
                      ?>
                       <input name="ArrearRent" type="text" class="am-form-field" value="<?php echo $ArrearRent; ?>">
                   </div>
-
-  			  </td>
-                <td>
+  			        </td>
+                <td class="dong_none">
                     <div class="am-input-group am-input-group-sm">
                     <?php
                         if($tenantOption != array()){
@@ -233,7 +268,7 @@
                     </div>
 
                 </td>
-                <td>
+                <td class="dong_none">
                     <div class="am-input-group am-input-group-sm">
                     <?php
                         if($tenantOption != array()){
@@ -246,35 +281,11 @@
                     </div>
 
                 </td>
-                <td>
-                    <div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $TenantQQ = $tenantOption['TenantQQ'];
-                        }else{
-                            $TenantQQ = '';
-                        }
-                     ?>
-                        <input name="TenantQQ" type="text" class="am-form-field" value="<?php echo $TenantQQ; ?>">
-                    </div>
-
-                </td>
-                <td>
-                    <div class="am-input-group am-input-group-sm">
-                     <?php
-                        if($tenantOption != array()){
-                            $BankID = $tenantOption['BankID'];
-                        }else{
-                            $BankID = '';
-                        }
-                     ?>
-                        <input name="BankID" type="text" class="am-form-field" value="<?php echo $BankID; ?>">
-                    </div>
-                </td>
+                
 			         <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:114px;">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
-                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/ConfirmTenantInfo/index.html"><span class="ResetIcon"></span>重置</a>
+                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="<?php echo url('ConfirmTenantInfo/index'); ?>"><span class="ResetIcon"></span>重置</a>
                 </div>
               </td>
             </tr>
@@ -283,7 +294,7 @@
 
 		  <?php foreach($tenantLst as $k1 => $v1){; ?>
 
-            <tr>
+            <tr class="check001">
                 <td>
                   <span class="piaochecked">
                     <input class="checkId radioclass" type="radio" name='choose' value="<?php echo $v1['TenantID']; ?>"/>
@@ -292,24 +303,21 @@
                 <td><?php echo ++$k1; ?></td>
                 <td><?php echo $v1['TenantID']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantName']; ?></td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
+                <?php }; ?>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantTel']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantBalance']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['ArrearRent']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantValue']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantWeChat']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['TenantQQ']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['BankID']; ?></td>
-<!--                 <td class="am-hide-sm-only">ffff</td>
-                <td class="am-hide-sm-only">ffff</td> -->
-				  <td>
-					  <div class="am-btn-group am-btn-group-xs">
-                          <?php if(in_array(57,$threeMenu)){ ; ?>
-						    <button class="am-btn am-btn-default am-btn-xs am-text-primary details TenantDetailBtn" value="<?php echo $v1['TenantID']; ?>"> 明细</button>
-                          <?php }; if(in_array(520,$threeMenu)){ ; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary details ConfirmTenantBtn" value="<?php echo $v1['TenantID']; ?>"> 确认</button>
-                          <?php }; ?>
-                      </div>
-				  </td>
+                <td class="dong_none"><?php echo $v1['TenantValue']; ?></td>
+                <td class="dong_none"><?php echo $v1['TenantWeChat']; ?></td>
+        			  <td>
+        				  <div class="am-btn-group am-btn-group-xs">
+                                <?php if(in_array(57,$threeMenu)){ ; ?>
+        					    <button class="am-btn am-btn-default am-btn-xs am-text-primary details TenantDetailBtn" value="<?php echo $v1['TenantID']; ?>">明细</button>
+                                <?php }; ?>
+                  </div>
+        			  </td>
             </tr>
 
 		  <?php }; ?>
@@ -325,31 +333,31 @@
       </div>
     </div>
   </div>
+
   <!-- content end -->
-  <!-- 删除类型选择 -->
-   <!-- <div id="deleteChoose" style="display:none;text-align: center;">
+    <!-- <div id="deleteChoose" style="display:none;text-align: center;">
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="2">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="2">
       </span>
       <span>房改</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="3">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="3">
       </span>
       <span>拆迁，已注销</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="4">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="4">
       </span>
       <span>数据合并</span>
       <span class="piaochecked" style="float:none;">
-        <input class="checkId radioclass" type="radio" name="infoDeleteType" value="5">
+        <input class="checkId radioclass" type="radio" name="roomDeleteType" value="5">
       </span>
       <span>数据作废</span>
   </div> -->
   <div id="deleteChoose" style="display:none; text-align: center; margin: 20px;">
-      <button id="HouseChange" class="am-btn am-btn-secondary " value="10" name="infoDeleteType" style="background: #0086ff;border:none">房改</button>
-      <button id="HouseRemove" class="am-btn am-btn-secondary" value="11" name="infoDeleteType" style="background: #0086ff;border:none">拆迁，已注销</button>
-      <button id="DateTogther" class="am-btn am-btn-secondary" value="12"  name="infoDeleteType"style="background: #0086ff;border:none">数据合并</button>
-      <button id="DateLose" class="am-btn am-btn-secondary" value="13"  name="infoDeleteType"style="background: #0086ff;border:none">数据作废</button>
+      <button id="HouseChange" class="am-btn am-btn-secondary " value="10" name="roomDeleteType" style="background: #0086ff;border:none">房改</button>
+      <button id="HouseRemove" class="am-btn am-btn-secondary" value="11" name="roomDeleteType" style="background: #0086ff;border:none">拆迁，已注销</button>
+      <button id="DateTogther" class="am-btn am-btn-secondary" value="12"  name="roomDeleteType"style="background: #0086ff;border:none">数据合并</button>
+      <button id="DateLose" class="am-btn am-btn-secondary" value="13"  name="roomDeleteType"style="background: #0086ff;border:none">数据作废</button>
   </div>
   <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
 <form  id="TenantForm" class="am-form" data-am-validator style="display:none;margin-top:1.6rem;">
@@ -358,89 +366,63 @@
 		<!--<legend>添加楼栋</legend>-->
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-email-2" class="label_style">租户编号：</label>
-			  <div class="am-u-md-8">
-				<input type="number" name="TenantID" id="doc-vld-email-2" placeholder="租户编号" required/>
-			  </div>
-			</div>
-
-			<!--<div class="am-form-group am-u-md-12">-->
-				<!--<label for="doc-vld-email-2" class="label_style">房屋编号：</label>-->
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" name="HouseID" id="doc-vld-email-3" placeholder="产权证号" required/>-->
-				<!--</div>-->
-			<!--</div>-->		
-			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">联系电话：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="TenantTel" id="doc-vld-email-3" placeholder="联系电话" required/>
+				<label class="label_style">联系电话：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="TenantTel" placeholder=""/>
 				</div>
 			</div>	
 				
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">年龄：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="TenantAge" id="doc-vld-email-3" placeholder="年龄" required/>
+			  <label class="label_style">年龄：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="TenantAge" placeholder="" />
 				</div>
 			</div>	
 
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">微信号：</label>
+			  <label class="label_style">微信号：</label>
 				<div class="am-u-md-8">
-					<input type="text" name="TenantWeChat" id="doc-vld-email-3" placeholder="微信号" required/>
+					<input type="text" name="TenantWeChat" placeholder="" />
 				</div>
 			</div>
-
-<!-- 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">证件类型：</label>
-				<div class="am-u-md-8" style="float:left;">
-					<select name="TenantPaperType" id="doc-select-7" >
-						<option value="1">身份证</option>
-						<option value="2">护照</option>
-						<option value="3">军官证</option>
-						<option value="4">工商执照扫描件</option>
-					</select>
-				</div>
-			</div> -->
 			
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">身份证：</label>
-				<div class="am-u-md-8">
-					<input type="text" name="TenantNumber" id="IDCard" placeholder="证件号码" required/>
+			  <label class="label_style">身份证：</label>
+				<div class="am-u-md-8" >
+					<input type="text" name="TenantNumber" id="IDCard" placeholder="" />
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">银行卡号：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="BankID" id="doc-vld-email-5" placeholder="银行卡号" required/>
+			  <label class="label_style">银行卡号：</label>
+				<div class="am-u-md-8" >
+					<input type="number" name="BankID" placeholder="" />
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">欠租情况：</label>
+			  <label class="label_style">欠租金额：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="ArrearRent" id="doc-vld-email-5" value="0.00" required/>
+					<input type="number" name="ArrearRent" value="0.00" />
 				</div>
 			</div>
-<!-- 
-			<div class="am-form-group am-u-md-12">
-			  <label for="imgUp" class="label_style">影像资料：</label>
-				<div class="am-form-group am-form-file am-u-md-8">
-				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-				  <input type="file" name="TenantImageIDS" id="imgUp" multiple>
-				</div>
-			</div>
-			<img class="am-form-group am-u-md-12" id="imgShow" style="width:300px;height:150px;"> -->
 		</div>
 		
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">租户姓名：</label>
+			  <label class="label_style">租户姓名：</label>
 				<div class="am-u-md-8">
-					<input type="text" name="TenantName" id="doc-vld-email-3" placeholder="租户姓名" required/>
+					<input type="text" name="TenantName" placeholder="" required/>
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">性别：</label>
+				<label class="label_style">账户余额：</label>
+				<div class="am-u-md-8" data-am-validator>
+					<input type="number" name="TenantBalance" value="0.00" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">性别：</label>
 				<div class="am-u-md-8">
 					<label class="am-radio-inline">
 						<input type="radio"  value="1" name="TenantSex" checked="checked" required> 男
@@ -450,34 +432,24 @@
 					</label>
 				</div>
 			</div>
-			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">余额：</label>
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" id="doc-vld-email-10" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" placeholder="选择年份" data-am-datepicker readonly/>-->
-				<!--</div>-->
-				<div class="am-u-md-8" data-am-validator>
-					<input type="number" name="TenantBalance" id="doc-vld-email-10" value="0.00" required/>
-				</div>
-				<!--<input type="text" class="am-u-md-8" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" placeholder="日历组件" data-am-datepicker readonly/>-->
-			</div>
 
 			<!--新加-->
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">QQ号：</label>
+			  <label class="label_style">QQ号：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="TenantQQ" id="doc-vld-email-3" placeholder="QQ号" required/>
+					<input type="number" name="TenantQQ" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">银行机构：</label>
-				<div class="am-u-md-8">
-					<input type="text" name="BankName" id="doc-vld-email-3" placeholder="银行机构" required/>
+			  <label class="label_style">银行机构：</label>
+				<div class="am-u-md-8" >
+					<input type="text" name="BankName" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">诚信值：</label>
+			  <label class="label_style">诚信值：</label>
 				<div class="am-u-md-8">
-					<input type="text" name="TenantValue" id="doc-vld-email-3" placeholder="诚信值" required/>
+					<input type="text" name="TenantValue" value="100" placeholder=""/>
 				</div>
 			</div>
 		</div>
@@ -486,7 +458,7 @@
 <script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
   <div id="TenantDetail" class="am-form" style="display:none;margin-top:1.6rem;">
 
-	  <fieldset >
+	  <fieldset>
 		<!--<legend>添加楼栋</legend>-->
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
@@ -507,6 +479,7 @@
 			  <label for="doc-select-2" class="label_style">联系电话：</label>
 			  <div class="am-u-md-8" style="float:left;">
 					<p class="detail_p_style" id="TenantTel">加载中</p>
+					
 			  </div>
 			</div>
 
@@ -600,7 +573,7 @@
 			  <label for="doc-select-7" class="label_style">登记机构：</label>
 			  <div class="am-u-md-8" style="float:left;">
 					<p class="detail_p_style" id="InstitutionName">加载中</p>
-			  </div>
+				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
 			  <label for="doc-select-7" class="label_style">登记时间：</label>
@@ -608,6 +581,7 @@
 					<p class="detail_p_style" id="CreateTime">加载中</p>
 			  </div>
 			</div>
+			
 		</div>
 	  </fieldset>
   </div>
@@ -619,83 +593,66 @@
 		<!--<legend>添加楼栋</legend>-->
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-email-2" class="label_style">租户编号：</label>
+			  <label class="label_style">租户编号：</label>
 			  <div class="am-u-md-8">
-				<input type="number" name="TenantID" onfocus=this.blur() id="TenantI" placeholder="租户编号" required/>
+				<input type="number" name="TenantID" onfocus=this.blur(); id="TenantI" placeholder=""/>
 			  </div>
 			</div>
-
 			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">联系电话：</label>
+				<label class="label_style">联系电话：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="TenantTel" id="TenantTe" placeholder="联系电话" required/>
-				</div>
-			</div>	
-				
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">年龄：</label>
-				<div class="am-u-md-8">
-					<input type="number" name="TenantAge" id="TenantAg" placeholder="年龄" required/>
-				</div>
-			</div>	
-
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">微信号：</label>
-				<div class="am-u-md-8">
-					<input type="text" name="TenantWeChat" id="TenantWeCha" placeholder="微信号" required/>
-				</div>
-			</div>
-
-<!-- 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">证件类型：</label>
-				<div class="am-u-md-8" style="float:left;">
-					<select name="TenantPaperType" id="doc-select-7" >
-						<option value="1">身份证</option>
-						<option value="2">护照</option>
-						<option value="3">军官证</option>
-						<option value="4">工商执照扫描件</option>
-					</select>
-				</div>
-			</div> -->
-			
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">身份证：</label>
-				<div class="am-u-md-8">
-					<input type="text" name="TenantNumber" id="TenantNumbe" placeholder="证件号码" required/>
+					<input type="number" name="TenantTel" id="TenantTe" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">银行卡号：</label>
+			  <label class="label_style">年龄：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="BankID" id="BanI" placeholder="银行卡号" required/>
+					<input type="number" name="TenantAge" id="TenantAg" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">欠租情况：</label>
+			  <label class="label_style">微信号：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="ArrearRent" id="ArrearRen" value="0.00" required/>
+					<input type="text" name="TenantWeChat" id="TenantWeCha" placeholder=""/>
 				</div>
 			</div>
-<!-- 
 			<div class="am-form-group am-u-md-12">
-			  <label for="imgUp" class="label_style">影像资料：</label>
-				<div class="am-form-group am-form-file am-u-md-8">
-				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-				  <input type="file" name="TenantImageIDS" id="imgUp" multiple>
+			  <label class="label_style">身份证：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="TenantNumber" id="TenantNumbe" placeholder=""/>
 				</div>
 			</div>
-			<img class="am-form-group am-u-md-12" id="imgShow" style="width:300px;height:150px;"> -->
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">银行卡号：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="BankID" id="BanI" placeholder=""/>
+				</div>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">欠租金额：</label>
+				<div class="am-u-md-8">
+					<input type="number" name="ArrearRent" id="ArrearRen" value="0.00"/>
+				</div>
+			</div>
 		</div>
 		
 		<div class="am-u-md-6">
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">租户姓名：</label>
+			  <label class="label_style">租户姓名：</label>
 				<div class="am-u-md-8">
 					<input type="text" name="TenantName" id="TenantNam" placeholder="租户姓名" required/>
 				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">性别：</label>
+				<label class="label_style">余额：</label>
+				<div class="am-u-md-8" data-am-validator>
+					<input type="number" name="TenantBalance" id="TenantBalanc" value="0.00" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>
+			<div class="am-form-group am-u-md-12">
+			  <label class="label_style">性别：</label>
 				<div class="am-u-md-8">
 					<label class="am-radio-inline">
 						<input type="radio"  value="1" name="TenantSex" checked="checked" required> 男
@@ -706,33 +663,21 @@
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-				<label for="doc-vld-email-2" class="label_style">余额：</label>
-				<!--<div class="am-u-md-8">-->
-					<!--<input type="text" id="doc-vld-email-10" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" placeholder="选择年份" data-am-datepicker readonly/>-->
-				<!--</div>-->
-				<div class="am-u-md-8" data-am-validator>
-					<input type="number" name="TenantBalance" id="TenantBalanc" value="0.00" required/>
-				</div>
-				<!--<input type="text" class="am-u-md-8" data-am-datepicker="{format: 'yyyy ', viewMode: 'years', minViewMode: 'years'}" placeholder="日历组件" data-am-datepicker readonly/>-->
-			</div>
-
-			<!--新加-->
-			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">QQ号：</label>
+			  <label class="label_style">QQ号：</label>
 				<div class="am-u-md-8">
-					<input type="number" name="TenantQQ" id="TenantQ" placeholder="QQ号" required/>
+					<input type="number" name="TenantQQ" id="TenantQ" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">银行机构：</label>
+			  <label class="label_style">银行机构：</label>
 				<div class="am-u-md-8">
-					<input type="text" name="BankName" id="BanNam" placeholder="银行机构" required/>
+					<input type="text" name="BankName" id="BanNam" placeholder=""/>
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">诚信值：</label>
+			  <label class="label_style">诚信值：</label>
 				<div class="am-u-md-8">
-					<input type="text" name="TenantValue" id="TenantValu" placeholder="诚信值" required/>
+					<input type="text" name="TenantValue" id="TenantValu" placeholder=""/>
 				</div>
 			</div>
 		</div>
@@ -748,7 +693,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -915,6 +860,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+
+
+
 <div id="notice_info_dialog" hidden="hidden">
 	<div>
 	    <span id="title_info"></span><br/>
@@ -985,6 +933,27 @@
 		</div>
 		<div class="version_content" style="margin-left:4px;">
 			<h3 style="font-size:24px;">武房公房系统版本更新日志</h3>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-08-06</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋调整异动上线</p>
+			<p>2.楼栋调整异动上线</p>
+			<p>3.租金减免异动伤心</p>
+			<p>4.空租异动上线</p>
+			<p>5.暂停计租异动上线</p>
+			<p>6.陈欠核销异动上线</p>
+			<p>7.新发租异动上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金追加上传资料</p>
+			<p>2.使用权变更上传资料</p>
+			<p>3.异动与楼栋、房屋和报表的关联</p>
 		</div>
 	</div>
 	<div class="content">
@@ -1197,7 +1166,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 </script>
 
 <script type="text/javascript" src="/public/static/gf/js/validation.js"></script>
-<script  type="text/javascript" src="/public/static/gf/viewJs/confirm_tenant_form.js" ></script>
+<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/confirm_tenant_form.js"></script>
 
 </body>
 </html>

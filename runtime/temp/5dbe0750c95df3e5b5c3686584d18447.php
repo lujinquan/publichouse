@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:11:{s:70:"/usr/share/nginx/publichouse/application/ph/view/house_info/index.html";i:1530074017;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:42:"application/ph/view/house_info/detail.html";i:1528342025;s:40:"application/ph/view/house_info/form.html";i:1528342025;s:42:"application/ph/view/house_info/modify.html";i:1528342025;s:44:"application/ph/view/house_info/RentForm.html";i:1531549142;s:45:"application/ph/view/house_info/RentFormM.html";i:1531549142;s:44:"application/ph/view/house_info/beInDebt.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1532308676;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:11:{s:70:"/usr/share/nginx/publichouse/application/ph/view/house_info/index.html";i:1536559472;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:42:"application/ph/view/house_info/detail.html";i:1533511343;s:40:"application/ph/view/house_info/form.html";i:1537066000;s:42:"application/ph/view/house_info/modify.html";i:1533511343;s:44:"application/ph/view/house_info/RentForm.html";i:1534760328;s:45:"application/ph/view/house_info/RentFormM.html";i:1536048298;s:44:"application/ph/view/house_info/beInDebt.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1537405974;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -108,7 +108,7 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
 <!-- content start -->
@@ -159,6 +159,7 @@
                     <th class="table-set">产别</th>
                     <th class="table-set">使用性质</th>
                     <th class="table-set">规定月租金</th>
+                    <th class="table-title">计算租金</th>
                     <th class="table-set dong_none">单元号</th>
                     <th class="table-set dong_none">楼层号</th>
                     <th class="table-set">使用面积</th>
@@ -220,7 +221,8 @@
                                 
                                 <select name="TubulationID">
                                     <option value="" style="display:none">请选择</option>
-                                    <?php if(session('user_base_info.institution_level')==1){;foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){;                                 if(isset($houseOption['TubulationID'])){
+                                    <?php if(session('user_base_info.institution_level')==1){;foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; 
+                                if(isset($houseOption['TubulationID'])){
                                     if($houseOption['TubulationID'] == $v10['id']){
                                         $select ='selected';
                                     }else{
@@ -232,7 +234,8 @@
                                 ?>
                                     <option value="<?php echo $v10['id']; ?>"
                                             <?php echo $select; ?>><?php echo $v10['Institution']; ?></option>
-                                    <?php }}}elseif(session('user_base_info.institution_level')==2){; foreach($instLst as $k12 => $v12){ ;                                 if(isset($houseOption['TubulationID'])){
+                                    <?php }}}elseif(session('user_base_info.institution_level')==2){; foreach($instLst as $k12 => $v12){ ; 
+                                if(isset($houseOption['TubulationID'])){
                                     if($houseOption['TubulationID'] == $v12['id']){
                                         $select ='selected';
                                     }else{
@@ -253,7 +256,8 @@
                             <div class="am-form-group search_input">
                                 <select name="OwnerType">
                                     <option value="" style="display:none">请选择</option>
-                                    <?php foreach($owerLst as $k3 =>$v3){;                                if(isset($houseOption['OwnerType'])){
+                                    <?php foreach($owerLst as $k3 =>$v3){;
+                                if(isset($houseOption['OwnerType'])){
                                     if($houseOption['OwnerType'] == $v3['id']){
                                         $select ='selected';
                                     }else{
@@ -276,7 +280,8 @@
                             <div class="am-form-group search_input">
                                 <select name="UseNature">
                                     <option value="" style="display:none">请选择</option>
-                                    <?php foreach($useNatureLst as $k0 =>$v0){;                                if(isset($houseOption['UseNature'])){
+                                    <?php foreach($useNatureLst as $k0 =>$v0){;
+                                if(isset($houseOption['UseNature'])){
                                     if($houseOption['UseNature'] == $v0['id']){
                                         $select ='selected';
                                     }else{
@@ -303,25 +308,27 @@
                                 <input name="HousePrerent" type="text" class="am-form-field" value="<?php echo $HousePrerent; ?>">
                             </div>
                         </td>
-
+                        <td>
+                            <div style="width:50px;"></div>
+                        </td>
                         <td class="dong_none">
-                            <div style="width:120px;">总规租：<?php echo $HousePrerentSum; ?></div>
+                            <div style="width:120px;"></div>
                         </td>
                         <td class="dong_none">
                             <div style="width:50px;"></div>
                         </td>
                         <td>
-                            <div style="width:50px;"><?php echo $HouseUseareaSum; ?></div>
+                            <div style="width:50px;"></div>
                         </td>
                         <td class="dong_none">
-                            <div style="width:50px;"><?php echo $LeasedAreaSum; ?></div>
+                            <div style="width:50px;"></div>
                         </td>
                         <td>
-                            <div style="width:60px;"><?php echo $HouseAreaSum; ?></div>
+                            <div style="width:60px;"></div>
                         </td>
 
                         <td>
-                            <div style="width:60px;"><?php echo $ArrearRentSum; ?></div>
+                            <div style="width:60px;"></div>
                         </td>
 
                         <td>
@@ -360,6 +367,7 @@
                     
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
+                    <td class="am-hide-sm-only" <?php if((($v1['HousePrerent'] != $v1['ApprovedRent']) && ($v1['UseNature'] == '住宅'))): ?>style="color:red;" <?php endif; ?>><?php echo $v1['ApprovedRent']; ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HouseUsearea']; ?></td>
@@ -482,7 +490,7 @@
 			</div>
 
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-vld-age-2" class="label_style">计算原价：</label>
+			  <label for="doc-vld-age-2" class="label_style">房屋原价：</label>
 			  <div class="am-u-md-8">
 					<p class="detail_p_style" id="OldOprice"></p>
 			  </div>
@@ -503,7 +511,7 @@
 				</div>
 			</div>
 			<div class="am-form-group am-u-md-12">
-			  <label for="doc-select-8" class="label_style">是否住改非：</label>
+			  <label for="doc-select-8" class="label_style" style="width:80px;">是否住改非：</label>
 			  <div class="am-u-md-8" style="float:left;">
 					<p class="detail_p_style" id="NonliveIf"></p>
 			  </div>
@@ -785,13 +793,13 @@
             </div>
 
             <div class="am-form-group am-u-md-12">
-                <label for="OldOprice" class="label_style">计算原价：</label>
+                <label for="OldOprice" class="label_style">房屋原价：</label>
                 <div class="am-u-md-8">
                     <input type="text" name="OldOprice" id="OldOprice" placeholder="" required/>
                 </div>
             </div>
 
-            <div class="am-form-group am-u-md-12">
+<!--             <div class="am-form-group am-u-md-12">
                 <label for="OldOprice" class="label_style">租差：</label>
                 <div class="am-u-md-8">
                     <input type="text" name="DiffRent" id="DiffRent" placeholder="" required/>
@@ -805,7 +813,7 @@
                     <input type="text" name="ProtocolRent" id="ProtocolRent" placeholder="" required/>
                 </div>
                 <i style="font-style: normal; color:red; vertical-align: middle;">*</i>
-            </div>
+            </div> -->
         </div>
         <div class="am-u-md-6">
             <div class="am-form-group am-u-md-12">
@@ -851,7 +859,7 @@
                 </div>
             </div>
 
-            <div class="am-form-group am-u-md-12">
+<!--             <div class="am-form-group am-u-md-12">
                 <label class="label_style">是否房改：</label>
                 <div class="am-u-md-8">
                     <label class="am-radio-inline">
@@ -885,7 +893,7 @@
                         <input type="radio" value="0" name="IfSuspend" checked="checked"> 否
                     </label>
                 </div>
-            </div>
+            </div> -->
 
             <div class="am-form-group am-u-md-12">
                 <label for="imgUp" class="label_style">影像资料：</label>
@@ -895,7 +903,6 @@
                 </div>
             </div>
             <img class="am-form-group am-u-md-12" id="imgShow" style="width:312px;height:150px;float:left;">
-            <div class="am-form-group am-u-md-12">
 
     </fieldset>
 </form>
@@ -946,7 +953,8 @@
 					<input type="text" name="DoorID" id="DoorI" placeholder="" required/>
 				</div>
 			</div>
-			<div class="am-form-group am-u-md-12">
+
+<!-- 			<div class="am-form-group am-u-md-12">
 				<label class="label_style">租差：</label>
 				<div class="am-u-md-8">
 					<input type="text" name="DiffRent" id="DiffRen" placeholder="" required/>
@@ -960,13 +968,22 @@
 					<input type="text" name="ProtocolRent" id="ProtocolRen" placeholder="" required/>
 				</div>
 				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
-			</div>
+			</div> -->
+
 			<div class="am-form-group am-u-md-12">
-				<label class="label_style">计算原价：</label>
+				<label class="label_style">房屋原价：</label>
 				<div class="am-u-md-8">
 					<input type="text" name="OldOprice" id="OldOpric" placeholder="" required/>
 				</div>
 			</div>
+
+			<div class="am-form-group am-u-md-12">
+			  	<label class="label_style">建筑面积：</label>
+				<div class="am-u-md-8">
+					<input type="text" name="HouseArea" id="HouseAre" placeholder="" required/>
+				</div>
+				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
+			</div>			
 			<!-- <div class="am-form-group am-u-md-12">
 				<label class="label_style">年度欠租：</label>
 				<div class="am-u-md-8">
@@ -984,13 +1001,7 @@
 				</div>
 				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>
-			<div class="am-form-group am-u-md-12">
-			  	<label class="label_style">建筑面积：</label>
-				<div class="am-u-md-8">
-					<input type="text" name="HouseArea" id="HouseAre" placeholder="" required/>
-				</div>
-				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
-			</div>
+
 			<div class="am-form-group am-u-md-12">
 				<label class="label_style">套内建面：</label>
 				<div class="am-u-md-8">
@@ -1015,7 +1026,7 @@
 				</div>
 			</div>
 
-			<div class="am-form-group am-u-md-12">
+<!-- 			<div class="am-form-group am-u-md-12">
 				<label class="label_style">是否房改：</label>
 				<div class="am-u-md-8">
 					<label class="am-radio-inline">
@@ -1049,7 +1060,7 @@
 						<input type="radio" value="0" name="IfSuspend" > 否
 					</label>
 				</div>
-			</div>
+			</div> -->
 			<div class="am-form-group am-u-md-12">
 			  <label for="imgReload" class="label_style">影像资料：</label>
 				<div class="am-form-group am-form-file am-u-md-8">
@@ -1144,12 +1155,15 @@
 		 	<li style="width:6%">产别</li>
 		    <li style="width:6%">单元号</li>
 		    <li style="width:6%">层次</li>
-		    <li style="width:7%">使用面积</li>
+		    <li style="width:7%">实有面积</li>
 		    <li style="width:7%">基价折减</li>
-		    <li style="width:7%">计租面积</li>
+		    <li style="width:6%">计租面积</li>
 		    <li style="width:7%">层次调解率</li>
-		    <li style="width:7%">月租金</li>
-		    <li style="width:5%">状态</li>
+
+		    <li style="width:4%">租金</li>
+		    <li style="width:5%">计算租金</li>
+
+		    <li style="width:4%">状态</li>
     	</ul>
     </div>
     
@@ -1243,8 +1257,8 @@
 	<li style="width:4%" class="m5">
 		<select name="OwnerType" class="fontS1">
 		<option  value="" style="display:none"></option>
-			<?php foreach($owerLst as $k3 =>$v3){;?>
-					<option value="<?php echo $k3+1; ?>"><?php echo $v3['OwnerType']; ?></option>
+			<?php foreach($owerLst as $v3){;?>
+					<option value="<?php echo $v3['id']; ?>"><?php echo $v3['OwnerType']; ?></option>
 			<?php }; ?>
 		</select>
 	</li>	
@@ -1257,7 +1271,8 @@
 	</li>
 	<li style="width:4%;height:35px"></li>
 	<li style="width:6%;height:35px"></li>
-	<li style="width:4%;height:35px"></li>
+	<li style="width:4%;height:35px"><input type="text"  class="fontS1"></li>
+	<li style="width:5%;height:35px"></li>
 	<li style="width:3%" class="delSD"><input type="hidden" class="pStatus" value="0"><img src="/public/static/gf/icons/del.png" class="del-styled"></li>
 </ul>
 <input type="text" value="" name="AddRent[deleteRoom][]" class="deleteRoom" style="display:none">
@@ -1334,13 +1349,13 @@
 		    <li style="width:7%" class="m5">绑定房屋</li>
 		    <li style="width:4%" class="m5">产别</li>
 		    <li style="width:3%" class="m5">单元号</li>
-		    <li style="width:3%" class="m5">层次</li>                                                                                     
-		    <li style="width:4%" class="m5">使用面积</li>
+		    <li style="width:3%" class="m5">层次</li>                                        
+		    <li style="width:4%" class="m5">实有面积</li>
 		    <li style="width:4%" class="m5">基价折减</li>
 		    <li style="width:4%" >计租面积</li>
 		    <li style="width:6%" >层次调解率</li>
-<!-- 		    <li style="width:4%" >规定租金</li> -->
-		    <li style="width:4%" >月租金</li>
+		    <li style="width:4%" >租金</li>
+		    <li style="width:5%" >计算租金</li>
 		    <li style="width:3%" >状态</li>
     </ul>
     </div>
@@ -1440,7 +1455,6 @@
 
 </fieldset>
  </form>
-   
 <div id="BeInDebt" class="am-form" style="display:none;margin-top:1.6rem;">
 <style>
 	.table_input{width:70px;height:30px;}
@@ -1557,7 +1571,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -1724,6 +1738,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+
+
+
 <div id="notice_info_dialog" hidden="hidden">
 	<div>
 	    <span id="title_info"></span><br/>
@@ -1794,6 +1811,27 @@
 		</div>
 		<div class="version_content" style="margin-left:4px;">
 			<h3 style="font-size:24px;">武房公房系统版本更新日志</h3>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-08-06</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋调整异动上线</p>
+			<p>2.楼栋调整异动上线</p>
+			<p>3.租金减免异动上线</p>
+			<p>4.空租异动上线</p>
+			<p>5.暂停计租异动上线</p>
+			<p>6.陈欠核销异动上线</p>
+			<p>7.新发租异动上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金追加上传资料</p>
+			<p>2.使用权变更上传资料</p>
+			<p>3.异动与楼栋、房屋和报表的关联</p>
 		</div>
 	</div>
 	<div class="content">
@@ -2006,7 +2044,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 </script>
 
 
-<script type="text/javascript" src="/public/static/gf/viewJs/confirm_house_form2.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/house_form.js"></script>
 
 </body>
 </html>

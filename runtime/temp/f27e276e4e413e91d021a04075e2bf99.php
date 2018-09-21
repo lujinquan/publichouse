@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:9:{s:68:"/usr/share/nginx/publichouse/application/ph/view/ban_info/index.html";i:1532052675;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:38:"application/ph/view/ban_info/form.html";i:1528342025;s:40:"application/ph/view/ban_info/modify.html";i:1531738055;s:40:"application/ph/view/ban_info/detail.html";i:1528342025;s:47:"application/ph/view/ban_info/ban_structure.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1532308676;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:9:{s:68:"/usr/share/nginx/publichouse/application/ph/view/ban_info/index.html";i:1533511343;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:38:"application/ph/view/ban_info/form.html";i:1528342025;s:40:"application/ph/view/ban_info/modify.html";i:1531738055;s:40:"application/ph/view/ban_info/detail.html";i:1533511343;s:47:"application/ph/view/ban_info/ban_structure.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1537405974;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -108,7 +108,7 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
   <!-- content start -->
@@ -1427,65 +1427,112 @@
         <div class="am-u-md-6">
 
             <div class="am-form-group am-u-md-12">
-                <label for="doc-vld-email-2" class="label_style">楼栋地址：</label>
+                <label class="label_style">楼栋地址：</label>
                 <div class="am-u-md-8">
                     <p class="detail_p_style" id="BanAddress"></p>
                 </div>
             </div>
 
             <div class="am-form-group am-u-md-12">
-                <label for="doc-vld-email-2" class="label_style">楼栋编号：</label>
+                <label class="label_style">楼栋编号：</label>
                 <div class="am-u-md-8">
                     <p class="detail_p_style" id="BanID"></p>
                 </div>
             </div>
-
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">栋号：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailBanNumber"></p>
+                </div>
+            </div>
 
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-2" class="label_style">机构名称：</label>
-                <div class="am-u-md-8" style="float:left;">
+                <label class="label_style">机构名称：</label>
+                <div class="am-u-md-8">
                     <p class="detail_p_style" id="TubulationID"></p>
                 </div>
             </div>
 
             <div class="am-form-group am-u-md-12">
-
-                <label for="doc-vld-email-2" class="label_style">产权证号：</label>
+                <label class="label_style">企业建面：</label>
                 <div class="am-u-md-8">
-                    <p class="detail_p_style" id="BanPropertyID"></p>
-                </div>
-
-            </div>
-
-            <div class="am-form-group am-u-md-12">
-
-                <label for="doc-select-4" class="label_style">完损等级：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="DamageGrade"></p>
-                </div>
-            </div>
-
-            <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">土地证号：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="BanLandID"></p>
+                    <p class="detail_p_style" id="detailEnterpriseArea"></p>
                 </div>
             </div>
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">不动产证：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="BanFreeholdID"></p>
+                <label class="label_style">企业规租：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailEnterpriseRent"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">企业原价：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailEnterprisePrice"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">企业栋数：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailEnterpriseNumber"></p>
                 </div>
             </div>
 
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">总户数：</label>
+                <label class="label_style">机关建面：</label>
                 <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="DetailsTotalHouseHolds"></p>
+                    <p class="detail_p_style" id="detailPartyArea"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">机关规租：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailPartyRent"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">机关原价：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailPartyPrice"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-vld-email-2" class="label_style">机关栋数：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailPartyNumber"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">民用建面：</label>
+                <div class="am-u-md-8" style="float:left;">
+                    <p class="detail_p_style" id="detailCivilArea"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">民用规租：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailCivilRent"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">民用原价：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailCivilPrice"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">民用栋数：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailCivilNumber"></p>
                 </div>
             </div>
 
-
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-vld-age-2" class="label_style">使用面积：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="BanUsearea"></p>
+                </div>
+            </div>
             <div class="am-form-group am-u-md-12">
                 <label for="doc-select-8" class="label_style">占地面积：</label>
                 <div class="am-u-md-8" style="float:left;">
@@ -1493,33 +1540,21 @@
                 </div>
             </div>
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">证载面积：</label>
-                <div class="am-u-md-8" style="float:left;">
+                <label class="label_style">证载面积：</label>
+                <div class="am-u-md-8">
                     <p class="detail_p_style" id="detailActualArea"></p>
                 </div>
             </div>
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">栋建面：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="detailBanArea"></p>
+                <label for="doc-vld-email-2" class="label_style">产权证号：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailBanPropertyID"></p>
                 </div>
             </div>
             <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">企业建面：</label>
+                <label for="doc-select-8" class="label_style">土地证号：</label>
                 <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="detailEnterpriseArea"></p>
-                </div>
-            </div>
-            <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">机关建面：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="detailPartyArea"></p>
-                </div>
-            </div>
-            <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">民用建面：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="detailCivilArea"></p>
+                    <p class="detail_p_style" id="BanLandID"></p>
                 </div>
             </div>
             <!--暂无相关信息-->
@@ -1530,26 +1565,7 @@
               </div>
             </div> -->
 
-            <!--<div class="am-form-group am-u-md-12">-->
-            <!--<label for="doc-vld-name-2" class="label_style">企业原价：</label>-->
-            <!--<div class="am-u-md-8">-->
-            <!--<p class="detail_p_style"></p>-->
-            <!--</div>-->
-            <!--</div>-->
 
-            <!--<div class="am-form-group am-u-md-12">-->
-            <!--<label for="doc-vld-email-2" class="label_style">机关原价：</label>-->
-            <!--<div class="am-u-md-8">-->
-            <!--<p class="detail_p_style"></p>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="am-form-group am-u-md-12">-->
-            <!--<label for="doc-vld-url-2" class="label_style">民用原价：</label>-->
-            <!--<div class="am-u-md-8">-->
-            <!--<p class="detail_p_style"></p>-->
-            <!--</div>-->
-            <!--</div>-->
 
             <!--<div class="am-form-group am-u-md-12">-->
             <!--<label for="doc-vld-age-2" class="label_style">合计原价：</label>-->
@@ -1558,20 +1574,20 @@
             <!--</div>-->
             <!--</div>-->
             <!--暂无相关信息-->
-            <div class="am-form-group am-u-md-12">
+            <!-- <div class="am-form-group am-u-md-12">
                 <label for="doc-vld-age-2" class="label_style">规定租金：</label>
                 <div class="am-u-md-8">
                     <p class="detail_p_style" id="PreRent"></p>
                 </div>
-            </div>
-            <div class="am-form-group am-u-md-12">
+            </div> -->
+<!--             <div class="am-form-group am-u-md-12">
                 <label for="doc-select-8" class="label_style">计算租金：</label>
                 <div class="am-u-md-8" style="float:left;">
                     <p class="detail_p_style" id=""></p>
                 </div>
             </div>
-
-            <!-- 			<div class="am-form-group am-u-md-12">
+ -->
+            <!-- 		<div class="am-form-group am-u-md-12">
                           <label for="doc-vld-age-2" class="label_style">楼栋地址：</label>
                           <div class="am-u-md-8">
                                 <p class="detail_p_style" id="BanAddress"></p>
@@ -1579,30 +1595,17 @@
                         </div>
 
                         <div class="am-form-group am-u-md-12">
-                          <label for="doc-vld-age-2" class="label_style">产权来源：</label>
-                          <div class="am-u-md-8">
-                                <p class="detail_p_style" id="PropertySource"></p>
-                          </div>
-                        </div>
-                        <div class="am-form-group am-u-md-12">
                           <label for="doc-vld-age-2" class="label_style">楼栋产别：</label>
                           <div class="am-u-md-8">
                                 <p class="detail_p_style" id="OwnerType"></p>
                           </div>
                         </div> -->
             <div class="am-form-group am-u-md-12">
-                <label for="doc-vld-age-2" class="label_style">拆迁状态：</label>
-                <div class="am-u-md-8">
-                    <p class="detail_p_style" id="RemoveStatus"></p>
-                </div>
-            </div>
-
-            <div class="am-form-group am-u-md-12">
-                <label for="imgReload" class="label_style">土地证电子版：</label>
+                <label for="imgReload" class="">土地证电子版：</label>
             </div>
             <img class="am-form-group am-u-md-12" id="detailImgOne" src="" style="width:310px;height:150px;float:left;">
             <div class="am-form-group am-u-md-12">
-                <label for="imgReload" class="label_style">不动产电子版：</label>
+                <label for="imgReload" class="">不动产电子版：</label>
             </div>
             <img class="am-form-group am-u-md-12" id="detailImgTwo" src="" style="width:310px;height:150px;float:left;">
             <div class="am-form-group am-u-md-12">
@@ -1621,40 +1624,45 @@
 
 
         <div class="am-u-md-6">
-            <div class="am-form-group am-u-md-12">
 
-                <label for="doc-select-5" class="label_style">产别：</label>
-                <div class="am-u-md-8" style="float:left;">
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-select-4" class="label_style">完损等级：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="DamageGrade"></p>
+                </div>
+            </div>
+
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-select-5" class="label_style">楼栋产别：</label>
+                <div class="am-u-md-8">
                     <p class="detail_p_style" id="OwnerType"></p>
                 </div>
             </div>
 
             <div class="am-form-group am-u-md-12">
+                <label for="doc-select-7" class="label_style">使用性质：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="UseNature"></p>
+                </div>
+            </div>
 
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-select-8" class="label_style">结构类别：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="StructureType"></p>
+                </div>
+            </div>
+
+            <div class="am-form-group am-u-md-12">
                 <label for="doc-vld-email-2" class="label_style">建成年份：</label>
                 <div class="am-u-md-8">
                     <p class="detail_p_style" id="BanYear"></p>
                 </div>
             </div>
-
-            <div class="am-form-group am-u-md-12">
-                <label for="doc-select-7" class="label_style">使用性质：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="UseNature"></p>
-                </div>
-            </div>
-
-
-            <div class="am-form-group am-u-md-12">
-                <label for="doc-select-8" class="label_style">结构类别：</label>
-                <div class="am-u-md-8" style="float:left;">
-                    <p class="detail_p_style" id="StructureType"></p>
-                </div>
-            </div>
             <!--新加-->
             <div class="am-form-group am-u-md-12">
                 <label for="doc-select-8" class="label_style">单元数量：</label>
-                <div class="am-u-md-8" style="float:left;">
+                <div class="am-u-md-8">
                     <p class="detail_p_style" id="BanUnitNum"></p>
                 </div>
             </div>
@@ -1672,7 +1680,12 @@
                     <p class="detail_p_style" id="BanFloorStart"></p>
                 </div>
             </div>
-
+            <div class="am-form-group am-u-md-12">
+                <label for="doc-vld-age-2" class="label_style">拆迁状态：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailRemoveStatus"></p>
+                </div>
+            </div>
             <!--<div class="am-form-group am-u-md-12">-->
             <!--<label for="doc-select-8" class="label_style">机构ID：</label>-->
             <!--<div class="am-u-md-8" style="float:left;">-->
@@ -1719,13 +1732,6 @@
               <div class="am-u-md-8">
                     <p class="detail_p_style" id="TotalArea"></p>
               </div>
-            </div>
-
-            <div class="am-form-group am-u-md-12">
-              <label for="doc-vld-age-2" class="label_style">使用面积：</label>
-              <div class="am-u-md-8">
-                    <p class="detail_p_style" id="BanUsearea"></p>
-              </div>
             </div> -->
             <!--<div class="am-form-group am-u-md-12">-->
             <!--<label for="doc-vld-age-2" class="label_style">楼栋状态：</label>-->
@@ -1734,8 +1740,26 @@
             <!--</div>-->
             <!--</div>-->
             <div class="am-form-group am-u-md-12">
+                <label for="doc-vld-age-2" class="label_style">产权来源：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailPropertySource"></p>
+                </div>
+            </div>
 
-                <label for="doc-select-8" class="label_style lh15">历史优秀建筑：</label>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">总户数：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="DetailsTotalHouseHolds"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style">栋系数：</label>
+                <div class="am-u-md-8">
+                    <p class="detail_p_style" id="detailBanRatio"></p>
+                </div>
+            </div>
+            <div class="am-form-group am-u-md-12">
+                <label class="label_style lh15">历史优秀建筑：</label>
                 <div class="am-u-md-8" style="float:left;">
                     <p class="detail_p_style" id="HistoryIf"></p>
                 </div>
@@ -1891,7 +1915,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -2058,6 +2082,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+
+
+
 <div id="notice_info_dialog" hidden="hidden">
 	<div>
 	    <span id="title_info"></span><br/>
@@ -2128,6 +2155,27 @@
 		</div>
 		<div class="version_content" style="margin-left:4px;">
 			<h3 style="font-size:24px;">武房公房系统版本更新日志</h3>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-08-06</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋调整异动上线</p>
+			<p>2.楼栋调整异动上线</p>
+			<p>3.租金减免异动上线</p>
+			<p>4.空租异动上线</p>
+			<p>5.暂停计租异动上线</p>
+			<p>6.陈欠核销异动上线</p>
+			<p>7.新发租异动上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金追加上传资料</p>
+			<p>2.使用权变更上传资料</p>
+			<p>3.异动与楼栋、房屋和报表的关联</p>
 		</div>
 	</div>
 	<div class="content">
@@ -2341,7 +2389,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 
 <script src="https://api.map.baidu.com/api?v=2.0&ak=2xlodrKVRyFNeopCajiMTfgIOr8dnUAe"></script>
 <script type="text/javascript" src="/public/static/gf/js/validation.js"></script>
-<script type="text/javascript" src="/public/static/gf/viewJs/confirm_ban_form.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/ban_form.js"></script>
 
 </body>
 </html>

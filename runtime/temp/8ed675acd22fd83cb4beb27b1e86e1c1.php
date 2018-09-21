@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:70:"/usr/share/nginx/publichouse/application/ph/view/user_audit/index.html";i:1531733080;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:40:"application/ph/view/user_audit/form.html";i:1531549142;s:47:"application/ph/view/user_audit/approveForm.html";i:1531549142;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1532308676;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:70:"/usr/share/nginx/publichouse/application/ph/view/user_audit/index.html";i:1534760328;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:40:"application/ph/view/user_audit/form.html";i:1533542784;s:47:"application/ph/view/user_audit/approveForm.html";i:1531549142;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1537405974;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -108,7 +108,7 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
 <link rel="stylesheet" href="/public/static/gf/css/iconfont.css">
@@ -308,13 +308,13 @@
                         <td><div style="min-width:60px;"></div></td>
                         <td>
                         <div class="am-input-group am-input-group-sm" style="width:130px;">
-                                <?php
-                        if($changeOption != array()){
-                            $CreateTime = $changeOption['CreateTime'];  
-                        }else{
-                            $CreateTime = '';
-                        }
-                     ?>
+                         <?php
+                            if($changeOption != array()){
+                                $CreateTime = $changeOption['CreateTime'];  
+                            }else{
+                                $CreateTime = '';
+                            }
+                         ?>
                         <div class="am-u-sm-6" style="padding:0;">
                               <input style="width:130px;" name="CreateTime" value="<?php echo $CreateTime; ?>" type="text" class="am-form-field" data-am-datepicker value="">
                         </div>
@@ -404,54 +404,58 @@
     <div class="am-form-group am-u-md-12">
         <h2 class="label_title">基本信息：</h2>
     </div>
-    <div class="am-form-group am-u-md-4">
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
         <label class="label_style">房屋编号：</label>
         <label class="label_p_style houseId"></label>
     </div>
-    <div class="am-form-group am-u-md-8">
+    <div class="am-u-md-8">
         <label class="label_style">房屋地址：</label>
         <label class="label_p_style houseAddress" style="width:484px;"></label>
     </div>
-    <div class="am-form-group am-u-md-4">
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
         <label class="label_style">楼层：</label>
         <label class="label_p_style FloorID"></label>
     </div>
-    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-4">
         <label class="label_style">使用面积：</label>
         <label class="label_p_style houseArea"></label>
     </div>
-    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-4">
         <label class="label_style">计租面积：</label>
         <label class="label_p_style leasedArea"></label>
     </div>
-
-    <div class="am-form-group am-u-md-4">
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
         <label class="label_style">转让形式：</label>
         <label id="TypeName" class="label_p_style">交易转让</label>
     </div>
-    <div class="am-form-group am-u-md-4" >
+    <div class="am-u-md-4" >
         <label class="label_style" >备案时间：</label>
         <label class="label_p_style createTime"></label>
     </div>
-    <div class="am-form-group am-u-md-4" >
+    <div class="am-u-md-4" >
         <label class="label_style" >转让金额：</label>
         <label class="label_p_style TransferRent"></label>
     </div>
-
-    <div class="am-form-group am-u-md-4">
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
         <label class="label_style">产别：</label>
         <label class="label_p_style OwnerType"></label>
     </div>
-    <div class="am-form-group am-u-md-4" >
+    <div class="am-u-md-4" >
         <label class="label_style">使用性质：</label>
         <label class="label_p_style useNature"></label>
     </div>
-    <div class="am-form-group am-u-md-4" >
+    <div class="am-u-md-4" >
         <label class="label_style">转让原因：</label>
         <label class="label_p_style ChangeReason"></label>
     </div>
-
-
+</div>
     <div class="am-u-md-12"><hr /></div>
     <div class="am-u-md-4">
       <label class="label_style">原租户：</label>
@@ -536,7 +540,22 @@
           </label>
         </div>
       </div>
-  
+
+      <div class="status_2" style="padding-left:0;display:none;">
+        <div class="am-form-group am-u-md-12">
+            <h2 class="label_title">提交材料：</h2>
+        </div>
+        <div class="am-u-md-12">
+          <div class="am-u-md-5">
+              <p>有偿转让备案单：</p>
+          </div>
+          <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="paidRecordSheet" type="file" name="paidRecordSheet" multiple>
+          </div>
+          <div id="paidRecordSheetShow" class="am-u-md-12"></div>
+        </div>
+    </div>
 <!--     <div class="am-u-md-12 material_3_status_2">
         <div class="am-u-md-5">
             <p>直管公房有偿转让备案单：</p>
@@ -916,7 +935,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -1083,6 +1102,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+
+
+
 <div id="notice_info_dialog" hidden="hidden">
 	<div>
 	    <span id="title_info"></span><br/>
@@ -1153,6 +1175,27 @@
 		</div>
 		<div class="version_content" style="margin-left:4px;">
 			<h3 style="font-size:24px;">武房公房系统版本更新日志</h3>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-08-06</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋调整异动上线</p>
+			<p>2.楼栋调整异动上线</p>
+			<p>3.租金减免异动上线</p>
+			<p>4.空租异动上线</p>
+			<p>5.暂停计租异动上线</p>
+			<p>6.陈欠核销异动上线</p>
+			<p>7.新发租异动上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金追加上传资料</p>
+			<p>2.使用权变更上传资料</p>
+			<p>3.异动与楼栋、房屋和报表的关联</p>
 		</div>
 	</div>
 	<div class="content">

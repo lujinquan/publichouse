@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:5:{s:73:"/usr/share/nginx/publichouse/application/ph/view/repair_middle/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1531738055;s:45:"application/ph/view/repair_middle/detail.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:73:"/usr/share/nginx/publichouse/application/ph/view/repair_middle/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:45:"application/ph/view/repair_middle/detail.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1533542784;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -107,7 +107,8 @@
     </div>
   </div>
   <!-- sidebar end -->
-
+<!-- 版本version显示 -->
+<div class="admin-content" style="display:none;"></div>
   <!-- content start -->
   
   <!-- content start -->
@@ -611,7 +612,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;">© 2017 CTNM.</p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -791,6 +792,166 @@
 	<table id="check_menu"></table><br/>
 	<span id="most_count" style="color:red" hidden="hidden">最多只能选择四项！</span>
 </div>
+<style>
+	#version{
+		width:100%;
+		padding:20px 0 20px 40px;
+		background:#FFF;
+		z-index:1117;
+		display:none;
+	}
+	.version_time{
+		width:120px;
+		display:inline-block;
+		vertical-align:top;
+	}
+	.version_time h3{
+		color:#666;
+		font-size:18px;
+		font-weight:500;
+	}
+	.version_content{
+		margin-left:-10px;
+		padding-left:30px;
+		border-left:2px dotted #ccc;
+		display:inline-block;
+		vertical-align:top;
+	}
+	.version_content h3{
+		font-size:18px;
+		color:#1188F0;
+		font-weight:500;
+	}
+	.version_time p,.version_content p{
+		margin:8px auto;
+		font-size:14px;
+		color:#666;
+	}
+	.dot{
+		width:10px;
+		height:10px;
+		position: relative;
+    	bottom: -10px;
+		background:#1188F0;
+		border-radius:50%;
+		display:inline-block;
+		vertical-align:top;
+	}
+	p.fun_title{
+		font-weight:700;
+		font-size:15px;
+	}
+</style>
+<div id="version">
+	<div class="title">
+		<div class="version_time">
+			<h3 style="font-size:24px;">更新时间</h3>
+		</div>
+		<div class="version_content" style="margin-left:4px;">
+			<h3 style="font-size:24px;">武房公房系统版本更新日志</h3>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-08-06</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋调整异动上线</p>
+			<p>2.楼栋调整异动上线</p>
+			<p>3.租金减免异动伤心</p>
+			<p>4.空租异动上线</p>
+			<p>5.暂停计租异动上线</p>
+			<p>6.陈欠核销异动上线</p>
+			<p>7.新发租异动上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金追加上传资料</p>
+			<p>2.使用权变更上传资料</p>
+			<p>3.异动与楼栋、房屋和报表的关联</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-07-16</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.4更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1. 注销异动上线</p>
+			<p>2. 租金追加上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.过户申请弹框改名为使用权变更申请</p>
+			<p>2.扩大图片上传的内存</p>
+			<p>3.修复一些弹框弹不出的问题</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-07-09</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.3更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.租金管理新增月份收欠版块</p>
+			<p>2.月租金报表中泵费上基数</p>
+			<p>3.租金管理版块上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.租金应缴中添加按上期欠缴和租金全部已缴按钮，提供做报表的方便</p>
+			<p>2.租金计算中添加泵费和租差字段，查询有泵费和租差的房屋</p>
+			<p>3.预收管理添加删除按钮</p>
+			<p>4.月份收欠记录以前月回收欠款的记录</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-07-02</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.2更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.使用权变更上线</p>
+			<p>2.修改密码上线</p>
+			<p class="fun_title">优化</p>
+			<p>1.优化系统的主页界面</p>
+			<p>2.优化系统左侧导航条展开方式</p>
+			<p>3.头部添加隐藏导航条按钮，使数据展示完全</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-05-28</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.1更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.月租金报表1-6月份的数据</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2018-05-07</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.0更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.房屋统计报表、产权报表、月租金报表12月份的数据</p>
+		</div>
+	</div>
+</div>
+<script>
+$('#version_show').click(function(){
+	$('.admin-content:eq(0)').prepend($('#version').show()).show();
+	$('.admin-content:eq(1)').hide();
+	$('.admin-sidebar').height($('.admin-content:eq(0)').height());
+})
+</script>
 <script src="/public/static/gf/js/amazeui.min.js"></script>
 <script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
 <script src="/public/static/gf/js/app.js"></script>
@@ -800,7 +961,7 @@
   if(body_height < window_height){
     $("footer").css({'width':'100%','position':'fixed','bottom':'0'});
   }
-  $('.admin-sidebar').height($('.admin-content').height());
+  $('.admin-sidebar').height($('.admin-content:eq(1)').height());
 
   // $('.d-parent').click(function(){
   //   setTimeout(function(){
