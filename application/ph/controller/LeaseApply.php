@@ -60,6 +60,9 @@ class LeaseApply extends Base
                                   ->field('a.Szno,a.BanAddress,a.InstitutionID,a.InstitutionPID,a.UseNature,a.OwnerType,b.StructureType,b.BanFloorNum,a.FloorID,c.TenantID,c.TenantName')
                                   ->where('a.HouseID',$data['houseID'])
                                   ->find();  
+            if(!$one['InstitutionID']){
+                return jsons('4000','数据错误，请刷新页面后，再次提交！');
+            }
 
             $val = Db::name('config')->where('id',1)->value('Value'); 
             $datas['Recorde'] = $data['Recorde'];
