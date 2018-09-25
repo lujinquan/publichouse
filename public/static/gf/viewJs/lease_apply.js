@@ -54,6 +54,7 @@ $('.addLease').click(function(){
 					var ws = 1;
 					var fb = 13;
 					var wfb = 13;
+					var bg = 16;
 					for(var i = 0;i < res.data.room.length;i++){
 						var this_data = res.data.room[i];
 						
@@ -124,12 +125,25 @@ $('.addLease').click(function(){
 									$('#applyRoom8_data5').val(this_data.RoomRentMonth);
 								}
 								break;
+							case "7":
+									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
+									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
+									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
+									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
+									bg++;
+								break;
 							case "8":
 									$('#applyRoom'+wfb+'_data5').val(this_data.RoomNumber);
 									$('#applyRoom'+wfb+'_data6').val(this_data.UseArea);
 									$('#applyRoom'+wfb+'_data7').val(this_data.LeasedArea);
 									$('#applyRoom'+wfb+'_data8').val(this_data.RoomRentMonth);
 									wfb++;
+								break;
+							case "9":
+									$('#applyRoom12_data6').val(this_data.RoomNumber);
+									$('#applyRoom12_data7').val(this_data.UseArea);
+									$('#applyRoom12_data8').val(this_data.LeasedArea);
+									$('#applyRoom12_data9').val(this_data.RoomRentMonth);
 								break;
 						}
 					}
@@ -394,5 +408,3 @@ function getYear(){
 	var year = date.getFullYear();
 	return year;
 }
-
-console.log(getDay());
