@@ -709,11 +709,20 @@ function count_house_rent($houseid){
 
     //$roomArr = Db::name('room')->where($where)->column('RoomID');
     $roomArr = Db::name('room')->where($where)->field('RoomID,RoomRentMonth')->select();
+
+    $rents = Db::name('room_amend')->where(['HouseID'=>$houseid])->column('RoomID,RoomRentMonth');
+
     if($roomArr){
         foreach ($roomArr as $value) {
 
             //$rent[] = count_room_rent($value);
-            $rent[] = $value['RoomRentMonth'];
+            if(isset($rents[$value['RoomID']])){
+
+                $rent[] = $rents[$value['RoomID']];
+            }else{
+                $rent[] = $value['RoomRentMonth'];
+            }
+            
         }
         //dump($rent);
         $sumrent = array_sum($rent);
