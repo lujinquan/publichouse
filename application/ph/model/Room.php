@@ -265,7 +265,7 @@ class Room extends Model
         $datas['RentPointIDS'] = $data['RentPointIDS'];  //入库基价折减条件
         $datas['RoomID'] = $data['RoomID'];        //入库房屋编号
         $datas['RoomNumber'] = $data['RoomNumber']; //入库房间间号
-        $datas['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('BanAddress');  //入库房间地址
+        $datas['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('AreaFour');  //入库房间地址
 
         $datas['RoomType'] = $data['RoomType'];   //入库房间类型
         $datas['UnitID'] = $data['UnitID'];   //入库单元号
@@ -332,7 +332,7 @@ class Room extends Model
         //$datas['RentPointIDS'] = $data['RentPointIDS'];  //入库基价折减条件
         $datas['RoomID'] = $data['RoomID'];        //入库房屋编号
         $datas['RoomNumber'] = $data['RoomNumber']; //入库房间间号
-        $datas['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('BanAddress');  //入库房间地址
+        $datas['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('AreaFour');  //入库房间地址
         $roomAreaPoint = Db::name('room_type_point')->where('id', 'eq', $data['RoomType'])->value('Point');  //获取当前房间类型计租面积基数
         $datas['LeasedArea'] = $roomAreaPoint * $data['UseArea'];  //入库计租面积,注意 计租面积 = 使用面积 * 当前房间类型的计租面积基数
         $datas['RoomType'] = $data['RoomType'];   //入库房间类型

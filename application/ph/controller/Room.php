@@ -53,7 +53,7 @@ class Room extends Base
 
             $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');
 
-            check($banid);
+            check('',$banid);
             //halt($data);
             $datas = model('ph/Room')->edit($data);  //1是为了区分添加和修改的，因为修改中的RoomID是不需要拼接的
             $datas['Status'] = 1; //状态改为未确认状态
@@ -95,7 +95,7 @@ class Room extends Base
 
         $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');
 
-        check($banid);
+        check('',$banid);
 
         $style = input('style');
         if(!$roomID || !$style){
