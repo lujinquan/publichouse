@@ -139,7 +139,7 @@ $('.addLease').click(function(){
 									$('#applyRoom'+wfb+'_data8').val(this_data.RoomRentMonth);
 									wfb++;
 								break;
-							case "9":
+							case "10":
 									$('#applyRoom12_data6').val(this_data.RoomNumber);
 									$('#applyRoom12_data7').val(this_data.UseArea);
 									$('#applyRoom12_data8').val(this_data.LeasedArea);
