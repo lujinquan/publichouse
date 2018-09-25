@@ -417,7 +417,7 @@ function AddInfo(ID,status,detail){
 			$('.fileUploadContent').empty();
 		},
 		yes:function(thisIndex){
-			var formData = fileTotall.getArrayFormdata();
+			var formData = fileTotall.getArrayFormdata() || new FormData();
 			formData.append('ChangeOrderID',ID);
 			if(status== '1'){
 				formData.append('IfReform',$("input[name='IfReform']:checked").val());
