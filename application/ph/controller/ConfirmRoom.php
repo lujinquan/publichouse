@@ -28,7 +28,7 @@ class ConfirmRoom extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
-            check($data['BanID']);
+            check('',$data['BanID']);
             // 验证
             $result = $this->validate($data,'Room');
             if(true !== $result) {
