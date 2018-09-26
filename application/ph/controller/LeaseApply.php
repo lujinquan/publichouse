@@ -40,7 +40,7 @@ class LeaseApply extends Base
         if ($this->request->isPost()) {
             // $data = $this->request->post();
             $data = array_no_space_str($this->request->post());
-            $f = Db::name('lease_change_order')->where(['HouseID'=>$data['houseID'],'Status'=>['>',0]])->find();
+            $f = Db::name('lease_change_order')->where(['HouseID'=>$data['houseID'],'Status'=>['>',1]])->find();
 
             if($f){
                 return jsons('4000','请勿重复申请');
