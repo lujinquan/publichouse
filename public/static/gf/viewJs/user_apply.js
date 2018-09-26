@@ -15,6 +15,26 @@ new file({
     Type: 1,
     title: "书面申请报告"
 });
+new file({
+    button: "#transferApprovalForm",
+    show: "#transferApprovalFormShow",
+    upButton: "#transferApprovalFormUp",
+    size: 10240,
+    url: "/ph/ChangeApply/add",
+    ChangeOrderID: '',
+    Type: 1,
+    title: "审批表"
+});
+new file({
+    button: "#transferOther",
+    show: "#transferOtherShow",
+    upButton: "#transferOtherUp",
+    size: 10240,
+    url: "/ph/ChangeApply/add",
+    ChangeOrderID: '',
+    Type: 1,
+    title: "其它"
+});
 $("#addTransfer").click(function(){
 	require(["layer","jquery"],function(layer){
 		$('#IdIput').val('');

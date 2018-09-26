@@ -136,7 +136,7 @@ $('.print2').click(function(event){
 				data.applyNO = data.Szno;
 				for(var key in data){
 					var name_id = key.replace(/apply/,'printer_2_');
-					$('#'+name_id).text(data[key]);
+					$('#'+name_id).text(data[key] == '0' ? '' : data[key]);
 				}
 				$('#picCode_2').prop('src',data.QrcodeUrl);
 			})

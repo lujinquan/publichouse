@@ -30,9 +30,11 @@ return [
     //使用权变更
     //
     "paidRecordSheet"=>"有偿转让备案单",
-
     "transferApplication"=>"书面申请报告",
-    "approveApplyReport"=>"书面申请报告",
+    "transferApprovalForm"=>"审批表",
+    "transferOther"=>"其它",
+
+
     "acquittance"=>"收据",
     "transferMaterial_1"=>"死亡证",
     "transferMaterial_2"=>"原承租人户口",
