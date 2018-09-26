@@ -87,8 +87,7 @@ $("#addTransfer").click(function(){
 				var transferReason = $("#transferReason").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
-
-
+				
 				var formData = fileTotall.getArrayFormdata() || new FormData();
 				formData.append('houseid',ID);
 				formData.append('oldID',oldID);

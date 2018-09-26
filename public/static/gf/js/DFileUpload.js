@@ -71,6 +71,10 @@ var fileTotall = {
         }
     },
     getArrayFormdata:function(){
+       
+        this.array.sort(function(a,b){
+            return (a.title > b.title);
+        })
         console.log(this.array);//图片命名规则
         var length = this.array.length;
         var formData = new FormData();
