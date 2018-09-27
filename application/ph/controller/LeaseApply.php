@@ -40,6 +40,7 @@ class LeaseApply extends Base
         if ($this->request->isPost()) {
             // $data = $this->request->post();
             $data = array_no_space_str($this->request->post());
+            //halt($data);
             $f = Db::name('lease_change_order')->where(['HouseID'=>$data['houseID'],'Status'=>['>',1]])->find();
 
             if($f){
@@ -61,7 +62,7 @@ class LeaseApply extends Base
                                   ->where('a.HouseID',$data['houseID'])
                                   ->find();  
             if(!$one['InstitutionID']){
-                return jsons('4000','数据错误，请刷新页面后，再次提交！');
+                return jsons('4000','注意房屋编号前后空格，请刷新页面后，再次提交！');
             }
 
             $val = Db::name('config')->where('id',1)->value('Value'); 
