@@ -108,7 +108,7 @@ class LeaseAudit extends Model
         $total = Db::name('lease_change_order')->alias('a')
                                              ->join('process_config b' ,'a.ProcessConfigType = b.id' ,'left')
                                              ->where('a.ChangeOrderID' ,'eq' ,$changeOrderID)
-                                             ->field('a.Deadline,a.Child,a.Status,b.Total')
+                                             ->field('a.Deadline,a.Child,a.PrintTime,a.Status,b.Total')
                                              ->find();
 
         $where['ChangeOrderID'] = array('eq' ,$changeOrderID);
@@ -128,6 +128,10 @@ class LeaseAudit extends Model
             }elseif($status == 4){  //当经管科审核完成后
                 $deadline['applyRoom21_data3'] = session('user_base_info.name');
                 $qrcodeUrl = $this->qrcode();
+            }elseif($status == 5){ //当经租会计审核完成后
+                if(!$total['PrintTime']){
+                    return jsons('4000','请先打印租约！');
+                }
             }
 
             Db::name('lease_change_order')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->setField('Deadline',json_encode($deadline));
