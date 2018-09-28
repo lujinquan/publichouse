@@ -26,6 +26,8 @@ class LeaseRecord extends Model
         }
 
         $ChangeList['option'] =array();
+        
+        $where['Status'] = array('in' ,[0,1]);
         if($searchForm = input('post.')) {
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
@@ -55,6 +57,9 @@ class LeaseRecord extends Model
             if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索房屋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
+            if (isset($searchForm['Status']) && $searchForm['Status']) {  //检索房屋状态
+                $where['Status'] = array('eq', $searchForm['Status']);
+            }
             
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
                 $starttime = strtotime($searchForm['CreateTime']);
@@ -63,7 +68,7 @@ class LeaseRecord extends Model
             }
         }
 
-        $where['Status'] = array('in' ,[0,1]);
+        
 //halt($where);
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
