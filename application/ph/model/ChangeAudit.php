@@ -696,7 +696,7 @@ class ChangeAudit extends Model
                                 'CivilArea' => ['exp','CivilArea+'.$v['HouseArea']],
                                 'CivilOprice' => ['exp','CivilOprice+'.$v['OldOprice']],
                                 'CivilRent' => ['exp','CivilRent+'.$v['HousePrerent']],
-                                'BanUsearea' => ['exp','BanUsearea+'.$v['HouseUsearea']],
+                                'BanUsearea' => ['exp','BanUsearea+'.$v['LeasedArea']],
                             ]
                         );
                     break;
