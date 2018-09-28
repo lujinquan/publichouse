@@ -126,11 +126,14 @@ $('.addLease').click(function(){
 								}
 								break;
 							case "7":
+									$('#applyRoom'+bg+'_data1').val('');
 									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
 									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
 									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
 									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
-									bg++;
+									if(bg < 19){
+										bg++;
+									}
 								break;
 							case "8":
 									$('#applyRoom'+wfb+'_data5').val(this_data.RoomNumber);
@@ -138,6 +141,16 @@ $('.addLease').click(function(){
 									$('#applyRoom'+wfb+'_data7').val(this_data.LeasedArea);
 									$('#applyRoom'+wfb+'_data8').val(this_data.RoomRentMonth);
 									wfb++;
+								break;
+							case "9":
+									$('#applyRoom'+bg+'_data1').val(this_data.RoomName);
+									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
+									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
+									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
+									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
+									if(bg < 19){
+										bg++;
+									}
 								break;
 							case "10":
 									$('#applyRoom12_data6').val(this_data.RoomNumber);
