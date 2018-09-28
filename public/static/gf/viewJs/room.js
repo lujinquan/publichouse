@@ -50,11 +50,15 @@ $('#addRoom').click(function(){
 
 			var data = new FormData($('#RoomForm')[0]);
 			var TempData = [];
-			PriceChoose =new FormData($('#PriceForm')[0]);
-			for(var i of PriceChoose.entries()){
-				console.log(i);
-				TempData.push(i[1]);
-			}
+			// PriceChoose =new FormData($('#PriceForm')[0]);
+			// for(var i of PriceChoose.entries()){
+			// 	console.log(i);
+			// 	TempData.push(i[1]);
+			// }
+			PriceChoose = $('#PriceForm').serializeArray();
+			PriceChoose.forEach(function(value,index,data){
+				TempData.push(value.value);
+			});
 			data.append('RentPointIDS',TempData);
 			$.ajax({
 			  url: "/ph/Room/add",
@@ -164,11 +168,16 @@ $('#reviseRoom').click(function(){
 				yes:function(farther){
 					var data = new FormData($('#RoomForm')[0]);
 					var TempData = [];
-					PriceChoose =new FormData($('#PriceForm')[0]);
-					for(var i of PriceChoose.entries()){
-						console.log(i);
-						TempData.push(i[1]);
-					}
+					// PriceChoose =new FormData($('#PriceForm')[0]);
+					// for(var i of PriceChoose.entries()){
+					// 	console.log(i);
+					// 	TempData.push(i[1]);
+					// }
+					
+					PriceChoose = $('#PriceForm').serializeArray();
+					PriceChoose.forEach(function(value,index,data){
+						TempData.push(value.value);
+					});
 					data.append('RentPointIDS',TempData);
 					// data.append('RoomID',$("#RoomID").val());
 					
