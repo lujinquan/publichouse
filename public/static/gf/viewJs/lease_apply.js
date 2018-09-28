@@ -143,7 +143,7 @@ $('.addLease').click(function(){
 									wfb++;
 								break;
 							case "9":
-									$('#applyRoom'+bg+'_data1').val(this_data.RoomName);
+									$('#applyRoom'+bg+'_data1').val('高2.20米以上搁楼');
 									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
 									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
 									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
