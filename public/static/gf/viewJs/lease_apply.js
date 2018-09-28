@@ -131,7 +131,7 @@ $('.addLease').click(function(){
 									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
 									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
 									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
-									if(bg < 19){
+									if(bg < 18){
 										bg++;
 									}
 								break;
@@ -143,14 +143,11 @@ $('.addLease').click(function(){
 									wfb++;
 								break;
 							case "9":
-									$('#applyRoom'+bg+'_data1').val('高2.20米以上搁楼');
-									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
-									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
-									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
-									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
-									if(bg < 19){
-										bg++;
-									}
+									$('#applyRoom19_data1').val('高2.20米以上搁楼');
+									$('#applyRoom19_data2').val(this_data.RoomNumber);
+									$('#applyRoom19_data3').val(this_data.UseArea);
+									$('#applyRoom19_data4').val(this_data.LeasedArea);
+									$('#applyRoom19_data5').val(this_data.RoomRentMonth);
 								break;
 							case "10":
 									$('#applyRoom12_data6').val(this_data.RoomNumber);
