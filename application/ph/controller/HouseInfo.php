@@ -228,7 +228,9 @@ class HouseInfo extends Base
                         'RoomName' => $one['RoomTypeName'],
                         'RentPointIDS' => $rentPointIDS,
                     ];
+
                     if ($datas['RoomID']) {  //如果房间编号存在，则为修改
+                        //halt($datas['RoomID']);
                         $datas['UpdateTime'] = time();
                         
                         if ($v5[14] == 1) { //删除中状态
@@ -242,7 +244,7 @@ class HouseInfo extends Base
                             } elseif ($findOne['RoomPublicStatus'] == 2) {    //两户共用的房屋
                                 $findHouses = explode(',', $findOne['HouseID']);
                                 Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('HouseUsearea', $findOne['UseArea']);
-                                Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('LeasedArea', $findOne['LeasedArea'] / 2);
+                                Db::name('house')->where('HouseID', 'in', $findHouses)->setDec('LeasedArea', $findOne['LeasedArea']);
                             } elseif ($findOne['RoomPublicStatus'] > 2) {
                                 Db::name('house')->where('HouseID', 'in', $houses)->setDec('PublicRent', 0.5);
                             }

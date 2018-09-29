@@ -402,7 +402,10 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $data = Db::name('ban')->field('TubulationID,BanID,AreaFour,OwnerType,BanPropertyID,BanYear,DamageGrade,StructureType,PropertySource,UseNature,BanArea,BanUsearea,EnterpriseNum,EnterpriseArea,EnterpriseOprice,EnterpriseRent,PartyNum,PartyArea,PartyOprice,PartyRent,CivilNum,CivilArea,CivilOprice,CivilRent,PreRent,TotalOprice,BanFloorNum')->where('Status',1)->select();
+        $where['Status'] = array('eq',1);
+        $where['BanID'] = array('in',array('1050053257','1050043286','1050053298','1050033530','1050013569','1050053573','1050053574','1050053581','1050053585','1050053588','1050053591','1050043333','1050023602','1050023604','1050023606','1050023607','1050023608','1050073611','1050073626','1050073630','1050073639','1050073640'));
+
+        $data = Db::name('ban')->field('TubulationID,BanID,AreaFour,OwnerType,BanPropertyID,BanYear,DamageGrade,StructureType,PropertySource,UseNature,BanArea,BanUsearea,EnterpriseNum,EnterpriseArea,EnterpriseOprice,EnterpriseRent,PartyNum,PartyArea,PartyOprice,PartyRent,CivilNum,CivilArea,CivilOprice,CivilRent,PreRent,TotalOprice,BanFloorNum')->where($where)->select();
 
         $insts = Db::name('institution')->column('id,Institution');
 
@@ -711,7 +714,9 @@ class HouseInfo extends Model
 
         $objPHPExcel = new \PHPExcel();
 
-        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where('Status',1)->select();
+        $where['BanID'] = array('in',array('1050053299','1050043299','1050053295','1050033539','1050013568','1050053599','1050053598','1050053687','1050053685','1050053684','1050053691','1050043339','1050023692','1050023694','1050023690','1050023697','1050023688','1050073681','1050073666','1050073659','1050074651','1050073688'));
+
+        $data = Db::name('house')->field('InstitutionID,HouseID,BanID,DoorID,HouseUsearea,UnitID,FloorID,HousePrerent,TenantName,PumpCost,DiffRent')->where($where)->select();
 
         $rData = Db::name('room')->field('RoomID,LeasedArea,RoomType,HouseID')->where('Status',1)->select();
         $a = [];
