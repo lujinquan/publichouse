@@ -28,7 +28,7 @@ class LeaseRecord extends Model
         $ChangeList['option'] =array();
 
         $where['Status'] = array('in' ,[0,1]);
-        if($searchForm = input('post.')) {
+        if($searchForm = input('param.')) {
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
             }
