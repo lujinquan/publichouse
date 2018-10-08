@@ -93,10 +93,10 @@ $('.addLease').click(function(){
 								}
 								break;
 							case "4":
-								$('#applyRoom'+fb+'_data2').val(this_data.RoomNumber);
-								$('#applyRoom'+fb+'_data3').val(this_data.UseArea);
-								$('#applyRoom'+fb+'_data4').val(this_data.LeasedArea);
-								$('#applyRoom'+fb+'_data5').val(this_data.RoomRentMonth);
+								$('#applyRoom'+fb+'_data1').val(this_data.RoomNumber);
+								$('#applyRoom'+fb+'_data2').val(this_data.UseArea);
+								$('#applyRoom'+fb+'_data3').val(this_data.LeasedArea);
+								$('#applyRoom'+fb+'_data4').val(this_data.RoomRentMonth);
 								fb++;
 								break;
 							case "5":
