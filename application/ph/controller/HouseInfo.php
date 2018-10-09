@@ -335,6 +335,7 @@ class HouseInfo extends Base
             //halt($houseArr);
             $res = Db::name('house')->update($houseArr);
             $temp = count_house_rent($data['AddRent']['HouseID']);
+            //halt($temp);
             Db::name('house')->where('HouseID', $data['AddRent']['HouseID'])->setField('ApprovedRent', $temp);
             //Db::name('system_tag')->where('TagType','RentSubmitTag')->setField('Tag',1);
             return ($res !== false) ? jsons('2000', '操作成功') : jsons('4000', '操作失败');
