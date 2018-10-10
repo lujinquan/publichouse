@@ -362,6 +362,7 @@ $(function (){
 function ImgToBase64(file, maxLen, callBack) {
     var img = new Image();
     var reader = new FileReader();//读取客户端上的文件
+    reader.readAsDataURL(file);
     reader.onload = function () {
         var url = reader.result;//读取到的文件内容.这个属性只在读取操作完成之后才有效,并且数据的格式取决于读取操作是由哪个方法发起的.所以必须使用reader.onload，
         img.src = url;//reader读取的文件内容是base64,利用这个url就能实现上传前预览图片
@@ -396,7 +397,6 @@ function ImgToBase64(file, maxLen, callBack) {
         var base64 = canvas.toDataURL('image/jpeg', 0.9);
         callBack(base64);
     };
-    reader.readAsDataURL(file);
 }
 
 function dataURLtoFile(dataurl, filename) {//base64转换成文件
