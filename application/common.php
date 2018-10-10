@@ -696,76 +696,61 @@ function get_wait_processing(){
     return $datas;
 }
 
-//房屋租金计算方式：各房间 + 加计租金 + 三户共用金额 + 租差 + 协议租金
+/**
+ * [count_house_rent 房屋计算租金]
+ * @param  [type] $houseid [房屋编号]
+ * @return [type]          [计算租金]
+ */
 function count_house_rent($houseid){
-
+    // 特殊的房屋计算租金
     if(in_array($houseid,array(666,888,999))){
         return 0;
     }
-    
-    $where['HouseID'] = array('like','%'.$houseid.'%');
-    $where['Status'] = array('eq',1);
-    //$where['RoomPublicStatus'] = array('<',3); //去掉3户共用的房间
-
-    //$roomArr = Db::name('room')->where($where)->column('RoomID');
-    $roomArr = Db::name('room')->where($where)->field('RoomID,RoomRentMonth')->select();
-
+    $roomArr = Db::name('room')->where(['HouseID'=>['like','%'.$houseid.'%'],'Status'=>['eq',1]])->field('RoomID,RoomRentMonth')->select();
+    // 处理两户共用，一户比另一户多1毛钱租金的情况
     $rents = Db::name('room_amend')->where(['HouseID'=>$houseid])->column('RoomID,RoomRentMonth');
-
+    // 返回所有房间的计算租金的和
     if($roomArr){
         foreach ($roomArr as $value) {
-
-            //$rent[] = count_room_rent($value);
-            if(isset($rents[$value['RoomID']])){
-
-                $rent[] = $rents[$value['RoomID']];
-            }else{
-                $rent[] = $value['RoomRentMonth'];
-            }
-            
+            $rent[] = isset($rents[$value['RoomID']])?$rents[$value['RoomID']]:$value['RoomRentMonth'];         
         }
-        //dump($rent);
         $sumrent = array_sum($rent);
     }else{
         $sumrent = 0;
     }
-
     //halt($sumrent);
-    //PlusRent加计租金，PublicRent三户共用房间的金额，DiffRent租差，ProtocolRent协议租金
     $find = Db::name('house')->field('PlusRent,ProtocolRent,DiffRent,UseNature')->where('HouseID',$houseid)->find();
+    //PlusRent加计租金（面盆浴盆，5米以上，5米以下什么的），DiffRent租差，ProtocolRent协议租金
+    $houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
 
-    $jiaji = $find['ProtocolRent'] + $find['DiffRent'] + $find['PlusRent'];
-
-    $houseRent = $sumrent + $jiaji;
-
-    if($find['UseNature'] == 1){
-        $houseRent = round($houseRent,1);
-    }else{
-        $houseRent = round($houseRent,2);
-    }
-
-    return $houseRent;
+    // 民用的四舍五入保留一位，机关企业的四舍五入保留两位 
+    return ($find['UseNature'] == 1)?round($houseRent,1):round($houseRent,2);
 }
 
+/**
+ * [count_room_rent 房间计算租金]
+ * @param  [type] $roomid  [房间编号]
+ * @param  string $houseid [房屋编号，可选]
+ * @return [type]          [房间计算租金]
+ */
 function count_room_rent($roomid , $houseid = ''){
 
     //初始数据
     $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RentPoint,RoomType,UseNature,FloorID,BanID,RoomPublicStatus')->find();
-    $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
-
+    
     if($roomOne['RoomPublicStatus'] > 2){ //三户共用直接无租金
         return 0.5;
     }
 
-    //层次调解率，与居住层，有无电梯，楼栋总层数有关
-    $floorPoint = get_floor_point($roomOne['FloorID'], $banOne['BanFloorNum'], $banOne['IfElevator']);
-    $structureTypePoint = get_structure_type_point($banOne['StructureType']);
-    //房间的架空率，与楼栋是否一层为架空层有关
-    $emptyPoint = $banOne['IfFirst']?0.98:1;
+    $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
 
-    //if($roomid = '121640'){
-    //dump($roomOne['LeasedArea']);dump($roomOne['RentPoint']);dump($structureTypePoint);dump($emptyPoint);halt($floorPoint);
-    //}
+    // 层次调解率，与居住层，有无电梯，楼栋总层数有关
+    $floorPoint = get_floor_point($roomOne['FloorID'], $banOne['BanFloorNum'], $banOne['IfElevator']);
+    // 结构基价
+    $structureTypePoint = get_structure_type_point($banOne['StructureType']);
+    // 房间的架空率，与楼栋是否一层为架空层有关
+    $emptyPoint = $banOne['IfFirst']?0.98:1;
+    // 处理两户共用，一户比另一户多1毛钱租金的情况
     if($houseid){
         $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
         if($roomRent){
@@ -773,14 +758,8 @@ function count_room_rent($roomid , $houseid = ''){
         }
     }
     
-    //计算租金= 计租面积 * 实际基价 * 结构基价 * 基价折减率 * 架空率 * 层次调解率
-    $roomRent = $roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint;
-
-    // if($roomOne['RoomPublicStatus'] == 2){ //被两户共用了，就只取一半
-    //     $roomRent = $roomRent / 2;
-    // }
-
-    return round($roomRent,2);
+    // 计算租金= 计租面积（使用面积，房间类型，是否共用） * 基价折减率（有无上下水这种折减） * 结构基价  *  架空率 * 层次调解率
+    return round($roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint,2);
 }
 
 function get_floor_point($liveFloor,$BanFloorNum,$ifElevator){

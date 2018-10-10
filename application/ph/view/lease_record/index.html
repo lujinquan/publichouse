@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约记录</small></div>
+      <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约记录</small>&nbsp;&nbsp;<span style="font-size:16px;">共{$leaseLstObj->total()}条记录</span></div>
     </div>
 
     <div class="am-g">
@@ -218,8 +218,7 @@
 
           </tbody>
         </table>
-    <div class="am-cf">
-          共{$leaseLstObj->total()}条记录
+      <div class="am-cf">
           <div class="am-fr">
           {$leaseLstObj->render()}
           </div>
