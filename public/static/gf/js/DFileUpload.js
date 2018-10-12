@@ -239,11 +239,11 @@ file.prototype.ImgToBase64 = function(file, maxLen,callBack) {
         var ctx = canvas.getContext("2d");
         canvas.width = img.width;
         canvas.height = img.height;
-        if(img.width < img.height){
-            ctx.translate(img.width/2,img.height/2);
-            ctx.rotate(Math.PI/2);
-            ctx.translate(-img.width/2,-img.height/2);
-        }
+        // if(img.width < img.height){
+        //     ctx.translate(img.width/2,img.height/2);
+        //     ctx.rotate(Math.PI/2);
+        //     ctx.translate(-img.width/2,-img.height/2);
+        // }
         ctx.drawImage(img, 0, 0, img.width, img.height);
         var base64 = canvas.toDataURL('image/jpeg', 0.9);
         callBack(base64);
