@@ -54,10 +54,15 @@ $('.addLease').click(function(){
 					var ws = 1;
 					var fb = 13;
 					var wfb = 13;
-					var bg = 16;
+					var bg = 16,
+						flag_12 = 0,//高1.7至2.2米搁楼标识（1个）
+						flag_13 = 0;//无封闭阳台标识（3个）
+					res.data.room.sort(function(a,b){
+						return b.RoomType - a.RoomType;
+					});
+					console.log(res.data.room);
 					for(var i = 0;i < res.data.room.length;i++){
 						var this_data = res.data.room[i];
-						
 						switch(this_data.RoomType){
 							case "1":
 								$('#applyRoom'+ws+'_data1').val(this_data.RoomNumber);
@@ -126,34 +131,61 @@ $('.addLease').click(function(){
 								}
 								break;
 							case "7":
+								if(bg < 19){
 									$('#applyRoom'+bg+'_data1').val('');
 									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
 									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
 									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
 									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
-									if(bg < 18){
+									bg++;
+								}
+								break;
+							case "8":
+									if(flag_13 < 3){
+										$('#applyRoom'+wfb+'_data5').val(this_data.RoomNumber);
+										$('#applyRoom'+wfb+'_data6').val(this_data.UseArea);
+										$('#applyRoom'+wfb+'_data7').val(this_data.LeasedArea);
+										$('#applyRoom'+wfb+'_data8').val(this_data.RoomRentMonth);
+										wfb++;
+										flag_13++;
+									}else{
+										$('#applyRoom'+bg+'_data1').val('无封闭阳台');
+										$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
+										$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
+										$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
+										$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
+										if(bg < 19){
+											bg++;
+										}
+									}
+								break;
+							case "9":
+									$('#applyRoom'+bg+'_data1').val('高2.20米以上搁楼');
+									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
+									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
+									$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
+									$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
+									if(bg < 19){
 										bg++;
 									}
 								break;
-							case "8":
-									$('#applyRoom'+wfb+'_data5').val(this_data.RoomNumber);
-									$('#applyRoom'+wfb+'_data6').val(this_data.UseArea);
-									$('#applyRoom'+wfb+'_data7').val(this_data.LeasedArea);
-									$('#applyRoom'+wfb+'_data8').val(this_data.RoomRentMonth);
-									wfb++;
-								break;
-							case "9":
-									$('#applyRoom19_data1').val('高2.20米以上搁楼');
-									$('#applyRoom19_data2').val(this_data.RoomNumber);
-									$('#applyRoom19_data3').val(this_data.UseArea);
-									$('#applyRoom19_data4').val(this_data.LeasedArea);
-									$('#applyRoom19_data5').val(this_data.RoomRentMonth);
-								break;
 							case "10":
-									$('#applyRoom12_data6').val(this_data.RoomNumber);
-									$('#applyRoom12_data7').val(this_data.UseArea);
-									$('#applyRoom12_data8').val(this_data.LeasedArea);
-									$('#applyRoom12_data9').val(this_data.RoomRentMonth);
+									if(flag_12 < 1){
+										$('#applyRoom12_data6').val(this_data.RoomNumber);
+										$('#applyRoom12_data7').val(this_data.UseArea);
+										$('#applyRoom12_data8').val(this_data.LeasedArea);
+										$('#applyRoom12_data9').val(this_data.RoomRentMonth);
+										flag_12++;
+									}else{
+										$('#applyRoom'+bg+'_data1').val('高1.7至2.2米搁楼');
+										$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
+										$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
+										$('#applyRoom'+bg+'_data4').val(this_data.LeasedArea);
+										$('#applyRoom'+bg+'_data5').val(this_data.RoomRentMonth);
+										if(bg < 19){
+											bg++;
+										}
+									}
 								break;
 						}
 					}
