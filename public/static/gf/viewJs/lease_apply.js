@@ -131,7 +131,7 @@ $('.addLease').click(function(){
 								}
 								break;
 							case "7":
-								if(bg < 19){
+								if(bg < 20){
 									$('#applyRoom'+bg+'_data1').val('');
 									$('#applyRoom'+bg+'_data2').val(this_data.RoomNumber);
 									$('#applyRoom'+bg+'_data3').val(this_data.UseArea);
