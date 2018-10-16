@@ -818,7 +818,6 @@ function count_house_area($houseid){
                     $leasedAreaArr[] = $v['LeasedArea'];
                 }
                 $useAreaArr[] = $v['UseArea'];
-                
             }
             return array('HouseUsearea' => array_sum($useAreaArr), 'LeaseArea' => array_sum($leasedAreaArr));
         }else{
