@@ -809,10 +809,16 @@ function count_house_area($houseid){
         return array('HouseUsearea' =>0, 'LeaseArea' =>0);
     }else{
         $roomidArr = Db::name('room')->where(['HouseID'=>['like','%'.$houseid.'%'],'RoomPublicStatus'=>['<',3]])->field('RoomID,UseArea,LeasedArea')->select();
+        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         if($roomidArr){
             foreach ($roomidArr as $v) {
+                if(isset($roomAmend[$v['RoomID']])){
+                    $leasedAreaArr[] = $roomAmend[$v['RoomID']]['LeasedArea'];
+                } else {
+                    $leasedAreaArr[] = $v['LeasedArea'];
+                }
                 $useAreaArr[] = $v['UseArea'];
-                $leasedAreaArr[] = $v['LeasedArea'];
+                
             }
             return array('HouseUsearea' => array_sum($useAreaArr), 'LeaseArea' => array_sum($leasedAreaArr));
         }else{
