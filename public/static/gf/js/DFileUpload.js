@@ -232,8 +232,10 @@ file.prototype.ImgToBase64 = function(file, maxLen,callBack) {
                 rate = maxLen / height;
             }
         };
-        img.width = width * rate;
-        img.height = height * rate;
+        if(file.size > 1048576){
+            img.width = width * rate;
+            img.height = height * rate;
+        }
         //生成canvas
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
@@ -245,7 +247,7 @@ file.prototype.ImgToBase64 = function(file, maxLen,callBack) {
         //     ctx.translate(-img.width/2,-img.height/2);
         // }
         ctx.drawImage(img, 0, 0, img.width, img.height);
-        var base64 = canvas.toDataURL('image/jpeg', 0.9);
+        var base64 = canvas.toDataURL('image/jpeg', 0.92);
         callBack(base64);
     }
 }
