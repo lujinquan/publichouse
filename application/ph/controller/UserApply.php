@@ -96,7 +96,7 @@ class UserApply extends Base
 
             //halt($id);
 
-            $datas['ProcessConfigType'] = 100;  //100为使用权变更(对应change_type表)
+            $datas['ProcessConfigType'] = 99;  //100为使用权变更(对应change_type表)
             $datas['Status'] = 2; //待审批状态
 
             if (Db::name('use_change_order')->insert($datas)) {
