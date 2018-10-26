@@ -1435,7 +1435,7 @@ $('#addApply').click(function() {
                 content: $('#RentAdditional'),
                 btn: ['确定', '取消'],
                 success: function() {
-                    houseQuery.action('getRentAdd','1');
+                    houseQuery.action('getRentAdd','0,1');
                     new file({
                         button: "#otherBills",
                         show: "#otherBillsShow",
