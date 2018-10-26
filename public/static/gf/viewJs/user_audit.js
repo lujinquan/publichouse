@@ -227,9 +227,9 @@ $('.BtnApprove').click(function(){
 	$.get('/ph/UserAudit/detail/ChangeOrderID/'+value,function(res){
 		res = JSON.parse(res);
 		console.log(res);
-		if(res.data.config.status == '1' || res.data.config.status == '2'){
-			status_1_2(value,res);
-		}else{
+		// if(res.data.config.status == '1' || res.data.config.status == '2'){
+		// 	status_1_2(value,res);
+		// }else{
 			$('.APhouseId').text(res.data.detail.HouseID);
 			$('.APcreateTime').text(res.data.detail.CreateTime);
 			$('.APhouseArea').text(res.data.detail.HouseUsearea);
@@ -321,7 +321,7 @@ $('.BtnApprove').click(function(){
 					})
 				}
 			});
-		}
+		// }
 	});
 	layer.photos({
 	  photos: '#layer-photos-demo'
