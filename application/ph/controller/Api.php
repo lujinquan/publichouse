@@ -574,6 +574,14 @@ class Api extends Controller
             }
         }
 
+        if (isset($map['OwnerType']) && $map['OwnerType']) { //楼栋产别查询     
+            $where['OwnerType'] = array('eq', $map['OwnerType']); 
+        }
+
+        if (isset($map['AreaFour']) && $map['AreaFour']) { //楼栋地址查询     
+            $where['AreaFour'] = array('like', '%'.$map['AreaFour'].'%'); 
+        }
+//halt($where);
         $data = Db::name('ban')->where($where)
             ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,UseNature,AreaFour')
             ->select();
@@ -635,6 +643,46 @@ class Api extends Controller
         }
         
         return jsons('2000', '获取成功', $data);
+
+    }
+
+    /**
+     * @title 租金调整（批量异动）
+     * @author Mr.Lu
+     */
+    public function get_house_diff()
+    {
+
+        $where['Status'] = array('eq', 1);
+        $where['BanID'] = array('eq',input('BanID'));
+        $where['IfSuspend'] = array('eq', 0);
+        $where['HouseChangeStatus'] = array('eq', 0);
+       
+        $data = Db::name('house')->where($where)
+            ->field('HouseID ,OwnerType,UseNature,TenantName,HousePrerent,BanAddress')
+            ->select();
+
+        $owns = Db::name('ban_owner_type')->column('id,OwnerType');
+        $uses= Db::name('use_nature')->column('id,UseNature');
+
+
+        $result = [];
+        if ($data) {
+            foreach ($data as $v) {
+                $v['ApprovedRent'] = count_house_rent($v['HouseID']);
+                $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
+                $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';  //使用性质
+                
+                $v['Diff'] = bcsub($v['HousePrerent'],$v['ApprovedRent'],2);
+                //halt($v['Diff']);
+                if(abs($v['Diff']) == 0.1){
+                    $result[] = $v;
+                }
+                
+            }
+        }
+        
+        return jsons('2000', '获取成功', $result);
 
     }
 
@@ -1003,7 +1051,7 @@ class Api extends Controller
         return jsons('2000', '获取成功', $allData);
     }
 
-    // //不需要调试模式，ob_end_clean() 不能去掉否则乱码
+
     // public function qrcode()
     // {
     //     ob_end_clean();
