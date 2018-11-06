@@ -465,29 +465,14 @@ class ChangeApply extends Base
                     
                     break;
                 case 15:  //租金调整（批量）
-                    
                     $datas['BanID'] = $data['BanID'];  //分户原始房屋编号
-                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
-                    $datas['Remark'] = $data['remark'];
-                    $datas['Deadline'] = json_encode([
-                        'beforeDamage'=> $one['DamageGrade'],
-                        'afterDamage'=> $data['afterAdjustDamageGrade']?:'',
-                        'beforeStructure'=> $one['StructureType'],
-                        'afterStructure'=> $data['afterAdjustStructureType']?:'',
-                    ]); 
-
-                    $datas['ChangeType'] = 14;  //异动类型
-                    $datas['ProcessConfigName'] = $changeTypes[14];  //异动名称
-                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>14])->order('id desc')->value('id');        //流程控制线路
-                    if(!$datas['ProcessConfigType']){
-                        return jsons('4001','请先联系超级管理员配置异动流程');
-                    }
-                    $datas['ChangeOrderID'] = date('YmdHis', time()).'14'.$suffix;   
+                    $datas['ChangeOrderID'] = date('YmdHis', time()).'15'.$suffix;   
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['InstitutionID'] = $one['TubulationID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
+                    halt($data);
                     $res = Db::name('change_order')->insert($datas);
                     
                     break;
