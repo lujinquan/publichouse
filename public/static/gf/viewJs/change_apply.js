@@ -215,8 +215,11 @@ $('#addApply').click(function() {
                 content: $('#pauseRent'),
                 btn:['保存','取消'],
                 success: function(){
+                    $('.type_3').show();
+                    $('.type_15').hide();
+                    $('.type_15_search').css('visibility','hidden');
                     var fun = new getBanList();
-                    fun.getData();
+                    fun.getData('/ph/Api/get_all_ban',3);
                     $('#banLinkSearch').click(function(){
                         fun.search($('#banLinkInput').val());
                     })
@@ -256,9 +259,9 @@ $('#addApply').click(function() {
                                         form_str += '<tr>\
                                             <td style="width:200px;">'+count+'</td>\
                                             <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(4)").text()+'</td>\
                                             <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(2)").text()+'</td>\
-                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
-                                            <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(6)").text()+'</td>\
+                                            <td style="width:350px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
                                         </tr>';
                                         HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
                                         house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
@@ -1820,6 +1823,113 @@ $('#addApply').click(function() {
                 }
             });
             break;
+        case '15':
+           // $(".batchRent").show();
+            var value;
+            var house_array = [];
+            var form_str = '';
+            var thisLayer = layer.open({
+                type: 1,
+                area: ['990px', '700px'],
+                resize: false,
+                title: ['租金调整（批量）', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                zIndex: 100,
+                content: $('#batchRent'),
+                btn:['保存','取消'],
+                success: function(){
+                    $('.type_3').hide();
+                    $('.type_15').show();
+                    var fun = new getBanList();
+                    $('#banLinkSearch').click(function(){
+                        //fun.getData('/ph/Api/get_all_ban',15);
+                        fun.getSearchData('/ph/Api/get_all_ban',$('.getInstitution').val(),$('.getOwnerType').val(),$('#banLinkInput').val(),15);
+                    });
+                    $('#batchRentQuery').off('click');
+                    $('#batchRentQuery').on('click', function(){
+                        $('#pauseHouseAdd').empty();
+                        var ban_link_house = layer.open({
+                            type: 1,
+                            area: ['990px','780px'],
+                            resize: false,
+                            zIndex: 100,
+                            title: ['租金调整（批量）', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                            content: $('#banLinkHouseForm'),
+                            btn: ['确定', '取消'],
+                            success: function() {
+
+                            },
+                            yes: function() {
+                                var HousePrerent = 0;
+                                var count = 0;
+                                house_array = [];
+                                var type = $('#pauseHouseChoose tr:eq(0) td:eq(2)').text();
+                                for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
+                                    if($("#pauseHouseChoose .house_check:eq("+i+") input[type='checkbox']").is(':checked')){
+                                        count++;
+                                        form_str += '<tr>\
+                                            <td style="width:200px;">'+count+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(2)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(3)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(4)").text()+'</td>\
+                                            <td style="width:200px;">'+$("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text()+'</td>\
+                                        </tr>';
+                                        HousePrerent += parseFloat($("#pauseHouseChoose .house_check:eq("+i+") td:eq(5)").text());
+                                        house_array.push($("#pauseHouseChoose .house_check:eq("+i+") td:eq(1)").text());
+                                    }
+                                }
+                                $('#batchBanID').text(fun.initData.BanID);
+                                $('#batchBanAddress').text(fun.initData.BanAddress);
+                                $('#batchOwnerType').text(fun.initData.OwnerType);
+                                $('#batchHousePrerent').text();
+                                $('#batchHouseMoney').text(HousePrerent.toFixed(2));
+                                
+                                $('#batchHouseDetail').empty();
+                                $('#batchHouseDetail').append(form_str);
+                                layer.close(ban_link_house);
+                            },
+                            end: function() {
+
+                            }
+                        });
+                    });
+                },
+                yes:function(thisIndex){
+                    var data = new FormData();
+                    data.append('banID',$('#batchBanID').text());
+                    data.append('type',15);
+                    house_array.forEach(function(value,index){
+                        data.append("houseID[]",value);
+                    });
+                    data.append('batchReason',$('#batchReason').val());
+                    data.append('diff',$('#batchHouseMoney').text());
+                    data.append('table_str',form_str);
+                    console.log(data);
+                    $.ajax({
+                        type: "post",
+                        url: "/ph/ChangeApply/add",
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            layer.msg(res.msg);
+                            if(res.retcode == '2000'){
+                                layer.close(thisIndex);
+                                location.reload();
+                            }
+                        }
+                    });
+                },
+                end:function(){
+                    $("input[type='text']").val('');
+                    $("input[type='number']").val('');
+                    $(".label_p_style").text('');
+                    $("select").val('');
+                    location.reload();
+                }
+            });
+            break;
         default:
             layer.msg('请选择选项！');
     }
@@ -1867,6 +1977,8 @@ $('#DQTenant').click(function() {
     });
 });
 
+
+
 //暂停计租楼栋与房屋联动
 function getBanList(){
     this.initData = {
@@ -1876,18 +1988,19 @@ function getBanList(){
         banData:null,
         filterData:null
     };
-    this.getData = function(){
+    this.getData = function(url,type){
         var self = this;
-        $.get('/ph/Api/get_all_ban', function(res) {
+        $.get(url, function(res) {
             res = JSON.parse(res);
             console.log(res);
             self.initData.banData = res.data;
-            self.renderDom(res.data);
+            self.renderDom(res.data,type);
         });
     };
-    this.renderDom = function(data){
+    this.renderDom = function(data,type){
         var self = this;
         var ban_str = '';
+
         for(var i = 0;i < data.length;i++){
             ban_str += '<tr>\
                 <td style="width:150px;">'+data[i].BanID+'</td>\
@@ -1898,7 +2011,8 @@ function getBanList(){
                 <td style="width:350px;">'+data[i].AreaFour+'</td>\
             </tr>'
         }
-        $('#allChoose').prop('checked',false);
+
+        $('.allChoose').prop('checked',false);
         $('#pauseBanAdd').empty();
         $('#pauseBanAdd').append($(ban_str));
         $('#pauseBanAdd tr').click(function(){
@@ -1908,7 +2022,8 @@ function getBanList(){
             self.initData.BanAddress = BanAddress;
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
-            banLinkHouse(BanID,BanAddress);
+            console.log(BanID);
+            banLinkHouse(BanID,BanAddress,type);
             $('#pauseHouseChoose').empty();
         })
     };
@@ -1918,24 +2033,54 @@ function getBanList(){
             return data.AreaFour.indexOf(val) > -1;
         })
         this.renderDom(this.initData.filterData);
+    };
+    this.getSearchData = function(url,tubulation,ownerType,address,type){
+        var self = this;
+        $.post(url,{InstitutionID:tubulation,OwnerType:ownerType,AreaFour:address}, function(res) {
+            res = JSON.parse(res);
+            console.log(res);
+            self.initData.banData = res.data;
+            self.renderDom(res.data,type);
+        });
     }
 }
-function banLinkHouse(BanID,BanAddress){
-    $.get('/ph/Api/get_all_house/BanID/'+BanID,function(res){
+
+
+function banLinkHouse(BanID,BanAddress,type){
+    if(type == 3){
+        var get_url = '/ph/Api/get_all_house/BanID/'+BanID;
+    }else if(type == 15){
+        var get_url = '/ph/Api/get_house_diff?BanID='+BanID;
+    }
+    $.get(get_url,function(res){
         res = JSON.parse(res);
+console.log(res);
         var house_str = '';
-        for(var i = 0;i < res.data.length;i++){
-            house_str += '<tr class="house_check">\
-                <td style="width:150px;"><input type="checkbox" ></td>\
-                <td style="width:150px;">'+res.data[i].HouseID+'</td>\
-                <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
-                <td style="width:150px;">'+res.data[i].UseNature+'</td>\
-                <td style="width:150px;">'+res.data[i].TenantName+'</td>\
-                <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
-                <td style="width:350px;display:none;">'+BanAddress+'</td>\
-            </tr>';
+        if(type == 3){
+            for(var i = 0;i < res.data.length;i++){
+                house_str += '<tr class="house_check">\
+                    <td style="width:150px;"><input type="checkbox" ></td>\
+                    <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                    <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                    <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                    <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                    <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
+                </tr>';
+            }
+        }else if(type == 15){
+            for(var i = 0;i < res.data.length;i++){
+                house_str += '<tr class="house_check">\
+                    <td style="width:150px;"><input type="checkbox" ></td>\
+                    <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                    <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                    <td style="width:150px;">'+res.data[i].HousePrerent+'</td>\
+                    <td style="width:150px;">'+res.data[i].ApprovedRent+'</td>\
+                    <td style="width:350px;color:'+((parseInt(res.data[i].Diff)>0)?'red':'green')+'">'+res.data[i].Diff+'</td>\
+                </tr>';
+            }
         }
-        $('#allChoose').prop('checked',false);
+
+        $('.allChoose').prop('checked',false);
         $('#pauseHouseAdd').empty();
         $('#pauseHouseAdd').append($(house_str));
         $('#pauseHouseAdd .house_check').click(function(){
@@ -1957,7 +2102,7 @@ function banLinkHouse(BanID,BanAddress){
         })
     })
 }
-$('#allChoose').click(function(){
+$('.allChoose').click(function(){
     if($(this).prop('checked')){
         $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',true);
         for(var j = 0;j < $("#pauseHouseAdd .house_check").length;j++){
@@ -1996,6 +2141,11 @@ function tr_remove(houseID){
         }
     }
 }
+
+
+
+
+
 //计租表
 $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelRentMeter').click(function() {
     $('.RentExample:gt(0)').remove();

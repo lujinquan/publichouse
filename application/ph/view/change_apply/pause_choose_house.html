@@ -6,10 +6,26 @@
       </ul>
       <div class="am-tabs-bd">
         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-          <div class="am-u-sm-8">
+          <div class="am-u-sm-3">
             <h2 class="label_title">查找楼栋编号：</h2>
           </div> 
-          <div class="am-u-sm-4">
+          <div class="am-u-sm-9">
+            <div class="am-form-group type_15_search" style="display:inline-block;">
+              <label>管段：</label>
+              <select class="label_p_style getInstitution">
+                  <option value="4">紫阳01管段</option>
+                  <option value="5">紫阳02管段</option>
+                  <option value="6">紫阳03管段</option>
+              </select>
+            </div>
+            <div class="am-form-group type_15_search" style="display:inline-block;">
+              <label>产别：</label>
+              <select class="label_p_style getOwnerType">
+                  <option value="2">区属</option>
+                  <option value="1">市属</option>
+                  <option value="3">代管</option>
+              </select>
+            </div>
             <input class="label_input" id="banLinkInput" placeholder="输入地址查询" />
             <button class="am-btn am-btn-primary am-btn-sm" id="banLinkSearch">查询</button>
           </div>
@@ -36,13 +52,21 @@
           <div class="am-u-sm-12">
                 <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;margin-bottom:0;">
                     <thead style="display:block;">
-                        <tr>
-                            <td style="width:150px;"><input type="checkbox" id="allChoose"></td>
+                        <tr class="type_3">
+                            <td style="width:150px;"><input type="checkbox" class="allChoose"></td>
                             <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
                             <td style="width:150px;" class="am-hide-sm-only">产别</td>
                             <td style="width:150px;" class="am-hide-sm-only">使用性质</td>
                             <td style="width:150px;" class="am-hide-sm-only">承租人</td>
                             <td style="width:350px;" class="am-hide-sm-only">月租金</td>
+                        </tr>
+                        <tr class="type_15">
+                            <td style="width:150px;"><input type="checkbox" class="allChoose"></td>
+                            <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
+                            <td style="width:150px;" class="am-hide-sm-only">承租人</td>
+                            <td style="width:150px;" class="am-hide-sm-only">月租金</td>
+                            <td style="width:150px;" class="am-hide-sm-only">计算租金</td>
+                            <td style="width:350px;" class="am-hide-sm-only">租金异动</td>
                         </tr>
                     </thead>
                     <tbody id="pauseHouseAdd" style="height:250px;display:block;overflow-y:scroll;">
@@ -57,13 +81,21 @@
           <div class="am-u-sm-12">
                 <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;margin-bottom:0;">
                     <thead style="display:block;">
-                        <tr>
+                        <tr class="type_3">
                             <td style="width:150px;">操作</td>
                             <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
                             <td style="width:150px;" class="am-hide-sm-only">产别</td>
                             <td style="width:150px;" class="am-hide-sm-only">使用性质</td>
                             <td style="width:150px;" class="am-hide-sm-only">承租人</td>
                             <td style="width:350px;" class="am-hide-sm-only">月租金</td>
+                        </tr>
+                        <tr class="type_15">
+                            <td style="width:150px;">操作</td>
+                            <td style="width:150px;" class="am-hide-sm-only">房屋编号</td>
+                            <td style="width:150px;" class="am-hide-sm-only">承租人</td>
+                            <td style="width:150px;" class="am-hide-sm-only">月租金</td>
+                            <td style="width:150px;" class="am-hide-sm-only">计算租金</td>
+                            <td style="width:350px;" class="am-hide-sm-only">租金异动</td>
                         </tr>
                     </thead>
                     <tbody id="pauseHouseChoose" style="height:530px;display:block;overflow-y:scroll;">

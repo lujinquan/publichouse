@@ -12,7 +12,7 @@
 //var FormMap = new BMap.Map("FormMap",{enableMapClick: false}); 
 var areaArray = null;
 $.get('/ph/Api/get_relation_area',function(res){
-	console.log(res);
+	//console.log(res);
 	var  j = 0,
 		array = [];
 		array[0] = [];

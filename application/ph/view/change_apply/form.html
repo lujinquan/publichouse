@@ -221,8 +221,8 @@
                   <td style="width:200px;">#</td>
                   <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
                   <td style="width:200px;" class="am-hide-sm-only">承租人</td>
-                  <td style="width:200px;" class="am-hide-sm-only">月租金</td>
-                  <td style="width:350px;" class="am-hide-sm-only">房屋地址</td>
+                  <td style="width:200px;" class="am-hide-sm-only">产别</td>
+                  <td style="width:350px;" class="am-hide-sm-only">月租金</td>
               </tr>
           </thead>
           <tbody id="pauseHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
@@ -1162,3 +1162,65 @@
     </div>
   </div>
 </form>
+
+<!-- 租金调整（批量） -->
+<form id="batchRent" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-md-12">
+      <label class="label_style">房屋编号：</label>
+      <a class="am-btn am-btn-primary am-btn-sm" id="batchRentQuery">查询</a>
+    </div>
+    <div class="am-form-group am-u-sm-4" style="padding-right: 0">
+      <label class="label_style">楼栋编号：</label>
+      <label id="batchBanID" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label id="batchBanAddress" class="label_content label_p_style" style="width:476px;"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4 ">
+      <label class="label_style">楼栋产别：</label>
+      <label id="batchOwnerType" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">规定租金：</label>
+      <label id="batchHousePrerent" class="label_content label_p_style"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">楼栋租金异动：</label>
+      <label id="batchHouseMoney" class="label_content label_p_style"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">房屋明细：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+          <thead style="display:block;">
+              <tr>
+                  <td style="width:200px;">#</td>
+                  <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
+                  <td style="width:200px;" class="am-hide-sm-only">承租人</td>
+                  <td style="width:200px;" class="am-hide-sm-only">原月租金</td>
+                  <td style="width:200px;" class="am-hide-sm-only">计算租金</td>
+                  <td style="width:200px;" class="am-hide-sm-only">租金异动</td>
+              </tr>
+          </thead>
+          <tbody id="batchHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+          </tbody>
+      </table>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">异动事由：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      
+      <textarea id="batchReason" style="width:100%;height:80px;padding:4px 10px;"></textarea>
+
+  </div>
+</form>
+<!--- 租金调整（批量） -->
