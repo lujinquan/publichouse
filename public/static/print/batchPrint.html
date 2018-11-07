@@ -1,0 +1,108 @@
+<!-- 租金调整（批量）打印 -->
+<!DOCTYPE html>
+<html>
+  <head lang='en' >
+    <meta content="text/html" charset="utf-8">
+    <style>
+      body{text-align:center;}
+      .batch_print{position:relative;z-index:10;width:740px;margin:auto;border:1px solid #ccc;text-align:left;}
+      h1{text-align:center;font-size:24px;}
+      .div_1{border:1px solid #ccc;border-right:none;border-left:none;}
+      .div_1 p{width:45%;padding-left:20px;display:inline-block;color:#333;}
+      h3{font-size:20px;color:#2E77EF;font-weight:600;}
+      .detail_box{margin:20px;}
+      .detail_box p{width:32%;display:inline-block;color:#333;}
+      table{width:100%;text-align:center;border:1px solid #ccc;border-collapse:collapse}
+      table, td, th{border:1px solid #ccc;height:30px;color:#333;}
+      .img_code{width:100px;height:100px;position:absolute;bottom:50px;right:50px;}
+      .process p{width:70%;}
+      #print{margin:20px;float:right;width:80px;height:30px;border:1px solid #2E77EF;border-radius:4px;color:#FFF;background:#2E77EF;cursor:pointer;}
+      .watermark{width:200px;height:50px;position:absolute;z-index:-1;background:url('./logo.png');background-size:cover;opacity:0.3;}
+      @media print{
+        #print{display:none;}
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="batch_print">
+      <h1>租金调整（批量）异动核算凭单</h1>
+      <div class="div_1">
+        <p><lable>机构：</lable><span class="ins"></span></p>
+        <p><lable>异动编号：</lable><span class="number"></span></p>
+      </div>
+      <div class="detail_box">
+        <h3>基本情况：</h3>
+        <p><lable>楼栋编号：</lable><span class="banID"></span></p>
+        <p style="width:60%;"><lable>楼栋地址：</lable><span class="address"></span></p>
+        <p><lable>产别：</lable><span class="type"></span></p>
+        <p><lable>结构：</lable><span class="struc"></span></p>
+        <p><lable>完损等级：</lable><span class="damage"></span></p>
+        <table>
+            <tr>
+              <td>基本情况</td>
+              <td>户数</td>
+              <td>建筑面积</td>
+              <td>规定租金</td>
+              <td>原价</td>
+            </tr>
+            <tr>
+              <td>异动前</td>
+              <td class="before_data1"></td>
+              <td class="before_data2"></td>
+              <td class="before_data3"></td>
+              <td class="before_data4"></td>
+            </tr>
+            <tr>
+              <td>异动后</td>
+              <td class="after_data1"></td>
+              <td class="after_data2"></td>
+              <td class="after_data3"></td>
+              <td class="after_data4"></td>
+            </tr>
+        </table>
+        <p><lable>异动户数：</lable><span class="change_num"></span></p>
+        <p><lable>异动金额：</lable><span class="change_money"></span></p>
+        <h3>租赁异动：</h3>
+        <table>
+            <tr>
+              <td>房屋编号</td>
+              <td>层数</td>
+              <td>住户姓名</td>
+              <td>使用性质</td>
+              <td>原规定租金</td>
+              <td>现规定租金</td>
+              <td>增减</td>
+            </tr>
+          <tbody id="table_detail">
+
+          </tbody>
+        </table>
+        <h3>异动事由：</h3>
+          <p class="remark"></p>
+        <h3>审批记录：</h3>
+          <div class="process"></div>
+      </div>
+      <img class="img_code" src="" />
+    </div>
+    <button id="print">打印</button>
+  </body>
+  <script>
+
+  for(var i = 0;i < 10;i++){
+    watermark(50+(i%2)*400+'px',50 + (i/2)*150+'px');
+  }
+  
+  function watermark(left,top){
+    var div_dom = document.createElement('div');
+    div_dom.setAttribute('class','watermark');
+    div_dom.style.top = top;
+    div_dom.style.left = left;
+    document.getElementsByClassName('batch_print')[0].appendChild(div_dom);
+  }
+  
+  document.getElementById('print').onclick = function(){
+    window.print();
+  }
+  </script>
+</html>
