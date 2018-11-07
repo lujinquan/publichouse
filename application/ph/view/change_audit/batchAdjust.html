@@ -1,0 +1,77 @@
+<!-- 租金调整（批量）明细 -->
+<div id="batch" class="am-form" style="display:none;margin-top:1.6rem;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <div class="am-form-group am-u-md-4">
+      <label id="houseLabel" class="label_style">楼栋编号：</label>
+      <label class="label_content batchBanId"></label>
+    </div>
+    <div class="am-form-group am-u-sm-8">
+      <label class="label_style">房屋地址：</label>
+      <label class="label_content batchAddress"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">楼栋产别：</label>
+      <label class="label_content batchOwnerType"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">规定租金：</label>
+      <label class="label_content batchInflRent"></label>
+    </div>
+    <div class="am-form-group am-u-sm-4">
+      <label class="label_style">异动租金：</label>
+      <label class="label_content batchDiff"></label>
+    </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">房屋明细：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+      <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
+          <thead style="display:block;">
+              <tr>
+                  <td style="width:200px;">#</td>
+                  <td style="width:200px;" class="am-hide-sm-only">房屋编号</td>
+                  <td style="width:200px;" class="am-hide-sm-only">承租人</td>
+                  <td style="width:200px;" class="am-hide-sm-only">月租金</td>
+                  <td style="width:200px;" class="am-hide-sm-only">计算租金</td>
+                  <td style="width:200px;" class="am-hide-sm-only">租金异动</td>
+              </tr>
+          </thead>
+          <tbody id="batchHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
+
+
+          </tbody>
+      </table>
+  </div>
+
+    <div class="am-u-md-12" style="padding-left:0;">
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">异动事由：</h2>
+        </div>
+        <div class="am-form-group am-u-sm-12" style="padding-right:0;">
+            <textarea id="batchReason" style="width:100%;height:80px;padding:4px 10px;" readonly></textarea>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <ul id="batchRentPhotos" class="am-u-md-12" style="margin-bottom:30px;"></ul>
+        </div>
+
+        <div class="am-form-group am-u-sm-12 status_2" style="display:none;">
+            <div class="am-u-sm-12"><hr /></div>
+            <div class="am-form-group am-u-sm-3">
+              <label>上传报告：</label>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                  <input id="batchUploadReport" type="file" name="batchUploadReport" multiple>
+            </div>
+            <div id="batchUploadReportShow" class="am-u-md-12 img_content"></div>
+        </div>
+        <div class="am-form-group am-u-sm-12">
+            <h2 class="label_title">审批状态：</h2>
+        </div>
+        <div id="batchRentState" class="am-u-md-12" style="padding-left:3rem;"></div>
+    </div>
+</div>
