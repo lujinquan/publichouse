@@ -759,7 +759,9 @@ $('.BtnDetail').click(function(){
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);
-		}
+		}else if(type == 15){
+            layerBox(value,'batch','租金调整(批量)',2);
+        }
 	});
 });
 $('.BtnDelete').click(function(){

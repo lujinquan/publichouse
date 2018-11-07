@@ -1827,7 +1827,7 @@ $('#addApply').click(function() {
            // $(".batchRent").show();
             var value;
             var house_array = [];
-            var form_str = '';
+            var form_str = '';//table表字符串化
             var thisLayer = layer.open({
                 type: 1,
                 area: ['990px', '700px'],
@@ -1903,7 +1903,7 @@ $('#addApply').click(function() {
                     });
                     data.append('batchReason',$('#batchReason').val());
                     data.append('diff',$('#batchHouseMoney').text());
-                    data.append('table_str',form_str);
+                    // data.append('table_str',form_str);
                     console.log(data);
                     $.ajax({
                         type: "post",
