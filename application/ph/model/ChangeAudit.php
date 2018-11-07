@@ -445,11 +445,11 @@ class ChangeAudit extends Model
         //房屋编号
         $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
 
-        $jsons = json_decode($one['Deadline'],true);
-
         $data = get_ban_info($one['BanID']);
 
         $data['Remark'] = $one['Remark'];
+
+        $data['Deadline'] = json_decode($one['Deadline'],true);
 
         $data['type'] = 15;
 
@@ -1008,10 +1008,53 @@ class ChangeAudit extends Model
                 }
 
                 break;
+            case 15:  //租金调整(批量)异动完成后的，系统处理
+                $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                $deadline = json_decode($one['Deadline'],true);
+
+                // $str = '';
+                
+                // foreach($deadline as $v){
+                //     Db::name('house')->where('HouseID',$v['HouseID'])->update('HousePrerent',$v['ApprovedRent']);
+                //     $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+                // }
+                //Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setDec('HousePrerent', $one['InflRent']);
+
+                
+                $url = $this->qrcode();
+
+                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update();
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+
+                break;
 
             default:
                 break;
         }
+    }
+
+    public function qrcode()
+    {
+        ob_end_clean();
+
+        Loader::import('phpqrcode.phpqrcode', EXTEND_PATH);
+
+        $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
+
+        $value = 'https://ph.ctnmit.com/erweima/'.$code;          //二维码内容
+        $errorCorrectionLevel = 'L';    //容错级别 
+        $matrixPointSize = 6;           //生成图片大小
+        $url = '/uploads/qrcode/'.$code.'.png';
+        $filename = $_SERVER['DOCUMENT_ROOT'].$url;
+
+        $qrcode = new \QRcode;
+
+        //$qrcode::png($value,false,$errorCorrectionLevel, $matrixPointSize, 2); 
+        $qrcode::png($value,$filename,$errorCorrectionLevel, $matrixPointSize, 2);
+
+        return $url;
     }
 
     /**

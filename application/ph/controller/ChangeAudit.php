@@ -125,7 +125,7 @@ class ChangeAudit extends Base
 
             $find = Db::name('change_order')->where('ChangeOrderID',$data['ChangeOrderID'])->field('ChangeImageIDS,Status,ChangeType')->find();
 
-            if(in_array($find['ChangeType'] ,[1,2,3,4,7,8,9,12,14]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
+            if(in_array($find['ChangeType'] ,[1,2,3,4,7,8,9,12,14,15]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
 
                 if(isset($_FILES) && $_FILES){         
                     foreach($_FILES as $k1 => $v1){
