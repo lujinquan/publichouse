@@ -492,7 +492,30 @@ $('.BtnApprove').click(function(){
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',1,res.data.config.status);
-		}
+		}else if(type == 15){
+            var house_str = '';
+            $('.batchBanId').text(res.data.detail.BanID);
+            $('.batchAddress').text(res.data.detail.BanAddress);
+            $('.batchOwnerType').text(res.data.detail.OwnerType);
+            $('.batchInflRent').text(res.data.detail.InflRent);
+            $('.batchDiff').text(res.data.detail.diff);
+            $('#batchReason').val(res.data.detail.Remark);
+            $('.status_2').hide();
+            for(var i = 0;i < res.data.detail.Deadline.length;i++){
+                house_str += '<tr>\
+                    <td style="width:200px;">'+(i+1)+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].HouseID+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].TenantName+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].HousePrerent+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].ApprovedRent+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].Diff+'</td>\
+                </tr>';
+            }
+            $('#batchHouseDetail').empty();
+            $('#batchHouseDetail').append($(house_str));
+            processState('#batchRentState',res);
+            layerBox(value,'batch','租金调整(批量)',1,res.data.config.status);
+        }
 	});
 })
 
@@ -760,6 +783,27 @@ $('.BtnDetail').click(function(){
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);
 		}else if(type == 15){
+            var house_str = '';
+            $('.batchBanId').text(res.data.detail.BanID);
+            $('.batchAddress').text(res.data.detail.BanAddress);
+            $('.batchOwnerType').text(res.data.detail.OwnerType);
+            $('.batchInflRent').text(res.data.detail.InflRent);
+            $('.batchDiff').text(res.data.detail.diff);
+            $('#batchReason').val(res.data.detail.Remark);
+            $('.status_2').hide();
+            for(var i = 0;i < res.data.detail.Deadline.length;i++){
+                house_str += '<tr>\
+                    <td style="width:200px;">'+(i+1)+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].HouseID+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].TenantName+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].HousePrerent+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].ApprovedRent+'</td>\
+                    <td style="width:200px;">'+res.data.detail.Deadline[i].Diff+'</td>\
+                </tr>';
+            }
+            $('#batchHouseDetail').empty();
+            $('#batchHouseDetail').append($(house_str));
+            processState('#batchRentState',res);
             layerBox(value,'batch','租金调整(批量)',2);
         }
 	});
