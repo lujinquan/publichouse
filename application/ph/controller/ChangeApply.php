@@ -465,14 +465,32 @@ class ChangeApply extends Base
                     
                     break;
                 case 15:  //租金调整（批量）
-                    $datas['BanID'] = $data['BanID'];  //分户原始房屋编号
+                //halt($data);
+                    $datas['BanID'] = $data['banID'];  //分户原始房屋编号
+                    $datas['HouseID'] = trim(implode(',',$data['houseID']),',');
+
+                     $houseArr = Db::name('house')->where('HouseID','in',$data['houseID'])->field('HouseID ,TenantName,HousePrerent,BanAddress')->select();
+                    
+                    foreach ($houseArr as &$v) {
+                        $v['ApprovedRent'] = count_house_rent($v['HouseID']); 
+                        $v['Diff'] = bcsub($v['HousePrerent'],$v['ApprovedRent'],2);
+                    }
+                    //halt($houseArr);
+                    $datas['Deadline'] = json_encode($houseArr);
+                    $datas['Remark'] = $data['batchReason'];
+                    $datas['ChangeType'] = 15;  //租金调整（批量）
+                    $datas['ProcessConfigName'] = $changeTypes[14];  //异动名称
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>15])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'15'.$suffix;   
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['InstitutionID'] = $one['TubulationID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
-                    halt($data);
+                    //halt($datas);
                     $res = Db::name('change_order')->insert($datas);
                     
                     break;
