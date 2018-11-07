@@ -396,7 +396,7 @@ class ChangeApply extends Model
                         'Status'=>1,
                         ];
 
-                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature')
+                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature,TotalOprice,PreRent,BanArea')
                                       ->where($findwhere)
                                       ->find();
                     if(!$finds){

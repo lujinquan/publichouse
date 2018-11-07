@@ -475,8 +475,18 @@ class ChangeApply extends Base
                         $v['ApprovedRent'] = count_house_rent($v['HouseID']); 
                         $v['Diff'] = bcsub($v['HousePrerent'],$v['ApprovedRent'],2);
                     }
+                    $changeBefore = $changeAfter = [];
+                    $changeBefore['BanArea'] = $changeAfter['BanArea'] = $one['BanArea'];
+                    $changeBefore['PreRent'] = $one['PreRent'];
+                    $changeAfter['PreRent'] = $one['PreRent'] + $data['diff'];
+                    $changeBefore['TotalOprice'] = $changeAfter['TotalOprice'] = $one['TotalOprice'];
+                    $changeBefore['TotalTenantNum'] = Db::name('house')->where(['BanID'=>$data['banID'],'Status'=>1])->count('HouseID');
                     //halt($houseArr);
-                    $datas['Deadline'] = json_encode($houseArr);
+                    $datas['Deadline'] = json_encode([
+                        'houseArr'=>$houseArr,
+                        'changeBefore'=>$changeBefore,
+                        'changeAfter'=>$changeAfter
+                    ]);
                     $datas['Remark'] = $data['batchReason'];
                     $datas['InflRent'] = $data['diff'];
                     $datas['ChangeType'] = 15;  //租金调整（批量）

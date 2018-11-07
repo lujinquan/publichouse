@@ -449,10 +449,15 @@ class ChangeAudit extends Model
 
         $data = get_ban_info($one['BanID']);
 
+        $deadline = json_decode($one['Deadline'],true);
+
+        $data['InstitutionPID'] = get_institution($one['InstitutionPID']);
+        $data['ChangeOrderID'] = $one['ChangeOrderID'];
         $data['Qrcode'] = $one['RoomID'];
         $data['Remark'] = $one['Remark'];
         $data['InflRent'] = $one['InflRent'];
-        $data['Deadline'] = json_decode($one['Deadline'],true);
+        $data['TotalChangeNum'] = count($deadline);
+        $data['Deadline'] = $deadline;
 
         $data['type'] = 15;
 
@@ -1018,10 +1023,12 @@ class ChangeAudit extends Model
 
                 $str = '';
 
-                foreach($deadline as $v){
+                foreach($deadline['houseArr'] as $v){
                     Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
                     $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "),";
                 }
+
+                Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent'+$one['InflRent']]]);
                 
                 $url = $this->qrcode();
 
