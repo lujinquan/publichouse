@@ -4,6 +4,8 @@
 namespace app\ph\model;
 
 use think\Model;
+use think\Exception;
+use think\Loader;
 use app\ph\model\BanInfo as BanInfoModel;
 use app\ph\model\HouseInfo as HouseInfoModel;
 use app\ph\model\TenantInfo as TenantInfoModel;
@@ -447,8 +449,9 @@ class ChangeAudit extends Model
 
         $data = get_ban_info($one['BanID']);
 
+        $data['Qrcode'] = $one['RoomID'];
         $data['Remark'] = $one['Remark'];
-
+        $data['InflRent'] = $one['InflRent'];
         $data['Deadline'] = json_decode($one['Deadline'],true);
 
         $data['type'] = 15;
@@ -1013,18 +1016,16 @@ class ChangeAudit extends Model
 
                 $deadline = json_decode($one['Deadline'],true);
 
-                // $str = '';
-                
-                // foreach($deadline as $v){
-                //     Db::name('house')->where('HouseID',$v['HouseID'])->update('HousePrerent',$v['ApprovedRent']);
-                //     $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
-                // }
-                //Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setDec('HousePrerent', $one['InflRent']);
+                $str = '';
 
+                foreach($deadline as $v){
+                    Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "),";
+                }
                 
                 $url = $this->qrcode();
 
-                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update();
+                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['RoomID'=>$url]);
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 
@@ -1043,7 +1044,7 @@ class ChangeAudit extends Model
 
         $code = substr(md5(substr(uniqid(),-6)),6).substr(uniqid(),-6);
 
-        $value = 'https://ph.ctnmit.com/erweima/'.$code;          //二维码内容
+        $value = 'https://ph.ctnmit.com/erweima_zujin/'.$code;          //二维码内容
         $errorCorrectionLevel = 'L';    //容错级别 
         $matrixPointSize = 6;           //生成图片大小
         $url = '/uploads/qrcode/'.$code.'.png';

@@ -478,6 +478,7 @@ class ChangeApply extends Base
                     //halt($houseArr);
                     $datas['Deadline'] = json_encode($houseArr);
                     $datas['Remark'] = $data['batchReason'];
+                    $datas['InflRent'] = $data['diff'];
                     $datas['ChangeType'] = 15;  //租金调整（批量）
                     $datas['ProcessConfigName'] = $changeTypes[14];  //异动名称
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>15])->order('id desc')->value('id');        //流程控制线路
