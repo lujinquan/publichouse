@@ -1107,7 +1107,7 @@ $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(fun
 
 
 function batchPrint(data,value,operation){
-    layer.open({
+    var this_index = layer.open({
         type:2,
         area:['850px','800px'],
         zIndex:19911117,
