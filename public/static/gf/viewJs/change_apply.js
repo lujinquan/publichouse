@@ -2075,7 +2075,7 @@ console.log(res);
                     <td style="width:150px;">'+res.data[i].TenantName+'</td>\
                     <td style="width:150px;">'+res.data[i].HousePrerent+'</td>\
                     <td style="width:150px;">'+res.data[i].ApprovedRent+'</td>\
-                    <td style="width:350px;color:'+((parseInt(res.data[i].Diff)>0)?'red':'green')+'">'+res.data[i].Diff+'</td>\
+                    <td style="width:350px;color:'+((parseFloat(res.data[i].Diff)>0)?'red':'green')+'">'+res.data[i].Diff+'</td>\
                 </tr>';
             }
         }

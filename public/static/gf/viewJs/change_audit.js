@@ -493,28 +493,29 @@ $('.BtnApprove').click(function(){
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',1,res.data.config.status);
 		}else if(type == 15){
-            var house_str = '';
-            $('.batchBanId').text(res.data.detail.BanID);
-            $('.batchAddress').text(res.data.detail.BanAddress);
-            $('.batchOwnerType').text(res.data.detail.OwnerType);
-             $('.batchPreRent').text(res.data.detail.PreRent);
-            $('.batchDiff').text(res.data.detail.InflRent);
-            $('#batchReason').val(res.data.detail.Remark);
-            $('.status_2').hide();
-            for(var i = 0;i < res.data.detail.Deadline.houseArr.length;i++){
-                house_str += '<tr>\
-                    <td style="width:200px;">'+(i+1)+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HouseID+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].TenantName+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].Diff+'</td>\
-                </tr>';
-            }
-            $('#batchHouseDetail').empty();
-            $('#batchHouseDetail').append($(house_str));
-            processState('#batchRentState',res);
-            layerBox(value,'batch','租金调整(批量)',1,res.data.config.status);
+            // var house_str = '';
+            // $('.batchBanId').text(res.data.detail.BanID);
+            // $('.batchAddress').text(res.data.detail.BanAddress);
+            // $('.batchOwnerType').text(res.data.detail.OwnerType);
+            //  $('.batchPreRent').text(res.data.detail.PreRent);
+            // $('.batchDiff').text(res.data.detail.InflRent);
+            // $('#batchReason').val(res.data.detail.Remark);
+            // $('.status_2').hide();
+            // for(var i = 0;i < res.data.detail.Deadline.houseArr.length;i++){
+            //     house_str += '<tr>\
+            //         <td style="width:200px;">'+(i+1)+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HouseID+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].TenantName+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].Diff+'</td>\
+            //     </tr>';
+            // }
+            // $('#batchHouseDetail').empty();
+            // $('#batchHouseDetail').append($(house_str));
+            // processState('#batchRentState',res);
+            // layerBox(value,'batch','租金调整(批量)',1,res.data.config.status);
+            batchPrint(res.data,value,1);
         }
 	});
 });
@@ -783,29 +784,29 @@ $('.BtnDetail').click(function(){
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);
 		}else if(type == 15){
-            var house_str = '';
-            $('.batchBanId').text(res.data.detail.BanID);
-            $('.batchAddress').text(res.data.detail.BanAddress);
-            $('.batchOwnerType').text(res.data.detail.OwnerType);
-            $('.batchPreRent').text(res.data.detail.PreRent);
-            $('.batchDiff').text(res.data.detail.InflRent);
-            $('#batchReason').val(res.data.detail.Remark);
-            $('.status_2').hide();
-            for(var i = 0;i < res.data.detail.Deadline.houseArr.length;i++){
-                house_str += '<tr>\
-                    <td style="width:200px;">'+(i+1)+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HouseID+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].TenantName+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
-                    <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].Diff+'</td>\
-                </tr>';
-            }
-            $('#batchHouseDetail').empty();
-            $('#batchHouseDetail').append($(house_str));
-            processState('#batchRentState',res);
-            layerBox(value,'batch','租金调整(批量)',2);
-            batchPrint(res.data);
+            // var house_str = '';
+            // $('.batchBanId').text(res.data.detail.BanID);
+            // $('.batchAddress').text(res.data.detail.BanAddress);
+            // $('.batchOwnerType').text(res.data.detail.OwnerType);
+            // $('.batchPreRent').text(res.data.detail.PreRent);
+            // $('.batchDiff').text(res.data.detail.InflRent);
+            // $('#batchReason').val(res.data.detail.Remark);
+            // $('.status_2').hide();
+            // for(var i = 0;i < res.data.detail.Deadline.houseArr.length;i++){
+            //     house_str += '<tr>\
+            //         <td style="width:200px;">'+(i+1)+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HouseID+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].TenantName+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
+            //         <td style="width:200px;">'+res.data.detail.Deadline.houseArr[i].Diff+'</td>\
+            //     </tr>';
+            // }
+            // $('#batchHouseDetail').empty();
+            // $('#batchHouseDetail').append($(house_str));
+            // processState('#batchRentState',res);
+            // layerBox(value,'batch','租金调整(批量)',2);
+            batchPrint(res.data,value,2);
         }
 	});
 });
@@ -1105,61 +1106,75 @@ $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(fun
 });
 
 
-function batchPrint(data){
-    $('#batchPrint').unbind('click');
-    $('#batchPrint').click(function(){
-        layer.open({
-            type:2,
-            area:['850px','800px'],
-            zIndex:19911117,
-            title:['租金调整（批量）异动核算凭单','color:#FFF;font-size:1.6rem;font-weight:600;'],
-            content:'/public/static/print/batchPrint.html',
-            success:function(){
-                var iframe_dom = $('iframe').eq(0).contents();
-                console.log(iframe_dom);
-                iframe_dom.find('.ins').text(data.detail.InstitutionID);
-                iframe_dom.find('.number').text(data.detail.ChangeOrderID);
-                iframe_dom.find('.banID').text(data.detail.BanID);
-                iframe_dom.find('.address').text(data.detail.BanAddress);
-                iframe_dom.find('.type').text(data.detail.OwnerType);
-                iframe_dom.find('.struc').text(data.detail.StructureType);
-                iframe_dom.find('.damage').text(data.detail.DamageGrade);
-                iframe_dom.find('.before_data1').text(data.detail.Deadline.changeBefore.TotalTenantNum||0);
-                iframe_dom.find('.before_data2').text(data.detail.Deadline.changeBefore.BanArea);
-                iframe_dom.find('.before_data3').text(data.detail.Deadline.changeBefore.PreRent);
-                iframe_dom.find('.before_data4').text(data.detail.Deadline.changeBefore.TotalOprice);
-                iframe_dom.find('.after_data1').text(data.detail.Deadline.changeAfter.TotalTenantNum);
-                iframe_dom.find('.after_data2').text(data.detail.Deadline.changeAfter.BanArea);
-                iframe_dom.find('.after_data3').text(data.detail.Deadline.changeAfter.PreRent);
-                iframe_dom.find('.after_data4').text(data.detail.Deadline.changeAfter.TotalOprice);
-                iframe_dom.find('.change_num').text(data.detail.TotalChangeNum);
-                iframe_dom.find('.change_money').text(data.detail.TotalOprice);
-                iframe_dom.find('.remark').text(data.detail.Remark);
-                iframe_dom.find('.img_code').prop('src',data.detail.Qrcode);
-
-                var process_str = '';
-                for(var i = 0;i < data.record.length;i++){
-                    process_str += "<p>"+data.record[i].RoleName+"【"+data.record[i].UserNumber+"】"+"于"+data.record[i].CreateTime+"进行"+data.record[i].Step+",原因："+data.record[i].Reson+"</p>";
-                }
-                console.log($(process_str));
-                iframe_dom.find('.process').empty();
-                iframe_dom.find('.process').append($(process_str));
-
-                var table_str = '';
-                for(var i = 0;i < data.detail.Deadline.houseArr.length;i++){
-                    table_str += '<tr>\
-                        <td>'+data.detail.Deadline.houseArr[i].HouseID+'</td>\
-                        <td>7</td>\
-                        <td>'+data.detail.Deadline.houseArr[i].TenantName+'</td>\
-                        <td>住宅</td>\
-                        <td>'+data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
-                        <td>'+data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
-                        <td>'+data.detail.Deadline.houseArr[i].Diff+'</td>\
-                    </tr>';
-                }
-                iframe_dom.find('#table_detail').empty();
-                iframe_dom.find('#table_detail').append($(table_str));
+function batchPrint(data,value,operation){
+    layer.open({
+        type:2,
+        area:['850px','800px'],
+        zIndex:19911117,
+        title:['租金调整（批量）异动核算凭单','color:#FFF;font-size:1.6rem;font-weight:600;text-align:center;'],
+        content:'/public/static/print/batchPrint.html',
+        btn:operation==1?['通过','不通过']:'',
+        success:function(){
+            var iframe_dom = $('iframe').eq(0).contents();
+            console.log(iframe_dom);
+            iframe_dom.find('.ins').text(data.detail.InstitutionID);
+            iframe_dom.find('.number').text(data.detail.ChangeOrderID);
+            iframe_dom.find('.banID').text(data.detail.BanID);
+            iframe_dom.find('.address').text(data.detail.BanAddress);
+            iframe_dom.find('.type').text(data.detail.OwnerType);
+            iframe_dom.find('.struc').text(data.detail.StructureType);
+            iframe_dom.find('.damage').text(data.detail.DamageGrade);
+            iframe_dom.find('.before_data1').text(data.detail.Deadline.changeBefore.TotalTenantNum||0);
+            iframe_dom.find('.before_data2').text(data.detail.Deadline.changeBefore.BanArea);
+            iframe_dom.find('.before_data3').text(data.detail.Deadline.changeBefore.PreRent);
+            iframe_dom.find('.before_data4').text(data.detail.Deadline.changeBefore.TotalOprice);
+            iframe_dom.find('.after_data1').text(data.detail.Deadline.changeAfter.TotalTenantNum);
+            iframe_dom.find('.after_data2').text(data.detail.Deadline.changeAfter.BanArea);
+            iframe_dom.find('.after_data3').text(data.detail.Deadline.changeAfter.PreRent);
+            iframe_dom.find('.after_data4').text(data.detail.Deadline.changeAfter.TotalOprice);
+            iframe_dom.find('.change_num').text(data.detail.TotalChangeNum);
+            iframe_dom.find('.change_money').text(data.detail.TotalOprice);
+            iframe_dom.find('.remark').text(data.detail.Remark);
+            iframe_dom.find('.img_code').prop('src',data.detail.Qrcode);
+            if(data.config.status != '0'){
+                iframe_dom.find('#print').hide();
             }
-        })
+            var process_str = '';
+            for(var i = 0;i < data.record.length;i++){
+                process_str += "<p>"+data.record[i].RoleName+"【"+data.record[i].UserNumber+"】"+"于"+data.record[i].CreateTime+"进行"+data.record[i].Step+",原因："+data.record[i].Reson+"</p>";
+            }
+            console.log($(process_str));
+            iframe_dom.find('.process').empty();
+            iframe_dom.find('.process').append($(process_str));
+
+            var table_str = '';
+            for(var i = 0;i < data.detail.Deadline.houseArr.length;i++){
+                var diff = data.detail.Deadline.houseArr[i].Diff;
+                console.log((parseFloat(diff)>0)?'red':'green');
+                table_str += '<tr>\
+                    <td>'+data.detail.Deadline.houseArr[i].HouseID+'</td>\
+                    <td>7</td>\
+                    <td>'+data.detail.Deadline.houseArr[i].TenantName+'</td>\
+                    <td>住宅</td>\
+                    <td>'+data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
+                    <td>'+data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
+                    <td style="color:'+((parseFloat(diff)>0)?'red':'green')+'">'+diff+'</td>\
+                </tr>';
+            }
+            iframe_dom.find('#table_detail').empty();
+            iframe_dom.find('#table_detail').append($(table_str));
+        },
+        yes:function(){
+            if(status == '1'){
+                var formData = fileTotall.getArrayFormdata() || new FormData();
+            }else{
+                var formData = new FormData();
+            }
+            formData.append('ChangeOrderID',value);
+            processPass(formData,this_index);
+        },
+        btn2:function(){
+            noPass(value);
+        }
     })
 }
