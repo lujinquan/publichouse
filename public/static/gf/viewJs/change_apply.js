@@ -2028,6 +2028,7 @@ function getBanList(){
             console.log(BanID);
             banLinkHouse(BanID,BanAddress,type);
             $('#pauseHouseChoose').empty();
+            self.setColor('#pauseBanAdd tr');
         })
     };
     this.search = function(val){
@@ -2045,6 +2046,19 @@ function getBanList(){
             self.initData.banData = res.data;
             self.renderDom(res.data,type);
         });
+    };
+    this.setColor = function(dom){
+        var click_flag = 0;
+        $(dom).click(function(){
+            var thisIndex = $(this).index(dom);
+            if(click_flag%2 == 0){
+                $(dom).eq(click_flag).find('td').css('background-color','#f9f9f9');
+            }else{
+                $(dom).eq(click_flag).find('td').css('background-color','#ffffff');
+            }
+            click_flag = thisIndex;
+            $(dom).eq(thisIndex).find('td').css('background','#DEF2FF');
+        });
     }
 }
 
@@ -2055,9 +2069,11 @@ function banLinkHouse(BanID,BanAddress,type){
     }else if(type == 15){
         var get_url = '/ph/Api/get_house_diff?BanID='+BanID;
     }
+    var load_1 = layer.load();
     $.get(get_url,function(res){
+        layer.close(load_1);
         res = JSON.parse(res);
-console.log(res);
+        console.log(res);
         var house_str = '';
         if(type == 3){
             for(var i = 0;i < res.data.length;i++){

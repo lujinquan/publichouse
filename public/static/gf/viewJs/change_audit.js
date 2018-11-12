@@ -1085,7 +1085,7 @@ $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(fun
                 $('.RoomDeT').eq(j).css('display', 'block');
                 $('.RoomDeT').eq(j).parent().children().eq(0).removeClass('nomal').addClass('active');
                 $('.pull').eq(j).prop('src', '/public/static/gf/icons/triU.png');
-            } //小长度             
+            } //小长度
             $('.RentTit').eq(a + 1).after(RentHtml);
             RentHtml = '';
             $('.RoomDeT').eq(1).css('display', 'block');
