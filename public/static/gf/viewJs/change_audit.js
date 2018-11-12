@@ -967,7 +967,7 @@ function processPass(formData,this_index){
 	})
 }
 // 审批不通过事件
-function noPass(value){
+function noPass(value,reason){
 	layer.open({
 		type:1,
 		area:['400px','400px'],
@@ -976,6 +976,10 @@ function noPass(value){
 		title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
 		btn:['确认'],
+        success:function(){
+            console.log(reason);
+            $('#reason').val(reason||'');
+        },
 		yes:function(msgIndex){
 			var reasonMsg = $('#reason').val();
 			if (reasonMsg=='') {
@@ -1173,7 +1177,7 @@ function batchPrint(data,value,operation){
             processPass(formData,this_index);
         },
         btn2:function(){
-            noPass(value);
+            noPass(value,'计算租金标准化。');
         }
     })
 }
