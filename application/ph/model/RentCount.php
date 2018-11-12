@@ -446,8 +446,7 @@ class RentCount extends Model
                     $historyUnpaidRent = $v['ArrearRent'];
                 }
 
-                //$receiveRent = $v['HousePrerent'] + $v['DiffRent'];
-                
+                // 
                 $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];

@@ -473,7 +473,7 @@ class ChangeApply extends Base
                     
                     foreach ($houseArr as &$v) {
                         $v['ApprovedRent'] = count_house_rent($v['HouseID']); 
-                        $v['Diff'] = bcsub($v['HousePrerent'],$v['ApprovedRent'],2);
+                        $v['Diff'] = bcsub($v['ApprovedRent'],$v['HousePrerent'],2);
                     }
                     $changeBefore = $changeAfter = [];
                     $changeBefore['BanArea'] = $changeAfter['BanArea'] = $one['BanArea'];

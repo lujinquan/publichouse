@@ -583,7 +583,7 @@ class Api extends Controller
         }
 //halt($where);
         $data = Db::name('ban')->where($where)
-            ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,UseNature,AreaFour')
+            ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,PreRent,UseNature,AreaFour')
             ->select();
 
         $dams = Db::name('ban_damage_grade')->column('id,DamageGrade');
