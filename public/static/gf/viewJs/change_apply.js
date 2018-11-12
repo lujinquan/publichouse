@@ -2016,6 +2016,8 @@ function getBanList(){
         $('.allChoose').prop('checked',false);
         $('#pauseBanAdd').empty();
         $('#pauseBanAdd').append($(ban_str));
+
+        var click_flag = 0;
         $('#pauseBanAdd tr').click(function(){
             var BanID = $(this).find('td').eq(0).text();
             var BanAddress = $(this).find('td').eq(5).text();
@@ -2025,10 +2027,9 @@ function getBanList(){
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
             self.initData.PreRent = PreRent;
-            console.log(BanID);
             banLinkHouse(BanID,BanAddress,type);
             $('#pauseHouseChoose').empty();
-            self.setColor('#pauseBanAdd tr');
+            self.setColor($(this),'#pauseBanAdd tr');
         })
     };
     this.search = function(val){
@@ -2047,19 +2048,17 @@ function getBanList(){
             self.renderDom(res.data,type);
         });
     };
-    this.setColor = function(dom){
-        var click_flag = 0;
-        $(dom).click(function(){
-            var thisIndex = $(this).index(dom);
-            if(click_flag%2 == 0){
-                $(dom).eq(click_flag).find('td').css('background-color','#f9f9f9');
-            }else{
-                $(dom).eq(click_flag).find('td').css('background-color','#ffffff');
-            }
-            click_flag = thisIndex;
-            $(dom).eq(thisIndex).find('td').css('background','#DEF2FF');
-        });
-    }
+    this.setColor = function(this_dom,dom){
+        var thisIndex = this_dom.index(dom);
+        if(click_flag%2 == 0){
+            $(dom).eq(click_flag).find('td').css('background-color','#f9f9f9');
+        }else{
+            $(dom).eq(click_flag).find('td').css('background-color','#ffffff');
+        }
+        click_flag = thisIndex;
+        console.log(thisIndex);
+        $(dom).eq(thisIndex).find('td').css('background','#DEF2FF');
+    };
 }
 
 
