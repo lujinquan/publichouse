@@ -1128,12 +1128,12 @@ function batchPrint(data,value,operation){
             iframe_dom.find('.before_data2').text(data.detail.Deadline.changeBefore.BanArea);
             iframe_dom.find('.before_data3').text(data.detail.Deadline.changeBefore.PreRent);
             iframe_dom.find('.before_data4').text(data.detail.Deadline.changeBefore.TotalOprice);
-            iframe_dom.find('.after_data1').text(data.detail.Deadline.changeAfter.TotalTenantNum);
+            iframe_dom.find('.after_data1').text(data.detail.Deadline.changeBefore.TotalTenantNum||0);
             iframe_dom.find('.after_data2').text(data.detail.Deadline.changeAfter.BanArea);
             iframe_dom.find('.after_data3').text(data.detail.Deadline.changeAfter.PreRent);
             iframe_dom.find('.after_data4').text(data.detail.Deadline.changeAfter.TotalOprice);
             iframe_dom.find('.change_num').text(data.detail.TotalChangeNum);
-            iframe_dom.find('.change_money').text(data.detail.TotalOprice);
+            iframe_dom.find('.change_money').text(data.detail.InflRent);
             iframe_dom.find('.remark').text(data.detail.Remark);
             iframe_dom.find('.img_code').prop('src',data.detail.Qrcode);
             if(data.config.status != '0'){
@@ -1150,7 +1150,6 @@ function batchPrint(data,value,operation){
             var table_str = '';
             for(var i = 0;i < data.detail.Deadline.houseArr.length;i++){
                 var diff = data.detail.Deadline.houseArr[i].Diff;
-                console.log((parseFloat(diff)>0)?'red':'green');
                 table_str += '<tr>\
                     <td>'+data.detail.Deadline.houseArr[i].HouseID+'</td>\
                     <td>7</td>\

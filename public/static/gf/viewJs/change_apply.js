@@ -1827,7 +1827,6 @@ $('#addApply').click(function() {
            // $(".batchRent").show();
             var value;
             var house_array = [];
-            var form_str = '';//table表字符串化
             var thisLayer = layer.open({
                 type: 1,
                 area: ['990px', '700px'],
@@ -1852,7 +1851,7 @@ $('#addApply').click(function() {
                             area: ['990px','780px'],
                             resize: false,
                             zIndex: 100,
-                            title: ['租金调整（批量）', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                            title: ['房屋选择', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                             content: $('#banLinkHouseForm'),
                             btn: ['确定', '取消'],
                             success: function() {
@@ -1861,6 +1860,7 @@ $('#addApply').click(function() {
                             yes: function() {
                                 var HousePrerent = 0;
                                 var count = 0;
+                                var form_str = '';//table表字符串化(因为现在数据没有筛选)
                                 house_array = [];
                                 var type = $('#pauseHouseChoose tr:eq(0) td:eq(2)').text();
                                 for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
