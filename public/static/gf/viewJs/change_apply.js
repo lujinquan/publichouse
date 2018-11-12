@@ -1881,7 +1881,7 @@ $('#addApply').click(function() {
                                 $('#batchBanID').text(fun.initData.BanID);
                                 $('#batchBanAddress').text(fun.initData.BanAddress);
                                 $('#batchOwnerType').text(fun.initData.OwnerType);
-                                $('#batchHousePrerent').text();
+                                $('#batchHousePrerent').text(fun.initData.PreRent);
                                 $('#batchHouseMoney').text(HousePrerent.toFixed(2));
                                 
                                 $('#batchHouseDetail').empty();
@@ -1984,6 +1984,7 @@ function getBanList(){
     this.initData = {
         BanAddress:"",
         BanID:"",
+        PreRent:null,
         OwnerType:"",
         banData:null,
         filterData:null
@@ -2003,7 +2004,7 @@ function getBanList(){
 
         for(var i = 0;i < data.length;i++){
             ban_str += '<tr>\
-                <td style="width:150px;">'+data[i].BanID+'</td>\
+                <td style="width:150px;" data-PreRent="'+data[i].PreRent+'">'+data[i].BanID+'</td>\
                 <td style="width:150px;">'+data[i].DamageGrade+'</td>\
                 <td style="width:150px;">'+data[i].StructureType+'</td>\
                 <td style="width:150px;">'+data[i].OwnerType+'</td>\
@@ -2019,9 +2020,11 @@ function getBanList(){
             var BanID = $(this).find('td').eq(0).text();
             var BanAddress = $(this).find('td').eq(5).text();
             var OwnerType = $(this).find('td').eq(3).text();
+            var PreRent = $(this).find('td').eq(0).attr('data-PreRent');
             self.initData.BanAddress = BanAddress;
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
+            self.initData.PreRent = PreRent;
             console.log(BanID);
             banLinkHouse(BanID,BanAddress,type);
             $('#pauseHouseChoose').empty();
