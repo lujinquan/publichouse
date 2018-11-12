@@ -1842,7 +1842,7 @@ $('#addApply').click(function() {
                     var fun = new getBanList();
                     $('#banLinkSearch').click(function(){
                         //fun.getData('/ph/Api/get_all_ban',15);
-                        fun.getSearchData('/ph/Api/get_all_ban',$('.getInstitution').val(),$('.getOwnerType').val(),$('#banLinkInput').val(),15);
+                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),15);
                     });
                     $('#batchRentQuery').off('click');
                     $('#batchRentQuery').on('click', function(){
@@ -2034,9 +2034,9 @@ function getBanList(){
         })
         this.renderDom(this.initData.filterData);
     };
-    this.getSearchData = function(url,tubulation,ownerType,address,type){
+    this.getSearchData = function(url,ownerType,address,type){
         var self = this;
-        $.post(url,{InstitutionID:tubulation,OwnerType:ownerType,AreaFour:address}, function(res) {
+        $.post(url,{OwnerType:ownerType,AreaFour:address}, function(res) {
             res = JSON.parse(res);
             console.log(res);
             self.initData.banData = res.data;
