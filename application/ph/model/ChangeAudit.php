@@ -456,7 +456,7 @@ class ChangeAudit extends Model
         $data['Qrcode'] = $one['RoomID'];
         $data['Remark'] = $one['Remark'];
         $data['InflRent'] = $one['InflRent'];
-        $data['TotalChangeNum'] = count($deadline);
+        $data['TotalChangeNum'] = count($deadline['houseArr']);
         $data['Deadline'] = $deadline;
 
         $data['type'] = 15;

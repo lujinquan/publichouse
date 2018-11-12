@@ -673,7 +673,7 @@ class Api extends Controller
                 $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
                 $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';  //使用性质
                 
-                $v['Diff'] = bcsub($v['HousePrerent'],$v['ApprovedRent'],2);
+                $v['Diff'] = bcsub($v['ApprovedRent'],$v['HousePrerent'],2);
                 //halt($v['Diff']);
                 if(abs($v['Diff']) == 0.1){
                     $result[] = $v;
