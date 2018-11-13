@@ -1839,12 +1839,13 @@ $('#addApply').click(function() {
                     $('.type_3').hide();
                     $('.type_15').show();
                     var fun = new getBanList();
+                    // fun.getData('/ph/Api/get_all_ban',15);
                     $('#banLinkSearch').click(function(){
-                        //fun.getData('/ph/Api/get_all_ban',15);
                         fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),15);
                     });
                     $('#batchRentQuery').off('click');
                     $('#batchRentQuery').on('click', function(){
+                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),15);
                         $('#pauseHouseAdd').empty();
                         var ban_link_house = layer.open({
                             type: 1,
@@ -2009,7 +2010,8 @@ function getBanList(){
                 <td style="width:150px;">'+data[i].StructureType+'</td>\
                 <td style="width:150px;">'+data[i].OwnerType+'</td>\
                 <td style="width:150px;">'+data[i].UseNature+'</td>\
-                <td style="width:350px;">'+data[i].AreaFour+'</td>\
+                <td style="width:150px;">'+data[i].count+'</td>\
+                <td style="width:200px;">'+data[i].AreaFour+'</td>\
             </tr>'
         }
 
@@ -2041,8 +2043,10 @@ function getBanList(){
     };
     this.getSearchData = function(url,ownerType,address,type){
         var self = this;
-        $.post(url,{OwnerType:ownerType,AreaFour:address}, function(res) {
+        var load_2 = layer.load();//加载动画
+        $.post(url,{OwnerType:ownerType,AreaFour:address,flag:true}, function(res) {
             res = JSON.parse(res);
+            layer.close(load_2);//加载动画结束
             console.log(res);
             self.initData.banData = res.data;
             self.renderDom(res.data,type);
@@ -2068,9 +2072,9 @@ function banLinkHouse(BanID,BanAddress,type){
     }else if(type == 15){
         var get_url = '/ph/Api/get_house_diff?BanID='+BanID;
     }
-    var load_1 = layer.load();
+    var load_1 = layer.load();//加载动画
     $.get(get_url,function(res){
-        layer.close(load_1);
+        layer.close(load_1);//加载动画结束
         res = JSON.parse(res);
         console.log(res);
         var house_str = '';
