@@ -1827,7 +1827,6 @@ $('#addApply').click(function() {
            // $(".batchRent").show();
             var value;
             var house_array = [];
-            var form_str = '';//table表字符串化
             var thisLayer = layer.open({
                 type: 1,
                 area: ['990px', '700px'],
@@ -1852,7 +1851,7 @@ $('#addApply').click(function() {
                             area: ['990px','780px'],
                             resize: false,
                             zIndex: 100,
-                            title: ['租金调整（批量）', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+                            title: ['房屋选择', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
                             content: $('#banLinkHouseForm'),
                             btn: ['确定', '取消'],
                             success: function() {
@@ -1861,6 +1860,7 @@ $('#addApply').click(function() {
                             yes: function() {
                                 var HousePrerent = 0;
                                 var count = 0;
+                                var form_str = '';//table表字符串化(因为现在数据没有筛选)
                                 house_array = [];
                                 var type = $('#pauseHouseChoose tr:eq(0) td:eq(2)').text();
                                 for(var i = 0;i <$('#pauseHouseChoose tr').length;i++ ){
@@ -1881,7 +1881,7 @@ $('#addApply').click(function() {
                                 $('#batchBanID').text(fun.initData.BanID);
                                 $('#batchBanAddress').text(fun.initData.BanAddress);
                                 $('#batchOwnerType').text(fun.initData.OwnerType);
-                                $('#batchHousePrerent').text();
+                                $('#batchHousePrerent').text(fun.initData.PreRent);
                                 $('#batchHouseMoney').text(HousePrerent.toFixed(2));
                                 
                                 $('#batchHouseDetail').empty();
@@ -1984,6 +1984,7 @@ function getBanList(){
     this.initData = {
         BanAddress:"",
         BanID:"",
+        PreRent:null,
         OwnerType:"",
         banData:null,
         filterData:null
@@ -2003,7 +2004,7 @@ function getBanList(){
 
         for(var i = 0;i < data.length;i++){
             ban_str += '<tr>\
-                <td style="width:150px;">'+data[i].BanID+'</td>\
+                <td style="width:150px;" data-PreRent="'+data[i].PreRent+'">'+data[i].BanID+'</td>\
                 <td style="width:150px;">'+data[i].DamageGrade+'</td>\
                 <td style="width:150px;">'+data[i].StructureType+'</td>\
                 <td style="width:150px;">'+data[i].OwnerType+'</td>\
@@ -2015,16 +2016,20 @@ function getBanList(){
         $('.allChoose').prop('checked',false);
         $('#pauseBanAdd').empty();
         $('#pauseBanAdd').append($(ban_str));
+
+        var click_flag = 0;
         $('#pauseBanAdd tr').click(function(){
             var BanID = $(this).find('td').eq(0).text();
             var BanAddress = $(this).find('td').eq(5).text();
             var OwnerType = $(this).find('td').eq(3).text();
+            var PreRent = $(this).find('td').eq(0).attr('data-PreRent');
             self.initData.BanAddress = BanAddress;
             self.initData.BanID = BanID;
             self.initData.OwnerType = OwnerType;
-            console.log(BanID);
+            self.initData.PreRent = PreRent;
             banLinkHouse(BanID,BanAddress,type);
             $('#pauseHouseChoose').empty();
+            self.setColor($(this),'#pauseBanAdd tr');
         })
     };
     this.search = function(val){
@@ -2042,7 +2047,18 @@ function getBanList(){
             self.initData.banData = res.data;
             self.renderDom(res.data,type);
         });
-    }
+    };
+    this.setColor = function(this_dom,dom){
+        var thisIndex = this_dom.index(dom);
+        if(click_flag%2 == 0){
+            $(dom).eq(click_flag).find('td').css('background-color','#f9f9f9');
+        }else{
+            $(dom).eq(click_flag).find('td').css('background-color','#ffffff');
+        }
+        click_flag = thisIndex;
+        console.log(thisIndex);
+        $(dom).eq(thisIndex).find('td').css('background','#DEF2FF');
+    };
 }
 
 
@@ -2052,9 +2068,11 @@ function banLinkHouse(BanID,BanAddress,type){
     }else if(type == 15){
         var get_url = '/ph/Api/get_house_diff?BanID='+BanID;
     }
+    var load_1 = layer.load();
     $.get(get_url,function(res){
+        layer.close(load_1);
         res = JSON.parse(res);
-console.log(res);
+        console.log(res);
         var house_str = '';
         if(type == 3){
             for(var i = 0;i < res.data.length;i++){

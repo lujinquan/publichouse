@@ -967,7 +967,7 @@ function processPass(formData,this_index){
 	})
 }
 // 审批不通过事件
-function noPass(value){
+function noPass(value,reason){
 	layer.open({
 		type:1,
 		area:['400px','400px'],
@@ -976,6 +976,10 @@ function noPass(value){
 		title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
 		content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
 		btn:['确认'],
+        success:function(){
+            console.log(reason);
+            $('#reason').val(reason||'');
+        },
 		yes:function(msgIndex){
 			var reasonMsg = $('#reason').val();
 			if (reasonMsg=='') {
@@ -1085,7 +1089,7 @@ $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(fun
                 $('.RoomDeT').eq(j).css('display', 'block');
                 $('.RoomDeT').eq(j).parent().children().eq(0).removeClass('nomal').addClass('active');
                 $('.pull').eq(j).prop('src', '/public/static/gf/icons/triU.png');
-            } //小长度             
+            } //小长度
             $('.RentTit').eq(a + 1).after(RentHtml);
             RentHtml = '';
             $('.RoomDeT').eq(1).css('display', 'block');
@@ -1107,7 +1111,7 @@ $('#rentMeterButton,#rentMaterQuery,#newRentDetail,#cancelMaterQuery').click(fun
 
 
 function batchPrint(data,value,operation){
-    layer.open({
+    var this_index = layer.open({
         type:2,
         area:['850px','800px'],
         zIndex:19911117,
@@ -1128,12 +1132,12 @@ function batchPrint(data,value,operation){
             iframe_dom.find('.before_data2').text(data.detail.Deadline.changeBefore.BanArea);
             iframe_dom.find('.before_data3').text(data.detail.Deadline.changeBefore.PreRent);
             iframe_dom.find('.before_data4').text(data.detail.Deadline.changeBefore.TotalOprice);
-            iframe_dom.find('.after_data1').text(data.detail.Deadline.changeAfter.TotalTenantNum);
+            iframe_dom.find('.after_data1').text(data.detail.Deadline.changeBefore.TotalTenantNum||0);
             iframe_dom.find('.after_data2').text(data.detail.Deadline.changeAfter.BanArea);
             iframe_dom.find('.after_data3').text(data.detail.Deadline.changeAfter.PreRent);
             iframe_dom.find('.after_data4').text(data.detail.Deadline.changeAfter.TotalOprice);
             iframe_dom.find('.change_num').text(data.detail.TotalChangeNum);
-            iframe_dom.find('.change_money').text(data.detail.TotalOprice);
+            iframe_dom.find('.change_money').text(data.detail.InflRent);
             iframe_dom.find('.remark').text(data.detail.Remark);
             iframe_dom.find('.img_code').prop('src',data.detail.Qrcode);
             if(data.config.status != '0'){
@@ -1150,7 +1154,6 @@ function batchPrint(data,value,operation){
             var table_str = '';
             for(var i = 0;i < data.detail.Deadline.houseArr.length;i++){
                 var diff = data.detail.Deadline.houseArr[i].Diff;
-                console.log((parseFloat(diff)>0)?'red':'green');
                 table_str += '<tr>\
                     <td>'+data.detail.Deadline.houseArr[i].HouseID+'</td>\
                     <td>7</td>\
@@ -1174,7 +1177,7 @@ function batchPrint(data,value,operation){
             processPass(formData,this_index);
         },
         btn2:function(){
-            noPass(value);
+            noPass(value,'计算租金标准化。');
         }
     })
 }
