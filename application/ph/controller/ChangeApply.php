@@ -469,14 +469,15 @@ class ChangeApply extends Base
                     $datas['BanID'] = $data['banID'];  //分户原始房屋编号
                     $datas['HouseID'] = trim(implode(',',$data['houseID']),',');
 
-                     $houseArr = Db::name('house')->where('HouseID','in',$data['houseID'])->field('HouseID ,TenantName,HousePrerent,BanAddress')->select();
-                    
+                    $houseArr = Db::name('house')->where('HouseID','in',$data['houseID'])->field('HouseID,FloorID,UseNature,TenantName,HousePrerent,BanAddress')->select();
+                    $uses = Db::name('use_nature')->column('id,UseNature');
                     foreach ($houseArr as &$v) {
+                        $v['UseNature'] = $uses[$v['UseNature']];
                         $v['ApprovedRent'] = count_house_rent($v['HouseID']); 
                         $v['Diff'] = bcsub($v['ApprovedRent'],$v['HousePrerent'],2);
                     }
                     $changeBefore = $changeAfter = [];
-                    $changeBefore['BanArea'] = $changeAfter['BanArea'] = $one['BanArea'];
+                    $changeBefore['BanArea'] = $changeAfter['BanArea'] = $one['TotalArea'];
                     $changeBefore['PreRent'] = $one['PreRent'];
                     $changeAfter['PreRent'] = $one['PreRent'] + $data['diff'];
                     $changeBefore['TotalOprice'] = $changeAfter['TotalOprice'] = $one['TotalOprice'];
