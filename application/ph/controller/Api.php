@@ -597,30 +597,25 @@ class Api extends Controller
             $result = [];
             if ($data) {
                 
-                foreach ($data as &$d) {
+                foreach ($data as $d) {
                     $i = 0;
-                    $result = Db::name('house')->where('BanID',$d['BanID'])->field('HouseID ,HousePrerent')->select();
-                    foreach($result as $r){
+                    $res = Db::name('house')->where('BanID',$d['BanID'])->field('HouseID ,HousePrerent')->select();
+                    foreach($res as $r){
                         $r['ApprovedRent'] = count_house_rent($r['HouseID']);
-                        //$r['OwnerType'] = $owns[$r['OwnerType']];   //楼栋产别
-                        //$r['UseNature'] = isset($uses[$r['UseNature']])?$uses[$r['UseNature']]:'';  //使用性质
                         $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
-                        //halt($v['Diff']);
+
                         if(abs($r['Diff']) == 0.1){
-                            $d['count'] = $i++;
-                            // $result[] = $r;
-                            // continue;
+                            $i++;
                         }
                     }
 
                     if($i > 0){
+                        $d['count'] = $i;
                         $result[] = $d;
-                    }
-                   
-                    
-                    
+                    }  
                     
                 }
+                //halt($result);
             }
             if($result){
                 foreach ($result as &$v) {
