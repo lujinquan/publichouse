@@ -1177,7 +1177,7 @@ function batchPrint(data,value,operation){
             processPass(formData,this_index);
         },
         btn2:function(){
-            noPass(value,'计算租金标准化。');
+            noPass(value,'');
         }
     })
 }
