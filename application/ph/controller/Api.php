@@ -594,38 +594,59 @@ class Api extends Controller
         
         
         if(isset($map['flag'])){
-            $result = [];
-            if ($data) {
-                
-                foreach ($data as $d) {
-                    $i = 0;
-                    $res = Db::name('house')->where('BanID',$d['BanID'])->field('HouseID ,HousePrerent')->select();
-                    foreach($res as $r){
-                        $r['ApprovedRent'] = count_house_rent($r['HouseID']);
-                        $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
-
-                        if(abs($r['Diff']) == 0.1){
-                            $i++;
-                        }
-                    }
-
-                    if($i > 0){
-                        $d['count'] = $i;
-                        $result[] = $d;
-                    }  
-                    
-                }
+            if($result = Cache::get('allban_'.$currentUserInstitutionID)){
                 //halt($result);
-            }
-            if($result){
-                foreach ($result as &$v) {
-                    $v['DamageGrade'] = $dams[$v['DamageGrade']];//完损等级
-                    $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
-                    $v['StructureType'] = $strs[$v['StructureType']];//结构名称
-                    $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
+                $s = $results = [];
+                foreach($data as $da){
+                    $s[$da['BanID']] = $da['BanID'];
                 }
+                //halt($s);
+                foreach($result as $rs){
+                    if(isset($s[$rs['BanID']])){
+                        $results[] = $rs;
+                    }
+                }
+                return jsons('2000', '获取成功', $results);
+            }else{
+                $result = [];
+                if ($data) {
+                    
+                    foreach ($data as $d) {
+                        $i = 0;
+                        $wheres['Status'] = array('eq', 1);
+                        $wheres['BanID'] = array('eq',$d['BanID']);
+                        $wheres['IfSuspend'] = array('eq', 0);
+                        $wheres['HouseChangeStatus'] = array('eq', 0);
+                        $res = Db::name('house')->where($wheres)->field('HouseID ,HousePrerent')->select();
+                        foreach($res as $r){
+                            $r['ApprovedRent'] = count_house_rent($r['HouseID']);
+                            $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
+
+                            if(abs($r['Diff']) == 0.1){
+                                $i++;
+                            }
+                        }
+
+                        if($i > 0){
+                            $d['count'] = $i;
+                            $result[] = $d;
+                        }  
+                        
+                    }
+                    //halt($result);
+                }
+                if($result){
+                    foreach ($result as &$v) {
+                        $v['DamageGrade'] = $dams[$v['DamageGrade']];//完损等级
+                        $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
+                        $v['StructureType'] = $strs[$v['StructureType']];//结构名称
+                        $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
+                    }
+                }
+                Cache::set('allban_'.$currentUserInstitutionID,$result,7200);
+                return jsons('2000', '获取成功', $result);
             }
-            return jsons('2000', '获取成功', $result);
+            
         }else{
             if ($data) {
                 foreach ($data as &$v) {
