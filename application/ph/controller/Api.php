@@ -613,7 +613,11 @@ class Api extends Controller
                     
                     foreach ($data as $d) {
                         $i = 0;
-                        $res = Db::name('house')->where('BanID',$d['BanID'])->field('HouseID ,HousePrerent')->select();
+                        $wheres['Status'] = array('eq', 1);
+                        $wheres['BanID'] = array('eq',$d['BanID']);
+                        $wheres['IfSuspend'] = array('eq', 0);
+                        $wheres['HouseChangeStatus'] = array('eq', 0);
+                        $res = Db::name('house')->where($wheres)->field('HouseID ,HousePrerent')->select();
                         foreach($res as $r){
                             $r['ApprovedRent'] = count_house_rent($r['HouseID']);
                             $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
