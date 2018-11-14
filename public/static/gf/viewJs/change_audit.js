@@ -1156,9 +1156,9 @@ function batchPrint(data,value,operation){
                 var diff = data.detail.Deadline.houseArr[i].Diff;
                 table_str += '<tr>\
                     <td>'+data.detail.Deadline.houseArr[i].HouseID+'</td>\
-                    <td>7</td>\
+                    <td>'+data.detail.Deadline.houseArr[i].FloorID+'</td>\
                     <td>'+data.detail.Deadline.houseArr[i].TenantName+'</td>\
-                    <td>住宅</td>\
+                    <td>'+data.detail.Deadline.houseArr[i].UseNature+'</td>\
                     <td>'+data.detail.Deadline.houseArr[i].HousePrerent+'</td>\
                     <td>'+data.detail.Deadline.houseArr[i].ApprovedRent+'</td>\
                     <td style="color:'+((parseFloat(diff)>0)?'red':'green')+'">'+diff+'</td>\
