@@ -32,7 +32,7 @@ class UserRecord extends Model
 
         $ChangeList['option'] =array();
 
-        if($searchForm = input('post.')) {
+        if($searchForm = input('param.')) {
 
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
@@ -61,6 +61,9 @@ class UserRecord extends Model
             }
             if ($searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
+            }
+            if ($searchForm['OwnerType']) {  //检索变更类型
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
             
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){

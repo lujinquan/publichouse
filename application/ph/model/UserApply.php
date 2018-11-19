@@ -36,7 +36,7 @@ class UserApply extends Model
 
         $ChangeList['option'] =array();
 
-        if($searchForm = input('post.')) {
+        if($searchForm = input('param.')) {
 
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
@@ -65,6 +65,9 @@ class UserApply extends Model
             if (isset($searchForm['ChangeType']) && $searchForm['ChangeType']) {  //检索变更类型
                 $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
             }
+            if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //检索产别
+                $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
+            }
             if (isset($searchForm['UserName']) && $searchForm['UserName']) {  //检索操作人姓名
                 $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
             }
@@ -78,7 +81,7 @@ class UserApply extends Model
         }
 
         $where['Status'] = array('not in' ,[0,1]);
-
+//halt($where);
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
