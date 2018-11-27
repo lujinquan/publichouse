@@ -2002,17 +2002,29 @@ function getBanList(){
     this.renderDom = function(data,type){
         var self = this;
         var ban_str = '';
-
-        for(var i = 0;i < data.length;i++){
-            ban_str += '<tr>\
-                <td style="width:150px;" data-PreRent="'+data[i].PreRent+'">'+data[i].BanID+'</td>\
-                <td style="width:150px;">'+data[i].DamageGrade+'</td>\
-                <td style="width:150px;">'+data[i].StructureType+'</td>\
-                <td style="width:150px;">'+data[i].OwnerType+'</td>\
-                <td style="width:150px;">'+data[i].UseNature+'</td>\
-                <td style="width:150px;">'+data[i].count+'</td>\
-                <td style="width:200px;">'+data[i].AreaFour+'</td>\
-            </tr>'
+        if(type==3){
+            for(var i = 0;i < data.length;i++){
+                ban_str += '<tr>\
+                    <td style="width:150px;" data-PreRent="'+data[i].PreRent+'">'+data[i].BanID+'</td>\
+                    <td style="width:150px;">'+data[i].DamageGrade+'</td>\
+                    <td style="width:150px;">'+data[i].StructureType+'</td>\
+                    <td style="width:150px;">'+data[i].OwnerType+'</td>\
+                    <td style="width:150px;">'+data[i].UseNature+'</td>\
+                    <td style="width:200px;">'+data[i].AreaFour+'</td>\
+                </tr>'
+            }
+        }else{
+            for(var i = 0;i < data.length;i++){
+                ban_str += '<tr>\
+                    <td style="width:150px;" data-PreRent="'+data[i].PreRent+'">'+data[i].BanID+'</td>\
+                    <td style="width:150px;">'+data[i].DamageGrade+'</td>\
+                    <td style="width:150px;">'+data[i].StructureType+'</td>\
+                    <td style="width:150px;">'+data[i].OwnerType+'</td>\
+                    <td style="width:150px;">'+data[i].UseNature+'</td>\
+                    <td style="width:200px;">'+data[i].AreaFour+'</td>\
+                    <td style="width:150px;">'+data[i].count+'</td>\
+                </tr>'
+            }
         }
 
         $('.allChoose').prop('checked',false);
