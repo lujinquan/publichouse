@@ -2051,7 +2051,7 @@ function getBanList(){
         this.initData.filterData = this.initData.banData.filter(function(data){
             return data.AreaFour.indexOf(val) > -1;
         })
-        this.renderDom(this.initData.filterData);
+        this.renderDom(this.initData.filterData,3);
     };
     this.getSearchData = function(url,ownerType,address,type){
         var self = this;
