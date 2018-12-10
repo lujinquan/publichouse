@@ -163,7 +163,7 @@ class UserAudit extends Model
             //终审通过后，系统自动将变更数据更改,1更名，2过户，3赠予，4转让
             $changeOrderDetail = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->field('*')->find();
 
-            Db::name('house')->where('TenantID','eq',$changeOrderDetail['OldTenantID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
+            Db::name('house')->where(['HouseID','eq',$changeOrderDetail['HouseID']])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
 
             $datas['Status'] = 2;
 
