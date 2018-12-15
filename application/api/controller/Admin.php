@@ -18,13 +18,142 @@ class Admin extends Controller
 {
     public function api()
     {
+        $find = Db::name('report')->where('id',52)->value('data');
+        $res = json_decode($find,true);
+
+        foreach($res as $p => $a){ //按1完损等级2使用性质3所属机构4建成年份5价值
+            foreach($a as $k => $b){ // 按1市2区3代管自管7托管分  10 11 12
+                
+                foreach($b as $w => $c){ // 按机构
+                    foreach($c['data']['top'] as $r => $d){
+                        $count = count($d);
+                        //halt($i);
+                        for($i= 0; $i < $count;$i++){
+                            
+                            if(!isset($res[$p][10][$w]['data']['top'][$r][$i])){
+                                $res[$p]10][$w]['data']['top'][$r][$i] = 0;
+                            }
+                            if($i == 0){
+                                $res[$p]10][$w]['data']['top'][$r][$i] =  $d[0];
+                            }else{
+
+                                $res[$p]10][$w]['data']['top'][$r][$i] += $d[$i];
+                            } 
+
+                             
+                        }
+                    }
+
+                    $res[$p][$k][1]['data']['below'] = $res[$p][$k][2]['data']['below'] = $res[$p][$k][3]['data']['below'] = [];
+
+
+                }
+
+
+ 
+            }
+        }
+        //halt($res[1][1][2]);
+        //Db::name('report')->insert(['data'=>json_encode($res)]);
+        halt($res);
+
+    }
+
+    public function api_old()
+    {
+        $find = Db::name('report')->where('id',46)->value('data');
+        $res = json_decode($find,true);
+
+        foreach($res as $p => $a){ //按1完损等级2使用性质3所属机构4建成年份5价值
+            foreach($a as $k => $b){ // 按1市2区3代管自管7托管分
+                //halt($b);
+                foreach($b as $w => $c){ // 按机构
+                    foreach($c['data']['top'] as $r => $d){
+                        $count = count($d);
+                        //halt($i);
+                        for($i= 0; $i < $count;$i++){
+                            if($w<19 && $w >2){ //紫阳所
+                                if(!isset($res[$p][$k][2]['data']['top'][$r][$i])){
+                                    $res[$p][$k][2]['data']['top'][$r][$i] = 0;
+                                }
+                                if($i == 0){
+                                    $res[$p][$k][2]['data']['top'][$r][$i] =  $d[0];
+                                }else{
+
+                                    $res[$p][$k][2]['data']['top'][$r][$i] += $d[$i];
+                                }  
+                            }elseif($w>18){
+                                if(!isset($res[$p][$k][3]['data']['top'][$r][$i])){
+                                    $res[$p][$k][3]['data']['top'][$r][$i] = 0;
+                                }
+                                if($i == 0){
+                                    $res[$p][$k][3]['data']['top'][$r][$i] =  $d[0];
+                                }else{
+
+                                    $res[$p][$k][3]['data']['top'][$r][$i] += $d[$i];
+                                } 
+                            }
+                            if(!isset($res[$p][$k][1]['data']['top'][$r][$i])){
+                                $res[$p][$k][1]['data']['top'][$r][$i] = 0;
+                            }
+                            if($i == 0){
+                                $res[$p][$k][1]['data']['top'][$r][$i] =  $d[0];
+                            }else{
+
+                                $res[$p][$k][1]['data']['top'][$r][$i] += $d[$i];
+                            } 
+
+                             
+                        }
+                    }
+
+                    $res[$p][$k][1]['data']['below'] = $res[$p][$k][2]['data']['below'] = $res[$p][$k][3]['data']['below'] = [];
+                // $b[2] = $b[4] + $b[5] + $b[6] + $b[7] + $b[8] + $b[9] + $b[10] + $b[11] + $b[12] +$b[13] + $b[14] + $b[15] + $b[16] + $b[17] + $b[18];
+                // $b[3] = $b[19] + $b[20] + $b[21] + $b[22] + $b[23] + $b[24] + $b[25] + $b[26] + $b[27] +$b[28] + $b[29] + $b[30] + $b[31] + $b[32] + $b[33];
+                // $b[1] = $b[2] + $b[3];
+
+                }
+                // if($k == 2){
+                //     $b[2] = $b[4] + $b[5];
+                //     dump($b[4]);dump($b[5]);halt($b[2]);  
+                // }
+                
+            }
+        }
+//halt($res[1][1][2]);
+        //Db::name('report')->insert(['data'=>json_encode($res)]);
+        halt($res);
+
+
         //halt(date('Y-m-d'));
-        $month = '201712';
-        $RentReport = Cache::store('file')->get('HouseReport'.$month);
-        $row['data'] = $RentReport;
-        $row['type'] = '月租金报表'.$month;
+        // $month = '2017';
+        // $RentReport = Cache::store('file')->get('PropertyReport'.$month);
+        // $row['data'] = $RentReport;
+        // $row['type'] = '月租金报表'.$month;
         //Db::name('report')->insert($row);
-        halt($RentReport);
+        
+        // id = 44的产权统计表
+        // 一级：产别 1 2 5 6 11 市、区、自 、市代托、全部
+        // 二级：机构 1 2 3 ,例如获取区属紫阳所的，如下：
+        //$find = Db::name('report')->where('id',44)->value('data');$res = json_decode($find,true);halt($res[2][2]);
+        
+        // 一级：产别 1 2 3 5 7 10 11 12
+        //  1 => '市属',
+        // 2 => '区属',
+        // 3 => '代管',
+        // 5 => '自管',
+        // 7 => '托管',
+        // 10 => '市代托',
+        // 11 => '市区代托',
+        // 12 => '所有产别',
+        // 二级：机构 1——33,例如获取区属紫阳01管段的，如下：
+        //$find = Db::name('report')->where('id',14)->value('data');$res = json_decode($find,true);halt($res[2][4]);
+        
+
+
+
+
+        //halt($RentReport);
     }
 
     /**

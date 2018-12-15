@@ -44,6 +44,7 @@ class SystemLog extends Base
         $HouseReportdata = model('ph/PropertyReport')->index();
         Debug::remark('end');
         $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
+        
         return $res?jsons('2000','缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
     }
 
@@ -55,6 +56,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $HouseReportdata = model('ph/HouseReport')->index();
+        //halt($HouseReportdata);
         Debug::remark('end');
         $res = Cache::store('file')->set('HouseReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
         return $res?jsons('2000','缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');

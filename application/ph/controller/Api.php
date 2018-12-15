@@ -917,25 +917,40 @@ class Api extends Controller
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
             }
-            switch($searchForm['QueryType']){
-                case '1':
-                    $result['data'] = model('ph/HouseReports')->get_by_damage($where);
-                    break;
-                case '2':
-                    $result['data'] = model('ph/HouseReports')->get_by_useNature($where);
-                    break;
-                case '3';
-                    $result['data'] = model('ph/HouseReports')->get_by_institution($where);
-                    break;
-                case '4':
-                    $result['data'] = model('ph/HouseReports')->get_by_year($where);
-                    break;
-                case '5':
-                    $result['data'] = model('ph/HouseReports')->get_by_value($where);
-                    break;
-                default:
-                    break;
+
+            // 2017年的房屋统计表直接读缓存数据
+            if(substr($searchForm['month'],0,4) == '2017'){
+                $data = Db::name('report')->where('id',52)->value('data');
+                $sdata = json_decode($data,true);
+                $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']]; 
+
+            // 不是2017年的就直接计算统计
+            }else{
+
+                switch($searchForm['QueryType']){
+                    case '1':
+                        $result['data'] = model('ph/HouseReports')->get_by_damage($where);
+                        break;
+                    case '2':
+                        $result['data'] = model('ph/HouseReports')->get_by_useNature($where);
+                        break;
+                    case '3';
+                        $result['data'] = model('ph/HouseReports')->get_by_institution($where);
+                        break;
+                    case '4':
+                        $result['data'] = model('ph/HouseReports')->get_by_year($where);
+                        break;
+                    case '5':
+                        $result['data'] = model('ph/HouseReports')->get_by_value($where);
+                        break;
+                    default:
+                        break;
+                }
+
+
+            
             }
+            //halt($result);
             return jsons('2000', '获取成功', $result);
         }
     }
