@@ -54,39 +54,54 @@ class HouseReport extends Base
         }
         $HouseIdList['option'] = array();
         if ($searchForm = input('post.')) {
+            halt($searchForm);
             $HouseIdList['option'] = $searchForm;
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
             }
-            switch($searchForm['QueryType']){
-                case '1':
-                    $result = model('ph/HouseReport')->get_by_damage($where);
-                    break;
-                case '2':
-                    $result = model('ph/HouseReport')->get_by_useNature($where);
-                    break;
-                case '3';
-                    $result = model('ph/HouseReport')->get_by_institution($where);
-                    break;
-                case '4':
-                    $result = model('ph/HouseReport')->get_by_year($where);
-                    break;
-                case '5':
-                    $result = model('ph/HouseReport')->get_by_value($where);
-                    $this->assign([
-                        'dataAll' => $result['dataAll'],
-                        'datasByUseNature' => $result['datasByUseNature'],
-                        'arr' => $result['arr'],
-                    ]);
-                    break;
-                default:
-                    break;
-            }
+            // 2017年的房屋统计表直接读缓存数据
+            if(substr($searchForm['month'],0,4) == '2017'){
+                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>2017])->value('data');
+                $sdata = json_decode($data,true);
+                $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']]; 
 
+            // 不是2017年的就直接计算统计
+            }else{
+                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$searchForm['month']])->value('data');
+                $sdata = json_decode($data,true);
+                $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
+
+                // switch($searchForm['QueryType']){
+                //     case '1':
+                //         $result['data'] = model('ph/HouseReports')->get_by_damage($where);
+                //         break;
+                //     case '2':
+                //         $result['data'] = model('ph/HouseReports')->get_by_useNature($where);
+                //         break;
+                //     case '3';
+                //         $result['data'] = model('ph/HouseReports')->get_by_institution($where);
+                //         break;
+                //     case '4':
+                //         $result['data'] = model('ph/HouseReports')->get_by_year($where);
+                //         break;
+                //     case '5':
+                //         $result['data'] = model('ph/HouseReports')->get_by_value($where);
+                //         break;
+                //     default:
+                //         break;
+                // }
+
+
+            
+            }
         }else{   //默认按价值查看
             $where = isset($where)?$where:0;
             //halt($where);
             $result = model('ph/HouseReports')->get_by_value($where);
+
+            //$data = Db::name('report')->where(['type'=>'HouseReport','date'=>date('Ym',time())])->value('data');
+            //$sdata = json_decode($data,true);
+            //$result = $sdata[5][1][$currentUserInstitutionID];
             //halt($result['top']);
             $this->assign([
                 'propertyOption' => [],

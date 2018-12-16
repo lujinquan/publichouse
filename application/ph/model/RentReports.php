@@ -342,8 +342,8 @@ class RentReports extends Model
             }
         }
  
-
-        $datas = json_decode(Cache::store('file')->get('RentReport'.($cacheDate - 1),''),true);
+        $reportolddata = Db::name('report')->where(['type'=>'RentReport','date'=> ($cacheDate - 1)])->value('data');
+        $datas = json_decode($reportolddata,true);
         $lastMonthData = isset($datas)?$datas:array();
 
         // $firstMonth = substr($cacheDate,0,4).'01';

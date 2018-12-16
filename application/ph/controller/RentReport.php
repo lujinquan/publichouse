@@ -17,6 +17,7 @@ class RentReport extends Base
         //提交检索条件处理
         $rentReportOption = array();
         if ($searchForm = input('post.')) {
+            //halt($searchForm);
             $rentReportOption = $searchForm;
             if (isset($searchForm['TubulationID']) && $searchForm['TubulationID']) {   //检索机构
                 $institutionid = $searchForm['TubulationID'];
@@ -39,10 +40,14 @@ class RentReport extends Base
             12 => '所有产别',
         ];
         $month = isset($rentReportOption['month'])?$rentReportOption['month']:date('Y-m',time());
+        //halt($date);
+        //$month = isset($date)?$date:date('Ym',time());
 // $find = Db::name('report')->where('id',20)->value('data');
 // $datas = json_decode($find,true);
-        $datas = json_decode(Cache::store('file')->get('RentReport'.$date ,''),true);
-
+       // $datas = json_decode(Cache::store('file')->get('RentReport'.$date ,''),true);
+        $dataJson = Db::name('report')->where(['type'=>'RentReport','date'=>$date])->value('data');
+        $datas = json_decode($dataJson,true);
+//halt($datas);
         //Cache::rm('RentReport201805');
 
         $result = isset($datas[$ownerType][$institutionid])?$datas[$ownerType][$institutionid]:array();

@@ -920,12 +920,16 @@ class Api extends Controller
 
             // 2017年的房屋统计表直接读缓存数据
             if(substr($searchForm['month'],0,4) == '2017'){
-                $data = Db::name('report')->where('id',52)->value('data');
+                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>2017])->value('data');
                 $sdata = json_decode($data,true);
                 $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']]; 
 
             // 不是2017年的就直接计算统计
             }else{
+                // $months = str_replace('-','',$searchForm['month']);
+                // $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$months])->value('data');
+                // $sdata = json_decode($data,true);
+                // $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
 
                 switch($searchForm['QueryType']){
                     case '1':

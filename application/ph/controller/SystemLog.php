@@ -3,6 +3,7 @@ namespace app\ph\controller;
 
 use think\Cache;
 use think\Debug;
+use think\Db;
 
 /**
  * 系统日志控制器
@@ -43,9 +44,23 @@ class SystemLog extends Base
         Debug::remark('begin');
         $HouseReportdata = model('ph/PropertyReport')->index();
         Debug::remark('end');
-        $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
-        
-        return $res?jsons('2000','缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
+        $where = [
+            'type'=>'PropertyReport',
+            'date'=>date('Y', time()),
+        ];
+        $res = Db::name('report')->where($where)->find();
+        if($res){
+            $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
+        }else{
+            $re = Db::name('report')->insert([
+                'data'=>json_encode($HouseReportdata),
+                'type'=>'PropertyReport',
+                'date'=>date('Y', time()),
+            ]);
+        }
+        // $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
+        //halt($re);
+        return ($re !== false)?jsons('2000','保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
     }
 
     /**
@@ -55,26 +70,66 @@ class SystemLog extends Base
 
         set_time_limit(0);
         Debug::remark('begin');
+        $month = $this->nowmonth;
         $HouseReportdata = model('ph/HouseReport')->index();
-        //halt($HouseReportdata);
+        //$s = Cache::store('file')->get('HouseReport' . $month);
+        $where = [
+            'type'=>'HouseReport',
+            'date'=>$month,
+        ];
+        $res = Db::name('report')->where($where)->find();
+//halt($res);
+        if($res){
+            $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
+        }else{
+            $re = Db::name('report')->insert([
+                'data'=>json_encode($HouseReportdata),
+                'type'=>'HouseReport',
+                'date'=>$month,
+            ]);
+        }
         Debug::remark('end');
-        $res = Cache::store('file')->set('HouseReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
-        return $res?jsons('2000','缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
+
+        if($re){
+            return $this->success('保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
+        }else{
+            return $this->error('保存失败，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
+        }
+
+        //$res = Cache::store('file')->set('HouseReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
+        //return $re?jsons('2000','保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
     }
 
     /**
      * 缓存月租金报表
      */
     public function RentReportCache(){
-
+        $date = $this->nowmonth;
         set_time_limit(0);
         Debug::remark('begin');
+        //halt($date);
         //return jsons('100','测试一下');
-        $HouseReportdata = model('ph/RentReports')->index($this->nowmonth);
+        $HouseReportdata = model('ph/RentReports')->index($date);
+        
 
         Debug::remark('end');
-        $res = Cache::store('file')->set('RentReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
-        return $res?jsons('2000',$this->nowmonth.'月报，缓存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','缓存失败');
+        $where = [
+            'type'=>'RentReport',
+            'date'=> $date,
+        ];
+        $res = Db::name('report')->where($where)->find();
+        //halt($res);
+        if($res){
+            $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
+        }else{
+            $re = Db::name('report')->insert([
+                'data'=>json_encode($HouseReportdata),
+                'type'=>'RentReport',
+                'date'=>$date,
+            ]);
+        }
+        //$res = Cache::store('file')->set('RentReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
+        return ($re !== false)?jsons('2000',$date.'月报，保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
     }
 
     /**

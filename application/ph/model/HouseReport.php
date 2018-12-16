@@ -692,7 +692,7 @@ class HouseReport extends Model
         $result[0][16] = $total['areasArr'][3];
         $result[0][17] = $total['opricesArr'][3];
 
-        halt($result);
+        //halt($result);
 
         return $result;
     }
