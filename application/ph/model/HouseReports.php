@@ -197,17 +197,6 @@ class HouseReports extends Model
 
     public function get_by_useNature($where){  //右侧的顺序是住宅，企业，机关
 
-        //$structureTypes = Db::name('ban_structure_type')->column('id,StructureType');
-
-//        if ($where['OwnerType'] == 10) {
-//            $where['OwnerType'] = array('in',[1,3,7]);
-//            $wheres['OwnerType'] = array('in',[1,3,7]);
-//        } elseif($where['OwnerType'] < 10){
-//            $wheres['OwnerType'] = $where['OwnerType'];
-//        }elseif($where['OwnerType'] == 11){
-//            unset($where['OwnerType']);
-//        }
-
         if ($where['OwnerType'] == 10) {
             $where['OwnerType'] = array('in',[1,3,7]);
             $wheres['OwnerType'] = array('in',[1,3,7]);
@@ -343,11 +332,26 @@ class HouseReports extends Model
 
     public function get_by_institution($where){
 
-        $wheres['OwnerType'] = $where['OwnerType'];
+        //$wheres['OwnerType'] = $where['OwnerType'];
+        if ($where['OwnerType'] == 10) {
+            $where['OwnerType'] = array('in',[1,3,7]);
+            $wheres['OwnerType'] = array('in',[1,3,7]);
+        } elseif($where['OwnerType'] < 10){
+            $wheres['OwnerType'] = $where['OwnerType'];
+        }elseif($where['OwnerType'] == 11){
+            $where['OwnerType'] = array('in',[1,2,3,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,7]);
+        }elseif($where['OwnerType'] == 12){
+            $where['OwnerType'] = array('in',[1,2,3,5,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
+        }
+        
         if(isset($where['TubulationID'])){
             $wheres['InstitutionID'] = $where['TubulationID'];
         }
-        
+        if(isset($where['InstitutionID'])){
+            $wheres['InstitutionPID'] = $where['InstitutionID'];
+        }
         $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
 
@@ -457,14 +461,29 @@ class HouseReports extends Model
             }
 
             for($j = 0; $j <4; $j++){
+                //halt($datas[$k6][$j]);
                 $total['banidsArr'][$j][] = $datas[$k6][$j]['BanIDS'];
                 $total['householdsArr'][$j][] = $datas[$k6][$j]['TotalHouseholds'];
                 $total['areasArr'][$j][] = $datas[$k6][$j]['TotalAreas'];
+                $total['Percent'][$j][] = $datas[$k6][$j]['Percent'];
                 if($j == 1){ //名用多一个使用面积
                     $total['useAreas'][$j][] = $datas[$k6][$j]['BanUseareas'];
                 }
                 $total['banPrerents'][$j][] = $datas[$k6][$j]['BanPrerents'];
-                $total['Percent'][$j][] = $datas[$k6][$j]['Percent'];
+                //转换下顺序
+                $results[$k6][$j]['BanIDS'] = $datas[$k6][$j]['BanIDS'];
+                $results[$k6][$j]['TotalHouseholds'] = $datas[$k6][$j]['TotalHouseholds'];
+                $results[$k6][$j]['TotalAreas'] = $datas[$k6][$j]['TotalAreas'];
+                $results[$k6][$j]['Percent'] = $datas[$k6][$j]['Percent'];
+                if($j == 1){ //名用多一个使用面积
+                    $results[$k6][$j]['BanUseareas'] = $datas[$k6][$j]['BanUseareas'];
+                }
+                $results[$k6][$j]['BanPrerents'] = $datas[$k6][$j]['BanPrerents'];    
+                if(isset($datas[$k6][$j]['InstitutionName'])){
+                    $results[$k6][$j]['InstitutionName'] = $datas[$k6][$j]['InstitutionName'];
+                }
+                
+
             }
 
         }
@@ -477,7 +496,7 @@ class HouseReports extends Model
         }
 
         //将两个数组整合成一个数组，便于前端遍历显示
-        foreach ($datas as $k7 => $v7) {
+        foreach ($results as $k7 => $v7) {
             ksort($v7);
             foreach ($v7 as $k8 => $v8) {
                 foreach ($v8 as $k9 => $v9) {
@@ -524,9 +543,25 @@ class HouseReports extends Model
 
     public function get_by_year($where){
 
-        $wheress['OwnerType'] = $where['OwnerType'];
+        //$wheress['OwnerType'] = $where['OwnerType'];
+        if ($where['OwnerType'] == 10) {
+            $where['OwnerType'] = array('in',[1,3,7]);
+            $wheress['OwnerType'] = array('in',[1,3,7]);
+        } elseif($where['OwnerType'] < 10){
+            $wheress['OwnerType'] = $where['OwnerType'];
+        }elseif($where['OwnerType'] == 11){
+            $where['OwnerType'] = array('in',[1,2,3,7]);
+            $wheress['OwnerType'] = array('in',[1,2,3,7]);
+        }elseif($where['OwnerType'] == 12){
+            $where['OwnerType'] = array('in',[1,2,3,5,7]);
+            $wheress['OwnerType'] = array('in',[1,2,3,5,7]);
+        }
+
         if(isset($where['TubulationID'])){
             $wheress['InstitutionID'] = $where['TubulationID'];
+        }
+        if(isset($where['InstitutionID'])){
+            $wheress['InstitutionPID'] = $where['InstitutionID'];
         }
         
 
@@ -671,19 +706,6 @@ class HouseReports extends Model
 
     public function get_by_value($where){  //右侧的顺序是住宅，企业，机关
 
-        //$structureTypes = Db::name('ban_structure_type')->column('id,StructureType');
-
-//        if ($where['OwnerType'] == 10) {
-//            $where['OwnerType'] = array('in',[1,3,7]);
-//            $wheres['OwnerType'] = array('in',[1,3,7]);
-//        } elseif($where['OwnerType'] < 10){
-//            $wheres['OwnerType'] = $where['OwnerType'];
-//        }elseif($where['OwnerType'] == 11){
-//            unset($where['OwnerType']);
-//        }
-
-
-
         if ($where['OwnerType'] == 10) {
             $where['OwnerType'] = array('in',[1,3,7]);
             $wheres['OwnerType'] = array('in',[1,3,7]);
@@ -813,116 +835,10 @@ class HouseReports extends Model
                 }
             }
         }
-
-        //halt($result);
-
         $results['top'] = $result;
         $results['below'] = $below;
 
         return $results;
     }
 
-//    public function get_by_value($where){
-//
-//        //halt($where);
-//
-//        $wheres['OwnerType'] = $where['OwnerType'];
-//        $wheres['InstitutionID'] = $where['TubulationID'];
-//
-//        $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
-//
-//         $structureTypes = Db::name('ban_structure_type')->column('id,StructureType');
-//
-//        $structureTypes = array(1=>'钢混',4=>'砖混一等',5=>'砖混二等',6=>'砖木一等',3=>'砖木二等',2=>'砖木三等',7=>'简易');
-//        $q = 0;
-//        $nArr = array(2,1,3);
-//
-//         //$k = 1 ,2 ,3 ,4 ,5 ,6 ,7 分别表示结构等级为 钢混 ，砖木三等 ，砖木二等 ，砖混一等 ，砖混二等 ，砖木一等 ，简易
-//         foreach($structureTypes as $k1 => $v1){
-//             $q++;
-//                //$i = 1 ,2 ,3 分别表示使用性质为 住宅 ，企业 ，机关
-//                foreach($nArr as $i){
-//
-//                    $datas[$k1][$i] = Db::name('ban')       //根据使用性质和结构类型分类
-//                        ->field('count(BanID) as BanIDS , sum(TotalArea) as TotalAreas,sum(BanUsearea) as  BanUseareas ,sum(TotalOprice) as TotalOprices')
-//                        ->where($where)
-//                        ->where(['StructureType'=>$k1,'UseNature'=>$i])
-//                        ->find();  //计算每一个（结构等级，使用性质）的结果集
-//
-//                    if($i != 1){  //只有住宅需要统计使用面积
-//                        unset($datas[$k1][$i]['BanUseareas']);
-//                    }
-//
-//                    foreach ($datas[$k1][$i] as &$v2) {  //保证每个结果的值不为null ，避免报错
-//                        if(!$v2){$v2 = 0;}
-//                    }
-//
-//                    $datas[$k1][$i]['StructureTypeName'] = $v1;
-//
-//                }
-//         }
-//
-//        // 将$v5[0],用作计算左侧合计部分
-//        foreach ($datas as $k5 => &$v5) {
-//            $v5[0]['BanIDS'] = $v5[1]['BanIDS'] + $v5[2]['BanIDS'] + $v5[3]['BanIDS'];
-//            $v5[0]['TotalAreas'] = $v5[1]['TotalAreas'] + $v5[2]['TotalAreas'] + $v5[3]['TotalAreas'];
-//            $v5[0]['TotalOprices'] = $v5[1]['TotalOprices'] + $v5[2]['TotalOprices'] + $v5[3]['TotalOprices'];
-//        }
-//
-//        foreach ($datas as $k6 => $v6) {
-//
-//            for($j = 0; $j <4; $j++){
-//                $total['banidsArr'][$j][] = $datas[$k6][$j]['BanIDS'];
-//                $total['areasArr'][$j][] = $datas[$k6][$j]['TotalAreas'];
-//                if($j == 1){
-//                    $total['banUseareas'][$j][] = $datas[$k6][$j]['BanUseareas'];
-//                }
-//                $total['opricesArr'][$j][] = $datas[$k6][$j]['TotalOprices'];
-//            }
-//
-//        }
-//
-//        // $total为最下面的合计部分
-//        foreach ($total as $k3 => $v3) {  //最下面的合计
-//            foreach ($v3 as $k4 => $v4) {
-//                $total[$k3][$k4] = array_sum($v4);
-//            }
-//        }
-//
-//        //将两个数组整合成一个数组，便于前端遍历显示
-//        foreach ($datas as $k7 => $v7) {
-//            ksort($v7);
-//            foreach ($v7 as $k8 => $v8) {;
-//                foreach ($v8 as $k9 => $v9) {
-//                    if($k9 == 'StructureTypeName') continue;
-//                    $result[$k7][] = $v9;
-//                }
-//            }
-//            array_unshift($result[$k7] ,$v7[1]['StructureTypeName']);
-//        }
-//
-//        $result[0][0] = '合计';
-//        $result[0][1] = $total['banidsArr'][0];
-//        $result[0][2] = $total['householdsArr'][0];
-//        $result[0][3] = $total['areasArr'][0];
-//        $result[0][4] = $total['opricesArr'][0];
-//        $result[0][5] = $total['banidsArr'][1];
-//        $result[0][6] = $total['householdsArr'][1];
-//        $result[0][7] = $total['areasArr'][1];
-//        $result[0][8] = $total['banUseareas'][1];
-//        $result[0][9] = $total['opricesArr'][1];
-//        $result[0][10] = $total['banidsArr'][2];
-//        $result[0][11] = $total['householdsArr'][2];
-//        $result[0][12] = $total['areasArr'][2];
-//        $result[0][13] = $total['opricesArr'][2];
-//        $result[0][14] = $total['banidsArr'][3];
-//        $result[0][15] = $total['householdsArr'][3];
-//        $result[0][16] = $total['areasArr'][3];
-//        $result[0][17] = $total['opricesArr'][3];
-//        sort($result);
-//        $results['top'] = $result;
-//        $results['below'] = $below;
-//
-//        return $results;
-//    }
 }

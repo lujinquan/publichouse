@@ -917,6 +917,14 @@ class Api extends Controller
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
             }
+            if($searchForm['TubulationID']){
+                if($searchForm['TubulationID']>3){
+                    $where['TubulationID'] = $searchForm['TubulationID'];
+                }else{
+                    $where['InstitutionID'] = $searchForm['TubulationID'];
+                }
+                
+            }
 
             // 2017年的房屋统计表直接读缓存数据
             if(substr($searchForm['month'],0,4) == '2017'){
