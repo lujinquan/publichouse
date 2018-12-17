@@ -26,7 +26,7 @@ class PropertyReport extends Base
         ];
         //初始条件
         $institutionid = session('user_base_info.institution_id');
-        $ownerType = 1;
+        $ownerType = 11;
         $date = date('Y',time());
         //$propertyOption['TubulationID'] = $institutionid;
 

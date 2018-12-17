@@ -21,7 +21,7 @@ class HouseReports extends Model
 
 
         $instLst = Db::name('institution')->column('id');
-        $ownerLst = Db::name('ban_owner_type')->column('id');
+        $ownerLst = [1,2,3,5,7];
         //halt($where);
         for ($i = 1;$i < 6; $i++) {
 
@@ -86,7 +86,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            unset($where['OwnerType']);
+            $where['OwnerType'] = array('in',[1,2,3,5,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
         }
 
         if(isset($where['TubulationID'])){
@@ -216,7 +217,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            unset($where['OwnerType']);
+            $where['OwnerType'] = array('in',[1,2,3,5,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
         }
 
         if(isset($where['TubulationID'])){
@@ -332,7 +334,6 @@ class HouseReports extends Model
                 }
             }
         }
-        //halt($result);
 
         $results['top'] = $result;
         $results['below'] = $below;
@@ -343,7 +344,10 @@ class HouseReports extends Model
     public function get_by_institution($where){
 
         $wheres['OwnerType'] = $where['OwnerType'];
-        $wheres['InstitutionID'] = $where['TubulationID'];
+        if(isset($where['TubulationID'])){
+            $wheres['InstitutionID'] = $where['TubulationID'];
+        }
+        
         $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
 
@@ -521,7 +525,10 @@ class HouseReports extends Model
     public function get_by_year($where){
 
         $wheress['OwnerType'] = $where['OwnerType'];
-        $wheress['InstitutionID'] = $where['TubulationID'];
+        if(isset($where['TubulationID'])){
+            $wheress['InstitutionID'] = $where['TubulationID'];
+        }
+        
 
         $below = Db::name('house')->where($wheress)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
         //halt($wheres);
@@ -686,7 +693,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            unset($where['OwnerType']);
+            $where['OwnerType'] = array('in',[1,2,3,5,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
         }
 
         if(isset($where['TubulationID'])){

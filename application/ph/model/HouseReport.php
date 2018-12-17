@@ -21,7 +21,7 @@ class HouseReport extends Model
 
 
         $instLst = Db::name('institution')->column('id');
-        $ownerLst = Db::name('ban_owner_type')->column('id');
+        $ownerLst = [1,2,3,5,7];
         
         for ($i = 1;$i < 6; $i++) {
             foreach ($ownerLst as $owner) {
