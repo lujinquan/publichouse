@@ -364,7 +364,7 @@ class HouseReports extends Model
             unset($where['TubulationID']);
             //dump($where);halt($institutions);
         }else{
-            $institutions = Db::name('institution')->where('id','neq',1)->column('id,Institution');
+            $institutions = Db::name('institution')->where('id','gt',3)->column('id,Institution');
         }
 
         //$k = 1 ,2 ,3 ,4 ,5 ,6 ,7 分别表示结构等级为 钢混 ，砖木三等 ，砖木二等 ，砖混一等 ，砖混二等 ，砖木一等 ，简易
@@ -439,9 +439,9 @@ class HouseReports extends Model
             $v5[0]['BanPrerents'] = $v5[1]['BanPrerents'] + $v5[2]['BanPrerents'] + $v5[3]['BanPrerents'];
 
             if($v5[0]['TotalAreas']){
-                $datas[$k5][1]['Percent'] = round($datas[$k5][1]['TotalAreas'] / $v5[0]['TotalAreas'] ,2) * 100;
-                $datas[$k5][2]['Percent'] = round($datas[$k5][2]['TotalAreas'] / $v5[0]['TotalAreas'] ,2) * 100;
-                $datas[$k5][3]['Percent'] = round($datas[$k5][3]['TotalAreas'] / $v5[0]['TotalAreas'] ,2) * 100;
+                $datas[$k5][1]['Percent'] = round($datas[$k5][1]['TotalAreas'] / $v5[0]['TotalAreas'] ,4) * 100;
+                $datas[$k5][2]['Percent'] = round($datas[$k5][2]['TotalAreas'] / $v5[0]['TotalAreas'] ,4) * 100;
+                $datas[$k5][3]['Percent'] = round($datas[$k5][3]['TotalAreas'] / $v5[0]['TotalAreas'] ,4) * 100;
             }else{
                 $datas[$k5][1]['Percent'] = 0;
                 $datas[$k5][2]['Percent'] = 0;
@@ -455,7 +455,7 @@ class HouseReports extends Model
         foreach ($datas as $k6 => $v6) {
 
             if($totalTotalAreas){
-                $datas[$k6][0]['Percent'] = round($datas[$k6][0]['TotalAreas'] / $totalTotalAreas ,2) * 100;
+                $datas[$k6][0]['Percent'] = round($datas[$k6][0]['TotalAreas'] / $totalTotalAreas ,4) * 100;
             }else{
                 $datas[$k6][0]['Percent'] = 0;
             }
@@ -571,7 +571,7 @@ class HouseReports extends Model
         foreach($arr as $k1 => $v1){
             switch ($k1) {
                 case '1':
-                    $wheres['BanYear'] = array('eq',1937);
+                    $wheres['BanYear'] = array('elt',1939);
                     break;
                 case '2':
                     $wheres['BanYear'] = array('between',[1940,1949]);
