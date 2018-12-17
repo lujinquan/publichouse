@@ -917,7 +917,7 @@ class Api extends Controller
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
             }
-            if($searchForm['TubulationID']){
+            if(isset($searchForm['TubulationID']) && $searchForm['TubulationID']){
                 if($searchForm['TubulationID']>3){
                     $where['TubulationID'] = $searchForm['TubulationID'];
                 }else{
