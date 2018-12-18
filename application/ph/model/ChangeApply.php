@@ -194,7 +194,7 @@ class ChangeApply extends Model
 
                 break;
                 case 4:
-                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>8,'Status'=>['>',1]])->find();
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>4,'Status'=>['>',1]])->find();
                     if($ifin){
                         return jsons('4001','该房屋已经在陈欠核销异动订单中了');
                     }
