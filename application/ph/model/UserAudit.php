@@ -165,6 +165,8 @@ class UserAudit extends Model
 //dump($changeOrderDetail);halt($where);
             Db::name('house')->where('HouseID',$changeOrderDetail['HouseID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
 
+            Db::name('tenant')->where('TenantID',$changeOrderDetail['NewTenantID'])->setField('Status',1);
+
             $datas['Status'] = 2;
 
         }
