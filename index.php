@@ -22,7 +22,7 @@ define('__TEMPLATES__',__DIR__.'/templates/');
 // 定义session文件目录
 define('SESSION_PATH',__DIR__.'/runtime/session/');
 
-set_time_limit(8000);
+set_time_limit(120);
 
 ini_set('memory_limit','512M');
 
