@@ -21,7 +21,7 @@ class HouseReports extends Model
 
 
         $instLst = Db::name('institution')->column('id');
-        $ownerLst = [1,2,3,5,7];
+        $ownerLst = [1,2,3,5,6,7];
         //halt($where);
         for ($i = 1;$i < 6; $i++) {
 
@@ -86,8 +86,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            $where['OwnerType'] = array('in',[1,2,3,5,7]);
-            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
+            $where['OwnerType'] = array('in',[1,2,3,5,6,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,6,7]);
         }
 
         if(isset($where['TubulationID'])){
@@ -206,8 +206,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            $where['OwnerType'] = array('in',[1,2,3,5,7]);
-            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
+            $where['OwnerType'] = array('in',[1,2,3,5,6,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,6,7]);
         }
 
         if(isset($where['TubulationID'])){
@@ -342,8 +342,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            $where['OwnerType'] = array('in',[1,2,3,5,7]);
-            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
+            $where['OwnerType'] = array('in',[1,2,3,5,6,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,6,7]);
         }
         
         if(isset($where['TubulationID'])){
@@ -553,8 +553,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheress['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            $where['OwnerType'] = array('in',[1,2,3,5,7]);
-            $wheress['OwnerType'] = array('in',[1,2,3,5,7]);
+            $where['OwnerType'] = array('in',[1,2,3,5,6,7]);
+            $wheress['OwnerType'] = array('in',[1,2,3,5,6,7]);
         }
 
         if(isset($where['TubulationID'])){
@@ -715,8 +715,8 @@ class HouseReports extends Model
             $where['OwnerType'] = array('in',[1,2,3,7]);
             $wheres['OwnerType'] = array('in',[1,2,3,7]);
         }elseif($where['OwnerType'] == 12){
-            $where['OwnerType'] = array('in',[1,2,3,5,7]);
-            $wheres['OwnerType'] = array('in',[1,2,3,5,7]);
+            $where['OwnerType'] = array('in',[1,2,3,5,6,7]);
+            $wheres['OwnerType'] = array('in',[1,2,3,5,6,7]);
         }
 
         if(isset($where['TubulationID'])){

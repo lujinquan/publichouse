@@ -22,6 +22,7 @@ class PropertyReport extends Base
             1 => '市属',
             2 => '区属',
             5 => '自管',
+            6 => '生活',
             11 => '所有产别',
         ];
         //初始条件
@@ -51,7 +52,7 @@ class PropertyReport extends Base
         // }else{
         //     $datas = json_decode(Cache::store('file')->get('PropertyReport'.$date ,''),true);
         // }
-        
+        //halt($dataJson);
         //dump($ownerType);dump($institutionid);exit;
         $data = $datas?$datas[$ownerType][$institutionid]:array();
 // 原数据转换方法如下

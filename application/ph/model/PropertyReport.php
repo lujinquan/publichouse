@@ -30,24 +30,24 @@ class PropertyReport extends Model
         // $instLst = [1,2,3];
         //初始化查询条件，默认市属、当前月份、当前机构,市属是包含市属，代管和托管
         $propertyWhere = [
-            'OwnerType' => array('in',[1,2,3,5,7]),
+            'OwnerType' => array('in',[1,2,3,5,6,7]),
             'Status' => array('eq',1),
         ];
 
         $dengjiWhere = [
-            'OwnerType' => array('in',[1,2,3,5,7]),
+            'OwnerType' => array('in',[1,2,3,5,6,7]),
             'BanPropertyID' => array('>',0),
             'Status' => array('eq',1),
         ];
 
         $xinfaWhere = [
-            'OwnerType' => array('in',[1,2,3,5,7]),
+            'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',7),
             'Status' => array('eq',1),
         ];
 
         $zhuxiaoWhere = [
-            'OwnerType' => array('in',[1,2,3,5,7]),
+            'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',8),
             'Status' => array('eq',1),
         ];
@@ -102,7 +102,7 @@ class PropertyReport extends Model
         }
 
          //保证每一个产别，机构，下的每一个字段都不缺失（没有的以0来补充）
-        $ownertypes = [1,2,3,5,7]; //市、区、代、自、托
+        $ownertypes = [1,2,3,5,6,7]; //市、区、代、自、托
         foreach ($ownertypes as $owner) {
             for ($j=4;$j<34;$j++) {
 
@@ -142,7 +142,7 @@ class PropertyReport extends Model
         }
         //halt($propertydata);
 
-        $ownertype = [1,2,5];
+        $ownertype = [1,2,5,6];
         foreach ($ownertype as $owners) { //处理市、区、代、自、托
             for ($a = 4; $a < 34; $a++) { //每个管段，从4开始……
                     
@@ -245,7 +245,7 @@ class PropertyReport extends Model
         }
         
         //第一步：处理市代托，市区代托，全部下的公司，紫阳，粮道的数据（注意只有所和公司才有市代托、市区代托、全部）
-        $ownertypess = [1,2,5,11]; //市、区、自、全部
+        $ownertypess = [1,2,5,6,11]; //市、区、自、全部
         foreach ($ownertypess as $own) {
 
             for ($d = 4; $d >0; $d--) {

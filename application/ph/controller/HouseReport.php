@@ -50,7 +50,7 @@ class HouseReport extends Base
             //return jsons('4000','数据核对期间，只能以房管员的账号来查看');
             $where['OwnerType'] = 1;
         }else{
-            $where['OwnerType'] = 1;
+            $where['OwnerType'] = 12;
         }
         $HouseIdList['option'] = array();
         if ($searchForm = input('post.')) {
@@ -115,6 +115,7 @@ class HouseReport extends Base
             2 => '区属',
             3 => '代管',
             5 => '自管',
+            6 => '生活',
             7 => '托管',
             10 => '市代托',
             11 => '市区代托',

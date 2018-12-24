@@ -18,7 +18,7 @@
                 <div class="label_style">产别：</div>
                 <div class="am-u-md-2">
                     <select name="OwnerType" id="OwnerTyp" >
-                        <option  value="1" style="display:none">市属</option>
+                        <option  value="12" style="display:none">所有产别</option>
 
                         <?php foreach($owerLst as $k1 =>$v1){ $select =($propertyOption != array() && $propertyOption['OwnerType'] == $k1)?'selected':''; ?>
                         <option value="<?php echo $k1; ?>" {$select}>{$v1}</option>
