@@ -53,7 +53,7 @@
                 <select name="TubulationID">
                     <option  value="<?php echo session('user_base_info.institution_id'); ?>"><?php echo session('user_base_info.institution_name'); ?></option>
                     <?php foreach($instLst as $k10 => $v10){ if($v10['level'] <2 ){; ?>
-                    <?php
+                                <?php
                                 if($propertyOption != array()){
                                     if($propertyOption['TubulationID'] == $v10['id']){
                                         $select ='selected';

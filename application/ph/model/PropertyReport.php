@@ -104,7 +104,7 @@ class PropertyReport extends Model
          //保证每一个产别，机构，下的每一个字段都不缺失（没有的以0来补充）
         $ownertypes = [1,2,3,5,6,7]; //市、区、代、自、托
         foreach ($ownertypes as $owner) {
-            for ($j=4;$j<34;$j++) {
+            for ($j=4;$j<36;$j++) {
 
                 if(!isset($propertydata[$owner][$j])){
                     $propertydata[$owner][$j] = [
@@ -144,7 +144,7 @@ class PropertyReport extends Model
 
         $ownertype = [1,2,5,6];
         foreach ($ownertype as $owners) { //处理市、区、代、自、托
-            for ($a = 4; $a < 34; $a++) { //每个管段，从4开始……
+            for ($a = 4; $a < 36; $a++) { //每个管段，从4开始……
                     
                 if($owners === 1){
                     $result[$owners][$a][0][0] = $propertydata[1][$a]['totalNums'] + $propertydata[3][$a]['totalNums'] + $propertydata[7][$a]['totalNums']; //市属楼栋
@@ -245,19 +245,23 @@ class PropertyReport extends Model
         }
         
         //第一步：处理市代托，市区代托，全部下的公司，紫阳，粮道的数据（注意只有所和公司才有市代托、市区代托、全部）
-        $ownertypess = [1,2,5,6,11]; //市、区、自、全部
+        $ownertypess = [1,2,5,6,10,11]; //市、区、自、生活、市区自、全部
         foreach ($ownertypess as $own) {
 
             for ($d = 4; $d >0; $d--) {
                 //公司和所，从1到3（1公司，2紫阳，3粮道），注意顺序公司的数据由所加和得来，所以是3、2、1的顺序
                 if($own < 10 && $d ==3){ //粮道所，的市、区、自
-                    $result[$own][$d] = array_merge_adds($result[$own][19],$result[$own][20],$result[$own][21],$result[$own][22],$result[$own][23],$result[$own][24],$result[$own][25],$result[$own][26],$result[$own][27],$result[$own][28],$result[$own][29],$result[$own][30],$result[$own][31],$result[$own][32],$result[$own][33]);
+                    $result[$own][$d] = array_merge_adds($result[$own][19],$result[$own][20],$result[$own][21],$result[$own][22],$result[$own][23],$result[$own][24],$result[$own][25],$result[$own][26],$result[$own][27],$result[$own][28],$result[$own][29],$result[$own][30],$result[$own][31],$result[$own][32],$result[$own][33],$result[$own][35]);
                 }elseif($own < 10 && $d ==2){ //紫阳所，的市、区、自
-                    $result[$own][$d] = array_merge_adds($result[$own][4],$result[$own][5],$result[$own][6],$result[$own][7],$result[$own][8],$result[$own][9],$result[$own][10],$result[$own][11],$result[$own][12],$result[$own][13],$result[$own][14],$result[$own][15],$result[$own][16],$result[$own][17],$result[$own][18]);
+                    $result[$own][$d] = array_merge_adds($result[$own][4],$result[$own][5],$result[$own][6],$result[$own][7],$result[$own][8],$result[$own][9],$result[$own][10],$result[$own][11],$result[$own][12],$result[$own][13],$result[$own][14],$result[$own][15],$result[$own][16],$result[$own][17],$result[$own][18],$result[$own][34]);
                 }elseif($own < 10 && $d ==1){ //公司，的市、区、自
                     $result[$own][$d] = array_merge_add($result[$own][2] ,$result[$own][3]);
-                }elseif($own == 11 && $d > 1){ 
+                }elseif($own == 10 && $d > 1){ 
                     $result[$own][$d] = array_merge_add(array_merge_add($result[1][$d] ,$result[2][$d]),$result[5][$d]);
+                }elseif($own == 10 && $d == 1){
+                    $result[$own][$d] = array_merge_add($result[$own][2] ,$result[$own][3]);
+                }elseif($own == 11 && $d > 1){ 
+                    $result[$own][$d] = array_merge_add(array_merge_add(array_merge_add($result[1][$d] ,$result[2][$d]),$result[5][$d]),$result[6][$d]);
                 }elseif($own == 11 && $d == 1){
                     $result[$own][$d] = array_merge_add($result[$own][2] ,$result[$own][3]);
                 }
