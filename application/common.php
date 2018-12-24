@@ -834,7 +834,7 @@ function change_house_data($houseid){
     Db::name('house')->where('HouseID','eq',$houseid)->update($edit);
 }
 
-function array_merge_adds($arr1,$arr2,$arr3,$arr4,$arr5,$arr6,$arr7,$arr8,$arr9,$arr10,$arr11,$arr12,$arr13,$arr14,$arr15){
+function array_merge_adds($arr1,$arr2,$arr3,$arr4,$arr5,$arr6,$arr7,$arr8,$arr9,$arr10,$arr11,$arr12,$arr13,$arr14,$arr15,$arr16){
     //dump($arr1);halt($arr2);
     foreach ($arr1 as $k1 => $ar) {
         foreach ($ar as $k2 => $ar) {
@@ -851,7 +851,8 @@ function array_merge_adds($arr1,$arr2,$arr3,$arr4,$arr5,$arr6,$arr7,$arr8,$arr9,
             $adds11 = bcadd($arr15[$k1][$k2] , $add7 , 2);
             $adds12 = bcadd($adds8 , $adds9 , 2);
             $adds13 = bcadd($adds10 , $adds11 , 2);
-            $re[$k1][$k2] = bcadd($adds12 , $adds13 , 2);
+            $adds14 = bcadd($adds13 , $arr16[$k1][$k2] , 2);
+            $re[$k1][$k2] = bcadd($adds12 , $adds14 , 2);
         }
     }
     return $re;
