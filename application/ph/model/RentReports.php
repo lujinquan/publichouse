@@ -118,12 +118,12 @@ class RentReports extends Model
         //从房屋表中分组获取年度欠租、租差
         $changeZhengceData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
-            ->where(['DateEnd'=>['egt',$cacheDate],'CutType'=>5,'Status'=>1])
+            ->where(['DateEnd'=>['gt',$cacheDate],'CutType'=>5,'Status'=>1])
             ->select();
 
         $changejianmianData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
-            ->where(['DateEnd'=>['egt',$cacheDate],'ChangeType'=>1,'CutType'=>['neq',5],'Status'=>1])
+            ->where(['DateEnd'=>['gt',$cacheDate],'ChangeType'=>1,'CutType'=>['neq',5],'Status'=>1])
             ->select();
 
 
