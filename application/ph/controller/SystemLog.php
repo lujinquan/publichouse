@@ -16,7 +16,7 @@ class SystemLog extends Base
     protected function _initialize(){
         parent::_initialize();
         $this->nowmonth = date('Ym',time());
-        //$this->nowmonth = '201806';
+        //$this->nowmonth = '201811';
     }
 
     /**

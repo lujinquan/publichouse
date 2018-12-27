@@ -26,10 +26,7 @@ class RentReports extends Model
      */
     public function index($cacheDate)
     {
-        //$cacheDate = date('Ym',time());
-        //$cacheDate = '201803';
-
-        //$date = '201801';
+        //$date = '201811';
 
         // 以2018年5月报表为例
         $arr1 = array('eq', $cacheDate);     // 201805
