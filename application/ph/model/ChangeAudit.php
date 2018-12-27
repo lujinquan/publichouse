@@ -920,16 +920,16 @@ class ChangeAudit extends Model
 
                 }
 
-                
+              
 
                 if($oneData['InflRent'] != 0){
                     $findHouse = Db::name('house')->where('HouseID',$oneData['HouseID'])->find();
 
-                    Db::name('rent_config')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update(['HousePrerent'=>$findHouse['HousePrerent']]);
+                    Db::name('rent_config')->where(['HouseID'=> ['eq', $oneData['HouseID']]])->update(['HousePrerent'=>$findHouse['HousePrerent']]);
 
-                    Db::name('rent_config')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update(['HousePrerent'=>$findHouse['HousePrerent'],'ReceiveRent'=>['exp','ReceiveRent+'.$oneData['InflRent']],'Type'=>1,'PaidRent'=>0,'UnpaidRent'=>['exp','ReceiveRent+'.$oneData['InflRent']]]);
+                    Db::name('rent_order')->where(['HouseID'=> ['eq', $oneData['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->update(['HousePrerent'=>$findHouse['HousePrerent'],'ReceiveRent'=>['exp','ReceiveRent+'.$oneData['InflRent']],'Type'=>1,'PaidRent'=>0,'UnpaidRent'=>['exp','ReceiveRent+'.$oneData['InflRent']]]);
                 }
-                
+               
                 //房屋调整合并到 调整里面，所以是12
                 $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
 
