@@ -937,7 +937,7 @@ class Api extends Controller
                 // $months = str_replace('-','',$searchForm['month']);
                 // $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$months])->value('data');
                 // $sdata = json_decode($data,true);
-                // $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
+                // $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
 
                 switch($searchForm['QueryType']){
                     case '1':

@@ -18,54 +18,108 @@ class HouseReports extends Model
 {
     public function index($where)
     {
-
-
         $instLst = Db::name('institution')->column('id');
         $ownerLst = [1,2,3,5,6,7];
         //halt($where);
         for ($i = 1;$i < 6; $i++) {
 
+            $belowWhere = array();
+
+            $where['Status'] = array('eq', 1);
+            $belowWhere['Status'] = array('eq', 1);
+            $belowWhere['UseNature'] = array('in', [1,2,3]);
+            $where['OwnerType'] = array('eq', $owner);
+            $belowWhere['OwnerType'] = array('eq', $owner);
+            $belowWhere['InstitutionID'] = $where['TubulationID'];
+
+
+            $below = Db::name('house')->where($belowWhere)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+
+            switch ($i) {
+                case 1:
+                    $results[1]['top'] = model('ph/HouseReports')->get_by_damage($where);
+                    $results[1]['below'] = $below;
+                    break;
+                case 2:
+                    $results[2]['top'] = model('ph/HouseReports')->get_by_useNature($where);
+                    $results[2]['below'] = $below;
+                    break;
+                case 3;
+                    $results[3]['top'] = model('ph/HouseReports')->get_by_institution($where);
+                    $results[3]['below'] = $below;
+                    break;
+                case 4:
+                    $results[4]['top'] = model('ph/HouseReports')->get_by_year($where);
+                    $results[4]['below'] = $below;
+                    break;
+                case 5:
+                    $results[5]['top'] = model('ph/HouseReports')->get_by_value($where);
+                    $results[5]['below'] = $below;
+                    break;
+                default:  //默认按
+                    break;
+            }
+        }
+        return $results;
+    }
+
+    public function runCache()
+    {
+
+
+        $instLst = Db::name('institution')->column('id');
+        $ownerLst = [1,2,3,5,6,7,10,11,12];
+        
+        for ($i = 1;$i < 6; $i++) {
+            foreach ($ownerLst as $owner) {
+                foreach ($instLst as $ins) {
 
 
 
+                    $where = array();
                     $belowWhere = array();
 
-                    $where['Status'] = array('eq', 1);
-                    $belowWhere['Status'] = array('eq', 1);
+                    $where['Status'] = 1;
+                    $belowWhere['Status'] = 1;
                     $belowWhere['UseNature'] = array('in', [1,2,3]);
-                    $where['OwnerType'] = array('eq', $owner);
-                    $belowWhere['OwnerType'] = array('eq', $owner);
-                    $belowWhere['InstitutionID'] = $where['TubulationID'];
-
+                    $where['OwnerType'] = $owner;
+                    $belowWhere['OwnerType'] = $owner;
+                    if($ins == 2 || $ins == 3){
+                        $where['InstitutionID'] = $ins;
+                        $belowWhere['InstitutionPID'] = $ins;
+                    }elseif($ins > 3){
+                        $where['TubulationID'] = $ins;
+                        $belowWhere['InstitutionID'] = $ins;
+                    }
 
                     $below = Db::name('house')->where($belowWhere)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
                     switch ($i) {
                         case 1:
-                            $results[1]['top'] = model('ph/HouseReport')->get_by_damage($where);
-                            $results[1]['below'] = $below;
+                            $results[1][$owner][$ins] = model('ph/HouseReports')->get_by_damage($where);
+                            //$results[1][$owner][$ins]['below'] = $below;
                             break;
                         case 2:
-                            $results[2]['top'] = model('ph/HouseReport')->get_by_useNature($where);
-                            $results[2]['below'] = $below;
+                            $results[2][$owner][$ins] = model('ph/HouseReports')->get_by_useNature($where);
+                            //$results[2][$owner][$ins]['below'] = $below;
                             break;
                         case 3;
-                            $results[3]['top'] = model('ph/HouseReport')->get_by_institution($where);
-                            $results[3]['below'] = $below;
+                            $results[3][$owner][$ins] = model('ph/HouseReports')->get_by_institution($where);
+                            //$results[3][$owner][$ins]['below'] = $below;
                             break;
                         case 4:
-                            $results[4]['top'] = model('ph/HouseReport')->get_by_year($where);
-                            $results[4]['below'] = $below;
+                            $results[4][$owner][$ins] = model('ph/HouseReports')->get_by_year($where);
+                            //$results[4][$owner][$ins]['below'] = $below;
                             break;
                         case 5:
-                            $results[5]['top'] = model('ph/HouseReport')->get_by_value($where);
-                            $results[5]['below'] = $below;
+                            $results[5][$owner][$ins] = model('ph/HouseReports')->get_by_value($where);
+                            //$results[5][$owner][$ins]['below'] = $below;
                             break;
                         default:  //默认按
                             break;
                     }
-
-
+                }
+            }
         }
 
 
@@ -96,6 +150,7 @@ class HouseReports extends Model
         if(isset($where['InstitutionID'])){
             $wheres['InstitutionPID'] = $where['InstitutionID'];
         }
+
         //$wheres['InstitutionID'] = isset($where['TubulationID'])?$where['TubulationID']:$where['InstitutionID'];
         //halt($wheres);
         $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计

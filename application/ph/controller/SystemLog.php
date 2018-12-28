@@ -71,14 +71,14 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        $HouseReportdata = model('ph/HouseReport')->index();
+        $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
             'type'=>'HouseReport',
             'date'=>$month,
         ];
         $res = Db::name('report')->where($where)->find();
-//halt($res);
+//halt($HouseReportdata);
         if($res){
             $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
         }else{

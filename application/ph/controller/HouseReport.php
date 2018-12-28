@@ -54,7 +54,7 @@ class HouseReport extends Base
         }
         $HouseIdList['option'] = array();
         if ($searchForm = input('post.')) {
-            halt($searchForm);
+            //halt($searchForm);
             $HouseIdList['option'] = $searchForm;
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
