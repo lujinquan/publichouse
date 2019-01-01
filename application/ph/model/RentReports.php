@@ -60,7 +60,6 @@ class RentReports extends Model
             ->group('UseNature,OwnerType,InstitutionID')
             ->select();
 
-
         //从租金订单表中,获取规定、已缴、欠缴、应缴租金
         $rentData = Db::name('rent_order')->field('UseNature,OwnerType,InstitutionID,count(HouseID) as HouseIDs,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents')
             ->where(['OrderDate'=>$arr1])
@@ -106,18 +105,19 @@ class RentReports extends Model
             ->where(['OrderDate'=>$arr1,'ChangeType'=>['eq',4],'Status'=>1])
             ->select();
 
-        //从房屋表中分组获取年度欠租、租差
+        //房屋出售
         $changeSaleData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['OrderDate'=>$arr1,'CancelType'=>1,'Status'=>1])
             ->select();
 
-        //从房屋表中分组获取年度欠租、租差
+        //政策减免
         $changeZhengceData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['DateEnd'=>['gt',$cacheDate],'CutType'=>5,'Status'=>1])
             ->select();
 
+        //减免（除去政策减免）
         $changejianmianData = Db::name('rent_table')->field('UseNature,OwnerType,InstitutionID ,sum(InflRent) as InflRents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where(['DateEnd'=>['gt',$cacheDate],'ChangeType'=>1,'CutType'=>['neq',5],'Status'=>1])
@@ -338,11 +338,16 @@ class RentReports extends Model
                 }
             }
         }
- 
-        $reportolddata = Db::name('report')->where(['type'=>'RentReport','date'=> ($cacheDate - 1)])->value('data');
+        $cachedate = date('Ym',strtotime($cacheDate . '01 -1 month'));
+
+        $reportolddata = Db::name('report')->where(['type'=>'RentReport','date'=> $cachedate])->value('data');
         $datas = json_decode($reportolddata,true);
         $lastMonthData = isset($datas)?$datas:array();
 
+        //如果缓存的是某年的第一个月的数据
+        if(substr($cacheDate,4,2) == '01' ){
+            //$lastMonthData = array();
+        }
         // $firstMonth = substr($cacheDate,0,4).'01';
         // $lastcacheDate = $cacheDate - 1;
         // if($lastcacheDate >= $firstMonth){ //如果缓存的程序是2月份或2月份以上
@@ -356,22 +361,42 @@ class RentReports extends Model
         foreach ($ownertypes as $owners) { //处理市、区、代、自、托
             for ($j = 4; $j < 34; $j++) { //每个管段，从4开始……
 
-                $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
-                $result[$owners][$j][0][2] = $lastMonthData[$owners][$j][20][1] + $lastMonthData[$owners][$j][20][2];
-                $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][3];
-                $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
-                $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
-                $result[$owners][$j][0][6] = 0.4 * $result[$owners][$j][0][3];
-                $result[$owners][$j][0][7] = 0.6 * $result[$owners][$j][0][1];
-                $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
-                $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
-                $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
-                $result[$owners][$j][0][11] = $lastMonthData[$owners][$j][20][10] + $lastMonthData[$owners][$j][20][11];//$lastMonthData[$owners][$j][20][10];
-                $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][12];
-                $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
-                $result[$owners][$j][0][14] = $lastMonthData[$owners][$j][20][13] + $lastMonthData[$owners][$j][20][14];//$lastMonthData[$owners][$j][20][13];
-                $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][15];
-                array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
+                if(substr($cacheDate,4,2) != '01'){
+                    $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
+                    $result[$owners][$j][0][2] = $lastMonthData[$owners][$j][20][1] + $lastMonthData[$owners][$j][20][2];
+                    $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][3];
+                    $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
+                    $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
+                    $result[$owners][$j][0][6] = 0.4 * $result[$owners][$j][0][3];
+                    $result[$owners][$j][0][7] = 0.6 * $result[$owners][$j][0][1];
+                    $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
+                    $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
+                    $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
+                    $result[$owners][$j][0][11] = $lastMonthData[$owners][$j][20][10] + $lastMonthData[$owners][$j][20][11];//$lastMonthData[$owners][$j][20][10];
+                    $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][12];
+                    $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
+                    $result[$owners][$j][0][14] = $lastMonthData[$owners][$j][20][13] + $lastMonthData[$owners][$j][20][14];//$lastMonthData[$owners][$j][20][13];
+                    $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][15];
+                    array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
+                }else{
+                    $result[$owners][$j][0][1] = $lastMonthData[$owners][$j][8][1];
+                    $result[$owners][$j][0][2] = 0;
+                    $result[$owners][$j][0][3] = $lastMonthData[$owners][$j][20][1] + $lastMonthData[$owners][$j][20][2] + $lastMonthData[$owners][$j][20][3];
+                    $result[$owners][$j][0][4] = 0.4 * $result[$owners][$j][0][1];
+                    $result[$owners][$j][0][5] = 0.4 * $result[$owners][$j][0][2];
+                    $result[$owners][$j][0][6] = 0.4 * $result[$owners][$j][0][3];
+                    $result[$owners][$j][0][7] = 0.6 * $result[$owners][$j][0][1];
+                    $result[$owners][$j][0][8] = 0.6 * $result[$owners][$j][0][2];
+                    $result[$owners][$j][0][9] = 0.6 * $result[$owners][$j][0][3];
+                    $result[$owners][$j][0][10] = $lastMonthData[$owners][$j][8][10];
+                    $result[$owners][$j][0][11] = 0;//$lastMonthData[$owners][$j][20][10];
+                    $result[$owners][$j][0][12] = $lastMonthData[$owners][$j][20][10] + $lastMonthData[$owners][$j][20][11] + $lastMonthData[$owners][$j][20][12];
+                    $result[$owners][$j][0][13] = $lastMonthData[$owners][$j][8][13];
+                    $result[$owners][$j][0][14] = 0;//$lastMonthData[$owners][$j][20][13];
+                    $result[$owners][$j][0][15] = $lastMonthData[$owners][$j][20][13] + $lastMonthData[$owners][$j][20][14] + $lastMonthData[$owners][$j][20][15];
+                    array_unshift($result[$owners][$j][0],array_sum($result[$owners][$j][0]) - $result[$owners][$j][0][1] - $result[$owners][$j][0][2] - $result[$owners][$j][0][3]);
+                }
+                
               
                 //新发租异动ChangeType = 7
                 $result[$owners][$j][2][1] = $changedata[$owners][2][$j][7]['InflRents'];
@@ -722,22 +747,14 @@ class RentReports extends Model
                 $result[$owners][$j][19][7] = 0.6 * $result[$owners][$j][19][1];
                 $result[$owners][$j][19][8] = 0.6 * $result[$owners][$j][19][2];
                 $result[$owners][$j][19][9] = 0.6 * $result[$owners][$j][19][3];
-                //$result[$owners][$j][19][10] = $lastMonthData[$owners][$j][18][10] + $result[$owners][$j][18][10];  //暂时是这样的
                 $result[$owners][$j][19][10] = $lastMonthData[$owners][$j][19][10] + $result[$owners][$j][18][10];
-                
                 $result[$owners][$j][19][11] = $rentOldTotalMonthdata[$owners][3][$j]['PayRents'];
                 $result[$owners][$j][19][12] = $rentOldTotalYeardata[$owners][3][$j]['PayRents'];
-                //$result[$owners][$j][19][12] = $lastMonthData[$owners][$j][18][12]+ $result[$owners][$j][18][12];
-                //$result[$owners][$j][19][13] = $lastMonthData[$owners][$j][18][13] + $result[$owners][$j][18][13];  //暂时是这样的
                 $result[$owners][$j][19][13] = $lastMonthData[$owners][$j][19][13] + $result[$owners][$j][18][13];
-
                 $result[$owners][$j][19][14] = $rentOldTotalMonthdata[$owners][1][$j]['PayRents'];
                 $result[$owners][$j][19][15] = $rentOldTotalYeardata[$owners][1][$j]['PayRents'];
-                //$result[$owners][$j][19][15] = $lastMonthData[$owners][$j][18][15]+ $result[$owners][$j][18][15];
                 array_unshift($result[$owners][$j][19],array_sum($result[$owners][$j][19]) - $result[$owners][$j][19][1] - $result[$owners][$j][19][2] - $result[$owners][$j][19][3]);
-// if($owners == 2 && $j == 21){
-//     dump($result[$owners][$j][17][13]);dump($result[$owners][$j][18][13]);halt(bcsub($result[$owners][$j][17][13] , $result[$owners][$j][18][13],2));
-// }
+
                 $result[$owners][$j][20][1] = bcsub($result[$owners][$j][17][1] , $result[$owners][$j][18][1],2);
                 $result[$owners][$j][20][2] = bcsub($result[$owners][$j][17][2] , $result[$owners][$j][18][2],2);
                 $result[$owners][$j][20][3] = bcsub($result[$owners][$j][17][3] , $result[$owners][$j][18][3],2);
