@@ -16,7 +16,7 @@ class SystemLog extends Base
     protected function _initialize(){
         parent::_initialize();
         $this->nowmonth = date('Ym',time());
-        //$this->nowmonth = '201811';
+        $this->nowyear = date('Y',time());
     }
 
     /**
@@ -42,7 +42,8 @@ class SystemLog extends Base
 
         set_time_limit(0);
         Debug::remark('begin');
-        $HouseReportdata = model('ph/PropertyReport')->index();
+        $year = $this->nowyear;
+        $HouseReportdata = model('ph/PropertyReport')->index($year);
         Debug::remark('end');
         $where = [
             'type'=>'PropertyReport',

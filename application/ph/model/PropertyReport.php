@@ -21,7 +21,7 @@ class PropertyReport extends Model
      * 机制：将所有产别，机构按照多维数组序列化存储，$data[产别][机构]
      * 这样要取出某个产别和机构的数据时直接读取缓存中的对应结构即可
      */
-    public function index(){
+    public function index($year){
         //注意所有与私房、区直共有房屋还没做
         //获取所有产别，去除代管产、托管产
         //$owerLst = Db::name('ban_owner_type')->where('id','not in','3,7')->column('id');
@@ -44,12 +44,14 @@ class PropertyReport extends Model
             'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',7),
             'Status' => array('eq',1),
+            'OrderDate' => array('between', [$year . '01', $year . '12']),
         ];
 
         $zhuxiaoWhere = [
             'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',8),
             'Status' => array('eq',1),
+            'OrderDate' => array('between', [$year . '01', $year . '12']),
         ];
         
         $propertyData = Db::name('ban')->field('OwnerType,TubulationID,sum(TotalNum) as totalNums, sum(TotalArea) as totalAreas')
