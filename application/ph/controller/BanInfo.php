@@ -129,7 +129,7 @@ class BanInfo extends Base
                 return jsons('4001' ,$result);
             }
             //等联动修改好了后，需要加上去   AreaTwo,AreaThree,
-            $fields = 'BanNumber,AreaFour,TubulationID,BanPropertyID,DamageGrade,BanLandID,BanFreeholdID,CoveredArea,ActualArea,OwnerType,BanYear,UseNature,StructureType,BanUnitNum,BanFloorNum,BanFloorStart,HistoryIf,ReformIf,ProtectculturalIf,CutIf,BanGpsX,BanGpsY';
+            $fields = 'BanNumber,AreaFour,TubulationID,BanPropertyID,DamageGrade,BanLandID,BanFreeholdID,CoveredArea,ActualArea,OwnerType,BanYear,UseNature,BanUnitNum,BanFloorNum,BanFloorStart,HistoryIf,ReformIf,ProtectculturalIf,CutIf,BanGpsX,BanGpsY';
             $oldOneData = Db::name('ban')->field($fields)->where('BanID', 'eq', $banID)->find();
             foreach($oldOneData as $k1=>$v1){
                 if($data[$k1] != $v1){

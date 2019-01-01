@@ -21,7 +21,7 @@ class BanInfo extends Validate
         'OwnerType|产别' => 'require',
         'BanYear|建成年份' => 'require|between:1000,3000',
         'DamageGrade|完损等级' => 'require',
-        'StructureType|结构类别' => 'number',
+        //'StructureType|结构类别' => 'number',
         'UseNature|使用性质' => 'require',
         'BanUnitNum|单元数量' => 'require',
         'BanFloorNum|楼层数量' => 'require',
