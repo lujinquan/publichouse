@@ -20,7 +20,7 @@ class BanInfo extends Validate
         'TubulationID|管段' => 'require',
         'OwnerType|产别' => 'require',
         'BanYear|建成年份' => 'require|between:1000,3000',
-        'DamageGrade|完损等级' => 'require',
+        'DamageGrade|完损等级' => 'number',
         'StructureType|结构类别' => 'require',
         'UseNature|使用性质' => 'require',
         'BanUnitNum|单元数量' => 'require',

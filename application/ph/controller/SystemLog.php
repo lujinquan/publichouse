@@ -17,6 +17,7 @@ class SystemLog extends Base
         parent::_initialize();
         $this->nowmonth = date('Ym',time());
         $this->nowyear = date('Y',time());
+        //$this->nowyear = '2018';
     }
 
     /**
@@ -46,8 +47,8 @@ class SystemLog extends Base
         $HouseReportdata = model('ph/PropertyReport')->index($year);
         Debug::remark('end');
         $where = [
-            'type'=>'PropertyReport',
-            'date'=>date('Y', time()),
+            'type' => 'PropertyReport',
+            'date' => $year,
         ];
         $res = Db::name('report')->where($where)->find();
         if($res){
@@ -56,7 +57,7 @@ class SystemLog extends Base
             $re = Db::name('report')->insert([
                 'data'=>json_encode($HouseReportdata),
                 'type'=>'PropertyReport',
-                'date'=>date('Y', time()),
+                'date'=>$year,
             ]);
         }
         // $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
