@@ -27,8 +27,8 @@ class HouseInfo extends Base
             'houseOption' => $houseLst['option'],
             //'HousePrerentSum' => $houseLst['HousePrerentSum'],
             //'HouseUseareaSum' => $houseLst['HouseUseareaSum'],
-            //'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
-            //'HouseAreaSum' => $houseLst['HouseAreaSum'],
+            'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
+            'HouseAreaSum' => $houseLst['HouseAreaSum'],
             //'ArrearRentSum' => $houseLst['ArrearRentSum'],
         ]);
         return $this->fetch();
