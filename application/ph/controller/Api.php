@@ -909,6 +909,7 @@ class Api extends Controller
             //return jsons('4000','数据核对期间，只能以房管员的账号来查看');
             $where['OwnerType'] = 1;
         }else{
+             $where['InstitutionID'] = 1;
             $where['OwnerType'] = 1;
         }
         $result['option'] = array();
@@ -928,9 +929,11 @@ class Api extends Controller
 
             // 2017年的房屋统计表直接读缓存数据
             if(substr($searchForm['month'],0,4) == '2017'){
+                $tubulationid = $searchForm['TubulationID']?$searchForm['TubulationID']:$currentUserInstitutionID;
                 $data = Db::name('report')->where(['type'=>'HouseReport','date'=>2017])->value('data');
                 $sdata = json_decode($data,true);
-                $result = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']]; 
+                $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$tubulationid]; 
+                //halt($result);
 
             // 不是2017年的就直接计算统计
             }else{

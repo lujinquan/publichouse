@@ -18,6 +18,7 @@ class SystemLog extends Base
         $this->nowmonth = date('Ym',time());
         $this->nowyear = date('Y',time());
         //$this->nowyear = '2018';
+        //$this->nowmonth = '2017';
     }
 
     /**
@@ -79,6 +80,7 @@ class SystemLog extends Base
             'type'=>'HouseReport',
             'date'=>$month,
         ];
+        Cache::store('file')->set(('HouseReport2017'), json_encode($HouseReportdata), $this->cachetime);
         $res = Db::name('report')->where($where)->find();
 //halt($HouseReportdata);
         if($res){
