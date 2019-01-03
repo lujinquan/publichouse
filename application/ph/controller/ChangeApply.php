@@ -44,9 +44,9 @@ class ChangeApply extends Base
         if ($this->request->isPost()) {
             $data = $this->request->post();
             //halt($data);
-            if(!in_array($data['type'],[1,2,3,4,7,8,9,11,12,14,15])){
-                return jsons('4001','程序正在升级中……');
-            }
+            // if(!in_array($data['type'],[1,2,3,4,7,8,11,14])){
+            //     return jsons('4001','开放时间：2019年1月7日，等待年报表确认！');
+            // }
 
             $one = model('ph/ChangeApply')->check_apply_table($data);
             

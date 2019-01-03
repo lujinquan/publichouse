@@ -117,6 +117,7 @@ class ChangeAudit extends Base
 
             $data = $this->request->post();
 
+            
             $checkProcess = model('ph/ChangeAudit')->check_process($data['ChangeOrderID']);  //检查是否可以审核
 
             if($checkProcess === false){
@@ -124,7 +125,9 @@ class ChangeAudit extends Base
             }
 
             $find = Db::name('change_order')->where('ChangeOrderID',$data['ChangeOrderID'])->field('ChangeImageIDS,Status,ChangeType')->find();
-
+            if(!in_array($find['ChangeType'],[1,2,3,4,7,8,11,14])){
+                return jsons('4001','开放时间：2019年1月7日，等待年报表确认！');
+            }
             if(in_array($find['ChangeType'] ,[1,2,3,4,7,8,9,12,14,15]) && $find['Status'] == 2){ //暂停计租，减免第二步要补充资料
 
                 if(isset($_FILES) && $_FILES){         
