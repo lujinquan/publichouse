@@ -920,6 +920,8 @@ class Api extends Controller
             if(isset($searchForm['TubulationID']) && $searchForm['TubulationID']){
                 if($searchForm['TubulationID']>3){
                     $where['TubulationID'] = $searchForm['TubulationID'];
+                }else{
+                    $where['InstitutionID'] = $searchForm['TubulationID'];
                 }
                 
             }

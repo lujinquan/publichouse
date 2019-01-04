@@ -530,6 +530,7 @@ class HouseReports extends Model
                 $results[$k6][$j]['TotalHouseholds'] = $datas[$k6][$j]['TotalHouseholds'];
                 $results[$k6][$j]['TotalAreas'] = $datas[$k6][$j]['TotalAreas'];
                 $results[$k6][$j]['Percent'] = $datas[$k6][$j]['Percent'];
+                //$results[$k6][$j]['Percent'] = round($datas[$k6][$j]['TotalAreas'] / $totalTotalAreas ,4) * 100;
                 if($j == 1){ //名用多一个使用面积
                     $results[$k6][$j]['BanUseareas'] = $datas[$k6][$j]['BanUseareas'];
                 }
@@ -570,23 +571,23 @@ class HouseReports extends Model
         $result[0][1] = $total['banidsArr'][0];
         $result[0][2] = $total['householdsArr'][0];
         $result[0][3] = $total['areasArr'][0];
-        $result[0][4] = $total['Percent'][0];
+        $result[0][4] = 100;
         $result[0][5] = $total['banPrerents'][0];
         $result[0][6] = $total['banidsArr'][1];
         $result[0][7] = $total['householdsArr'][1];
         $result[0][8] = $total['areasArr'][1];
-        $result[0][9] = $total['Percent'][1];
+        $result[0][9] = $total['areasArr'][0]?round($total['areasArr'][1] / $total['areasArr'][0] ,4) * 100:0;
         $result[0][10] = $total['useAreas'][1];
         $result[0][11] = $total['banPrerents'][1];
         $result[0][12] = $total['banidsArr'][2];
         $result[0][13] = $total['householdsArr'][2];
         $result[0][14] = $total['areasArr'][2];
-        $result[0][15] = $total['Percent'][2];
+        $result[0][15] = $total['areasArr'][0]?round($total['areasArr'][2] / $total['areasArr'][0] ,4) * 100:0;
         $result[0][16] = $total['banPrerents'][2];
         $result[0][17] = $total['banidsArr'][3];
         $result[0][18] = $total['householdsArr'][3];
         $result[0][19] = $total['areasArr'][3];
-        $result[0][20] = $total['Percent'][3];
+        $result[0][20] = $total['areasArr'][0]?round($total['areasArr'][3] / $total['areasArr'][0] ,4) * 100:0;
         $result[0][21] = $total['banPrerents'][3];
 
         sort($result);
