@@ -923,11 +923,11 @@ class Api extends Controller
                 }
                 
             }
-
+            $year = substr($searchForm['month'],0,4);
             // 2017年的房屋统计表直接读缓存数据
-            if(substr($searchForm['month'],0,4) == '2017'){
+            if($year == '2017' || $year == '2018'){
                 $tubulationid = $searchForm['TubulationID']?$searchForm['TubulationID']:$currentUserInstitutionID;
-                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>2017])->value('data');
+                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$year])->value('data');
                 $sdata = json_decode($data,true);
                 $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$tubulationid]; 
                 //halt($result);
