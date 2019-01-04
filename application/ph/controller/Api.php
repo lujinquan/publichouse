@@ -909,7 +909,6 @@ class Api extends Controller
             //return jsons('4000','数据核对期间，只能以房管员的账号来查看');
             $where['OwnerType'] = 1;
         }else{
-             $where['InstitutionID'] = 1;
             $where['OwnerType'] = 1;
         }
         $result['option'] = array();
@@ -921,8 +920,6 @@ class Api extends Controller
             if(isset($searchForm['TubulationID']) && $searchForm['TubulationID']){
                 if($searchForm['TubulationID']>3){
                     $where['TubulationID'] = $searchForm['TubulationID'];
-                }else{
-                    $where['InstitutionID'] = $searchForm['TubulationID'];
                 }
                 
             }
@@ -937,6 +934,7 @@ class Api extends Controller
 
             // 不是2017年的就直接计算统计
             }else{
+                //halt($where);
                 // $months = str_replace('-','',$searchForm['month']);
                 // $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$months])->value('data');
                 // $sdata = json_decode($data,true);
