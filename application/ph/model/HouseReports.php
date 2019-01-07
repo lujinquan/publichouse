@@ -153,7 +153,7 @@ class HouseReports extends Model
 
         //$wheres['InstitutionID'] = isset($where['TubulationID'])?$where['TubulationID']:$where['InstitutionID'];
         //halt($wheres);
-        $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+        $below = Db::name('house')->where($wheres)->where('Status',1)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
         //$k = 1 ,2 ,3 ,4 ,5 ,6 ,7 分别表示结构等级为 钢混 ，砖木三等 ，砖木二等 ，砖混一等 ，砖混二等 ，砖木一等 ，简易
 
@@ -271,7 +271,7 @@ class HouseReports extends Model
         if(isset($where['InstitutionID'])){
             $wheres['InstitutionPID'] = $where['InstitutionID'];
         }
-        $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+        $below = Db::name('house')->where($wheres)->where('Status',1)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
         $structureTypes = array(1=>'钢混',4=>'砖混一等',5=>'砖混二等',6=>'砖木一等',3=>'砖木二等',2=>'砖木三等',7=>'简易');
         $q = 0;
@@ -407,7 +407,7 @@ class HouseReports extends Model
         if(isset($where['InstitutionID'])){
             $wheres['InstitutionPID'] = $where['InstitutionID'];
         }
-        $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+        $below = Db::name('house')->where($wheres)->where('Status',1)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
 
         if(isset($where['InstitutionID'])){
@@ -436,21 +436,21 @@ class HouseReports extends Model
 
                 if ($i == 1) {
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(CivilNum) as BanIDS ,sum(TotalHouseholds) as TotalHouseholds, sum(CivilArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(CivilNum) as BanIDS ,sum(CivilHolds) as TotalHouseholds, sum(CivilArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
                         ->find();
                 } elseif($i == 2){
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(EnterpriseNum) as BanIDS ,sum(TotalHouseholds) as TotalHouseholds, sum(EnterpriseArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(EnterpriseNum) as BanIDS ,sum(EnterpriseHolds) as TotalHouseholds, sum(EnterpriseArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
                         ->find();
                 }elseif($i == 3){
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(PartyNum) as BanIDS ,sum(TotalHouseholds) as TotalHouseholds, sum(PartyArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(PartyNum) as BanIDS ,sum(PartyHolds) as TotalHouseholds, sum(PartyArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
@@ -619,8 +619,7 @@ class HouseReports extends Model
             $wheress['InstitutionPID'] = $where['InstitutionID'];
         }
         
-
-        $below = Db::name('house')->where($wheress)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+        $below = Db::name('house')->where($wheress)->where('Status',1)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
         //halt($wheres);
         $arr = ['1' => '1937年代' ,'2' => '40年代' ,'3' => '50年代' ,'4' => '60年代' ,'5' => '70年代' ,'6' =>'80年代以后'];
         foreach($arr as $k1 => $v1){
@@ -783,7 +782,8 @@ class HouseReports extends Model
         if(!isset($wheres)){
             $wheres = 1;
         }
-        $below = Db::name('house')->where($wheres)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
+        //halt($wheres);
+        $below = Db::name('house')->where($wheres)->where('Status',1)->group('UseNature')->column('UseNature ,count(HouseID) as HouseIDS'); //底部的户数统计
 
         $structureTypes = array(1=>'钢混',4=>'砖混一等',5=>'砖混二等',6=>'砖木一等',3=>'砖木二等',2=>'砖木三等',7=>'简易');
         $q = 0;
