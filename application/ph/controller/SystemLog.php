@@ -18,7 +18,7 @@ class SystemLog extends Base
         $this->nowmonth = date('Ym',time());
         $this->nowyear = date('Y',time());
         //$this->nowyear = '2018';
-        //$this->nowmonth = '2017';
+        //$this->nowmonth = '2018';
     }
 
     /**
@@ -80,7 +80,7 @@ class SystemLog extends Base
             'type'=>'HouseReport',
             'date'=>$month,
         ];
-        Cache::store('file')->set(('HouseReport2017'), json_encode($HouseReportdata), $this->cachetime);
+        Cache::store('file')->set(('HouseReport2018'), json_encode($HouseReportdata), $this->cachetime);
         $res = Db::name('report')->where($where)->find();
 //halt($HouseReportdata);
         if($res){
@@ -95,9 +95,9 @@ class SystemLog extends Base
         Debug::remark('end');
 
         if($re){
-            return $this->success('保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
+            return $this->success($month.'报表，保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
         }else{
-            return $this->error('保存失败，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
+            return $this->error($month.'报表，保存失败，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
         }
 
         //$res = Cache::store('file')->set('HouseReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);

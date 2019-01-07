@@ -50,12 +50,15 @@ class PropertyReport extends Base
         //if($date == 2017){
             $dataJson = Db::name('report')->where(['type'=>'PropertyReport','date'=>$date])->value('data');
             $datas = json_decode($dataJson,true);
+            // dump($ownerType);
+            // dump($institutionid);
+            
         // }else{
         //     $datas = json_decode(Cache::store('file')->get('PropertyReport'.$date ,''),true);
         // }
         //halt($dataJson);
         //dump($ownerType);dump($institutionid);exit;
-        $data = $datas?$datas[$ownerType][$institutionid]:array();
+        $data = $datas?$datas[$ownerType][$institutionid]:array();//halt($data);
 // 原数据转换方法如下
 // $results = [];
 //         foreach($datas as $a => $z){

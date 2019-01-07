@@ -74,7 +74,7 @@ class OldCutRent extends Model
 
         //$where = isset($where)?$where:1;
 
-        $where['PayYear'] = array('<',2018);
+        $where['PayYear'] = array('<',date('Y'));
 
         $fields = '*';
         $OldRentList['obj'] = self::field($fields)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
