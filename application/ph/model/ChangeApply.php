@@ -17,7 +17,7 @@ class ChangeApply extends Model
 
     public function get_all_process_lst(){
 
-        $where = 1;
+        $where['Status'] = 1;
 
         $ProcessLst['obj'] = self::field('id ,ProcessName ,IfBaseChange,CreateUserID,CreateTime')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 

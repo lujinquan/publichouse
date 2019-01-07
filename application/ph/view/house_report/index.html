@@ -64,9 +64,11 @@
                     </select>
                 </div>
 
-
-            </div>
-            <div class="am-u-md-12">
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <div class="am-u-md-12">
+                </div>
+                <?php }; ?>
+           
 
                 <div class="label_style">查询类型:</div>
                 <div class="am-u-md-2">
@@ -93,7 +95,9 @@
                 <a href="javascript:void(0);"  id="yueQuery" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span> 查询</a>
                 <a type="button" href="/ph/HouseReport/index" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-reply"></span> 重置</a>
                 <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印</button>
+                <?php if(session('user_base_info.institution_level') == 1){ ;?>
                 <a href="/ph/SystemLog/HouseReportCache" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-file-o"></span> 缓存报表</a>
+                <?php }; ?>
             </div>
         </form>
         <div style="margin-left:6px;padding:2% 3% 2% 2%;">
