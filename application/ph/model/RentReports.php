@@ -67,8 +67,9 @@ class RentReports extends Model
             ->select();
 
 
+
         //从房屋表中分组获取年度欠租、租差
-        $houseData = Db::name('house')->field('UseNature,OwnerType,InstitutionID ,sum(ArrearRent) as ArrearRents ,sum(DiffRent) as DiffRents,sum(HousePrerent) as HousePrerents')
+        $houseData = Db::name('house')->field('UseNature,OwnerType,InstitutionID ,count(HouseID) as HouseIDs,sum(ArrearRent) as ArrearRents ,sum(DiffRent) as DiffRents,sum(HousePrerent) as HousePrerents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where('Status',1)
             ->select();
@@ -138,6 +139,7 @@ class RentReports extends Model
         //重组为规定格式的房屋数据
         foreach($houseData as $k2 => $v2){
             $housedata[$v2['OwnerType']][$v2['UseNature']][$v2['InstitutionID']] = [
+                'HouseIDs' => $v2['HouseIDs'],
                 'HousePrerents' => $v2['HousePrerents'],
                 'ArrearRents' => $v2['ArrearRents'],
                 'DiffRents' => $v2['DiffRents'],
@@ -251,6 +253,7 @@ class RentReports extends Model
                     }
                     if(!isset($housedata[$owner][$i][$j])){
                         $housedata[$owner][$i][$j] = [
+                            'HouseIDs' => 0,
                             'HousePrerents' => 0,
                             'ArrearRents' => 0,
                             'DiffRents' => 0,
@@ -772,9 +775,9 @@ class RentReports extends Model
                 $result[$owners][$j][20][15] = bcsub($result[$owners][$j][17][15] , $result[$owners][$j][18][15],2);
                 array_unshift($result[$owners][$j][20],array_sum($result[$owners][$j][20]) - $result[$owners][$j][20][1] - $result[$owners][$j][20][2] - $result[$owners][$j][20][3]);
 
-                $result[$owners][$j][100][1] = $rentdata[$owners][2][$j]['HouseIDs']; //工商总户数
-                $result[$owners][$j][100][2] = $rentdata[$owners][3][$j]['HouseIDs']; //党政总户数
-                $result[$owners][$j][100][3] = $rentdata[$owners][1][$j]['HouseIDs']; //民用总户数
+                $result[$owners][$j][100][1] = $housedata[$owners][2][$j]['HouseIDs']; //工商总户数
+                $result[$owners][$j][100][2] = $housedata[$owners][3][$j]['HouseIDs']; //党政总户数
+                $result[$owners][$j][100][3] = $housedata[$owners][1][$j]['HouseIDs']; //民用总户数
             }
         }
 
