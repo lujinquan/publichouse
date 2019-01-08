@@ -62,7 +62,7 @@ class ChangeRecord extends Model
             }
 
             $ChangeList['option'] = $searchForm;
-
+//halt($searchForm);
             if (isset($searchForm['TubulationID']) && $searchForm['TubulationID']) {   //检索机构
 
                 $level = Db::name('institution')->where('id', 'eq', $searchForm['TubulationID'])->value('Level');
@@ -112,7 +112,7 @@ class ChangeRecord extends Model
 
         $where['IfShow'] = array('eq',1);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->order('FinishTime desc')->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field('id')->where($where)->order('Status desc ,FinishTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 

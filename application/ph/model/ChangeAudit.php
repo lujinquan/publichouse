@@ -9,6 +9,7 @@ use think\Loader;
 use app\ph\model\BanInfo as BanInfoModel;
 use app\ph\model\HouseInfo as HouseInfoModel;
 use app\ph\model\TenantInfo as TenantInfoModel;
+use think\paginator\driver\Bootstrap;
 use think\Db;
 use util\Tree;
 
@@ -26,6 +27,7 @@ class ChangeAudit extends Model
         $currentUserInstitutionID = session('user_base_info.institution_id');
 
         $currentUserLevel = session('user_base_info.institution_level');
+        $currentRoleIDS = json_decode(session('user_base_info.role'));
 
         if ($currentUserLevel == 3) {  //用户为管段级别，则直接查询
 
@@ -52,7 +54,7 @@ class ChangeAudit extends Model
 
         $ChangeList['option'] = array();
 
-        if ($searchForm = input('post.')) {
+        if ($searchForm = input('param.')) {
 
             foreach ($searchForm as &$val) { //去首尾空格
                 $val = trim($val);
@@ -109,18 +111,48 @@ class ChangeAudit extends Model
 
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
-        $arr = $ChangeList['obj']->all();
+        $arr = self::field('id')->where($where)->order('CreateTime desc')->select();
+        $s = $sr = [];
+        foreach($arr as $d){
+            $reone = self::get_one_change_info($d['id']);
+            //halt($currentRoleID);
+            if(in_array($reone['ProcessRoleID'],$currentRoleIDS)){
+                $s[] = $reone;
+            }else{
+                $sr[] = $reone;
+            }
 
-        if (!$arr) {
-
-            $ChangeList['arr'] = array();
+            //halt($reone);
         }
+        $sresult = array_merge($s , $sr);
+        if($sresult){
+            //$data = array();
+            $curpage = input('page') ? input('page') : 1;//当前第x页，有效值为：1,2,3,4,5...
+            $listRow = 15;//每页215行记录
+            //$showdata = array_chunk($s, $listRow, true);
+            $showdata = array_slice($sresult, ($curpage - 1)*$listRow, $listRow,true);
+            
+            $p = Bootstrap::make($showdata, $listRow, $curpage, count($sresult), false, [
+                'var_page' => 'page',
+                'path'     => url('/ph/ChangeAudit/index'),//这里根据需要修改url
+                'query'    => [],
+                'fragment' => '',
+            ]);
+            
+            $p->appends($_GET);
+            $ChangeList['arr'] = $showdata;
+            $ChangeList['obj'] = $p;
 
-        foreach ($arr as $v) {
-
-            $ChangeList['arr'][] = self::get_one_change_info($v['id']);
-
+        }else{
+            $arr = $ChangeList['obj']->all();
+            if (!$arr) {
+                $ChangeList['arr'] = array();
+            }
+            foreach ($arr as $v) {
+                $ChangeList['arr'][] = self::get_one_change_info($v['id']);
+            } 
         }
+        
 
         return $ChangeList;
     }

@@ -13,7 +13,7 @@ class ChangeRecord extends Base
 //halt($data['option']);
         //获取所有完损等级
         $damaLst = model('ph/BanInfo') -> get_all_damage_grade();
-
+//halt($data['option']);
         $this -> assign([
             'changes' => $changes,
             'damaLst'    =>  $damaLst,
