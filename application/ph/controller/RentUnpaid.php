@@ -33,7 +33,7 @@ class RentUnpaid extends Base
 
         $ids = $_POST['value'];
 
-        return jsons('4002','由于短信需付费，功能暂时关闭……');
+        //return jsons('4002','由于短信需付费，功能暂时关闭……');
 
         if(!$ids){
 
@@ -41,6 +41,8 @@ class RentUnpaid extends Base
         }
 
         model('ph/RentUnpaid') ->batch_call($ids);
+
+        return jsons('2000' ,'提醒成功！');
     }
 
     /**

@@ -34,7 +34,7 @@ class RentUnpaid extends Model
 
             foreach($re as &$v){
                 //短信接口，所以需要调试，避免大量短信浪费
-                halt($v);
+                //halt($v);
 
                 $v['TenantTel'] = Db::name('tenant')->where('TenantID' ,'eq' ,$v['TenantID'])->value('TenantTel');
 
