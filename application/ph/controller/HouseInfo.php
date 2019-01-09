@@ -616,7 +616,8 @@ class HouseInfo extends Base
         foreach ($houseidArr as $house) {
             $datas[] = pdf_info($house);
         }
-        ob_clean();
+        //ob_clean();
+        ob_end_clean();
         Loader::import('tcpdf.tcpdf', EXTEND_PATH);
         $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
