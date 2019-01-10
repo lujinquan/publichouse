@@ -137,8 +137,8 @@ class ConfirmBanInfo extends Base
                     Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('OwnerType',$data['OwnerType']);
                 }
                 if ($data['BanAddress']){
-                    Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['BanAddress']);
-                    Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['BanAddress']);
+                    Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
+                    Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
                 }
                 if(!isset($allData)){$allData = array(); }
                 // 记录行为

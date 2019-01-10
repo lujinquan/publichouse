@@ -228,7 +228,7 @@ class HouseInfo extends Base
                         'RoomName' => $one['RoomTypeName'],
                         'RentPointIDS' => $rentPointIDS,
                     ];
-
+//halt($datas);
                     if ($datas['RoomID']) {  //如果房间编号存在，则为修改
                         //halt($datas['RoomID']);
                         $datas['UpdateTime'] = time();
