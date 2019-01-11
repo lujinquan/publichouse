@@ -86,7 +86,7 @@ class RentPayable extends Base
     }
 
     /**
-     *  按上期处理
+     *  按上期欠缴处理
      */
     public function dealAsLast(){
 
@@ -112,14 +112,12 @@ class RentPayable extends Base
 
             if(isset($nowData[$o['HouseID']][$o['OwnerType']])){
                 //halt($nowData[$o['HouseID']][$o['OwnerType']]);
-                if($o['HousePrerent'] == $nowData[$o['HouseID']][$o['OwnerType']]['HousePrerent']){
+                //if($o['HousePrerent'] == $nowData[$o['HouseID']][$o['OwnerType']]['HousePrerent']){
                     $result[] =[
                         'id' => $nowData[$o['HouseID']][$o['OwnerType']]['id'],
-                        'PaidRent' => $o['PaidRent'],
-                        'UnpaidRent' => $o['UnpaidRent'],
                         'Type' => 2,
                     ];
-                 }
+                 //}
             }
         }
 
