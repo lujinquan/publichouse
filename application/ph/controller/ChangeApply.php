@@ -501,7 +501,7 @@ class ChangeApply extends Base
                     $datas['InstitutionID'] = $one['TubulationID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionID'];   //机构父id
                     $datas['OwnerType'] = $one['OwnerType'];
-                    $datas['UseNature'] = $one['UseNature'];
+                    $datas['UseNature'] = 1;
                     //halt($datas);
                     $res = Db::name('change_order')->insert($datas);
                     
