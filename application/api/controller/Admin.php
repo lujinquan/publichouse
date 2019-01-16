@@ -18,44 +18,43 @@ class Admin extends Controller
 {
     public function test()
     {
-        $houses = Db::name('house')->where('Status',1)->field('HouseID,BanID,UseNature')->select();
-        $arr = [];
-        foreach($houses as $k => $h){
-            if($h['UseNature'] == 1){ //住宅
-                $arr[$h['BanID']]['CivilHolds'][] = 1; 
-            }elseif($h['UseNature'] == 2){ //企业
-                $arr[$h['BanID']]['EnterpriseHolds'][] = 1;
-            }else{ //机关
-                $arr[$h['BanID']]['PartyHolds'][] = 1;
-            }
+        // 以前年的欠款弄成订单
+        exit;
+        $houses = Db::name('house')->where(['Status'=>1,'ArrearRent'=>['>',0]])->field('HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,BanAddress,ArrearRent,TenantID,TenantName')->select();
+        $str = '';
+        foreach($houses as $k => $v){
+            $orderid = $v['HouseID'].$v['OwnerType'].'201701';
+            $str .= "('" . $orderid . "','". $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+            $str .= "," . $v['ArrearRent'] . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+            $str .= ",1," . $v['ArrearRent'] . "," . $v['ArrearRent'] . ",201701,2," . time() . "),";
 
         }
 
-        $hs = Db::name('house')->where('Status',1)->group('BanID')->column('BanID');
-        //halt($hs);
-        //$a = [];
-        $banids = Db::name('ban')->where(['Status'=>1])->column('BanID');
-        // foreach($hs as $h){
-        //     if(!in_array($h,$banids)){
-        //         $a[] = $h;
+        $res = Db::execute("insert into ".config('database.prefix')."rent_order (RentOrderID,HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,OrderDate,Type,CreateTime) values " . rtrim($str, ','));
+
+        if($res){
+            halt(1);
+        }
+
+        // $hs = Db::name('house')->where('Status',1)->group('BanID')->column('BanID');
+
+        // $banids = Db::name('ban')->where(['Status'=>1])->column('BanID');
+
+        // $i = 0;
+        // foreach($banids as $b){
+        //     if(isset($arr[$b])){
+        //         $c = isset($arr[$b]['CivilHolds'])?count($arr[$b]['CivilHolds']):0;
+        //         $p = isset($arr[$b]['PartyHolds'])?count($arr[$b]['PartyHolds']):0;
+        //         $e = isset($arr[$b]['EnterpriseHolds'])?count($arr[$b]['EnterpriseHolds']):0;
+        //         Db::name('ban')->where('BanID',$b)->update(['CivilHolds'=>$c,'PartyHolds'=>$p,'EnterpriseHolds'=>$e]);
+        //         ++$i;
+                
         //     }
         // }
-        // halt($a);
-
-        $i = 0;
-        foreach($banids as $b){
-            if(isset($arr[$b])){
-                $c = isset($arr[$b]['CivilHolds'])?count($arr[$b]['CivilHolds']):0;
-                $p = isset($arr[$b]['PartyHolds'])?count($arr[$b]['PartyHolds']):0;
-                $e = isset($arr[$b]['EnterpriseHolds'])?count($arr[$b]['EnterpriseHolds']):0;
-                Db::name('ban')->where('BanID',$b)->update(['CivilHolds'=>$c,'PartyHolds'=>$p,'EnterpriseHolds'=>$e]);
-                ++$i;
-                
-            }
-        }
-        halt($i);
+        // halt($i);
         //Db::name('ban')->field('BanID,')
     }
+
     // public function api()
     // {
     //     $result = [];
