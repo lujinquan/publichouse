@@ -260,7 +260,7 @@
 				<select name="OwnerType" required>
 					<option  value="" style="display:none">请选择</option>
 					<?php foreach($owerLst as $k3 =>$v3){;?>
-					<option value="{$k3+1}"><?php echo $v3['OwnerType']; ?></option>
+					<option value="{$v3['id']}"><?php echo $v3['OwnerType']; ?></option>
 					<?php }; ?>
 				</select>
 			  </div>
