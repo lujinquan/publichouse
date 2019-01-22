@@ -757,7 +757,7 @@ function count_room_rent($roomid , $houseid = ''){
             $roomOne['LeasedArea'] = $roomRent;
         }
     }
-    
+    //dump('计租面积：'.$roomOne['LeasedArea'].',基价折减率：'.$roomOne['RentPoint'].',结构基价：'.$structureTypePoint.',架空率：'.$emptyPoint.',层次调解率'.$floorPoint."。公式：".'('.$roomOne['LeasedArea'].'*('.$roomOne['RentPoint'].'*'.$structureTypePoint.')'.'*'.$emptyPoint.'*'.$floorPoint.')');
     // 计算租金= 计租面积（使用面积，房间类型，是否共用） * 基价折减率（有无上下水这种折减） * 结构基价  *  架空率 * 层次调解率
     return round($roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint,2);
 }
