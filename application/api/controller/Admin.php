@@ -68,6 +68,76 @@ class Admin extends Controller
         //Db::name('ban')->field('BanID,')
     }
 
+    /**
+     *  注意，两个所，分别计算
+     */
+    public function config($ifPre = 1)
+    {
+        //重新生成租金配置时，先删除原配置
+        Db::name('rent_config')->delete(true);
+
+        $where['Status'] = array('eq', 1);    //房屋必须是可用状态
+        $where['IfEmpty'] = array('eq', 0);    // 是否空租
+        $where['IfSuspend'] = array('eq', 0);  // 是否暂停计租
+        $where['InstitutionID'] = array('not in', [34, 35]);  //34为紫阳所私有，35为粮道所私有，不需要计算租金
+        $where['OwnerType'] = array('neq', 6); // 6是生活用房
+        $where['HouseChangeStatus'] = array('eq', 0); //是否房改，1为私房【房改】，0为公房
+
+        $fields = 'HouseID,TenantID,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,TenantName,BanAddress,OwnerType,UseNature,AnathorOwnerType,AnathorHousePrerent,ApprovedRent,ArrearRent';
+        $houseData = Db::name('house')->field($fields)->where($where)->select();
+ 
+        $changeData = Db::name('change_order')->where(['Status'=>1,'ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
+
+        $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
+
+        foreach($changeData as $c){
+            $changedata[$c['HouseID']] = $c;
+        }
+
+        $str = '';
+
+        if ($ifPre == 1) { //使用规定租金
+
+            foreach ($houseData as $v) {
+
+                if ($v['AnathorHousePrerent'] > 0) {
+                    $receiveRent = $v['AnathorHousePrerent'];  //应收租金，后期处理
+                    $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+                    $str .= "," . $v['AnathorHousePrerent'] . ", 0, 0 '" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['AnathorOwnerType'] . "," . $v['UseNature'];
+                    $str .= ",1," . $receiveRent . "," . $receiveRent . "," . 10000 . "," . time() . "),";
+                }
+
+                if(isset($changedata[$v['HouseID']])){
+                    $cutType = $changedata[$v['HouseID']]['CutType'];
+                    $cutRent = $changedata[$v['HouseID']]['InflRent'];
+                }else{
+                    $cutType = 0;
+                    $cutRent = 0;
+                }
+                if(isset($rentData[$v['HouseID']])){
+                    $historyUnpaidRent = $rentData[$v['HouseID']] + $v['ArrearRent'];
+                }else{
+                    $historyUnpaidRent = $v['ArrearRent'];
+                }
+
+                $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
+
+                $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+                $str .= "," . $v['HousePrerent'] . "," . $v['DiffRent'] . "," . $v['PumpCost'] . "," . $cutType . "," . $cutRent . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+                $str .= ",1," . $receiveRent . "," . $receiveRent . "," . $historyUnpaidRent . "," . 10000 . "," . time() . "),";
+            }
+        } else { //使用计算租金
+            return jsons('4002' ,'暂时无法配置计算租金');
+
+        }
+
+        $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
+
+        Db::name('rent_config')->where(['ReceiveRent'=>0])->delete();
+
+        return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+    }
+
     // public function api()
     // {
     //     $result = [];
