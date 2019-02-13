@@ -18,36 +18,36 @@ class Admin extends Controller
 {
     public function test()
     {
-        $roomid = input('roomid');
-        $houseid = input('houseid');
-        $str = '';
-        if($roomid){
-            $roomRent = count_room_rent($roomid);
-            $str .= '房间编号'.$roomid.'的计算租金：'.$roomRent.'元！';
-        }
-        if($houseid){
-            $houseRent = count_house_rent($houseid);
-            $str .= '房屋编号'.$houseid.'的计算租金：'.$houseRent.'元！';
-        }
-
-        halt($str);
-        // 以前年的欠款弄成订单
-        //exit;
-        // $houses = Db::name('house')->where(['Status'=>1,'ArrearRent'=>['>',0]])->field('HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,BanAddress,ArrearRent,TenantID,TenantName')->select();
+        // $roomid = input('roomid');
+        // $houseid = input('houseid');
         // $str = '';
-        // foreach($houses as $k => $v){
-        //     $orderid = $v['HouseID'].$v['OwnerType'].'201701';
-        //     $str .= "('" . $orderid . "','". $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
-        //     $str .= "," . $v['ArrearRent'] . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
-        //     $str .= ",1," . $v['ArrearRent'] . "," . $v['ArrearRent'] . ",201701,2," . time() . "),";
-
+        // if($roomid){
+        //     $roomRent = count_room_rent($roomid);
+        //     $str .= '房间编号'.$roomid.'的计算租金：'.$roomRent.'元！';
+        // }
+        // if($houseid){
+        //     $houseRent = count_house_rent($houseid);
+        //     $str .= '房屋编号'.$houseid.'的计算租金：'.$houseRent.'元！';
         // }
 
-        // $res = Db::execute("insert into ".config('database.prefix')."rent_order (RentOrderID,HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,OrderDate,Type,CreateTime) values " . rtrim($str, ','));
+        // halt($str);
+        //以前年的欠款弄成订单
+        //exit;
+        $houses = Db::name('house')->where(['Status'=>1,'ArrearRent'=>['>',0]])->field('HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,BanAddress,ArrearRent,TenantID,TenantName')->select();
+        $str = '';
+        foreach($houses as $k => $v){
+            $orderid = $v['HouseID'].$v['OwnerType'].'201701';
+            $str .= "('" . $orderid . "','". $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
+            $str .= "," . $v['ArrearRent'] . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
+            $str .= ",1," . $v['ArrearRent'] . "," . $v['ArrearRent'] . ",201701,2," . time() . "),";
 
-        // if($res){
-        //     halt(1);
-        // }
+        }
+
+        $res = Db::execute("insert into ".config('database.prefix')."rent_order (RentOrderID,HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,OrderDate,Type,CreateTime) values " . rtrim($str, ','));
+
+        if($res){
+            halt(1);
+        }
 
         // $hs = Db::name('house')->where('Status',1)->group('BanID')->column('BanID');
 
