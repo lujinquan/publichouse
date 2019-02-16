@@ -1008,9 +1008,15 @@ $('#addApply').click(function() {
                 success:function(){
                    $('#cancelQueryData').on("click", function() {
                         var HouseID = $('#getcancel').val();
-                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                        $.get('/ph/Api/check_house_cancel_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
+
+                            if(res.retcode != "2000"){
+                                layer.msg(res.msg);
+                                return false;
+                            }
+
                             $('#cancelUseNature').text(res.data.UseNature);
                             $('#cancelDamageGrade').text(res.data.DamageGrade);
                             $('#cancelHouseUsearea').text(res.data.HouseUsearea);
@@ -1023,23 +1029,61 @@ $('#addApply').click(function() {
                             $('#cancelFloorID').text(res.data.FloorID);
                             $('#cancelOwnerType').text(res.data.OwnerType);
                             $('.housePrice').val('');
-                            var DOM = $('.cancel_BanNumber').eq($('.cancel_BanNumber').length - 1).clone();
-                            $('#addBanNumber').empty();
+                            var DOM = $('.cancel_BanNumber_dom').children();
+                            $('#cancelBanAdd').empty();
+                            $('.input_1,.input_2,.input_3,.input_4').off('input propertychange');
                             for(var i = 0;i < res.data.Ban.length;i++){
-                                var ban_dom = DOM.clone().show();
-                                ban_dom.find('.banID').text(res.data.Ban[i].BanID);
-                                ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
-                                ban_dom.find('.banOwnerType').text(res.data.Ban[i].OwnerType);
-                                $('#addBanNumber').append(ban_dom);
+                                var ban_dom_1 = DOM.find('tr:eq(0)').clone();
+                                var ban_dom_2 = DOM.find('tr:eq(1)').clone();
+                                var ban_dom_3 = DOM.find('tr:eq(2)').clone();
+                                ban_dom_1.find('.banID').text(res.data.Ban[i].BanID);
+                                ban_dom_1.find('.PreRent').text(res.data.Ban[i].PreRent);
+                                ban_dom_1.find('.BanUsearea').text(res.data.Ban[i].BanUsearea);
+                                ban_dom_1.find('.TotalArea').text(res.data.Ban[i].TotalArea);
+                                ban_dom_1.find('.TotalOprice').text(res.data.Ban[i].TotalOprice);
+                                
+                                ban_dom_3.find('.result_1').text(res.data.Ban[i].PreRent);
+                                ban_dom_3.find('.result_2').text(res.data.Ban[i].BanUsearea);
+                                ban_dom_3.find('.result_3').text(res.data.Ban[i].TotalArea);
+                                ban_dom_3.find('.result_4').text(res.data.Ban[i].TotalOprice);
+
+                                ban_dom_2.find('.input_1').on('input propertychange',function(){
+                                    var this_index = $(this).index('#cancelBanAdd .input_1');
+                                    var number = numberMethod($('.PreRent').eq(this_index).text(),$(this).val(),'-');
+                                    $('.next .result_1').eq(this_index).text(number||0);
+                                });
+
+                                ban_dom_2.find('.input_2').on('input propertychange',function(){
+                                    var this_index = $(this).index('#cancelBanAdd .input_2');
+                                    var number = numberMethod($('.BanUsearea').eq(this_index).text(),$(this).val(),'-');
+                                    $('.next .result_2').eq(this_index).text(number||0);
+                                });
+
+                                ban_dom_2.find('.input_3').on('input propertychange',function(){
+                                    var this_index = $(this).index('#cancelBanAdd .input_3');
+                                    var number = numberMethod($('.TotalArea').eq(this_index).text(),$(this).val(),'-');
+                                    $('.next .result_3').eq(this_index).text(number||0);
+                                });
+
+                                ban_dom_2.find('.input_4').on('input propertychange',function(){
+                                    var this_index = $(this).index('#cancelBanAdd .input_4');
+                                    var number = numberMethod($('.TotalOprice').eq(this_index).text(),$(this).val(),'-');
+                                    $('.next .result_4').eq(this_index).text(number||0);
+                                });
+
+                                $('#cancelBanAdd').append(ban_dom_1);
+                                $('#cancelBanAdd').append(ban_dom_2);
+                                $('#cancelBanAdd').append(ban_dom_3);
+
                             }
-                            //$('.cancel_BanNumber:eq(0)').remove();
+
                             $('.cancelPrent').eq(0).val(res.data.HousePrerent);
                             $('.cancelHouseUsearea').eq(0).val(res.data.LeasedArea);
 
-                            $('.houseArea').on('input propertychange',function(){
-                                var number = parseFloat(res.data.TotalOprice)/parseFloat(res.data.TotalArea)*parseFloat($(this).val());
-                                $('.housePrice').val(number.toFixed(2));
-                            });
+                            // $('.houseArea').on('input propertychange',function(){
+                            //     var number = parseFloat(res.data.TotalOprice)/parseFloat(res.data.TotalArea)*parseFloat($(this).val());
+                            //     $('.housePrice').val(number.toFixed(2));
+                            // });
                         });
                     });
                     new file({
@@ -1073,15 +1117,13 @@ $('#addApply').click(function() {
                         formData.append("cancelType", $('#cancelType').val());
                         formData.append("cancelReason", $('#cancelReason').val());
                         formData.append("type", 8);
-                        for(var i = 0;i < $('.cancel_BanNumber').length-1;i++){
-                            formData.append("Ban["+i+"][banID]", $('.cancel_BanNumber .banID').eq(i).text());
-                            formData.append("Ban["+i+"][HouseAdress]", $('.cancel_BanNumber .HouseAdress').eq(i).text());
-                            formData.append("Ban["+i+"][houseArea]", $('.cancel_BanNumber .houseArea').eq(i).val());
-                            formData.append("Ban["+i+"][housePrice]", $('.cancel_BanNumber .housePrice').eq(i).val());
-                            formData.append("Ban["+i+"][cancelPrent]", $('.cancel_BanNumber .cancelPrent').eq(i).val());
-                            formData.append("Ban["+i+"][cancelHouseUsearea]", $('.cancel_BanNumber .cancelHouseUsearea').eq(i).val());
+                        for(var i = 0;i < $('#cancelBanAdd tr').length/3;i++){
+                            formData.append("Ban["+i+"][banID]", $('#cancelBanAdd .banID').eq(i).text());
+                            formData.append("Ban["+i+"][cancelPrent]", $('#cancelBanAdd .input_1').eq(i).val());
+                            formData.append("Ban["+i+"][cancelHouseUsearea]", $('#cancelBanAdd .input_2').eq(i).val());
+                            // formData.append("Ban["+i+"][houseArea]", $('#cancelBanAdd .houseArea').eq(i).val());
+                            // formData.append("Ban["+i+"][housePrice]", $('#cancelBanAdd .housePrice').eq(i).val());
                         }
-                        
                         $.ajax({
                             type: "post",
                             url: "/ph/ChangeApply/add",
@@ -2430,6 +2472,12 @@ function cancelEmptyRent(){
 
 // 目前只适用于加减法 浮点小数加减法
 function numberMethod(number1,number2,method){
+    if(number1 == '' || number1 == ' '){
+        number1 = "0";
+    }
+    if(number2 == '' || number2 == ' '){
+        number2 = "0";
+    }
     var array_1 = number1.split('.');
     var array_2 = number2.split('.');
     var number = 0;
@@ -2445,8 +2493,8 @@ function numberMethod(number1,number2,method){
         multiple = array_2[1].length;
         dot_diff_1 = array_2[1].length - array_1[1].length;
     }
-    number1 = parseFloat(array_1[0]) * Math.pow(10,multiple)+parseFloat(array_1[1]) * Math.pow(10,dot_diff_1);
-    number2 = parseFloat(array_2[0]) * Math.pow(10,multiple)+parseFloat(array_2[1]) * Math.pow(10,dot_diff_2);
+    number1 = parseFloat(array_1[0].replace('-','')) * Math.pow(10,multiple)+parseFloat(array_1[1]) * Math.pow(10,dot_diff_1);
+    number2 = parseFloat(array_2[0].replace('-','')) * Math.pow(10,multiple)+parseFloat(array_2[1]) * Math.pow(10,dot_diff_2);
     if(method == '+'){
         number = (number1 + number2)/Math.pow(10,multiple);
     }else if(method == '-'){

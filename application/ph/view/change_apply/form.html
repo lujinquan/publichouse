@@ -1,4 +1,4 @@
-<!-- rent_reduction/租金减免、pauseRent/暂停计租、cancel/注销-->
+<!--rent_reduction/租金减免、pauseRent/暂停计租、cancel/注销-->
 
 <form id="derateApplyForm" style="display:none;margin-top:20px;">
   <div class="am-form-group am-u-sm-12">
@@ -323,12 +323,58 @@
     </div>
   </div>
 
+
+<div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">影响基数：</h2>
+</div>
 <div id="addBanNumber">
   <div class="cancel_BanNumber">
-    <div class="am-form-group am-u-sm-12">
+<!--     <div class="am-form-group am-u-sm-12">
         <hr />
-    </div>
+    </div> -->
+    <style>
+        table,table tr,table tr th, table tr td { border-color:#ccc; }
+        #addBanNumber table input{width:100px;border-radius:2px;border:1px solid #D6E2F6;}
+    </style>
     <div class="am-u-sm-12">
+      <table style="width:90%;border:1px solid #ccc;margin-left:5%;" border="1">
+        <thead>
+          <tr>
+            <th>楼栋编号</th>
+            <th>异动状态</th>
+            <th>规定租金</th>
+            <th>使用面积</th>
+            <th>建筑面积</th>
+            <th>房屋原价</th>
+          </tr>
+        </thead>
+        <tbody id="cancelBanAdd">
+          <tr>
+            <td rowspan="3"></td>
+            <td>异动前</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>异动中</td>
+            <td><input class="input_1" /></td>
+            <td><input class="input_2" /></td>
+            <td><input class="input_3" /></td>
+            <td><input class="input_4" /></td>
+          </tr>
+          <tr>
+            <td>异动后</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<!--     <div class="am-u-sm-12">
       <div class="am-form-group am-u-sm-4">
         <label class="label_style">楼栋编号：</label>
         <label class="label_p_style banID"></label>
@@ -341,8 +387,8 @@
         <label class="label_style">注销租金：</label>
         <input type="number" class="label_input cancelPrent" />
       </div>
-    </div>
-    <div class="am-u-sm-12">
+    </div> -->
+<!--     <div class="am-u-sm-12">
       <div class="am-form-group am-u-sm-4">
         <label class="label_style">建筑面积：</label>
         <input type="number" class="label_input houseArea" />
@@ -355,43 +401,34 @@
         <label class="label_style">计租面积：</label>
         <input type="number" class="label_input cancelHouseUsearea" />
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 
-<div class="cancel_BanNumber" style="display:none;">
-  <div class="am-form-group am-u-sm-12">
-      <hr />
-  </div>
-  <div class="am-u-sm-12">
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">楼栋编号：</label>
-      <label class="label_p_style banID"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">房屋地址：</label>
-      <label class="label_p_style HouseAdress"></label>
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">注销租金：</label>
-      <input type="number" class="label_input cancelPrent" />
-    </div>
-  </div>
-  <div class="am-u-sm-12">
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">建筑面积：</label>
-      <input type="number" class="label_input houseArea" />
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">房屋原价：</label>
-      <input type="number" class="label_input housePrice" />
-    </div>
-    <div class="am-form-group am-u-sm-4">
-      <label class="label_style">计租面积：</label>
-      <input type="number" class="label_input cancelHouseUsearea" />
-    </div>
-  </div>
-</div>
+<table class="cancel_BanNumber_dom" style="display:none;">
+  <tr class="pre">
+    <td rowspan="3" class="banID"></td>
+    <td>异动前</td>
+    <td class="PreRent">306.70</td>
+    <td class="BanUsearea">204.41</td>
+    <td class="TotalArea">204.41</td>
+    <td class="TotalOprice">204.41</td>
+  </tr>
+  <tr class="doing">
+    <td>异动中</td>
+        <td><input type="number" class="input_1" /></td>
+        <td><input type="number" class="input_2" /></td>
+        <td><input type="number" class="input_3" disabled /></td>
+        <td><input type="number" class="input_4" disabled /></td>
+  </tr>
+  <tr class="next">
+    <td>异动后</td>
+    <td class="result_1"></td>
+    <td class="result_2"></td>
+    <td class="result_3"></td>
+    <td class="result_4"></td>
+  </tr>
+</table>
 
   <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">资料上传：</h2>
@@ -1223,4 +1260,4 @@
 
   </div>
 </form>
-<!--- 租金调整（批量） -->
+<!--- 租金调整（批量）-->
