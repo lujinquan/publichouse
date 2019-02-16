@@ -1,6 +1,0 @@
-*
-!.gitignore
-application/database.php
-application/config.php
-runtime/*
-thinkphp/*

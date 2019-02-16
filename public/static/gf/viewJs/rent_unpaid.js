@@ -139,27 +139,28 @@ $('.details').click(function(){
 		content:$('#details')
 	});
 });
-//单个缴费
-$('.payment').click(function(){
+//年度回收
+$('.annual_recovery').click(function(){
 	var thisID = $(this).val();
-	$.get('/ph/RentPayable/pay/RentOrderID/'+thisID,function(res){
+	$.get('/ph/RentUnpaid/pay/RentOrderID/'+thisID,function(res){
 		res = JSON.parse(res);
 		console.log(res);
+		// $('.RentOrderID').text(res.data.RentOrderID);
 		$('#ReceiveRents').text(res.data.ReceiveRent);
-		$('#LateRents').text(res.data.LateRent);
 		$('#PaidRents').text(res.data.PaidRent);
 		$('#UnpaidRents').text(res.data.UnpaidRent);
 		layer.open({
 			type:1,
 			area:['600px','600px'],
 			resize:false,
+			zIndex:100,
 			title:['缴费','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$('#payForMoney'),
 			btn:['确定','取消'],
 			yes:function(thisIndex){
 				var money = $('#money').val();
-				var date = $('#CreateDate').val();
-				$.post('/ph/RentPayable/pay',{RentOrderID:thisID,cost:money,CreateDate:date},function(res){
+				// var date = $('#CreateDate').val();
+				$.post('/ph/RentUnpaid/pay/',{RentOrderID:thisID,cost:money},function(res){
 					res = JSON.parse(res);
 					if(res.retcode == 2000){
 						layer.msg(res.msg);						
