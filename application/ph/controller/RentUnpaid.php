@@ -146,7 +146,7 @@ class RentUnpaid extends Base
             //halt($results);
             //Db::name('rent_recovery')->insert($results);
 
-            if (OldCutRentModel::create($data)) {
+            if (OldCutRentModel::create($results)) {
                 return jsons('2000', '缴款成功');
             } else {
                 return jsons('4000', '缴款失败');
