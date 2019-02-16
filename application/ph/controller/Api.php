@@ -142,7 +142,21 @@ class Api extends Controller
 
     }
 
-    public function get_house_info()
+    public function check_house_cancel_info()
+    {
+        $houseID = input('HouseID');
+
+
+        $row = Db::name('rent_order')->where(['HouseID'=>['eq', $houseID],'Type'=>['eq',2]])->find();
+        if($row){
+            return jsons('4002' ,'当前房屋有欠缴订单无法办理注销，请核查！');
+        }else{
+            $this->get_house_info();
+        }
+
+    }
+
+        public function get_house_info()
     {
 
         $houseID = input('HouseID');
@@ -208,7 +222,6 @@ class Api extends Controller
         $data['BanAddress'] = Db::name('ban')->where('BanID', 'eq', $data['BanID'])->value('BanAddress');
         return jsons('2000', '获取成功', $data);
     }
-
 
     public function get_ban_info()
     {
