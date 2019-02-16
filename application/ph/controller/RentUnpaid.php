@@ -133,7 +133,6 @@ class RentUnpaid extends Base
                 'TenantName' => $result['TenantName'],
                 'BanAddress' => $result['BanAddress'],
                 'HousePrerent' => $result['HousePrerent'],
-                'OrderDate' => $result['OrderDate'],
                 'InstitutionID' => $result['InstitutionID'],
                 'InstitutionPID' => $result['InstitutionPID'],
                 'HouseID' => $result['HouseID'],
@@ -156,12 +155,7 @@ class RentUnpaid extends Base
 
         $result = model('ph/RentCount')->get_one_rent_order_info($rentOrderID);
         $datas = [
-            'HousePrerent' => $result['HousePrerent'],  //规定租金
-            'CutRent' => $result['CutRent'],    //减免租金
-            'PumpCost' => $result['PumpCost'],    //泵费
-            'RepairCost' => $result['RepairCost'],  //维修费
-            'ReceiveRent' => $result['ReceiveRent'],  //应缴租金
-            'LateRent' => $result['LateRent'],  //滞纳金
+            'RentOrderID' => $rentOrderID,
             'ReceiveRent' => $result['ReceiveRent'],  //应收租金
             'PaidRent' => $result['PaidRent'],  //已缴租金
             'UnpaidRent' => $result['UnpaidRent'],  //欠缴租金

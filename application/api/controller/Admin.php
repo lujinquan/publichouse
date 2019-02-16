@@ -68,6 +68,7 @@ class Admin extends Controller
         //Db::name('ban')->field('BanID,')
     }
 
+
     /**
      *  注意，两个所，分别计算
      */
