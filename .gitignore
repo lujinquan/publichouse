@@ -1,0 +1,5 @@
+/runtime/*
+/uploads/*
+/backup/*
+/application/database.php
+1.pdf
