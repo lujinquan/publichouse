@@ -118,7 +118,6 @@ class HouseInfo extends Model
             $HouseIdList['option']['BanID'] = $BanID;
         }
 
-        //halt($where);
         if(!isset($wheres)){
             $wheres = 1;
         }
@@ -158,6 +157,7 @@ class HouseInfo extends Model
             return array();
         }
         $data['ApprovedRent'] = count_house_rent($houseid);
+        //$data['ApprovedRent'] = $data['ApprovedRent'];
         $data["OwnerType"] = get_owner($data["OwnerType"]);
         $data['IfSuspend'] = $data['IfSuspend']?'是':'否';
         $data["UseNature"] = get_usenature($data["UseNature"]);

@@ -412,13 +412,9 @@ class RentCount extends Model
 
         $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
 
-        //halt($changedata);
-
         foreach($changeData as $c){
             $changedata[$c['HouseID']] = $c;
         }
-
-        
 
         $str = '';
 
@@ -440,13 +436,9 @@ class RentCount extends Model
                     $cutType = 0;
                     $cutRent = 0;
                 }
-                if(isset($rentData[$v['HouseID']])){
-                    $historyUnpaidRent = $rentData[$v['HouseID']] + $v['ArrearRent'];
-                }else{
-                    $historyUnpaidRent = $v['ArrearRent'];
-                }
 
-                // 
+                $historyUnpaidRent = isset($rentData[$v['HouseID']])?$rentData[$v['HouseID']]:0;
+
                 $receiveRent = $v['HousePrerent'] + $v['DiffRent'] + $v['PumpCost'] - $cutRent;
 
                 $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
@@ -458,7 +450,6 @@ class RentCount extends Model
 
         }
 
-        //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
         Db::name('rent_config')->where(['ReceiveRent'=>0,'InstitutionID'=>$institutionID])->delete();

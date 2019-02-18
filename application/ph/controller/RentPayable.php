@@ -102,7 +102,7 @@ class RentPayable extends Base
 
         $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();
 
-        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,HousePrerent,OwnerType')->select();
+        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,ReceiveRent,HousePrerent,OwnerType')->select();
 
         foreach($nowDatas as $n){
             $nowData[$n['HouseID']][$n['OwnerType']] = $n;
@@ -115,6 +115,8 @@ class RentPayable extends Base
                 //if($o['HousePrerent'] == $nowData[$o['HouseID']][$o['OwnerType']]['HousePrerent']){
                     $result[] =[
                         'id' => $nowData[$o['HouseID']][$o['OwnerType']]['id'],
+                        'UnpaidRent' => $o['UnpaidRent'],
+                        'PaidRent' => $nowData[$o['HouseID']][$o['OwnerType']]['ReceiveRent'] - $o['UnpaidRent'],
                         'Type' => 2,
                     ];
                  //}
