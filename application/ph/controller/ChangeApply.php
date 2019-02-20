@@ -276,24 +276,24 @@ class ChangeApply extends Base
                     break;
 
                 case 8:  // 注销
-                    $arr = [];
-                    foreach($data['Ban'] as $k => $b){
-                        $row = Db::name('ban')->where('BanID',$b['banID'])->field('TotalArea,TotalOprice,PreRent,BanUsearea')->find();
-                        $arr[$k][0]['BanID'] = $b['banID'];
-                        $arr[$k][0]['TotalArea'] = $row['TotalArea'];
-                        $arr[$k][0]['TotalOprice'] = $row['TotalOprice'];
-                        $arr[$k][0]['PreRent'] = $row['PreRent'];
-                        $arr[$k][0]['BanUsearea'] = $row['BanUsearea'];
-                        $arr[$k][1]['cancelPrent'] = $b['cancelPrent'];
-                        $arr[$k][1]['cancelHouseUsearea'] = $b['cancelHouseUsearea'];
-                        $arr[$k][1]['cancelArea'] = isset($b['cancelArea'])?$b['cancelArea']:0;
-                        $arr[$k][1]['cancelOprice'] = isset($b['cancelOprice'])?$b['cancelOprice']:0;
-                        $arr[$k][2]['TotalArea'] = $row['TotalArea'] - $arr[$k][1]['cancelArea'] ;
-                        $arr[$k][2]['TotalOprice'] = $row['TotalOprice'] - $arr[$k][1]['cancelOprice'];
-                        $arr[$k][2]['PreRent'] = $row['PreRent'] - $arr[$k][1]['cancelPrent'];
-                        $arr[$k][2]['BanUsearea'] = $row['BanUsearea'] - $arr[$k][1]['cancelHouseUsearea'];
-                    }
-                    $datas['Deadline'] = json_encode($arr);
+                    // $arr = [];
+                    // foreach($data['Ban'] as $k => $b){
+                    //     $row = Db::name('ban')->where('BanID',$b['banID'])->field('TotalArea,TotalOprice,PreRent,BanUsearea')->find();
+                    //     $arr[$k][0]['BanID'] = $b['banID'];
+                    //     $arr[$k][0]['TotalArea'] = $row['TotalArea'];
+                    //     $arr[$k][0]['TotalOprice'] = $row['TotalOprice'];
+                    //     $arr[$k][0]['PreRent'] = $row['PreRent'];
+                    //     $arr[$k][0]['BanUsearea'] = $row['BanUsearea'];
+                    //     $arr[$k][1]['cancelPrent'] = $b['cancelPrent'];
+                    //     $arr[$k][1]['cancelHouseUsearea'] = $b['cancelHouseUsearea'];
+                    //     $arr[$k][1]['cancelArea'] = isset($b['cancelArea'])?$b['cancelArea']:0;
+                    //     $arr[$k][1]['cancelOprice'] = isset($b['cancelOprice'])?$b['cancelOprice']:0;
+                    //     $arr[$k][2]['TotalArea'] = $row['TotalArea'] - $arr[$k][1]['cancelArea'] ;
+                    //     $arr[$k][2]['TotalOprice'] = $row['TotalOprice'] - $arr[$k][1]['cancelOprice'];
+                    //     $arr[$k][2]['PreRent'] = $row['PreRent'] - $arr[$k][1]['cancelPrent'];
+                    //     $arr[$k][2]['BanUsearea'] = $row['BanUsearea'] - $arr[$k][1]['cancelHouseUsearea'];
+                    // }
+                    $datas['Deadline'] = json_encode($data['Ban']);
                     //halt($arr);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['TenantID'] = $one['TenantID'];
