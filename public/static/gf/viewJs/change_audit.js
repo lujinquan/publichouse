@@ -1,4 +1,5 @@
 //审批
+var _global = null;//注销传值
 $('.BtnApprove').click(function(){
 	var value = $(this).val(),
 		CordID = "#approveForm";
@@ -190,7 +191,6 @@ $('.BtnApprove').click(function(){
         	$('.oldCancelTenantTel').text(res.data.detail.TenantTel);
         	$('.oldCancelReason').text(res.data.detail.Remark);
 
-
         	$('.oldCancelYear').text(res.data.detail.OldYearRent);
         	$('.oldCancelMonth').text(res.data.detail.Deadline);
         	$('.oldCancelMonthMoney').text(res.data.detail.OldMonthRent);
@@ -240,20 +240,45 @@ $('.BtnApprove').click(function(){
         	$('.cancelFloorID').text(res.data.detail.FloorID);
         	$('.Remark').text(res.data.detail.Remark);
         	$('.cancelCreateTime').text(res.data.detail.OrderCreateTime);
-        	var house_str = '';
-        	for(var i = 0;i < res.data.detail.Ban.length;i++){
-        		house_str += '<tr>\
-	                <td style="width:150px;">'+(i+1)+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].banID+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].houseArea+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].housePrice+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
-	            </tr>';
+
+            var DOM = $('.cancel_BanNumber_dom').children();
+            var this_ban_data = res.data.detail.Ban;
+                _global = res.data.detail.Ban;
+            $('#cancelBanAdd').empty();
+            $('.input_1,.input_2,.input_3,.input_4').off('input propertychange');
+        	for(var i = 0;i < this_ban_data.length;i++){
+                var ban_dom_1 = DOM.find('tr:eq(0)').clone();
+                var ban_dom_2 = DOM.find('tr:eq(1)').clone();
+                var ban_dom_3 = DOM.find('tr:eq(2)').clone();
+                ban_dom_1.find('.banID').text(this_ban_data[i].banID);
+                ban_dom_1.find('.PreRent').text(this_ban_data[i].housePrice);
+                ban_dom_1.find('.BanUsearea').text(this_ban_data[i].cancelHouseUsearea);
+                ban_dom_1.find('.TotalArea').text(this_ban_data[i].houseArea);
+                ban_dom_1.find('.TotalOprice').text(this_ban_data[i].cancelPrent);
+
+                ban_dom_2.find('.input_1').val(this_ban_data[i].cancelPrent);
+                ban_dom_2.find('.input_2').val(this_ban_data[i].cancelHouseUsearea);
+
+                ban_dom_3.find('.result_1').text(this_ban_data[i].housePrice);
+                ban_dom_3.find('.result_2').text(this_ban_data[i].cancelHouseUsearea);
+                ban_dom_3.find('.result_3').text(this_ban_data[i].houseArea);
+                ban_dom_3.find('.result_4').text(this_ban_data[i].cancelPrent);
+
+                ban_dom_2.find('.input_3').on('input propertychange',function(){
+                    var this_index = $(this).index('#cancelBanAdd .input_3');
+                    var number = numberMethod($('.TotalArea').eq(this_index).text(),$(this).val(),'-');
+                    $('.next .result_3').eq(this_index).text(number||0);
+                });
+
+                ban_dom_2.find('.input_4').on('input propertychange',function(){
+                    var this_index = $(this).index('#cancelBanAdd .input_4');
+                    var number = numberMethod($('.TotalOprice').eq(this_index).text(),$(this).val(),'-');
+                    $('.next .result_4').eq(this_index).text(number||0);
+                });
+                $('#cancelBanAdd').append(ban_dom_1);
+                $('#cancelBanAdd').append(ban_dom_2);
+                $('#cancelBanAdd').append(ban_dom_3);
         	}
-        	$('#cancelHouseDetail').empty();
-        	$('#cancelHouseDetail').append($(house_str));
 			if(res.data.config.status == '1'){
 				$('.status_2').show();
 				new file({
@@ -646,21 +671,34 @@ $('.BtnDetail').click(function(){
         	$('.cancelFloorID').text(res.data.detail.FloorID);
         	$('.Remark').text(res.data.detail.Remark);
         	$('.cancelCreateTime').text(res.data.detail.OrderCreateTime);
-        	var house_str = '';
-        	for(var i = 0;i < res.data.detail.Ban.length;i++){
-        		house_str += '<tr>\
-	                <td style="width:150px;">'+(i+1)+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].banID+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].houseArea+'</td>\
-	                <td style="width:150px;">'+res.data.detail.Ban[i].cancelHouseUsearea+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].housePrice+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].cancelPrent+'</td>\
-	                <td style="width:200px;">'+res.data.detail.Ban[i].HouseAdress+'</td>\
-	            </tr>';
-        	}
-        	$('#cancelHouseDetail').empty();
-        	$('#cancelHouseDetail').append($(house_str));
 
+            var DOM = $('.cancel_BanNumber_dom').children();
+            var this_ban_data = res.data.detail.Ban;
+            $('#cancelBanAdd').empty();
+            for(var i = 0;i < this_ban_data.length;i++){
+                var ban_dom_1 = DOM.find('tr:eq(0)').clone();
+                var ban_dom_2 = DOM.find('tr:eq(1)').clone();
+                var ban_dom_3 = DOM.find('tr:eq(2)').clone();
+                ban_dom_1.find('.banID').text(this_ban_data[i].banID);
+                ban_dom_1.find('.PreRent').text(this_ban_data[i].housePrice);
+                ban_dom_1.find('.BanUsearea').text(this_ban_data[i].cancelHouseUsearea);
+                ban_dom_1.find('.TotalArea').text(this_ban_data[i].houseArea);
+                ban_dom_1.find('.TotalOprice').text(this_ban_data[i].cancelPrent);
+
+                ban_dom_2.find('.input_1').val(this_ban_data[i].cancelPrent);
+                ban_dom_2.find('.input_2').val(this_ban_data[i].cancelHouseUsearea);
+                ban_dom_2.find('.input_3').val(this_ban_data[i].cancelPrent).prop('disabled',true);
+                ban_dom_2.find('.input_4').val(this_ban_data[i].cancelHouseUsearea).prop('disabled',true);
+
+                ban_dom_3.find('.result_1').text(this_ban_data[i].housePrice);
+                ban_dom_3.find('.result_2').text(this_ban_data[i].cancelHouseUsearea);
+                ban_dom_3.find('.result_3').text(this_ban_data[i].houseArea);
+                ban_dom_3.find('.result_4').text(this_ban_data[i].cancelPrent);
+
+                $('#cancelBanAdd').append(ban_dom_1);
+                $('#cancelBanAdd').append(ban_dom_2);
+                $('#cancelBanAdd').append(ban_dom_3);
+            }
 			processState('#cancelState',res);
 			metailShow('#cancelPhotos',res);
 			layerBox(value,'cancel','注销详情',2);
@@ -924,6 +962,7 @@ function processState(id,res){
 }
 // 详情与审批流程弹出框
 function layerBox(value,id,name,operation,status){
+    console.log(value,id,name,operation,status);
 	var this_index = layer.open({
         type: 1,
         area: ['990px','780px'],
@@ -941,6 +980,32 @@ function layerBox(value,id,name,operation,status){
         	}else{
         		var formData = new FormData();
         	}
+            if(id == "cancel"){//注销时，传参
+                var ban_data = [];
+                for(var i = 0;i <_global.length;i++){
+                    var temp = [{
+                        BanID:_global[i].BanID,
+                        BanUsearea:_global[i].BanUsearea,
+                        PreRent:_global[i].PreRent,
+                        TotalArea:_global[i].TotalArea,
+                        TotalOprice:_global[i].TotalArea
+                    },{
+                        cancelArea:_global[i].cancelArea,
+                        cancelHouseUsearea:_global[i].cancelHouseUsearea,
+                        cancelOprice:$('#cancelBanAdd .input_3').eq(i).val(),
+                        cancelPrent:$('#cancelBanAdd .input_4').eq(i).val()
+                    },{
+                        BanUsearea:_global[i].BanUsearea,
+                        PreRent:_global[i].PreRent,
+                        TotalArea:$('#cancelBanAdd .result_3').eq(i).text(),
+                        TotalOprice:$('#cancelBanAdd .result_4').eq(i).text()
+                    }];
+                    ban_data.push(temp);
+                };
+                console.log(ban_data);
+                return false;
+                formData.append('Ban',ban_data);
+            }
 			formData.append('ChangeOrderID',value);
         	processPass(formData,this_index);
         },
@@ -1180,4 +1245,37 @@ function batchPrint(data,value,operation){
             noPass(value,'');
         }
     })
+}
+
+// 目前只适用于加减法 浮点小数加减法
+function numberMethod(number1,number2,method){
+    if(number1 == '' || number1 == ' '){
+        number1 = "0";
+    }
+    if(number2 == '' || number2 == ' '){
+        number2 = "0";
+    }
+    var array_1 = number1.split('.');
+    var array_2 = number2.split('.');
+    var number = 0;
+    var multiple = 0;
+    var dot_diff_1 = 0;
+    var dot_diff_2 = 0;
+    array_1[1] = (array_1[1] == undefined ? '0' : array_1[1]);
+    array_2[1] = (array_2[1] == undefined ? '0' : array_2[1]);
+    if(array_1[1].length > array_2[1].length){
+        multiple = array_1[1].length;
+        dot_diff_2 = array_1[1].length - array_2[1].length;
+    }else{
+        multiple = array_2[1].length;
+        dot_diff_1 = array_2[1].length - array_1[1].length;
+    }
+    number1 = parseFloat(array_1[0].replace('-','')) * Math.pow(10,multiple)+parseFloat(array_1[1]) * Math.pow(10,dot_diff_1);
+    number2 = parseFloat(array_2[0].replace('-','')) * Math.pow(10,multiple)+parseFloat(array_2[1]) * Math.pow(10,dot_diff_2);
+    if(method == '+'){
+        number = (number1 + number2)/Math.pow(10,multiple);
+    }else if(method == '-'){
+        number = (number1 - number2)/Math.pow(10,multiple);
+    }
+    return number;
 }

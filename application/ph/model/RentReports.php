@@ -61,7 +61,7 @@ class RentReports extends Model
             ->select();
 
         //从租金订单表中,获取规定、已缴、欠缴、应缴租金
-        $rentData = Db::name('rent_order')->field('UseNature,OwnerType,InstitutionID,count(HouseID) as HouseIDs,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents')
+        $rentData = Db::name('rent_order')->field('UseNature,OwnerType,InstitutionID,count(HouseID) as HouseIDs,sum(CutRent) as CutRents,sum(ReceiveRent) as ReceiveRents,sum(PaidRent) as PaidRents,sum(UnpaidRent) as UnpaidRents,sum(DiffRent) as DiffRents,sum(PumpCost) as PumpCosts')
             ->where(['OrderDate'=>$arr1])
             ->group('UseNature,OwnerType,InstitutionID')
             ->select();
@@ -133,6 +133,8 @@ class RentReports extends Model
                 'ReceiveRents' => $v1['ReceiveRents'],
                 'PaidRents' => $v1['PaidRents'],
                 'UnpaidRents' => $v1['UnpaidRents'],
+                'DiffRents' => $v1['DiffRents'],
+                'PumpCosts' => $v1['PumpCosts']
             ];
         }
 
@@ -249,6 +251,8 @@ class RentReports extends Model
                             'ReceiveRents' => 0,
                             'PaidRents' => 0,
                             'UnpaidRents' => 0,
+                            'DiffRents' => 0,
+                            'PumpCosts' => 0,
                         ];
                     }
                     if(!isset($housedata[$owner][$i][$j])){
@@ -548,6 +552,42 @@ class RentReports extends Model
                 $result[$owners][$j][8][14] = $result[$owners][$j][0][14] + $result[$owners][$j][1][14];
                 $result[$owners][$j][8][15] = $result[$owners][$j][0][15] + $result[$owners][$j][1][15];
                 array_unshift($result[$owners][$j][8],array_sum($result[$owners][$j][8]) - $result[$owners][$j][8][1] - $result[$owners][$j][8][2] - $result[$owners][$j][8][3]);
+
+                //规定租金那一行 = 上期结转 + 基数异动合计
+                $result[$owners][$j][30][1] = $rentdata[$owners][2][$j]['DiffRents'];
+                $result[$owners][$j][30][2] = 0;
+                $result[$owners][$j][30][3] = 0;
+                $result[$owners][$j][30][4] = 0;
+                $result[$owners][$j][30][5] = 0;
+                $result[$owners][$j][30][6] = 0;
+                $result[$owners][$j][30][7] = 0;
+                $result[$owners][$j][30][8] = 0;
+                $result[$owners][$j][30][9] = 0;
+                $result[$owners][$j][30][10] = $rentdata[$owners][3][$j]['DiffRents'];
+                $result[$owners][$j][30][11] = 0;
+                $result[$owners][$j][30][12] = 0;
+                $result[$owners][$j][30][13] = $rentdata[$owners][1][$j]['DiffRents'];
+                $result[$owners][$j][30][14] = 0;
+                $result[$owners][$j][30][15] = 0;
+                array_unshift($result[$owners][$j][30],$rentdata[$owners][2][$j]['DiffRents'] + $rentdata[$owners][3][$j]['DiffRents'] + $rentdata[$owners][1][$j]['DiffRents']);
+
+                //规定租金那一行 = 上期结转 + 基数异动合计
+                $result[$owners][$j][31][1] = $rentdata[$owners][2][$j]['PumpCosts'];
+                $result[$owners][$j][31][2] = 0;
+                $result[$owners][$j][31][3] = 0;
+                $result[$owners][$j][31][4] = 0;
+                $result[$owners][$j][31][5] = 0;
+                $result[$owners][$j][31][6] = 0;
+                $result[$owners][$j][31][7] = 0;
+                $result[$owners][$j][31][8] = 0;
+                $result[$owners][$j][31][9] = 0;
+                $result[$owners][$j][31][10] = $rentdata[$owners][3][$j]['PumpCosts'];
+                $result[$owners][$j][31][11] = 0;
+                $result[$owners][$j][31][12] = 0;
+                $result[$owners][$j][31][13] = $rentdata[$owners][1][$j]['PumpCosts'];
+                $result[$owners][$j][31][14] = 0;
+                $result[$owners][$j][31][15] = 0;
+                array_unshift($result[$owners][$j][31],$rentdata[$owners][2][$j]['PumpCosts'] + $rentdata[$owners][3][$j]['PumpCosts'] + $rentdata[$owners][1][$j]['PumpCosts']);
 
 
                 //减免，取得是异动里面的减免金额

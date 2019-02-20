@@ -81,30 +81,78 @@
     </div>
 
 
-    <div class="am-form-group am-u-sm-12 rent_reduction">
+    <div class="am-form-group am-u-sm-12">
       <h2 class="label_title">注销信息：</h2>
     </div>
     <div class="am-form-group am-u-sm-12">
-      <div class="am-u-sm-12">
-        <table class="am-table am-table-striped am-table-hover am-table-centered am-table-compact overflow_tbody" style="border:1px solid #ccc;">
-            <thead style="display:block;">
-                <tr>
-                    <td style="width:150px;">#</td>
-                    <td style="width:150px;" class="am-hide-sm-only">楼栋编号</td>
-                    <td style="width:150px;" class="am-hide-sm-only">建筑面积/㎡</td>
-                    <td style="width:150px;" class="am-hide-sm-only">计租面积/㎡</td>
-                    <td style="width:200px;" class="am-hide-sm-only">房屋原价/元</td>
-                    <td style="width:200px;" class="am-hide-sm-only">注销租金/元</td>
-                    <td style="width:200px;" class="am-hide-sm-only">房屋地址</td>
-                </tr>
-            </thead>
-            <tbody id="cancelHouseDetail" style="height:200px;display:block;overflow-y:scroll;">
-
-
-            </tbody>
+      <style>
+          table,table tr,table tr th, table tr td { border-color:#ccc; text-align:center;}
+          #HouseDetail table input{width:100px;height:20px;margin:auto;border-radius:2px;border:1px solid #D6E2F6;}
+      </style>
+      <div class="am-u-sm-12" id="HouseDetail">
+        <table style="width:90%;border:1px solid #ccc;margin-left:5%;" border="1">
+          <thead>
+            <tr>
+              <th>楼栋编号</th>
+              <th>异动状态</th>
+              <th>规定租金</th>
+              <th>使用面积</th>
+              <th>建筑面积</th>
+              <th>房屋原价</th>
+            </tr>
+          </thead>
+          <tbody id="cancelBanAdd">
+            <tr>
+              <td rowspan="3"></td>
+              <td>异动前</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>异动中</td>
+              <td><input class="input_1" disabled /></td>
+              <td><input class="input_2" disabled /></td>
+              <td><input class="input_3" /></td>
+              <td><input class="input_4" /></td>
+            </tr>
+            <tr>
+              <td>异动后</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
+
+  <table class="cancel_BanNumber_dom" style="display:none;">
+    <tr class="pre">
+      <td rowspan="3" class="banID"></td>
+      <td>异动前</td>
+      <td class="PreRent">306.70</td>
+      <td class="BanUsearea">204.41</td>
+      <td class="TotalArea">204.41</td>
+      <td class="TotalOprice">204.41</td>
+    </tr>
+    <tr class="doing">
+      <td>异动中</td>
+          <td><input type="number" class="input_1" disabled /></td>
+          <td><input type="number" class="input_2" disabled /></td>
+          <td><input type="number" class="input_3" /></td>
+          <td><input type="number" class="input_4" /></td>
+    </tr>
+    <tr class="next">
+      <td>异动后</td>
+      <td class="result_1"></td>
+      <td class="result_2"></td>
+      <td class="result_3"></td>
+      <td class="result_4"></td>
+    </tr>
+  </table>
 
     <div class="am-u-md-12" style="padding-left:0;">
         <div class="am-form-group am-u-sm-12">

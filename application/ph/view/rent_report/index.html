@@ -70,7 +70,11 @@
             </div>
         </form>
         <div style="padding:2% 3% 2% 1%;">
+            {if(date('Ym') < 201902)}
             {include file="application/ph/view/form/rent_report.html" /}
+            {else /}
+            {include file="application/ph/view/form/rent_report_new.html" /}
+            {/if}
             {include file="application/ph/view/form/rent_report_show.html" /}
         </div>
     </div>
