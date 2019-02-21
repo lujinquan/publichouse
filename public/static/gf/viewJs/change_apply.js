@@ -1022,6 +1022,8 @@ $('#addApply').click(function() {
                             $('#cancelUnitID').text(res.data.UnitID);
                             $('#cancelFloorID').text(res.data.FloorID);
                             $('#cancelOwnerType').text(res.data.OwnerType);
+                            $("#cancelPumpCosts").text(res.data.PumpCost);
+                            $("#cancelDiffRents").text(res.data.DiffRent);
                             $('.housePrice').val('');
                             var DOM = $('.cancel_BanNumber').eq($('.cancel_BanNumber').length - 1).clone();
                             $('#addBanNumber').empty();

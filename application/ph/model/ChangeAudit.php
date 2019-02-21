@@ -876,7 +876,7 @@ class ChangeAudit extends Model
                 }
                 // 2、修改对应的楼栋底下的房屋的状态为注销
                 Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
-
+                Db::name('room')->where(['HouseID', 'eq', $changeFind['HouseID'])->setField('Status',10);
                 $str = "( 8,'".$changeFind['ChangeOrderID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", ". $deadline[0]['houseArea'] . ", ". $deadline[0]['cancelHouseUsearea'] . ", ". $deadline[0]['housePrice'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . $changeFind['OrderDate']. "," . $changeFind['CancelType'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate,CancelType) values " . rtrim($str, ','));
@@ -890,6 +890,8 @@ class ChangeAudit extends Model
       
                 //5、删除该房屋本月订单
                 Db::name('rent_order')->where(['HouseID'=> ['eq', $changeFind['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->delete();
+
+
                 break;
 
             case 9:  //房屋调整异动完成后的，系统处理
@@ -1106,7 +1108,7 @@ class ChangeAudit extends Model
     }
 
     /**
-     * 检查是否可执行当前审批 :::  注意如果当前登录账号拥有多角色，例如同时有审批流中的多个角色，程序可能会出现BUG
+     * 检查是否可执行当前审批
      * @description  当，审批流程未到此处时，或， 已审批过时
      * @author Mr.Lu
      * @return bool
