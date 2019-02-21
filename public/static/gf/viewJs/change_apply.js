@@ -1008,40 +1008,44 @@ $('#addApply').click(function() {
                 success:function(){
                    $('#cancelQueryData').on("click", function() {
                         var HouseID = $('#getcancel').val();
-                        $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
+                        $.get('/ph/Api/check_house_cancel_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
-                            console.log(res);
-                            $('#cancelUseNature').text(res.data.UseNature);
-                            $('#cancelDamageGrade').text(res.data.DamageGrade);
-                            $('#cancelHouseUsearea').text(res.data.HouseUsearea);
-                            $('#cancelLeasedArea').text(res.data.LeasedArea);
-                            $('#cancelHousePrerent').text(res.data.HousePrerent);
-                            $('#cancelTenantName').text(res.data.TenantName);
-                            $('#cancelTenantNumber').text(res.data.TenantNumber);
-                            $('#cancelTenantTel').text(res.data.TenantTel);
-                            $('#cancelUnitID').text(res.data.UnitID);
-                            $('#cancelFloorID').text(res.data.FloorID);
-                            $('#cancelOwnerType').text(res.data.OwnerType);
-                            $("#cancelPumpCosts").text(res.data.PumpCost);
-                            $("#cancelDiffRents").text(res.data.DiffRent);
-                            $('.housePrice').val('');
-                            var DOM = $('.cancel_BanNumber').eq($('.cancel_BanNumber').length - 1).clone();
-                            $('#addBanNumber').empty();
-                            for(var i = 0;i < res.data.Ban.length;i++){
-                                var ban_dom = DOM.clone().show();
-                                ban_dom.find('.banID').text(res.data.Ban[i].BanID);
-                                ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
-                                ban_dom.find('.banOwnerType').text(res.data.Ban[i].OwnerType);
-                                $('#addBanNumber').append(ban_dom);
-                            }
-                            //$('.cancel_BanNumber:eq(0)').remove();
-                            $('.cancelPrent').eq(0).val(res.data.HousePrerent);
-                            $('.cancelHouseUsearea').eq(0).val(res.data.LeasedArea);
+                            if(res.retcode == '4002'){
+                                layer.msg(res.msg);
+                            }else{
+                                //console.log(res);
+                                $('#cancelUseNature').text(res.data.UseNature);
+                                $('#cancelDamageGrade').text(res.data.DamageGrade);
+                                $('#cancelHouseUsearea').text(res.data.HouseUsearea);
+                                $('#cancelLeasedArea').text(res.data.LeasedArea);
+                                $('#cancelHousePrerent').text(res.data.HousePrerent);
+                                $('#cancelTenantName').text(res.data.TenantName);
+                                $('#cancelTenantNumber').text(res.data.TenantNumber);
+                                $('#cancelTenantTel').text(res.data.TenantTel);
+                                $('#cancelUnitID').text(res.data.UnitID);
+                                $('#cancelFloorID').text(res.data.FloorID);
+                                $('#cancelOwnerType').text(res.data.OwnerType);
+                                $("#cancelPumpCosts").text(res.data.PumpCost);
+                                $("#cancelDiffRents").text(res.data.DiffRent);
+                                $('.housePrice').val('');
+                                var DOM = $('.cancel_BanNumber').eq($('.cancel_BanNumber').length - 1).clone();
+                                $('#addBanNumber').empty();
+                                for(var i = 0;i < res.data.Ban.length;i++){
+                                    var ban_dom = DOM.clone().show();
+                                    ban_dom.find('.banID').text(res.data.Ban[i].BanID);
+                                    ban_dom.find('.HouseAdress').text(res.data.Ban[i].BanAddress);
+                                    ban_dom.find('.banOwnerType').text(res.data.Ban[i].OwnerType);
+                                    $('#addBanNumber').append(ban_dom);
+                                }
+                                //$('.cancel_BanNumber:eq(0)').remove();
+                                $('.cancelPrent').eq(0).val(res.data.HousePrerent);
+                                $('.cancelHouseUsearea').eq(0).val(res.data.LeasedArea);
 
-                            $('.houseArea').on('input propertychange',function(){
-                                var number = parseFloat(res.data.TotalOprice)/parseFloat(res.data.TotalArea)*parseFloat($(this).val());
-                                $('.housePrice').val(number.toFixed(2));
-                            });
+                                $('.houseArea').on('input propertychange',function(){
+                                    var number = parseFloat(res.data.TotalOprice)/parseFloat(res.data.TotalArea)*parseFloat($(this).val());
+                                    $('.housePrice').val(number.toFixed(2));
+                                }); 
+                            }
                         });
                     });
                     new file({

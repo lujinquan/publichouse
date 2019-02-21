@@ -39,7 +39,7 @@ class Admin extends Controller
             $orderid = $v['HouseID'].$v['OwnerType'].'201701';
             $str .= "('" . $orderid . "','". $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
             $str .= "," . $v['ArrearRent'] . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'];
-            $str .= ",1," . $v['ArrearRent'] . "," . $v['ArrearRent'] . ",201701,2," . time() . "),";
+            $str .= ",1," . $v['ArrearRent'] . "," . $v['ArrearRent'] . ",201712,2," . time() . "),";
 
         }
 
