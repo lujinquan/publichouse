@@ -1038,7 +1038,9 @@ $('#addApply').click(function() {
                                     $('#addBanNumber').append(ban_dom);
                                 }
                                 //$('.cancel_BanNumber:eq(0)').remove();
-                                $('.cancelPrent').eq(0).val(res.data.HousePrerent);
+                                var housePrerent = parseFloat(res.data.HousePrerent) + parseFloat(res.data.PumpCost) + parseFloat(res.data.DiffRent);
+                                console.log(housePrerent);
+                                $('.cancelPrent').eq(0).val(housePrerent);
                                 $('.cancelHouseUsearea').eq(0).val(res.data.LeasedArea);
 
                                 $('.houseArea').on('input propertychange',function(){
