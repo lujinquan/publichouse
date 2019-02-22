@@ -876,7 +876,7 @@ class ChangeAudit extends Model
                 }
                 // 2、修改对应的楼栋底下的房屋的状态为注销
                 Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
-                Db::name('room')->where(['HouseID', 'eq', $changeFind['HouseID'])->setField('Status',10);
+                Db::name('room')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status',10);
                 $str = "( 8,'".$changeFind['ChangeOrderID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", ". $deadline[0]['houseArea'] . ", ". $deadline[0]['cancelHouseUsearea'] . ", ". $deadline[0]['housePrice'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . $changeFind['OrderDate']. "," . $changeFind['CancelType'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate,CancelType) values " . rtrim($str, ','));
