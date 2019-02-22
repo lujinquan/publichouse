@@ -239,7 +239,7 @@ $('.BtnApprove').click(function(){
         	$('.cancelUnitID').text(res.data.detail.UnitID);
         	$('.cancelFloorID').text(res.data.detail.FloorID);
             $('.cancelDiffRent').text(res.data.detail.DiffRent);
-            $('.CancelPumpCost').text(res.data.detail.PumpCost);
+            $('.cancelPumpCost').text(res.data.detail.PumpCost);
         	$('.Remark').text(res.data.detail.Remark);
         	$('.cancelCreateTime').text(res.data.detail.OrderCreateTime);
         	var house_str = '';
