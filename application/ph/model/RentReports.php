@@ -69,7 +69,7 @@ class RentReports extends Model
 
 
         //从房屋表中分组获取年度欠租、租差
-        $houseData = Db::name('house')->field('UseNature,OwnerType,InstitutionID ,count(HouseID) as HouseIDs,sum(ArrearRent) as ArrearRents ,sum(DiffRent) as DiffRents,sum(HousePrerent) as HousePrerents')
+        $houseData = Db::name('house')->field('UseNature,OwnerType,InstitutionID ,count(HouseID) as HouseIDs,sum(ArrearRent) as ArrearRents ,sum(DiffRent) as DiffRents,sum(PumpCost) as PumpCosts,sum(HousePrerent) as HousePrerents')
             ->group('UseNature,OwnerType,InstitutionID')
             ->where('Status',1)
             ->select();
@@ -145,6 +145,7 @@ class RentReports extends Model
                 'HousePrerents' => $v2['HousePrerents'],
                 'ArrearRents' => $v2['ArrearRents'],
                 'DiffRents' => $v2['DiffRents'],
+                'PumpCosts' => $v2['PumpCosts'],
             ];
         }
 
@@ -261,6 +262,7 @@ class RentReports extends Model
                             'HousePrerents' => 0,
                             'ArrearRents' => 0,
                             'DiffRents' => 0,
+                            'PumpCosts' => 0,
                         ];
                     }
                     if(!isset($rentOldMonthdata[$owner][$i][$j])){
@@ -554,7 +556,7 @@ class RentReports extends Model
                 array_unshift($result[$owners][$j][8],array_sum($result[$owners][$j][8]) - $result[$owners][$j][8][1] - $result[$owners][$j][8][2] - $result[$owners][$j][8][3]);
 
                 //规定租金那一行 = 上期结转 + 基数异动合计
-                $result[$owners][$j][30][1] = $rentdata[$owners][2][$j]['DiffRents'];
+                $result[$owners][$j][30][1] = $housedata[$owners][2][$j]['DiffRents'];
                 $result[$owners][$j][30][2] = 0;
                 $result[$owners][$j][30][3] = 0;
                 $result[$owners][$j][30][4] = 0;
@@ -563,16 +565,16 @@ class RentReports extends Model
                 $result[$owners][$j][30][7] = 0;
                 $result[$owners][$j][30][8] = 0;
                 $result[$owners][$j][30][9] = 0;
-                $result[$owners][$j][30][10] = $rentdata[$owners][3][$j]['DiffRents'];
+                $result[$owners][$j][30][10] = $housedata[$owners][3][$j]['DiffRents'];
                 $result[$owners][$j][30][11] = 0;
                 $result[$owners][$j][30][12] = 0;
-                $result[$owners][$j][30][13] = $rentdata[$owners][1][$j]['DiffRents'];
+                $result[$owners][$j][30][13] = $housedata[$owners][1][$j]['DiffRents'];
                 $result[$owners][$j][30][14] = 0;
                 $result[$owners][$j][30][15] = 0;
-                array_unshift($result[$owners][$j][30],$rentdata[$owners][2][$j]['DiffRents'] + $rentdata[$owners][3][$j]['DiffRents'] + $rentdata[$owners][1][$j]['DiffRents']);
+                array_unshift($result[$owners][$j][30],$housedata[$owners][2][$j]['DiffRents'] + $housedata[$owners][3][$j]['DiffRents'] + $housedata[$owners][1][$j]['DiffRents']);
 
                 //规定租金那一行 = 上期结转 + 基数异动合计
-                $result[$owners][$j][31][1] = $rentdata[$owners][2][$j]['PumpCosts'];
+                $result[$owners][$j][31][1] = $housedata[$owners][2][$j]['PumpCosts'];
                 $result[$owners][$j][31][2] = 0;
                 $result[$owners][$j][31][3] = 0;
                 $result[$owners][$j][31][4] = 0;
@@ -581,13 +583,13 @@ class RentReports extends Model
                 $result[$owners][$j][31][7] = 0;
                 $result[$owners][$j][31][8] = 0;
                 $result[$owners][$j][31][9] = 0;
-                $result[$owners][$j][31][10] = $rentdata[$owners][3][$j]['PumpCosts'];
+                $result[$owners][$j][31][10] = $housedata[$owners][3][$j]['PumpCosts'];
                 $result[$owners][$j][31][11] = 0;
                 $result[$owners][$j][31][12] = 0;
-                $result[$owners][$j][31][13] = $rentdata[$owners][1][$j]['PumpCosts'];
+                $result[$owners][$j][31][13] = $housedata[$owners][1][$j]['PumpCosts'];
                 $result[$owners][$j][31][14] = 0;
                 $result[$owners][$j][31][15] = 0;
-                array_unshift($result[$owners][$j][31],$rentdata[$owners][2][$j]['PumpCosts'] + $rentdata[$owners][3][$j]['PumpCosts'] + $rentdata[$owners][1][$j]['PumpCosts']);
+                array_unshift($result[$owners][$j][31],$housedata[$owners][2][$j]['PumpCosts'] + $housedata[$owners][3][$j]['PumpCosts'] + $housedata[$owners][1][$j]['PumpCosts']);
 
 
                 //减免，取得是异动里面的减免金额
