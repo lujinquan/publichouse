@@ -39,10 +39,8 @@
                 <th class="table-author am-hide-sm-only">机构</th>
                 <?php }; ?>
         				<th class="table-date am-hide-sm-only">联系电话</th>
+                <th class="table-date am-hide-sm-only">身份证号</th>
         				<th class="table-set">余额</th>
-         				<th class="table-set">欠租情况</th>
-        				<th class="table-set dong_none">诚信分</th>
-        				<th class="table-set dong_none">微信号</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -127,6 +125,18 @@
         				  <input name="TenantTel" type="text" class="am-form-field" value="{$TenantTel}">
         				</div>
         			  </td>
+                <td class="dong_none">
+                    <div class="am-input-group am-input-group-sm">
+                    <?php
+                        if($tenantOption != array()){
+                            $TenantNumber = $tenantOption['TenantNumber'];
+                        }else{
+                            $TenantNumber = '';
+                        }
+                     ?>
+                        <input name="TenantNumber" type="text" class="am-form-field" value="{$TenantNumber}">
+                    </div>
+                </td>
                   <td>
             				<div class="am-input-group am-input-group-sm">
                              <?php
@@ -139,44 +149,6 @@
             				  <input name="TenantBalance" type="text" class="am-form-field" value="{$TenantBalance}">
             				</div>
           			  </td>
-                <td>
-                  <div class="am-input-group am-input-group-sm">
-                      <?php
-                        if($tenantOption != array()){
-                            $ArrearRent = $tenantOption['ArrearRent'];
-                        }else{
-                            $ArrearRent = '';
-                        }
-                     ?>
-                      <input name="ArrearRent" type="text" class="am-form-field" value="{$ArrearRent}">
-                  </div>
-  			        </td>
-                <td class="dong_none">
-                    <div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantValue = $tenantOption['TenantValue'];
-                        }else{
-                            $TenantValue = '';
-                        }
-                     ?>
-                        <input name="TenantValue" type="text" class="am-form-field" value="{$TenantValue}">
-                    </div>
-
-                </td>
-                <td class="dong_none">
-                    <div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($tenantOption != array()){
-                            $TenantWeChat = $tenantOption['TenantWeChat'];
-                        }else{
-                            $TenantWeChat = '';
-                        }
-                     ?>
-                        <input name="TenantWeChat" type="text" class="am-form-field"  value="{$TenantWeChat}">
-                    </div>
-
-                </td>
                 
 			         <td>
                 <div class="am-btn-group am-btn-group-xs" style="width:114px;">
@@ -203,10 +175,9 @@
                 <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
                 <?php }; ?>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantTel']; ?></td>
+                <td class="dong_none"><?php echo $v1['TenantNumber']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v1['TenantBalance']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v1['ArrearRent']; ?></td>
-                <td class="dong_none"><?php echo $v1['TenantValue']; ?></td>
-                <td class="dong_none"><?php echo $v1['TenantWeChat']; ?></td>
+                
         			  <td>
         				  <div class="am-btn-group am-btn-group-xs">
                                 <?php if(in_array(57,$threeMenu)){ ; ?>

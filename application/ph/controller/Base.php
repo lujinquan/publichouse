@@ -52,6 +52,7 @@ class Base extends Controller
         $lastLoginTime = Db::name('admin_user')->where('Number',UID)->value('LastLoginTime');
         if($userBaseInfo['last_login_time'] < $lastLoginTime){ 
             return $this->success('您的账号于'.date('Y年m月d日 H时i分s秒',$lastLoginTime).'在另一个地方登录……','User/Publics/signin?flag=1','',5);
+            //return $this->redirect('/templates/jump.html',['lastLoginTime'=>$lastLoginTime]);
         }
 
         $useRoles = json_decode(session('user_base_info.role'),true); //当前用户的角色数组

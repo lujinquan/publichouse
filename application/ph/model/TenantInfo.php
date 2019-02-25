@@ -32,42 +32,26 @@ class TenantInfo extends Model
     public function get_all_tenant_lst($status = 0)
     {
         $currentUserInstitutionID = session('user_base_info.institution_id');
-
         $currentUserLevel = session('user_base_info.institution_level');
-
         $where['Status'] = array('eq' ,$status);
-
         if($currentUserLevel == 3){  //用户为管段级别，则直接查询
-
             $where['InstitutionID'] = array('eq' ,$currentUserInstitutionID);
-
         }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-
             $where['InstitutionPID'] = array('eq' ,$currentUserInstitutionID);
-
         }else{    //用户为公司级别，则获取所有子管段
-
         }
-
         $TenantID = input('TenantID');
-
         if($TenantID){  //接收查看房屋跳转，传递进来的BankID参数
             //dump($BankID);exit;
             $where['TenantID'] = array('eq',$TenantID);
         }
-
         $TenantIdList['option'] =array();
-
         $searchForm = input('request.');
-
         foreach ($searchForm as &$val) { //去收尾空格
             $val = trim($val);
         }
-
         if(isset($searchForm['TenantID'])){
-
-            $TenantIdList['option'] = $searchForm;
-            
+            $TenantIdList['option'] = $searchForm;    
             if (isset($searchForm['TubulationID']) && $searchForm['TubulationID']) {   //检索机构
 
                 $level = Db::name('institution')->where('id','eq',$searchForm['TubulationID'])->value('Level');
@@ -91,60 +75,21 @@ class TenantInfo extends Model
             if ($searchForm['TenantBalance']) {  //模糊检索租户金额
                 $where['TenantBalance'] = array('like', '%'.$searchForm['TenantBalance'].'%');
             }
-            if ($searchForm['ArrearRent']) {  //模糊检索租户欠租情况
-                $where['ArrearRent'] = array('like', '%'.$searchForm['ArrearRent'].'%');
+            if ($searchForm['TenantNumber']) {  //模糊检索租户欠租情况
+                $where['TenantNumber'] = array('like', '%'.$searchForm['TenantNumber'].'%');
             }
-            if ($searchForm['TenantValue']) {  //模糊检索租户诚信分
-                $where['TenantValue'] = array('like', '%'.$searchForm['TenantValue'].'%');
-            }
-            // if ($searchForm['TenantQQ']) {  //模糊检索租户QQ号
-            //     $where['TenantQQ'] = array('like', '%'.$searchForm['TenantQQ'].'%');
-            // }
-            if ($searchForm['TenantWeChat']) {  //模糊检索租户微信号
-                $where['TenantWeChat'] = array('like', '%'.$searchForm['TenantWeChat'].'%');
-            }
-            // if ($searchForm['BankID']) {  //模糊检索租户银行卡号
-            //     $where['BankID'] = array('like', '%'.$searchForm['BankID'].'%');
-            // }
-
-//            if($searchForm['LesseeDateStart'] && $searchForm['LesseeDateEnd']){  //检索大于等于起始时间，且小于等于结束时间
-//                $start = strtotime($searchForm['LesseeDateStart']);
-//                $end = strtotime($searchForm['LesseeDateEnd']);
-//                //dump($start);dump($end);exit;
-//                if($start < $end){
-//                    $where['LesseeDate'] = array('between',$start.",".$end);
-//                }
-//            }
-//
-//            if($searchForm['LesseeDateStart'] && empty($searchForm['LesseeDateEnd'])){ //检索大于等于起始时间
-//                $start = strtotime($searchForm['LesseeDateStart']);
-//                //dump($start);exit;
-//                $where['LesseeDate'] = array('egt',$start);
-//            }
-//
-//            if($searchForm['LesseeDateEnd'] && empty($searchForm['LesseeDateStart'])){ //检索小于等于结束时间
-//                $end = strtotime($searchForm['LesseeDateEnd']);
-//                $where['LesseeDate'] = array('elt',$end);
-//            }
 
         }
 
         if(!isset($where)){
             $where = 1;
         }
-
+//halt($where);
         $TenantIdList['obj'] = self::field('TenantID')->where($where)->order('TenantID desc')->paginate(config('paginate.list_rows'));
-
-        //dump(TenantInfo::getLastSql());exit;
-
         $arr = $TenantIdList['obj']->all();
-
         if(!$arr){
             $TenantIdList['arr'] = array();
         }
-
-        //dump($TenantIdList);exit;
-
         foreach($arr as $v){
             $TenantIdList['arr'][] = self::get_one_tenant_base_info($v['TenantID']);
         }
@@ -155,7 +100,7 @@ class TenantInfo extends Model
     public function get_one_tenant_base_info($tenantid = '',$map=''){
 
         //租户编号，租户姓名，联系电话 ，余额，欠租情况 ，诚信分 ，微信号 ，QQ号 ，银行卡账号
-        if(!$map) $map = 'TenantID,TenantName,InstitutionID,InstitutionPID,TenantTel,TenantBalance,ArrearRent ,TenantValue,TenantWeChat,TenantQQ,BankID ';
+        if(!$map) $map = 'TenantID,TenantName,InstitutionID,InstitutionPID,TenantTel,TenantBalance,TenantValue,TenantWeChat,TenantQQ,BankID,TenantNumber ';
 
         $data = Db::name('tenant')->field($map)->where('TenantID','eq',$tenantid)->find();
 
@@ -171,18 +116,12 @@ class TenantInfo extends Model
     }
 
     public function get_one_tenant_detail_info($tenantid = ''){
-
-        //租户id ,租户名称 ，租户电话 ，年龄 ，性别 ，余额 ，欠租情况 ，身份证号码 ，银行名称 ，银行卡号 ，qq号 ，微信号 ，诚信值 ,登记时间 ，登记人ID ，最后更新时间
-        // $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID ,  TenantQQ , TenantWeChat , TenantValue ,CreateTime ,CreateUserID ,UpdateTime';
-
-        $data = self::where('TenantID',$tenantid)->find();;
-//halt($data);
+        $data = self::where('TenantID',$tenantid)->find();
         if($data['TenantSex'] === 1){
             $data['TenantSex'] = '男';
         }else{
             $data['TenantSex'] = '女';
         }
-
         return $data;
     }
 
