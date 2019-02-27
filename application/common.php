@@ -719,12 +719,17 @@ function count_house_rent($houseid){
         $sumrent = 0;
     }
     //halt($sumrent);
-    $find = Db::name('house')->field('PlusRent,ProtocolRent,DiffRent,UseNature')->where('HouseID',$houseid)->find();
-    //PlusRent加计租金（面盆浴盆，5米以上，5米以下什么的），DiffRent租差，ProtocolRent协议租金
-    $houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
+    $find = Db::name('house')->field('PlusRent,ProtocolRent,DiffRent,UseNature,BanID,HousePrerent')->where('HouseID',$houseid)->find();
+    if($find['BanID'] == '1050053295'){
+        return $find['HousePrerent'];
+    }else{
+        //PlusRent加计租金（面盆浴盆，5米以上，5米以下什么的），DiffRent租差，ProtocolRent协议租金
+        $houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
 
-    // 民用的四舍五入保留一位，机关企业的四舍五入保留两位 
-    return ($find['UseNature'] == 1)?round($houseRent,1):round($houseRent,2);
+        // 民用的四舍五入保留一位，机关企业的四舍五入保留两位 
+        return ($find['UseNature'] == 1)?round($houseRent,1):round($houseRent,2); 
+    }
+
 }
 
 /**
@@ -736,30 +741,35 @@ function count_house_rent($houseid){
 function count_room_rent($roomid , $houseid = ''){
 
     //初始数据
-    $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RentPoint,RoomType,UseNature,FloorID,BanID,RoomPublicStatus')->find();
+    $roomOne = Db::name('room')->where('RoomID',$roomid)->field('LeasedArea,RoomPrerent,RentPoint,RoomType,UseNature,FloorID,BanID,RoomPublicStatus')->find();
     
     if($roomOne['RoomPublicStatus'] > 2){ //三户共用直接无租金
         return 0.5;
     }
 
-    $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
+    if($roomOne['BanID'] == '1050053295'){ //如果是新华村5栋的楼，则单独处理
+        return $roomOne['RoomPrerent'];
+    }else{
+        $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
 
-    // 层次调解率，与居住层，有无电梯，楼栋总层数有关
-    $floorPoint = get_floor_point($roomOne['FloorID'], $banOne['BanFloorNum'], $banOne['IfElevator']);
-    // 结构基价
-    $structureTypePoint = get_structure_type_point($banOne['StructureType']);
-    // 房间的架空率，与楼栋是否一层为架空层有关
-    $emptyPoint = $banOne['IfFirst']?0.98:1;
-    // 处理两户共用，一户比另一户多1毛钱租金的情况
-    if($houseid){
-        $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
-        if($roomRent){
-            $roomOne['LeasedArea'] = $roomRent;
+        // 层次调解率，与居住层，有无电梯，楼栋总层数有关
+        $floorPoint = get_floor_point($roomOne['FloorID'], $banOne['BanFloorNum'], $banOne['IfElevator']);
+        // 结构基价
+        $structureTypePoint = get_structure_type_point($banOne['StructureType']);
+        // 房间的架空率，与楼栋是否一层为架空层有关
+        $emptyPoint = $banOne['IfFirst']?0.98:1;
+        // 处理两户共用，一户比另一户多1毛钱租金的情况
+        if($houseid){
+            $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
+            if($roomRent){
+                $roomOne['LeasedArea'] = $roomRent;
+            }
         }
+        //dump('计租面积：'.$roomOne['LeasedArea'].',基价折减率：'.$roomOne['RentPoint'].',结构基价：'.$structureTypePoint.',架空率：'.$emptyPoint.',层次调解率'.$floorPoint."。公式：".'('.$roomOne['LeasedArea'].'*('.$roomOne['RentPoint'].'*'.$structureTypePoint.')'.'*'.$emptyPoint.'*'.$floorPoint.')');
+        // 计算租金= 计租面积（使用面积，房间类型，是否共用） * 基价折减率（有无上下水这种折减） * 结构基价  *  架空率 * 层次调解率
+        return round($roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint,2); 
     }
-    //dump('计租面积：'.$roomOne['LeasedArea'].',基价折减率：'.$roomOne['RentPoint'].',结构基价：'.$structureTypePoint.',架空率：'.$emptyPoint.',层次调解率'.$floorPoint."。公式：".'('.$roomOne['LeasedArea'].'*('.$roomOne['RentPoint'].'*'.$structureTypePoint.')'.'*'.$emptyPoint.'*'.$floorPoint.')');
-    // 计算租金= 计租面积（使用面积，房间类型，是否共用） * 基价折减率（有无上下水这种折减） * 结构基价  *  架空率 * 层次调解率
-    return round($roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint,2);
+    
 }
 
 function get_floor_point($liveFloor,$BanFloorNum,$ifElevator){
