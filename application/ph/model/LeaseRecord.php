@@ -87,7 +87,7 @@ class LeaseRecord extends Model
 
         }
 
-        //halt($ChangeList['arr']);
+        //halt($ChangeList['option']);
         return $ChangeList;
     }
 

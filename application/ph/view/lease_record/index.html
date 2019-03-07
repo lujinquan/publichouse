@@ -170,8 +170,8 @@
                      
                     <select name="Status">
                         <option value="" style="display:none">请选择</option>
-                        <option value="1" {if(isset($leaseOption['Status']) && $leaseOption['Status'])}selected{/if}>成功</option>
-                        <option value="0" {if(isset($leaseOption['Status']) && !$leaseOption['Status'])}selected{/if}>失败</option>
+                        <option value="1" {if(isset($leaseOption['Status']) && $leaseOption['Status'] ==='1')}selected{/if}>成功</option>
+                        <option value="0" {if(isset($leaseOption['Status']) && $leaseOption['Status'] === '0')}selected{/if}>失败</option>
                     </select>
                   </div>
               </td>
