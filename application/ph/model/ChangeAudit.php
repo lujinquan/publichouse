@@ -713,15 +713,20 @@ class ChangeAudit extends Model
                      '11' => $year.'11',
                      '12' => $year.'12',
                     ];
-                    // foreach($e as $v){
-                    //     Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>$arr[$v]])->update([
-                    //             'PaidRent' => ['exp','ReceiveRent'],
-                    //             'UnpaidRent' => 0,
-                    //             'Type' => 3,
-                    //     ]);
-                    // }    
+
+
+                    foreach($e as $v){
+                        // Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>$arr[$v]])->update([
+                        //         'PaidRent' => ['exp','ReceiveRent'],
+                        //         'UnpaidRent' => 0,
+                        //         'Type' => 3,
+                        // ]);
+                        Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>$arr[$v]])->delete();
+                    }    
                 }
-                Db::name('house')->where('HouseID',$one['HouseID'])->setDec('ArrearRent',$one['OldYearRent']);
+                Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>['<',date('Y').'00']])->delete();
+                //Db::name('house')->where('HouseID',$one['HouseID'])->setDec('ArrearRent',$one['OldYearRent']);
+                
 
                 $str = "( 4,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " . $one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
 

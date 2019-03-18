@@ -204,8 +204,8 @@ class ChangeApply extends Model
                     }
                     if($data['oldCancelYearBefore']){
                         $v= Db::name('rent_order')->where(['HouseID'=>$data['HouseID'],'OrderDate'=>['<',date('Y').'00']])->sum('UnpaidRent');
-                        if($data['oldCancelYearBefore'] > $v){
-                          return jsons('4000','年度核销金额超出欠缴金额');  
+                        if($data['oldCancelYearBefore'] != $v){
+                          return jsons('4000','年度核销金额与以前年欠缴金额不等');  
                         }
                     }
                     $findwhere = [
