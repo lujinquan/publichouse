@@ -156,7 +156,7 @@ class Api extends Controller
 
     }
 
-        public function get_house_info()
+    public function get_house_info()
     {
 
         $houseID = input('HouseID');
@@ -192,7 +192,16 @@ class Api extends Controller
         $begin = date('Y',time()).'00';
         $now = date('Ym',strtotime('-1 month'));
         $data['Room'] = Db::name('rent_order')->where(['OrderDate'=>['between',[$begin,$now]],'HouseID'=>$houseID,'Type'=>2])->field('OrderDate,UnpaidRent')->select();
-
+        $dataYear = Db::name('rent_order')->where(['OrderDate'=>['<',$begin],'HouseID'=>$houseID,'Type'=>2])->field('OrderDate,UnpaidRent')->select();
+        $i = 0;
+        foreach($dataYear as $v){
+   
+                $i += $v['UnpaidRent'];
+            
+            
+        }
+        //halt($i);
+        $data['ArrearRent'] = $i;
         if($arr){
             $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.AreaFour as BanAddress,a.PreRent,a.TotalArea,a.BanUsearea,a.TotalOprice,b.OwnerType')->select();
 
