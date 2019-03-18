@@ -203,7 +203,7 @@ class ChangeApply extends Model
                         return jsons('4000','请选择核销项');
                     }
                     if($data['oldCancelYearBefore']){
-                        $v= Db::name('house')->where('HouseID',$data['HouseID'])->value('ArrearRent');
+                        $v= Db::name('rent_order')->where(['HouseID'=>$data['HouseID'],'OrderDate'=>['<',date('Y').'00']])->sum('UnpaidRent');
                         if($data['oldCancelYearBefore'] > $v){
                           return jsons('4000','年度核销金额超出欠缴金额');  
                         }
