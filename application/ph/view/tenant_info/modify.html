@@ -63,7 +63,7 @@
 			<div class="am-form-group am-u-md-12">
 			  <label class="label_style">租户姓名：</label>
 				<div class="am-u-md-8">
-					<input type="text" readonly name="TenantName" id="TenantNam" placeholder="租户姓名" required/>
+					<input type="text" {if condition="session('user_base_info.institution_level') ==3"}readonly{/if} name="TenantName" id="TenantNam" placeholder="租户姓名" required/>
 				</div>
 				<i style="font-style: normal; color:red; vertical-align: middle;">*</i>
 			</div>

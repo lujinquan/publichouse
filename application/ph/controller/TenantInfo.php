@@ -124,9 +124,11 @@ class TenantInfo extends Base
                     $allData[$k1]['name'] = config($k1);
                 }
             }
-            $data['InstitutionID'] = session('user_base_info.institution_id');
-            $data['InstitutionPID'] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('pid');
-
+            if(session('user_base_info.institution_level') ==3){
+                $data['InstitutionID'] = session('user_base_info.institution_id');
+                $data['InstitutionPID'] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('pid');
+            }
+        
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
             if ($res >0 || $res===0 ) {
 
