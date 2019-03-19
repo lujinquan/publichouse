@@ -63,7 +63,7 @@ class RentUnpaid extends Base
         
         foreach($orders as $v){
 
-            $PayYear = date('Y',$v['CreateTime']);
+            $PayYear = substr($v['OrderDate'],0,4);
             $OldPayMonth = date('Ym',time());
 
             $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
