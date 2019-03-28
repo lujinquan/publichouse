@@ -1,29 +1,40 @@
 $('#rentAllocation').click(function(){
+	$.get('/ph/RentCount/conf/IfPre/1',function(res){
 
-	layer.open({
-		type: 1,
-		area:['400px','400px'],
-		resize:false,
-		zIndex:100,
-		title:['租金配置','color:#FFF;font-size:1.6rem;font-weight:600;'],
-		content: $('#allocation'),
-		btn:['确定','取消'],
-		yes:function(thisIndex){
-
-			var IfPre = $('input[name="allocationChoose"]:checked').val();
-			
-			$.get('/ph/RentCount/conf/IfPre/'+IfPre,function(res){
-
-			res = JSON.parse(res);
-			if(res.retcode == 2000){
-					layer.msg(res.msg);
-					location.reload();
-					}
-			});
-			
-			layer.close(thisIndex);
-		}
+	res = JSON.parse(res);
+	if(res.retcode == 2000){
+		// layer.open({
+		// 	time: 2000,
+		// 	content: res.msg
+		// });
+			layer.msg(res.msg);
+			location.reload();
+			}
 	});
+	// layer.open({
+	// 	type: 1,
+	// 	area:['400px','400px'],
+	// 	resize:false,
+	// 	zIndex:100,
+	// 	title:['租金配置','color:#FFF;font-size:1.6rem;font-weight:600;'],
+	// 	content: $('#allocation'),
+	// 	btn:['确定','取消'],
+	// 	yes:function(thisIndex){
+
+	// 		var IfPre = $('input[name="allocationChoose"]:checked').val();
+			
+	// 		$.get('/ph/RentCount/conf/IfPre/'+IfPre,function(res){
+
+	// 		res = JSON.parse(res);
+	// 		if(res.retcode == 2000){
+	// 				layer.msg(res.msg);
+	// 				location.reload();
+	// 				}
+	// 		});
+			
+	// 		layer.close(thisIndex);
+	// 	}
+	// });
 });
 $('#rentCount').click(function(){
 	layer.confirm('计算滞纳金大概需要10分钟！',{title:'计算滞纳金',icon:'1',skin:'lan_class'},function(conIndex){

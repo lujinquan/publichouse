@@ -527,6 +527,10 @@ function get_house_info($houseID){
         $data['IfFirstName'] = $data['IfFirst']?'是':'否';
     }
 
+    $remitrent = Db::name('change_order')->where(['Status'=>1,'HouseID'=>$houseID,'ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->value('InflRent');
+    $data['RemitRent'] = $remitrent?$remitrent:0;
+    $data['ReceiveRent'] = $data['HousePrerent'] - $data['RemitRent'];
+
     $data['RoomNumbers'] = Db::name('Room')->where('HouseID','like','%'.$houseID.'%')->column('RoomID,RoomNumber');
 
     return $data?$data:array();

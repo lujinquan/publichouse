@@ -195,12 +195,10 @@ class Api extends Controller
         $dataYear = Db::name('rent_order')->where(['OrderDate'=>['<',$begin],'HouseID'=>$houseID,'Type'=>2])->field('OrderDate,UnpaidRent')->select();
         $i = 0;
         foreach($dataYear as $v){
-   
-                $i += $v['UnpaidRent'];
-            
-            
+            $i += $v['UnpaidRent'];  
         }
-        //halt($i);
+        $data['RemitRent'] = Db::name('change_order')->where(['Status'=>1,'HouseID'=>$houseID,'ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->value('InflRent');
+        $data['ReceiveRent'] = $data['HousePrerent'] - $data['RemitRent'];
         $data['ArrearRent'] = $i;
         if($arr){
             $data['Ban'] = Db::name('ban')->alias('a')->join('ban_owner_type b','a.OwnerType = b.id','left')->where('BanID','in',$arr)->field('a.BanID,a.AreaFour as BanAddress,a.PreRent,a.TotalArea,a.BanUsearea,a.TotalOprice,b.OwnerType')->select();
@@ -644,7 +642,7 @@ class Api extends Controller
                             $r['ApprovedRent'] = count_house_rent($r['HouseID']);
                             $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
 
-                            if(abs($r['Diff']) == 0.1){
+                            if(abs($r['Diff']) < 0.6){
                                 $i++;
                             }
                         }
@@ -760,7 +758,7 @@ class Api extends Controller
                 
                 $v['Diff'] = bcsub($v['ApprovedRent'],$v['HousePrerent'],2);
                 //halt($v['Diff']);
-                if(abs($v['Diff']) == 0.1){
+                if(abs($v['Diff']) < 0.6){
                     $result[] = $v;
                 }
                 

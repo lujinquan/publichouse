@@ -74,7 +74,7 @@
 			  </div>
 		</div>
 		<div class="am-u-md-2">
-			  <label for="doc-vld-email-2" class="label_style">层次：</label>
+			  <label for="doc-vld-email-2" class="label_style">居住层：</label>
 			  <div class="am-u-md-6">
 				<p class="detail_p_style RentLayer" ></p>
 			  </div>
@@ -139,8 +139,8 @@
 				<div><span class="w200">瓷砖、马赛克、地板砖</span><span class="w50 mr "><input type="text"  width="100%" class="RentCeramicd" name='AddRent[RentCeramic]'/></span>m²</div>
 				<div><span class="w200">浴盆</span><span class="w50 mr"><input type="text"  width="100%" class="RentBathd" name='AddRent[RentBath]' /></span>件</div>
 				<div><span class="w200">面盆</span><span class="w50 mr"><input type="text"  width="100%" class="RentBasind" name='AddRent[RentBasin]' /></span>件</div>
-				<div><span class="w200">空间1至1.7米(5㎡以下)</span><span class="w50 mr"><input type="text"  width="100%" class="RentBelowd" name='AddRent[RentBelow]' /></span>个</div>
-				<div><span class="w200">阁楼(含1.7米)(5㎡以上)</span><span class="w50 mr"><input type="text"  width="100%" class="RentMored" name='AddRent[RentMore]' /></span>个</div>
+				<div><span class="w200">空间1至1.7米(5㎡以下)</span><span class="w50 mr"><input type="text"  width="100%" class="RentBelowd" name='AddRent[RentBelow]' readonly="readonly"/></span>个</div>
+				<div><span class="w200">阁楼(含1.7米)(5㎡以上)</span><span class="w50 mr"><input type="text"  width="100%" class="RentMored" name='AddRent[RentMore]' readonly="readonly" /></span>个</div>
     		</div>
     		<div class="am-u-md-6">
     			<div class="am-u-md-12">
@@ -154,25 +154,23 @@
 						</select>
     				</span >
     				</div>
-    				<div class="am-u-md-6"><span class="w100">规定租金：</span><span class="w90 mr"><input type="text" class="RentPriced" name="AddRent[TypeF][RPrice]"></span></div>
+    				<div class="am-u-md-6"><span class="w100">规定租金：</span><span class="w90 mr"><input type="text" class="RentPriced" name="AddRent[TypeF][RPrice]" readonly="readonly"></span></div>
     			</div>
     			<div class="am-u-md-12">
     				<div class="am-u-md-6"><span class="w100">产别：</span>
     				<span class="w90 mr">
-    					<select name="AddRent[TypeS][OwnerType]" class="ROwnerTypeS">
+    					<select name="AddRent[TypeS][OwnerType]" class="ROwnerTypeS" readonly="readonly">
 							<option value="0">请选择</option>
-							<?php foreach($owerLst as $k7 =>$v7){;?>
-							<option value="<?php echo $v7['id']; ?>"><?php echo $v7['OwnerType']; ?></option>
-							<?php }; ?>
+							
 						</select>
     				</span>
     				</div>
-    				<div class="am-u-md-6"><span class="w100">规定租金：</span><span class="w90 mr"><input type="text" class="RentPriced" name="AddRent[TypeS][RPrice]"></span></div>
+    				<div class="am-u-md-6"><span class="w100">规定租金：</span><span class="w90 mr"><input type="text" class="RentPriced" name="AddRent[TypeS][RPrice]" readonly="readonly"></span></div>
     			</div>
     			<div class="am-u-md-12">
     				<div class="am-u-md-6"><span class="w100">计算租金：</span><span class="w90 RentApproved" name="StipulateR"></span></div>
     				<div class="am-u-md-6">
-						<span class="w100">租差：</span><span class="w90 mr"><input type="text" class="diffRentd" name='AddRent[DiffRent]'></span>
+						<span class="w100">租差：</span><span class="w90 mr"><input type="text" class="diffRentd" name='AddRent[DiffRent]' readonly="readonly"></span>
 					</div>
     			</div>
 				
@@ -181,12 +179,12 @@
 						<span class="w100">减免租金：</span><span class="w90 RentRemit"></span>
 					</div>
 					<div class="am-u-md-6">
-						<span class="w100">协议租金：</span><span class="w90 mr"><input type="text" class="agreementRentd" name='AddRent[ProtocolRent]'></span>
+						<span class="w100">协议租金：</span><span class="w90 mr"><input type="text" class="agreementRentd" name='AddRent[ProtocolRent]' readonly="readonly"></span>
 					</div>
 				</div>
 				<div class="am-u-md-12">
 					<div class="am-u-md-6">
-						<span class="w100">泵费：</span><span class="w90 mr"><input type="text" class="RentPumpd" name='AddRent[PumpPrice]'></span>
+						<span class="w100">泵费：</span><span class="w90 mr"><input type="text" class="RentPumpd" name='AddRent[PumpPrice]' readonly="readonly"></span>
 					</div>
 				</div>
 				<div class="am-u-md-12">

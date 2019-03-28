@@ -547,7 +547,7 @@ class ChangeAudit extends Model
         } elseif ($reson != '') {
 
             //终审不通过则状态改为 0
-            self::where($where)->update(['Status' => 0, 'FinishTime' => time()]);
+            self::where($where)->update(['Status' => 2, 'FinishTime' => time()]);
 
             $datas['Status'] = 3;
 
@@ -822,8 +822,8 @@ class ChangeAudit extends Model
                 model('ph/RentCount')->addOne($findOne['HouseID']);
 
                 // 插入到统计表中
-                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . ", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . $findOne['OrderDate']. ")";
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . "," . $v['HouseArea'] ."," . $v['LeasedArea'] ."," . $v['OldOprice'] .", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . $findOne['OrderDate']. ")";
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 break;
 
             case 8:  //注销异动完成后的，系统处理
@@ -963,6 +963,9 @@ class ChangeAudit extends Model
 
                 if($oneData['InflRent'] != 0){
                     $findHouse = Db::name('house')->where('HouseID',$oneData['HouseID'])->find();
+
+                    //自动更新房屋规租
+                    Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent'+$oneData['InflRent']]]);
 
                     Db::name('rent_config')->where(['HouseID'=> ['eq', $oneData['HouseID']]])->update(['HousePrerent'=>$findHouse['HousePrerent']]);
 

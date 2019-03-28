@@ -383,7 +383,7 @@ class RentCount extends Model
     /**
      *  注意，两个所，分别计算
      */
-    public function config($ifPre)
+    public function config($ifPre ,$if_return = true)
     {
 
         $institutionID = session('user_base_info.institution_id');
@@ -453,8 +453,10 @@ class RentCount extends Model
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
         Db::name('rent_config')->where(['ReceiveRent'=>0,'InstitutionID'=>$institutionID])->delete();
-
-        return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+        if($if_return){
+            return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+        }
+        
     }
 
     /**
@@ -530,19 +532,20 @@ class RentCount extends Model
         if (session('user_base_info.institution_level') != 3) {
             return jsons('4000', '您的角色没有生成下月租金的权限……');
         }
+        //由于房管员有时候不会主动更新配置，主动更新配置
+        $this->config(1,false);
 
         $nextDate = date('Ym');
 
         $where['OrderDate'] = $nextDate; //获取当月日期
         $where['InstitutionID'] = $institutionID;
         $result = Db::name('rent_order')->where($where)->field('Type')->find();
-        $findOne = Db::name('rent_config')->find();
+        //$findOne = Db::name('rent_config')->find();
 
         
-        if (!$findOne) {
-            return jsons('4004', '请先生成租金配置');
-        }
-
+        // if (!$findOne) {
+        //     return jsons('4004', '请先生成租金配置');
+        // }
         if ($result) {
             return jsons('4003', '租金已生成，请勿重复操作……');
         } else {  //生成下月租金
