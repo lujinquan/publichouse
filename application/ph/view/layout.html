@@ -25,6 +25,11 @@
     #offCanvas{margin-left: 44px;}
 
     #userName{color:#FFF;}
+    .indexhover>a:hover {
+      color: #fff;
+      opacity:0.78;
+    }
+    
   </style>
   {block name="css"}{/block}
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -41,7 +46,7 @@
 
 <header class="am-topbar admin-header am-print-hide">
   <div class="am-topbar-brand">
-    <strong>武房网公房管理系统</strong>
+    <strong><span class="indexhover"><a href="/">武房网公房管理系统</a></span></strong>
     <button class="am-btn am-btn-xs am-btn-secondary am-icon-bars" id="offCanvas" data-value="false"></button>
   </div>
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>

@@ -937,6 +937,7 @@ class Api extends Controller
             if ($searchForm['OwnerType']) {  //检索楼栋产别
                 $where['OwnerType'] = $searchForm['OwnerType'];
             }
+
             if(isset($searchForm['TubulationID']) && $searchForm['TubulationID']){
                 if($searchForm['TubulationID']>3){
                     $where['TubulationID'] = $searchForm['TubulationID'];
@@ -948,7 +949,7 @@ class Api extends Controller
             $year = substr($searchForm['month'],0,4);
             // 2017年的房屋统计表直接读缓存数据
             if($year == '2017' || $year == '2018'){
-                $tubulationid = $searchForm['TubulationID']?$searchForm['TubulationID']:$currentUserInstitutionID;
+                $tubulationid = (isset($searchForm['TubulationID'])&&$searchForm['TubulationID'])?$searchForm['TubulationID']:$currentUserInstitutionID;
                 $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$year])->value('data');
                 $sdata = json_decode($data,true);
                 $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$tubulationid]; 
