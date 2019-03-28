@@ -11,7 +11,7 @@ class RentCut extends Model
 {
 
     // 设置当前模型对应的完整数据表名称
-    protected $table = '__RENT_CUT_ORDER__';
+    //protected $table = '__RENT_CUT_ORDER__';
 
     public function get_all_cut_lst()
     {
@@ -93,11 +93,11 @@ class RentCut extends Model
 
         }
 
-        $where['Startline'] = array('>', 197001);
-
+        //$where['Startline'] = array('>', 197001);
+        $where['a.Status'] = array('in', [0, 1]);
         //halt($where);
 
-        $RentCutList['obj'] = self::field('ChangeOrderID,CutType,TenantID,HouseID,IDnumber,MuchMonth')->where($where)->paginate(config('paginate.list_rows'));
+        $RentCutList['obj'] = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','inner')->field('a.ChangeOrderID,a.CutType,a.TenantID,a.HouseID,b.IDnumber,MuchMonth')->where($where)->paginate(config('paginate.list_rows'));
 
         $RentCutList['arr'] = $RentCutList['obj']->all() ? $RentCutList['obj']->all() : array();
 
