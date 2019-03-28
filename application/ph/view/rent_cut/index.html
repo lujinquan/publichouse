@@ -4,7 +4,7 @@
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><small class="am-text-sm">租金管理</small> > <small class="am-text-primary">租金减免</small></div>
+      <div class="am-fl am-cf"><small class="am-text-sm">租金管理</small> > <small class="am-text-primary">租金减免</small>&nbsp;&nbsp;<span style="font-size:14px;"><i style="font-style:normal;color:red;">标红数据为本月减免失效的租户，如有异议请联系相关运营人员</i></span></div>
     </div>
 
     <div class="am-g">
@@ -29,6 +29,7 @@
                 <th class="table-set">低保证号</th>
                 <th class="table-set">房屋</th>
                 <th class="table-set">减免时长</th>
+                <th class="table-set">减免到期</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -42,12 +43,12 @@
                   <div class="am-input-group am-input-group-sm">
                       <?php
                         if($rentOption != array()){
-                            $TenantID = $rentOption['TenantID'];
+                            $TenantName = $rentOption['TenantName'];
                         }else{
-                            $TenantID = '';
+                            $TenantName = '';
                         }
                      ?>
-                      <input name="TenantID" type="text" class="am-form-field" value="{$TenantID}">
+                      <input name="TenantName" type="text" class="am-form-field" value="{$TenantName}">
                   </div>
               </td>
               <td>
@@ -110,7 +111,8 @@
                      ?>
                      <input name="MuchMonth" type="text" class="am-form-field" value="{$MuchMonth}">
                 </div></td>
-                
+
+              <td></td> 
               <td>
                 <div class="am-btn-group am-btn-group-xs">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
@@ -124,12 +126,13 @@
             <tr>
                 <td><!-- <input class="checkId" type="checkbox" name='choose' value="1111"/> --></td>
                 <td><?php echo ++$k; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['TenantID'] ; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['TenantName'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $cutTypes[$v['CutType']] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['IDnumber'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HouseID'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['MuchMonth'].'个月' ; ?></td>
-
+              
+                <td class="am-hide-sm-only"><?php if($v['DateEnd'] == date('Ym')){; ?><font color="red"><?php }; ?><?php echo $v['DateEnd'] ; ?></font></td>
       				  <td>
       					<div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-primary details details_btn" value="{$v['ChangeOrderID']}">明细</button>

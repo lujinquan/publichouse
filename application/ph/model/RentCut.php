@@ -6,6 +6,7 @@ namespace app\ph\model;
 use think\Model;
 use think\Db;
 use util\Tree;
+use think\paginator\driver\Bootstrap;
 
 class RentCut extends Model
 {
@@ -54,23 +55,23 @@ class RentCut extends Model
             //     }
             // }
             if ($searchForm['CutType']) {   //检索产别
-                $where['CutType'] = array('eq', $searchForm['CutType']);
+                $where['a.CutType'] = array('eq', $searchForm['CutType']);
             }
             if ($searchForm['MuchMonth']) {   //检索产别
-                $where['MuchMonth'] = array('eq', $searchForm['MuchMonth']);
+                $where['b.MuchMonth'] = array('eq', $searchForm['MuchMonth']);
             }
 
-            if ($searchForm['TenantID']) {  //模糊检索租户编号
-                $where['TenantID'] = array('like', '%' . $searchForm['TenantID'] . '%');
+            if ($searchForm['TenantName']) {  //模糊检索租户编号
+                $where['c.TenantName'] = array('like', '%' . $searchForm['TenantName'] . '%');
             }
             if ($searchForm['HouseID']) {  //模糊检索租户编号
-                $where['HouseID'] = array('like', '%' . $searchForm['HouseID'] . '%');
+                $where['a.HouseID'] = array('like', '%' . $searchForm['HouseID'] . '%');
             }
             // if ($searchForm['BanAddress']) {  //模糊检索楼栋地址
             //     $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             // }
             if ($searchForm['IDnumber']) {  //减免证件号码
-                $where['IDnumber'] = array('like', '%' . $searchForm['IDnumber'] . '%');
+                $where['b.IDnumber'] = array('like', '%' . $searchForm['IDnumber'] . '%');
             }
 
             // if($searchForm['DateStart'] && $searchForm['DateEnd']){  //检索大于等于起始时间，且小于等于结束时间
@@ -94,12 +95,39 @@ class RentCut extends Model
         }
 
         //$where['Startline'] = array('>', 197001);
-        $where['a.Status'] = array('in', [0, 1]);
+        $where['a.Status'] = array('eq', 1);
+        $where['a.ChangeType'] = array('eq', 1);
         //halt($where);
 
-        $RentCutList['obj'] = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','inner')->field('a.ChangeOrderID,a.CutType,a.TenantID,a.HouseID,b.IDnumber,MuchMonth')->where($where)->paginate(config('paginate.list_rows'));
+        $result = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','inner')->join('tenant c','a.TenantID = c.TenantID','inner')->field('a.ChangeOrderID,a.CutType,c.TenantName,a.HouseID,b.IDnumber,b.MuchMonth,a.DateEnd')->where($where)->select();
+        $sresult = [];
+        foreach($result as $v){
+            if($v['DateEnd'] == date('Ym')){
+                array_unshift($sresult,$v);
+            }else{
+                $sresult[] = $v;
+            }
+        }
+        //halt($sresult);
+        $curpage = input('page') ? input('page') : 1;//当前第x页，有效值为：1,2,3,4,5...
+        $listRow = 15;//每页215行记录
+        //$showdata = array_chunk($s, $listRow, true);
+        $showdata = array_slice($sresult, ($curpage - 1)*$listRow, $listRow,true);
+        
+        $p = Bootstrap::make($showdata, $listRow, $curpage, count($sresult), false, [
+            'var_page' => 'page',
+            'path'     => url('/ph/RentCut/index'),//这里根据需要修改url
+            'query'    => [],
+            'fragment' => '',
+        ]);
+        
+        $p->appends($_GET);
+        $RentCutList['arr'] = $showdata;
+        $RentCutList['obj'] = $p;
+        //halt($RentCutList['obj']);
+        // $RentCutList['obj'] = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','inner')->field('a.ChangeOrderID,a.CutType,a.TenantID,a.HouseID,b.IDnumber,MuchMonth,a.DateEnd')->where($where)->paginate(config('paginate.list_rows'));
 
-        $RentCutList['arr'] = $RentCutList['obj']->all() ? $RentCutList['obj']->all() : array();
+        //$RentCutList['arr'] = $RentCutList['obj']->all() ? $RentCutList['obj']->all() : array();
 
         return $RentCutList;
     }
