@@ -656,7 +656,7 @@ class Api extends Controller
                         if($i > 0){
                             $d['count'] = $i;
                             $result[] = $d;
-                        }  
+                        }
                         
                     }
                     //halt($result);
@@ -741,7 +741,7 @@ class Api extends Controller
      */
     public function get_house_diff()
     {
-
+        $changetype = input('ChangeType');
         $where['Status'] = array('eq', 1);
         $where['BanID'] = array('eq',input('BanID'));
         //$where['IfSuspend'] = array('eq', 0);
@@ -764,9 +764,16 @@ class Api extends Controller
                 
                 $v['Diff'] = bcsub($v['ApprovedRent'],$v['HousePrerent'],2);
                 //halt($v['Diff']);
-                if(abs($v['Diff']) < 0.6){
-                    $result[] = $v;
+                if($changetype == 15){
+                    if(abs($v['Diff']) == 0.1){
+                        $result[] = $v;
+                    }
+                }else{
+                    if(abs($v['Diff']) < 0.6 && abs($v['Diff']) > 0.1){
+                        $result[] = $v;
+                    }
                 }
+                
                 
             }
         }
