@@ -8,7 +8,6 @@ $('#addH').click(function() {
 });
 $('#addApply').click(function() {
     var checkId = $("input:checked").val();
-    console.log(checkId);
     $(".rent_reduction").hide();
     $(".cancel").hide();
     $(".PauseRent").hide();
@@ -1831,10 +1830,13 @@ $('#addApply').click(function() {
                 }
             });
             break;
-        case '15':
+        case '15': case '16':
            // $(".batchRent").show();
             var value;
             var house_array = [];
+
+            console.log(checkId);
+
             var thisLayer = layer.open({
                 type: 1,
                 area: ['990px', '700px'],
@@ -1904,9 +1906,10 @@ $('#addApply').click(function() {
                     });
                 },
                 yes:function(thisIndex){
+                    console.log(checkId);
                     var data = new FormData();
                     data.append('banID',$('#batchBanID').text());
-                    data.append('type',15);
+                    data.append('type',checkId);
                     house_array.forEach(function(value,index){
                         data.append("houseID[]",value);
                     });
