@@ -641,10 +641,16 @@ class Api extends Controller
                         foreach($res as $r){
                             $r['ApprovedRent'] = count_house_rent($r['HouseID']);
                             $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
-
-                            if(abs($r['Diff']) < 0.6 && abs($r['Diff']) > 0.1){
-                                $i++;
+                            if($map['ChangeType'] == 15){
+                                if(abs($r['Diff']) == 0.1){
+                                    $i++;
+                                }
+                            }else{
+                                if(abs($r['Diff']) < 0.6 && abs($r['Diff']) > 0.1){
+                                    $i++;
+                                }
                             }
+                            
                         }
 
                         if($i > 0){
