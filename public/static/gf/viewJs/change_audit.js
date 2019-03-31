@@ -905,7 +905,7 @@ function metailShow(id,res,ctrl_status){
 	});
     $(id+' .img_states2_close').click(function(){
         var this_index = $(this).index(id+' .img_states2_close');
-        var img_src = $(id+' img[layer-pid]').eq(this_index).prop('src');
+        var img_src = $(id+' img[layer-pid]').eq(this_index).attr('data-original');
         console.log(img_src);
         delete_img_array.push(img_src);
         $(id+' li').eq(this_index).remove();
