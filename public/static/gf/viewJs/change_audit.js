@@ -1166,7 +1166,11 @@ function batchPrint(data,value,operation){
             }
             var process_str = '';
             for(var i = 0;i < data.record.length;i++){
-                process_str += "<p>"+data.record[i].RoleName+"【"+data.record[i].UserNumber+"】"+"于"+data.record[i].CreateTime+"进行"+data.record[i].Step+",原因："+data.record[i].Reson+"</p>";
+                if(data.record[i].Status == "2"){
+                    process_str += "<p>"+data.record[i].RoleName+"【"+data.record[i].UserNumber+"】于"+data.record[i].CreateTime+data.record[i].Step+"；</p>";
+                }else{
+                    process_str += "<p>"+data.record[i].RoleName+"【"+data.record[i].UserNumber+"】于"+data.record[i].CreateTime+data.record[i].Step+",原因："+data.record[i].Reson+"</p>";
+                }
             }
             console.log($(process_str));
             iframe_dom.find('.process').empty();
