@@ -642,7 +642,7 @@ class Api extends Controller
                             $r['ApprovedRent'] = count_house_rent($r['HouseID']);
                             $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
 
-                            if(abs($r['Diff']) < 0.6){
+                            if(abs($r['Diff']) < 0.6 && abs($r['Diff']) > 0.1){
                                 $i++;
                             }
                         }

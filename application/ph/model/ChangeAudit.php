@@ -245,6 +245,9 @@ class ChangeAudit extends Model
             case 15:     //  租金调整(批量)
                 $data = self::get_fifteen_detail($changeOrderID);
                 break;
+            case 16:     //  租金调整(批量)
+                $data = self::get_sixteen_detail($changeOrderID);
+                break;
             default:
         }
 
@@ -492,6 +495,28 @@ class ChangeAudit extends Model
         $data['Deadline'] = $deadline;
 
         $data['type'] = 15;
+
+        return $data;
+    }
+
+    public function get_sixteen_detail($changeOrderID)
+    {
+        //房屋编号
+        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+        $data = get_ban_info($one['BanID']);
+
+        $deadline = json_decode($one['Deadline'],true);
+
+        $data['InstitutionPID'] = get_institution($one['InstitutionPID']);
+        $data['ChangeOrderID'] = $one['ChangeOrderID'];
+        $data['Qrcode'] = $one['RoomID'];
+        $data['Remark'] = $one['Remark'];
+        $data['InflRent'] = $one['InflRent'];
+        $data['TotalChangeNum'] = count($deadline['houseArr']);
+        $data['Deadline'] = $deadline;
+
+        $data['type'] = 16;
 
         return $data;
     }

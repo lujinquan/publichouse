@@ -384,6 +384,7 @@ class ChangeApply extends Model
                     }
                     //halt($finds);
                     return $finds;
+                break;
                 case 15:
                     $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>15,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
                     if($ifin){
@@ -402,10 +403,26 @@ class ChangeApply extends Model
                     if(!$finds){
                         return jsons('4002','楼栋状态异常');
                     }
-                    // if(!$data['afterAdjustDamageGrade'] && !$data['afterAdjustStructureType']){
-                    //     return jsons('4001','请完善异动信息');
-                    // }
-                    //halt($finds);
+                    return $finds;
+                break;
+                case 16:
+                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>16,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    if($ifin){
+                        return jsons('4001','该楼栋已在租金调整（批量）异动单中……');
+                    }
+                    $banModel = new BanModel;
+
+                    $findwhere = [
+                        'BanID'=>$data['banID'],
+                        'Status'=>1,
+                        ];
+
+                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature,TotalOprice,PreRent,TotalArea')
+                                      ->where($findwhere)
+                                      ->find();
+                    if(!$finds){
+                        return jsons('4002','楼栋状态异常');
+                    }
                     return $finds;
                 break;
 
