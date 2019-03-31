@@ -558,6 +558,17 @@ class ChangeAudit extends Model
 
         $where['ChangeOrderID'] = array('eq', $changeOrderID);
 
+        $option['FatherOrderID'] = array('eq', $changeOrderID);
+        $option['IfValid'] = array('eq', 1);
+        // $step = Db::name('use_child_order')->where($option)->max('Step');
+        $step = Db::name('use_child_order')->where($option)->order('id desc')->value('Step');
+
+        if (!$step) {
+            $datas['Step'] = 2;
+        } else {
+            $datas['Step'] = $step + 1;
+        }
+
         //判断当前流程，，通过比对当前进行到第几步和流程总步数，来确定是否为终审
         $status = self::where($where)->value('Status');
 
@@ -568,6 +579,7 @@ class ChangeAudit extends Model
 
             $datas['Status'] = 2;
 
+
             //若审核不通过
         } elseif ($reson != '') {
 
@@ -575,6 +587,7 @@ class ChangeAudit extends Model
             self::where($where)->update(['Status' => 2, 'FinishTime' => time()]);
 
             $datas['Status'] = 3;
+            $datas['Step'] = 2;
 
             // 若终审通过
         } elseif ($status == $total && $reson == '') {
@@ -592,15 +605,7 @@ class ChangeAudit extends Model
 
         }
 
-        $option['FatherOrderID'] = array('eq', $changeOrderID);
-        $option['IfValid'] = array('eq', 1);
-        $step = Db::name('use_child_order')->where($option)->max('Step');
-
-        if (!$step) {
-            $datas['Step'] = 2;
-        } else {
-            $datas['Step'] = $step + 1;
-        }
+       
 
         $datas['FatherOrderID'] = $changeOrderID;  //父订单编号
         $datas['InstitutionID'] = session('user_base_info.institution_id'); //保存机构
@@ -1092,6 +1097,28 @@ class ChangeAudit extends Model
 
                 break;
             case 15:  //租金调整(批量)异动完成后的，系统处理
+                $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                $deadline = json_decode($one['Deadline'],true);
+
+                $str = '';
+
+                foreach($deadline['houseArr'] as $v){
+                    Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "),";
+                }
+
+                Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent+'.$one['InflRent']],'CivilRent'=>['exp','CivilRent+'.$one['InflRent']]]);
+                
+                $url = $this->qrcode();
+
+                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['RoomID'=>$url]);
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+
+                break;
+                
+            case 16:  //租金调整(批量)异动完成后的，系统处理
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
 
                 $deadline = json_decode($one['Deadline'],true);

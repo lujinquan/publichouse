@@ -129,7 +129,7 @@ class ChangeAudit extends Base
             //     return jsons('4001','开放时间：2019年1月7日，等待年报表确认！');
             // }
             // 删除附件
-            if($data['deteleImg']){
+            if(isset($data['deteleImg']) && $data['deteleImg']){
                 $deleteImgs = explode(',',$data['deteleImg']);
                 $imgs = [];
                 $oldImgs = explode(',',$find['ChangeImageIDS']);
@@ -222,9 +222,13 @@ class ChangeAudit extends Base
 
         $status = Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->value('Status');
 
+        $row = Db::name('use_child_order')->where('FatherOrderID',$changeOrderID)->find();
+
         if($status != 2){
 
             return jsons('4002' ,'异动单已在审核流程中，无法删除……');
+        }elseif($status == 2 && $row){
+            Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->setField('Status',0);
         }else{
 
             $s = Db::name('change_order')->where('ChangeOrderID',$changeOrderID)->delete();
