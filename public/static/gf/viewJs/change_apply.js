@@ -1851,11 +1851,11 @@ $('#addApply').click(function() {
                     var fun = new getBanList();
                     // fun.getData('/ph/Api/get_all_ban',15);
                     $('#banLinkSearch').click(function(){
-                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),15);
+                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),checkId);
                     });
                     $('#batchRentQuery').off('click');
                     $('#batchRentQuery').on('click', function(){
-                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),15);
+                        fun.getSearchData('/ph/Api/get_all_ban',$('.getOwnerType').val(),$('#banLinkInput').val(),checkId);
                         $('#pauseHouseAdd').empty();
                         var ban_link_house = layer.open({
                             type: 1,
@@ -2067,7 +2067,7 @@ function getBanList(){
     this.getSearchData = function(url,ownerType,address,type){
         var self = this;
         var load_2 = layer.load();//加载动画
-        $.post(url,{OwnerType:ownerType,AreaFour:address,flag:true}, function(res) {
+        $.post(url,{OwnerType:ownerType,AreaFour:address,flag:true,ChangeType:type}, function(res) {
             res = JSON.parse(res);
             layer.close(load_2);//加载动画结束
             console.log(res);
@@ -2092,8 +2092,8 @@ function getBanList(){
 function banLinkHouse(BanID,BanAddress,type){
     if(type == 3){
         var get_url = '/ph/Api/get_all_house/BanID/'+BanID;
-    }else if(type == 15){
-        var get_url = '/ph/Api/get_house_diff?BanID='+BanID;
+    }else if(type == 15 || type == 16){
+        var get_url = '/ph/Api/get_house_diff?BanID='+BanID+'&ChangeType='+type;
     }
     var load_1 = layer.load();//加载动画
     $.get(get_url,function(res){
@@ -2112,7 +2112,7 @@ function banLinkHouse(BanID,BanAddress,type){
                     <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
                 </tr>';
             }
-        }else if(type == 15){
+        }else if(type == 15 || type == 16){
             for(var i = 0;i < res.data.length;i++){
                 house_str += '<tr class="house_check">\
                     <td style="width:150px;"><input type="checkbox" ></td>\
