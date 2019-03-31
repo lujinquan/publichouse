@@ -1,7 +1,9 @@
 //审批
+var delete_img_array = [];
 $('.BtnApprove').click(function(){
 	var value = $(this).val(),
 		CordID = "#approveForm";
+    delete_img_array = [];
 	$(".breaks").hide();
 	$(".pause").hide();
 	$(".WriteOff").hide();
@@ -9,10 +11,8 @@ $('.BtnApprove').click(function(){
 	$('.cancel').hide();
 	$('#SerialNumber').text('房屋编号:');
 	$(".LHide").css('display','block');
-	console.log(value);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+value,function(res){
 		res = JSON.parse(res);
-		console.log(res);
 		var type = res.data.detail.type;
 		if(type == 1){
 			new file({
@@ -47,7 +47,7 @@ $('.BtnApprove').click(function(){
 				$('.status_2').hide();
 			}
 			processState('#derateState',res);
-			metailShow('#deratePhotos',res);
+			metailShow('#deratePhotos',res,1);
 			layerBox(value,'derate','租金减免审批',1,res.data.config.status);
 		}else if(type == 2){
 			$('.status_2').hide();
@@ -138,7 +138,7 @@ $('.BtnApprove').click(function(){
                 title: "其他"
             });
             processState('#emptyRentState',res);
-			metailShow('#emptyRentPhotos',res);
+			metailShow('#emptyRentPhotos',res,1);
 			layerBox(value,'emptyRent',title,1,res.data.config.status);
 		}else if(type == 3){
 			new file({
@@ -174,7 +174,7 @@ $('.BtnApprove').click(function(){
         	$('#pauseHouseDetail').empty();
         	$('#pauseHouseDetail').append($(house_str));
 			processState('#pauseRentState',res);
-			metailShow('#pauseRentPhotos',res);
+			metailShow('#pauseRentPhotos',res,1);
 			layerBox(value,'pause','暂停计租审批',1,res.data.config.status);
 		}else if(type == 4){
 			$('.oldCancelHouseID').text(res.data.detail.HouseID);
@@ -220,7 +220,7 @@ $('.BtnApprove').click(function(){
 				$('.status_2').hide();
 			}
 			processState('#oldCancelState',res);
-			metailShow('#oldCancelPhotos',res);
+			metailShow('#oldCancelPhotos',res,1);
 			layerBox(value,'oldCancel','陈欠核销详情',1,res.data.config.status);
 		}else if(type == 8){
 			$('.status_2').hide();
@@ -272,7 +272,7 @@ $('.BtnApprove').click(function(){
 				$('.status_2').hide();
 			}
 			processState('#cancelState',res);
-			metailShow('#cancelPhotos',res);
+			metailShow('#cancelPhotos',res,1);
 			layerBox(value,'cancel','注销审批',1,res.data.config.status);
 		}else if(type == 5){
 
@@ -318,7 +318,7 @@ $('.BtnApprove').click(function(){
                 $('.status_2').hide();
             }
             processState('#newRentState',res);
-            metailShow('#newRentPhotos',res);
+            metailShow('#newRentPhotos',res,1);
             layerBox(value,'newRent','新发租审批',1,res.data.config.status);
 		}else if(type == 9){//房屋调整
             $('.houseAdjustHouseID').text(res.data.detail.HouseID);
@@ -371,7 +371,7 @@ $('.BtnApprove').click(function(){
                 $('.status_2').hide();
             }
             processState('#HAState',res);
-            metailShow('#HAPhotos',res);
+            metailShow('#HAPhotos',res,1);
             layerBox(value,'houseAdjust','房屋调整审批',1,res.data.config.status);
 		}else if(type == 10){//管段调整
 
@@ -392,7 +392,7 @@ $('.BtnApprove').click(function(){
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
         	processState('#rentAddState',res);
-        	metailShow('#rentAddPhotos',res);
+        	metailShow('#rentAddPhotos',res,1);
 			var this_index = layer.open({
 		        type: 1,
 		        area: ['990px','780px'],
@@ -457,7 +457,7 @@ $('.BtnApprove').click(function(){
 				$('.status_2').hide();
 			}
 			processState('#rentState',res);
-			metailShow('#rentPhotos',res);
+			metailShow('#rentPhotos',res,1);
 			layerBox(value,'rentAdjustment','规定租金审批',1,res.data.config.status);
 		}else if(type==13){
 			
@@ -492,7 +492,7 @@ $('.BtnApprove').click(function(){
                 $('.status_2').hide();
             }
             processState('#buildingAdjustState',res);
-            metailShow('#buildingAdjustPhotos',res);
+            metailShow('#buildingAdjustPhotos',res,1);
             layerBox(value,'buildingAdjustment','楼栋调整',1,res.data.config.status);
 		}else if(type == 15){
             // var house_str = '';
@@ -858,7 +858,7 @@ $(document).on('click','.SplitNum',function() {
 });
 
 //查看附件函数
-function metailShow(id,res){
+function metailShow(id,res,ctrl_status){
 	var ImgLength = res.data.urls.length;
 	var img_title = [];
 	var	img_array = [];
@@ -878,24 +878,39 @@ function metailShow(id,res){
 		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
 		FatherDom.append(title_dom);
 		for(var j = 0;j < img_array[i].length;j++){
-			var ImgDom = $("<li style='width:100px;display:inline-block;'><img style='width:100px;' layer-pid="+i+" data-original="+
-				img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/></li>");
+            if(res.data.config.status == '1' && ctrl_status == 1){
+                var ImgDom = $("<li style='display:inline-block;position:relative;'>\
+                    <img style='height:100px;padding:0 10px 10px 0;' layer-pid="+i+" data-original="+img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>\
+                    <img style='width:20px;position:absolute;top:0;right:-2px;cursor:pointer;box-shadow: 0 0 5px #ccc;border-radius: 50%;' src='/public/static/gf/icons/delete.png' class='img_states2_close'>\
+                    </li>");
+            }else{
+                var ImgDom = $("<li style='display:inline-block;position:relative;'>\
+                    <img style='height:100px;padding:0 10px 10px 0;' layer-pid="+i+" data-original="+img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>\
+                    </li>");
+            }
 			FatherDom.append(ImgDom);
 		}
 	}
-	console.log(id);
 	// layer.photos({
 	//   photos: id
 	//   ,anim: 5
 	// });
-	$(id+' img').click(function(){
+	$(id+' img[layer-pid]').click(function(){
 		var viewer = new Viewer($(id)[0],{
 				hidden:function(){
 					viewer.destroy();
 				}
 			}
 		);
-	})
+	});
+    $(id+' .img_states2_close').click(function(){
+        var this_index = $(this).index(id+' .img_states2_close');
+        var img_src = $(id+' img[layer-pid]').eq(this_index).prop('src');
+        console.log(img_src);
+        delete_img_array.push(img_src);
+        $(id+' li').eq(this_index).remove();
+        console.log(delete_img_array);
+    })
 }
 //流程配置函数
 function processState(id,res){
@@ -942,6 +957,7 @@ function layerBox(value,id,name,operation,status){
         yes:function(){
         	if(status == '1'){
         		var formData = fileTotall.getArrayFormdata() || new FormData();
+                formData.append('deteleImg',delete_img_array.join(','));
         	}else{
         		var formData = new FormData();
         	}
@@ -953,6 +969,7 @@ function layerBox(value,id,name,operation,status){
 		}
     })
 }
+
 // 审批通过事件
 function processPass(formData,this_index){
 	$.ajax({
