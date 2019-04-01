@@ -106,9 +106,9 @@ class Index extends Base
         $currentUserLevel = session('user_base_info.institution_level');
         if($currentUserLevel == 3){  //用户为管段级别，则直接查询
             $pid = Db::name('institution')->where('id',$currentUserInstitutionID)->value('pid');
-            $where['Institution'] = array('eq' ,$pid);
+            $where['Institution'] = array('in' ,[$pid,4]);
         }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-            $where['Institution'] = array('eq' ,$currentUserInstitutionID);
+            $where['Institution'] = array('in' ,[$currentUserInstitutionID,4]);
         }else{    //用户为公司级别，则获取所有子管段
         }
         if(!$where){
@@ -146,9 +146,9 @@ class Index extends Base
         $currentUserLevel = session('user_base_info.institution_level');
         if($currentUserLevel == 3){  //用户为管段级别，则直接查询
             $pid = Db::name('institution')->where('id',$currentUserInstitutionID)->value('pid');
-            $where['Institution'] = array('eq' ,$pid);
+            $where['Institution'] = array('in' ,[$pid,4]);
         }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
-            $where['Institution'] = array('eq' ,$currentUserInstitutionID);
+            $where['Institution'] = array('in' ,[$currentUserInstitutionID,4]);
         }else{    //用户为公司级别，则获取所有子管段
         }
 
