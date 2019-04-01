@@ -67,7 +67,7 @@ class Attachment extends Model
      * 获取所有文件信息
      */
     public function get_all_file_lst(){
-        $fileList['obj'] = Db::name('file')->order('Time desc')->paginate(config('paginate.list_rows'));
+        $fileList['obj'] = Db::name('file')->order('IsTop desc,Time desc')->paginate(config('paginate.list_rows'));
         $fileList['arr'] = $fileList['obj']->all();
         return $fileList;
     }

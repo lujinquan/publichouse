@@ -55,6 +55,16 @@ class Attachment extends Base
         }
     }
 
+    public function edit(){
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            $msg = $data['IsTop']?'置顶成功':'取消成功';
+            $res = Db::name('file')->where('id',$data['id'])->setField('IsTop',$data['IsTop']);
+            if($res !== false){
+                return jsons('2000', $msg);
+            }
+        }
+    }
     /**
      * 删除文件
      */

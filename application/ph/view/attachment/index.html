@@ -30,7 +30,7 @@
                     <th class="table-check"></th>
                     <th class="table-id">#</th>
                     <th class="table-title">文件名称</th>
-                    <!-- <th class="table-author am-hide-sm-only">文件类别</th> -->
+                    <th class="table-author am-hide-sm-only">是否置顶</th>
                     <th class="table-set">上传时间</th>
                     <th class="table-set">上传者</th>
                 </tr>
@@ -46,6 +46,9 @@
                     </td>
                     <td class="am-hide-sm-only"><?php echo ++$k0; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v0['Title']; ?></td>
+                    <td class="am-hide-sm-only">
+                        <button type="button" value="<?php echo $v0['id']; ?>" class="am-btn am-btn-primary am-btn-xs doc-single-toggle <?php echo $v0['IsTop']?'':'am-active'; ?> am-round" data-am-button><?php echo $v0['IsTop']?'已置顶':'未置顶'; ?></button>
+                    </td>
                     <td class="am-hide-sm-only"><?php echo $v0['Time']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v0['UploadUser']; ?></td>
                 </tr>
@@ -70,5 +73,33 @@
 <script type="text/javascript" src="/public/static/gf/js/jquery-form.js"></script>
 <script type="text/javascript" src="/public/static/gf/viewJs/attachment.js"></script>
 <script type="text/javascript" src="/public/static/gf/viewJs/uploadfile.js"></script>
+<script>
+$(function() {
+    var $toggleButton = $('.doc-single-toggle');
+    $toggleButton.on('click', function() {
+        //console.log(this);
+        if($(this).hasClass('am-active')){
+            var status = '已置顶';
+            var IsTop = 1;
+        }else{
+            var status = '未置顶';
+            var IsTop = 0;
+        }
+        $(this).text(status);
+        var id = $(this).val();
+        console.log(id);
+        $.ajax({
+            type: 'post',
+            url: '/ph/Attachment/edit',
+            data: 'IsTop='+IsTop+'&id='+id,
+            dataType: "json",
+            success: function(res){
+                layer.msg(res.msg);
+                //location.reload();
+            }
+        });
+    });
+})
+</script>
 <!-- <script type="text/javascript" src="/public/static/gf/js/lightbox-plus-jquery.min.js"></script> -->
 {/block}

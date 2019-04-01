@@ -101,8 +101,22 @@ class Index extends Base
      * 获取公告列表
      */
     public function get_notice_list(){
-        $num = Db::name('notice')->count();
-        $list = Db::name('notice')->order('UpdateTime desc')->page(1, 5)->select();
+        $where = [];
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+        $currentUserLevel = session('user_base_info.institution_level');
+        if($currentUserLevel == 3){  //用户为管段级别，则直接查询
+            $pid = Db::name('institution')->where('id',$currentUserInstitutionID)->value('pid');
+            $where['Institution'] = array('eq' ,$pid);
+        }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
+            $where['Institution'] = array('eq' ,$currentUserInstitutionID);
+        }else{    //用户为公司级别，则获取所有子管段
+        }
+        if(!$where){
+            $where = 1;
+        }
+        //halt($where);
+        $num = Db::name('notice')->where($where)->count();
+        $list = Db::name('notice')->where($where)->order('UpdateTime desc')->page(1, 5)->select();
 
         $pageTool = new PageTool($num);
         $nav = $pageTool->show();
@@ -126,11 +140,26 @@ class Index extends Base
     public function ajax_get_notice_list($data){
         $id = $data['id'];
         $search = $data['search'];
-        $num = Db::name('notice')->where('Title like "%'.$search.'%"')->count();
+
+        $where = [];
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+        $currentUserLevel = session('user_base_info.institution_level');
+        if($currentUserLevel == 3){  //用户为管段级别，则直接查询
+            $pid = Db::name('institution')->where('id',$currentUserInstitutionID)->value('pid');
+            $where['Institution'] = array('eq' ,$pid);
+        }elseif($currentUserLevel == 2){  //用户为所级别，则获取所有该所子管段，查询
+            $where['Institution'] = array('eq' ,$currentUserInstitutionID);
+        }else{    //用户为公司级别，则获取所有子管段
+        }
+
+        $where['Title'] = array('like' ,'%'.$search.'%');
+
+
+        $num = Db::name('notice')->where($where)->count();
         if($data['id'] == '-1'){
             $id = ceil($num/5);
         }
-        $list = Db::name('notice')->where('Title like "%'.$search.'%"')->order('UpdateTime desc')->page($id, 5)->select();
+        $list = Db::name('notice')->where($where)->order('IsTop desc,UpdateTime desc')->page($id, 5)->select();
         $pageTool = new PageTool($num, $data['id']);
         $nav = $pageTool->show();
         return array(
@@ -144,7 +173,7 @@ class Index extends Base
      */
     public function get_upload_file_list(){
         $num = Db::name('file')->count();
-        $list = Db::name('file')->order('Time desc')->page(1, 5)->select();
+        $list = Db::name('file')->order('IsTop desc,Time desc')->page(1, 5)->select();
         $pageTool = new PageTool($num);
         $nav = $pageTool->show();
         return array(

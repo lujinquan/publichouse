@@ -49,8 +49,10 @@ class Notice extends Base
     public function modify(){
         if($this->request->isPost()){
             $data = $this->request->post();
-            model('ph/Notice')->modify_notice_info($data);
-            return jsons('2000', '修改成功', 1);
+            $res = model('ph/Notice')->modify_notice_info($data);
+            if($res !== false){
+                return jsons('2000', '修改成功', 1);
+            }
         }else{
             $data = Db::name('notice')->find(input('id'));
             if($data){

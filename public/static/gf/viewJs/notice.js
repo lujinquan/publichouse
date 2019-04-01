@@ -16,17 +16,17 @@ $('#publish_notice').click(function() {
         },
         yes:function(add){
             var title = $('#title').val();
-            // var institution = $('#institution').val();
-            var institution = '';
+            var institution = $('#institution').val();
+            var istop = $('input:radio:checked').val();
             var content = editor.html();
             if($.trim(title) == ''){
                 layer.msg('标题不能为空');return ;
             } else if($.trim(content) == ''){
                 layer.msg('内容不能为空');return ;
             }
-            content = escape(content);
+            content = escape(istop);
             console.log(content);
-            var data = 'title='+title+'&institution='+institution+'&content='+content;
+            var data = 'title='+title+'&institution='+institution+'&content='+content+'&istop='+istop;
             $.post('/ph/Notice/add', data, function(res){
                 res = JSON.parse(res);
                 console.log(res);
@@ -63,7 +63,8 @@ $('#modify_notice').click(function(){
     $.get('/ph/Notice/modify/id/'+id, function(msg){
         msg = JSON.parse(msg);
         $('#modify_title').val(msg.data.Title);
-        // $('#modify_institution').val(msg.data.Institution);
+        $("input[name='IsTop'][value='"+msg.data.IsTop+"']").attr("checked","checked");
+        $("#institution option[value='"+msg.data.Institution+"']").attr("selected","selected");
         layer.open({
             type:1,
             area:['900px','650px'],
@@ -80,8 +81,8 @@ $('#modify_notice').click(function(){
             },
             yes:function(modify){
                 var title = $('#modify_title').val();
-                // var institution = $('#modify_institution').val();
-                var institution = '';
+                var institution = $('#institution').val();
+                var istop = $('input:radio:checked').val();
                 var content = editor.html();
                 console.log(content + '-----');
                 if($.trim(title) == ''){
@@ -89,7 +90,7 @@ $('#modify_notice').click(function(){
                 } else if($.trim(content) == ''){
                     layer.msg('内容不能为空');return ;
                 }
-                var data = 'title='+title+'&institution='+institution+'&content='+content+'&id='+id;
+                var data = 'title='+title+'&institution='+institution+'&content='+content+'&id='+id+'&IsTop='+istop;
                 $.post('/ph/Notice/modify', data, function(res){
                     res = JSON.parse(res);
                     console.log(res);
