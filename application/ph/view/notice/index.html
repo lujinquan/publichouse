@@ -120,7 +120,7 @@ $(function() {
             dataType: "json",
             success: function(res){
                 layer.msg(res.msg);
-                if(res.retcode == 4000){
+                if(res.retcode != 2000){
                     console.log(res.retcode);
                     _this.addClass('am-active');
                     _this.text('未置顶');
