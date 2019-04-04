@@ -21,6 +21,7 @@ class Notice extends Model
 
     public function notice_add($data){
         $totalTops = Db::name('notice')->where('IsTop',1)->count();
+        //dump($totalTops);halt($data);
         if($totalTops > 2 && $data['istop'] == 1){
             return jsons('4000', '置顶数不能超过3条');die;
         }
