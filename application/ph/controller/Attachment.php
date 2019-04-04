@@ -58,6 +58,10 @@ class Attachment extends Base
     public function edit(){
         if ($this->request->isPost()) {
             $data = $this->request->post();
+            $totalTops = Db::name('file')->where('IsTop',1)->count();
+            if($totalTops > 2 && $data['IsTop'] == 1){
+                return jsons('4000', '置顶数不能超过3条');die;
+            }
             $msg = $data['IsTop']?'置顶成功':'取消成功';
             $res = Db::name('file')->where('id',$data['id'])->setField('IsTop',$data['IsTop']);
             if($res !== false){

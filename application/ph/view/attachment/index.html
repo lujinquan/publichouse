@@ -49,7 +49,7 @@
                     <td class="am-hide-sm-only">
                         <button type="button" value="<?php echo $v0['id']; ?>" class="am-btn am-btn-primary am-btn-xs doc-single-toggle <?php echo $v0['IsTop']?'':'am-active'; ?> am-round" data-am-button><?php echo $v0['IsTop']?'已置顶':'未置顶'; ?></button>
                     </td>
-                    <td class="am-hide-sm-only"><?php echo $v0['Time']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v0['CreateTime']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v0['UploadUser']; ?></td>
                 </tr>
               <?php }; ?>
@@ -77,7 +77,7 @@
 $(function() {
     var $toggleButton = $('.doc-single-toggle');
     $toggleButton.on('click', function() {
-        //console.log(this);
+        var _this = $(this);
         if($(this).hasClass('am-active')){
             var status = '已置顶';
             var IsTop = 1;
@@ -95,7 +95,11 @@ $(function() {
             dataType: "json",
             success: function(res){
                 layer.msg(res.msg);
-                //location.reload();
+                if(res.retcode == 4000){
+                    console.log(res.retcode);
+                    _this.addClass('am-active');
+                    _this.text('未置顶');
+                }
             }
         });
     });

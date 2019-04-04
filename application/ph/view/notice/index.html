@@ -52,7 +52,7 @@
                 </td>
                 <td class="am-hide-sm-only">{$k++}</td>
                 <td class="am-hide-sm-only"><a class="notice_info" href="javascript:void(0)">{$info['Title']}</a></td>
-                <td class="am-hide-sm-only" width="15%">{$info['UpdateTime']}</td>
+                <td class="am-hide-sm-only" width="15%">{$info['CreateTime']}</td>
                 <td class="am-hide-sm-only" width="10%">
                     {switch name="$info['Institution']"}
                         {case value="4"}全部{/case}
@@ -103,7 +103,7 @@
 $(function() {
     var $toggleButton = $('.doc-single-toggle');
     $toggleButton.on('click', function() {
-        //console.log(this);
+        var _this = $(this);
         if($(this).hasClass('am-active')){
             var status = '已置顶';
             var IsTop = 1;
@@ -113,7 +113,6 @@ $(function() {
         }
         $(this).text(status);
         var id = $(this).val();
-        console.log(id);
         $.ajax({
             type: 'post',
             url: '/ph/Notice/modify',
@@ -121,6 +120,11 @@ $(function() {
             dataType: "json",
             success: function(res){
                 layer.msg(res.msg);
+                if(res.retcode == 4000){
+                    console.log(res.retcode);
+                    _this.addClass('am-active');
+                    _this.text('未置顶');
+                }
                 //location.reload();
             }
         });

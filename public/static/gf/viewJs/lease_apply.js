@@ -69,7 +69,9 @@ $('.addLease').click(function(){
 								$('#applyRoom'+ws+'_data2').val(this_data.UseArea);
 								$('#applyRoom'+ws+'_data3').val(this_data.LeasedArea);
 								$('#applyRoom'+ws+'_data4').val(this_data.RoomRentMonth);
-								ws++;
+								if(ws < 4){
+									ws++;
+								}
 								break;
 							case "2":
 								if(this_data.RoomPublicStatus =="独"){

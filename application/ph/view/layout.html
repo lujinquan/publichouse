@@ -300,11 +300,16 @@
                     <?php
                     if(isset($upload_file_list)){
                       foreach($upload_file_list['list'] as $info){
+                        if($info['IsTop']){
+                          $fontweight = 'bold';
+                        }else{
+                          $fontweight = 'normal';
+                        }
                         echo '
                       <tr>
-                        <td style="width:50%;padding-left:20px;">'. $info['Title'] .'</td>
+                        <td style="width:50%;padding-left:20px;font-weight:'.$fontweight.'">'. $info['Title'] .'</td>
                         <td style="width:20%;"><a class="index-file-download" href="downloadFile?file='. $info['Url'] .'" style="color:#4C84FF;">下载</a></td>
-                        <td>'. $info['Time'] .'</td>
+                        <td>'. $info['CreateTime'] .'</td>
                       </tr>';
                       }
                     }
@@ -334,12 +339,17 @@
           </div>
           <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="padding-top:6px;">
             <table class="am-table am-table-bd am-table-striped admin-content-table" style="border: 1px solid #D6E2F6;">
-              <thead><tr><th style="padding-left:20px;">标题</th><th>更新时间</th></tr></thead>
+              <thead><tr><th style="padding-left:20px;">标题</th><th>创建时间</th></tr></thead>
               <tbody id="index_notice_list_content">
                   <?php 
                   if(isset($notice_list)){
                     foreach($notice_list['list'] as $info){
-                      echo '<tr><td style="width:70%;padding-left:20px;"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['UpdateTime'] .'</td></tr>';
+                      if($info['IsTop']){
+                        $fontweight = 'bold';
+                      }else{
+                        $fontweight = 'normal';
+                      }
+                      echo '<tr><td style="width:70%;padding-left:20px;font-weight:'.$fontweight.'"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['CreateTime'] .'</td></tr>';
                     }
                   }
                   ?>

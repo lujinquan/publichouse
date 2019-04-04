@@ -116,7 +116,7 @@ class Index extends Base
         }
         //halt($where);
         $num = Db::name('notice')->where($where)->count();
-        $list = Db::name('notice')->where($where)->order('UpdateTime desc')->page(1, 5)->select();
+        $list = Db::name('notice')->where($where)->order('IsTop desc,UpdateTime desc')->page(1, 5)->select();
 
         $pageTool = new PageTool($num);
         $nav = $pageTool->show();
@@ -173,7 +173,7 @@ class Index extends Base
      */
     public function get_upload_file_list(){
         $num = Db::name('file')->count();
-        $list = Db::name('file')->order('IsTop desc,Time desc')->page(1, 5)->select();
+        $list = Db::name('file')->order('IsTop desc,UpdateTime desc')->page(1, 5)->select();
         $pageTool = new PageTool($num);
         $nav = $pageTool->show();
         return array(
@@ -287,7 +287,7 @@ class Index extends Base
         if($id == '-1'){
             $id = ceil($num / 5);
         }
-        $list = Db::name('file')->where('Title like "%'.$search.'%"')->order('Time desc')->page($id, 5)->select();
+        $list = Db::name('file')->where('Title like "%'.$search.'%"')->order('IsTop desc,UpdateTime desc')->page($id, 5)->select();
         $pageTool = new PageTool($num, $data['id']);
         $nav = $pageTool->show();
         return array(

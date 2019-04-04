@@ -160,7 +160,7 @@ $('.notice_info').click(function(){
         success:function(){
             content = unescape(res.data.Content);
             $('#title_info').html(res.data.Title);
-            $('#update_time_info').html(res.data.UpdateTime);
+            $('#update_time_info').html(res.data.CreateTime);
             $('#name_info').html(res.data.Name);
             $('#content_info').html(content);
         }

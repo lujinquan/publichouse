@@ -9,7 +9,11 @@ $('#index_notice_pages').on('click', '.page_notice_index', function(){
 		$('#index_notice_list_content').empty();
 		var  buf = '';
 		for (var i = 0; i < list.length; i++) {
-			buf += '<tr><td width="50%"><a class="notice_info" id="'+ list[i].id +'" href="javascript:void(0)">' + list[i].Title + '</a></td><td>'+ list[i].UpdateTime +'</td></tr>';
+			if(list[i].IsTop == 1){
+				buf += '<tr><td style="width:70%;"><a class="notice_info" id="'+ list[i].id +'" href="javascript:void(0)"><strong>' + list[i].Title + '</strong></a></td><td>'+ list[i].UpdateTime +'</td></tr>';
+			}else{
+				buf += '<tr><td style="width:70%;"><a class="notice_info" id="'+ list[i].id +'" href="javascript:void(0)">' + list[i].Title + '</a></td><td>'+ list[i].UpdateTime +'</td></tr>';
+			}	
 		}
 		$('#index_notice_list_content').append(buf);
 
@@ -35,7 +39,7 @@ $('#index_notice_list_content').on('click', '.notice_info', function(){
     });
     layer.open({
         type:1,
-        area:['700px','600px'],
+        area:['1000px','700px'],
         
         resize:false,
         zIndex:100,
@@ -86,7 +90,12 @@ $('#upload_file_pages').on('click', '.upload_file_index', function(){
 		$('#index_upload_file_list_content').empty();
 		var  buf = '';
 		for (var i = 0; i < list.length; i++) {
-			buf += '<tr><td width="50%">'+ list[i].Title +'</td><td><a class="index-file-download am-icon-download" href="downloadFile?file='+ list[i].Url +'"></a></td><td>'+ list[i].Time +'</td></tr>';
+			if(list[i].IsTop == 1){
+				buf += '<tr><td width="50%"><strong>'+ list[i].Title +'</strong></td><td><a class="index-file-download am-icon-download" href="downloadFile?file='+ list[i].Url +'"></a></td><td>'+ list[i].CreateTime +'</td></tr>';
+			}else{
+				buf += '<tr><td width="50%">'+ list[i].Title +'</td><td><a class="index-file-download am-icon-download" href="downloadFile?file='+ list[i].Url +'"></a></td><td>'+ list[i].CreateTime +'</td></tr>';
+			}	
+			
 		}
 		$('#index_upload_file_list_content').append(buf);
 

@@ -67,7 +67,7 @@ class Attachment extends Model
      * 获取所有文件信息
      */
     public function get_all_file_lst(){
-        $fileList['obj'] = Db::name('file')->order('IsTop desc,Time desc')->paginate(config('paginate.list_rows'));
+        $fileList['obj'] = Db::name('file')->order('IsTop desc,UpdateTime desc')->paginate(config('paginate.list_rows'));
         $fileList['arr'] = $fileList['obj']->all();
         return $fileList;
     }
@@ -78,7 +78,7 @@ class Attachment extends Model
     public function add_url_of_upload_files($title, $name){
         $uploaduser = Session::get('user_base_info.name');
         $time = date('Y-m-d H:i:s', time());
-        $info = ['Url' => '/uploads/files/'.$name, 'Title' => $title, 'UploadUser' => $uploaduser, 'Time' => $time];
+        $info = ['Url' => '/uploads/files/'.$name, 'Title' => $title, 'UploadUser' => $uploaduser, 'CreateTime' => $time];
         return Db::name('file')->insert($info);
     }
     /**
