@@ -17,24 +17,30 @@ $('#publish_notice').click(function() {
         yes:function(add){
             var title = $('#title').val();
             var institution = $('#institution').val();
-            var istop = $('input:radio:checked').val();
+            var istop = $('#istop').val();
             var content = editor.html();
             if($.trim(title) == ''){
                 layer.msg('标题不能为空');return ;
             } else if($.trim(content) == ''){
                 layer.msg('内容不能为空');return ;
             }
-            content = escape(istop);
+            content = escape(content);
             console.log(content);
             var data = 'title='+title+'&institution='+institution+'&content='+content+'&istop='+istop;
             $.post('/ph/Notice/add', data, function(res){
                 res = JSON.parse(res);
                 console.log(res);
-                if(res.data == '1'){
-                    layer.msg('公告已发布');
-                    location.reload();
+                // if(res.data == '1'){
+                //     layer.msg('公告已发布');
+                //     location.reload();
+                // }
+                if(res.retcode == 2000){
+                    layer.msg('发布成功');
+                    layer.close(add);
+                }else{
+                    layer.msg(res.msg);
                 }
-                layer.close(add);
+                
                 // $(location).attr('href', '');
             });
 
@@ -61,10 +67,12 @@ $('#modify_notice').click(function(){
     var res = null;
 
     $.get('/ph/Notice/modify/id/'+id, function(msg){
+
         msg = JSON.parse(msg);
         $('#modify_title').val(msg.data.Title);
-        $("input[name='IsTop'][value='"+msg.data.IsTop+"']").attr("checked","checked");
-        $("#institution option[value='"+msg.data.Institution+"']").attr("selected","selected");
+        $('#modify_editor').val(msg.data.Content);
+        $("#IsTop option[value='"+msg.data.IsTop+"']").attr("selected","selected");
+        $("#InstitutionID option[value='"+msg.data.Institution+"']").attr("selected","selected");
         layer.open({
             type:1,
             area:['900px','650px'],
@@ -81,10 +89,10 @@ $('#modify_notice').click(function(){
             },
             yes:function(modify){
                 var title = $('#modify_title').val();
-                var institution = $('#institution').val();
-                var istop = $('input:radio:checked').val();
+                var institution = $('#InstitutionID option:selected').val();
+                var istop = $('#IsTop option:selected').val();
                 var content = editor.html();
-                console.log(content + '-----');
+                console.log(istop);
                 if($.trim(title) == ''){
                     layer.msg('标题不能为空s');return ;
                 } else if($.trim(content) == ''){
@@ -97,6 +105,12 @@ $('#modify_notice').click(function(){
                     if(res.data == '1'){
                         layer.msg('公告已修改');
                         layer.close(modify);
+                    }
+                    if(res.retcode == 2000){
+                        layer.msg('修改成功');
+                        layer.close(modify);
+                    }else{
+                        layer.msg(res.msg);
                     }
                 });
                 // ue.destroy();

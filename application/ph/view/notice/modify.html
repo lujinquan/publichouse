@@ -17,7 +17,7 @@
 			<input type="text" name="modify_title" id="modify_title" placeholder="" required/>
 		</div>
 	</div>
-	<div class="am-form-group am-u-md-12">
+<!-- 	<div class="am-form-group am-u-md-12">
 		<label for="doc-select-8" style="float:left;">状态：</label>
 		<div class="am-u-md-8">
 			<label class="am-radio-inline">
@@ -27,11 +27,21 @@
 				<input type="radio" value="0" name="IsTop" class="radio" checked="checked" > 普通
 			</label>
 		</div>
+	</div> -->
+	<div class="am-form-group am-u-md-12">
+	  <label for="doc-select-8" style="float:left;">状态：</label>
+	  <div class="am-u-md-8">
+		<select name="IsTop" id="IsTop" style="width:180px">
+			<option  value="" style="display:none">请选择</option>
+			<option value="1">置顶</option>
+			<option value="0">普通</option>
+		</select>
+	  </div>
 	</div>
 	<div class="am-form-group am-u-md-12">
 	  <label for="doc-select-8" style="float:left;">可见：</label>
 	  <div class="am-u-md-8">
-		<select name="InstitutionID" id="institution" style="width:180px">
+		<select name="InstitutionID" id="InstitutionID" style="width:180px">
 			<option  value="" style="display:none">请选择</option>
 			<option value="4">全部</option>
 			<option value="2">紫阳所</option>
