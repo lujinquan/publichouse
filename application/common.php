@@ -712,11 +712,11 @@ function count_house_rent($houseid){
     }
     $roomArr = Db::name('room')->where(['HouseID'=>['like','%'.$houseid.'%'],'Status'=>['eq',1]])->field('RoomID,RoomRentMonth')->select();
     // 处理两户共用，一户比另一户多1毛钱租金的情况
-    $rents = Db::name('room_amend')->where(['HouseID'=>$houseid])->column('RoomID,RoomRentMonth');
+    //$rents = Db::name('room_amend')->where(['HouseID'=>$houseid])->column('RoomID,RoomRentMonth');
     // 返回所有房间的计算租金的和
     if($roomArr){
         foreach ($roomArr as $value) {
-            $rent[] = isset($rents[$value['RoomID']])?$rents[$value['RoomID']]:$value['RoomRentMonth'];         
+            $rent[] = $value['RoomRentMonth'];         
         }
         $sumrent = array_sum($rent);
     }else{
@@ -763,12 +763,12 @@ function count_room_rent($roomid , $houseid = ''){
         // 房间的架空率，与楼栋是否一层为架空层有关
         $emptyPoint = $banOne['IfFirst']?0.98:1;
         // 处理两户共用，一户比另一户多1毛钱租金的情况
-        if($houseid){
-            $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
-            if($roomRent){
-                $roomOne['LeasedArea'] = $roomRent;
-            }
-        }
+        // if($houseid){
+        //     $roomRent = Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$roomid])->value('LeasedArea');
+        //     if($roomRent){
+        //         $roomOne['LeasedArea'] = $roomRent;
+        //     }
+        // }
         //dump('计租面积：'.$roomOne['LeasedArea'].',基价折减率：'.$roomOne['RentPoint'].',结构基价：'.$structureTypePoint.',架空率：'.$emptyPoint.',层次调解率'.$floorPoint."。公式：".'('.$roomOne['LeasedArea'].'*('.$roomOne['RentPoint'].'*'.$structureTypePoint.')'.'*'.$emptyPoint.'*'.$floorPoint.')');
         // 计算租金= 计租面积（使用面积，房间类型，是否共用） * 基价折减率（有无上下水这种折减） * 结构基价  *  架空率 * 层次调解率
         return round($roomOne['LeasedArea'] * round($roomOne['RentPoint'] * $structureTypePoint,2) * $emptyPoint * $floorPoint,2); 
@@ -823,14 +823,14 @@ function count_house_area($houseid){
         return array('HouseUsearea' =>0, 'LeaseArea' =>0);
     }else{
         $roomidArr = Db::name('room')->where(['HouseID'=>['like','%'.$houseid.'%'],'RoomPublicStatus'=>['<',3]])->field('RoomID,UseArea,LeasedArea')->select();
-        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
+        //$roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         if($roomidArr){
             foreach ($roomidArr as $v) {
-                if(isset($roomAmend[$v['RoomID']])){
-                    $leasedAreaArr[] = $roomAmend[$v['RoomID']]['LeasedArea'];
-                } else {
+                // if(isset($roomAmend[$v['RoomID']])){
+                //     $leasedAreaArr[] = $roomAmend[$v['RoomID']]['LeasedArea'];
+                // } else {
                     $leasedAreaArr[] = $v['LeasedArea'];
-                }
+                //}
                 $useAreaArr[] = $v['UseArea'];
             }
             return array('HouseUsearea' => array_sum($useAreaArr), 'LeaseArea' => array_sum($leasedAreaArr));

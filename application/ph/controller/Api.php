@@ -309,19 +309,20 @@ class Api extends Controller
             ->select();
         $roomTypeNames = Db::name('room_type_point')->column('id,RoomTypeName');
         $sort = Db::name('room_type_point')->column('id,Sort');
-        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
+        //$roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         foreach ($rooms as $key => $value) {
-            if(isset($roomAmend[$value['RoomID']])){
-                $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
-                $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
+
+            // if(isset($roomAmend[$value['RoomID']])){
+            //     $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
+            //     $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
                 
-                if($value['RoomRentMonth'] == 0){
-                    //halt($value['RoomRentMonth']);
-                    $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
-                    Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
-                }
-            }
-      
+            //     if($value['RoomRentMonth'] == 0){
+            //         //halt($value['RoomRentMonth']);
+            //         $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
+            //         Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
+            //     }
+            // }
+            $value['LeasedArea'] = round($value['LeasedArea'],2);
             $value['RentPoint'] = (100 - $value['RentPoint'] * 100) . '%';
             $value['OwnerType'] = get_owner($value['OwnerType']);
             $value['FloorPoint'] = ((get_floor_point($value['FloorID'], $result['banDetail']['BanFloorNum'], $result['banDetail']['IfElevator'])) * 100) . '%'; 
@@ -385,18 +386,19 @@ class Api extends Controller
         $roomTypeNames = Db::name('room_type_point')->order('Sort asc')->column('Sort,RoomTypeName');
         $sort = Db::name('room_type_point')->column('id,Sort');
         $result['roomTypes'] = $roomTypeNames;
-        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
+        //$roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
         foreach ($rooms as $key => $value) {
-            if(isset($roomAmend[$value['RoomID']])){
-                $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
-                $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
+            // if(isset($roomAmend[$value['RoomID']])){
+            //     $value['LeasedArea'] = $roomAmend[$value['RoomID']]['LeasedArea'];
+            //     $value['RoomRentMonth'] = $roomAmend[$value['RoomID']]['RoomRentMonth'];
                 
-                if($value['RoomRentMonth'] == 0){
-                    //halt($value['RoomRentMonth']);
-                    $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
-                    Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
-                }
-            }
+            //     if($value['RoomRentMonth'] == 0){
+            //         //halt($value['RoomRentMonth']);
+            //         $value['RoomRentMonth'] = count_room_rent($value['RoomID'],$houseid);
+            //         Db::name('room_amend')->where(['HouseID'=>$houseid,'RoomID'=>$value['RoomID']])->setField('RoomRentMonth',$value['RoomRentMonth']);
+            //     }
+            // }
+            $value['LeasedArea'] = round($value['LeasedArea'],2);
             $value['RentPoint'] = (100 - $value['RentPoint'] * 100) . '%';
             $value['FloorPoint'] = ((get_floor_point($value['FloorID'], $result['banDetail']['BanFloorNum'], $result['banDetail']['IfElevator'])) * 100) . '%';
             $value['RoomName'] = $roomTypeNames[$value['RoomType']];
