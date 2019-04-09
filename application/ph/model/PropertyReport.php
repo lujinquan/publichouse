@@ -44,14 +44,16 @@ class PropertyReport extends Model
             'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',7),
             'Status' => array('eq',1),
-            'OrderDate' => array('between', [$year . '01', $year . '12']),
+            //'OrderDate' => array('between', [$year . '01', $year . '12']),
+            'OrderDate' => array('eq', $year),
         ];
 
         $zhuxiaoWhere = [
             'OwnerType' => array('in',[1,2,3,5,6,7]),
             'ChangeType' => array('eq',8),
             'Status' => array('eq',1),
-            'OrderDate' => array('between', [$year . '01', $year . '12']),
+            //'OrderDate' => array('between', [$year . '01', $year . '12']),
+            'OrderDate' => array('eq', $year),
         ];
         
         $propertyData = Db::name('ban')->field('OwnerType,TubulationID,sum(TotalNum) as totalNums, sum(TotalArea) as totalAreas')

@@ -44,12 +44,12 @@ class SystemLog extends Base
 
         set_time_limit(0);
         Debug::remark('begin');
-        $year = $this->nowyear;
-        $HouseReportdata = model('ph/PropertyReport')->index($year);
+        $nowmonth = $this->nowmonth;
+        $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
             'type' => 'PropertyReport',
-            'date' => $year,
+            'date' => $nowmonth,
         ];
         $res = Db::name('report')->where($where)->find();
         if($res){
@@ -58,7 +58,7 @@ class SystemLog extends Base
             $re = Db::name('report')->insert([
                 'data'=>json_encode($HouseReportdata),
                 'type'=>'PropertyReport',
-                'date'=>$year,
+                'date'=>$nowmonth,
             ]);
         }
         // $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);

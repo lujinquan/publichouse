@@ -29,7 +29,7 @@ class PropertyReport extends Base
         //初始条件
         $institutionid = session('user_base_info.institution_id');
         $ownerType = 11;
-        $date = date('Y',time());
+        $date = date('Y-m',time());
         //$propertyOption['TubulationID'] = $institutionid;
 
         /*搜索条件*/
@@ -48,7 +48,7 @@ class PropertyReport extends Base
             }
         }
         //if($date == 2017){
-            $dataJson = Db::name('report')->where(['type'=>'PropertyReport','date'=>$date])->value('data');
+            $dataJson = Db::name('report')->where(['type'=>'PropertyReport','date'=>str_replace('-','',$date)])->value('data');
             $datas = json_decode($dataJson,true);
             // dump($ownerType);
             // dump($institutionid);
