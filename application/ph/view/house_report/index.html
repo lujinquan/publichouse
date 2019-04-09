@@ -90,7 +90,7 @@
                             $month =date('Y-m',time());
                         }
                     ?>
-                    <input type="text" id="timeYear" name="month" value="{$month}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'years',minViewMode: 'months'}" placeholder="日历组件" data-am-datepicker readonly/>
+                    <input type="text" id="timeYear" name="month" value="{$month}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'months',minViewMode: 'months'}" placeholder="日历组件" data-am-datepicker readonly/>
                 </div>
                 <a href="javascript:void(0);"  id="yueQuery" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span> 查询</a>
                 <a type="button" href="/ph/HouseReport/index" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-reply"></span> 重置</a>
@@ -112,5 +112,20 @@
     $('#printForm').click(function () {
         window.print();
     });
+    var checkin = $('#timeYear').datepicker({
+        onRender: function(date){
+            //var nowTemp = new Date();
+            //var nowMoth = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), 1, 0, 0, 0, 0).valueOf();
+            
+            //禁止搜索2019-01,2019-02，2019-03
+            //var forbidDate = new Array(1551369600000,1548950400000,1546272000000);
+            //2019-04以前只能查201712,201812两个日期
+            var showDate = new Array(1543593600000,1512057600000);
+            //return (forbidDate.indexOf(date.valueOf()) > -1)? 'am-disabled' : '';
+            return ((date.valueOf() < 1554048000000) && (showDate.indexOf(date.valueOf()) < 0))? 'am-disabled' : '';
+        }
+    }).on('changeDate.datepicker.amui', function(ev) {
+
+    }).data('amui.datepicker');
 </script>
 {/block}
