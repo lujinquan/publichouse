@@ -546,8 +546,8 @@ class ChangeAudit extends Model
 
     }
 
-    //创建一个子订单，例如（补充资料完成，每次审核完成 ，）
-    public function create_child_order($changeOrderID, $reson = '')
+    //创建一个子订单，例如（补充资料完成，每次审核完成 ，$isfail 0打回，1不通过，2通过
+    public function create_child_order($changeOrderID, $reson = '',$isfail = 0)
     {   //此处有别与使用权变更，不通过打回的时候直接进入记录
 
         //获取流程总人数
@@ -572,25 +572,27 @@ class ChangeAudit extends Model
         //判断当前流程，，通过比对当前进行到第几步和流程总步数，来确定是否为终审
         $status = self::where($where)->value('Status');
 
-        //若中间审核通过
-        if ($status < $total && $reson == '') {
-
-            self::where($where)->setInc('Status', 1); //步骤递进
-
-            $datas['Status'] = 2;
-
-
-            //若审核不通过
-        } elseif ($reson != '') {
-
+       
+        //若审核不通过
+        if ($isfail == 0) {
             //终审不通过则状态改为 0
             self::where($where)->update(['Status' => 2, 'FinishTime' => time()]);
+            $datas['Status'] = 3;
+            $datas['Step'] = 2;
+        } elseif ($status < $total && $isfail == 2) {
+            self::where($where)->setInc('Status', 1); //步骤递进
+            $datas['Status'] = 2;
+        //若审核不通过
+        } elseif ($reson != '' && $isfail == 1) {
+
+            //终审不通过则状态改为 0
+            self::where($where)->update(['Status' => 0, 'FinishTime' => time()]);
 
             $datas['Status'] = 3;
             $datas['Step'] = 2;
 
-            // 若终审通过
-        } elseif ($status == $total && $reson == '') {
+        // 若终审通过
+        } elseif ($status == $total && $reson == '' && $isfail == 0) {
 
             //终审通过则状态改为  1,并写入最终通过时间
             self::where($where)->update(['Status' => 1, 'FinishTime' => time()]);
@@ -1246,7 +1248,7 @@ class ChangeAudit extends Model
             $map['Total'] = array('eq', $v3['Step']);
 
             if ($v3['Status'] == 3) {
-                $v3['Status'] = '不通过';
+                $v3['Status'] = '发回';
             }
 
             $v3['Step'] = Db::name('process_config')->where($map)->value('Title');  //操作内容

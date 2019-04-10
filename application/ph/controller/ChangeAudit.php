@@ -167,7 +167,8 @@ class ChangeAudit extends Base
 
             $data['reson'] = isset($data['reson'])?$data['reson']:'';
 
-            $result = model('ph/ChangeAudit')->create_child_order($data['ChangeOrderID'], $data['reson']); //执行审核
+            $isfail = isset($data['isfail'])?$data['isfail']:2;
+            $result = model('ph/ChangeAudit')->create_child_order($data['ChangeOrderID'], $data['reson'],$isfail); //执行审核
 
             return ($result === true)?jsons('2000' ,'审核完成'):jsons('4000' ,'审核异常');
 

@@ -950,7 +950,7 @@ function layerBox(value,id,name,operation,status){
         zIndex: 100,
         title: [name, 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
         content: $('#'+id+''),
-        btn:operation==1?['通过','不通过']:'',
+        btn:operation==1?['通过','不通过','打回']:'',
         success: function(){
 
         },
@@ -965,8 +965,11 @@ function layerBox(value,id,name,operation,status){
         	processPass(formData,this_index);
         },
         btn2:function(){
-			noPass(value)
-		}
+			noPass(value);
+		},
+        btn3:function(){
+            goBack(value);
+        }
     })
 }
 
@@ -1009,7 +1012,7 @@ function noPass(value,reason){
 				reasonMsg=$('#reason').val();
 			}
 			console.log(reasonMsg);
-			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
+			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg,isfail:1},function(res){
 				res = JSON.parse(res);
 				console.log(res);
 				layer.msg(res.msg);
@@ -1020,6 +1023,41 @@ function noPass(value,reason){
 			});
 		}
 	})
+}
+
+// 审批不通过事件
+function goBack(value,reason){
+    layer.open({
+        type:1,
+        area:['400px','400px'],
+        resize:false,
+        zIndex:100,
+        title:['打回原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+        content:'<textarea id="backReason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+        btn:['确认'],
+        success:function(){
+            console.log(reason);
+            $('#backReason').val(reason||'');
+        },
+        yes:function(msgIndex){
+            var reasonMsg = $('#backReason').val();
+            if (reasonMsg=='') {
+                reasonMsg='空';
+            }else{
+                reasonMsg=$('#backReason').val();
+            }
+            // console.log(reasonMsg);
+            $.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg,isfail:0},function(res){
+                res = JSON.parse(res);
+                console.log(res);
+                layer.msg(res.msg);
+                if(res.retcode == "2000"){
+                    layer.close(msgIndex);
+                    location.reload();
+                }
+            });
+        }
+    })
 }
 
 //计租表
