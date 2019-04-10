@@ -302,12 +302,14 @@
                       foreach($upload_file_list['list'] as $info){
                         if($info['IsTop']){
                           $fontweight = 'bold';
+                          $fontsize = '1.5rem';
                         }else{
                           $fontweight = 'normal';
+                          $fontsize = '1.25rem';
                         }
                         echo '
                       <tr>
-                        <td style="width:50%;padding-left:20px;font-weight:'.$fontweight.'">'. $info['Title'] .'</td>
+                        <td style="width:50%;padding-left:20px;font-size:'.$fontsize.';font-weight:'.$fontweight.'">'. $info['Title'] .'</td>
                         <td style="width:20%;"><a class="index-file-download" href="downloadFile?file='. $info['Url'] .'" style="color:#4C84FF;">下载</a></td>
                         <td>'. $info['CreateTime'] .'</td>
                       </tr>';
@@ -346,10 +348,12 @@
                     foreach($notice_list['list'] as $info){
                       if($info['IsTop']){
                         $fontweight = 'bold';
+                        $fontsize = '1.5rem';
                       }else{
                         $fontweight = 'normal';
+                        $fontsize = '1.25rem';
                       }
-                      echo '<tr><td style="width:70%;padding-left:20px;font-weight:'.$fontweight.'"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['CreateTime'] .'</td></tr>';
+                      echo '<tr><td style="width:70%;padding-left:20px;font-size:'.$fontsize.';font-weight:'.$fontweight.'"><span style="cursor:pointer;" class="notice_info" id="'. $info['id'] .'">' . $info['Title'] . '</span></td><td>'. $info['CreateTime'] .'</td></tr>';
                     }
                   }
                   ?>
