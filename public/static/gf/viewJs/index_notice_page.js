@@ -39,7 +39,7 @@ $('#index_notice_list_content').on('click', '.notice_info', function(){
     });
     layer.open({
         type:1,
-        area:['1000px','700px'],
+        area:['1050px','700px'],
         
         resize:false,
         zIndex:100,
