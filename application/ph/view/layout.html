@@ -12,9 +12,9 @@
   <link rel="icon" type="image/png" href="/public/static/gf/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="/public/static/gf/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="" />
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/admin.css">
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v={:config('version_sign')}"/>
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v={:config('version_sign')}"/>
+  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v={:config('version_sign')}">
   <style>
     .am-topbar-nav>li>a:after{display:none;}
     body .ddd-class .layui-layer-title{background:#FFF;font-size:20px;}
@@ -33,8 +33,8 @@
   </style>
   {block name="css"}{/block}
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/public/static/gf/js/jquery.min.js"></script>
-<script src="/public/static/gf/layer/layer.js"></script>
+<script src="/public/static/gf/js/jquery.min.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/layer/layer.js?v={:config('version_sign')}"></script>
 
 <!--<![endif]-->
 </head>
@@ -557,9 +557,9 @@
 {include file="application/ph/view/notice/notice_info.html" /}
 {include file="application/ph/view/index/second_menu.html" /}
 {include file="application/ph/view/index/version.html" /}
-<script src="/public/static/gf/js/amazeui.min.js"></script>
-<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
-<script src="/public/static/gf/js/app.js"></script>
+<script src="/public/static/gf/js/amazeui.min.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/js/app.js?v={:config('version_sign')}"></script>
 <script type="text/javascript">
   var body_height = $(document.body).height();
   var window_height = $(window).height();
@@ -686,7 +686,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 // admin-sidebar-sub左边列表栏样式选择结束
 </script>
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js?v={:config('version_sign')}"></script>
 {/block}
 </body>
 </html>

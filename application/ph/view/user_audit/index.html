@@ -311,7 +311,7 @@
 {include file="application/ph/view/user_audit/approveForm.html" /}
 {/block}
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script>
-<script type="text/javascript" src="/public/static/gf/js/viewer.min.js"></script>
-<script type="text/javascript" src="/public/static/gf/viewJs/user_audit.js"></script>
+<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/user_audit.js?v={:config('version_sign')}"></script>
 {/block}

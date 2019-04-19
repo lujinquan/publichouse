@@ -296,6 +296,6 @@
 {include file="application/ph/view/room/modify.html" /}
 {/block}
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/js/validation.js"></script>
-<script type="text/javascript" src="/public/static/gf/viewJs/room.js"></script>
+<script type="text/javascript" src="/public/static/gf/js/validation.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/room.js?v={:config('version_sign')}"></script>
 {/block}

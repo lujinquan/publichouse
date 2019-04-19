@@ -1,7 +1,7 @@
 {extend name="layout" /}
 {block name="title"}<title>地图查询</title>{/block}
 {block name="content"}
-	<link rel="stylesheet" type="text/css" href="/public/static/gf/css/map.css">
+	<link rel="stylesheet" type="text/css" href="/public/static/gf/css/map.css?v={:config('version_sign')}">
 	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=2xlodrKVRyFNeopCajiMTfgIOr8dnUAe"></script>
 </head>
 <body>
@@ -138,7 +138,7 @@
 	{include file="application/ph/view/map_query/detail.html" /}
 	{include file="application/ph/view/map_query/house_detail.html" /}
 </body>
-<script type="text/javascript" src="/public/static/gf/viewJs/mapQuery.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/mapQuery.js?v={:config('version_sign')}"></script>
 </html>
 
 {/block}
