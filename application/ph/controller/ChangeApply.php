@@ -199,7 +199,7 @@ class ChangeApply extends Base
 
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
-                    $datas['ProcessConfigType'] = 5;        //流程控制线路
+                    $datas['ProcessConfigType'] = 250;        //流程控制线路
                     $datas['ChangeType'] = $data['type'];   //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[5];  //异动名称
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'05'.$suffix;   //04代表陈欠核销

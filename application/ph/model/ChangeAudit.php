@@ -572,7 +572,7 @@ class ChangeAudit extends Model
         //判断当前流程，，通过比对当前进行到第几步和流程总步数，来确定是否为终审
         $status = self::where($where)->value('Status');
 
-       
+       //dump($isfail);dump($status);halt($total);
         //若审核不通过
         if ($isfail == 0) {
             //终审不通过则状态改为 0
@@ -592,7 +592,7 @@ class ChangeAudit extends Model
             $datas['Step'] = 2;
 
         // 若终审通过
-        } elseif ($status == $total && $reson == '' && $isfail == 0) {
+        } elseif ($status == $total && $reson == '' && $isfail != 0) {
 
             //终审通过则状态改为  1,并写入最终通过时间
             self::where($where)->update(['Status' => 1, 'FinishTime' => time()]);

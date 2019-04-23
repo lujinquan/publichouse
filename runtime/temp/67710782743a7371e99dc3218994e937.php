@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:69:"D:\phpStudy\WWW\publichouse/application/user\view\publics\signin.html";i:1529982035;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:69:"D:\phpStudy\WWW\publichouse/application/user\view\publics\signin.html";i:1555635641;}*/ ?>
 <!--<div style="text-align:center;margin:200px 0px;font-size:20px;">服务器已迁移，请<span style="font-weight:bold;"><a href="http://118.25.128.122" target="_blank">点击此处</a></span>访问……</div>-->
 <!DOCTYPE html>
 <html>
@@ -6,8 +6,8 @@
     <title>武昌区公房管理系统v1.0</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link href="/public/static/user/css/signin.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/public/static/user/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link href="/public/static/user/css/signin.css?v=<?php echo config('version_sign'); ?>" rel="stylesheet" type="text/css" media="all">
+    <script src="/public/static/user/js/jquery-1.10.2.min.js?v=<?php echo config('version_sign'); ?>" type="text/javascript"></script>
 
 </head>
 <body onkeydown="getkeyup(event)">
@@ -57,6 +57,6 @@
     </div>
     <footer>楚天新媒科技（武汉）有限公司</footer>
 </body>
-<script type="text/javascript" src="/public/static/user/js/signin.js"></script>
- <script src="/public/static/user/js/superdog.js" type="text/javascript"></script>
+<script type="text/javascript" src="/public/static/user/js/signin.js?v=<?php echo config('version_sign'); ?>"></script>
+ <script src="/public/static/user/js/superdog.js?v=<?php echo config('version_sign'); ?>" type="text/javascript"></script>
 </html>
