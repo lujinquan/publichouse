@@ -1891,11 +1891,11 @@ EOF;
             $result['house']['InnerAisle'] = 0;
             $result['house']['Kitchen'] = 0;
             foreach($rooms as &$v){
-                $row = Db::name('room_amend')->where(['RoomID'=>$v['RoomID'],'HouseID'=>$houseid])->find();
-                if($row){
-                   $v['LeasedArea'] = $row['LeasedArea'];
-                   $v['RoomRentMonth'] = $row['RoomRentMonth'];
-                }
+                //$row = Db::name('room_amend')->where(['RoomID'=>$v['RoomID'],'HouseID'=>$houseid])->find();
+                //if($row){
+                   $v['LeasedArea'] = round($v['LeasedArea'],2);
+                   //$v['RoomRentMonth'] = $row['RoomRentMonth'];
+                //}
                 switch ($v['RoomPublicStatus']) {
                     case 1:
                         $v['RoomPublicStatus'] = '独';
