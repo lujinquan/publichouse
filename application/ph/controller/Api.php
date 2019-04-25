@@ -1833,7 +1833,7 @@ EOF;
                                       ->join('ban b','a.BanID = b.BanID','left')
                                       ->join('tenant c','a.TenantID = c.TenantID','left')
                                       ->join('ban_structure_type d','b.StructureType = d.id','left')
-                                      ->field('a.UseNature,a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost')
+                                      ->field('a.UseNature,a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost,a.PlusRent')
                                       ->where('a.HouseID',$houseid)
                                       ->find();
 
@@ -1878,7 +1878,7 @@ EOF;
             ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
             ->select();
 
-        $roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
+        //$roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
 
         if(empty($rooms)){
             $rooms = array();
@@ -1933,7 +1933,7 @@ EOF;
 
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
-            $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k + $result['house']['BelowFiveNumRent'] + $result['house']['MoreFiveNumRent'];
+            $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k + $result['house']['BelowFiveNumRent'] + $result['house']['MoreFiveNumRent'] + $result['house']['PlusRent'];
             $result['house']['TotalRoomMonth'] = round($s,1);
             $result['house']['HeDingRoomMonth'] = round($s,1);
         }
