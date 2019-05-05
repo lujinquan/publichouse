@@ -25,8 +25,9 @@ class LeaseAudit extends Model
         $find = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->field('QrcodeUrl,Deadline,Szno,Recorde')->find();
 
         $result = $find['Deadline']?json_decode($find['Deadline'],true):array();
-
-        $result['applyText_other'] = preg_replace("/\(.*\)/", '', $result['applyText_other']);
+        if($find['Status'] == 5){
+            $result['applyText_other'] = preg_replace("/\(.*\)/", '', $result['applyText_other']);
+        }
         $result['Recorde'] = $find['Recorde'];
         $result['QrcodeUrl'] = $find['QrcodeUrl'];
         $result['Szno'] = $find['Szno']; 
