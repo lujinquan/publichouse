@@ -22,7 +22,7 @@ class LeaseAudit extends Model
      */
     public function get_change_detail_info($changeOrderID){
 
-        $find = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->field('QrcodeUrl,Deadline,Szno,Recorde')->find();
+        $find = Db::name('lease_change_order')->where('ChangeOrderID',$changeOrderID)->field('QrcodeUrl,Deadline,Szno,Recorde,Status')->find();
 
         $result = $find['Deadline']?json_decode($find['Deadline'],true):array();
         if($find['Status'] == 5){
