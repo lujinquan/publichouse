@@ -613,10 +613,10 @@ class Api extends Controller
         $strs = Db::name('ban_structure_type')->column('id,StructureType');
         $uses= Db::name('use_nature')->column('id,UseNature');
 
-        
+        $map['ChangeType'] = isset($map['ChangeType'])?$map['ChangeType']:'';
         
         if(isset($map['flag'])){
-            if($result = Cache::get('allban_'.$currentUserInstitutionID)){
+            if($result = Cache::get('allban_'.$map['ChangeType'].$currentUserInstitutionID)){
                 //halt($result);
                 $s = $results = [];
                 foreach($data as $da){
@@ -671,7 +671,7 @@ class Api extends Controller
                         $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
                     }
                 }
-                Cache::set('allban_'.$currentUserInstitutionID,$result,7200);
+                Cache::set('allban_'.$map['ChangeType'].$currentUserInstitutionID,$result,7200);
                 return jsons('2000', '获取成功', $result);
             }
             
