@@ -386,7 +386,7 @@ class ChangeApply extends Model
                     return $finds;
                 break;
                 case 15:
-                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>15,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>15,'Status'=>['>',1],'OrderDate'=>date('Ym',time())])->find();
                     if($ifin){
                         return jsons('4001','该楼栋已在租金调整（批量）异动单中……');
                     }
@@ -406,7 +406,7 @@ class ChangeApply extends Model
                     return $finds;
                 break;
                 case 16:
-                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>16,'Status'=>['>',0],'OrderDate'=>date('Ym',time())])->find();
+                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>16,'Status'=>['>',1],'OrderDate'=>date('Ym',time())])->find();
                     if($ifin){
                         return jsons('4001','该楼栋已在租金调整（批量）异动单中……');
                     }
