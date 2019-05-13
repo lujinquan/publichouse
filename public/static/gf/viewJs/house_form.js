@@ -383,6 +383,19 @@ $(".HouseDetailBtn").click(function() {
     // })
 });
 
+// 修改加计租金里面的8户以上共用
+$('#jiaji').on('change',function(){
+    var jiaji = $('#jiaji').val();
+    var houseid = $('#house_id').val();
+    $.get('/ph/HouseInfo/jiaji/jiaji/'+jiaji+'/houseid/'+houseid,function(res){
+        res = JSON.parse(res);
+        console.log(res);
+        if(res.retcode == 2000){
+            layer.msg(res.msg);
+        }
+    });
+});
+
 function readFile(fileUp, fileShow) {
     if (typeof FileReader === 'undefined') {
         fileShow.text('浏览器不支持！');
@@ -414,6 +427,7 @@ $('.RentForm').click(function() {
         res = JSON.parse(res);
         // console.log(res);
         $('.RentBan').text(res.data.banDetail.BanID);
+        $('#house_id').val(res.data.houseDetail.HouseID);
         $('.RentStructure').text(res.data.banDetail.StructureType);
         $('.RentAddress').text(res.data.banDetail.BanAddress);
         $('.RentPoint').text(res.data.banDetail.NewPoint);

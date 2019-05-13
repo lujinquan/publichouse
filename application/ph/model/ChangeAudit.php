@@ -660,6 +660,7 @@ class ChangeAudit extends Model
                                                 'UnpaidRent'=>['exp','UnpaidRent'-$one['InflRent']] ,
                                             ]);
                 }
+
                 // $rentorderfind = Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])->find();        
                 // if($rentconfigfind){
                 //     Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])
@@ -672,7 +673,7 @@ class ChangeAudit extends Model
                 //                             ]);
                 // }
 
-                $str = "( 1,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "," . $one['DateEnd'] .")";
+                $str = "( 1,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
 
@@ -682,10 +683,8 @@ class ChangeAudit extends Model
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
                 
                 Db::name('house')->where('HouseID', 'eq', $one['HouseID'])->update(['IfEmpty' => 1]);
-                // Db::name('rent_config')->where('HouseID', 'eq', $one['HouseID'])->delete();
-                // Db::name('rent_order')->where(['HouseID'=>['eq', $one['HouseID']],'OrderDate'=>date('Ym',time())])->delete();
-
-                $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate'] .")";
+   
+                $str = "( 2,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()) .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 
@@ -706,13 +705,13 @@ class ChangeAudit extends Model
 
                     $str = '';
                     foreach($housearr as $v){
-                        $str .= "('" .$changeFind['ChangeOrderID'] . "',". $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . $changeFind['OrderDate']. "),";
+                        $str .= "('" .$changeFind['ChangeOrderID'] . "',". $changeFind['ChangeType'] . ",". $v['InstitutionID'] . "," . $v['InstitutionPID'] . "," . $v['HousePrerent'] . ", " . $v['OwnerType'] . "," . $v['UseNature'] . "," . date('Ym',time()). "),";
                     }
 
                 }else{
                     $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->setField('IfSuspend', 1);
                     $housearr = $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->find();
-                    $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $housearr['InstitutionID'] . "," . $housearr['InstitutionPID'] . "," . $housearr['HousePrerent'] . ", " . $housearr['OwnerType'] . "," . $housearr['UseNature'] . "," . $changeFind['OrderDate']. ")";
+                    $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $housearr['InstitutionID'] . "," . $housearr['InstitutionPID'] . "," . $housearr['HousePrerent'] . ", " . $housearr['OwnerType'] . "," . $housearr['UseNature'] . "," . date('Ym',time()). ")";
                 }
 //halt($str);
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeOrderID,ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
@@ -758,9 +757,8 @@ class ChangeAudit extends Model
                 }
                 Db::name('rent_order')->where(['HouseID'=>$one['HouseID'],'OrderDate'=>['<',date('Y').'00']])->delete();
                 //Db::name('house')->where('HouseID',$one['HouseID'])->setDec('ArrearRent',$one['OldYearRent']);
-                
 
-                $str = "( 4,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " . $one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+                $str = "( 4,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " . $one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). ")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,OldMonthRent,OldYearRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 
@@ -854,15 +852,14 @@ class ChangeAudit extends Model
                 model('ph/RentCount')->addOne($findOne['HouseID']);
 
                 // 插入到统计表中
-                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . "," . $v['HouseArea'] ."," . $v['LeasedArea'] ."," . $v['OldOprice'] .", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . $findOne['OrderDate']. ")";
+                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . "," . $v['HouseArea'] ."," . $v['LeasedArea'] ."," . $v['OldOprice'] .", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . date('Ym',time()). ")";
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 break;
 
             case 8:  //注销异动完成后的，系统处理
                 //$nextMonthDate = date('Y', time());
 
-                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-                
+                $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find(); 
                 $deadline = json_decode($changeFind['Deadline'],true);
 
                 // 1、处理对楼栋的影响
@@ -914,7 +911,7 @@ class ChangeAudit extends Model
                 // 2、修改对应的楼栋底下的房屋的状态为注销
                 Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status', 10);
                 Db::name('room')->where('HouseID', 'eq', $changeFind['HouseID'])->setField('Status',10);
-                $str = "( 8,'".$changeFind['ChangeOrderID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", ". $deadline[0]['houseArea'] . ", ". $deadline[0]['cancelHouseUsearea'] . ", ". $deadline[0]['housePrice'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . $changeFind['OrderDate']. "," . $changeFind['CancelType'] .")";
+                $str = "( 8,'".$changeFind['ChangeOrderID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", ". $deadline[0]['houseArea'] . ", ". $deadline[0]['cancelHouseUsearea'] . ", ". $deadline[0]['housePrice'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate,CancelType) values " . rtrim($str, ','));
 
@@ -982,10 +979,10 @@ class ChangeAudit extends Model
 
                     //将异动信息加入到产权报表中
                     if($a['TotalAreaChange'] > 0){
-                        $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
+                        $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
                         Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,NewLeaseType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
                     }else{
-                        $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
+                        $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
                         Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,CancelType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
                     }
 
@@ -1005,7 +1002,7 @@ class ChangeAudit extends Model
                 }
                
                 //房屋调整合并到 调整里面，所以是12
-                $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . $oneData['OrderDate'] .")";
+                $str = "( 12,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . $str);
 
@@ -1013,6 +1010,7 @@ class ChangeAudit extends Model
             case 10:  //管段调整异动完成后的，系统处理 （待完善）
 
                 $oneData = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->field('BanID,HouseID,NewInstitutionID')->find();
+
                 $pid = Db::name('institution')->where('id', 'eq', $oneData['NewInstitutionID'])->value('pid');
                 $map['InstitutionID'] = $pid;
                 $map['TubulationID'] = $oneData['NewInstitutionID'];
@@ -1035,7 +1033,6 @@ class ChangeAudit extends Model
 
             case 11:  //租金追加调整异动完成后的，系统处理
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
-
                 $houseInfo = Db::name('house')->where('HouseID',$one['HouseID'])->find();
 
                 $st = "('". $one['HouseID'] . "'," .$one['OwnerType'] . "," . $one['InstitutionID'] . "," . $one['InstitutionPID'] . ", " .$one['UseNature'] . ", " . $houseInfo['TenantID'] . ",'" . $houseInfo['TenantName'] . "','" . $houseInfo['BanAddress']."',".$houseInfo['HousePrerent'] . "," . $one['OldMonthRent'] . "," . date('Ym',strtotime('-1 month')) . ", " .date('Y',time()) . ", " . date('Ym',time()) . "," . $one['UserNumber'] . "," . time() . "),";
@@ -1045,7 +1042,7 @@ class ChangeAudit extends Model
                 Db::execute("insert into ".config('database.prefix')."old_rent (HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,TenantID,TenantName,BanAddress,HousePrerent,PayRent,PayMonth,PayYear,OldPayMonth,CreateUserID,CreateTime) values " . rtrim($st, ','));
 
                 //追收做到调整里面了
-                $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " .$one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+                $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['OldMonthRent'] . ", " .$one['OldYearRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). ")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,OldMonthRent,OldYearRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 
@@ -1055,7 +1052,7 @@ class ChangeAudit extends Model
 
                 Db::name('house')->where('HouseID', 'eq', $changeFind['HouseID'])->setDec('HousePrerent', $one['InflRent']);
 
-                $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. ")";
+                $str = "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). ")";
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 
@@ -1107,7 +1104,7 @@ class ChangeAudit extends Model
 
                 foreach($deadline['houseArr'] as $v){
                     Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
-                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "),";
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "),";
                 }
 
                 Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent+'.$one['InflRent']],'CivilRent'=>['exp','CivilRent+'.$one['InflRent']]]);
@@ -1129,7 +1126,7 @@ class ChangeAudit extends Model
 
                 foreach($deadline['houseArr'] as $v){
                     Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
-                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . $one['OrderDate']. "),";
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "),";
                 }
 
                 Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent+'.$one['InflRent']],'CivilRent'=>['exp','CivilRent+'.$one['InflRent']]]);

@@ -90,6 +90,18 @@ class HouseInfo extends Base
         }
     }
 
+    public function jiaji()
+    {
+        $houseid = input('houseid');
+        $jiaji = input('jiaji');
+        //halt($houseid);
+        $jiajirent = 0.5 * $jiaji;
+        $re = Db::name('house')->where('HouseID', 'eq', $houseid)->update(['BelowFiveNum'=>$jiaji,'PlusRent'=>$jiajirent]);
+        if($re !== false){
+            return jsons('2000', '修改成功');
+        } 
+    }
+
     public function edit()
     {
         $houseID = input('HouseID');

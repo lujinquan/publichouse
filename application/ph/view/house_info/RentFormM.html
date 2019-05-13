@@ -59,6 +59,7 @@
 				<p class="detail_p_style RentAddress" ></p>
 			  </div>
 		</div>
+		<input type="hidden" id="house_id" value=""/>
 	</div><!-- 第一排 -->
     <div class="am-u-md-12">
     	<div class="am-u-md-2">
@@ -139,8 +140,10 @@
 				<div><span class="w200">瓷砖、马赛克、地板砖</span><span class="w50 mr "><input type="text"  width="100%" class="RentCeramicd" name='AddRent[RentCeramic]'/></span>m²</div>
 				<div><span class="w200">浴盆</span><span class="w50 mr"><input type="text"  width="100%" class="RentBathd" name='AddRent[RentBath]' /></span>件</div>
 				<div><span class="w200">面盆</span><span class="w50 mr"><input type="text"  width="100%" class="RentBasind" name='AddRent[RentBasin]' /></span>件</div>
-				<div><span class="w200">空间1至1.7米(5㎡以下)</span><span class="w50 mr"><input type="text"  width="100%" class="RentBelowd" name='AddRent[RentBelow]' readonly="readonly"/></span>个</div>
-				<div><span class="w200">阁楼(含1.7米)(5㎡以上)</span><span class="w50 mr"><input type="text"  width="100%" class="RentMored" name='AddRent[RentMore]' readonly="readonly" /></span>个</div>
+				<div><span class="w200">8户以上共用房间</span><span class="w50 mr"><input type="text"  width="100%" id="jiaji" class="RentBelowd" name='AddRent[RentBelow]' /></span>个</div>
+				<div><span class="w400" style="font-size:12px;color:red">* 由于存在100多户共用厕所等等问题，请将8户以上共用房间个数直接填入上述栏中。</span><span class="w50 mr"></span></div>
+				<input type="hidden"  width="100%" class="RentMored" name='AddRent[RentMore]' readonly="readonly" />
+				<!-- <div><span class="w200">阁楼(含1.7米)(5㎡以上)</span><span class="w50 mr"><input type="text"  width="100%" class="RentMored" name='AddRent[RentMore]' readonly="readonly" /></span>个</div> -->
     		</div>
     		<div class="am-u-md-6">
     			<div class="am-u-md-12">

@@ -18,6 +18,7 @@ use think\Debug;
  */
 class Api extends Controller
 {
+
     /**
      * @title 获取房屋对应的租户信息 ：注意，需要检测是否允许查询当前房屋信息（房管员只能查询自己所处管段的房屋）
      * @author Mr.Lu
@@ -1824,6 +1825,129 @@ EOF;
     }
 
     public function lease_house_info()
+    {
+        $houseid = input('HouseID');
+
+        $result = [];
+
+        $result['house'] = Db::name('house')->alias('a')
+                                      ->join('ban b','a.BanID = b.BanID','left')
+                                      ->join('tenant c','a.TenantID = c.TenantID','left')
+                                      ->join('ban_structure_type d','b.StructureType = d.id','left')
+                                      ->field('a.UseNature,a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost,a.PlusRent')
+                                      ->where('a.HouseID',$houseid)
+                                      ->find();
+
+        // $s = [
+        //     '1' => '老证换新证',
+        //     '2' => '遗失补发',
+        //     '3' => '亲属转让',
+        //     '4' => '正常过户',
+        //     '5' => '新发租',
+        //     '6' => '其他',
+        // ];
+
+        // if($recorde){
+        //     foreach($recorde as &$r){
+        //         $r['CreateTime'] = date('Y年m月d日',$r['CreateTime']);
+        //         $r['Type'] = $s[$r['Type']];
+        //     }
+        // }
+
+        $result['house']['Recorde'] = Db::name('lease_change_order')->where(['HouseID'=>$houseid,'Status'=>1])->order('CreateTime desc')->value('Recorde');
+
+        if(empty($result['house'])){
+            return jsons('4000','参数错误');
+        }
+
+        $val = Db::name('config')->where('id',1)->value('Value');
+
+        $result['house']['Szno'] = $result['house']['Szno'].$val;
+        
+        $result['house']['TotalUseArea'] = 0;
+        $result['house']['TotalLeaseArea'] = 0;
+        $result['house']['TotalRoomMonth'] = 0;
+        $result['house']['HallRent'] = 0;
+        $result['house']['ToiletRent'] = 0;
+        $result['house']['AisleRent'] = 0;
+        $result['house']['KitchenRent'] = 0;
+
+        $result['house']['BelowFiveNumRent'] = 0.5 * $result['house']['BelowFiveNum'];
+        $result['house']['MoreFiveNumRent'] = 1 * $result['house']['MoreFiveNum'];
+
+        $rooms = Db::name('room')->field('RoomID,RoomType,RoomName,RoomNumber,UseArea,LeasedArea,RoomRentMonth,RoomPublicStatus')
+            ->where(['HouseID' => ['like', '%' . $houseid . '%'], 'Status'=>1])
+            ->select();
+
+        //$roomAmend = Db::name('room_amend')->where('HouseID',$houseid)->column('RoomID,LeasedArea,RoomRentMonth');
+
+        if(empty($rooms)){
+            $rooms = array();
+        }else{
+            $i = 0;
+            $j = 0;
+            $k = 0;
+            $result['house']['Hall'] = 0;
+            $result['house']['Toilet'] = 0;
+            $result['house']['InnerAisle'] = 0;
+            $result['house']['Kitchen'] = 0;
+            foreach($rooms as &$v){
+                //$row = Db::name('room_amend')->where(['RoomID'=>$v['RoomID'],'HouseID'=>$houseid])->find();
+                //if($row){
+                   $v['LeasedArea'] = round($v['LeasedArea'],2);
+                   //$v['RoomRentMonth'] = $row['RoomRentMonth'];
+                //}
+                switch ($v['RoomPublicStatus']) {
+                    case 1:
+                        $v['RoomPublicStatus'] = '独';
+                        $i += $v['UseArea'];
+                        $j += $v['LeasedArea'];
+                        $k += $v['RoomRentMonth'];
+                        $room[] = $v;
+                        break;
+                    case 2:
+                        $v['RoomPublicStatus'] = '共';
+                        $i += $v['UseArea'];
+                        $j += $v['LeasedArea'];
+                        $k += $v['RoomRentMonth'];
+                        $room[] = $v;
+                        break;
+                    default:
+                        if($v['RoomType'] == 5){ //三户共用厅堂
+                            $result['house']['Hall'] += 1;
+                        }elseif($v['RoomType'] == 2){ //三户共用卫生间
+                            $result['house']['Toilet'] += 1;
+                        }elseif($v['RoomType'] == 3){ //三户共用室内走道
+                            $result['house']['InnerAisle'] += 1;
+                        }elseif($v['RoomType'] == 6){ //三户共用厨房
+                            $result['house']['Kitchen'] += 1;
+                        }
+                    break;
+                }
+             
+            }
+
+            $result['house']['HallRent'] = 0.5 * $result['house']['Hall'];
+            $result['house']['ToiletRent'] = 0.5 * $result['house']['Toilet'];
+            $result['house']['InnerAisleRent'] = 0.5 * $result['house']['InnerAisle'];
+            $result['house']['KitchenRent'] = 0.5 * $result['house']['Kitchen'];
+
+            $result['house']['TotalUseArea'] = $i;
+            $result['house']['TotalLeaseArea'] = $j;
+            $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k + $result['house']['BelowFiveNumRent'] + $result['house']['MoreFiveNumRent'];
+            $result['house']['TotalRoomMonth'] = round($s,1);
+            $result['house']['HeDingRoomMonth'] = round($s,1);
+        }
+
+        $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
+        $result['house']['HeDingRoomMonth'] = $result['house']['HeDingRoomMonth'] + $result['house']['PumpCost'];
+
+        $result['room'] = isset($room)?$room:array();
+
+        return jsons('2000', '获取成功', $result);
+    }
+
+    public function lease_house_info_old()
     {
         $houseid = input('HouseID');
 
