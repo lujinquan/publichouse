@@ -656,8 +656,8 @@ class ChangeAudit extends Model
                                                 'CutType' => $one['CutType'],
                                                 'CutRent' => $one['InflRent'], 
                                                 'CutNumber' => $one['IDnumber'],
-                                                'ReceiveRent'=>['exp','ReceiveRent'-$one['InflRent']],
-                                                'UnpaidRent'=>['exp','UnpaidRent'-$one['InflRent']] ,
+                                                'ReceiveRent'=>['exp','ReceiveRent-'.$one['InflRent']],
+                                                'UnpaidRent'=>['exp','UnpaidRent-'.$one['InflRent']] ,
                                             ]);
                 }
 
@@ -994,7 +994,7 @@ class ChangeAudit extends Model
                     $findHouse = Db::name('house')->where('HouseID',$oneData['HouseID'])->find();
 
                     //自动更新房屋规租
-                    Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent'+$oneData['InflRent']]]);
+                    Db::name('house')->where('HouseID',$oneData['HouseID'])->update(['HousePrerent'=>['exp','HousePrerent+'.$oneData['InflRent']]]);
 
                     Db::name('rent_config')->where(['HouseID'=> ['eq', $oneData['HouseID']]])->update(['HousePrerent'=>$findHouse['HousePrerent']]);
 
