@@ -74,7 +74,7 @@
                                         $RentOrderID = '';
                                     }
                                  ?>
-                                <input style="width:152px;" name="RentOrderID" type="text" class="am-form-field" value="{$RentOrderID}">
+                                <input style="width:200px;" name="RentOrderID" type="text" class="am-form-field" value="{$RentOrderID}">
                             </div>
                         </td>
                         <td>
@@ -88,7 +88,7 @@
 
                                     }
                                  ?>
-                                <input style="width:140px;" type="text" name="OrderDate" class="am-form-field" type="text"
+                                <input style="width:80px;" type="text" name="OrderDate" class="am-form-field" type="text"
                                    data-am-datepicker="{format: 'yyyy/mm', viewMode: 'years',minViewMode: 'months'}"
                                    value="{$OrderDate}" placeholder="" data-am-datepicker readonly/>
                                 
@@ -103,7 +103,7 @@
                             $HouseID = '';
                         }
                      ?>
-                                <input name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
+                                <input style="width:132px;" name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
                             </div>
                         </td>
                         <?php if(session('user_base_info.institution_level')!=3){ ;?>
@@ -228,7 +228,7 @@
                       $BanAddress = isset($rentOption['BanAddress'])?$rentOption['BanAddress']:'';
 
                      ?>
-                                <input style="width:150px;" name="BanAddress" type="text" class="am-form-field"
+                                <input style="width:132px;" name="BanAddress" type="text" class="am-form-field"
                                        value="{$BanAddress}">
                             </div>
                         </td>

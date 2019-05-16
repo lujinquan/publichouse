@@ -68,8 +68,8 @@ class UserApply extends Model
             if (isset($searchForm['OwnerType']) && $searchForm['OwnerType']) {  //检索产别
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
-            if (isset($searchForm['UserName']) && $searchForm['UserName']) {  //检索操作人姓名
-                $where['UserName'] = array('like', '%'.$searchForm['UserName'].'%');
+            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索操作人姓名
+                $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
                 $starttime = strtotime($searchForm['CreateTime']);

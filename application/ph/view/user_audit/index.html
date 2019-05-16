@@ -63,7 +63,7 @@
                             $ChangeOrderID = '';
                         }
                      ?>
-                            <input style="width:122px;" type="text" name="ChangeOrderID" class="am-form-field" value="{$ChangeOrderID}">
+                            <input style="width:132px;" type="text" name="ChangeOrderID" class="am-form-field" value="{$ChangeOrderID}">
                             </div>
                         </td>
 
@@ -76,7 +76,7 @@
                                 $HouseID = '';
                             }
                          ?>
-                            <input style="width:122px;" type="text" name="HouseID" class="am-form-field" value="{$HouseID}">
+                            <input style="width:132px;" type="text" name="HouseID" class="am-form-field" value="{$HouseID}">
                             </div>
                         </td>
                         
@@ -200,12 +200,12 @@
                             <div class="am-input-group am-input-group-sm">
                                 <?php
                                     if($changeOption != array()){
-                                        $UserName = $changeOption['UserName'];
+                                        $BanAddress = $changeOption['BanAddress'];
                                     }else{
-                                        $UserName = '';
+                                        $BanAddress = '';
                                     }
                                 ?>
-                                <input type="text" name="UserName" class="am-form-field" value="{$UserName}">
+                                <input type="text" name="BanAddress" class="am-form-field" value="{$BanAddress}">
                             </div>
                         </td>
                         <td><div style="min-width:80px;"></div></td>

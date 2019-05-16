@@ -74,7 +74,7 @@
                                     $HouseID = isset($houseOption['HouseID'])?$houseOption['HouseID']:'';
 
                                 ?>
-                                <input style="width:122px;" name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
+                                <input style="width:130px;" name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
                             </div>
                         </td>
 
@@ -93,7 +93,7 @@
                                     $BanAddress = isset($houseOption['BanAddress'])?$houseOption['BanAddress']:'';
 
                                  ?>
-                                <input style="width:150px;" name="BanAddress" type="text" class="am-form-field" value="{$BanAddress}">
+                                <input style="width:120px;" name="BanAddress" type="text" class="am-form-field" value="{$BanAddress}">
                             </div>
                         </td>
                         <td>
@@ -198,7 +198,7 @@
                                 </select>
                             </div>
                         </td>
-                        <td>
+<!--                         <td>
                             <div class="am-input-group am-input-group-sm">
                                 <?php
 
@@ -207,15 +207,18 @@
                                 ?>
                                 <input name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}">
                             </div>
+                        </td> -->
+                        <td class="dong_none">
+                            <div style="width:120px;"><input style="width:50px;display:inline-block" name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}"> {$HousePrerentSum}</div>
                         </td>
                         <td>
                             <div style="width:50px;"></div>
                         </td>
                         <td class="dong_none">
-                            <div style="width:120px;">{//  总规租：{$HousePrerentSum}</div>
+                            <div style="width:40px;"></div>
                         </td>
                         <td class="dong_none">
-                            <div style="width:50px;"></div>
+                            <div style="width:40px;"></div>
                         </td>
                         <td class="dong_none">
                             <div style="width:50px;">{$LeasedAreaSum}</div>

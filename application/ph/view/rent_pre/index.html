@@ -65,7 +65,7 @@
                         $HouseID =isset($preRentOption['HouseID'])?$preRentOption['HouseID']:'';
                         
                         ?>
-                        <input name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
+                        <input style="width:132px;" name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
                     </div>
                 </td>
                 <?php if(session('user_base_info.institution_level')!=3){ ;?>
@@ -168,7 +168,7 @@
                   </div>
               </td>
               <td>
-                  <div class="am-input-group am-input-group-sm" style="width:150px;">
+                  <div class="am-input-group am-input-group-sm" style="width:100px;">
                       <?php
                         if($preRentOption != array()){
                             $TempDate = $preRentOption['TempDate'];
@@ -176,7 +176,7 @@
                             $TempDate = ''; 
                         }
                       ?>
-                      <input style="width:140px;" name="TempDate" value="{$TempDate}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy/mm/dd', viewMode: 'years',minViewMode: 'days'}">
+                      <input style="width:100px;" name="TempDate" value="{$TempDate}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy/mm/dd', viewMode: 'years',minViewMode: 'days'}">
                   </div>
               </td>
               <td>
