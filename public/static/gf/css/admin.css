@@ -1,6 +1,7 @@
 body{
 	font-family:'Microsoft Yahei';
 }
+.j-hide{ display: none;}
 ul {
   margin-top: 0;
 }
@@ -483,6 +484,9 @@ label{
   font-size:14px;
   color:#2E77EF;
   margin:0;
+}
+.label_title.label_margin_top{
+	margin-top: 10px;
 }
 .label_style{
 	width:70px;

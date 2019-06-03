@@ -87,6 +87,7 @@ $("#addTransfer").click(function(){
 				var transferReason = $("#transferReason").val();
 				var transferWay = $("#transferWay").val();
 				var transferMoney = $("#transferMoney").val();
+				var transferName = $("#transferName").val();//别字更正
 				
 				var formData = fileTotall.getArrayFormdata() || new FormData();
 				formData.append('houseid',ID);
@@ -97,6 +98,7 @@ $("#addTransfer").click(function(){
 				formData.append('transferType',transferWay);
 				formData.append('transferRent',transferMoney);
 				formData.append('transferReason',transferReason);
+				formData.append('transferName',transferName);
 				$.ajax({
 				    type: "post",
 				    url: "/ph/UserApply/add",
@@ -116,6 +118,22 @@ $("#addTransfer").click(function(){
 		});
 	})
 });
+//变更类型增加别字更正
+$('#transferWay').change(function(){ 
+	if($("#transferWay option:selected").text()=='别字更正')
+	{
+		$(".transfer_name").show();
+		$(".transfer_money").hide();
+		$(".transfer_reason").hide();
+
+$(".transfer_money").hide();	}
+	else
+	{
+		$(".transfer_name").hide();
+		$(".transfer_money").show();
+		$(".transfer_reason").show();
+	}
+}) 
 //申请修改
 $('.BtnChange').click(function(){
 	var ID = $(this).val();

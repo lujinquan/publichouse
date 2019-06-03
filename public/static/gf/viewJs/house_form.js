@@ -624,7 +624,7 @@ $('.RentForm').click(function() {
                 });
                 var Atypes = res.data.roomTypes;
                 $('.RoomDeTd').css('display', 'none');
-                for (var m = 0; m < 10; m++) {
+                for (var m = 0; m < 12; m++) {
                     $('.addP').before($(".ModifyDetail").eq(0).clone(true));
                     $(".ModifyDetail").eq(m + 1).css('display', 'block');
                     $('.Mrname').eq(m + 1).text(Atypes[m + 1]);
@@ -725,7 +725,7 @@ $('.RentForm').click(function() {
                     houseQuery.actionA('QueryHouse','','0,1',n);
                 }
                 var Aname = [];
-                for (var l = 0; l < 10; l++) {
+                for (var l = 0; l < 12; l++) {
                     $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + '][]');
                     $("." + l + " li select").attr('name', 'RoomType[' + l + '][]');
                 }
@@ -908,7 +908,7 @@ $(document).on('click', '.addRoom', function() {
     $(this).parent().before($(".exRoom").eq(0).clone());
     $(this).parent().parent().find('.exRoom').css('display', 'block');
     // $(this).parent().parent().find('.exRoom').eq(0).css('display','none');
-    for (var l = 0; l < 10; l++) {
+    for (var l = 0; l < 12; l++) {
         $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + '][]');
         $("." + l + " li select").attr('name', 'RoomType[' + l + '][]');
     }

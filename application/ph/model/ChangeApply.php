@@ -59,8 +59,8 @@ class ChangeApply extends Model
 
         if($res !== true){
 
-            //return jsons('4003' ,$fileUpload->getErrorMsg());
-            return jsons('4003' ,'上传失败');
+            return jsons('4003' ,$fileUpload->getErrorMsg());
+            //return jsons('4003' ,'上传失败');
 
         }else{  //上传成功
 

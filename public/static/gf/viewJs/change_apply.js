@@ -1011,7 +1011,8 @@ $('#addApply').click(function() {
                             res = JSON.parse(res);
                             if(res.retcode == '4002'){
                                 layer.msg(res.msg);
-                            }else{
+                            }
+							else{
                                 //console.log(res);
                                 $('#cancelUseNature').text(res.data.UseNature);
                                 $('#cancelDamageGrade').text(res.data.DamageGrade);
@@ -1130,6 +1131,27 @@ $('#addApply').click(function() {
                 btn: ['确定', '取消'],
                 success: function() {
                     houseQuery.action('houseAdjustHouse','1');
+					//新增房屋调整资料上传
+					new file({
+					    button: "#housingReadjust",
+					    show: "#housingReadjustShow",
+					    upButton: "#housingReadjustUp",
+					    size: 102400,
+					    url: "/ph/ChangeApply/add",
+					    ChangeOrderID: '',
+					    Type: 1,
+					    title: "武汉市直管公有住房出售收入专用票据1"
+					});
+					new file({
+					    button: "#housingApprovalChart",
+					    show: "#housingApprovalChartShow",
+					    upButton: "#housingApprovalChartUp",
+					    size: 102400,
+					    url: "/ph/ChangeApply/add",
+					    ChangeOrderID: '',
+					    Type: 1,
+					    title: "武昌区房地局出售直管公有住房审批表1"
+					});
                     $('#houseAdjustQuery').off('click');
                     $('#houseAdjustQuery').on("click", function() {
                         var houseID = $("#houseAdjustHouse").val()
@@ -1216,7 +1238,7 @@ $('#addApply').click(function() {
                     if ($('#houseAdjustHouse').val() == "") {
                         layer.msg('房屋编号存在问题呢！！！');
                     } else {
-                        var formData = new FormData();
+                        var formData = fileTotall.getArrayFormdata() ||  new FormData();
                         formData.append("HouseID", $('#houseAdjustHouse').val());
                         formData.append("Remark", $('#houseAdjustReason').val());
                         for(var i = 0;i < ban_length;i++){
