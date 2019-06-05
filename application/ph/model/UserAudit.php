@@ -23,7 +23,7 @@ class UserAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, NewTenantID, IfReform ,IfRepair ,IfCollection ,IfFacade , IfCheck ,CreateTime,NewTenantName')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
         $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea ,HouseUsearea')
@@ -63,7 +63,7 @@ class UserAudit extends Model
         $data['OldTenantName'] = $tenantOldData['TenantName']?$tenantOldData['TenantName']:'';  //租户姓名
         $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'';  //租户身份证号码
         $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'';  //租户联系方式
-        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:'';  //租户姓名
+        $data['NewTenantName'] = $tenantNewData['TenantName']?$tenantNewData['TenantName']:$orderData['NewTenantName'];  //租户姓名
         $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'';  //租户身份证号码
 
         return $data;
@@ -162,10 +162,18 @@ class UserAudit extends Model
 
             //终审通过后，系统自动将变更数据更改,1更名，2过户，3赠予，4转让
             $changeOrderDetail = self::where('ChangeOrderID' ,'eq' ,$changeOrderID)->field('*')->find();
-//dump($changeOrderDetail);halt($where);
-            Db::name('house')->where('HouseID',$changeOrderDetail['HouseID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
+            //dump($changeOrderDetail);halt($where);
 
-            Db::name('tenant')->where('TenantID',$changeOrderDetail['NewTenantID'])->setField('Status',1);
+            if($changeOrderDetail['ChangeType'] == 4){ //别字更正
+                Db::name('house')->where('HouseID',$changeOrderDetail['HouseID'])->update(['TenantID'=>$changeOrderDetail['OldTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
+
+                Db::name('tenant')->where('TenantID',$changeOrderDetail['OldTenantID'])->setField('TenantName',$changeOrderDetail['NewTenantName']);
+            }else{
+                Db::name('house')->where('HouseID',$changeOrderDetail['HouseID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
+
+                Db::name('tenant')->where('TenantID',$changeOrderDetail['NewTenantID'])->setField('Status',1);
+            }
+            
 
             $datas['Status'] = 2;
 

@@ -46,7 +46,7 @@ class UserApply extends Base
 
             //halt($data);
 
-            if(empty($data['newName']) || empty($data['houseid']) || empty($data['transferType'])) {
+            if(empty($data['houseid']) || empty($data['transferType'])) {
                 return jsons('4005' ,'请完善相关信息！');
             }
 
@@ -62,11 +62,15 @@ class UserApply extends Base
             $datas['OldTenantID'] = $data['oldID'];  //原租户编号
             $datas['OldTenantName'] = $data['oldName']; //原租户名称
             $datas['NewTenantID'] = $data['newID']; //新租户id
-            $datas['NewTenantName'] = $data['newName']; //新租户名称
+            $datas['NewTenantName'] = $data['newName']?$data['newName']:$data['transferName']; //新租户名称
             $datas['ChangeType'] = $data['transferType']; //转让形式
             if($data['transferType'] == 1 && !$data['transferRent']){
                 return jsons('4002','交易转让必须填写转让金额');
             }
+            if($data['transferType'] == 4 && !$data['transferName']){
+                return jsons('4002','别字更正必须填写更正姓名');
+            }
+
             $datas['TransferRent'] = $data['transferRent']; //转让金额
             $datas['ChangeReason'] = $data['transferReason']; //转让原因
             $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';

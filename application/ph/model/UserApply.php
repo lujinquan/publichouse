@@ -106,7 +106,7 @@ class UserApply extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,HouseUsearea,BanAddress,OldTenantName, HousePrerent, OwnerType,InstitutionID ,UserNumber ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,HouseUsearea,BanAddress,OldTenantName,NewTenantName, HousePrerent, OwnerType,InstitutionID ,UserNumber ,CreateTime ,Status';
         $data = $this->alias('a')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
