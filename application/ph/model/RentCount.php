@@ -99,6 +99,7 @@ class RentCount extends Model
         $RentLst['obj'] = Db::name('rent_config')->field($maps)->where($where)->paginate(config('paginate.list_rows'));
 
         $RentLst['receiveRentTotal'] = Db::name('rent_config')->where($where)->sum('ReceiveRent');
+        $RentLst['cutRentTotal'] = Db::name('rent_config')->where($where)->sum('CutRent');
 
         $arr = $RentLst['obj']->all();
 

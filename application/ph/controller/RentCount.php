@@ -19,6 +19,7 @@ class RentCount extends Base
 
         $this->assign([
             'receiveRentTotal' => $rentLst['receiveRentTotal'],
+            'cutRentTotal' => $rentLst['cutRentTotal'],
             'owerLst' => $owerLst,
             'rentLst' => $rentLst['arr'],
             'rentLstObj' => $rentLst['obj'],
