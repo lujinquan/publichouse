@@ -17,9 +17,9 @@ return [
     // +----------------------------------------------------------------------
     
     // 版本号
-    'version_sign' => '1.5.0.2',
+    'version_sign' => '1.5.0.3',
     //网站信息
-    'WebSite' => 'web.gf.com',
+    'WebSite' => 'ph.ctnmit.com',
 
     //添加楼栋
     'LandCertificate' => '土地证电子版',
