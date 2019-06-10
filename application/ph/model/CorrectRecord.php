@@ -59,9 +59,6 @@ class CorrectRecord extends Model
             if ($searchForm['BanAddress']) {  //检索房屋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
-            if ($searchForm['ChangeType']) {  //检索变更类型
-                $where['ChangeType'] = array('eq', $searchForm['ChangeType']);
-            }
             if ($searchForm['OwnerType']) {  //检索变更类型
                 $where['OwnerType'] = array('eq', $searchForm['OwnerType']);
             }
