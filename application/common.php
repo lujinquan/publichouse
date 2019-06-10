@@ -662,6 +662,36 @@ function get_wait_processing(){
         }
     }
 
+    // $where['Status'] = array('not in','0,1'); 
+
+    $corData = Db::name('cor_change_order')->field('ChangeOrderID ,CreateTime ,ChangeType,Status')->order('CreateTime desc')->limit(5)->select();
+
+    foreach($corData as $w){
+
+        $config = Db::name('cor_change_order')->alias('a')
+            ->join('process_config b' ,'a.ProcessConfigType = b.Type' ,'left')
+            ->where('a.ChangeOrderID' ,'eq' ,$w['ChangeOrderID'])
+            ->order('a.CreateTime desc')
+            ->field('b.id, b.Title ,b.Total')
+            ->find();
+
+        $maps['pid'] = array('eq',$config['id']);
+        $maps['Total'] = array('eq',$w['Status']);
+
+        $roleid = Db::name('process_config')->where($maps)->value('RoleID');
+
+        unset($w['Status']);
+
+        $w['CreateTime'] = date('Y-m-d H:i:s',$w['CreateTime']);
+        $w['ChangeType'] = '别字更正';
+
+        $w['type'] = 3;
+
+        if(in_array($roleid,$roleArr)){
+            $datas[] = $w;
+        }
+    }
+
     $changeData = Db::name('change_order')->alias('a')
         ->join('change_type b','a.ChangeType = b.id','left')
         ->where($where)

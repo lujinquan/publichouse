@@ -251,6 +251,8 @@
           foreach($wait_processing['list'] as $wait_k => $wait_v){
               if($wait_v['type'] == 1){
                 $href = '/ph/UserAudit/index';
+              }else if($wait_v['type'] == 3){
+                $href = '/ph/CorrectAudit/index';
               }else{
                 $href = '/ph/ChangeAudit/index';
               }
