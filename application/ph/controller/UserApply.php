@@ -64,20 +64,21 @@ class UserApply extends Base
             $datas['NewTenantID'] = $data['newID']; //新租户id
             $datas['NewTenantName'] = $data['newName']?$data['newName']:$data['transferName']; //新租户名称
             $datas['ChangeType'] = $data['transferType']; //转让形式
+            
+            if(!$data['oldID']){
+                return jsons('4002','请完善当前租户信息');
+            }
+            if(!$data['newID']){
+                return jsons('4002','请完善新租户信息');
+            }
             if($data['transferType'] == 1 && !$data['transferRent']){
                 return jsons('4002','交易转让必须填写转让金额');
             }
-            if($data['transferType'] == 4 && !$data['transferName']){
-                return jsons('4002','别字更正必须填写更正姓名');
-            }
+
 
             $datas['TransferRent'] = $data['transferRent']; //转让金额
             $datas['ChangeReason'] = $data['transferReason']; //转让原因
             $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';
-
-            // $houseModel = new HouseInfoModel;
-
-            // halt($houseModel);
 
 
             $one = Db::name('house')->where('HouseID', 'eq', $data['houseid'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature,HousePrerent,BanAddress,HouseUsearea')->find();
