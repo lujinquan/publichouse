@@ -1,0 +1,161 @@
+<form id="TransferForms" style="margin-top:1.6rem;display:none;">
+  <div class="am-form-group am-u-md-12">
+      <label class="label_title">基础信息</label>
+  </div>
+  <div class="am-u-md-12">
+    <label class="label_style">房屋编号：</label>
+    <input type="text" class="label_input" id="HouseIdInput" placeholder="房屋编号" required/>
+    <a class="am-btn am-btn-primary am-btn-sm" id="queryAction_1">查询</a>
+  </div>
+  
+<div class="am-u-md-12" style="margin-top:20px;">
+  <div class="am-u-md-12 label_box">
+      <h1 class="label_h1">当前信息</h1>
+      <div class="am-u-md-12" style="padding:20px 0 0;">
+         <label class="label_style">租户ID：</label>
+         <label id="oldID" class="label_p_style"></label>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0 0;">
+         <label class="label_style">租户姓名：</label>
+         <label id="oldName" class="label_p_style"></label>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0;">
+         <label class="label_style">身份证号：</label>
+         <label id="oldTel" class="label_p_style"></label>
+      </div>
+  </div>
+
+ <!--  <div class="am-u-md-4 label_box" style="margin:auto 30px;">
+      <h1 class="label_h1">新租户信息</h1>
+      <div class="am-u-md-12" style="padding:20px 0 6px;">
+        <label class="label_style">租户ID：</label>
+        <input id="IdIput" class="label_input" type="text"  required/>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0 0">
+         <label class="label_style">租户姓名：</label>
+         <label id="newNam" class="label_p_style"></label>
+      </div>
+      <div class="am-u-md-12" style="padding:10px 0;">
+         <label class="label_style">身份证号：</label>
+         <label id="newTel" class="label_p_style"></label>
+      </div>
+  </div> -->
+
+  <!-- <div class="am-form-group am-u-md-4" style="padding:0 0 10px;border:1px solid rgba(214,226,246,1);background:#f7faff;">
+      <h1 class="label_h1">房屋需满足以下条件：</h1>
+      <label class="label_explain">1.房屋编号</label>
+      <label class="label_explain">2.承租人房屋使用权没有争议</label>
+      <label class="label_explain">3.承租人不存在拖欠房屋租金</label>
+      <label class="label_explain">4.承租人未擅自拆改房屋结构</label>
+      <label class="label_explain">5.不是成套独用住房变为成套伙用住房</label>
+      <label class="label_explain">6.承租人有本市城镇户籍</label>
+      <label class="label_explain">7.不属于国家和本市规定不得变更的其他情形</label>
+  </div> -->
+
+</div>
+
+<!-- <div class="am-u-md-4" style="margin:20px auto 30px;">
+    <label class="label_style">变更类型：</label>
+    <select class="label_select" id="transferWay">
+        <option value="1">交易转让</option>
+        <option value="2">亲属转让</option>
+        <option value="3">正常过户</option>
+		<option value="4">别字更正</option>
+    </select>
+</div> -->
+<div class="am-u-md-4 transfer_name" style="padding-left:10px;margin:20px auto 30px;">
+    <label class="label_style">正确姓名：</label>
+    <input class="label_input" id="transferName" name="news-Name" value="123" require />
+</div>
+<!-- <div class="am-u-md-4 transfer_money" style="padding-left:0;margin:20px auto 30px;">
+    <label class="label_style">转让金额：</label>
+    <input class="label_input" id="transferMoney" require />
+</div>
+<div class="am-u-md-4 transfer_reason" style="padding-left:0;margin:20px auto 30px;">
+    <label>有偿转让原因：</label>
+    <input class="label_input" id="transferReason" />
+</div> -->
+
+
+<div class="am-u-md-12 fileUpLoad"><hr /></div>
+
+<div class="am-u-md-12 fileUpLoad">
+    <div class="am-u-md-4">
+        <p>书面申请报告：</p>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-8">
+        <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        <input id="transferApplication" type="file" name="transferApplication" multiple>
+    </div>
+    <div id="transferApplicationShow" class="am-u-md-12"></div>
+</div>
+
+<div class="am-u-md-12 fileUpLoad">
+    <div class="am-u-md-4">
+        <p>审批表：</p>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-8">
+        <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        <input id="transferApprovalForm" type="file" name="transferApprovalForm" multiple>
+    </div>
+    <div id="transferApprovalFormShow" class="am-u-md-12"></div>
+</div>
+
+<div class="am-u-md-12 fileUpLoad">
+    <div class="am-u-md-4">
+        <p>其它：</p>
+    </div>
+    <div class="am-form-group am-form-file am-u-md-8">
+        <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+        <input id="transferOther" type="file" name="transferOther" multiple>
+    </div>
+    <div id="transferOtherShow" class="am-u-md-12"></div>
+</div>
+<!-- 
+  <div class="am-form-group am-u-md-12">
+      <label class="label_title">产权户籍情况</label>
+  </div>
+
+  <div class="am-u-md-12">
+    <div class="am-u-md-4" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否代、托、改造产：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfReform" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfReform" value="0" checked> 否
+      </label>
+    </div>
+    <div class="am-u-md-8" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否五年内新翻覆修房屋：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfRepair" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfRepair" value="0" checked> 否
+      </label>
+    </div>
+  </div>
+
+  <div class="am-u-md-12">
+    <div class="am-u-md-4" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否属门面营业用房：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfCollection" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfCollection" value="0" checked> 否
+      </label>
+    </div>
+    <div class="am-u-md-8" style="padding:10px 0 0">
+      <label class="label_style" style="width:160px;">是否属于征收范围内房屋：</label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfFacade" value="1"> 是
+      </label>
+      <label class="am-radio-inline">
+          <input type="radio" name="IfFacade" value="0" checked> 否
+      </label>
+    </div>
+  </div>
+ -->
+</form>

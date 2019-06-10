@@ -1,0 +1,308 @@
+<form id="addForm" style="margin-top:1.6rem;display:none;">
+    <div class="am-form-group am-u-md-12">
+        <h2 class="label_title">基本信息：</h2>
+    </div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
+        <label class="label_style">房屋编号：</label>
+        <label class="label_p_style houseId"></label>
+    </div>
+    <div class="am-u-md-8">
+        <label class="label_style">房屋地址：</label>
+        <label class="label_p_style houseAddress" style="width:484px;"></label>
+    </div>
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
+        <label class="label_style">楼层：</label>
+        <label class="label_p_style FloorID"></label>
+    </div>
+    <div class="am-u-md-4">
+        <label class="label_style">使用面积：</label>
+        <label class="label_p_style houseArea"></label>
+    </div>
+    <div class="am-u-md-4">
+        <label class="label_style">计租面积：</label>
+        <label class="label_p_style leasedArea"></label>
+    </div>
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
+        <label class="label_style">变更类型：</label>
+        <label id="TypeName" class="label_p_style">交易转让</label>
+    </div>
+    <div class="am-u-md-4" >
+        <label class="label_style" >备案时间：</label>
+        <label class="label_p_style createTime"></label>
+    </div>
+    <div class="am-u-md-4" >
+        <label class="label_style" >转让金额：</label>
+        <label class="label_p_style TransferRent"></label>
+    </div>
+</div>
+<div class="am-form-group am-u-md-12">
+    <div class="am-u-md-4">
+        <label class="label_style">产别：</label>
+        <label class="label_p_style OwnerType"></label>
+    </div>
+    <div class="am-u-md-4" >
+        <label class="label_style">使用性质：</label>
+        <label class="label_p_style useNature"></label>
+    </div>
+    <div class="am-u-md-4" >
+        <label class="label_style">转让原因：</label>
+        <label class="label_p_style ChangeReason"></label>
+    </div>
+</div>
+    <div class="am-u-md-12"><hr /></div>
+    <div class="am-u-md-4">
+      <label class="label_style">原租户：</label>
+      <label class="label_p_style OldTenantName"></label>
+    </div>
+    <div class="am-u-md-4">
+      <label class="label_style">身份证号：</label>
+      <label class="label_p_style OldTenantNumber"></label>
+    </div>
+    <div class="am-u-md-4">
+      <label class="label_style">联系电话：</label>
+      <label class="label_p_style OldTenantTel"></label>
+    </div>
+    <div class="am-u-md-12"><hr /></div>
+    <div class="am-u-md-4">
+      <label class="label_style">现租户：</label>
+      <label class="label_p_style NewTenantName"></label>
+    </div>
+    <div class="am-u-md-4">
+      <label class="label_style">身份证号：</label>
+      <label class="label_p_style NewTenantNumber"></label>
+    </div>
+    <div class="am-u-md-4">
+      <label class="label_style">联系电话：</label>
+      <label class="label_p_style NewTenantTel"></label>
+    </div>
+    <div class="am-u-md-12"><hr /></div>
+
+<!--     <div class="am-u-md-12 status_2">
+        <div class="am-u-md-5">
+            <p>书面申请报告：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+            <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+            <input id="approveApplyReport" type="file" name="approveApplyReport" multiple>
+        </div>
+        <div id="approveApplyReportShow" class="am-u-md-12"></div>
+    </div> -->
+
+     <!--  <div class="status_2" style="padding-left:0;display:none;">
+        <div class="am-form-group am-u-md-12">
+            <h2 class="label_title">提交材料：</h2>
+        </div>
+        <div class="am-u-md-12">
+          <div class="am-u-md-5">
+              <p>有偿转让备案单：</p>
+          </div>
+          <div class="am-form-group am-form-file am-u-md-5">
+              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+              <input id="paidRecordSheet" type="file" name="paidRecordSheet" multiple>
+          </div>
+          <div id="paidRecordSheetShow" class="am-u-md-12"></div>
+        </div>
+    </div> -->
+<!--     <div class="am-u-md-12 material_3_status_2">
+        <div class="am-u-md-5">
+            <p>直管公房有偿转让备案单：</p>
+        </div>
+        <div class="am-form-group am-form-file am-u-md-5">
+            <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+            <input id="RecordSheet" type="file" name="RecordSheet" multiple>
+        </div>
+        <div id="RecordSheetShow" class="am-u-md-12"></div>
+    </div> -->
+
+
+
+    <div class="material_1" style="padding-left:0;display:none;">
+        <div class="am-form-group am-u-md-12">
+            <h2 class="label_title">提交材料：</h2>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>死亡证：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_1" type="file" name="transferMaterial_1" multiple>
+            </div>
+            <div id="transferMaterial_1Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>原承租人户口：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_2" type="file" name="transferMaterial_2" multiple>
+            </div>
+            <div id="transferMaterial_2Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>现承租人户口：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_3" type="file" name="transferMaterial_3" multiple>
+            </div>
+            <div id="transferMaterial_3Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>住宅租约：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_4" type="file" name="transferMaterial_4" multiple>
+            </div>
+            <div id="transferMaterial_4Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>结婚证：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_5" type="file" name="transferMaterial_5" multiple>
+            </div>
+            <div id="transferMaterial_5Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>现承租人身份证：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_6" type="file" name="transferMaterial_6" multiple>
+            </div>
+            <div id="transferMaterial_6Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>武汉市直管公房承租人过户申请审批表：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_7" type="file" name="transferMaterial_7" multiple>
+            </div>
+            <div id="transferMaterial_7Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>武汉市直管公房承租人过户协议书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_8" type="file" name="transferMaterial_8" multiple>
+            </div>
+            <div id="transferMaterial_8Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>共有子女材料证明：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_9" type="file" name="transferMaterial_9" multiple>
+            </div>
+            <div id="transferMaterial_9Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>离婚协议书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_10" type="file" name="transferMaterial_10" multiple>
+            </div>
+            <div id="transferMaterial_10Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>武汉市公有房屋使用权转让协议：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_11" type="file" name="transferMaterial_11" multiple>
+            </div>
+            <div id="transferMaterial_11Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>武汉市公有住房承租权有偿转让申请书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_12" type="file" name="transferMaterial_12" multiple>
+            </div>
+            <div id="transferMaterial_12Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>同意办理公有住房使用权转让或者代理转让协议：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_13" type="file" name="transferMaterial_13" multiple>
+            </div>
+            <div id="transferMaterial_13Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>材料承诺书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_14" type="file" name="transferMaterial_14" multiple>
+            </div>
+            <div id="transferMaterial_14Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>家庭成员身份证明：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_15" type="file" name="transferMaterial_15" multiple>
+            </div>
+            <div id="transferMaterial_15Show" class="am-u-md-12"></div>
+        </div>
+        <div class="am-u-md-12">
+            <div class="am-u-md-5">
+                <p>缴费承诺书：</p>
+            </div>
+            <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="transferMaterial_16" type="file" name="transferMaterial_16" multiple>
+            </div>
+            <div id="transferMaterial_16Show" class="am-u-md-12"></div>
+        </div>
+    </div>
+      <div class="am-form-group am-u-md-12">
+          <h2 class="label_title">查看附件：</h2>
+      </div>
+      <div class="am-form-group am-u-md-12">
+        <div id="lookingUpStatus3" class="am-u-md-12"></div>
+      </div>
+    <div class="am-form-group am-u-md-12">
+        <h2 class="label_title">审批状态：</h2>
+    </div>
+    <div id="FormState" class="am-u-md-12">
+               <!--  <span class="process_style process_style_active">房管员</span><span class="line_style">——></span>
+                <span class="process_style">房调员</span><span>——></span>
+                <span class="process_style">所长</span><span>——></span>
+                <span class="process_style">总公司科长</span><span>——></span>
+                <span class="process_style">经管副总</span> -->
+    </div>
+    <div class="am-form-group am-u-md-12">
+        <!--<label>1.房管员［黄芳］于2017年6月13日提交了使用权变更申请；</label>-->
+    </div>
+</form>

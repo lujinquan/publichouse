@@ -1,0 +1,258 @@
+{extend name="layout" /}
+{block name="title"}<title>别字更正申请</title>{/block}
+{block name="content"}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><small class="am-text-sm">别字更正</small> > <small class="am-text-primary">别字更正申请</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12 am-u-md-6">
+        <div class="am-btn-toolbar">
+          <div class="am-btn-group-xs">
+              <?php if(in_array(85,$threeMenu)){ ; ?>
+            <button type="button" id="addTransfer" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span>  别字更正申请</button>
+              <?php }; ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-scrollable-horizontal">
+          <table class="am-table am-table-striped am-table-hover table-main am-table-centered">
+            <thead>
+              <tr>
+                <th class="table-check"></th>
+        				<th class="table-id">#</th>
+        				<th class="table-title">变更编号</th>
+        				<th class="table-type">房屋编号</th>
+        				<th class="table-author am-hide-sm-only">产别</th>
+                <?php if(session('user_base_info.institution_level')==1){;?>
+                <th class="table-type">机构</th>
+                <?php }; ?>
+        				<th class="table-set">房屋地址</th>
+                <th class="table-set">租户姓名</th>
+                <th class="table-set">使用面积</th>
+                <th class="table-set">月租金</th>
+        				<th class="table-set">申请时间</th>
+        				<th class="table-set" style="width:220px;">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+		  <!--查询-->
+          <form action="{:url('CorrectApply/index')}" method="post" id="queryForm">
+		    <tr class="am-form-group am-form-inline">
+              <td></td>
+              <td></td>
+              <td>
+                <div class="am-input-group am-input-group-sm">
+                    <?php
+                        if($changeOption != array()){
+                            $ChangeOrderID = $changeOption['ChangeOrderID'];
+                        }else{
+                            $ChangeOrderID = '';
+                        }
+                     ?>
+                  <input style="width:132px;" type="text" name="ChangeOrderID" class="am-form-field" value="{$ChangeOrderID}">
+                </div>
+              </td>
+              <td>
+        				<div class="am-g am-input-group am-input-group-sm">
+                        <?php
+                            if($changeOption != array()){
+                                $HouseID = $changeOption['HouseID'];
+                            }else{
+                                $HouseID = '';
+                            }
+                         ?>
+        				  <input style="width:132px;" type="text" name="HouseID" class="am-form-field" value="{$HouseID}">
+        				</div>
+        			</td>
+             <td>
+                  <div class="am-form-group am-form" style="width:70px;">
+                      <select name="OwnerType">
+                          <option  value="" style="display:none">请选择</option>
+                          <?php foreach($owerLst as $k3 =>$v3){;?>
+                          <?php
+                                if($changeOption != array()){
+                                    if($changeOption['OwnerType'] == $v3['id']){
+                                        $select ='selected';
+                                    }else{
+                                        $select ='';
+                                    }
+                                }else{
+                                    $select ='';
+                                }
+                                ?>
+                          <option value="<?php echo $v3['id']; ?>" {$select}><?php echo $v3['OwnerType']; ?></option>
+                          <?php }; ?>
+                      </select>
+                  </div>
+              </td> 
+            <?php if(session('user_base_info.institution_level')!=3){ ;?>
+              <td>
+                  <div class="am-form-group am-form" style="width:100px;">
+
+                      
+                      <select name="TubulationID">
+                          <option  value="" style="display:none">请选择</option>
+
+                          <?php if(session('user_base_info.institution_level')==1){;?>
+
+                          <?php foreach($instLst as $k10 => $v10){ if($v10['level'] !=0 ){; ?>
+
+                          <?php
+
+                                if($changeOption != array()){
+
+                                    if($changeOption['TubulationID'] == $v10['id']){
+
+                                        $select ='selected';
+                                    }else{
+
+                                        $select ='';
+                                    }
+                                }else{
+
+                                    $select ='';
+                                }
+
+                                ?>
+
+                          <option value="<?php echo $v10['id']; ?>" {$select}><?php echo $v10['Institution']; ?></option>
+
+                          <?php }}}elseif(session('user_base_info.institution_level')==2){; ?>
+
+                          <?php foreach($instLst as $k12 => $v12){ ; ?>
+
+                          <?php
+
+                                if($changeOption != array()){
+
+                                    if($changeOption['TubulationID'] == $v12['id']){
+
+                                        $select ='selected';
+                                    }else{
+
+                                        $select ='';
+                                    }
+                                }else{
+
+                                    $select ='';
+                                }
+
+                                ?>
+
+                          <option value="<?php echo $v12['id']; ?>" {$select}><?php echo $v12['Institution']; ?></option>
+
+                          <?php }} ; ?>
+
+                      </select>
+                  </div>
+        			</td>
+              <?php } ; ?>
+             
+              
+              <td>
+                <div class="am-input-group am-input-group-sm">
+                     <?php
+                        if($changeOption != array()){
+                            $BanAddress = $changeOption['BanAddress'];
+                        }else{
+                            $BanAddress = '';
+                        }
+                     ?>
+                  <input type="text" name="BanAddress" class="am-form-field" value="{$BanAddress}">
+                </div>
+              </td>
+
+              <td>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+
+              <td>
+        				<div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+        			</td>
+
+              <td>
+                <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+              </td>
+
+              <td>
+        				<div class="am-input-group am-input-group-sm" style="width:130px;">
+                                <?php
+                        if($changeOption != array()){
+                            $CreateTime = $changeOption['CreateTime'];  
+                        }else{
+                            $CreateTime = '';
+                        }
+                     ?>
+                    <div class="am-u-sm-6" style="padding:0;">
+                          <input style="width:130px;" name="CreateTime" value="{$CreateTime}" type="text" class="am-form-field" data-am-datepicker value="">
+                    </div>
+                    
+        				</div>
+        			</td>
+              <td>
+                <div class="am-btn-group am-btn-group-xs" style="width:114px;">
+                  <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
+                  <a class="am-btn am-btn-xs am-text-primary ABtn" href="/ph/UserApply/index.html"><span class="ResetIcon"></span>重置</a>
+                </div>
+              </td>
+            </tr>
+        </form>
+		<!---查询-->
+
+          <?php foreach($changeLst as $k1 => $v1){ ;?>
+            <tr class="check001">
+                <td>
+                  <span class="piaochecked">
+                    <input class="checkId radioclass" type="radio" value="<?php echo $v1['ChangeOrderID']; ?>" /></td>
+                  </span>
+                <td><?php echo ++$k1; ?></td>
+                <td><?php echo $v1['ChangeOrderID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v1['HouseID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v1['OwnerType']; ?></td>
+                <?php if(session('user_base_info.institution_level')!=3){ ;?>
+                <td class="am-hide-sm-only"><?php echo $v1['InstitutionID']; ?></td>
+                <?php }; ?>
+                <td class="am-hide-sm-only"><?php echo $v1['BanAddress']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v1['OldTenantName']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v1['HouseUsearea']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
+                <td><a href="#"></a><?php echo $v1['CreateTime']; ?></td>
+                <td>
+                    <div class="am-btn-group am-btn-group-xs">
+                        <?php if(in_array(86,$threeMenu)){ ; ?>
+                        <!-- <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnChange" value="<?php echo $v1['ChangeOrderID']; ?>">修改</button> -->
+                        <?php }; ?>
+                        <?php if(in_array(87,$threeMenu)){ ; ?>
+                        <button class="am-btn am-btn-default am-btn-xs am-text-primary am-hide-sm-only BtnDel" value="<?php echo $v1['ChangeOrderID']; ?>">删除</button>
+                        <?php }; ?>
+                    </div>
+                </td>
+            </tr>
+          <?php }; ?>
+
+          </tbody>
+        </table>
+		<div class="am-cf">
+          共{$changeLstObj->total()}条记录
+          <div class="am-fr">
+              {$changeLstObj->render()}
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- content end -->
+  {include file="application/ph/view/correct_apply/form.html" /}
+  {include file="application/ph/view/correct_apply/TransferForm.html" /}
+{/block}
+{block name="JsFile"}
+<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/js/require.js" data-main="/public/static/gf/viewJs/correct_apply.js?v={:config('version_sign')}"></script>
+{/block}
