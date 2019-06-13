@@ -26,6 +26,7 @@ class HouseInfo extends Base
             'houseLstObj' => $houseLst['obj'],
             'houseOption' => $houseLst['option'],
             'HousePrerentSum' => $houseLst['HousePrerentSum'],
+            'ApprovedRentSum' => $houseLst['ApprovedRentSum'],
             //'HouseUseareaSum' => $houseLst['HouseUseareaSum'],
             'LeasedAreaSum' => $houseLst['LeasedAreaSum'],
             'HouseAreaSum' => $houseLst['HouseAreaSum'],

@@ -12,9 +12,9 @@
   <link rel="icon" type="image/png" href="/public/static/gf/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="/public/static/gf/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="" />
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v={:config('version_sign')}"/>
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v={:config('version_sign')}"/>
-  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v={:config('version_sign')}">
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v={$version}"/>
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v={$version}"/>
+  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v={$version}">
   <style>
     .am-topbar-nav>li>a:after{display:none;}
     body .ddd-class .layui-layer-title{background:#FFF;font-size:20px;}
@@ -33,8 +33,8 @@
   </style>
   {block name="css"}{/block}
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/public/static/gf/js/jquery.min.js?v={:config('version_sign')}"></script>
-<script src="/public/static/gf/layer/layer.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/js/jquery.min.js?v={$version}"></script>
+<script src="/public/static/gf/layer/layer.js?v={$version}"></script>
 
 <!--<![endif]-->
 </head>
@@ -386,7 +386,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5.01</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">{$version}</span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -559,9 +559,9 @@
 {include file="application/ph/view/notice/notice_info.html" /}
 {include file="application/ph/view/index/second_menu.html" /}
 {include file="application/ph/view/index/version.html" /}
-<script src="/public/static/gf/js/amazeui.min.js?v={:config('version_sign')}"></script>
-<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v={:config('version_sign')}"></script>
-<script src="/public/static/gf/js/app.js?v={:config('version_sign')}"></script>
+<script src="/public/static/gf/js/amazeui.min.js?v={$version}"></script>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v={$version}"></script>
+<script src="/public/static/gf/js/app.js?v={$version}"></script>
 <script type="text/javascript">
   var body_height = $(document.body).height();
   var window_height = $(window).height();
@@ -688,7 +688,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 // admin-sidebar-sub左边列表栏样式选择结束
 </script>
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js?v={$version}"></script>
 {/block}
 </body>
 </html>

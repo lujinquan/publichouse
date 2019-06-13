@@ -212,7 +212,7 @@
                             <div style="width:120px;"><input style="width:50px;display:inline-block" name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}"> {$HousePrerentSum}</div>
                         </td>
                         <td>
-                            <div style="width:50px;"></div>
+                            <div style="width:50px;">{$ApprovedRentSum}</div>
                         </td>
                         <td class="dong_none">
                             <div style="width:40px;"></div>
@@ -267,7 +267,7 @@
                     
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
-                    <td class="am-hide-sm-only" {if (($v1['HousePrerent'] != $v1['ApprovedRent']) && ($v1['UseNature'] == '住宅') && ($v1['IfSuspend'] === '否'))}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
+                    <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#ddd;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['LeasedArea']; ?></td>
@@ -341,5 +341,5 @@
 {/block}
 {block name="JsFile"}
 
-<script type="text/javascript" src="/public/static/gf/viewJs/house_form.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/house_form.js?v={$version}"></script>
 {/block}

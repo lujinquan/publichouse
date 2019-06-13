@@ -22,7 +22,9 @@ define('__TEMPLATES__',__DIR__.'/templates/');
 // 定义session文件目录
 define('SESSION_PATH',__DIR__.'/runtime/session/');
 
-set_time_limit(80000);
+define('WEB_VERSION','V1.5.02');
+
+set_time_limit(10);
 
 ini_set('memory_limit','512M');
 

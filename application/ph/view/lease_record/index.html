@@ -1,8 +1,8 @@
 {extend name="layout" /}
 {block name="title"}<title>租约申请</title>{/block}
 {block name="content"}
-  <link rel="stylesheet" href="/public/static/gf/css/iconfont.css?v={:config('version_sign')}">
-  <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css?v={:config('version_sign')}">
+  <link rel="stylesheet" href="/public/static/gf/css/iconfont.css?v={$version}">
+  <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css?v={$version}">
   <div class="admin-content">
     <div class="am-cf am-padding">
       <div class="am-fl am-cf"><small class="am-text-sm">租约管理</small> > <small class="am-text-primary">租约记录</small>&nbsp;&nbsp;<span style="font-size:16px;">共{$leaseLstObj->total()}条记录</span></div>
@@ -231,6 +231,6 @@
   {include file="application/ph/view/lease_audit/print2.html" /}
 {/block}
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/js/viewer.min.js?v={:config('version_sign')}"></script>
-<script type="text/javascript" src="/public/static/gf/viewJs/lease_audit.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js?v={$version}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/lease_audit.js?v={$version}"></script>
 {/block}

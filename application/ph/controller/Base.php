@@ -73,6 +73,7 @@ class Base extends Controller
         $cutTypeLst = $this->BanInfoModel ->get_all_cut_type();
 
         $this->assign([
+            'version' => WEB_VERSION,
             'left_menu' => $leftMenu ,
             'nowMvc' => $nowMvc,
             'nowID' => $nowID,

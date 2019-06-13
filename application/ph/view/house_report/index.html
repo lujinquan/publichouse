@@ -107,7 +107,7 @@
 </div>
 {/block}
 {block name="JsFile"}
-<script type="text/javascript" src="/public/static/gf/viewJs/house_report.js?v={:config('version_sign')}"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/house_report.js?v={$version}"></script>
 <script type="text/javascript">
     $('#printForm').click(function () {
         window.print();
