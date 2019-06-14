@@ -232,16 +232,22 @@ class ChangeApply extends Model
                     
                     $findwhere = [
                         'HouseID'=>$data['HouseID'],
-                        'Status'=>0,
-                        'HouseChangeStatus'=>0,
+                        // 'Status'=>0,
+                        // 'HouseChangeStatus'=>0,
                     ];
                     $finds = $houseModel->field('InstitutionPID,BanID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
-
-                    if(!$finds){
+                    if($finds['Status']){
                         return jsons('4002','房屋状态需为异动状态');
                     }
+                    if(!$finds['HousePrerent']){
+                        return jsons('4002','请完善该房屋的规租信息');
+                    }
+                    if(!$finds['TenantID']){
+                        return jsons('4002','请完善该房屋的租户信息');
+                    }
+
                     return $finds;
                 break;
                 case 8:

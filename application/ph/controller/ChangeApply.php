@@ -94,7 +94,8 @@ class ChangeApply extends Base
                     $datas['CutType'] = $data['CutType'];  //减免类型
                     $datas['InflRent'] = $data['RemitRent'];  //减免类型
                     $datas['OrderDate'] = date('Ym', time());  //订单期 
-                    $datas['DateEnd'] = date('Ym', strtotime($data['validity'].' month'));
+                    //$datas['DateEnd'] = date('Ym', strtotime($data['validity'].' month'));
+                    $datas['DateEnd'] = date('Y', strtotime('+1 year')).'01';
 
                     $result['CutType'] = $data['CutType'];  //减免类型
                     $result['IDnumber'] = $data['IDnumber'];  //证件号码
