@@ -910,8 +910,8 @@ $(document).on('click', '.addRoom', function() {
     $(this).parent().parent().find('.exRoom').css('display', 'block');
     // $(this).parent().parent().find('.exRoom').eq(0).css('display','none');
     for (var l = 0; l < 12; l++) {
-        $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + ']');
-        $("." + l + " li select").attr('name', 'RoomType[' + l + ']');
+        $("." + l + " li input:first-child").attr('name', 'RoomType[' + l + '][]');
+        $("." + l + " li select").attr('name', 'RoomType[' + l + '][]');
     }
     for (var n = 0; n < $('.QueryBanID').length; n++) {
         banQuery.actionA('QueryBanID','','0,1',n);
@@ -920,8 +920,10 @@ $(document).on('click', '.addRoom', function() {
         houseQuery.actionA('QueryHouse','','0,1', n);
     }
 	//营业编辑不可点击栏目设置
-	 $(".ModifyDetail.11 .exRoom").each(function(){
-	  $(this).find('li:gt(1):lt(11) .fontS1').attr('disabled',true);
+	$(".ModifyDetail.11 .exRoom").each(function(){
+	  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick");
+	  $(this).find('li:gt(1):lt(12) .fontS1').removeClass("QueryCut");
+	   $(this).find('li:gt(1):lt(12) select').css('visibility','hidden');
 	});
     // var PointBox=[]
     // var beforeLength =$('.QueryCut').length;
