@@ -97,6 +97,9 @@ class HouseInfo extends Model
             if (isset($searchForm['HousePrerent']) && $searchForm['HousePrerent']) {  //检索房屋规定租金
                 $where['HousePrerent'] = array('eq', $searchForm['HousePrerent']);
             }
+            if (isset($searchForm['IfSuspend']) && $searchForm['IfSuspend']) {  //检索房屋规定租金
+                $where['IfSuspend'] = array('eq', $searchForm['IfSuspend']);
+            }
             if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //模糊检索租户姓名
                 $where['TenantName'] = array('like', '%' . $searchForm['TenantName'] . '%');
             }
@@ -126,7 +129,7 @@ class HouseInfo extends Model
         $HouseIdList['HousePrerentSum'] = self::field('HouseID')->where($where)->sum('HousePrerent');
         $ApprovedRentSum = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('ApprovedRent');
         $HousePrerent = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('HousePrerent');
-        $HouseIdList['ApprovedRentSum'] = $ApprovedRentSum - $HousePrerent;
+        $HouseIdList['ApprovedRentSum'] = bcsub($ApprovedRentSum,$HousePrerent,2);
         //$HouseIdList['HouseUseareaSum'] = self::field('HouseID')->where($where)->sum('HouseUsearea');
         $HouseIdList['LeasedAreaSum'] = self::field('HouseID')->where($where)->sum('LeasedArea');
         $HouseIdList['HouseAreaSum'] = self::field('HouseID')->where($where)->sum('HouseArea');
@@ -361,11 +364,20 @@ class HouseInfo extends Model
             $v3[12] = empty($v3[12])?1:$v3[12];
 
             foreach ($v3 as $k4 => $v4) {
-                //先效验房间的信息是否完整填写
-                if (!in_array($k4, [0,4,5,6,7]) && $v4 === '') { //房间编号，绑定的第二个和第三个,四个，五个房屋可以为空
-                    //halt($k4);
-                    return jsons('4001', '请完善房间信息');
+                if($v3[15] != 12){
+                    //先效验房间的信息是否完整填写
+                    if (!in_array($k4, [0,4,5,6,7]) && ($v4 === '')) { //房间编号，绑定的第二个和第三个,四个，五个房屋可以为空
+                        //halt($k4);
+                        return jsons('4001', '请完善房间信息');
+                    }
+                }else{
+                    if (in_array($k4, [1,13]) && ($v4 === '')) { //房间编号，绑定的第二个和第三个,四个，五个房屋可以为空
+                        //halt($k4);
+                        return jsons('4001', '请完善营业房间信息');
+                    }
                 }
+                
+
             }
 
 //            $banUnitFloorNum = Db::name('ban')->where('BanID',$v3[2])->field('BanUnitNum,BanFloorNum')->find();
