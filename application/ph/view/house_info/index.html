@@ -269,7 +269,7 @@
 
                 <?php foreach($houseLst as $k1 => $v1){; ?>
 
-                <tr class="check001">
+                <tr class="check001" {if condition="$v1['IfSuspend'] === '是'"}style="color:#9b9b9b;"{/if}>
                     <td>
                         <span class="piaochecked">
                             <input class="checkId radioclass input" type="radio" name="choose"
@@ -291,7 +291,7 @@
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['IfSuspend']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
-                    <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#ddd;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
+                    <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#9b9b9b;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['LeasedArea']; ?></td>

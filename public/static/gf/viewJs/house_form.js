@@ -921,7 +921,7 @@ $(document).on('click', '.addRoom', function() {
     }
 	//营业编辑不可点击栏目设置
 	$(".ModifyDetail.11 .exRoom").each(function(){
-	  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick");
+	  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick").css('background-color','#f6f6f6');
 	  $(this).find('li:gt(1):lt(12) .fontS1').removeClass("QueryCut");
 	   $(this).find('li:gt(1):lt(12) select').css('visibility','hidden');
 	});
