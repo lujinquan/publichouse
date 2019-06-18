@@ -212,6 +212,7 @@ class HouseInfo extends Base
                             'Status' => 1,
                             'RoomType' => $v5[15],
                             'RoomPrerent' => $v5[13],
+                            'RoomRentMonth' => $v5[13],
                             'RoomName' => $one['RoomTypeName'],
                         ];
                         if ($datas['RoomID']) {  //如果房间编号存在，则为修改

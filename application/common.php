@@ -781,7 +781,7 @@ function count_room_rent($roomid , $houseid = ''){
         return 0.5;
     }
 
-    if($roomOne['BanID'] == '1050053295'){ //如果是新华村5栋的楼，则单独处理
+    if($roomOne['BanID'] == '1050053295' || $roomOne['RoomType'] == 12){ //如果是新华村5栋的楼，则单独处理
         return $roomOne['RoomPrerent'];
     }else{
         $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();
