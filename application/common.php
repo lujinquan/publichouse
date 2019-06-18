@@ -486,6 +486,7 @@ function get_house_info($houseID){
 
     if(empty($data)){return jsons('4004','房屋编号不存在');}
     $data['ApprovedRent'] = count_house_rent($houseID);
+    $data['RentMonth'] = $data['HousePrerent'] + $data['DiffRent'] + $data['PumpCost'];
     $data['OwnerTypes'][0]['OwnerType'] = get_owner($data['OwnerType']);
     $data['OwnerTypes'][0]['HousePrerent'] = $data['HousePrerent'];
     $data['OwnerTypes'][1]['OwnerType'] = $data['AnathorOwnerType']?get_owner($data['AnathorOwnerType']):0;

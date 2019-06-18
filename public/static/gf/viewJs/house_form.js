@@ -445,7 +445,7 @@ $('.RentForm').click(function() {
         $('.RentApproved').text(res.data.houseDetail.ApprovedRent);
         $('.RentRemit').text(res.data.houseDetail.RemitRent);
         $('.RentPump').text(res.data.houseDetail.PumpCost);
-        $('.RentReceive').text(res.data.houseDetail.ReceiveRent);
+        $('.RentReceive').text(res.data.houseDetail.RentMonth);
         $('.RentHouseArea').text(res.data.houseDetail.HouseUsearea);
         $('.diffRent').text(res.data.houseDetail.DiffRent);
         $('.agreementRent').text(res.data.houseDetail.ProtocolRent);
