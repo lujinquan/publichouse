@@ -760,7 +760,7 @@ function count_house_rent($houseid){
     }else{
         //PlusRent加计租金（面盆浴盆，5米以上，5米以下什么的），DiffRent租差，ProtocolRent协议租金
         //$houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
-        $houseRent = $sumrent;
+        $houseRent = $sumrent + $find['PlusRent'];
         // 民用的四舍五入保留一位，机关企业的四舍五入保留两位 
         return ($find['UseNature'] == 1)?round($houseRent,1):round($houseRent,2); 
         //return $houseRent;
