@@ -55,6 +55,23 @@ class PropertyReport extends Model
             //'OrderDate' => array('between', [$year . '01', $year . '12']),
             'OrderDate' => array('eq', $year),
         ];
+
+        $tiaozhengWhere = [  //租金调整，上调的部分
+            'OwnerType' => array('in',[1,2,3,5,6,7]),
+            'ChangeType' => array('eq',9),
+            'Status' => array('eq',1),
+            //'Area' => array('>',0),
+            //'OrderDate' => array('between', [$year . '01', $year . '12']),
+            'OrderDate' => array('eq', $year),
+        ];
+        // $tiaozhengDelWhere = [  //租金调整，上调的部分
+        //     'OwnerType' => array('in',[1,2,3,5,6,7]),
+        //     'ChangeType' => array('eq',9),
+        //     'Status' => array('eq',1),
+        //     'Area' => array('<',0),
+        //     //'OrderDate' => array('between', [$year . '01', $year . '12']),
+        //     'OrderDate' => array('eq', $year),
+        // ];
         
         $propertyData = Db::name('ban')->field('OwnerType,TubulationID,sum(TotalNum) as totalNums, sum(TotalArea) as totalAreas')
                               ->where($propertyWhere)
@@ -73,6 +90,10 @@ class PropertyReport extends Model
 
         $zhuxiaoChangeData = Db::name('rent_table')->field('OwnerType,InstitutionID,CancelType, sum(Area) as areas, sum(ChangeNum) as changeNums')
                               ->where($zhuxiaoWhere)
+                              ->group('OwnerType,InstitutionID,CancelType')
+                              ->select();
+        $tiaozhengData = Db::name('rent_table')->field('OwnerType,InstitutionID,CancelType, sum(Area) as areas, sum(ChangeNum) as changeNums')
+                              ->where($tiaozhengWhere)
                               ->group('OwnerType,InstitutionID,CancelType')
                               ->select();
 
@@ -103,6 +124,31 @@ class PropertyReport extends Model
                 'areas' => $v3['areas'],
                 'changeNums' => $v3['changeNums'],
             ];
+        }
+        foreach($tiaozhengData as $k5 => $v5){
+            if($v5['areas'] > 0){
+                if(!isset($xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'])){
+                    $xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'] = 0;
+                }
+                if(!isset($xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'])){
+                    $xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'] = 0;
+                }
+                $xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'] += $v5['areas'];
+                $xinfaChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'] += $v5['changeNums'];
+                    
+
+            }
+            if($v5['areas'] < 0){
+                if(!isset($zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'])){
+                    $zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'] = 0;
+                }
+                if(!isset($zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'])){
+                    $zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'] = 0;
+                }
+                $zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['areas'] -= $v5['areas']; //负号所以是减，即为加
+                $zhuxiaoChangedata[$v5['OwnerType']][$v5['InstitutionID']][6]['changeNums'] -= $v5['changeNums'];      
+            }
+            
         }
 
          //保证每一个产别，机构，下的每一个字段都不缺失（没有的以0来补充）

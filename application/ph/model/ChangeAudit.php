@@ -980,13 +980,13 @@ class ChangeAudit extends Model
                     );
 
                     //将异动信息加入到产权报表中
-                    if($a['TotalAreaChange'] > 0){
-                        $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
-                        Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,NewLeaseType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
-                    }else if($a['TotalAreaChange'] < 0){
-                        $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
-                        Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,CancelType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
-                    }
+                    // if($a['TotalAreaChange'] > 0){
+                    //     $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
+                    //     Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,NewLeaseType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
+                    // }else if($a['TotalAreaChange'] < 0){
+                    //     $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
+                    //     Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,CancelType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
+                    // }
 
                 }
 

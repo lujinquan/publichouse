@@ -136,7 +136,7 @@ class HouseInfo extends Base
             if (true !== $result) {
                 return jsons('4001', $result);
             }
-            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,TenantID,NonliveIf';
+            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,BanID,TenantID,NonliveIf';
             $oldOneData = Db::name('house')->field($fields)->where('HouseID', 'eq', $houseID)->find();
             foreach($oldOneData as $k1=>$v1){
                 if($data[$k1] != $v1){
