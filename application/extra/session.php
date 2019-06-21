@@ -14,17 +14,17 @@ return [
     // | 会话设置
     // +----------------------------------------------------------------------
 
-    'session'                => [
-        'id'             => '',
-        // SESSION_ID的提交变量,解决flash上传跨域
-        'var_session_id' => 'ph',
-        // SESSION 前缀
-        'prefix'         => 'ph_admin_',
-        // 驱动方式 支持redis memcache memcached
-        'type'           => '',
-        //'expire'         => '7200',
-        // 是否自动开启 SESSION
-        'auto_start'     => true, 
-        'path'           => SESSION_PATH,
-    ],
+    //'session'                => [
+        // 'id'             => '',
+        // // SESSION_ID的提交变量,解决flash上传跨域
+        // 'var_session_id' => 'ph',
+        // // SESSION 前缀
+        // 'prefix'         => 'ph_admin_',
+        // // 驱动方式 支持redis memcache memcached
+        // 'type'           => '',
+        // //'expire'         => '7200',
+        // // 是否自动开启 SESSION
+        // 'auto_start'     => true, 
+        // 'path'           => SESSION_PATH,
+    //],
 ];

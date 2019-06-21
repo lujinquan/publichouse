@@ -1939,7 +1939,8 @@ EOF;
             $result['house']['HeDingRoomMonth'] = round($s,1);
         }
 
-        $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
+        // $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
+        $result['house']['PumpCost'] = $result['house']['PumpCost'];
         $result['house']['HeDingRoomMonth'] = round(($result['house']['HeDingRoomMonth'] + $result['house']['PumpCost'] + $result['house']['DiffRent']),1);
 
         $result['room'] = isset($room)?$room:array();

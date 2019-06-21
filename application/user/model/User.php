@@ -134,6 +134,7 @@ class User extends Model
         );
 
         session('user_base_info', $userBaseInfo);
+        //halt(session('user_base_info'));
         session('user_auth_sign', $this->dataAuthSign($userBaseInfo));
 
 
@@ -215,7 +216,7 @@ class User extends Model
     public function isLogin()
     {
         $user = session('user_base_info');
-
+//halt($user);
         if (empty($user)) {
             return '';
         }else{
