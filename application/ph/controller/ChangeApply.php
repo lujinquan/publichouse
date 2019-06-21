@@ -49,7 +49,7 @@ class ChangeApply extends Base
             // }
 
             $one = model('ph/ChangeApply')->check_apply_table($data);
-            
+            //halt($one);
             if (isset($_FILES) && $_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('ChangeApply')->uploads($v, $k ,$data['type']);
@@ -267,6 +267,7 @@ class ChangeApply extends Base
                     $datas['ChangeType'] = 7;  //异动类型为新发租
                     $datas['ProcessConfigName'] = $changeTypes[7];  //异动名称
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
+                    //halt($datas);
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>7])->order('id desc')->value('id');//流程控制线路
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');

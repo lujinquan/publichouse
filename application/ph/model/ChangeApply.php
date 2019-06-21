@@ -235,7 +235,7 @@ class ChangeApply extends Model
                         // 'Status'=>0,
                         // 'HouseChangeStatus'=>0,
                     ];
-                    $finds = $houseModel->field('InstitutionPID,BanID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID,BanID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature,Status')
                                         ->where($findwhere)
                                         ->find();
                     if($finds['Status']){
