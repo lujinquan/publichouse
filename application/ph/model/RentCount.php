@@ -410,7 +410,7 @@ class RentCount extends Model
         $houseData = Db::name('house')->field($fields)->where($where)->select();
  
         $changeData = Db::name('change_order')->where(['Status'=>1,'ChangeType'=>1,'DateEnd'=>['>',date('Ym',time())]])->field('HouseID,CutType,InflRent')->select();
-
+//halt($changeData);
         $rentData = Db::name('rent_order')->where('Type',2)->group('HouseID')->column('HouseID,sum(UnpaidRent) as UnpaidRents');
 
         foreach($changeData as $c){

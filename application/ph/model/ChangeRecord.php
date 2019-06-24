@@ -113,6 +113,7 @@ class ChangeRecord extends Model
         $where['IfShow'] = array('eq',1);
 
         $ChangeList['obj'] = self::field('id')->where($where)->order('Status desc ,FinishTime desc')->paginate(config('paginate.list_rows'));
+        $ChangeList['InflRentSum'] = self::field('id')->where($where)->sum('InflRent');
 
         $arr = $ChangeList['obj']->all();
 

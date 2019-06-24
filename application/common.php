@@ -486,6 +486,7 @@ function get_house_info($houseID){
 
     if(empty($data)){return jsons('4004','房屋编号不存在');}
     $data['ApprovedRent'] = count_house_rent($houseID);
+    $data['RentMonth'] = $data['HousePrerent'] + $data['DiffRent'] + $data['PumpCost'];
     $data['OwnerTypes'][0]['OwnerType'] = get_owner($data['OwnerType']);
     $data['OwnerTypes'][0]['HousePrerent'] = $data['HousePrerent'];
     $data['OwnerTypes'][1]['OwnerType'] = $data['AnathorOwnerType']?get_owner($data['AnathorOwnerType']):0;
@@ -758,10 +759,11 @@ function count_house_rent($houseid){
         return $find['HousePrerent'];
     }else{
         //PlusRent加计租金（面盆浴盆，5米以上，5米以下什么的），DiffRent租差，ProtocolRent协议租金
-        $houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
-
+        //$houseRent = $sumrent + $find['PlusRent'] + $find['DiffRent'] + $find['ProtocolRent'];
+        $houseRent = $sumrent + $find['PlusRent'];
         // 民用的四舍五入保留一位，机关企业的四舍五入保留两位 
         return ($find['UseNature'] == 1)?round($houseRent,1):round($houseRent,2); 
+        //return $houseRent;
     }
 
 }
@@ -781,7 +783,7 @@ function count_room_rent($roomid , $houseid = ''){
         return 0.5;
     }
 
-    if($roomOne['BanID'] == '1050053295'){ //如果是新华村5栋的楼，则单独处理
+    if($roomOne['BanID'] == '1050053295' || $roomOne['RoomType'] == 12){ //如果是新华村5栋的楼，则单独处理
         return $roomOne['RoomPrerent'];
     }else{
         $banOne =  Db::name('ban')->where('BanID',$roomOne['BanID'])->field('StructureType,BanFloorNum,IfFirst,IfElevator')->find();

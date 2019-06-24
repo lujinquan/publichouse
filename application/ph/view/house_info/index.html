@@ -51,8 +51,11 @@
                     <?php }; ?>
                     <th class="table-set">产别</th>
                     <th class="table-set">使用性质</th>
-                    <th class="table-set">月租金</th>
+                    <th class="table-set">是否暂停</th>
+                    <th class="table-set">是否空租</th>
+                    <th class="table-set">规定租金</th>
                     <th class="table-title">计算租金</th>
+                    <th class="table-set">月租金</th>
                     <th class="table-set dong_none">单元号</th>
                     <th class="table-set dong_none">楼层号</th>
                     <th class="table-set">计租面积</th>
@@ -198,21 +201,73 @@
                                 </select>
                             </div>
                         </td>
-<!--                         <td>
-                            <div class="am-input-group am-input-group-sm">
-                                <?php
+            <td>
+                <div class="am-form-group search_input">
+                    <select name="IfSuspend">
+                        <option value="" style="display:none">请选择</option>
+                        <?php
+                        if(isset($houseOption['IfSuspend'])){
+                            if($houseOption['IfSuspend'] == 1){
+                                $selectDiff ='selected';
+                                $selectDiffs ='';
+                            }elseif($houseOption['IfSuspend'] === '0'){
+                                $selectDiff ='';
+                                $selectDiffs ='selected';
+                            }else{
+                                $selectDiff ='';
+                                $selectDiffs ='';
+                            }
+                        }else{
+                            $selectDiff ='';
+                            $selectDiffs ='';
+                        }
+                        ?>
+
+                        <option value="1" {$selectDiff}>是</option>
+                        <option value="0" {$selectDiffs}>否</option>
+                       
+                    </select>
+                </div></td>
+                <td>
+                <div class="am-form-group search_input">
+                    <select name="IfEmpty">
+                        <option value="" style="display:none">请选择</option>
+                        <?php
+                        if(isset($houseOption['IfEmpty'])){
+                            if($houseOption['IfEmpty'] == 1){
+                                $selectDiff ='selected';
+                                $selectDiffs ='';
+                            }elseif($houseOption['IfEmpty'] === '0'){
+                                $selectDiff ='';
+                                $selectDiffs ='selected';
+                            }else{
+                                $selectDiff ='';
+                                $selectDiffs ='';
+                            }
+                        }else{
+                            $selectDiff ='';
+                            $selectDiffs ='';
+                        }
+                        ?>
+
+                        <option value="1" {$selectDiff}>是</option>
+                        <option value="0" {$selectDiffs}>否</option>
+                       
+                    </select>
+                </div></td>
+                        <td class="dong_none">
+                            <?php
 
                                     $HousePrerent = isset($houseOption['HousePrerent'])?$houseOption['HousePrerent']:'';
 
                                 ?>
-                                <input name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}">
-                            </div>
-                        </td> -->
-                        <td class="dong_none">
                             <div style="width:120px;"><input style="width:50px;display:inline-block" name="HousePrerent" type="text" class="am-form-field" value="{$HousePrerent}"> {$HousePrerentSum}</div>
                         </td>
                         <td>
                             <div style="width:50px;">{$ApprovedRentSum}</div>
+                        </td>
+                        <td>
+                            <div style="width:50px;"></div>
                         </td>
                         <td class="dong_none">
                             <div style="width:40px;"></div>
@@ -246,7 +301,7 @@
 
                 <?php foreach($houseLst as $k1 => $v1){; ?>
 
-                <tr class="check001">
+                <tr class="check001" {if condition="$v1['IfSuspend'] === '是'"}style="color:#9b9b9b;"{/if}>
                     <td>
                         <span class="piaochecked">
                             <input class="checkId radioclass input" type="radio" name="choose"
@@ -266,8 +321,11 @@
                     <td class="am-hide-sm-only"><?php echo $v1['OwnerType']; ?></td>
                     
                     <td class="am-hide-sm-only"><?php echo $v1['UseNature']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['IfSuspend']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v1['IfEmpty']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
-                    <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#ddd;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
+                    <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#9b9b9b;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
+                    <td class="dong_none"><?php echo ($v1['HousePrerent'] + $v1['PumpCost'] + $v1['DiffRent']); ?></td>
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['LeasedArea']; ?></td>

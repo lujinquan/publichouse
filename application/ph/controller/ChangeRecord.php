@@ -20,6 +20,7 @@ class ChangeRecord extends Base
             'changeLst' => $data['arr'],
             'changeLstObj' => $data['obj'],
             'changeOption' => $data['option'],
+            'InflRentSum' => $data['InflRentSum'],
         ]);
 
         return $this->fetch();

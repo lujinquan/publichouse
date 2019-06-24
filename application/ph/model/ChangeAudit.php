@@ -647,19 +647,21 @@ class ChangeAudit extends Model
                 //将减免的金额写入到房屋减免字段中去
                 Db::name('house')->where('HouseID', $one['HouseID'])->setInc('RemitRent', $one['InflRent']);
 
+                //删除之前过期的减免统计
+                Db::name('rent_table')->where(['ChangeType'=>['eq',1],'HouseID'=>$one['HouseID']])->delete();
                 //将减免类型，减免金额，减免证件号写入到租金配置中去 
-                $rentconfigfind = Db::name('rent_config')->where('HouseID', $one['HouseID'])->find();  
+                // $rentconfigfind = Db::name('rent_config')->where('HouseID', $one['HouseID'])->find();  
 
-                if($rentconfigfind){
-                    Db::name('rent_config')->where('HouseID', $one['HouseID'])
-                                            ->update([
-                                                'CutType' => $one['CutType'],
-                                                'CutRent' => $one['InflRent'], 
-                                                'CutNumber' => $one['IDnumber'],
-                                                'ReceiveRent'=>['exp','ReceiveRent-'.$one['InflRent']],
-                                                'UnpaidRent'=>['exp','UnpaidRent-'.$one['InflRent']] ,
-                                            ]);
-                }
+                // if($rentconfigfind){
+                //     Db::name('rent_config')->where('HouseID', $one['HouseID'])
+                //                             ->update([
+                //                                 'CutType' => $one['CutType'],
+                //                                 'CutRent' => $one['InflRent'], 
+                //                                 'CutNumber' => $one['IDnumber'],
+                //                                 'ReceiveRent'=>['exp','ReceiveRent-'.$one['InflRent']],
+                //                                 'UnpaidRent'=>['exp','UnpaidRent-'.$one['InflRent']] ,
+                //                             ]);
+                // }
 
                 // $rentorderfind = Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])->find();        
                 // if($rentconfigfind){
@@ -673,9 +675,9 @@ class ChangeAudit extends Model
                 //                             ]);
                 // }
 
-                $str = "( 1,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
+                $str = "( 1,'". $one['ChangeOrderID'] . "','" .$one['HouseID'] . "',".$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
 
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,HouseID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
 
                 break;
             case 2:  //空租异动完成后的，系统处理
@@ -978,13 +980,13 @@ class ChangeAudit extends Model
                     );
 
                     //将异动信息加入到产权报表中
-                    if($a['TotalAreaChange'] > 0){
-                        $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
-                        Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,NewLeaseType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
-                    }else if($a['TotalAreaChange'] < 0){
-                        $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
-                        Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,CancelType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
-                    }
+                    // if($a['TotalAreaChange'] > 0){
+                    //     $str1 = "( 7,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6, ". $a['TotalAreaChange'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
+                    //     Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,NewLeaseType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
+                    // }else if($a['TotalAreaChange'] < 0){
+                    //     $str1 = "( 8,'".$oneData['ChangeOrderID']."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . ",6," . abs($a['TotalAreaChange']) . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
+                    //     Db::execute("insert into ".config('database.prefix')."rent_table ( ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,CancelType,InflRent,OwnerType,UseNature,OrderDate) values " . $str1);
+                    // }
 
                 }
 

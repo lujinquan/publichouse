@@ -136,7 +136,7 @@ class HouseInfo extends Base
             if (true !== $result) {
                 return jsons('4001', $result);
             }
-            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,TenantID,NonliveIf';
+            $fields = 'HouseID,UnitID,FloorID,UseNature,OldOprice,BanID,TenantID,NonliveIf';
             $oldOneData = Db::name('house')->field($fields)->where('HouseID', 'eq', $houseID)->find();
             foreach($oldOneData as $k1=>$v1){
                 if($data[$k1] != $v1){
@@ -190,8 +190,39 @@ class HouseInfo extends Base
 
             if (isset($data['RoomType'])) {
                 $roomArr = model('ph/HouseInfo')->check_rent_table($data);
+                $findhouse = Db::name('house')->where('HouseID', 'eq', $data['AddRent']['HouseID'])->find();
                 //halt($roomArr);
                 foreach ($roomArr as $k5 => $v5) {
+                    if($v5['15'] == 12){ //如果是营业类型的房间就直接入库就OK了
+                       
+                        //halt($findhouse);
+                        $datas = [
+                            'RoomID' => $v5[0],
+                            'InstitutionID' => $findhouse['InstitutionID'],
+                            'InstitutionPID' => $findhouse['InstitutionPID'],
+                            'OwnerType' => $findhouse['OwnerType'],
+                            'BanAddress' => $findhouse['BanAddress'],
+                            'RoomNumber' => $v5[1],
+                            'BanID' => $findhouse['BanID'],
+                            'HouseID' => $data['AddRent']['HouseID'],
+                            'RoomPublicStatus' => 1,
+                            'UnitID' => $findhouse['UnitID'],
+                            'FloorID' => $findhouse['FloorID'],
+                            'UseArea' => $v5[11],
+                            'Status' => 1,
+                            'RoomType' => $v5[15],
+                            'RoomPrerent' => $v5[13],
+                            'RoomRentMonth' => $v5[13],
+                            'RoomName' => $one['RoomTypeName'],
+                        ];
+                        if ($datas['RoomID']) {  //如果房间编号存在，则为修改
+                            Db::name('room')->update($datas);
+                        }else{
+                            Db::name('room')->insert($datas);  
+                        }
+                    }else{
+
+                    
                     if (isset($data['PriceBox' . ($k5 + 1)])) { //写入基价折减的条件，id用逗号分隔
                         $rentPointIDS = $data['PriceBox' . ($k5 + 1)];
                     }
@@ -318,6 +349,7 @@ class HouseInfo extends Base
                             Db::name('house')->where('HouseID',$hous)->setField('ApprovedRent',$houseTemp);
                         }
                     }
+                }
                 }
             }
             //halt(1);

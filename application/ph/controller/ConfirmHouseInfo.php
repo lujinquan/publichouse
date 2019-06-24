@@ -103,7 +103,7 @@ class ConfirmHouseInfo extends Base
             check($data['HouseID'],'');
             
             //$data['Status'] = 0; //状态改为未确认状态
-            $one = Db::name('ban')->field('TubulationID ,InstitutionID ,OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
+            $one = Db::name('ban')->field('TubulationID ,InstitutionID ,BanID, OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
             $data['InstitutionID'] = $one['TubulationID'];
             $data['InstitutionPID'] = $one['InstitutionID'];
             $data['OwnerType'] = $one['OwnerType'];

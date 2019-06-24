@@ -240,9 +240,22 @@ return [
         ],
     ],
 
-    // +----------------------------------------------------------------------
-    // | 会话设置
-    // +----------------------------------------------------------------------
+    //分页配置
+    'paginate'               => [
+        'type'      => 'bootstrap',
+        'var_page'  => 'page',
+        'list_rows' => 15,
+    ],
+
+    
+
+    // 开发模式开启，0关闭
+    'develop_mode' => 0,
+
+    //短信接口配置
+    'AppKey' => '349bd70312dbac392114f5fa9a348930',
+    'AppSecret' => '8bdb56f89269',
+    'TemplateNumber' => '3059645',
 
     'session'                => [
         'id'             => '',
@@ -252,15 +265,12 @@ return [
         'prefix'         => 'ph_admin_',
         // 驱动方式 支持redis memcache memcached
         'type'           => '',
-        'expire'         => '7200',
+        //'expire'         => '7200',
         // 是否自动开启 SESSION
-        'auto_start'     => TRUE, 
+        'auto_start'     => true, 
         'path'           => SESSION_PATH,
     ],
 
-    // +----------------------------------------------------------------------
-    // | Cookie设置
-    // +----------------------------------------------------------------------
     'cookie'                 => [
         // cookie 名称前缀
         'prefix'    => 'ph_admin_',
@@ -277,42 +287,6 @@ return [
         // 是否使用 setcookie
         'setcookie' => true,
     ],
-
-    //分页配置
-    'paginate'               => [
-        'type'      => 'bootstrap',
-        'var_page'  => 'page',
-        'list_rows' => 15,
-    ],
-
-    //验证码配置
-    'captcha'  => [
-        //验证码字符
-        //'codeSet' => '2345678abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY',
-        'codeSet' => '2345678',
-        // 验证码字体大小(px)
-        'fontSize' => 18,
-        // 是否话混淆曲线
-        'useCurve'  => false,
-        // 是否添加杂点
-        'useNoise' => false,
-        //验证码图片高度
-        'imageH'  => 37,
-        //验证码图片宽度
-        'imageW'  =>  140,
-        // 验证码长度（位数）
-        'length'   => 4,
-        // 验证成功后是否重置
-        'reset'   =>  true
-    ],
-
-    // 开发模式开启，0关闭
-    'develop_mode' => 0,
-
-    //短信接口配置
-    'AppKey' => '349bd70312dbac392114f5fa9a348930',
-    'AppSecret' => '8bdb56f89269',
-    'TemplateNumber' => '3059645',
 
 ];
 

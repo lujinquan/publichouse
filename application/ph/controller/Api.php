@@ -1834,7 +1834,7 @@ EOF;
                                       ->join('ban b','a.BanID = b.BanID','left')
                                       ->join('tenant c','a.TenantID = c.TenantID','left')
                                       ->join('ban_structure_type d','b.StructureType = d.id','left')
-                                      ->field('a.UseNature,a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost,a.PlusRent')
+                                      ->field('a.UseNature,a.Szno,a.BanAddress,d.StructureType,b.BanFloorNum,a.FloorID,c.TenantName,c.TenantNumber,c.TenantTel,a.Hall,a.Kitchen,a.Toilet,a.InnerAisle,a.BelowFiveNum,a.MoreFiveNum,a.PumpCost,a.PlusRent,a.DiffRent')
                                       ->where('a.HouseID',$houseid)
                                       ->find();
 
@@ -1939,8 +1939,9 @@ EOF;
             $result['house']['HeDingRoomMonth'] = round($s,1);
         }
 
-        $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
-        $result['house']['HeDingRoomMonth'] = $result['house']['HeDingRoomMonth'] + $result['house']['PumpCost'];
+        // $result['house']['PumpCost'] = ($result['house']['PumpCost'] != 0)?round(0.08 * $result['house']['TotalLeaseArea'],1):0;
+        $result['house']['PumpCost'] = $result['house']['PumpCost'];
+        $result['house']['HeDingRoomMonth'] = round(($result['house']['HeDingRoomMonth'] + $result['house']['PumpCost'] + $result['house']['DiffRent']),1);
 
         $result['room'] = isset($room)?$room:array();
 
