@@ -966,6 +966,7 @@ $('#addApply').click(function() {
                         formData.append("FloorID", $('.newRentFloor').val());
                         formData.append("HouseArea", $('.newRentBanArea').val());
                         formData.append("OldOprice", $('.newRentPrice').val());
+						formData.append("NewLeaseType", $('#NewLeaseType option:selected').val());
                         formData.append("type", 7);
                         $.ajax({
                             type: "post",
