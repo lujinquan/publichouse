@@ -228,6 +228,9 @@ class ChangeApply extends Model
                     if($ifin){
                         return jsons('4001','该房屋已经在新发租异动订单中了');
                     }
+                    if(!$data['NewLeaseType']){
+                        return jsons('4002','请选择新发类型');
+                    }
                     $houseModel = new HouseModel;
                     
                     $findwhere = [
@@ -238,10 +241,11 @@ class ChangeApply extends Model
                     $finds = $houseModel->field('InstitutionPID,BanID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature,Status')
                                         ->where($findwhere)
                                         ->find();
+                                        //halt($finds);
                     if($finds['Status']){
                         return jsons('4002','房屋状态需为异动状态');
                     }
-                    if(!$finds['HousePrerent']){
+                    if($finds['HousePrerent'] == '0.00'){
                         return jsons('4002','请完善该房屋的规租信息');
                     }
                     if(!$finds['TenantID']){

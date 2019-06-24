@@ -346,10 +346,10 @@ class ChangeAudit extends Model
     {   
 
         //新发租
-        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,CreateTime')->find();
+        $oneData = self::where('ChangeOrderID', 'eq', $changeOrderID)->field('HouseID,Remark,NewLeaseType,CreateTime')->find();
 
         $data = get_house_info($oneData['HouseID']);
-
+        $data['NewLeaseType'] = Db::name('new_lease_type')->where('id', 'eq', $oneData['NewLeaseType'])->value('Title');
         $data['Remark'] = $oneData['Remark'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 7;
@@ -854,8 +854,8 @@ class ChangeAudit extends Model
                 model('ph/RentCount')->addOne($findOne['HouseID']);
 
                 // 插入到统计表中
-                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . "," . $v['HouseArea'] ."," . $v['LeasedArea'] ."," . $v['OldOprice'] .", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . date('Ym',time()). ")";
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+                $str = "( 7,'". $findOne['ChangeOrderID'] . "'," .$findOne['InstitutionID'] . "," .$findOne['NewLeaseType'] . "," . $findOne['InstitutionPID'] . "," . $findOne['InflRent'] . "," . $v['HouseArea'] ."," . $v['LeasedArea'] ."," . $v['OldOprice'] .", " . $findOne['OwnerType'] . "," . $findOne['UseNature'] . "," . date('Ym',time()). ")";
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,NewLeaseType,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 break;
 
             case 8:  //注销异动完成后的，系统处理

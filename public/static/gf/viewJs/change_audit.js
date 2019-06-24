@@ -279,6 +279,7 @@ $('.BtnApprove').click(function(){
 		}else if(type == 6){//维修
 
 		}else if(type == 7){//新发租
+            console.log(res.data.detail.NewLeaseType);
             $('#newRentHouseID').text(res.data.detail.HouseID);
             $('#newRentTenantID').text(res.data.detail.TenantID);
             $('#newRentTenantName').text(res.data.detail.TenantName);
@@ -292,6 +293,7 @@ $('.BtnApprove').click(function(){
             $('#newRentBanInfo').attr('value',res.data.detail.BanID);
             $('#newRentDetail').attr('value',res.data.detail.HouseID);
             $('#createTime').text(res.data.detail.OrderCreateTime);
+            $('#newLeaseTypes').text(res.data.detail.NewLeaseType);
             if(res.data.config.status == '1'){
                 $('.status_2').show();
                 new file({
@@ -686,6 +688,7 @@ $('.BtnDetail').click(function(){
             $('#newRentBanInfo').attr('value',res.data.detail.BanID);
             $('#newRentDetail').attr('value',res.data.detail.HouseID);
             $('#createTime').text(res.data.detail.OrderCreateTime);
+            $('#newLeaseTypes').text(res.data.detail.NewLeaseType);
             processState('#newRentState',res);
             metailShow('#newRentPhotos',res);
             layerBox(value,'newRent','新发租',2);

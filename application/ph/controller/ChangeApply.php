@@ -261,6 +261,7 @@ class ChangeApply extends Base
                     $datas['InflRent'] = $one['HousePrerent'];
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['UseNature'] = $one['UseNature']; 
+                    $datas['NewLeaseType'] = $data['NewLeaseType'];  //新发类型
                     $datas['OwnerType'] = $one['OwnerType'];  //新发租类型：如接管，还建……
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
