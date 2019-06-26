@@ -35,6 +35,7 @@ $("#addInfo").click(function(){
 				$('.OldTenantName').text(res.data.detail.OldTenantName);
 				$('.OldTenantNumber').text(res.data.detail.OldTenantNumber);
 				$('.OldTenantTel').text(res.data.detail.OldTenantTel);
+				$('.NewCard').text(res.data.detail.NewCard);
 
 				$('.material_3_status_2').hide();
 				if(res.data.config.status == '1'){//资料员补充资料
@@ -249,6 +250,7 @@ $('.BtnApprove').click(function(){
 			$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
 			$('.NewTenantTel').text(res.data.detail.NewTenantTel);
 			$('#approveName').text(res.data.detail.ChangeType);
+			$('.NewCard').text(res.data.detail.NewCard);
 
 
 
@@ -341,6 +343,7 @@ $('.BtnDetail').click(function(){
 		$('.NewTenantName').text(res.data.detail.NewTenantName);
 		$('.NewTenantNumber').text(res.data.detail.NewTenantNumber);
 		$('.NewTenantTel').text(res.data.detail.NewTenantTel);
+		$('.NewCard').text(res.data.detail.NewCard);
 
 		
 		// $('#IfRepair').text(res.data.detail.IfRepair);

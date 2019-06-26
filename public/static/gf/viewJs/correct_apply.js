@@ -88,7 +88,7 @@ $("#addTransfer").click(function(){
 				// var transferWay = $("#transferWay").val();
 				// var transferMoney = $("#transferMoney").val();
 				var transferName = $("#transferName").val();//别字更正
-				
+				var card = $("#newCard").val();//别字更正
 				var formData = fileTotall.getArrayFormdata() || new FormData();
 				formData.append('houseid',ID);
 				formData.append('oldID',oldID);
@@ -99,6 +99,7 @@ $("#addTransfer").click(function(){
 				// formData.append('transferRent',transferMoney);
 				// formData.append('transferReason',transferReason);
 				formData.append('transferName',transferName);
+				formData.append('card',card);
 				$.ajax({
 				    type: "post",
 				    url: "/ph/CorrectApply/add",

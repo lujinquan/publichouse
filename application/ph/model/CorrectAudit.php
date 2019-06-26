@@ -23,7 +23,7 @@ class CorrectAudit extends Model
     public function get_change_detail_info($changeOrderID){
 
         //房屋编号，申请类型
-        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, CreateTime,OldTenantName,NewTenantName')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
+        $orderData = self::field('HouseID , TransferRent ,OwnerType,UseNature,ChangeReason,ChangeType, OldTenantID, CreateTime,OldTenantName,NewTenantName,NewCard')->where('ChangeOrderID' ,'eq' ,$changeOrderID)->find();
 
         //楼层号， 备案时间 ，承租人id ,计租面积 ，实有面积
         $houseData = Db::name('house')->field('TenantID ,BanAddress, FloorID, LeasedArea ,HouseArea ,HouseUsearea')
@@ -64,6 +64,7 @@ class CorrectAudit extends Model
         $data['OldTenantNumber'] = $tenantOldData['TenantNumber']?$tenantOldData['TenantNumber']:'';  //租户身份证号码
         // $data['NewTenantTel'] = $tenantNewData['TenantTel']?$tenantNewData['TenantTel']:'';  //租户联系方式
         $data['NewTenantName'] = $orderData['NewTenantName'];  //租户姓名
+        $data['NewCard'] = $orderData['NewCard'];  //租户身份证号
         // $data['NewTenantNumber'] = $tenantNewData['TenantNumber']?$tenantNewData['TenantNumber']:'';  //租户身份证号码
 
         return $data;

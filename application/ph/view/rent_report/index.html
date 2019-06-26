@@ -23,7 +23,8 @@
                     <select name="OwnerType" id="OwnerType">
                         <option value="1" style="display:none">市属</option>
                         <?php foreach($owerLst as $k1 =>$v1){ $select =($ownerType == $k1)?'selected':''; ?>
-                        <option value="{$k1}" {$select}>{$v1}</option>
+
+                        <option value="{$k1}" {if condition="$k1 > 7"} class="show"{/if}{$select}>{$v1}</option>
                         <?php }; ?>
                     </select>
                 </div>
@@ -83,6 +84,17 @@
 {/block}
 {block name="JsFile"}
 <script type="text/javascript">
+    $('#TubulationID').change(function(){
+        var tubulationID = $(this).val();
+
+        if(tubulationID > 3){
+            $('.show').remove();
+        }
+        if(tubulationID > 3){
+            $('.show').remove();
+        }
+        console.log(tubulationID);
+    });
     $('#printForm').click(function () {
         window.print();
     });
@@ -105,7 +117,7 @@
     }
     //月租金报表自管产、代管、托管的报表样式，没有其中一其中二
     var owner_type = $('#OwnerType').val();
-    console.log(owner_type);
+    //console.log(owner_type);
     if (owner_type == 3 || owner_type == 5 || owner_type == 7) {
         $('.once_hide').hide();
         for(var i = 4;i <= 9;i++){

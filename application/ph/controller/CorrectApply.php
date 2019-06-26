@@ -46,6 +46,9 @@ class CorrectApply extends Base
             if(empty($data['houseid']) || empty($data['transferName'])) {
                 return jsons('4005' ,'请完善相关信息！');
             }
+            if(empty($data['card'])){
+               return jsons('4005' ,'请填写身份证信息！');  
+            }
             if (isset($_FILES) && $_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('CorrectApply')->uploads($v, $k);
@@ -56,6 +59,7 @@ class CorrectApply extends Base
             $datas['OldTenantID'] = $data['oldID'];  //原租户编号
             $datas['OldTenantName'] = $data['oldName']; //原租户名称
             $datas['NewTenantName'] = $data['transferName']; 
+            $datas['NewCard'] = $data['card'];
             $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';
 
 

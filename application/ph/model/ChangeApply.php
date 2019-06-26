@@ -19,7 +19,7 @@ class ChangeApply extends Model
 
         $where['Status'] = 1;
 
-        $ProcessLst['obj'] = self::field('id ,ProcessName ,IfBaseChange,CreateUserID,CreateTime')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $ProcessLst['obj'] = self::field('id ,ProcessName ,IfBaseChange,CreateUserID,CreateTime')->where($where)->order('Sort asc')->paginate(config('paginate.list_rows'));
 
         $ProcessLst['arr'] = $ProcessLst['obj']->all()?$ProcessLst['obj']->all():array();
 
