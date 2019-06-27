@@ -11,7 +11,7 @@ $('.BtnDetail').click(function(){
 	console.log(value);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+value,function(res){
 		res = JSON.parse(res);
-		console.log(res);
+		console.log(1);
 		var type = res.data.detail.type;
 			if(type == 1){
 				$('.status_2').hide();

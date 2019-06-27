@@ -790,7 +790,7 @@ $('.BtnDetail').click(function(){
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);
-		}else if(type == 15 || type == 16){
+		}else if(type == 15 || type == 16 || type == 17){
             // var house_str = '';
             // $('.batchBanId').text(res.data.detail.BanID);
             // $('.batchAddress').text(res.data.detail.BanAddress);
