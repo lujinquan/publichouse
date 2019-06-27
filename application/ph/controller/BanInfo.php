@@ -131,12 +131,18 @@ class BanInfo extends Base
             //等联动修改好了后，需要加上去   AreaTwo,AreaThree,
             $fields = 'BanNumber,AreaFour,TubulationID,BanPropertyID,DamageGrade,BanLandID,BanFreeholdID,CoveredArea,ActualArea,OwnerType,BanYear,UseNature,BanUnitNum,BanFloorNum,BanFloorStart,HistoryIf,ReformIf,ProtectculturalIf,CutIf,BanGpsX,BanGpsY';
             $oldOneData = Db::name('ban')->field($fields)->where('BanID', 'eq', $banID)->find();
+            $oldBanFloorNum = $newBanFloorNum = 0;
             foreach($oldOneData as $k1=>$v1){
                 if($data[$k1] != $v1){
+                    if($k1 == 'BanFloorNum'){
+                        $oldBanFloorNum = $v1;
+                        $newBanFloorNum = $data[$k1];
+                    }
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
                     $allData[$k1]['name'] = config($k1);
                 }
+
             }
             //halt($data);
             if ($banInfo = BanInfoModel::update($data)) {
@@ -155,6 +161,17 @@ class BanInfo extends Base
                 if(!isset($allData)){$allData = array(); }
                 // 记录行为
                 action_log('BanInfo_edit', UID, 1, '编号为:' . $data['BanID'],json_encode($allData));
+
+                if($oldBanFloorNum && $newBanFloorNum){
+                    Db::name('ban_change')->insert([
+                        'BanID' => $data['BanID'],
+                        'TubulationID' => $data['TubulationID'],
+                        'InstitutionID' => $data['InstitutionID'],
+                        'OldFloorNum' => $oldBanFloorNum,
+                        'NewFloorNum' => $newBanFloorNum,
+                        'CreateTime' => time()
+                    ]);
+                }
                 return jsons('2000', '修改成功');
             } else {
                 return jsons('4000', '修改失败');
