@@ -570,6 +570,101 @@ class Api extends Controller
      * @title 楼栋查询器接口
      * @author Mr.Lu
      */
+    public function get_change_ban()
+    {
+
+        if ($this->request->isPost()) {
+            $map = $this->request->post();
+        }
+        //默认查询条件
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+        $currentUserLevel = session('user_base_info.institution_level');
+        if ($currentUserLevel == 3) {  //用户为管段级别，则直接查询
+            $where['TubulationID'] = array('eq', $currentUserInstitutionID);
+        } elseif ($currentUserLevel == 2) {  //用户为所级别，则获取所有该所子管段，查询
+            $where['InstitutionID'] = array('eq', $currentUserInstitutionID);
+        } else {    //用户为公司级别，则获取所有子管段
+        }
+        $where['Status'] = array('eq', 0);
+
+        //检索查询条件
+        if (isset($map['InstitutionID']) && $map['InstitutionID']) { //楼栋机构查询
+            $level = Db::name('institution')->where('id', 'eq', $map['InstitutionID'])->value('Level');
+            if ($level == 3) {
+                $where['TubulationID'] = array('eq', $map['InstitutionID']);
+            } elseif ($level == 2) {
+                $where['InstitutionID'] = array('eq', $map['InstitutionID']);
+            }
+        }
+
+        // if (isset($map['OwnerType']) && $map['OwnerType']) { //楼栋产别查询     
+        //     $where['OwnerType'] = array('eq', $map['OwnerType']); 
+        // }
+
+        // if (isset($map['AreaFour']) && $map['AreaFour']) { //楼栋地址查询     
+        //     $where['AreaFour'] = array('like', '%'.$map['AreaFour'].'%'); 
+        // }
+        //halt($where);
+        $banids = Db::name('ban_change')->where($where)->column('BanID');
+
+        $data = Db::name('ban')->where(['BanID'=>['in',$banids]])
+            ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,PreRent,UseNature,AreaFour')
+            ->select();
+
+        $dams = Db::name('ban_damage_grade')->column('id,DamageGrade');
+        $owns = Db::name('ban_owner_type')->column('id,OwnerType');
+        $strs = Db::name('ban_structure_type')->column('id,StructureType');
+        $uses= Db::name('use_nature')->column('id,UseNature');
+
+        $map['ChangeType'] = isset($map['ChangeType'])?$map['ChangeType']:'';
+
+        $result = [];
+        if ($data) {
+            
+            foreach ($data as $d) {
+                $i = 0;
+                $wheres['Status'] = array('eq', 1);
+                $wheres['BanID'] = array('eq',$d['BanID']);
+                //$wheres['IfSuspend'] = array('eq', 0);
+                $wheres['HouseChangeStatus'] = array('eq', 0);
+                $res = Db::name('house')->where($wheres)->field('HouseID ,HousePrerent')->select();
+                foreach($res as $r){
+                    $r['ApprovedRent'] = count_house_rent($r['HouseID']);
+                    $r['Diff'] = bcsub($r['ApprovedRent'],$r['HousePrerent'],2);
+                    
+                    if(abs($r['Diff']) > 0){
+                        $i++;
+                    }
+                    
+                    
+                }
+
+                if($i > 0){
+                    $d['count'] = $i;
+                    $result[] = $d;
+                }
+                
+            }
+            //halt($result);
+        }
+        if($result){
+            foreach ($result as &$v) {
+                $v['DamageGrade'] = $dams[$v['DamageGrade']];//完损等级
+                $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
+                $v['StructureType'] = $strs[$v['StructureType']];//结构名称
+                $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
+            }
+        }
+        //halt($result);
+        //Cache::set('allban_'.$map['ChangeType'].$currentUserInstitutionID,$result,7200);
+        return jsons('2000', '获取成功', $result);
+    }
+
+
+    /**
+     * @title 楼栋查询器接口
+     * @author Mr.Lu
+     */
     public function get_all_ban()
     {
 
@@ -771,8 +866,12 @@ class Api extends Controller
                     if(abs($v['Diff']) == 0.1){
                         $result[] = $v;
                     }
-                }else{
+                }else if($changetype == 16){
                     if(abs($v['Diff']) < 0.6 && abs($v['Diff']) > 0.1){
+                        $result[] = $v;
+                    }
+                }else if($changetype == 17){
+                    if(abs($v['Diff']) > 0){
                         $result[] = $v;
                     }
                 }

@@ -2227,7 +2227,7 @@ function getBanList(){
 function banLinkHouse(BanID,BanAddress,type){
     if(type == 3){
         var get_url = '/ph/Api/get_all_house/BanID/'+BanID;
-    }else if(type == 15 || type == 16){
+    }else if(type == 15 || type == 16 || type == 17){
         var get_url = '/ph/Api/get_house_diff?BanID='+BanID+'&ChangeType='+type;
     }
     var load_1 = layer.load();//加载动画
@@ -2247,7 +2247,7 @@ function banLinkHouse(BanID,BanAddress,type){
                     <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
                 </tr>';
             }
-        }else if(type == 15 || type == 16){
+        }else if(type == 15 || type == 16 || type == 17){
             for(var i = 0;i < res.data.length;i++){
                 house_str += '<tr class="house_check">\
                     <td style="width:150px;"><input type="checkbox" ></td>\

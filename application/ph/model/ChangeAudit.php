@@ -248,6 +248,9 @@ class ChangeAudit extends Model
             case 16:     //  租金调整(批量)
                 $data = self::get_sixteen_detail($changeOrderID);
                 break;
+            case 17:     //  租金调整(批量)
+                $data = self::get_seventeen_detail($changeOrderID);
+                break;
             default:
         }
 
@@ -517,6 +520,28 @@ class ChangeAudit extends Model
         $data['Deadline'] = $deadline;
 
         $data['type'] = 16;
+
+        return $data;
+    }
+
+    public function get_seventeen_detail($changeOrderID)
+    {
+        //房屋编号
+        $one = self::where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+        $data = get_ban_info($one['BanID']);
+
+        $deadline = json_decode($one['Deadline'],true);
+
+        $data['InstitutionPID'] = get_institution($one['InstitutionPID']);
+        $data['ChangeOrderID'] = $one['ChangeOrderID'];
+        $data['Qrcode'] = $one['RoomID'];
+        $data['Remark'] = $one['Remark'];
+        $data['InflRent'] = $one['InflRent'];
+        $data['TotalChangeNum'] = count($deadline['houseArr']);
+        $data['Deadline'] = $deadline;
+
+        $data['type'] = 17;
 
         return $data;
     }
@@ -1136,6 +1161,30 @@ class ChangeAudit extends Model
                 $url = $this->qrcode();
 
                 Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['RoomID'=>$url]);
+
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
+
+                break;
+
+            case 17:  //租金调整(批量)异动完成后的，系统处理
+                $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();
+
+                $deadline = json_decode($one['Deadline'],true);
+
+                $str = '';
+
+                foreach($deadline['houseArr'] as $v){
+                    Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "),";
+                }
+
+                Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent+'.$one['InflRent']],'CivilRent'=>['exp','CivilRent+'.$one['InflRent']]]);
+                
+                $url = $this->qrcode();
+
+                Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->update(['RoomID'=>$url]);
+
+                Db::name('ban_change')->where('BanID', 'eq', $one['BanID'])->update(['Status'=>1]);
 
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
 

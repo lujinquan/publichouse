@@ -496,7 +496,7 @@ $('.BtnApprove').click(function(){
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res,1);
             layerBox(value,'buildingAdjustment','楼栋调整',1,res.data.config.status);
-		}else if(type == 15 || type == 16){
+		}else if(type == 15 || type == 16 || type == 17){
             // var house_str = '';
             // $('.batchBanId').text(res.data.detail.BanID);
             // $('.batchAddress').text(res.data.detail.BanAddress);
