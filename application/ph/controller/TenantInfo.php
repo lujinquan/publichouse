@@ -72,6 +72,7 @@ class TenantInfo extends Base
                $data['TenantID'] = 10000;
             }
             $data['Status'] = 1;
+
             if ($tenantInfo = TenantInfoModel::create($data)) {
                 // 记录行为
                 action_log('TenantInfo_add', UID  ,3 , '编号为:'.$data['TenantID']);
@@ -128,7 +129,13 @@ class TenantInfo extends Base
                 $data['InstitutionID'] = session('user_base_info.institution_id');
                 $data['InstitutionPID'] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('pid');
             }
-        
+            if(isset($data['IDCardFace'])){
+                unset($data['IDCardFace']);
+            }
+            if(isset($data['IDCardReverse'])){
+                unset($data['IDCardReverse']);
+            }
+        //halt($data);
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
             if ($res >0 || $res===0 ) {
 
@@ -151,8 +158,14 @@ class TenantInfo extends Base
         if($data['TenantImageIDS']){
             $r = json_decode($data['TenantImageIDS'],true);
             //halt($r);
-            $data['IDCardFace'] = Db::name('upload_file')->where('id',$r['IDCardFace'])->value('FileUrl');
-            $data['IDCardReverse'] = Db::name('upload_file')->where('id',$r['IDCardReverse'])->value('FileUrl');  
+            if(isset($r['IDCardFace'])){
+                $data['IDCardFace'] = Db::name('upload_file')->where('id',$r['IDCardFace'])->value('FileUrl');
+            }
+            if(isset($r['IDCardReverse'])){
+                $data['IDCardReverse'] = Db::name('upload_file')->where('id',$r['IDCardReverse'])->value('FileUrl');
+            }
+            
+              
         }
         
 
