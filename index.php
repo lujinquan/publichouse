@@ -22,7 +22,7 @@ define('__TEMPLATES__',__DIR__.'/templates/');
 // 定义session文件目录
 define('SESSION_PATH',__DIR__.'/runtime/session/');
 
-define('WEB_VERSION','V1.5.03');
+define('WEB_VERSION','V1.5.04');
 
 set_time_limit(800);
 
