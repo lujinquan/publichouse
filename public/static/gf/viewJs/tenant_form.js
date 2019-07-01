@@ -257,7 +257,10 @@ $(".TenantDetailBtn").click(function(){
 			area:['800px','600px'],
 			resize:false,
 			title:['租户明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-			content:$('#TenantDetail')
+			content:$('#TenantDetail'),
+			end: function () {
+			location.reload();　　//layer.open关闭刷新
+			}
 		});
 	})
 });
