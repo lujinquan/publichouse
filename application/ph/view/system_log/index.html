@@ -70,9 +70,12 @@
                             </div>
                         </td>
                         <td>
-                            <!--<div class="am-input-group am-input-group-sm">-->
-                            <!--<input name="CreateTime" type="text" class="am-form-field">-->
-                            <!--</div>-->
+                            <div class="am-input-group am-input-group-sm">
+                                <?php
+                                   $Remark = isset($LogOption['Remark'])?$LogOption['Remark']:'';
+                                ?>
+                                <input  style="width:300px;" name="Remark" type="text" class="am-form-field" value="{$Remark}">
+                            </div>
                         </td>
                         <td>
                             <div class="am-input-group am-input-group-sm" style="width:210px;">

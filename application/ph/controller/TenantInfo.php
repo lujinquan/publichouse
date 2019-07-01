@@ -116,7 +116,7 @@ class TenantInfo extends Base
             }
             $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
-            $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
+            $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantImageIDS,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
             $oldOneData = Db::name('tenant')->field($fields)->where('TenantID', 'eq', $tenantID)->find();
             foreach($oldOneData as $k1=>$v1){
                 if($data[$k1] != $v1){
@@ -135,7 +135,11 @@ class TenantInfo extends Base
             if(isset($data['IDCardReverse'])){
                 unset($data['IDCardReverse']);
             }
-        //halt($data);
+
+            if($data['TenantImageIDS']){
+                $oldImgs = json_decode($oldOneData['TenantImageIDS'],true);
+                $data['TenantImageIDS'] = json_encode(array_merge($oldImgs,$TenantImageIDS));
+            }
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
             if ($res >0 || $res===0 ) {
 

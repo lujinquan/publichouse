@@ -34,6 +34,9 @@ class SystemLog extends Model
             if ($searchForm['UserID']) {   //管理员编号
                 $where['UserID'] = array('like', '%'.$searchForm['UserID'].'%');
             }
+            if ($searchForm['Remark']) {   //操作内容
+                $where['Remark'] = array('like', '%'.$searchForm['Remark'].'%');
+            }
             if ($searchForm['ActionType']) {   //管理员编号
                 $where['ActionType'] = array('eq', $searchForm['ActionType']);
             }

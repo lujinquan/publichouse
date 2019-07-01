@@ -42,6 +42,7 @@ class Publics extends Controller
         } else {
             
             $flag = input('flag');
+            $this->assign('web_version',VERSION);
             $this->assign('version',WEB_VERSION);
             return is_signin() && $flag != 1 ? $this->redirect('ph/index/index') : $this->fetch();   //自动登录功能
    
