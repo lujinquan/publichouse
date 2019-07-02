@@ -103,8 +103,10 @@ class RentCut extends Model
         $sresult = [];
         foreach($result as $v){
             if($v['DateEnd'] == date('Ym')){
+                $v['DateEnd'] = substr($v['DateEnd'],0,4).'-'.substr($v['DateEnd'],-2);
                 array_unshift($sresult,$v);
             }else{
+                $v['DateEnd'] = substr($v['DateEnd'],0,4).'-'.substr($v['DateEnd'],-2);
                 $sresult[] = $v;
             }
         }

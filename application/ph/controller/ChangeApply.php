@@ -265,7 +265,7 @@ class ChangeApply extends Base
                     $datas['OwnerType'] = $one['OwnerType'];  //新发租类型：如接管，还建……
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
                     $datas['InstitutionPID'] = $one['InstitutionPID'];   //机构父id
-                    $datas['ChangeType'] = 7;  //异动类型为新发租
+                    $datas['ChangeType'] = 7;  //异动类型  为新发租
                     $datas['ProcessConfigName'] = $changeTypes[7];  //异动名称
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     //halt($datas);
@@ -273,6 +273,11 @@ class ChangeApply extends Base
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    //halt($one);
+                    $owner = mb_substr(get_owner($one['OwnerType']),0,1);
+                    $szno = '租直昌'.$owner.'0'.$one['InstitutionPID'].'-';
+                    //dump($owner);halt($szno);
+                    Db::name('house')->where('HouseID',$data['HouseID'])->setField('Szno',$szno);
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'07'.$suffix;   //07代表新发租
 
                     $res = Db::name('change_order')->insert($datas);

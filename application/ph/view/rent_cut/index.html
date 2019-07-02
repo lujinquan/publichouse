@@ -28,7 +28,7 @@
                 <th class="table-set">减免类型</th>
                 <th class="table-set">低保证号</th>
                 <th class="table-set">房屋</th>
-                <th class="table-set">减免时长</th>
+                <!-- <th class="table-set">减免时长</th> -->
                 <th class="table-set">减免到期</th>
                 <th class="table-set">操作</th>
               </tr>
@@ -101,16 +101,7 @@
                       <input name="HouseID" type="text" class="am-form-field" value="{$HouseID}">
                   </div>
               </td>
-                <td><div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($rentOption != array()){
-                            $MuchMonth = $rentOption['MuchMonth'];
-                        }else{
-                            $MuchMonth = '';
-                        }
-                     ?>
-                     <input name="MuchMonth" type="text" class="am-form-field" value="{$MuchMonth}">
-                </div></td>
+                
 
               <td></td> 
               <td>
@@ -130,7 +121,7 @@
                 <td class="am-hide-sm-only"><?php echo $cutTypes[$v['CutType']] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['IDnumber'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HouseID'] ; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['MuchMonth'].'个月' ; ?></td>
+                
               
                 <td class="am-hide-sm-only"><?php if($v['DateEnd'] == date('Ym')){; ?><font color="red"><?php }; ?><?php echo $v['DateEnd'] ; ?></font></td>
       				  <td>

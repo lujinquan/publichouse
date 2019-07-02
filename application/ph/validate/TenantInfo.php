@@ -15,9 +15,11 @@ class TenantInfo extends Validate
     //定义验证规则
     protected $rule = [
         
-        //'TenantTel|联系电话'  => 'require|regex:^1\d{10}',
+        
         'TenantName|租户姓名'  => 'require|max:90',
-        'TenantBalance|账户余额' => 'require',
+        //'TenantBalance|账户余额' => 'require',
+        'TenantTel|联系电话'  => 'require',
+        'TenantNumber|身份证号'  => 'require',
 
     ];
 

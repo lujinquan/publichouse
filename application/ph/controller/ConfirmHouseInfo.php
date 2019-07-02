@@ -760,7 +760,7 @@ class ConfirmHouseInfo extends Base
     public function delete()
     {
         $houseID = input('HouseID');
-        check($houseID,'');
+        check($houseID);
 
         $style = input('style');
         if(!$houseID || !$style){

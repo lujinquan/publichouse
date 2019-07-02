@@ -33,6 +33,8 @@ class ConfirmBanInfo extends Validate
         'EnterpriseNum|企栋数' => 'require|between:0,1',
         'PartyNum|机栋数' => 'require|between:0,1',
         'CivilNum|民栋数' => 'require|between:0,1',
+        'CoveredArea|占地面积' => 'require|number',
+        'BanPropertyID|产权证号' => 'require',
         //'xy|经纬度' => 'require',
     ];
 
