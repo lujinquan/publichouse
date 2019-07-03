@@ -117,7 +117,8 @@ class TenantInfo extends Model
 
     public function get_one_tenant_detail_info($tenantid = ''){
         $data = self::where('TenantID',$tenantid)->find();
-        if($data['TenantSex'] === 1){
+        //halt();
+        if($data['TenantSex'] == 1){
             $data['TenantSex'] = '男';
         }else{
             $data['TenantSex'] = '女';
