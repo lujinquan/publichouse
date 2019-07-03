@@ -49,7 +49,7 @@ function getnextMonthDays($date){
 }
 
 function check($houseid){
-    $find = Db::name('change_order')->where(['HouseID'=>$houseid,'OrderDate'=>date('Ym'),'ChangeType'=>7,'Status'=>['>',0]])->find();   
+    $find = Db::name('change_order')->where(['HouseID'=>$houseid,'ChangeType'=>7,'Status'=>['>',1]])->find();   
     if($find){
         return jsons('4000','正在异动单中数据不能修改');
     }
