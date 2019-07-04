@@ -141,6 +141,10 @@ class TenantInfo extends Base
 
             if(isset($data['TenantImageIDS']) && $data['TenantImageIDS']){
                 $oldImgs = json_decode($oldOneData['TenantImageIDS'],true);
+                if(!$oldImgs){
+                    $oldImgs = [];
+                }
+                //dump($oldImgs);halt($TenantImageIDS);
                 $data['TenantImageIDS'] = json_encode(array_merge($oldImgs,$TenantImageIDS));
             }
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
