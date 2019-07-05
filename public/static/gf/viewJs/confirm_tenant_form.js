@@ -132,7 +132,7 @@ $("#reviseTenant").click(function(){
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.close(thisIndex);
+								//layer.close(thisIndex);
 								layer.msg(result.msg);
 							}
 						});

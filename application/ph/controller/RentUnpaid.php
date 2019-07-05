@@ -15,8 +15,12 @@ class RentUnpaid extends Base
     public function index(){
 
         $rentLst = model('ph/RentCount') ->get_all_rent_order_lst(array('Type'=>2,));
-
+        $houseid = input('HouseID','');
+        // if($houseid){
+        //    $rentLst['option']['HouseID'] = $houseid;
+        // }
         $this->assign([
+            'houseid' => $houseid,
             'rentLst' => $rentLst['arr'],
             'unpaidRents' => $rentLst['UnpaidRents'],
             'paidRents' => $rentLst['PaidRents'],

@@ -284,6 +284,7 @@ return [
     'BankName' => '银行名称',
     'TenantValue' => '租户诚信值',
     'TenantName' => '租户姓名',
+    'TenantImageIDS' => '身份证信息',
 
     'RoomRentMonth' => '月租金',
     'RentPoint' => '基价折减率',

@@ -407,7 +407,7 @@ $("#deleteBan").click(function(){
 
 			layer.open({
 				type:1,
-				area:['600px','130px'],
+				area:['600px','180px'],
 				title:['删除楼栋','color:#FFF;font-size:1.6rem;font-weight:600;'],
 				content:$('#deleteChoose'),
 				btn:['确定','取消'],

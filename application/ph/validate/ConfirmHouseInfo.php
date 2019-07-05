@@ -17,7 +17,8 @@ class ConfirmHouseInfo extends Validate
         'UseNature|使用性质'  => 'require',
         'UnitID|单元号'  => 'require',
         'FloorID|楼层号'  => 'require',
-
+        'HouseArea|建面' => 'require',
+        'TenantID|租户' => 'require'
     ];
 
     protected $message = [

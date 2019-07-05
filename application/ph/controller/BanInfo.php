@@ -100,7 +100,7 @@ class BanInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
-
+            
             $tempdatas = Db::name('ban')->where('BanID', 'eq', $banID)->find();
             $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
             $data['TotalNum'] = $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum'];

@@ -87,7 +87,14 @@ class ConfirmBanInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
-            check('',$data['BanID']);
+            $houseids = Db::name('change_order')->where(['ChangeType'=>7,'Status'=>['>',1]])->column('HouseID'); 
+            if($houseids){
+                $banids = Db::name('house')->where(['Status'=>0,'HouseID'=>['in',$houseids]])->column('BanID');
+                if(in_array($data['BanID'],$banids)){
+                    return jsons('4000','正在异动单中数据不能修改');
+                }
+            }
+
 
             $tempdatas = Db::name('ban')->where('BanID', 'eq', $banID)->find();
             $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
@@ -157,7 +164,15 @@ class ConfirmBanInfo extends Base
     public function delete()
     {
         $banID = input('BanID');
-        check('',$banID);
+
+        $houseids = Db::name('change_order')->where(['ChangeType'=>7,'Status'=>['>',1]])->column('HouseID'); 
+        if($houseids){
+            $banids = Db::name('house')->where(['Status'=>0,'HouseID'=>['in',$houseids]])->column('BanID');
+            if(in_array($banID,$banids)){
+                return jsons('4000','正在异动单中数据不能修改');
+            }
+        }
+        
         $style = input('style');
         if(!$banID || !$style){
             return jsons(4004 ,'参数异常……');

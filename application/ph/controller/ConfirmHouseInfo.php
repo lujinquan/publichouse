@@ -100,7 +100,7 @@ class ConfirmHouseInfo extends Base
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
 
-            check($data['HouseID'],'');
+            check($data['HouseID']);
             
             //$data['Status'] = 0; //状态改为未确认状态
             $one = Db::name('ban')->field('TubulationID ,InstitutionID ,BanID, OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
@@ -151,6 +151,8 @@ class ConfirmHouseInfo extends Base
     {
         if ($this->request->isPost()) {
             $data = $this->request->post();
+
+            //check($data['AddRent']['HouseID']);
             //halt($data);
             //验证数据合法性
             /*如果有未确认状态的要删除的房间则，再次删除*/
@@ -173,8 +175,39 @@ class ConfirmHouseInfo extends Base
 
             if (isset($data['RoomType'])) {
                 $roomArr = model('ph/HouseInfo')->check_rent_table($data);
+                $findhouse = Db::name('house')->where('HouseID', 'eq', $data['AddRent']['HouseID'])->find();
                 //halt($roomArr);
                 foreach ($roomArr as $k5 => $v5) {
+                    if($v5['15'] == 12){ //如果是营业类型的房间就直接入库就OK了
+                       
+                        //halt($findhouse);
+                        $datas = [
+                            'RoomID' => $v5[0],
+                            'InstitutionID' => $findhouse['InstitutionID'],
+                            'InstitutionPID' => $findhouse['InstitutionPID'],
+                            'OwnerType' => $findhouse['OwnerType'],
+                            'BanAddress' => $findhouse['BanAddress'],
+                            'RoomNumber' => $v5[1],
+                            'BanID' => $findhouse['BanID'],
+                            'HouseID' => $data['AddRent']['HouseID'],
+                            'RoomPublicStatus' => 1,
+                            'UnitID' => $findhouse['UnitID'],
+                            'FloorID' => $findhouse['FloorID'],
+                            'UseArea' => $v5[11],
+                            'Status' => 1,
+                            'RoomType' => $v5[15],
+                            'RoomPrerent' => $v5[13],
+                            'RoomRentMonth' => $v5[13],
+                            'RoomName' => $one['RoomTypeName'],
+                        ];
+                        if ($datas['RoomID']) {  //如果房间编号存在，则为修改
+                            Db::name('room')->update($datas);
+                        }else{
+                            Db::name('room')->insert($datas);  
+                        }
+                    }else{
+
+                    
                     if (isset($data['PriceBox' . ($k5 + 1)])) { //写入基价折减的条件，id用逗号分隔
                         $rentPointIDS = $data['PriceBox' . ($k5 + 1)];
                     }
@@ -301,6 +334,7 @@ class ConfirmHouseInfo extends Base
                             Db::name('house')->where('HouseID',$hous)->setField('ApprovedRent',$houseTemp);
                         }
                     }
+                }
                 }
             }
             //halt(1);
@@ -760,7 +794,7 @@ class ConfirmHouseInfo extends Base
     public function delete()
     {
         $houseID = input('HouseID');
-        check($houseID,'');
+        check($houseID);
 
         $style = input('style');
         if(!$houseID || !$style){

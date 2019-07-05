@@ -75,7 +75,10 @@ class ConfirmTenantInfo extends Base
 
         if($this->request->isPost()){
             $data = array_no_space_str($this->request->post());
-
+            $find = Db::name('change_order')->where(['TenantID'=>$data['TenantID'],'ChangeType'=>7,'Status'=>['>',1]])->find();   
+            if($find){
+                return jsons('4000','正在异动单中数据不能修改');
+            }
             $result = $this->validate($data,'TenantInfo');
             if(true !== $result) {
                 return jsons('4001',$result);
@@ -114,11 +117,16 @@ class ConfirmTenantInfo extends Base
 
 
     public function  delete(){
+        
         $tenantID = input('TenantID');
+        $find = Db::name('change_order')->where(['TenantID'=>$tenantID,'ChangeType'=>7,'Status'=>['>',1]])->find();   
+        if($find){
+            return jsons('4000','正在异动单中数据不能修改');
+        }
 
         $houseid = Db::name('house')->where('TenantID',$tenantID)->value('HouseID');
         $banid = Db::name('house')->where('HouseID',$houseid)->value('BanID');
-        check($banid);
+        //check($banid);
 
         if($houseid){
             return jsons(4001 ,'该租户已绑定编号为：'.$houseid.'的房屋，请先解绑！');

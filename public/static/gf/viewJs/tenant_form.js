@@ -227,7 +227,7 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 $(".TenantDetailBtn").click(function(){
 	var TenantID = $(this).val();
 	console.log(TenantID);
-	$.get('/ph/TenantInfo/edit/TenantID/'+TenantID,function(res){
+	$.get('/ph/TenantInfo/detail/TenantID/'+TenantID,function(res){
 		res = JSON.parse(res);
 		console.log(res);
 		$('#TenantID').text(res.data.TenantID); //租户id

@@ -109,6 +109,7 @@ class SystemLog extends Base
      */
     public function RentReportCache(){
         $date = $this->nowmonth;
+        //$date = 201906;
         set_time_limit(0);
         Debug::remark('begin');
         //halt($date);

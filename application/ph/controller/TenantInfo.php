@@ -116,9 +116,12 @@ class TenantInfo extends Base
             }
             $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
-            $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
+            $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantImageIDS,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
             $oldOneData = Db::name('tenant')->field($fields)->where('TenantID', 'eq', $tenantID)->find();
             foreach($oldOneData as $k1=>$v1){
+                if($k1 == 'TenantImageIDS'){
+                    continue;
+                }
                 if($data[$k1] != $v1){
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
@@ -135,7 +138,15 @@ class TenantInfo extends Base
             if(isset($data['IDCardReverse'])){
                 unset($data['IDCardReverse']);
             }
-        //halt($data);
+
+            if(isset($data['TenantImageIDS']) && $data['TenantImageIDS']){
+                $oldImgs = json_decode($oldOneData['TenantImageIDS'],true);
+                if(!$oldImgs){
+                    $oldImgs = [];
+                }
+                //dump($oldImgs);halt($TenantImageIDS);
+                $data['TenantImageIDS'] = json_encode(array_merge($oldImgs,$TenantImageIDS));
+            }
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
             if ($res >0 || $res===0 ) {
 
@@ -205,14 +216,33 @@ class TenantInfo extends Base
 
         //halt($tenantID);
 
-        if($tenantID){
+        $map = 'TenantID ,TenantName ,TenantTel ,TenantAge ,TenantSex ,TenantBalance ,ArrearRent ,TenantNumber ,BankName , BankID , TenantImageIDS, TenantQQ , TenantWeChat , TenantValue';
 
-            //所有楼栋基础信息
-            $tenantDetail = $this -> TenantInfoModel ->get_one_tenant_detail_info($tenantID);
-
-            return jsons(2000,'获取成功',$tenantDetail);
-
+        $data = Db::name('tenant')->field($map)->where('TenantID','eq',$tenantID)->find();
+        if($data['TenantImageIDS']){
+            $r = json_decode($data['TenantImageIDS'],true);
+            //halt($r);
+            if(isset($r['IDCardFace'])){
+                $data['IDCardFace'] = Db::name('upload_file')->where('id',$r['IDCardFace'])->value('FileUrl');
+            }
+            if(isset($r['IDCardReverse'])){
+                $data['IDCardReverse'] = Db::name('upload_file')->where('id',$r['IDCardReverse'])->value('FileUrl');
+            }
+            
+              
         }
+        if($data['TenantSex'] == 1){
+            $data['TenantSex'] = '男';
+        }else{
+            $data['TenantSex'] = '女';
+        }
+        
+
+        if($data){
+            return jsons('2000','获取成功',$data);
+        }
+
+        return jsons('4000','获取失败');
     }
 
 }

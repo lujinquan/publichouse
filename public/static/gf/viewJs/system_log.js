@@ -11,10 +11,10 @@ $(".SystemDetailBtn").click(function(){
 			
 			res = JSON.parse(res);
 			result = res['data'];
-			console.log(result);
+			//console.log(result);
 			for(var x in result){
 				for(var k in result[x]){
-						console.log(result[x][k]);
+						//console.log(result[x][k]);
 						thtml += '<td>'+result[x][k]+'</td>';
 				}
 				thtml2+='<tr class="am-form-group am-form-inline am-form">'+thtml+'</tr>';
@@ -30,7 +30,10 @@ $(".SystemDetailBtn").click(function(){
 				area:['800px','600px'],
 				resize:false,
 				title:['日志明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
-				content:$('#SystemDetail')
+				content:$('#SystemDetail'),
+				end: function () {
+					location.reload();　　//layer.open关闭刷新
+				}
 			});
 		})
 	// })
