@@ -1155,6 +1155,8 @@ $('#addApply').click(function() {
 					});
                     $('#houseAdjustQuery').off('click');
                     $('#houseAdjustQuery').on("click", function() {
+						$(".HARent,.HALeasedArea,.HABanArea,.HAPrice").val('0.00');
+						
                         var houseID = $("#houseAdjustHouse").val()
                         $.get('/ph/Api/get_house_info/HouseID/' + houseID, function(res) {
                             res = JSON.parse(res);
