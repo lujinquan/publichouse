@@ -108,6 +108,12 @@ class ChangeApply extends Model
                     if($ifin){
                         return jsons('4001','该房屋正在减免异动中');
                     }
+
+                    $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$data['HouseID']])->sum('UnpaidRent');
+
+                    if($unpaidRent > 0){
+                        return jsons('4002','该房屋累计欠租'.$unpaidRent.'元，无法申请租金减免！');
+                    }                  
                     $houseModel = new HouseModel;
 
                     $findwhere = [
@@ -140,10 +146,16 @@ class ChangeApply extends Model
                     return $finds;
                 break;
                 case 2:
-                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>2,'Status'=>['>',1],'OrderDate'=>date('Ym',time())])->find();
+                    $ifin = Db::name('change_order')->where(['HouseID' =>['eq' ,$data['HouseID']],'ChangeType'=>2,'Status'=>['>',1]])->find();
                     if($ifin){
                         return jsons('4001','该房屋正在空租异动中');
                     }
+                    $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$data['HouseID']])->sum('UnpaidRent');
+
+                    if($unpaidRent > 0){
+                        return jsons('4002','该房屋累计欠租'.$unpaidRent.'元，无法申请空租！');
+                    }
+                    
                     $findwhere = [
                         'HouseID'=>$data['HouseID'],
                         'Status'=>1,
@@ -170,6 +182,14 @@ class ChangeApply extends Model
                     if($houseids){
                         $implodeHouses = implode(',',$houseids);
                         return jsons('4005','该房屋:'.$implodeHouses.'已经在暂停异动中了');
+                    }
+                    foreach($data['houseID'] as $d){
+                        $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$d])->sum('UnpaidRent');
+
+                        if($unpaidRent > 0){
+                            return jsons('4002','房屋'.$d.'累计欠租'.$unpaidRent.'元，无法申请暂停计租！');
+                        }
+                        
                     }
 
                     $arrs = Db::name('house')->where(['HouseID'=>['in',$data['houseID']]])->group('OwnerType')->column('OwnerType');
@@ -259,6 +279,13 @@ class ChangeApply extends Model
                     if($ifin){
                         return jsons('4001','该房屋正在注销异动订单中处理……');
                     }
+
+                    $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$data['HouseID']])->sum('UnpaidRent');
+
+                    if($unpaidRent > 0){
+                        return jsons('4002','该房屋累计欠租'.$unpaidRent.'元，无法申请注销异动！');
+                    }
+                    
                     $houseModel = new HouseModel;
 
                     $findwhere = [

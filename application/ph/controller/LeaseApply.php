@@ -47,6 +47,13 @@ class LeaseApply extends Base
                 return jsons('4000','请勿重复申请');
             }
 
+            $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$data['houseID']])->sum('UnpaidRent');
+
+            if($unpaidRent > 0){
+                return jsons('4002','该房屋累计欠租'.$unpaidRent.'元，无法申请租约！');
+            }
+            
+
             if (isset($_FILES) && $_FILES) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     $ChangeImageIDS[] = model('LeaseApply')->uploads($v, $k);

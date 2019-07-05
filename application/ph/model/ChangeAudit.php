@@ -674,31 +674,6 @@ class ChangeAudit extends Model
 
                 //删除之前过期的减免统计
                 Db::name('rent_table')->where(['ChangeType'=>['eq',1],'HouseID'=>$one['HouseID']])->delete();
-                //将减免类型，减免金额，减免证件号写入到租金配置中去 
-                // $rentconfigfind = Db::name('rent_config')->where('HouseID', $one['HouseID'])->find();  
-
-                // if($rentconfigfind){
-                //     Db::name('rent_config')->where('HouseID', $one['HouseID'])
-                //                             ->update([
-                //                                 'CutType' => $one['CutType'],
-                //                                 'CutRent' => $one['InflRent'], 
-                //                                 'CutNumber' => $one['IDnumber'],
-                //                                 'ReceiveRent'=>['exp','ReceiveRent-'.$one['InflRent']],
-                //                                 'UnpaidRent'=>['exp','UnpaidRent-'.$one['InflRent']] ,
-                //                             ]);
-                // }
-
-                // $rentorderfind = Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])->find();        
-                // if($rentconfigfind){
-                //     Db::name('rent_order')->where(['OrderDate'=>['eq',date('Ym',time())],'HouseID'=>$one['HouseID']])
-                //                             ->update([
-                //                                 'CutType' => $one['CutType'],
-                //                                 'CutRent' => $one['InflRent'], 
-                //                                 'CutNumber' => $one['IDnumber'],
-                //                                 'ReceiveRent'=>['exp','ReceiveRent'-$one['InflRent']],
-                //                                 'UnpaidRent'=>['exp','UnpaidRent'-$one['InflRent']] ,
-                //                             ]);
-                // }
 
                 $str = "( 1,'". $one['ChangeOrderID'] . "','" .$one['HouseID'] . "',".$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
 
@@ -740,7 +715,7 @@ class ChangeAudit extends Model
                     $housearr = $houseModel->where('HouseID', 'eq', $changeFind['HouseID'])->field('InstitutionID,InstitutionPID,HousePrerent,OwnerType,UseNature')->find();
                     $str = "('" . $changeFind['ChangeOrderID'] . "',".$changeFind['ChangeType'] . ",". $housearr['InstitutionID'] . "," . $housearr['InstitutionPID'] . "," . $housearr['HousePrerent'] . ", " . $housearr['OwnerType'] . "," . $housearr['UseNature'] . "," . date('Ym',time()). ")";
                 }
-//halt($str);
+
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeOrderID,ChangeType,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . rtrim($str, ','));
                 // 3、修改租金配置表,删除不可用状态房屋对应的租金配置记录
                 Db::name('rent_config')->where('HouseID', 'in', $arr)->delete();

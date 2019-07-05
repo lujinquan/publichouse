@@ -49,15 +49,7 @@ class UserApply extends Base
             if(empty($data['houseid']) || empty($data['transferType'])) {
                 return jsons('4005' ,'请完善相关信息！');
             }
-
-            if (isset($_FILES) && $_FILES) {   //文件上传
-                foreach ($_FILES as $k => $v) {
-                    $ChangeImageIDS[] = model('UserApply')->uploads($v, $k);
-                }
-                $ChangeImageIDS = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
-            }
-
-            //$datas['ChangeType'] = $data['type']; //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
+            //申请的类型：1，更名，2，正常过户，3，转赠亲友，4，转让
             $datas['HouseID'] = $data['houseid']; //房屋编号
             $datas['OldTenantID'] = $data['oldID'];  //原租户编号
             $datas['OldTenantName'] = $data['oldName']; //原租户名称
@@ -74,7 +66,18 @@ class UserApply extends Base
             if($data['transferType'] == 1 && !$data['transferRent']){
                 return jsons('4002','交易转让必须填写转让金额');
             }
+            $unpaidRent = Db::name('rent_order')->where(['HouseID'=>$data['houseid']])->sum('UnpaidRent');
 
+            if($unpaidRent > 0){
+                return jsons('4002','该房屋累计欠租'.$unpaidRent.'元，无法申请使用权变更！');
+            }
+
+            if (isset($_FILES) && $_FILES) {   //文件上传
+                foreach ($_FILES as $k => $v) {
+                    $ChangeImageIDS[] = model('UserApply')->uploads($v, $k);
+                }
+                $ChangeImageIDS = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
+            }
 
             $datas['TransferRent'] = $data['transferRent']; //转让金额
             $datas['ChangeReason'] = $data['transferReason']; //转让原因
