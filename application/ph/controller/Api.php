@@ -630,7 +630,7 @@ class Api extends Controller
                 $i = 0;
                 $wheres['Status'] = array('eq', 1);
                 $wheres['BanID'] = array('eq',$d['BanID']);
-                //$wheres['IfSuspend'] = array('eq', 0);
+                $wheres['UseNature'] = array('eq', 1);
                 $wheres['HouseChangeStatus'] = array('eq', 0);
                 $res = Db::name('house')->where($wheres)->field('HouseID ,HousePrerent')->select();
                 foreach($res as $r){
