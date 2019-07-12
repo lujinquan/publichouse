@@ -167,13 +167,13 @@ class TenantInfo extends Base
 
         $data = Db::name('tenant')->field($map)->where('TenantID','eq',$tenantID)->find();
         if($data['TenantImageIDS']){
-            $r = json_decode($data['TenantImageIDS'],true);
-            //halt($r);
-            if(isset($r['IDCardFace'])){
-                $data['IDCardFace'] = Db::name('upload_file')->where('id',$r['IDCardFace'])->value('FileUrl');
+            //$r = json_decode($data['TenantImageIDS'],true);
+            $data['TenantImageIDS'] = json_decode($data['TenantImageIDS'],true);
+            if(isset($data['TenantImageIDS']['IDCardFace'])){
+                $data['IDCardFace'] = Db::name('upload_file')->where('id', $data['TenantImageIDS']['IDCardFace'])->value('FileUrl');
             }
-            if(isset($r['IDCardReverse'])){
-                $data['IDCardReverse'] = Db::name('upload_file')->where('id',$r['IDCardReverse'])->value('FileUrl');
+            if(isset($data['TenantImageIDS']['IDCardReverse'])){
+                $data['IDCardReverse'] = Db::name('upload_file')->where('id', $data['TenantImageIDS']['IDCardReverse'])->value('FileUrl');
             }
             
               

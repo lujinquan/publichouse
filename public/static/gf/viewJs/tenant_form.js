@@ -101,9 +101,16 @@ $("#reviseTenant").click(function(){
 				$('#BanNam').prop("value",res.data.BankName);    //银行名称
 				$('#TenantValu').prop("value",res.data.TenantValue);    //租户诚信值
 				$("input[name='TenantSex'][value='"+res.data.TenantSex+"']").attr("checked","checked");   //租户性别
-
 				$('#IDCardFaceM').prop('src',res.data.IDCardFace);
 				$('#IDCardReverseM').prop('src',res.data.IDCardReverse);
+				if(res.data.TenantImageIDS.IDCardFace){
+					$('#IDCardFaceM').attr('src',res.data.IDCardFace);
+					$("#editIDCardFaceHidden").val(res.data.TenantImageIDS.IDCardFace);
+				}
+				if(res.data.TenantImageIDS.IDCardReverse){
+					$('#IDCardReverseM').attr('src',res.data.IDCardReverse);
+					$("#editIDCardReverseMHidden").val(res.data.TenantImageIDS.IDCardReverse);	
+				}
 
 				layer.open({
 					type:1,
@@ -308,6 +315,7 @@ $('.j-upload').on('mouseover','.j-upload-img',function(){
 		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
 		var obj = $(this).parents(".am-u-md-12").find("input");
 		obj.val("")
+		$(this).parents(".am-u-md-12").find(".j-edit").val('');
 	})
 function readFile(fileUp,fileShow){
 	if(typeof FileReader === 'undefined'){
@@ -323,6 +331,7 @@ function readFile(fileUp,fileShow){
 			reader.readAsDataURL(file);
 			reader.onload = function(){
 				fileShow.attr('src',this.result);
+				fileShow.parents(".am-u-md-12").find(".j-edit").val('');
 			}
 		})
 	}

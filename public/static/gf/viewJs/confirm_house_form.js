@@ -145,6 +145,10 @@ $("#reviseHouse").click(function() {
             $('#mspace').val(res.data.BelowFiveNum);
             $('#mattic').val(res.data.MoreFiveNum);
             $('#imgChange').prop('src', res.data.HouseImageIDS.FileUrl);
+			if(res.data.HouseImageIDS){
+				$('#imgChange').attr('src',res.data.HouseImageIDS.FileUrl);
+				$("#editHouseImageIDSHidden").val(res.data.HouseImageIDS.id);
+			};
             var imgReload = $('#imgReload');
             var imgChange = $('#imgChange');
             readFile(imgReload, imgChange);
@@ -401,6 +405,7 @@ $('.j-upload').on('mouseover','.j-upload-img',function(){
 		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
 		var obj = $(this).parents(".am-u-md-12").find("input");
 		obj.val("")
+		$(this).parents(".am-u-md-12").find(".j-edit").val('');
 	})
 function readFile(fileUp, fileShow) {
     if (typeof FileReader === 'undefined') {
@@ -416,6 +421,7 @@ function readFile(fileUp, fileShow) {
             reader.readAsDataURL(file);
             reader.onload = function() {
                 fileShow.attr('src', this.result);
+				fileShow.parents(".am-u-md-12").find(".j-edit").val('');
             }
         })
     }

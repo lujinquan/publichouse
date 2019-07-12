@@ -280,22 +280,36 @@ $("#reviseBan").click(function(){
 
 
 				if(res.data.BanImageIDS){
-					if(res.data.BanImageIDS.length ==3){
-					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
-					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
-					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
-					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
-					$('#imgShowThree').attr('src',res.data.BanImageIDS[2].FileUrl);		//图片影像
-					$("#editBanImageIDSHidden").val(res.data.BanImageIDS[2].id);
-				}else if(res.data.BanImageIDS.length ==2){
-					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
-					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
-					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
-					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
-				}else if(res.data.BanImageIDS.length ==1){
-					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);	
-					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
-				}
+					for(i in res.data.BanImageIDS){
+						if(res.data.BanImageIDS[i].FileTitle === '不动产电子版'){
+							$('#imgShowTwo').attr('src',res.data.BanImageIDS[i].FileUrl);
+							$("#editRealEstateHidden").val(res.data.BanImageIDS[i].id);
+						}
+						else if(res.data.BanImageIDS[i].FileTitle === '楼栋其他影像电子版'){
+							$('#imgShowThree').attr('src',res.data.BanImageIDS[i].FileUrl);
+							$("#editBanImageIDSHidden").val(res.data.BanImageIDS[i].id);
+						}
+						else if(res.data.BanImageIDS[i].FileTitle === '土地证电子版'){
+							$('#imgShowOne').attr('src',res.data.BanImageIDS[i].FileUrl);
+							$("#editLandCertificateHidden").val(res.data.BanImageIDS[i].id);
+						}
+					}
+// 					if(res.data.BanImageIDS.length ==3){	
+// 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
+// 					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
+// 					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
+// 					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
+// 					$('#imgShowThree').attr('src',res.data.BanImageIDS[2].FileUrl);		//图片影像
+// 					$("#editBanImageIDSHidden").val(res.data.BanImageIDS[2].id);
+// 				}else if(res.data.BanImageIDS.length ==2){
+// 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
+// 					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
+// 					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
+// 					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
+// 				}else if(res.data.BanImageIDS.length ==1){
+// 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);	
+// 					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
+// 				}
 				}
 				
 				
@@ -747,7 +761,7 @@ function readFile(fileUp,fileShow){
 			reader.readAsDataURL(file);
 			reader.onload = function(){
 				fileShow.attr('src',this.result);
-				console.log(this);
+				/* console.log(this); */
 				fileShow.parents(".am-u-md-12").find(".j-edit").val('');
 			}
 		})

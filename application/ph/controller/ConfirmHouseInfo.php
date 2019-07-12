@@ -140,7 +140,7 @@ class ConfirmHouseInfo extends Base
         }
 
         $data = Db::name('house')->where('HouseID', 'eq', input('HouseID'))->find();
-        $data['HouseImageIDS'] = Db::name('upload_file')->where('id', 'eq', $data['HouseImageIDS'])->field('FileUrl ,FileTitle')->find();
+        $data['HouseImageIDS'] = Db::name('upload_file')->where('id', 'eq', $data['HouseImageIDS'])->field('id, FileUrl ,FileTitle')->find();
          return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
     }
 
