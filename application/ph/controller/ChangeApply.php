@@ -81,6 +81,7 @@ class ChangeApply extends Base
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ProcessConfigName'] = $changeTypes[1];  //异动名称
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['TenantID'] = $one['TenantID']; //当前租户
                     $datas['OwnerType'] = $one['OwnerType']; //产别
                     $datas['UseNature'] = $one['UseNature']; //使用性质
@@ -115,7 +116,7 @@ class ChangeApply extends Base
 
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
-
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['InflRent'] = $one['HousePrerent'];
                     $datas['Remark'] = $data['emptyRentReason'];
                     $datas['ChangeType'] = 2;  //异动类型
@@ -170,7 +171,7 @@ class ChangeApply extends Base
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
 
                     $datas['TenantID'] = Db::name('house')->where('HouseID' ,'eq' ,$data['HouseID'])->value('TenantID');  //当前租户
-
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
                     $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>4])->order('id desc')->value('id');        //找到最新的流程控制线路
@@ -258,6 +259,7 @@ class ChangeApply extends Base
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['Remark'] = $data['Remark'];  //异动缘由
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['InflRent'] = $one['HousePrerent'];
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['UseNature'] = $one['UseNature']; 
@@ -304,6 +306,7 @@ class ChangeApply extends Base
                     $datas['Deadline'] = json_encode($data['Ban']);
                     //halt($arr);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
@@ -329,6 +332,7 @@ class ChangeApply extends Base
                     $datas['Deadline'] = json_encode($data['Ban']);
                     //halt($datas['Deadline']);
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['TenantID'] = $one['TenantID'];
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
@@ -395,7 +399,8 @@ class ChangeApply extends Base
                     $datas['OldYearRent'] = $data['RentAddYear'];  
                     $datas['OldMonthRent'] = $data['RentAddMonth'];  
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'11'.$suffix;   //09代表房屋调整
-                    $one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
+                    //$one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['OwnerType'] = $one['OwnerType'];  //产别
                     $datas['UseNature'] = $one['UseNature'];   //使用性质
                     $datas['InstitutionID'] = $one['InstitutionID'];  //机构id
@@ -408,6 +413,7 @@ class ChangeApply extends Base
                 case 12:  // 租金调整
 
                     $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
                     $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ChangeType'] = $data['type'];  //异动类型
                     $datas['ProcessConfigName'] = $changeTypes[12];  //异动名称
