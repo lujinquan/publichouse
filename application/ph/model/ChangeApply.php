@@ -124,7 +124,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
 
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,BanID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
@@ -162,7 +162,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
                     $houseModel = new HouseModel;
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,IfEmpty,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,BanID,HousePrerent,TenantID,IfEmpty,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
@@ -234,7 +234,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                     ];
 
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,BanID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
 
@@ -294,7 +294,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
 
-                    $finds = $houseModel->field('InstitutionPID,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID,InstitutionID,BanID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
@@ -335,7 +335,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
 
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,BanID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
@@ -366,7 +366,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
 
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,BanID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
@@ -387,7 +387,7 @@ class ChangeApply extends Model
                         'HouseChangeStatus'=>0,
                         ];
 
-                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,HousePrerent,TenantID,OwnerType,UseNature')
+                    $finds = $houseModel->field('InstitutionPID ,InstitutionID,BanID,HousePrerent,TenantID,OwnerType,UseNature')
                                         ->where($findwhere)
                                         ->find();
                     if(!$finds){
