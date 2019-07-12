@@ -13,6 +13,9 @@
 
 // 创建header头
 header("Content-type: text/html; charset=utf-8");
+
+//die('<h3>系统维护中……</h3>');
+
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/application/');
 // 定义静态文件目录

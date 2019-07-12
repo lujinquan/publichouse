@@ -16,7 +16,7 @@ class Base extends Controller
     protected $HouseInfoModel;
     protected $TenantInfoModel;
 
-        protected function _initialize()
+    protected function _initialize()
     {
         $this->BanInfoModel = new BanInfoModel;
         $this->HouseInfoModel = new HouseInfoModel;
@@ -40,7 +40,7 @@ class Base extends Controller
             return $this->redirect('user/Publics/signin');
         }
 
-//halt(ini_get_all('session'));
+        //halt(ini_get_all('session'));
         // 检查权限
         if (!RoleModel::checkAuth()) return jsons('5000','权限不足！');
 

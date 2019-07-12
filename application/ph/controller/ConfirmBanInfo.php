@@ -157,7 +157,7 @@ class ConfirmBanInfo extends Base
         }
         $data = Db::name('ban')->where('BanID', 'eq', $banID)->find();
         $data['BanRatio'] += 0;
-        $data['BanImageIDS'] = Db::name('upload_file')->where('id' ,'in' ,explode(',',$data['BanImageIDS']))->field('FileTitle ,FileUrl')->select();
+        $data['BanImageIDS'] = Db::name('upload_file')->where('id' ,'in' ,explode(',',$data['BanImageIDS']))->field('id, FileTitle ,FileUrl')->select();
         return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
     }
 
