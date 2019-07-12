@@ -282,13 +282,19 @@ $("#reviseBan").click(function(){
 				if(res.data.BanImageIDS){
 					if(res.data.BanImageIDS.length ==3){
 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
+					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
 					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
+					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
 					$('#imgShowThree').attr('src',res.data.BanImageIDS[2].FileUrl);		//图片影像
+					$("#editBanImageIDSHidden").val(res.data.BanImageIDS[2].id);
 				}else if(res.data.BanImageIDS.length ==2){
 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);		//图片影像
+					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
 					$('#imgShowTwo').attr('src',res.data.BanImageIDS[1].FileUrl);		//图片影像
+					$("#editRealEstateHidden").val(res.data.BanImageIDS[1].id);
 				}else if(res.data.BanImageIDS.length ==1){
 					$('#imgShowOne').attr('src',res.data.BanImageIDS[0].FileUrl);	
+					$("#editLandCertificateHidden").val(res.data.BanImageIDS[0].id);
 				}
 				}
 				
@@ -722,6 +728,7 @@ $('.j-upload').on('mouseover','.j-upload-img',function(){
 		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
 		var obj = $(this).parents(".am-u-md-12").find("input");
 		obj.val("")
+		$(this).parents(".am-u-md-12").find(".j-edit").val('');
 	})
 
 
@@ -740,6 +747,8 @@ function readFile(fileUp,fileShow){
 			reader.readAsDataURL(file);
 			reader.onload = function(){
 				fileShow.attr('src',this.result);
+				console.log(this);
+				fileShow.parents(".am-u-md-12").find(".j-edit").val('');
 			}
 		})
 	}
