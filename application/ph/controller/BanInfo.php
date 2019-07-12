@@ -171,11 +171,11 @@ class BanInfo extends Base
                         'NewFloorNum' => $newBanFloorNum,
                         'CreateTime' => time()
                     ]);
-                    $roomids = Db::name('room')->where('BanID', 'eq', $data['BanID'])->column('RoomID');
+                    $roomids = Db::name('room')->where('BanID','eq', $data['BanID'])->column('RoomID');
                     if($roomids){
                        foreach($roomids as $r){
                             $roomRents = count_room_rent($r);
-                            Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('RoomRentMonth',$roomRents);
+                            Db::name('room')->where('RoomID', 'eq', $r)->setField('RoomRentMonth',$roomRents);
                        } 
                     }
                 }
