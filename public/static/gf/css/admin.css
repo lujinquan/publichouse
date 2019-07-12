@@ -1047,3 +1047,4 @@ text-decoration: underline;
 /*单图上传*/
 .j-upload .j-upload-img{position: relative; z-index: 9999;}
 .j-upload .img_close{background: url(../icons/delete.png) no-repeat; width:20px;height: 20px; position:absolute;top:33px;right:14px;cursor:pointer;/* box-shadow: 0 0 5px #ccc; */border-radius: 50%;z-index: 999;}
+.j-upload .am-form-file{ font-size: 15px;margin-top: 3px;}

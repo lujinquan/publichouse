@@ -403,14 +403,14 @@ $('.j-upload').on('mouseover','.j-upload-img',function(){
     });
 	//删除图片
 	$('.j-upload').on('click','.img_close',function(){
-		$(this).prev().hide();
+		/* $(this).prev().hide(); */
 		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
 		var obj = $(this).parents(".am-u-md-12").find("input");
 		obj.val("")
 	})
-	$('.j-upload').on('click','.am-field-valid',function(){
+/* 	$('.j-upload').on('click','.am-field-valid',function(){
 	       $(this).parents(".am-u-md-12").find(".j-upload-img img").show();
-	})
+	}) */
 function readFile(fileUp, fileShow) {
     if (typeof FileReader === 'undefined') {
         fileShow.text('浏览器不支持！');
