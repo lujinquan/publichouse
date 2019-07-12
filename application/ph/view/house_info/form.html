@@ -138,16 +138,19 @@
                     </label>
                 </div>
             </div> -->
-
-            <div class="am-form-group am-u-md-12">
-                <label for="imgUp" class="label_style">影像资料：</label>
-                <div class="am-form-group am-form-file am-u-md-8">
-                    <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-                    <input type="file" name="HouseImageIDS" id="imgUp" multiple>
-                </div>
-            </div>
-            <img class="am-form-group am-u-md-12" id="imgShow" style="width:312px;height:150px;float:left;">
-
+            <div class="am-u-md-12 j-upload">
+				<div class="am-form-group am-u-md-12">
+					<label for="imgUp" class="label_style">影像资料：</label>
+					<div class="am-form-group am-form-file am-u-md-8">
+						<i class="am-icon-cloud-upload"></i> 选择要上传的文件
+						<input type="file" name="HouseImageIDS" id="imgUp" multiple>
+					</div>
+				</div>
+				<div class="j-upload-img">
+				  <img class="am-form-group am-u-md-12" id="imgShow" style="width:312px;height:150px;float:left;">
+				  <i  class="img_close j-hide"></i>
+				</div>
+          </div>
     </fieldset>
 </form>
 <script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>

@@ -606,11 +606,16 @@ class Api extends Controller
         // }
         //halt($where);
         $banids = Db::name('ban_change')->where($where)->column('BanID');
-
+        //halt($banids);
+        if(!$banids){
+            return jsons('2000', '获取成功', []);
+        }
         $data = Db::name('ban')->where(['BanID'=>['in',$banids]])
             ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,PreRent,UseNature,AreaFour')
             ->select();
 
+
+        //halt($data);
         $dams = Db::name('ban_damage_grade')->column('id,DamageGrade');
         $owns = Db::name('ban_owner_type')->column('id,OwnerType');
         $strs = Db::name('ban_structure_type')->column('id,StructureType');
