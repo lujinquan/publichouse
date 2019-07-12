@@ -168,6 +168,7 @@ $("#addBan").click(function(){
 			},
 			end:function(){
 				$('#banForm').css('display','none');
+				location.reload();
 			}
 		});
 });
@@ -385,6 +386,7 @@ $("#reviseBan").click(function(){
 					},
 					end:function(){
 					$('#modifyForm').css('display','none');
+					location.reload();
 				}
 				})
 				
@@ -700,15 +702,27 @@ $(".structureBtn").click(function(){
 });
 
 // 打开高拍仪
-$('img').click(function(){
+/* $('img').click(function(){
 	var popWin = window.open('http://web.gf.com/public/unit/index.html');
 	// setInterval(function(){
 	// 	console.log('fff');
 	// 	popWin.postMessage('dsfsdaf',"http://ph.ctnmit.com/");
 	// },2000);
 	$('#currentId').val($(this).attr('id'));
-});
-
+}); */
+$('.j-upload').on('mouseover','.j-upload-img',function(){
+            $(this).find(".img_close").removeClass('j-hide');
+        });	
+   $('.j-upload').on('mouseleave','.j-upload-img',function(){
+        $(this).find(".img_close").addClass('j-hide');
+    });
+	//删除图片
+	$('.j-upload').on('click','.img_close',function(){
+		/* $(this).prev().hide(); */
+		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
+		var obj = $(this).parents(".am-u-md-12").find("input");
+		obj.val("")
+	})
 
 
 

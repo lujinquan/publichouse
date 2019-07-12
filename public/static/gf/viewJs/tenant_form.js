@@ -11,7 +11,7 @@ var flag =true;
 $("#addTenant").click(function(){
 	$("#InputForm input[type='text']").val("");
 	$("#InputForm input[type='number']").val("");
-	$("#InputForm img").prop('src','');
+	/* $("#InputForm img").prop('src',''); */
 	// require(["layer","jquery"],function(layer){
 	// 	layer.config({	//真实layer的配置路径
 	// 		path:'/public/static/gf/layer/'
@@ -296,7 +296,19 @@ $('#timeEnd').datepicker().
     }
     //$(this).datepicker('close');
   });
-
+$('.j-upload').on('mouseover','.j-upload-img',function(){
+            $(this).find(".img_close").removeClass('j-hide');
+        });	
+   $('.j-upload').on('mouseleave','.j-upload-img',function(){
+        $(this).find(".img_close").addClass('j-hide');
+    });
+	//删除图片
+	$('.j-upload').on('click','.img_close',function(){
+		/* $(this).prev().hide(); */
+		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
+		var obj = $(this).parents(".am-u-md-12").find("input");
+		obj.val("")
+	})
 function readFile(fileUp,fileShow){
 	if(typeof FileReader === 'undefined'){
 		fileShow.text('浏览器不支持！');

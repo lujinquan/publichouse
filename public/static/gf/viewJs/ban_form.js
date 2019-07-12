@@ -385,6 +385,7 @@ $("#reviseBan").click(function(){
 					},
 					end:function(){
 					$('#modifyForm').css('display','none');
+					location.reload();
 				}
 				})
 				

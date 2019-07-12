@@ -63,7 +63,10 @@ $("#addHouse").click(function() {
                     layer.msg(result.msg);
                 }
             });
-        }
+        },
+			end:function(){
+			location.reload();
+		}
     });
     // })
 });
@@ -186,7 +189,10 @@ $("#reviseHouse").click(function() {
                             layer.msg(result.msg);
                         }
                     });
-                }
+                },
+			end:function(){
+				location.reload();
+			}
             });
         })
     }

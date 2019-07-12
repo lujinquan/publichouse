@@ -63,7 +63,10 @@ $("#addHouse").click(function() {
                     layer.msg(result.msg);
                 }
             });
-        }
+        },
+		end:function(){
+			location.reload();
+		}
     });
     // })
 });
@@ -186,7 +189,10 @@ $("#reviseHouse").click(function() {
                             layer.msg(result.msg);
                         }
                     });
-                }
+                },
+				end:function(){
+					location.reload();
+				}
             });
         })
     }
@@ -383,7 +389,19 @@ $(".HouseDetailBtn").click(function() {
     })
     // })
 });
-
+$('.j-upload').on('mouseover','.j-upload-img',function(){
+            $(this).find(".img_close").removeClass('j-hide');
+        });	
+   $('.j-upload').on('mouseleave','.j-upload-img',function(){
+        $(this).find(".img_close").addClass('j-hide');
+    });
+	//删除图片
+	$('.j-upload').on('click','.img_close',function(){
+		/* $(this).prev().hide(); */
+		$(this).prev().attr("src","/public/static/gf/icons/noimg.png");;
+		var obj = $(this).parents(".am-u-md-12").find("input");
+		obj.val("")
+	})
 function readFile(fileUp, fileShow) {
     if (typeof FileReader === 'undefined') {
         fileShow.text('浏览器不支持！');
