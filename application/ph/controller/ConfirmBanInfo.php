@@ -34,7 +34,6 @@ class ConfirmBanInfo extends Base
             if (true !== $result) {
                 return jsons('4001', $result);
             }
-
             if ($_FILES  && !isset($datas)) {   //文件上传
                 foreach ($_FILES as $k => $v) {
                     if($v['error'] !== 0){
@@ -86,7 +85,7 @@ class ConfirmBanInfo extends Base
         $banID = input('BanID');
         if ($this->request->isPost()) {
             $data = array_no_space_str($this->request->post());
-
+//halt($data);
             $houseids = Db::name('change_order')->where(['ChangeType'=>7,'Status'=>['>',1]])->column('HouseID'); 
             if($houseids){
                 $banids = Db::name('house')->where(['Status'=>0,'HouseID'=>['in',$houseids]])->column('BanID');
@@ -102,21 +101,42 @@ class ConfirmBanInfo extends Base
             $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent'];
             $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
             $data['TotalArea'] = $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea'];
+            $ChangeImageIDS = [];
+            $imgStr = '';
             if ($_FILES) {
                 foreach ($_FILES as $k => $v) {
                     if($v['error'] == 0){
                         $ChangeImageIDS[] = model('BanInfo')->uploads($v, $k);
                     }
                 }
-                if(isset($ChangeImageIDS)){
-                    $data['BanImageIDS'] = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
-                }
+                // if(isset($ChangeImageIDS)){
+                //     $data['imgs'] = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
+                // }
             }
+
+            if($ChangeImageIDS){
+                $imgStr = implode(',', $ChangeImageIDS);
+            }
+            
+            if($data['LandCertificate']){
+                $imgStr =  $imgStr .','. $data['LandCertificate'];
+            }
+            if($data['RealEstate']){
+                $imgStr =  $imgStr .','. $data['RealEstate'];
+            }
+            if($data['BanImageIDS']){
+                $imgStr =  $imgStr .','. $data['BanImageIDS'];
+            }
+
+            $data['BanImageIDS'] = trim($imgStr,',');
+
             // 验证
             $arr = explode(',', $data['xy']);
             $data['BanGpsX'] = $arr[0];
             $data['BanGpsY'] = $arr[1];
             unset($data['xy']);
+            unset($data['RealEstate']);
+            unset($data['LandCertificate']);
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
             $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
             $result = $this->validate($data,'ConfirmBanInfo');
