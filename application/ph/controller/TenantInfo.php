@@ -94,6 +94,7 @@ class TenantInfo extends Base
             if(true !== $result) {
                 return jsons('4001',$result);
             }
+            $TenantImageIDS = [];
             if ($_FILES) {   //文件上传
                 //halt($_FILES);
                 foreach ($_FILES as $k => $v) {
@@ -103,17 +104,11 @@ class TenantInfo extends Base
 
                     $TenantImageIDS[$k] = model('TenantInfo')->uploads($v, $k);
                 }
-                if(isset($TenantImageIDS)){
-                    $data['TenantImageIDS'] = json_encode($TenantImageIDS);
-                }
-            }else{
-                if(isset($data['IDCardFace'])){
-                    unset($data['IDCardFace']);
-                }
-                if(isset($data['IDCardReverse'])){
-                    unset($data['IDCardReverse']);
-                }
+                // if(isset($TenantImageIDS)){
+                //     $data['TenantImageIDS'] = json_encode($TenantImageIDS);
+                // }
             }
+            //halt($TenantImageIDS);
             $data['Status'] = 1; //状态改为未确认状态
             $data['UpdateTime'] = time();
             $fields = 'TenantName,TenantTel,TenantAge,TenantWeChat,TenantImageIDS,TenantNumber,BankID,ArrearRent,TenantSex,TenantBalance,TenantQQ,BankName,TenantValue';
@@ -132,21 +127,25 @@ class TenantInfo extends Base
                 $data['InstitutionID'] = session('user_base_info.institution_id');
                 $data['InstitutionPID'] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('pid');
             }
-            if(isset($data['IDCardFace'])){
-                unset($data['IDCardFace']);
-            }
-            if(isset($data['IDCardReverse'])){
-                unset($data['IDCardReverse']);
-            }
+         
+                
+            //dump($data);halt($TenantImageIDS);
+            if(!isset($TenantImageIDS['IDCardFace']) && $data['IDCardFaceM']){
+                $TenantImageIDS['IDCardFace'] = $data['IDCardFaceM'];
 
-            if(isset($data['TenantImageIDS']) && $data['TenantImageIDS']){
-                $oldImgs = json_decode($oldOneData['TenantImageIDS'],true);
-                if(!$oldImgs){
-                    $oldImgs = [];
-                }
-                //dump($oldImgs);halt($TenantImageIDS);
-                $data['TenantImageIDS'] = json_encode(array_merge($oldImgs,$TenantImageIDS));
             }
+            if(!isset($TenantImageIDS['IDCardReverse']) && $data['IDCardReverseM']){
+                $TenantImageIDS['IDCardReverse'] = $data['IDCardReverseM'];
+            }
+          
+            $data['TenantImageIDS'] = $TenantImageIDS?json_encode($TenantImageIDS):'';
+            //halt($data);
+            
+            unset($data['IDCardFace']);
+            unset($data['IDCardFaceM']);
+            unset($data['IDCardReverse']);
+            unset($data['IDCardReverseM']);
+            //halt($data);
             $res = Db::name('tenant')->where('TenantID','eq',$data['TenantID'])->update($data);
             if ($res >0 || $res===0 ) {
 

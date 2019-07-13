@@ -28,7 +28,7 @@ define('SESSION_PATH',__DIR__.'/runtime/session/');
 define('WEB_VERSION','v1.5.05');
 
 // 【更新资源文件请修改下面的版本号】
-define('VERSION','v1.5.05_2');
+define('VERSION','v1.5.05_3');
 
 set_time_limit(800);
 
