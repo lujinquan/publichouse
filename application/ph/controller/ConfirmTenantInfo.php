@@ -28,6 +28,9 @@ class ConfirmTenantInfo extends Base
     public function  add(){
 
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             $maxid = Db::name('tenant')->max('TenantID');
 
@@ -74,6 +77,9 @@ class ConfirmTenantInfo extends Base
     public function  edit(){
 
         if($this->request->isPost()){
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             $find = Db::name('change_order')->where(['TenantID'=>$data['TenantID'],'ChangeType'=>7,'Status'=>['>',1]])->find();   
             if($find){
@@ -117,6 +123,9 @@ class ConfirmTenantInfo extends Base
 
 
     public function  delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         
         $tenantID = input('TenantID');
         $find = Db::name('change_order')->where(['TenantID'=>$tenantID,'ChangeType'=>7,'Status'=>['>',1]])->find();   

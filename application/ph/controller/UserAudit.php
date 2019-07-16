@@ -44,6 +44,9 @@ class UserAudit extends Base
         if(empty($changeOrderID)) return jsons('4002' ,'未传入变更编号');
 
         if($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
             $data = $this->request->post();
 
@@ -168,6 +171,9 @@ class UserAudit extends Base
     public function process(){
    
         if($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
             $data = $this->request->post();
 

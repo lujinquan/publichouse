@@ -39,6 +39,9 @@ class CorrectAudit extends Base
      * @description
      */
     public function supply(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $changeOrderID = input('ChangeOrderID');
 
         if(empty($changeOrderID)) return jsons('4002' ,'未传入变更编号');

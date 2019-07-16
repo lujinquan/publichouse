@@ -41,6 +41,9 @@ class CorrectApply extends Base
      */
     public function add(){
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = $this->request->post();
             //halt($data);
             if(empty($data['houseid']) || empty($data['transferName'])) {
@@ -112,6 +115,9 @@ class CorrectApply extends Base
      * @description
      */
     public function edit(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $orderID = input('ChangeOrderID'); //订单号
         $checkEdit = model('ph/UserApply')->check_edit($orderID);
         if($checkEdit === false){
@@ -145,6 +151,9 @@ class CorrectApply extends Base
      * @description
      */
     public function delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $orderID = input('ChangeOrderID');
 
         $checkDelete = model('ph/UserApply')->check_delete($orderID);

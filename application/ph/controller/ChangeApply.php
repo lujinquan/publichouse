@@ -43,6 +43,10 @@ class ChangeApply extends Base
 
         if ($this->request->isPost()) {
             $data = $this->request->post();
+
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             //halt($data);
             // if(!in_array($data['type'],[1,2,3,4,7,8,11,14])){
             //     return jsons('4001','开放时间：2019年1月7日，等待年报表确认！');

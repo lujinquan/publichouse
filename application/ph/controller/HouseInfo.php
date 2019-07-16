@@ -40,6 +40,9 @@ class HouseInfo extends Base
     {
         // 保存数据
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             $dataOne = Db::name('ban')->field('TubulationID,InstitutionID,BanAddress,AreaFour')->where('BanID', 'eq', $data['BanID'])->find();
             $data['InstitutionID'] = $dataOne['TubulationID'];
@@ -107,6 +110,9 @@ class HouseInfo extends Base
     {
         $houseID = input('HouseID');
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             //$data['Status'] = 0; //状态改为未确认状态
             $one = Db::name('ban')->field('TubulationID ,InstitutionID ,OwnerType ,AreaFour,BanAddress')->where('BanID', 'eq', $data['BanID'])->find();
@@ -167,6 +173,9 @@ class HouseInfo extends Base
     public function renttable()
     {
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = $this->request->post();
             //halt($data);
             //验证数据合法性
@@ -966,6 +975,9 @@ class HouseInfo extends Base
 
     public function delete()
     {
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $houseID = input('HouseID');
         check($houseID,'');
 

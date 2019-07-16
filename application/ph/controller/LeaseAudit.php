@@ -64,6 +64,9 @@ class LeaseAudit extends Base
     public function process(){
    
         if($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
             $data = $this->request->post();
 

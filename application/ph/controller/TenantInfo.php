@@ -32,6 +32,9 @@ class TenantInfo extends Base
     public function  add(){
         // 保存数据
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             
             $maxid = Db::name('tenant')->max('TenantID');
@@ -87,6 +90,9 @@ class TenantInfo extends Base
     public function  edit(){
         $tenantID = input('TenantID');
         if($this->request->isPost()){
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
 
             $result = $this->validate($data,'TenantInfo');
@@ -187,6 +193,9 @@ class TenantInfo extends Base
     }
 
     public function  delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $tenantID = input('TenantID');
         $style = input('style');
         if(!$tenantID || !$style){

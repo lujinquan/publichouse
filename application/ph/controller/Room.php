@@ -26,6 +26,9 @@ class Room extends Base
 
     public function add(){
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
             // 验证
             $result = $this->validate($data,'Room');
@@ -49,6 +52,9 @@ class Room extends Base
     public function edit(){
         $roomID = input('RoomID');
         if($this->request->isPost()){
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
 
             $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');
@@ -91,6 +97,9 @@ class Room extends Base
 
     //注意：这是假删除，只是改变了该条记录的状态值，，同时将关联数据回滚
     public function delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $roomID = input('RoomID');
 
         $banid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('BanID');

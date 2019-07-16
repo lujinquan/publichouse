@@ -26,6 +26,9 @@ class ConfirmRoom extends Base
 
     public function add(){
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
 
             check('',$data['BanID']);
@@ -51,6 +54,9 @@ class ConfirmRoom extends Base
     public function edit(){
         $roomID = input('RoomID');
         if($this->request->isPost()){
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = array_no_space_str($this->request->post());
 
             foreach($data['HouseID'] as $v){
@@ -80,6 +86,9 @@ class ConfirmRoom extends Base
     }
 
     public function delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $roomID = input('RoomID');
         $houseid = Db::name('room')->where('RoomID' ,'eq' ,$roomID)->value('HouseID');
         $arr = explode(',',$houseid);

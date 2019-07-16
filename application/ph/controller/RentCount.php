@@ -48,6 +48,9 @@ class RentCount extends Base
      *  计算下月租金，生成下月租金
      */
     public function add(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
         return model('ph/RentCount')->add()?jsons('2000' ,'生成成功!'):jsons('4001' ,'生成失败……');
     }

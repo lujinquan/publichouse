@@ -41,6 +41,9 @@ class UserApply extends Base
      */
     public function add(){
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
             $data = $this->request->post();
 
@@ -139,6 +142,9 @@ class UserApply extends Base
             return jsons('4005' ,'操作失败，请注意查看审核状态……');
         }
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             $data = $this->request->post();
             $res = Db::name('use_change_order')->where('ChangeOrderID','eq',$data['ChangeOrderID'])->update($data);
             if( $res >0 || $res===0 ){
@@ -166,6 +172,9 @@ class UserApply extends Base
      * @description
      */
     public function delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
         $orderID = input('ChangeOrderID');
 
         $checkDelete = model('ph/UserApply')->check_delete($orderID);

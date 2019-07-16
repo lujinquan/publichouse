@@ -38,6 +38,9 @@ class LeaseApply extends Base
      */
     public function add(){
         if ($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
             // $data = $this->request->post();
             $data = array_no_space_str($this->request->post());
             //halt($data);
@@ -127,6 +130,9 @@ class LeaseApply extends Base
      * @description
      */
     public function delete(){
+        if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
 
         $orderID = input('ChangeOrderID');
 
