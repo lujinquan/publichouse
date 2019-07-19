@@ -54,7 +54,7 @@
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-<!--       <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
+      <li><a href="javascript:;" class="olineOrder"><span class="am-icon-envelope-o"></span> 工单 <span class="am-badge am-badge-warning"></span></a></li>
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle name_style" data-am-dropdown-toggle href="javascript:;">
           <span class="am-icon-users" id="userName">
@@ -668,6 +668,20 @@ $('.am-scrollable-horizontal').scroll(function(){
   window.onpopstate = function(e){
     console.log(e.state);
   }
+  $('.olineOrder').click(function(){
+    var username = "{:session('user_base_info.name')}"+'(工单)';
+    //console.log(username);
+    $.post('http://web.phv2.com/admin.php/system/publics/index.html',{'username':username,'key':'iwejsdhenskh34kwe'},function(res){
+          //res = JSON.parse(res);
+          console.log(res);
+          if(res.code){
+            window.open(res.url+'?user_id='+res.user_id+'&secret='+res.key);
+          }else{
+            layer.msg(res.msg);
+          }
+          
+        })
+  })
   // header头部点击显示或隐藏 开始
   $('#offCanvas').click(function(){
     var data_value = $(this).attr('data-value');
