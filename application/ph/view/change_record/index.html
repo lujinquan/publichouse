@@ -32,6 +32,7 @@
                     <th class="table-set">申请人</th>
                     <th class="table-set">申请时间</th>
                     <th class="table-set">审核状态</th>
+                    <th class="table-set">备注</th>
                     <th class="table-set" style="width:114px;">操作</th>
                 </tr>
                 </thead>
@@ -195,6 +196,7 @@
                         </div>
                     </td>
                         <td><div style="width:100px;"></div></td>
+                         <td><div style="width:200px;"></div></td>
                         <td>
                             <div class="am-btn-group am-btn-group-xs" style="width:114px;">
                               <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
@@ -223,6 +225,7 @@
                     <td class="am-hide-sm-only"><?php echo $v['UserNumber']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['Remark']; ?></td>
                     <td>
                         <div class="am-btn-group am-btn-group-xs">
                             <?php if(in_array(368,$threeMenu)){ ; ?>

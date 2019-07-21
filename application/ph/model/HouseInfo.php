@@ -128,7 +128,7 @@ class HouseInfo extends Model
             $wheres = 1;
         }
 
-        $HouseIdList['obj'] = self::field('HouseID')->where($where)->order('CreateTime desc,HouseID desc')->paginate(config('paginate.list_rows'));
+        $HouseIdList['obj'] = self::field('HouseID')->where($where)->order('CreateTime desc,HouseID desc')->paginate(10);
         $HouseIdList['HousePrerentSum'] = self::field('HouseID')->where($where)->sum('HousePrerent');
         $ApprovedRentSum = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('ApprovedRent');
         $HousePrerent = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('HousePrerent');
@@ -160,13 +160,14 @@ class HouseInfo extends Model
     {
 
         //产别 ，使用性质，房屋编号 ，楼栋编号 ，楼栋地址，租户姓名，机构名称 ，门牌号码， 单元号，楼层号，使用面积 ，建筑面积，规定月租金 ，原价 ，泵费，基数租差
-        if (!$map) $map = 'OwnerType ,UseNature,LeasedArea,HouseID ,BanID ,BanAddress ,DiffRent,ArrearRent ,TenantID ,InstitutionID ,DoorID ,IfSuspend,IfEmpty,UnitID ,FloorID ,ComprisingArea ,HouseUsearea ,HouseArea ,HousePrerent ,Oprice ,PumpCost,ApprovedRent';
+        if (!$map) $map = 'OwnerType ,UseNature,LeasedArea,HouseID ,BanID ,BanAddress ,DiffRent ,TenantID ,InstitutionID ,DoorID ,IfSuspend,IfEmpty,UnitID ,FloorID  ,HouseUsearea ,HouseArea ,HousePrerent ,PumpCost,ApprovedRent';
         $data = Db::name('house')->field($map)->where('HouseID', 'eq', $houseid)->find();
         if (!$data) {
             return array();
         }
         $data['ApprovedRent'] = count_house_rent($houseid);
-        //$data['ApprovedRent'] = $data['ApprovedRent'];
+        $arrear = Db::name('rent_order')->where(['HouseID'=>['eq',$houseid],'OrderDate'=>['<',date('Y').'00']])->sum('UnpaidRent');
+        $data['ArrearRent'] = $arrear?$arrear:0;
         $data["OwnerType"] = get_owner($data["OwnerType"]);
         $data['IfSuspend'] = $data['IfSuspend']?'是':'否';
         $data['IfEmpty'] = $data['IfEmpty']?'是':'否';

@@ -134,7 +134,7 @@ class ChangeRecord extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,UseNature,InflRent,InstitutionID ,UserNumber ,CreateTime ,Status';
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,UseNature,InflRent,InstitutionID ,UserNumber ,CreateTime ,Remark, Status';
         $data = Db::name('change_order')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){

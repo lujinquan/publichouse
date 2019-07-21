@@ -601,7 +601,7 @@ class ChangeAudit extends Model
         //若审核不通过
         if ($isfail == 0) {
             //终审不通过则状态改为 0
-            self::where($where)->update(['Status' => 2, 'FinishTime' => time()]);
+            self::where($where)->update(['Status' => 2]);
             $datas['Status'] = 3;
             $datas['Step'] = 2;
         } elseif ($status < $total && $isfail == 2) {
@@ -611,7 +611,7 @@ class ChangeAudit extends Model
         } elseif ($reson != '' && $isfail == 1) {
 
             //终审不通过则状态改为 0
-            self::where($where)->update(['Status' => 0]);
+            self::where($where)->update(['Status' => 0, 'FinishTime' => time()]);
 
             $datas['Status'] = 3;
             $datas['Step'] = 2;
@@ -1273,13 +1273,14 @@ class ChangeAudit extends Model
             if ($v3['Status'] == 3) {
                 $v3['Status'] = '发回';
             }
-
+            $userRow = Db::name('admin_user')->where('Number', 'eq', $v3['UserNumber'])->field('UserName,Role')->find();
+            $roleArr = json_decode($userRow['Role'],true);
             $v3['Step'] = Db::name('process_config')->where($map)->value('Title');  //操作内容
-            $v3['RoleName'] = Db::name('process_config')->where($map)->value('RoleName');  //角色名称
-            $v3['UserNumber'] = Db::name('admin_user')->where('Number', 'eq', $v3['UserNumber'])->value('UserName'); //操作人
+            $v3['RoleName'] = Db::name('admin_role')->where('id', 'eq', $roleArr[0])->value('RoleName');  //角色名称
+            $v3['UserNumber'] = $userRow['UserName']; //操作人
             $v3['CreateTime'] = date('Y-m-d H:i:s', $v3['CreateTime']);
         }
-
+        //halt($record);
         array_unshift($record, $first);
 
         return $record;

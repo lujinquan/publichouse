@@ -670,8 +670,7 @@ $('.am-scrollable-horizontal').scroll(function(){
   }
   $('.olineOrder').click(function(){
     var username = "{:session('user_base_info.name')}"+'(工单)';
-    //console.log(username);
-    $.post('http://web.phv2.com/admin.php/system/publics/index.html',{'username':username,'key':'iwejsdhenskh34kwe'},function(res){
+    $.post('http://pro.ctnmit.com/admin.php/system/publics/index.html',{'username':username,'key':'iwejsdhenskh34kwe'},function(res){
           //res = JSON.parse(res);
           console.log(res);
           if(res.code){
