@@ -1801,6 +1801,26 @@ $('#addApply').click(function() {
                 btn: ['确定', '取消'],
                 success: function() {
                     banQuery.action('buildingAdjustBan','1');
+					new file({
+					    button: "#buildingProperty",
+					    show: "#buildingPropertyShow",
+					    upButton: "#buildingPropertyUp",
+					    size: 102400,
+					    url: "/ph/ChangeApply/add",
+					    ChangeOrderID: '',
+					    Type: 1,
+					    title: "产权证"
+					});
+					new file({
+					    button: "#buildingTransfer",
+					    show: "#buildingTransferShow",
+					    upButton: "#buildingTransferUp",
+					    size: 102400,
+					    url: "/ph/ChangeApply/add",
+					    ChangeOrderID: '',
+					    Type: 1,
+					    title: "划转清册"
+					});
                     $('#buildingAdjustQuery').off('click');
                     $('#buildingAdjustQuery').on('click', function() {
                         var BanID = $("#buildingAdjustBan").val();
@@ -1823,11 +1843,12 @@ $('#addApply').click(function() {
                     });
                 },
                 yes: function(thisIndex) {
-                    var formData = new FormData();
+                     var formData = fileTotall.getArrayFormdata() || new FormData();
                     formData.append("BanID", $("#buildingAdjustBan").val());
                     formData.append("remark", $("#buildingAdjustReason").val());
                     formData.append("afterAdjustDamageGrade", $("#afterAdjustDamageGrade").val());
                     formData.append("afterAdjustStructureType", $("#afterAdjustStructureType").val());
+					formData.append("afterAdjustadd", $("#afterAdjustadd").val());
                     formData.append("type", 14);
                     $.ajax({
                         type: "post",

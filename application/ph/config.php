@@ -217,6 +217,8 @@ return [
 
     // 楼栋调整
     'buildingAdjustOther' => '其它',
+	'buildingProperty' => '产权证',
+	'buildingTransfer' => '划转清册',
 
     //库字段映射
     'BanUnitNum' => '单元数',
