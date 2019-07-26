@@ -450,7 +450,7 @@ class RentCount extends Model
             return jsons('4002' ,'暂时无法配置计算租金');
 
         }
-
+//halt($str);
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
         Db::name('rent_config')->where(['ReceiveRent'=>0,'InstitutionID'=>$institutionID])->delete();

@@ -166,8 +166,8 @@ class HouseInfo extends Model
             return array();
         }
         $data['ApprovedRent'] = count_house_rent($houseid);
-        $arrear = Db::name('rent_order')->where(['HouseID'=>['eq',$houseid],'OrderDate'=>['<',date('Y').'00']])->sum('UnpaidRent');
-        $data['ArrearRent'] = $arrear?$arrear:0;
+        // $arrear = Db::name('rent_order')->where(['HouseID'=>['eq',$houseid],'OrderDate'=>['<',date('Y').'00']])->sum('UnpaidRent');
+        // $data['ArrearRent'] = $arrear?$arrear:0;
         $data["OwnerType"] = get_owner($data["OwnerType"]);
         $data['IfSuspend'] = $data['IfSuspend']?'是':'否';
         $data['IfEmpty'] = $data['IfEmpty']?'是':'否';
