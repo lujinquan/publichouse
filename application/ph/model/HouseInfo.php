@@ -128,7 +128,7 @@ class HouseInfo extends Model
             $wheres = 1;
         }
 
-        $HouseIdList['obj'] = self::field('HouseID')->where($where)->order('CreateTime desc,HouseID desc')->paginate(10);
+        $HouseIdList['obj'] = self::field('HouseID')->where($where)->order('CreateTime desc,HouseID desc')->paginate(config('paginate.list_rows'));
         $HouseIdList['HousePrerentSum'] = self::field('HouseID')->where($where)->sum('HousePrerent');
         $ApprovedRentSum = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('ApprovedRent');
         $HousePrerent = self::field('HouseID')->where($where)->where(['UseNature'=>['eq',1],'IfSuspend'=>['eq',0]])->sum('HousePrerent');
