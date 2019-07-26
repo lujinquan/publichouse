@@ -481,6 +481,7 @@ class ChangeApply extends Base
                         'afterDamage'=> $data['afterAdjustDamageGrade']?:'',
                         'beforeStructure'=> $one['StructureType'],
                         'afterStructure'=> $data['afterAdjustStructureType']?:'',
+                        'afterAdjustadd'=> $data['afterAdjustadd']?:'',
                     ]); 
 
                     $datas['ChangeType'] = 14;  //异动类型
@@ -489,6 +490,7 @@ class ChangeApply extends Base
                     if(!$datas['ProcessConfigType']){
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'14'.$suffix;   
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['InstitutionID'] = $one['TubulationID'];  //机构id

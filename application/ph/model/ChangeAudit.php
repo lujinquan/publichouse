@@ -467,6 +467,7 @@ class ChangeAudit extends Model
         $data['Remark'] = $one['Remark'];
 
         $data['beforeDamage'] = get_damage($jsons['beforeDamage']);
+        $data['afterAdjustadd'] = $jsons['afterAdjustadd'];
         $data['beforeStructure'] = get_structure($jsons['beforeStructure']);
         if($jsons['afterDamage']){
             $data['afterDamage'] = get_damage($jsons['afterDamage']);   
@@ -1095,7 +1096,10 @@ class ChangeAudit extends Model
                         
                     }
                 }
-
+                if($jsons['afterAdjustadd']){
+                    Db::name('ban')->where('BanID',$oneData['BanID'])->update(['AreaFour'=>$jsons['afterAdjustadd']]);
+                    Db::name('house')->where('BanID','eq',$oneData['BanID'])->update(['BanAddress'=>$jsons['afterAdjustadd']]);
+                }
                 break;
             case 15:  //租金调整(批量)异动完成后的，系统处理
                 $one = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find();

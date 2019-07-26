@@ -478,6 +478,7 @@ $('.BtnApprove').click(function(){
             $('#beforeAdjustStructureType').text(res.data.detail.beforeStructure);
             $('#afterAdjustDamageGrade').text(res.data.detail.afterDamage);
             $('#afterAdjustStructureType').text(res.data.detail.afterStructure);
+            $('#afterAdjustadd').text(res.data.detail.afterAdjustadd);
             if(res.data.config.status == '1'){
                 $('.status_2').show();
                 new file({
@@ -787,6 +788,7 @@ $('.BtnDetail').click(function(){
             $('#beforeAdjustStructureType').text(res.data.detail.beforeStructure);
             $('#afterAdjustDamageGrade').text(res.data.detail.afterDamage);
             $('#afterAdjustStructureType').text(res.data.detail.afterStructure);
+            $('#afterAdjustadd').text(res.data.detail.afterAdjustadd);
             processState('#buildingAdjustState',res);
             metailShow('#buildingAdjustPhotos',res);
             layerBox(value,'buildingAdjustment','楼栋调整',2);
