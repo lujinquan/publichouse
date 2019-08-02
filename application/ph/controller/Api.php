@@ -1066,23 +1066,16 @@ class Api extends Controller
                 }
                 
             }
-            $year = substr($searchForm['month'],0,4);
+            //$year = substr($searchForm['month'],0,4);
+            $month = str_replace('-','',$searchForm['month']);
             // 2017年的房屋统计表直接读缓存数据
-            if($year == '2017' || $year == '2018'){
-                $tubulationid = (isset($searchForm['TubulationID'])&&$searchForm['TubulationID'])?$searchForm['TubulationID']:$currentUserInstitutionID;
-                $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$year])->value('data');
-                $sdata = json_decode($data,true);
-                $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$tubulationid]; 
-                //halt($result);
+            //if($year < '201907'){
+            $tubulationid = (isset($searchForm['TubulationID'])&&$searchForm['TubulationID'])?$searchForm['TubulationID']:$currentUserInstitutionID;
+            $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$month])->value('data');
+            $sdata = json_decode($data,true);
+            $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$tubulationid]; 
 
-            // 不是2017年的就直接计算统计
-            }else{
-                //halt($where);
-                // $months = str_replace('-','',$searchForm['month']);
-                // $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$months])->value('data');
-                // $sdata = json_decode($data,true);
-                // $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
-
+            if($month == date('Ym') && !$data){
                 switch($searchForm['QueryType']){
                     case '1':
                         $result['data'] = model('ph/HouseReports')->get_by_damage($where);
@@ -1102,10 +1095,40 @@ class Api extends Controller
                     default:
                         break;
                 }
+            }
+                //halt($result);
+
+            // 不是2017年的就直接计算统计
+            // }else{
+            //     //halt($where);
+            //     // $months = str_replace('-','',$searchForm['month']);
+            //     // $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$months])->value('data');
+            //     // $sdata = json_decode($data,true);
+            //     // $result['data'] = $sdata[$searchForm['QueryType']][$searchForm['OwnerType']][$searchForm['TubulationID']];
+
+            //     switch($searchForm['QueryType']){
+            //         case '1':
+            //             $result['data'] = model('ph/HouseReports')->get_by_damage($where);
+            //             break;
+            //         case '2':
+            //             $result['data'] = model('ph/HouseReports')->get_by_useNature($where);
+            //             break;
+            //         case '3';
+            //             $result['data'] = model('ph/HouseReports')->get_by_institution($where);
+            //             break;
+            //         case '4':
+            //             $result['data'] = model('ph/HouseReports')->get_by_year($where);
+            //             break;
+            //         case '5':
+            //             $result['data'] = model('ph/HouseReports')->get_by_value($where);
+            //             break;
+            //         default:
+            //             break;
+            //     }
 
 
             
-            }
+            // }
             //halt($result);
             return jsons('2000', '获取成功', $result);
         }

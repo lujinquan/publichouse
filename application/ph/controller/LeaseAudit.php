@@ -88,6 +88,34 @@ class LeaseAudit extends Base
 
     }
 
+    //房管员可以不通过
+    public function unpass(){
+   
+        if($this->request->isPost()) {
+            if(DATA_DEBUG){
+                return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+            }
+
+            $data = $this->request->post();
+
+            model('ph/LeaseAudit')->check_process($data['ChangeOrderID']);
+
+            if(!isset($data['reson'])) $data['reson']='';
+       
+            $result = model('ph/LeaseAudit')->create_child_order($data['ChangeOrderID'], $data['reson']);
+
+            if($result === true){
+
+                return jsons('2000' ,'审核完成');
+            }else{
+
+                return jsons('4000' ,'审核异常');
+            }
+            
+        }
+
+    }
+
     /**
      * @title 租约打印
      * @author Mr.Lu

@@ -49,6 +49,41 @@ $('.examine').click(function(event){
 		}
 	})
 })
+$('.butongguo').click(function(event){
+	//noPass();
+	event.stopPropagation();
+	var ChangeOrderID = $(this).val();
+	//noPass(ChangeOrderID);
+	layer.open({
+		type:1,
+		area:['400px','400px'],
+		resize:false,
+		zIndex:100,
+		title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+		btn:['确认'],
+		yes:function(msgIndex){
+			var reasonMsg = $('#reason').val();
+			if (reasonMsg=='') {
+				reasonMsg='空';
+			}else{
+				reasonMsg=$('#reason').val();
+			}
+
+			console.log(reasonMsg);
+			//return false;
+			$.post('/ph/LeaseAudit/unpass/',{ChangeOrderID:ChangeOrderID,reson:reasonMsg},function(res){
+				res = JSON.parse(res);
+				console.log(res);
+				layer.msg(res.msg);
+				if(res.retcode == "2000"){
+					layer.close(msgIndex);
+					location.reload();
+				}
+			});
+		}
+	})
+})
 $('.print1').click(function(event){
 	event.stopPropagation();
 	$('.admin-main').addClass('am-print-hide');
