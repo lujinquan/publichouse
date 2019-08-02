@@ -1819,7 +1819,7 @@ $('#addApply').click(function() {
 					    url: "/ph/ChangeApply/add",
 					    ChangeOrderID: '',
 					    Type: 1,
-					    title: "划转清册"
+					    title: "产权清册及其他"
 					});
                     $('#buildingAdjustQuery').off('click');
                     $('#buildingAdjustQuery').on('click', function() {
@@ -1842,7 +1842,7 @@ $('#addApply').click(function() {
                         });
                     });
                 },
-                yes: function(thisIndex) {
+                yes: function(thisIndex, layero) {
                      var formData = fileTotall.getArrayFormdata() || new FormData();
                     formData.append("BanID", $("#buildingAdjustBan").val());
                     formData.append("remark", $("#buildingAdjustReason").val());
@@ -1850,6 +1850,13 @@ $('#addApply').click(function() {
                     formData.append("afterAdjustStructureType", $("#afterAdjustStructureType").val());
 					formData.append("afterAdjustadd", $("#afterAdjustadd").val());
                     formData.append("type", 14);
+					//console.log($("#buildingPropertyShow").length);
+					if($("#buildingPropertyShow").html()=="")
+						{
+							layer.msg("产权证必填！");
+							return false;
+							
+						}
                     $.ajax({
                         type: "post",
                         url: "/ph/ChangeApply/add",
@@ -1865,6 +1872,7 @@ $('#addApply').click(function() {
                             }
                         }
                     });
+
                 },
                 end: function() {
                     $("input[type='text']").val('');
@@ -1874,6 +1882,7 @@ $('#addApply').click(function() {
                     $("select").val('');
                     location.reload();
                 }
+				
             });
             break;
         case '15': case '16':
