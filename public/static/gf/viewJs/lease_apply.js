@@ -19,7 +19,7 @@ $('.addLease').click(function(){
 			$('#leaseHouseQuery').click(function(){
 				$.get('/ph/api/lease_house_info/HouseID/'+$('#leaseHouseInput').val(),function(res){
 					res = JSON.parse(res);
-					console.log(res);
+					//console.log(res);
 					$('#applyNO').val(res.data.house.Szno);
 					$('#applyAddress').val(res.data.house.BanAddress);
 					$('#applyStruct').val(res.data.house.StructureType);
@@ -60,7 +60,7 @@ $('.addLease').click(function(){
 					res.data.room.sort(function(a,b){
 						return b.RoomType - a.RoomType;
 					});
-					console.log(res.data.room);
+					//console.log(res.data.room);
 					for(var i = 0;i < res.data.room.length;i++){
 						var this_data = res.data.room[i];
 						switch(this_data.RoomType){
@@ -191,6 +191,7 @@ $('.addLease').click(function(){
 								break;
 						}
 					}
+					
 					$('.input_remark').off('blur');
 				    $('.input_remark').blur(function(){
 				    	var str_new = $('.remark label').text() + '&nbsp&nbsp'
@@ -204,7 +205,7 @@ $('.addLease').click(function(){
 				    	console.log(str_new);
 				    });
 
-
+					$('.remark p').remove();
 				    var recorde_array = res.data.house.Recorde.split(';');
 					for(var i = 0,length = recorde_array.length;i < length; i++){
 						$('.remark').append($('<p>'+recorde_array[i]+'</p>'));
@@ -231,7 +232,7 @@ $('.addLease').click(function(){
 				    		str_new = str_new + ';' + res.data.house.Recorde;
 				    	}
 				    	$('.applyText_other').val(str_new);
-				    	console.log(str_new);
+				    	//console.log(str_new);
 				    })
 				})
 			})

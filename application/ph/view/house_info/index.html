@@ -57,7 +57,7 @@
                     <th class="table-set dong_none">楼层号</th>
                     <th class="table-set">计租面积</th>
                     <th class="table-set dong_none">建筑面积</th>
-                    <!-- <th class="table-set">年度欠租</th> -->
+                    <th class="table-set">出证时间</th>
                     <th class="table-set">操作</th>
                 </tr>
                 </thead>
@@ -278,7 +278,9 @@
                         <td>
                             <div style="width:60px;">{$HouseAreaSum}</div>
                         </td>
-
+                        <td class="dong_none">
+                            <div style="width:40px;"></div>
+                        </td>
                         
 
                         <td>
@@ -325,9 +327,10 @@
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['LeasedArea']; ?></td>
                     <td class="dong_none"><?php echo $v1['HouseArea']; ?></td>
+                    <td class="dong_none" style="width:180px;"><?php echo $v1['PrintTime']; ?></td>
                  
                     <td>
-                        <div class="am-btn-group am-btn-group-xs"  style="width:124px;">
+                        <div class="am-btn-group am-btn-group-xs" style="width:124px;">
                             <?php if(in_array(55,$threeMenu)){ ; ?>
                             <button class="am-btn am-btn-default am-btn-xs am-text-primary details HouseDetailBtn"
                                     value="<?php echo $v1['HouseID']; ?>"> 明细

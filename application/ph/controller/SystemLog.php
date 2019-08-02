@@ -18,7 +18,7 @@ class SystemLog extends Base
         $this->nowmonth = date('Ym',time());
         $this->nowyear = date('Y',time());
         //$this->nowyear = '2018';
-        //$this->nowmonth = '2018';
+        //$this->nowmonth = '201906';
     }
 
     /**
@@ -63,7 +63,7 @@ class SystemLog extends Base
         }
         // $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
         //halt($re);
-        return ($re !== false)?jsons('2000','保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
+        return ($re !== false)?jsons('2000',$nowmonth.'报表保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
     }
 
     /**
@@ -109,7 +109,7 @@ class SystemLog extends Base
      */
     public function RentReportCache(){
         $date = $this->nowmonth;
-        //$date = 201906;
+        //$date = 201907;
         set_time_limit(0);
         Debug::remark('begin');
         //halt($date);

@@ -116,7 +116,7 @@
             //2019-04以前只能查201712,201812两个日期
             var showDate = new Array(1543593600000,1512057600000);
             //return (forbidDate.indexOf(date.valueOf()) > -1)? 'am-disabled' : '';
-            return ((date.valueOf() < 1554048000000) && (showDate.indexOf(date.valueOf()) < 0))? 'am-disabled' : '';
+            return ((date.valueOf() < 1559318400000) && (showDate.indexOf(date.valueOf()) < 0))? 'am-disabled' : '';
         }
     }).on('changeDate.datepicker.amui', function(ev) {
 

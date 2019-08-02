@@ -174,7 +174,8 @@ class HouseInfo extends Model
         $data["UseNature"] = get_usenature($data["UseNature"]);
         $data['id'] = $data["TenantID"];
         $data["TenantID"] = Db::name('tenant')->where('TenantID', 'eq', $data['TenantID'])->value('TenantName');
-        //$data["TenantID"] = $data["TenantName"];
+        $Histime = Db::name('lease_change_order')->where(['HouseID'=>$houseid,'Status'=>1])->order('id desc')->value('PrintTime'); //出证时间
+        $data["PrintTime"] = $Histime?date('Y-m-d H:i',$Histime):'';
         $data["InstitutionID"] = Db::name('institution')->where('id', 'eq', $data['InstitutionID'])->value('Institution');
 
         return $data;
