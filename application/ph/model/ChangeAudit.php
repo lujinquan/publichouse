@@ -467,7 +467,7 @@ class ChangeAudit extends Model
         $data['Remark'] = $one['Remark'];
 
         $data['beforeDamage'] = get_damage($jsons['beforeDamage']);
-        $data['afterAdjustadd'] = $jsons['afterAdjustadd'];
+        $data['afterAdjustadd'] = isset($jsons['afterAdjustadd'])?$jsons['afterAdjustadd']:'';
         $data['beforeStructure'] = get_structure($jsons['beforeStructure']);
         if($jsons['afterDamage']){
             $data['afterDamage'] = get_damage($jsons['afterDamage']);   
