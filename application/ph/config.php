@@ -118,6 +118,7 @@ return [
     //新增注销
     'housingBill' => '武汉市直管公有住房出售收入专用票据',
     'housingApprovalForm' => '武昌区房地局出售直管公有住房审批表',
+    'housingApprovalFormOther' => '其他',
     'cancelUploadReport' => '注销报告',
     //新增房屋调整
 	'housingReadjust' => '调整附件报告',

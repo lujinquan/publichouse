@@ -54,7 +54,7 @@ class LeaseRecord extends Model
             if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //检索租户姓名
                 $where['TenantName'] = array('like', '%'.$searchForm['TenantName'].'%');
             }
-            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索房屋地址
+            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索楼栋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
             if (isset($searchForm['Status']) && $searchForm['Status'] !== '') {  //检索房屋状态

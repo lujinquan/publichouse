@@ -55,7 +55,7 @@ function bigMap(){
 		// 		var opsiX =this.mX;
 		// 		var opsiY = this.mY;
 		// 		sContent ="<table style='border:1px solid black; width:500px; height:50px;text-align:center;margin:15px 0;' cellspacing='0'>"+
-		// 	"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>房屋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
+		// 	"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
 		// 	"<tr>"+"<td style='border-right:1px solid black'>"+this.BanId+"</td>"+
 		// 	"<td style='border-right:1px solid black'>"+this.aDd+"</td>"+"<td>"+
 		// 			"<a href='#' style='margin-right:10px'>查看明细</a>"+
@@ -90,7 +90,7 @@ function bigMap(){
 // 				var opsiY = 30.599275;
 				
 // 				sContent ="<table style='border:1px solid black; width:500px; height:50px;text-align:center;margin:15px 0;' cellspacing='0'>"+
-// 			"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>房屋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
+// 			"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
 // 			"<tr>"+"<td style='border-right:1px solid black'>"+BanId+"</td>"+
 // 			"<td style='border-right:1px solid black'>"+aDd+"</td>"+"<td>"+
 // 					"<a href='#' style='margin-right:10px'>查看明细</a>"+
@@ -137,7 +137,7 @@ function bigMap(){
 // 				var opsiX =this.mX;
 // 				var opsiY = this.mY;
 // 				sContent ="<table style='border:1px solid black; width:500px; height:50px;text-align:center;margin:15px 0;' cellspacing='0'>"+
-// 			"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>房屋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
+// 			"<thead>"+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋编号</th> "+"<th style='border-right:1px solid black;border-bottom:1px solid black;'>楼栋地址</th>"+"<th style='border-bottom:1px solid black;'>操作</th>"+"</thead>"+"<tbody>"+
 // 			"<tr>"+"<td style='border-right:1px solid black'>"+this.BanId+"</td>"+
 // 			"<td style='border-right:1px solid black'>"+this.aDd+"</td>"+"<td>"+
 // 					"<a href='#' style='margin-right:10px'>查看明细</a>"+

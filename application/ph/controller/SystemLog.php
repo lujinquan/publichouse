@@ -45,7 +45,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowmonth = $this->nowmonth;
-        //$nowmonth = '201906';
+        //$nowmonth = '201907';
         $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
@@ -75,7 +75,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201906';
+        //$month = '201907';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
@@ -96,7 +96,7 @@ class SystemLog extends Base
         }
         Debug::remark('end');
 
-        if($re){
+        if($re !== false){
             return $this->success($month.'报表，保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');
         }else{
             return $this->error($month.'报表，保存失败，耗时'.Debug::getRangeTime('begin', 'end') . 's','HouseReport/index');

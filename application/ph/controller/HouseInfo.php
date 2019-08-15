@@ -707,7 +707,7 @@ class HouseInfo extends Base
             $html .= $data['houseinfo']['StructureType'];
             $html .= '</span></span>&nbsp;&nbsp;<span>结构基价：<span style="color:#000000;font-style:nomal">';
             $html .= $data['houseinfo']['StructureTypePoint'];
-            $html .= '</span></span>&nbsp;&nbsp;<span>房屋地址：<span style="color:#000000;font-style:nomal;">';
+            $html .= '</span></span>&nbsp;&nbsp;<span>楼栋地址：<span style="color:#000000;font-style:nomal;">';
             $html .= $data['houseinfo']['BanAddress'];
             $html .= '</span></span>&nbsp;&nbsp;<br/><span>户名：<span style="color:#000000;font-style:nomal;">';
             $html .= $data['houseinfo']['TenantName'];
@@ -861,7 +861,7 @@ class HouseInfo extends Base
             $html .= $data['houseinfo']['StructureType'];
             $html .= '</span></span>&nbsp;&nbsp;<span>结构基价：<span style="color:#000000;font-style:nomal">';
             $html .= $data['houseinfo']['StructureTypePoint'];
-            $html .= '</span></span>&nbsp;&nbsp;<span>房屋地址：<span style="color:#000000;font-style:nomal;">';
+            $html .= '</span></span>&nbsp;&nbsp;<span>楼栋地址：<span style="color:#000000;font-style:nomal;">';
             $html .= $data['houseinfo']['BanAddress'];
             $html .= '</span></span>&nbsp;&nbsp;<br/><span>户名：<span style="color:#000000;font-style:nomal;">';
             $html .= $data['houseinfo']['TenantName'];
