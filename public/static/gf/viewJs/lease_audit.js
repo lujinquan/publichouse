@@ -100,7 +100,7 @@ $('.print1').click(function(event){
 			$.get('/ph/LeaseAudit/detail/ChangeOrderID/'+ChangeOrderID,function(res){
 				var res = JSON.parse(res);
 				var data = res.data.detail;
-				console.log(data);
+				//console.log(data);
 
 				data.applyNO = data.Szno;
 
@@ -113,7 +113,7 @@ $('.print1').click(function(event){
 						var d = 0;
 						for(var i = 0,length = recorde_array.length;i < length; i++){
 							var s = recorde_array[i].indexOf('老证换新证');
-							console.log(s);
+							
 							if(s > -1){
 								if(d == 0){
 									$('#print_1_Text_other').append($('<p>'+recorde_array[i]+'</p>'));
