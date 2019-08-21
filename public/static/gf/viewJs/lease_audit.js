@@ -108,9 +108,21 @@ $('.print1').click(function(event){
 					var name_id_print = key.replace(/apply/,'print_1_');
 					if(key.indexOf('Text_other') > -1){
 						var recorde_array = data[key].split(';');
+						//console.log(recorde_array);
 						$('#print_1_Text_other').empty();
+						var d = 0;
 						for(var i = 0,length = recorde_array.length;i < length; i++){
-							$('#print_1_Text_other').append($('<p>'+recorde_array[i]+'</p>'));
+							var s = recorde_array[i].indexOf('老证换新证');
+							console.log(s);
+							if(s > -1){
+								if(d == 0){
+									$('#print_1_Text_other').append($('<p>'+recorde_array[i]+'</p>'));
+								}
+								++d;
+							}else{
+								$('#print_1_Text_other').append($('<p>'+recorde_array[i]+'</p>'));
+							}
+							
 						}
 					}else{
 						$('#'+name_id_print).text(data[key] == "0"?" " : data[key]);
