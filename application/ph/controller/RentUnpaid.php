@@ -70,13 +70,15 @@ class RentUnpaid extends Base
             $PayYear = substr($v['OrderDate'],0,4);
             $OldPayMonth = date('Ym',time());
 
+            $type = ($PayYear == date('Y'))?2:1;
+
             $str .= "('" . $v['HouseID'] . "','" . $v['TenantID'] . "'," . $v['InstitutionID'] . "," . $v['InstitutionPID'];
-            $str .= "," . $v['HousePrerent'] . "," . $v['UnpaidRent'] . "," . $PayYear . "," . $v['OrderDate'] . "," . $OldPayMonth . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'].  "," . UID . "," . time() . "),";
+            $str .= "," . $v['HousePrerent'] . "," . $v['UnpaidRent'] . "," . $PayYear . "," . $v['OrderDate'] . "," . $OldPayMonth . ",'" . $v['TenantName'] . "','" . $v['BanAddress'] . "'," . $v['OwnerType'] . "," . $v['UseNature'].  "," . UID . ",". $type ."," . time() . "),";
         }
 
         if($str){
 
-            $res = Db::execute("insert into ".config('database.prefix')."old_rent (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,PayRent,PayYear,PayMonth,OldPayMonth,TenantName,BanAddress,OwnerType,UseNature,CreateUserID,CreateTime) values " . rtrim($str, ','));
+            $res = Db::execute("insert into ".config('database.prefix')."old_rent (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,PayRent,PayYear,PayMonth,OldPayMonth,TenantName,BanAddress,OwnerType,UseNature,CreateUserID,Type,CreateTime) values " . rtrim($str, ','));
         }
 
         $bool = Db::name('rent_order')->where(['RentOrderID'=>['in',$ids]])->update(['Type'=> 3 ,'PaidRent'=> ['exp','ReceiveRent'],'UnpaidRent'=>0]);
