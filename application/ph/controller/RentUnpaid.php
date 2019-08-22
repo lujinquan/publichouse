@@ -145,7 +145,8 @@ class RentUnpaid extends Base
                 'OwnerType' => $result['OwnerType'],
                 'UseNature' => $result['UseNature'],
                 'OldPayMonth' => date('Ym',time()),
-                'PayYear' => 2017,
+                'PayMonth' => $result['OrderDate'],
+                'PayYear' => substr($result['OrderDate'],0,4),
                 'CreateUserID' => UID,
                 'CreateTime' => time(),
             ];
