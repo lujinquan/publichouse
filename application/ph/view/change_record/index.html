@@ -195,7 +195,14 @@
                     
                         </div>
                     </td>
-                        <td><div style="width:100px;"></div></td>
+                        <td><div class="am-form-group  am-form search_input">
+                     
+                    <select name="Status">
+                        <option value="" style="display:none">请选择</option>
+                        <option value="1" {if(isset($changeOption['Status']) && $changeOption['Status'] ==='1')}selected{/if}>成功</option>
+                        <option value="0" {if(isset($changeOption['Status']) && $changeOption['Status'] === '0')}selected{/if}>失败</option>
+                    </select>
+                  </div></td>
                          <td><div style="width:200px;"></div></td>
                         <td>
                             <div class="am-btn-group am-btn-group-xs" style="width:114px;">

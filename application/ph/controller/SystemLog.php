@@ -45,7 +45,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowmonth = $this->nowmonth;
-        //$nowmonth = '201907';
+        //$nowmonth = '201906';
         $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
@@ -75,7 +75,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201907';
+        //$month = '201906';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
@@ -135,8 +135,25 @@ class SystemLog extends Base
                 'date'=>$date,
             ]);
         }
+        $currentUserInstitutionID = session('user_base_info.institution_id');
+
+        $currentUserLevel = Db::name('institution')->where('id', 'eq', $currentUserInstitutionID)->value('Level');
+        $whereRent = [];
+        $whereRent['type'] = 1;
+
+        if ($currentUserLevel == 3) { //用户为管段级别，则直接查询
+            $whereRent['InstitutionID'] = array('eq', $currentUserInstitutionID);
+        } elseif ($currentUserLevel == 2) {  //用户为所级别，则获取所有该所子管段，查询
+            $whereRent['InstitutionPID'] = array('eq', $currentUserInstitutionID);
+        } else {   //用户为公司级别，则获取所有子管段
+        }
+        $counts = Db::name('rent_order')->where($whereRent)->count('id');
+        $msg = '。';
+        if($counts){
+            $msg = '，您有 '. $counts . ' 条账单未处理！';
+        }
         //$res = Cache::store('file')->set('RentReport' . $this->nowmonth, json_encode($HouseReportdata), $this->cachetime);
-        return ($re !== false)?jsons('2000',$date.'月报，保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
+        return ($re !== false)?jsons('2000',$date.'月报，保存成功'.$msg):jsons('4000','保存失败');
     }
 
     /**

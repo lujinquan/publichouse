@@ -172,6 +172,7 @@ $('.notice_info').click(function(){
         btn:['确定','取消'],
         content:$("#notice_info_dialog"),
         success:function(){
+            console.log(res.data);
             content = unescape(res.data.Content);
             $('#title_info').html(res.data.Title);
             $('#update_time_info').html(res.data.CreateTime);
