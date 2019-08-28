@@ -72,6 +72,17 @@ $('#Password').blur(function(){
 	$(this).next().css('borderBottom', '1px solid #E1E1E1');
 	$('#vertical-bar-pwd').next().css('color', '#AFAFAF');
 });
+$('#Password1').focus(function(){
+	$(".error-box").hide();
+	$('#vertical-bar-pwd1').attr('src', '/public/static/user/images/pwd2.png');
+	$(this).next().css('borderBottom', '1px solid #4087F1');
+	$('#vertical-bar-pwd1').next().css('color', '#4087F1');
+});
+$('#Password1').blur(function(){
+	$('#vertical-bar-pwd1').attr('src', '/public/static/user/images/pwd.png');
+	$(this).next().css('borderBottom', '1px solid #E1E1E1');
+	$('#vertical-bar-pwd1').next().css('color', '#AFAFAF');
+});
 $('#yzm').focus(function(){
 	$(".error-box").hide();
 	$('#vertical-bar-code2').attr('src', '/public/static/user/images/code2.png');

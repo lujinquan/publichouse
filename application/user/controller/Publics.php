@@ -48,7 +48,15 @@ class Publics extends Controller
    
         }
     }
-
+	
+	public function forgetpass()
+	{
+		return $this->fetch();
+	}
+    public function settingpass()
+    {
+    	return $this->fetch();
+    }
     public function weixinsignin()
     {
         if ($this->request->isPost()) {
