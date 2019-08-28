@@ -109,6 +109,9 @@ class ChangeRecord extends Model
         }
 
         $where['Status'] = array('in' , [1,0]);
+        if (isset($searchForm['Status']) && $searchForm['Status'] !== '') {  //检索房屋状态
+            $where['Status'] = array('eq', $searchForm['Status']);
+        }
 
         $where['IfShow'] = array('eq',1);
 

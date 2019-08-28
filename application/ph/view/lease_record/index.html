@@ -20,10 +20,9 @@
             <th class="table-type">机构名称</th>
             <?php }; ?>
             <th class="table-author am-hide-sm-only">产别</th>
-            <th class="table-set">房屋地址</th>
+            <th class="table-set">楼栋地址</th>
             <th class="table-date am-hide-sm-only">结构</th>
-            <th class="table-set">房屋层</th>
-            <th class="table-set">居住层</th>
+            <th class="table-set">申请时间</th>
             <th class="table-set">承租人</th>
             <th class="table-set">流程状态</th>
             <th class="table-set" style="width:114px;">操作</th>
@@ -138,11 +137,22 @@
               </td>
          
               <td>
-                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
+                 
+                 <div class="am-input-group am-input-group-sm" style="width:60px;">
+                                <?php
+                        if(isset($leaseOption['CreateTime'])){
+                            $CreateTime = $leaseOption['CreateTime'];  
+                        }else{
+                            $CreateTime = '';
+                        }
+                     ?>
+                    <div class="am-u-sm-6" >
+                          <input style="width:145px;" name="CreateTime" value="{$CreateTime}" type="text" placeholder="支持按月或按日查询" class="am-form-field" data-am-datepicker="{format: 'yyyy-mm-dd',viewMode: 'days', minViewMode: 'days'}" value="">
+                    </div>
+                    
+                        </div>
               </td>
-              <td>
-                 <div class="am-input-group am-input-group-sm" style="width:60px;"></div>
-              </td>
+              
               <td>
                 <div class="am-g am-input-group am-input-group-sm">
                       <?php
@@ -189,8 +199,7 @@
                 <td class="am-hide-sm-only"><?php echo $v['OwnerType']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['BanAddress']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['StructureType']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['FloorNum']; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['FloorID']; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
                 <td><a href="#"><?php echo $v['Status']; ?></a></td>
                 <td>

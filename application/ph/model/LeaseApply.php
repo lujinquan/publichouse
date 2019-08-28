@@ -80,10 +80,10 @@ class LeaseApply extends Model
             if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //检索租户姓名
                 $where['TenantName'] = array('like', '%'.$searchForm['TenantName'].'%');
             }
-            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索房屋地址
+            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索楼栋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
-            if (isset($searchForm['if_show']) && $searchForm['if_show']) {  //检索房屋地址
+            if (isset($searchForm['if_show']) && $searchForm['if_show']) {  //检索楼栋地址
                 if($searchForm['if_show'] == 1){
                     $where['PrintTime'] = array('>', 0);
                 }else{
@@ -91,7 +91,7 @@ class LeaseApply extends Model
                 }
                 //$where['BanAddress'] = array('like', '%'.$searchForm['if_show'].'%');
             }
-            if (isset($searchForm['admin_is']) && $searchForm['admin_is']) {  //检索房屋地址
+            if (isset($searchForm['admin_is']) && $searchForm['admin_is']) {  //检索楼栋地址
                
                 switch($searchForm['admin_is']){
                     case 112:

@@ -1071,6 +1071,16 @@ $('#addApply').click(function() {
                         Type: 1,
                         title: "武昌区房地局出售直管公有住房审批表"
                     });
+                    new file({
+                        button: "#housingApprovalFormOther",
+                        show: "#housingApprovalFormOtherShow",
+                        upButton: "#housingApprovalFormOtherUp",
+                        size: 102400,
+                        url: "/ph/ChangeApply/add",
+                        ChangeOrderID: '',
+                        Type: 1,
+                        title: "其他"
+                    });
                 },
                 yes:function(thisIndex){
                     if ($('#getcancel').val() == "") {

@@ -1154,7 +1154,7 @@ class ChangeAudit extends Model
 
                 foreach($deadline['houseArr'] as $v){
                     Db::name('house')->where('HouseID',$v['HouseID'])->update(['HousePrerent'=>$v['ApprovedRent']]);
-                    $str .= "( 12,'". $one['ChangeOrderID'] . "','" .$v['HouseID']. "','" .$v['BanID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "),";
+                    $str .= "( 12,'". $one['ChangeOrderID'] . "','" .$v['HouseID']. "','" .$one['BanID'] . "'," .$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $v['Diff'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "),";
                 }
 
                 Db::name('ban')->where('BanID',$one['BanID'])->update(['PreRent'=>['exp','PreRent+'.$one['InflRent']],'CivilRent'=>['exp','CivilRent+'.$one['InflRent']]]);

@@ -54,18 +54,35 @@ class LeaseRecord extends Model
             if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //检索租户姓名
                 $where['TenantName'] = array('like', '%'.$searchForm['TenantName'].'%');
             }
-            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索房屋地址
+            if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索楼栋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
             if (isset($searchForm['Status']) && $searchForm['Status'] !== '') {  //检索房屋状态
                 $where['Status'] = array('eq', $searchForm['Status']);
             }
             
+            // if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
+            //     $starttime = strtotime($searchForm['CreateTime']);
+            //     $endtime = $starttime + 3600*24;
+            //     $where['CreateTime'] = array('between',[$starttime,$endtime]);
+            // }
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
+
+                $c = substr_count($searchForm['CreateTime'],'-');
+                
                 $starttime = strtotime($searchForm['CreateTime']);
-                $endtime = $starttime + 3600*24;
+
+                if($c == 2){
+                    $endtime = $starttime + 3600*24;
+                }elseif($c == 1){
+                    $endtime = $starttime + 3600*24*30;
+                }else{
+                    $endtime = $starttime + 3600*24*365;
+                }             
+
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
+
         }
 
         

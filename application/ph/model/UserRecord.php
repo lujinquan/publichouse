@@ -56,7 +56,7 @@ class UserRecord extends Model
             if ($searchForm['HouseID']) {  //检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
-            if ($searchForm['BanAddress']) {  //检索房屋地址
+            if ($searchForm['BanAddress']) {  //检索楼栋地址
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
             if ($searchForm['ChangeType']) {  //检索变更类型

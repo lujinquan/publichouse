@@ -1384,7 +1384,7 @@ class Api extends Controller
             <td>{$find['HouseID']}</td>
         </tr>
         <tr>
-            <td>房屋地址</td>
+            <td>楼栋地址</td>
             <td>{$find['BanAddress']}</td>
         </tr>
         <tr>
@@ -1700,7 +1700,7 @@ EOF;
                 <th rowspan="2" colspan="1" width="80" class="am-text-middle">管段</th>
                 <th rowspan="2" colspan="1" class="am-text-middle">账号</th>
                 <th rowspan="2" colspan="1" class="am-text-middle">业主姓名</th>
-                <th rowspan="2" colspan="1" width="120" class="am-text-middle">房屋地址</th>
+                <th rowspan="2" colspan="1" width="120" class="am-text-middle">楼栋地址</th>
                 <th rowspan="2" colspan="1" class="am-text-middle">建筑面积</th>
                 <th rowspan="1" colspan="2" width="80" class="am-text-middle">收入</th>
                 <th rowspan="1" colspan="3" class="am-text-middle">支出</th>
@@ -1725,7 +1725,7 @@ EOF;
             $html .= '</td><td>';
             $html .= $v['TenantName'];  //业主姓名
             $html .= '</td><td>';
-            $html .= $v['BanAddress'];  //房屋地址
+            $html .= $v['BanAddress'];  //楼栋地址
             $html .= '</td><td>';
             $html .= $v['HouseArea'];   //建筑面积
             $html .= '</td><td>';
