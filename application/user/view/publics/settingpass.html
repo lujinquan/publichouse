@@ -61,7 +61,9 @@
       console.log(res);
       layer.msg(res.msg);
       if(res.code){
-        window.location.href = res.url;
+        setTimeout(function(){
+            window.location.href = res.url;
+        }, 3000);
       }
       
     })
