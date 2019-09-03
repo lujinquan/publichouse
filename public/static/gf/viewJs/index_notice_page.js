@@ -49,7 +49,7 @@ $('#index_notice_list_content').on('click', '.notice_info', function(){
         success:function(){
         	content = unescape(res.data.Content);
             $('#title_info').html(res.data.Title);
-            $('#update_time_info').html(res.data.CreateTime);
+            $('#update_time_info').html(res.data.UpdateTime);
             $('#name_info').html(res.data.Name);
             $('#content_info').html(content);
         }
