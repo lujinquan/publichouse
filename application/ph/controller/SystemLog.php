@@ -84,7 +84,7 @@ class SystemLog extends Base
         ];
         //Cache::store('file')->set(('HouseReport'.$month), json_encode($HouseReportdata), $this->cachetime);
         $res = Db::name('report')->where($where)->find();
-//halt($HouseReportdata);
+        //halt($HouseReportdata);
         if($res){
             $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
         }else{

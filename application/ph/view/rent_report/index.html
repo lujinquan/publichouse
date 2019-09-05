@@ -64,10 +64,10 @@
                 <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius" href="/ph/RentReport/index.html"><span class="am-icon-reply"></span> 重置</a>
                 <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印
                 </button>
-                <a type="button" class="am-btn am-btn-xs d-btn-1188F0 am-radius" id="propertycache"><span
+                <button class="am-btn am-btn-xs d-btn-1188F0 am-radius" id="rentreportcache"><span
                         class="am-icon-file-o"></span>
                     缓存报表
-                </a>
+                </button>
             </div>
         </form>
         <div style="padding:2% 3% 2% 1%;">
@@ -100,9 +100,13 @@
     $('#printForm').click(function () {
         window.print();
     });
-    $('#propertycache').click(function () {
+    $('#rentreportcache').click(function () {
+        $('#rentreportcache').attr('disabled','disabled');
+        $('#rentreportcache').text('缓存中……');
         $.ajax({
             url: "/ph/SystemLog/RentReportCache", success: function (result) {
+                $('#rentreportcache').removeAttr('disabled');
+                $('#rentreportcache').text('缓存报表');
                 var results = jQuery.parseJSON(result);
                 layer.msg(results.msg);
             }
