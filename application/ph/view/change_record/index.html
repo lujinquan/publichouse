@@ -31,6 +31,7 @@
                     <th class="table-set">金额</th>
                     <th class="table-set">申请人</th>
                     <th class="table-set">申请时间</th>
+                    <th class="table-set">完成时间</th>
                     <th class="table-set">审核状态</th>
                     <th class="table-set">备注</th>
                     <th class="table-set" style="width:114px;">操作</th>
@@ -195,6 +196,21 @@
                     
                         </div>
                     </td>
+                    <td>
+                        <div class="am-input-group am-input-group-sm" style="width:140px;">
+                                <?php
+                        if(isset($changeOption['FinishTime'])){
+                            $FinishTime = $changeOption['FinishTime'];  
+                        }else{
+                            $FinishTime = '';
+                        }
+                     ?>
+                    <div class="am-u-sm-6" >
+                          <input style="width:140px;" name="FinishTime" value="{$FinishTime}" type="text" class="am-form-field" data-am-datepicker="{format: 'yyyy-mm',viewMode: 'months', minViewMode: 'months'}" value="">
+                    </div>
+                    
+                        </div>
+                    </td>
                         <td><div class="am-form-group  am-form search_input">
                      
                     <select name="Status">
@@ -231,6 +247,7 @@
                       <td class="am-hide-sm-only"><?php echo $v['InflRent']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['UserNumber']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
+                    <td class="am-hide-sm-only"><?php echo $v['FinishTime']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v['Remark']; ?></td>
                     <td>
