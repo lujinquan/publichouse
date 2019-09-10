@@ -341,6 +341,7 @@ $('#addApply').click(function() {
                             $("#oldCancelOwnTypeD").text(res.data.OwnerType);
                             $("#oldCancelmonthRent").text(res.data.HousePrerent);
                             $("#oldCancelYearBefore").val(res.data.ArrearRent);
+							$(".money_sum").text(res.data.ArrearRent);
                             $(".cancel_money").text('0');
                             $('.month_ul li').removeClass('active');
                             $('.month_ul').empty();
@@ -361,14 +362,24 @@ $('#addApply').click(function() {
                         title: "暂停计租报告"
                     });
                     $('.month_ul').on('click','li',function(){
-                        if($(this).hasClass('active')){
-                            $(this).removeClass('active');
-                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'-'));
-                        }else{
-                            $(this).addClass('active');
-                            $('.cancel_money').text(numberMethod($('.cancel_money').text(),$(this).attr('value'),'+'));
-                                
-                        }
+						$(this).prevAll().addClass('active');
+						$(this).nextAll().removeClass('active');
+						if($(this).hasClass('active')){
+							$(this).removeClass('active');
+						}else{
+							$(this).addClass('active');
+						}
+						 var sum = 0;
+						 var lis = $(".month_ul li.active");
+						for(var i = 0; i< lis.length; i++){
+							sum += parseFloat($(lis[i]).attr('value')) * 100;
+						}
+						console.log(typeof($('.cancel_money').text()));
+						$('.cancel_money').text(sum / 100);     
+						var sum2 = parseFloat($('.cancel_money').text())*100 + parseFloat($('#oldCancelYearBefore').val())*100;
+						$('.money_sum').text(sum2 / 100);
+						if(!$(".month_ul li").hasClass("active")){$('.cancel_money').text(0);}
+								
                     });
                 },
                 yes: function(thisIndex){
@@ -401,6 +412,7 @@ $('#addApply').click(function() {
                                 location.reload();
                             }
                         });
+						
                     }
                 },
                 end: function() {
@@ -2641,4 +2653,11 @@ function numberMethod(number1,number2,method){
         number = (number1 - number2)/Math.pow(10,multiple);
     }
     return number;
+}
+function adds(arg1,arg2){  
+    var r1,r2,m;  
+    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
+    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
+    m=Math.pow(10,Math.max(r1,r2))  
+    return (arg1*m+arg2*m)/m  
 }
