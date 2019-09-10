@@ -95,8 +95,7 @@
                 <a href="javascript:void(0);"  id="yueQuery" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-search"></span> 查询</a>
                 <a type="button" href="/ph/HouseReport/index" id="" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-reply"></span> 重置</a>
                 <button type="button" id="printForm" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-print"></span> 打印</button>
-                <a href="/ph/SystemLog/HouseReportCache" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-file-o"></span> 缓存报表</a>
-               
+                <button id="house-report-cache" class="am-btn am-btn-xs d-btn-1188F0 am-radius"><span class="am-icon-file-o"></span> 缓存报表</button>
             </div>
         </form>
         <div style="margin-left:6px;padding:2% 3% 2% 2%;">
@@ -126,5 +125,17 @@
     }).on('changeDate.datepicker.amui', function(ev) {
 
     }).data('amui.datepicker');
+    $('#house-report-cache').click(function(){
+        $('#house-report-cache').attr('disabled','disabled');
+        $('#house-report-cache').text('缓存中……');
+        $.ajax({
+            url: "/ph/SystemLog/HouseReportCache", success: function (result) {
+                $('#house-report-cache').removeAttr('disabled');
+                $('#house-report-cache').text('缓存报表');
+                //var results = jQuery.parseJSON(result);
+                layer.msg(result.msg);
+            }
+        });
+    })
 </script>
 {/block}

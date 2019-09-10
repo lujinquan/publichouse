@@ -46,7 +46,7 @@
                     <img id="vertical-bar-code2" class="img-margin" src="/public/static/user/images/code.png"><span class="vertical-bar">|</span><input id="yzm" placeholder="验证码" maxlength="6" class="edging code2" type="text" name="" style="width:170px;">
                     <img id="ImageCheck" src="{:captcha_src()}" class="yzm-img" onclick="this.src='{:captcha_src()}?d='+Math.random();" title="点击刷新" alt="captcha" /><div class="tel-hr hr-super-dog"></div>
                 </div>
-                <div id="super-dog-div"><span class="j-fl" id="super-dog">未检测到安全控件</span><span class="j-forget j-fr"><a href="forgetpass.html">忘记密码?</a></span></div>
+                <div id="super-dog-div"><span class="j-fl" id="super-dog">未检测到安全控件</span><span class="j-forget j-fr"><a href="{:url('forgetpass')}">忘记密码?</a></span></div>
                 <div id="name-div-login">
                     <button id="name-btn-login" onclick="btnClick()" class="btn-login">登  录</button>
                 </div>

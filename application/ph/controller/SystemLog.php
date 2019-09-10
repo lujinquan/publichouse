@@ -45,7 +45,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowmonth = $this->nowmonth;
-        //$nowmonth = '201906';
+        //$nowmonth = '201907';
         $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
@@ -75,7 +75,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201906';
+        //$month = '201907';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
@@ -84,7 +84,7 @@ class SystemLog extends Base
         ];
         //Cache::store('file')->set(('HouseReport'.$month), json_encode($HouseReportdata), $this->cachetime);
         $res = Db::name('report')->where($where)->find();
-//halt($HouseReportdata);
+        //halt($HouseReportdata);
         if($res){
             $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
         }else{

@@ -1161,6 +1161,35 @@ class Api extends Controller
         }
     }
 
+    public function forget_password()
+    {
+        if ($this->request->isPost()) {
+            $data = $this->request->post();
+            $key = str_replace(" ","+",$data['secret']); //加密过程中可能出现“+”号，在接收时接收到的是空格，需要先将空格替换成“+”号
+            $number = str_coding($key,'DECODE');
+
+            $one = Db::name('admin_user')->where('Number', $number)->field('Password,Salt')->find();
+            if (!$one) {
+                return $this->error('页面已失效，请返回重新进入该页面！');
+            }
+            if (!preg_match("/^[A-Za-z0-9]{6,18}+$/", $data['newPassword'])) {
+                return $this->error('新密码不合法');
+            }
+            if ($data['newPassword'] !== $data['repeatPassword']) {
+                return $this->error('密码输入不一致');
+            }
+
+            $newPassword = md5(md5($data['newPassword'] . $one['Salt']));
+            //halt($number);
+            $res = Db::name('admin_user')->where('Number', $number)->setField('Password', $newPassword);
+            if ($res !== false) {
+                return $this->success('修改成功',url('user/publics/signin'));
+            } else {
+                return $this->error('修改失败');
+            }
+        }
+    }
+
     /**
      * @title 获取楼栋经纬度
      * @author Mr.Lu

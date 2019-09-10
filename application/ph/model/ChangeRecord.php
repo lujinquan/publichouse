@@ -105,6 +105,22 @@ class ChangeRecord extends Model
 
                 $where['CreateTime'] = array('between',[$starttime,$endtime]);
             }
+            if(isset($searchForm['FinishTime']) && $searchForm['FinishTime']){
+
+                $c = substr_count($searchForm['FinishTime'],'-');
+                
+                $startfinishtime = strtotime($searchForm['FinishTime']);
+
+                if($c == 2){
+                    $endfinishtime = $startfinishtime + 3600*24;
+                }elseif($c == 1){
+                    $endfinishtime = $startfinishtime + 3600*24*30;
+                }else{
+                    $endfinishtime = $startfinishtime + 3600*24*365;
+                }             
+
+                $where['CreateTime'] = array('between',[$startfinishtime,$endfinishtime]);
+            }
 
         }
 
@@ -137,7 +153,7 @@ class ChangeRecord extends Model
     public function get_one_change_info($id = '' ,$map=''){
 
         //使用权变更单号 ，房屋编号 ，变更类型 ，操作机构 ，操作人 ，操作时间 ，状态
-        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,UseNature,InflRent,InstitutionID ,UserNumber ,CreateTime ,Remark, Status';
+        if(!$map) $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,UseNature,InflRent,InstitutionID ,UserNumber ,CreateTime ,FinishTime,Remark, Status';
         $data = Db::name('change_order')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
@@ -159,6 +175,7 @@ class ChangeRecord extends Model
         $data['UserNumber'] = Db::name('admin_user')->where('Number' ,'eq' ,$data['UserNumber'])->value('UserName');
 
         $data['CreateTime'] = date('Y-m-d H:i:s' ,$data['CreateTime']);
+        $data['FinishTime'] = date('Y-m-d H:i:s' ,$data['FinishTime']);
 
         return $data;
     }

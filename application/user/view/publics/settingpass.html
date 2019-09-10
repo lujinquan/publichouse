@@ -12,7 +12,7 @@
 		}
 	</style>
 </head>
-<body onkeydown="getkeyup(event)">
+<body>
     <div id="top-title-div">
         <span id="top-title-text">重设密码</span>
     </div>
@@ -25,13 +25,13 @@
     
             <div id="tel-part">
                 <div id="" class="">
-                    <img id="vertical-bar-pwd" class="img-margin" src="/public/static/user/images/pwd.png"><span class="vertical-bar">|</span><input id="Password" placeholder="请输入密码" maxlength="100" class="edging" type="password" name=""><div class="tel-hr"></div>
+                    <img id="vertical-bar-pwd" class="img-margin" src="/public/static/user/images/pwd.png"><span class="vertical-bar">|</span><input id="newPassword" placeholder="6~18位只能包含字母和数字" maxlength="100" class="edging" type="password" name=""><div class="tel-hr"></div>
                 </div>
                 <div id="" class="">
-                    <img id="vertical-bar-pwd1" class="img-margin" src="/public/static/user/images/pwd.png"><span class="vertical-bar">|</span><input id="Password1" placeholder="请确认密码" maxlength="100" class="edging" type="password" name=""><div class="tel-hr"></div>
+                    <img id="vertical-bar-pwd1" class="img-margin" src="/public/static/user/images/pwd.png"><span class="vertical-bar">|</span><input id="repeatPassword" placeholder="请确认密码" maxlength="100" class="edging" type="password" name=""><div class="tel-hr"></div>
                 </div>
                 <div id="tel-div-login">
-                    <button id="tel-btn-login" onclick="" class="btn-login">确认</button>
+                    <button id="tel-btn-pass" onclick="" class="btn-login">确认</button>
                 </div>
             </div>
     
@@ -40,5 +40,33 @@
     
     <footer>楚天新媒科技（武汉）有限公司</footer>
 </body>
-<script type="text/javascript" src="/public/static/user/js/signin.js"></script>
+<script src="/public/static/gf/layer/layer.js"></script>
+<script type="text/javascript">
+    var secret = '{$secret}';
+  $('#repeatPassword').blur(function(){
+    var password_one = $('#newPassword').val();
+    var password_two = $('#repeatPassword').val();
+    if(password_one != password_two){
+      layer.msg('确认密码和新密码不相同');
+    }
+  });
+  $('#tel-btn-pass').click(function(){
+    var password_one = $('#newPassword').val();
+    var password_two = $('#repeatPassword').val();
+    if(password_one != password_two){
+      layer.msg('确认密码和新密码不相同');
+    }
+    $.post('/ph/Api/forget_password',{'newPassword':password_one,'repeatPassword':password_two,'secret':secret},function(res){
+      //res = JSON.parse(res);
+      console.log(res);
+      layer.msg(res.msg);
+      if(res.code){
+        setTimeout(function(){
+            window.location.href = res.url;
+        }, 3000);
+      }
+      
+    })
+  });
+</script>
 </html>

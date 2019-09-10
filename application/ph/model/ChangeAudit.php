@@ -1352,7 +1352,15 @@ class ChangeAudit extends Model
      */
     public function get_new_rent_detail($changeOrderID)
     {
-        $statusArr = ['未确认', '正常', '修改中', '异动中', '删除中'];
+        $statusArr = [
+            '0'=>'未确认',
+            '1'=>'正常', 
+            '2'=>'修改中', 
+            '3'=>'异动中',
+            '4'=>'删除中',
+            '10'=>'注销',
+            '13'=>'注销',
+        ];
 
         $findOne = Db::name('change_order')->field('HouseID,BanID')->where('ChangeOrderID', $changeOrderID)->find();
 

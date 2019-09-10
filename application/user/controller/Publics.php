@@ -51,10 +51,65 @@ class Publics extends Controller
 	
 	public function forgetpass()
 	{
+        if ($this->request->isPost()) {
+            // 获取post数据
+            $data = $this->request->post();
+            // 验证数据
+            //$result = $this->validate($data, 'User.signin');
+            // if(true !== $result){
+            //     // 验证失败 输出错误信息
+            //     return jsons('4001', $result);
+            // }
+            $UserModel = new UserModel;
+            $userNumber = $UserModel->where(['Tel'=>$data['telNum'],'Status'=>1])->value('Number');
+            if(!$userNumber){
+                $this->error('当前账号不存在或已被禁用');
+            }
+
+            $auth = new ServerCodeAPI();
+            if(!isset($data['code'])){
+                $res = $auth->SendSmsCode($data['telNum']);
+                $res = json_decode($res);
+                if($res->code == '416'){
+                    $this->error('验证次数过多，请更换登录方式');
+                }
+            }else{
+                $res = $auth->CheckSmsYzm($data['telNum'], $data['code']);
+                $res = json_decode($res);
+                if($res->code == '200'){
+                    $secret = str_coding($userNumber,'ENCODE','',180);
+                    $this->success('验证成功', url('settingpass').'?secret='.$secret);
+                } else if($res->code == '413'){
+                    $this->error('验证失败');
+                } else {
+                    $this->error('请重新获取');
+                }
+                
+            }
+            
+            // 验证验证码
+            //if(!$UserModel->check($data['code'])){
+                //验证码错误
+                //$this->error($UserModel->getError());
+            //}
+            // 登录,返回登录管理员的id
+            // $uid = $UserModel->login($data['UserName'], $data['Password'], $data['DogId'], $rememberme);
+            //$uid = $UserModel->login($data['UserName'], $data['Password']);
+
+            //$userNumber = $UserModel->where(['Tel'=>$data['telNum']])->value('Number');
+
+            
+                // 记录行为,1为登入标识，由于登录不在权限表中所以创建一个标识
+                //action_log('登录系统',$userNumber , 6 , 1);
+               // $this->success('验证成功', url('settingpass'));
+            
+        }
 		return $this->fetch();
 	}
     public function settingpass()
     {
+        //$number = input('param.number');
+        $this->assign('secret',input('param.secret'));
     	return $this->fetch();
     }
     public function weixinsignin()
