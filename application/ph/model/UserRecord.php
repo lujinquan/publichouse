@@ -53,6 +53,12 @@ class UserRecord extends Model
             if ($searchForm['ChangeOrderID']) {   //变更编号
                 $where['ChangeOrderID'] = array('like', '%'.$searchForm['ChangeOrderID'].'%');
             }
+            if ($searchForm['OldTenantName']) {   //变更编号
+                $where['OldTenantName'] = array('like', '%'.$searchForm['OldTenantName'].'%');
+            }
+            if ($searchForm['NewTenantName']) {   //变更编号
+                $where['NewTenantName'] = array('like', '%'.$searchForm['NewTenantName'].'%');
+            }
             if ($searchForm['HouseID']) {  //检索房屋编号
                 $where['HouseID'] = array('like', '%'.$searchForm['HouseID'].'%');
             }
@@ -79,7 +85,7 @@ class UserRecord extends Model
 
         $where['Status'] = array('in' , [1,0]);
 
-        $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,OldTenantName,HouseUsearea,InstitutionID,BanAddress,HousePrerent,UserNumber ,CreateTime ,Status';
+        $map='ChangeOrderID ,HouseID ,ChangeType ,OwnerType,OldTenantName,NewTenantName,HouseUsearea,InstitutionID,BanAddress,HousePrerent,UserNumber ,CreateTime ,Status';
 
         $ChangeList['obj'] = self::field($map)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 

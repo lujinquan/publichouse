@@ -315,7 +315,7 @@ class ChangeApply extends Base
                     $datas['InstitutionID'] = $one['InstitutionID'];
                     $datas['InstitutionPID'] = $one['InstitutionPID'];
                     $datas['OrderDate'] = date('Ym', time());  //订单期
-                    $datas['InflRent'] = $one['HousePrerent'];
+                    $datas['InflRent'] = $one['HousePrerent'] + $one['DiffRent'] + $one['PumpCost'];
                     $datas['OwnerType'] = $one['OwnerType'];
                     $datas['UseNature'] = $one['UseNature'];
                     $datas['CancelType'] = $data['cancelType'];  //注销类型

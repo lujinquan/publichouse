@@ -108,7 +108,8 @@
                 $('#rentreportcache').removeAttr('disabled');
                 $('#rentreportcache').text('缓存报表');
                 var results = jQuery.parseJSON(result);
-                layer.msg(results.msg);
+                //layer.msg(results.msg);
+                layer.alert(results.msg, {icon: 6});
             }
         });
     });
