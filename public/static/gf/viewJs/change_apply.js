@@ -374,10 +374,18 @@ $('#addApply').click(function() {
 						for(var i = 0; i< lis.length; i++){
 							sum += parseFloat($(lis[i]).attr('value')) * 100;
 						}
-						console.log(typeof($('.cancel_money').text()));
+						// console.log(typeof($('.cancel_money').text()));
 						$('.cancel_money').text(sum / 100);     
-						var sum2 = parseFloat($('.cancel_money').text())*100 + parseFloat($('#oldCancelYearBefore').val())*100;
-						$('.money_sum').text(sum2 / 100);
+						var sum2 = parseFloat($('.cancel_money').text()).toFixed(2)*100 + parseFloat($('#oldCancelYearBefore').val()).toFixed(2)*100;
+						var sum3 = parseFloat($('.cancel_money').text()).toFixed(2)*100;
+						if($('#oldCancelYearBefore').val()=='')
+						{
+							$('.money_sum').text(sum3.toFixed(2) / 100);
+						}
+						else{
+							$('.money_sum').text(sum2.toFixed(2) / 100);
+						}
+						
 						if(!$(".month_ul li").hasClass("active")){$('.cancel_money').text(0);}
 								
                     });
@@ -2653,11 +2661,4 @@ function numberMethod(number1,number2,method){
         number = (number1 - number2)/Math.pow(10,multiple);
     }
     return number;
-}
-function adds(arg1,arg2){  
-    var r1,r2,m;  
-    try{r1=arg1.toString().split(".")[1].length}catch(e){r1=0}  
-    try{r2=arg2.toString().split(".")[1].length}catch(e){r2=0}  
-    m=Math.pow(10,Math.max(r1,r2))  
-    return (arg1*m+arg2*m)/m  
 }
