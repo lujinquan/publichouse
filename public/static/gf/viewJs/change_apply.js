@@ -350,6 +350,7 @@ $('#addApply').click(function() {
                                 $('.month_ul').append(li_dom);
                             }
                         });
+						$(".money_sum").text('');
                     });
                     var eight = new file({
                         button: "#WriteOffReport",
@@ -378,6 +379,20 @@ $('#addApply').click(function() {
 						$('.cancel_money').text(sum / 100);     
 						var sum2 = parseFloat($('.cancel_money').text()).toFixed(2)*100 + parseFloat($('#oldCancelYearBefore').val()).toFixed(2)*100;
 						var sum3 = parseFloat($('.cancel_money').text()).toFixed(2)*100;
+						
+						  if($('#oldCancelYearBefore').val()=='')
+						  {
+						  	$('.money_sum').text(sum3.toFixed(2) / 100);
+						  }
+						  else{
+						  	$('.money_sum').text(sum2.toFixed(2) / 100);
+						  }
+						if(!$(".month_ul li").hasClass("active")){$('.cancel_money').text(0);}
+								
+                    });
+					$("#oldCancelYearBefore").change(function(){
+						var sum2 = parseFloat($('.cancel_money').text()).toFixed(2)*100 + parseFloat($('#oldCancelYearBefore').val()).toFixed(2)*100;
+						var sum3 = parseFloat($('.cancel_money').text()).toFixed(2)*100;
 						if($('#oldCancelYearBefore').val()=='')
 						{
 							$('.money_sum').text(sum3.toFixed(2) / 100);
@@ -385,10 +400,7 @@ $('#addApply').click(function() {
 						else{
 							$('.money_sum').text(sum2.toFixed(2) / 100);
 						}
-						
-						if(!$(".month_ul li").hasClass("active")){$('.cancel_money').text(0);}
-								
-                    });
+					});
                 },
                 yes: function(thisIndex){
                     if ($('#oldCancelHouseID').val() == "") {
