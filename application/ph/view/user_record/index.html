@@ -22,7 +22,8 @@
                 <?php }; ?>
         				<th class="table-author am-hide-sm-only">转让形式</th>
                 <th class="table-set">楼栋地址</th>
-        		    <th class="table-set">租户姓名</th>
+                <th class="table-set">原租户</th>
+        		    <th class="table-set">变更后租户</th>
                 <th class="table-set">使用面积</th>
                 <th class="table-set">规定租金</th> 
         				<th class="table-set">申请时间</th>
@@ -187,7 +188,26 @@
                               </div>
                           </td>
                       
-                          <td style="min-width:60px;"></td>
+                          <td style="min-width:60px;"><div class="am-input-group am-input-group-sm">
+                                  <?php
+                        if($changeOption != array()){
+                            $OldTenantName = $changeOption['OldTenantName'];
+                        }else{
+                            $OldTenantName = '';
+                        }
+                     ?>
+                                  <input style="width:100px;" type="text" name="OldTenantName" class="am-form-field" value="{$OldTenantName}">
+                              </div></td>
+                              <td style="min-width:60px;"><div class="am-input-group am-input-group-sm">
+                                  <?php
+                        if($changeOption != array()){
+                            $NewTenantName = $changeOption['NewTenantName'];
+                        }else{
+                            $NewTenantName = '';
+                        }
+                     ?>
+                                  <input style="width:100px;" type="text" name="NewTenantName" class="am-form-field" value="{$NewTenantName}">
+                              </div></td>
                           <td style="min-width:60px;"></td>
                           <td style="min-width:60px;"></td>
                           <td>
@@ -233,6 +253,7 @@
                       <td class="am-hide-sm-only"><?php echo $v1['ChangeType']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['BanAddress']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['OldTenantName']; ?></td>
+                      <td class="am-hide-sm-only"><?php echo $v1['NewTenantName']; ?></td>
                       <td class="am-hide-sm-only"><?php echo $v1['HouseUsearea']; ?></td>
                       
                       <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>

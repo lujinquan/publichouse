@@ -174,6 +174,11 @@ class UserAudit extends Model
                 Db::name('tenant')->where('TenantID',$changeOrderDetail['NewTenantID'])->setField('Status',1);
             }
             
+            $qrcodeUrl = Db::name('lease_change_order')->where(['HouseID'=>$changeOrderDetail['HouseID'],'TenantID'=>$changeOrderDetail['OldTenantID']])->value('QrcodeUrl');
+
+            if($qrcodeUrl){
+                @unlink($_SERVER['DOCUMENT_ROOT'].$qrcodeUrl);
+            }
 
             $datas['Status'] = 2;
 
