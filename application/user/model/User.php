@@ -163,7 +163,7 @@ class User extends Model
             //生成所有该用户的权限菜单
             $url_values =  Db::name('admin_menu')->where('id', 'in', $menu_auth)->where('UrlValue', 'neq', '')->column('UrlValue','id');
             //生成导航菜单的权限树
-            $url_values_tree =  Db::name('admin_menu')->where('id', 'in', $menu_auth)->where('UrlValue', 'neq', '')->where('Level','neq',3)->field('id,Title,Icons,UrlValue,pid')->select();
+            $url_values_tree =  Db::name('admin_menu')->where('id', 'in', $menu_auth)->where('UrlValue', 'neq', '')->where('Level','neq',3)->field('id,Title,Icons,UrlValue,pid')->order('Sort asc')->select();
             //保存左侧的权限树
             session('left_menu_tree',tree($url_values_tree));
 

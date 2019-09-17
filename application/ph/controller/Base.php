@@ -69,6 +69,7 @@ class Base extends Controller
         $instLst = get_all_institution();
 //halt($instLst);
         $allInstitutions = tree(Db::name('institution')->field('id,Institution,pid,Level')->select());
+        //halt($allInstitutions);
 
         $cutTypeLst = $this->BanInfoModel ->get_all_cut_type();
 

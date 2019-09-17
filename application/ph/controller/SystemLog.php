@@ -68,6 +68,36 @@ class SystemLog extends Base
     }
 
     /**
+     * 缓存产权统计报表
+     */
+    public function PropertyReportYearCache(){
+
+        set_time_limit(0);
+        Debug::remark('begin');
+        $nowyear = $this->nowyear;
+        //$nowmonth = '201906';
+        $HouseReportdata = model('ph/PropertyReportYear')->index($nowyear);
+        Debug::remark('end');
+        $where = [
+            'type' => 'PropertyReport',
+            'date' => $nowyear,
+        ];
+        $res = Db::name('report')->where($where)->find();
+        if($res){
+            $re = Db::name('report')->where($where)->update(['data'=>json_encode($HouseReportdata)]);
+        }else{
+            $re = Db::name('report')->insert([
+                'data'=>json_encode($HouseReportdata),
+                'type'=>'PropertyReport',
+                'date'=>$nowyear,
+            ]);
+        }
+        // $res = Cache::store('file')->set('PropertyReport' . date('Y', time()), json_encode($HouseReportdata), $this->cachetime);
+        //halt($re);
+        return ($re !== false)?jsons('2000',$nowyear.'报表保存成功，耗时'.Debug::getRangeTime('begin', 'end') . 's'):jsons('4000','保存失败');
+    }
+
+    /**
      * 缓存房屋统计报表
      */
     public function HouseReportCache(){
@@ -75,7 +105,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201908';
+        $month = '201906';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
