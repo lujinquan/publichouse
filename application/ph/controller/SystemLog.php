@@ -105,7 +105,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        $month = '201906';
+        //$month = '201906';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
