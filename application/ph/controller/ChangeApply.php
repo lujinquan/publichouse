@@ -328,6 +328,7 @@ class ChangeApply extends Base
                         return jsons('4001','请先联系超级管理员配置异动流程');
                     }
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'08'.$suffix;   //08代表注销
+                    //halt($datas);
                     $res = Db::name('change_order')->insert($datas);
                     break;
 

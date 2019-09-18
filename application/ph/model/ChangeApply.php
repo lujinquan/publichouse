@@ -315,6 +315,18 @@ class ChangeApply extends Model
                     if(!$data['Ban']){
                         return jsons('4001','请完善异动信息');
                     }
+                    if(!$data['Ban'][0]['houseArea']){
+                        return jsons('4001','请完善建筑面积');
+                    }
+                    if(!$data['Ban'][0]['housePrice']){
+                        return jsons('4001','请完善房屋原价');
+                    }
+                    if(!$data['Ban'][0]['cancelPrent']){
+                        return jsons('4001','请完善规租');
+                    }
+                    if(!$data['Ban'][0]['cancelHouseUsearea']){
+                        return jsons('4001','请完善使用面积');
+                    }
                     return $finds;
                 break;
                 case 9:

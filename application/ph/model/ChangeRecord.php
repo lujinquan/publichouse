@@ -119,7 +119,7 @@ class ChangeRecord extends Model
                     $endfinishtime = $startfinishtime + 3600*24*365;
                 }             
 
-                $where['CreateTime'] = array('between',[$startfinishtime,$endfinishtime]);
+                $where['FinishTime'] = array('between',[$startfinishtime,$endfinishtime]);
             }
 
         }

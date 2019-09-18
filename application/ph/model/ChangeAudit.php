@@ -620,14 +620,19 @@ class ChangeAudit extends Model
         // 若终审通过
         } elseif ($status == $total && $reson == '' && $isfail != 0) {
 
-            //终审通过则状态改为  1,并写入最终通过时间
-            self::where($where)->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
-
             $changeType = self::where($where)->value('ChangeType');
 
-
+        try {
             //终审通过后，系统直接将对应的数据修改为异动后的数据
             model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);  //终审通过后，系统直接更改相关的
+        } catch (\Exception $e) {
+            // 这是进行异常捕获
+            return jsons('4001','未知错误！');
+        }
+            
+
+            //终审通过则状态改为  1,并写入最终通过时间
+            self::where($where)->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
 
             $datas['Status'] = 2;
 
