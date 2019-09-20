@@ -43,7 +43,7 @@ $('#addRoom').click(function(){
 			//console.log('bbb');
 			console.log($('#addRoomType').val());
 			if($('#addRoomType').val() == ''){
-				layer.msg('请选择房间类型!');
+				layer.msg('请选择房间类型!',{time:4000});
 				return false;
 			}
 			//console.log(num)
@@ -65,7 +65,7 @@ $('#addRoom').click(function(){
 			  success:function(res){
 			  	res = JSON.parse(res);
 			  	console.log(res);
-			  	layer.msg(res.msg);
+			  	layer.msg(res.msg,{time:4000});
 			  	//layer.close(farther);
 				// 	location.reload();
 			  	// console.log('aaa');
@@ -181,7 +181,7 @@ $('#reviseRoom').click(function(){
 					  success:function(res){
 					  	res = JSON.parse(res);
 					  	console.log(res);
-					  	layer.msg(res.msg);
+					  	layer.msg(res.msg,{time:4000});
 						layer.close(farther);
 						location.reload();
 					  }
@@ -189,7 +189,7 @@ $('#reviseRoom').click(function(){
 				}
 		});
 	}else{
-		layer.msg('请选择要操作的条目');
+		layer.msg('请选择要操作的条目',{time:4000});
 	}
 });
 //删除
@@ -197,7 +197,7 @@ $('#deleteRoom').click(function(){
 	var checkId = $("input:checked").val();
 	console.log(checkId);
 	if(checkId == 1){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.open({
 			type:1,
@@ -238,10 +238,10 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						})
 					})
@@ -254,10 +254,10 @@ $(".ConfirmRoomBtn").click(function(){
 		$.get('/ph/ConfirmRoom/confirm/RoomID/'+roomID,function(result){
 			result = JSON.parse(result);
 			if(result.retcode  == '2000' ){
-				layer.msg(result.msg);
+				layer.msg(result.msg,{time:4000});
 				location.reload();
 			}else{
-				layer.msg(result.msg);
+				layer.msg(result.msg,{time:4000});
 			}
 		});
 	});
@@ -328,7 +328,7 @@ $('#DqueryBtn').click(function(){
 			$('.BanAddress').text(res.data.BanAddress);
 		}
 		else{
-			layer.msg('无此信息！');
+			layer.msg('无此信息！',{time:4000});
 		}
 	});
 });

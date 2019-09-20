@@ -24,7 +24,7 @@ $('#addProcess').click(function(){
 			$.post('/ph/ProcessConfig/add/',data,function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				layer.close(thisIndex);
 				if(res.retcode == 2000){
 					location.reload();
@@ -42,7 +42,7 @@ $('#modifiProcess').click(function(){
 		}
 	}
 	if(ID == undefined){
-		layer.msg('请先选择要修改的流程！')
+		layer.msg('请先选择要修改的流程！',{time:4000})
 	}else{
 		layer.open({
 			type:1,
@@ -97,7 +97,7 @@ $('#delProcess').click(function(){
 		}
 	}
 	if(ID == undefined){
-		layer.msg('请先选择要删除的流程！')
+		layer.msg('请先选择要删除的流程！',{time:4000})
 	}else{
 		layer.confirm('确认删除？',{title:'提示信息',icon:'2',skin:'lan_class'},function(conIndex){
 			$.get('/ph/ProcessConfig/delete/id/'+ID,function(res){
@@ -116,7 +116,7 @@ $('.proDetail').click(function(){
 	var ID = $(this).val();
 	console.log(ID);
 	if(ID == undefined){
-		layer.msg('请先选择要修改的流程！')
+		layer.msg('请先选择要修改的流程！',{time:4000})
 	}else{
 		layer.open({
 			type:1,

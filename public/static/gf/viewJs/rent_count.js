@@ -7,7 +7,7 @@ $('#rentAllocation').click(function(){
 		// 	time: 2000,
 		// 	content: res.msg
 		// });
-			layer.msg(res.msg);
+			layer.msg(res.msg,{time:4000});
 			location.reload();
 			}
 	});
@@ -50,7 +50,7 @@ $('#generateRent').click(function(){
 		$.get('/ph/RentCount/add',function(res){
 			res = JSON.parse(res);
 			console.log(res);
-			layer.msg(res.msg);
+			layer.msg(res.msg,{time:4000});
 		});
 		layer.close(conIndex);
 	});
@@ -58,7 +58,7 @@ $('#generateRent').click(function(){
 $('.rentApply').click(function(){
 	var ID = $(this).val();
 	if(ID == ''){
-		layer.msg('功能开发中...');
+		layer.msg('功能开发中...',{time:4000});
 	}else{
 		$.get('',function(res){
 			res = JSON.parse(res);

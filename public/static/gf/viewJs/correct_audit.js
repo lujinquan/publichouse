@@ -8,13 +8,13 @@ $("#addInfo").click(function(){
 	}
 	console.log(ID);
 	if(ID == undefined){
-		layer.msg('请先选择变更编号！');
+		layer.msg('请先选择变更编号！',{time:4000});
 	}else{
 		$.get('/ph/CorrectAudit/supply/ChangeOrderID/'+ID,function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == 4005 || res.retcode == 5000){
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}else{
 				$('.changeType').text(res.data.detail.CreateTime);
 				$('.houseArea').text(res.data.detail.HouseArea);
@@ -268,7 +268,7 @@ $('.BtnApprove').click(function(){
 					$.post('/ph/CorrectAudit/process/',{ChangeOrderID:value},function(res){
 						res = JSON.parse(res);
 						console.log(res);
-						layer.msg(res.msg);
+						layer.msg(res.msg,{time:4000});
 						if(res.retcode == '2000'){
 							layer.close(thisIndex);
 							location.reload(); 
@@ -295,7 +295,7 @@ $('.BtnApprove').click(function(){
 							$.post('/ph/CorrectAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
 								res = JSON.parse(res);
 								console.log(res);
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 								if(res.retcode == '2000'){
 									location.reload(); 
 								}
@@ -393,7 +393,7 @@ function AddInfo(ID,status,detail){
                 success:function(res){
                     res = JSON.parse(res);
                        console.log(res);
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
 					if(res.retcode == '2000'){
 						location.reload(); 
 					}
@@ -423,7 +423,7 @@ function AddInfo(ID,status,detail){
 					$.post('/ph/CorrectAudit/process/',{ChangeOrderID:ID,reson:reasonMsg},function(res){
 						res = JSON.parse(res);
 						console.log(res);
-						layer.msg(res.msg);
+						layer.msg(res.msg,{time:4000});
 						if(res.retcode == '2000'){
 							location.reload(); 
 						}
@@ -504,7 +504,7 @@ function processState(id,res){
 
 function status_1_2(ID,res){
 	if(res.retcode == 4005 || res.retcode == 5000){
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 	}else{
 		$('.changeType').text(res.data.detail.CreateTime);
 		$('.houseArea').text(res.data.detail.HouseArea);
@@ -757,7 +757,7 @@ $('.BtnGathering').click(function(){
                     res = JSON.parse(res);
                     console.log(res);
 					if(res.retcode == '2000'){
-						layer.msg(res.msg);
+						layer.msg(res.msg,{time:4000});
 						location.reload(); 
 					}else{
 						location.reload();

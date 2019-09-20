@@ -824,7 +824,7 @@ $('.BtnDelete').click(function(){
 	console.log(value);
 	$.get('/ph/ChangeAudit/delete/ChangeOrderID/'+value,function(res){
 		res = JSON.parse(res);
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 		if(res.retcode == '2000'){
 			location.reload();
 		}
@@ -989,7 +989,7 @@ function processPass(formData,this_index){
         success:function(res){
             res = JSON.parse(res);
                console.log(res);
-            layer.msg(res.msg);
+            layer.msg(res.msg,{time:4000});
             layer.close(this_index);
             location.reload();
         }
@@ -1020,7 +1020,7 @@ function noPass(value,reason){
 			$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg,isfail:1},function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				if(res.retcode == "2000"){
 					layer.close(msgIndex);
 					location.reload();
@@ -1055,7 +1055,7 @@ function goBack(value,reason){
             $.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg,isfail:0},function(res){
                 res = JSON.parse(res);
                 console.log(res);
-                layer.msg(res.msg);
+                layer.msg(res.msg,{time:4000});
                 if(res.retcode == "2000"){
                     layer.close(msgIndex);
                     location.reload();

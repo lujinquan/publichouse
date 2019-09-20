@@ -22,14 +22,14 @@ $("#addUser").click(function(){
 						// 	layer.close(conIndex);
 						// 	location.reload();
 						// });
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 						layer.close(thisIndex);
 						location.reload();
 					}else{
 						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 						// 	layer.close(conIndex);
 						// });
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 					}
 				});
 			}
@@ -52,7 +52,7 @@ $("#reviseUser").click(function(){
 	// 		path:'/public/static/gf/layer/'
 	// 	});
 		if(ID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			$.get('/ph/UserManage/edit/id/'+ID,function(res){
 				res = JSON.parse(res);
@@ -90,13 +90,13 @@ $("#reviseUser").click(function(){
 								// 	location.reload();
 								// });
 								layer.close(thisIndex);
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					}
@@ -116,17 +116,17 @@ $("#deleteUser").click(function(){
 		}
 	}
 	if(ID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.confirm('请谨慎操作!!!',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 
 					$.get('/ph/UserManage/delete/id/'+ ID,function(result){
 						result = JSON.parse(result);
 						if(result.retcode  == '2000' ){
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 							location.reload();
 						}else{
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 					});
 
@@ -150,7 +150,7 @@ $("#assignRole").click(function(){
 	// 		path:'/public/static/gf/layer/'
 	// 	});
 		if(ID == undefined){
-			layer.msg('请先选择用户');
+			layer.msg('请先选择用户',{time:4000});
 		}else{
 			$.get('/ph/UserManage/userToRole/id/'+ID,function(res){
 				res = JSON.parse(res);
@@ -187,13 +187,13 @@ $("#assignRole").click(function(){
 								// 	layer.close(thisIndex);
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								layer.close(thisIndex);
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'2',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					},

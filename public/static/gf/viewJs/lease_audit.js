@@ -75,7 +75,7 @@ $('.butongguo').click(function(event){
 			$.post('/ph/LeaseAudit/unpass/',{ChangeOrderID:ChangeOrderID,reson:reasonMsg},function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				if(res.retcode == "2000"){
 					layer.close(msgIndex);
 					location.reload();
@@ -152,7 +152,7 @@ $('.print1').click(function(event){
 					$('#leaseprint_1_').css({'position':'absolute','top':'0px','left':'0px','background':'#fff','z-index': '1000'});
 					 
 				}else{
-					layer.msg(res.msg);
+					layer.msg(res.msg,{time:4000});
 				}
 			})
 		},
@@ -292,7 +292,7 @@ $('.uploadPic').click(function(){
 		        success:function(res){
 		            res = JSON.parse(res);
 		            console.log(res);
-		            layer.msg(res.msg);
+		            layer.msg(res.msg,{time:4000});
 		            if(res.retcode == '2000'){
 		               	location.reload();
 		            }
@@ -318,7 +318,7 @@ function processPass(formData,this_index){
         success:function(res){
             res = JSON.parse(res);
                console.log(res);
-            layer.msg(res.msg);
+            layer.msg(res.msg,{time:4000});
             layer.close(this_index);
             location.reload();
         }
@@ -345,7 +345,7 @@ function noPass(value){
 			$.post('/ph/LeaseAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				if(res.retcode == "2000"){
 					layer.close(msgIndex);
 					location.reload();

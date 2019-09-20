@@ -50,14 +50,14 @@ $("#addTenant").click(function(){
 						// 	location.reload();
 						// });
 						layer.close(thisIndex);
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 						location.reload();
 					}else{
 						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 						// 	layer.close(conIndex);
 						// });
 						flag=true;
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 					}
 				});
 				}
@@ -83,7 +83,7 @@ $("#reviseTenant").click(function(){
 	// 		path:'/public/static/gf/layer/'
 	// 	});
 		if(TenantID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			$.get('/ph/TenantInfo/edit/TenantID/'+TenantID,function(res){
 				res = JSON.parse(res);
@@ -142,13 +142,13 @@ $("#reviseTenant").click(function(){
 								// 	location.reload();
 								// });
 								layer.close(thisIndex);
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					}
@@ -174,7 +174,7 @@ $("#deleteTenant").click(function(){
 	// 	});
 	// 	
 	if(TenantID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.open({
 			type:1,
@@ -222,10 +222,10 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						})
 					})
@@ -281,7 +281,7 @@ $('#timeStart').datepicker().
 		// 	layer.config({
 		// 		path:'/public/static/gf/layer/'
 		// 	});
-			layer.msg('时间选择错误！');
+			layer.msg('时间选择错误！',{time:4000});
 		// });
     } else {
       startDate = new Date(event.date);
@@ -296,7 +296,7 @@ $('#timeEnd').datepicker().
 		// 	layer.config({
 		// 		path:'/public/static/gf/layer/'
 		// 	});
-			layer.msg('时间选择错误！');
+			layer.msg('时间选择错误！',{time:4000});
 		// });
     } else {
       endDate = new Date(event.date);
@@ -324,7 +324,7 @@ function readFile(fileUp,fileShow){
 		fileUp.on('change',function(){
 			var file = this.files[0];
 			if(!/image\/\w+/.test(file.type)){
-				layer.msg('文件必须是图片！');
+				layer.msg('文件必须是图片！',{time:4000});
 				return false;
 			}
 			var reader = new FileReader();

@@ -81,7 +81,7 @@ $("table").on('click', '.conf-modify', function(){
 					contentDom.text($("#modify-content").val());
 					layer.close(thisIndex);
 				}else{
-					layer.msg(res.msg);
+					layer.msg(res.msg,{time:4000});
 				}
 			})
 		}
@@ -148,7 +148,7 @@ $("table").on('click', '.conf-delete', function(){
 					_this.parent().parent().parent().remove();
 				})
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 			layer.close(this_index);
 		})

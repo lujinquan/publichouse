@@ -28,7 +28,7 @@ var fileTotall = {
                 contentType:false,
                 success:function(res){
                     res = JSON.parse(res);
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
                 }
             });
         }
@@ -65,7 +65,7 @@ var fileTotall = {
                 contentType:false,
                 success:function(res){
                     res = JSON.parse(res);
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
                 }
             });
         }
@@ -135,10 +135,10 @@ file.prototype.fileShowEvent = function(){
     var files = this.button[0].files;
     for(var i = 0;i < files.length;i++){
         if(files[i].size/1024 > this.size){
-            layer.msg('图片过大！');
+            layer.msg('图片过大！',{time:4000});
             continue;
         }else if(this.filesArray.some(function(data){return data.name==files[i].name})){
-            layer.msg('上传文件重复！');
+            layer.msg('上传文件重复！',{time:4000});
             continue;
         }else{
             files[i].title = this.name;

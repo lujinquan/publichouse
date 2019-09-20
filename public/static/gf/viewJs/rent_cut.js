@@ -17,7 +17,7 @@ $('#derateApply').click(function(){
 							$.get('/ph/Api/get_house_info/HouseID/'+HouseID,function(res){
 								res = JSON.parse(res);
 								console.log(res);
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 								$("#BanID").text(res.data.BanID);
 								$("#BanAddress").text(res.data.BanAddress);
 								$("#CreateTime").text(res.data.CreateTime);
@@ -86,7 +86,7 @@ $('#derateApply').click(function(){
 				yes:function(thisIndex){
 					
 					if($('#getInfo_1').val() == ""){
-						layer.msg('房屋编号存在问题呢！！！');
+						layer.msg('房屋编号存在问题呢！！！',{time:4000});
 					}else{
 						var formData = fileTotall.getArrayFormdata();
 			            if(fileTotall.array.length!=0){
@@ -107,7 +107,7 @@ $('#derateApply').click(function(){
 			                success:function(res){
 			                	
 			                    res = JSON.parse(res);
-			                    layer.msg(res.msg);
+			                    layer.msg(res.msg,{time:4000});
 			                    layer.close(thisIndex);
 			                    location.reload();
 			                }

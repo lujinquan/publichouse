@@ -9,12 +9,12 @@ $('#withHolding').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		$.post('/ph/RentDebit/batchRevoke',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
-			layer.msg('批量操作成功！');
+			layer.msg('批量操作成功！',{time:4000});
 			location.reload();
 		});
 	}
@@ -55,7 +55,7 @@ $('.cancel').click(function(){
 	$.get('/ph/RentDebit/revoke/RentOrderID/'+thisID,function(res){
 		res = JSON.parse(res);
 		if(res.retcode == "2000"){
-			layer.msg('撤销成功!');
+			layer.msg('撤销成功!',{time:4000});
 			location.reload();
 		}
 	});

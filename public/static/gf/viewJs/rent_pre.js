@@ -50,7 +50,7 @@ $('#recharge').click(function(){
 					$.post('/ph/RentPre/recharge',{HouseID:houseID,Money:money},function(res){
 						res = JSON.parse(res);
 						console.log(res);
-						layer.msg(res.msg);
+						layer.msg(res.msg,{time:4000});
 						layer.close(thisIndex);
 						if(res.retcode == '2000'){
 							location.reload();
@@ -72,12 +72,12 @@ $('#printInvoice').click(function(){
 		}
 	}
 	if(orders == ''){
-		layer.msg('请先选择要处理的数据!');
+		layer.msg('请先选择要处理的数据!',{time:4000});
 	}else{
 		layer.confirm('请确认批量标记打印发票',{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 			$.post('/ph/RentPre/batchSign',{id:orders},function(res){
 				res = JSON.parse(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				location.reload();
 			});
 			layer.close(conIndex);
@@ -92,7 +92,7 @@ $('.deleteButton').click(function(){
 	layer.confirm('确认要删除？', {icon: 3, title:'提示',skin:'lan_class'}, function(index){
 		$.get('/ph/RentPre/delete/id/'+value,function(res){
 			res = JSON.parse(res);
-			layer.msg(res.msg);
+			layer.msg(res.msg,{time:4000});
 			layer.close(index);
 			location.reload();
 		})

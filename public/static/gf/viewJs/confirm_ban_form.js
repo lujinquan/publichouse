@@ -151,7 +151,7 @@ $("#addBan").click(function(){
 	            		contentType: false
 					}).done(function(result){
 						if(result.retcode == 2000){
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 						layer.close(thisIndex);
 						location.reload();
 						}else{
@@ -160,7 +160,7 @@ $("#addBan").click(function(){
 								
 							// });
 							flag = true;
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 						
 					});
@@ -189,7 +189,7 @@ $("#reviseBan").click(function(){
 	}
 	//var vanId = $('.checkId').eq(0).val();
 		if(BanID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			
 			$.get('/ph/ConfirmBanInfo/edit/BanID/'+BanID,function(res){
@@ -393,14 +393,14 @@ $("#reviseBan").click(function(){
 								// 	layer.close(conIndex);
 								// 	location.reload();
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								layer.close(thisIndex);
 								location.reload();
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					},
@@ -424,7 +424,7 @@ $("#deleteBan").click(function(){
 	}
 	//var vanId = $('.checkId').eq(0).val();
 		if(BanID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 
 			layer.open({
@@ -448,10 +448,10 @@ $("#deleteBan").click(function(){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 						layer.close(index);
@@ -476,10 +476,10 @@ $('#HouseChange,#HouseRemove,#DateTogther,#DateLose').click(function(){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode  == '2000' ){
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						})
 					})
@@ -495,10 +495,10 @@ $(".ConfirmBanBtn").click(function(){
 			result = JSON.parse(result);
 			
 			if(result.retcode  == '2000' ){
-				layer.msg(result.msg);
+				layer.msg(result.msg,{time:4000});
 				location.reload();
 			}else{
-				layer.msg(result.msg);
+				layer.msg(result.msg,{time:4000});
 			}
 		});
 	});
@@ -754,7 +754,7 @@ function readFile(fileUp,fileShow){
 		fileUp.on('change',function(){
 			var file = this.files[0];
 			if(!/image\/\w+/.test(file.type)){
-				layer.msg('文件必须是图片！');
+				layer.msg('文件必须是图片！',{time:4000});
 				return false;
 			}
 			var reader = new FileReader();

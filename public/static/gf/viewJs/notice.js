@@ -20,9 +20,9 @@ $('#publish_notice').click(function() {
             var istop = $('#istop').val();
             var content = editor.html();
             if($.trim(title) == ''){
-                layer.msg('标题不能为空');return ;
+                layer.msg('标题不能为空',{time:4000});return ;
             } else if($.trim(content) == ''){
-                layer.msg('内容不能为空');return ;
+                layer.msg('内容不能为空',{time:4000});return ;
             }
             content = escape(content);
             console.log(content);
@@ -35,10 +35,10 @@ $('#publish_notice').click(function() {
                 //     location.reload();
                 // }
                 if(res.retcode == 2000){
-                    layer.msg('发布成功');
+                    layer.msg('发布成功',{time:4000});
                     layer.close(add);
                 }else{
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
                 }
                 
                 // $(location).attr('href', '');
@@ -60,7 +60,7 @@ $('#modify_notice').click(function(){
     
     var id = $('input:radio:checked').val();
     if(id == null || id == ''){
-        layer.msg('选择要修改的公告');
+        layer.msg('选择要修改的公告',{time:4000});
         return ;
     }
     var data = 'id='+id;
@@ -94,23 +94,23 @@ $('#modify_notice').click(function(){
                 var content = editor.html();
                 console.log(istop);
                 if($.trim(title) == ''){
-                    layer.msg('标题不能为空s');return ;
+                    layer.msg('标题不能为空',{time:4000});return ;
                 } else if($.trim(content) == ''){
-                    layer.msg('内容不能为空');return ;
+                    layer.msg('内容不能为空',{time:4000});return ;
                 }
                 var data = 'title='+title+'&institution='+institution+'&content='+content+'&id='+id+'&IsTop='+istop;
                 $.post('/ph/Notice/modify', data, function(res){
                     res = JSON.parse(res);
                     console.log(res);
                     if(res.data == '1'){
-                        layer.msg('公告已修改');
+                        layer.msg('公告已修改',{time:4000});
                         layer.close(modify);
                     }
                     if(res.retcode == 2000){
-                        layer.msg('修改成功');
+                        layer.msg('修改成功',{time:4000});
                         layer.close(modify);
                     }else{
-                        layer.msg(res.msg);
+                        layer.msg(res.msg,{time:4000});
                     }
                 });
                 // ue.destroy();
@@ -131,7 +131,7 @@ $('#modify_notice').click(function(){
 $('#delete_notice').click(function(){
     var id = $('input:radio:checked').val();
     if(id == null || id == ''){
-        layer.msg('选择要删除的公告');
+        layer.msg('选择要删除的公告',{time:4000});
         return ;
     }
     var data = 'id='+id;
@@ -140,7 +140,7 @@ $('#delete_notice').click(function(){
             res = JSON.parse(res);
             console.log(res);
             if(res.data){
-                layer.msg('删除成功!');
+                layer.msg('删除成功!',{time:4000});
                 $(location).attr('href', '');
             }
         })

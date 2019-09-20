@@ -9,17 +9,17 @@ $('#rentPayment').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPayable/batchPay',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg('批量操作成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -35,17 +35,17 @@ $('#rentArrearage').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPayable/batchCut',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg('批量操作成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -56,7 +56,7 @@ $('#generateCharging').click(function(){
 	$.get('/ph/RentPayable/batchDebit/',function(res){
 		res = JSON.parse(res);
 		console.log(res);
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 		location.reload();
 	});
 });
@@ -66,7 +66,7 @@ $('#payAll').click(function(){
 	$.get('/ph/RentPayable/payAll',function(res){
 		res = JSON.parse(res);
 		console.log(res);
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 		location.reload();
 	});
 });
@@ -76,7 +76,7 @@ $('#dealAsLast').click(function(){
 	$.get('/ph/RentPayable/dealAsLast/',function(res){
 		res = JSON.parse(res);
 		console.log(res);
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 		location.reload();
 	});
 });
@@ -103,7 +103,7 @@ $('.payment').click(function(){
 				$.post('/ph/RentPayable/pay',{RentOrderID:thisID,cost:money},function(res){
 					res = JSON.parse(res);
 					console.log(res);
-					layer.msg(res.msg);
+					layer.msg(res.msg,{time:4000});
 					layer.close(thisIndex);
 					location.reload();
 				});
@@ -122,17 +122,17 @@ $('#deleteCharging').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPayable/batchDelete',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量删除成功！');
+				layer.msg('批量删除成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}

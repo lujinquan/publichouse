@@ -49,14 +49,14 @@ $("#addHouse").click(function(){
 						// 	location.reload();
 						// });
 						layer.close(thisIndex);
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 						location.reload();
 					}else{
 						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 						// 	layer.close(conIndex);
 						// 	location.reload();
 						// });
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 					}
 				});
 			}
@@ -79,7 +79,7 @@ $("#reviseHouse").click(function(){
 	// 		path:'/public/static/gf/layer/'
 	// 	});
 		if(HouseID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			$.get('/ph/HouseInfo/edit/HouseID/'+HouseID,function(res){
 				res = JSON.parse(res);
@@ -157,13 +157,13 @@ $("#reviseHouse").click(function(){
 								// 	location.reload();
 								// });
 								layer.close(thisIndex);
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								location.reload();
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					}
@@ -187,7 +187,7 @@ $("#deleteHouse").click(function(){
 	// 		skin:'lan_class'
 	// 	});
 		if(HouseID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			layer.confirm('确定删除房屋信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 						$.get('/ph/HouseInfo/delete/HouseID/'+HouseID,function(result){
@@ -197,7 +197,7 @@ $("#deleteHouse").click(function(){
 								// 	layer.close(index_2);
 								// 	location.reload();
 								// });
-								layer.msg('删除成功');
+								layer.msg('删除成功',{time:4000});
 								location.reload();
 							}
 						});
@@ -284,7 +284,7 @@ function readFile(fileUp,fileShow){
 		fileUp.on('change',function(){
 			var file = this.files[0];
 			if(!/image\/\w+/.test(file.type)){
-				layer.msg('文件必须是图片！');
+				layer.msg('文件必须是图片！',{time:4000});
 				return false;
 			}
 			var reader = new FileReader();
