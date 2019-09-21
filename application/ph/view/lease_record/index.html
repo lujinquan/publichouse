@@ -147,7 +147,7 @@
                         }
                      ?>
                     <div class="am-u-sm-6" >
-                          <input style="width:145px;" name="CreateTime" value="{$CreateTime}" type="text" placeholder="" class="am-form-field" data-am-datepicker="{format: 'yyyy-mm',viewMode: 'months', minViewMode: 'months'}" value="">
+                          <input style="width:90px;" name="CreateTime" value="{$CreateTime}" type="text" placeholder="" class="am-form-field" data-am-datepicker="{format: 'yyyy-mm',viewMode: 'months', minViewMode: 'months'}" value="">
                     </div>
                     
                         </div>
@@ -185,7 +185,7 @@
         </form>
     <!---查询-->
         <?php foreach($leaseLst as $k => $v){; ?>
-            <tr class="check001">
+            <tr class="check001" {if condition="$v['HouseStatus'] > 1"}style="color:#9b9b9b;"{/if}>
                 <td>
                   <span class="piaochecked">
                     <input class="checkId radioclass" type="radio" value="<?php echo $v['ChangeOrderID']; ?>" />

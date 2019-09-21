@@ -208,8 +208,26 @@
                      ?>
                                   <input style="width:100px;" type="text" name="NewTenantName" class="am-form-field" value="{$NewTenantName}">
                               </div></td>
-                          <td style="min-width:60px;"></td>
-                          <td style="min-width:60px;"></td>
+                          <td style="min-width:60px;"><div class="am-input-group am-input-group-sm">
+                                  <?php
+                        if($changeOption != array()){
+                            $HouseUsearea = $changeOption['HouseUsearea'];
+                        }else{
+                            $HouseUsearea = '';
+                        }
+                     ?>
+                                  <input style="width:100px;" type="text" name="HouseUsearea" class="am-form-field" value="{$HouseUsearea}">
+                              </div></td>
+                          <td style="min-width:60px;"><div class="am-input-group am-input-group-sm">
+                                  <?php
+                        if($changeOption != array()){
+                            $HousePrerent = $changeOption['HousePrerent'];
+                        }else{
+                            $HousePrerent = '';
+                        }
+                     ?>
+                                  <input style="width:100px;" type="text" name="HousePrerent" class="am-form-field" value="{$HousePrerent}">
+                              </div></td>
                           <td>
                             <div class="am-input-group am-input-group-sm" style="width:130px;">
                                 <?php

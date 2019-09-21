@@ -217,7 +217,7 @@
               <td class="am-hide-sm-only"><?php echo $v['InflRent']; ?></td>
               <td class="am-hide-sm-only"><?php echo $v['UserNumber']; ?></td>
               <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
-              <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+              <td class="am-hide-sm-only" {if condition="!$IfProcess"}style="color:#1188F0;font-weight:bold;"{/if}><?php echo $v['Status']; ?></td>
               <td>
                   <div class="am-btn-group am-btn-group-xs">
                       <?php if(in_array(368,$threeMenu)){ ; ?>

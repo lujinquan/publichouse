@@ -71,6 +71,18 @@ class UserApply extends Model
             if (isset($searchForm['BanAddress']) && $searchForm['BanAddress']) {  //检索操作人姓名
                 $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             }
+            if ($searchForm['OldTenantName']) {   //变更编号
+                $where['OldTenantName'] = array('like', '%'.$searchForm['OldTenantName'].'%');
+            }
+            if ($searchForm['NewTenantName']) {   //变更编号
+                $where['NewTenantName'] = array('like', '%'.$searchForm['NewTenantName'].'%');
+            }
+            if ($searchForm['HouseUsearea']) {   //变更编号
+                $where['HouseUsearea'] = array('eq', $searchForm['HouseUsearea']);
+            }
+            if ($searchForm['HousePrerent']) {   //变更编号
+                $where['HousePrerent'] = array('eq', $searchForm['HousePrerent']);
+            }
             if(isset($searchForm['CreateTime']) && $searchForm['CreateTime']){
                 $starttime = strtotime($searchForm['CreateTime']);
 

@@ -110,8 +110,8 @@ class LeaseRecord extends Model
 
     public function get_one_change_info($id = '' ,$map=''){
 
-        if(!$map) $map='ChangeOrderID ,ProcessConfigType,HouseID ,TenantName,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,PrintTimes,PrintTime,CreateTime ,Status';
-        $data = $this->field($map)->where('id','eq',$id)->find();
+        if(!$map) $map='a.ChangeOrderID ,a.ProcessConfigType,a.HouseID ,a.TenantName,a.BanAddress, a.OwnerType,a.FloorNum,a.FloorID, a.StructureType, a.InstitutionID ,a.PrintTimes,a.PrintTime,a.CreateTime ,a.Status,b.Status as HouseStatus';
+        $data = Db::name('lease_change_order')->alias('a')->join('house b','a.HouseID = b.HouseID','left')->field($map)->where('id','eq',$id)->find();
 
         if(!$data){
             return array();
@@ -124,8 +124,8 @@ class LeaseRecord extends Model
         $data['OwnerType'] = get_owner($data['OwnerType']);
         $data['StructureType'] = get_structure($data['StructureType']);
         $data['PrintTime'] =  $data['PrintTime']?date('Y-m-d H:i:s' ,$data['PrintTime']):'';
-        $data['CreateTime'] = date('Y-m-d H:i:s' ,$data['CreateTime']);
-
+        $data['CreateTime'] = date('Y-m-d' ,$data['CreateTime']);
+//halt($data);
         return $data;
     }
 
