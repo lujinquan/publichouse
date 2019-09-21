@@ -815,11 +815,22 @@ class Api extends Controller
             $where['InstitutionPID'] = array('eq', $currentUserInstitutionID);
         } else {    //用户为公司级别，则获取所有子管段
         }
+        $changeType = input('ChangeType');
+        $banID = input('BanID');
         $where['Status'] = array('eq', 1);
-        $where['BanID'] = array('eq',input('BanID'));
+        $where['BanID'] = array('eq',$banID);
         $where['IfSuspend'] = array('eq', 0);
         $where['HouseChangeStatus'] = array('eq', 0);
-       
+        if($changeType == 3){
+            //halt($changeType);
+            $houseids = Db::name('change_order')->where(['ChangeType'=>['eq',3],'Status'=>['>',1],'BanID'=>['eq',$banID]])->value('HouseID');
+            //halt($houseids);
+            if($houseids){
+                $houseidArr = explode(',',$houseids);
+            }
+        }
+        
+
         $data = Db::name('house')->where($where)
             ->field('HouseID ,OwnerType,UseNature,TenantName,HousePrerent,BanAddress')
             ->select();
@@ -829,6 +840,16 @@ class Api extends Controller
 
         if ($data) {
             foreach ($data as &$v) {
+                $v['StatusType'] = 0;
+                if(isset($houseidArr)){
+                    if(in_array($v['HouseID'],$houseidArr)){ // 正在暂停计租的
+                        $v['StatusType'] = 1;
+                    }
+                }
+                $unpaidRow = Db::name('rent_order')->where(['HouseID'=>['eq',$v['HouseID']],'Type'=>['eq',2]])->find();
+                if($unpaidRow){ // 有欠租的
+                    $v['StatusType'] = 2;
+                }
                 $v['OwnerType'] = $owns[$v['OwnerType']];   //楼栋产别
                 $v['UseNature'] = isset($uses[$v['UseNature']])?$uses[$v['UseNature']]:'';   //使用性质
             }
@@ -1372,11 +1393,13 @@ class Api extends Controller
             $find = Db::name('lease_change_order')->where('QrcodeUrl','like','%'.$route['name'].'%')->find();
         }
 
+        $houseRow = Db::name('house')->where('HouseID','eq',$find['HouseID'])->find();
+
         $detail = json_decode($find['Deadline'],true);
 
         $date = $detail['applyYear'].'年'.$detail['applyMonth'].'月'.$detail['applyDay'].'日';
 
-        if(is_file($filename)){
+        if(is_file($filename) && ($houseRow['Status'] == 1) && ($houseRow['TenantID'] == $find['TenantID'])){
             $info = <<<EOF
 
 <!DOCTYPE html>

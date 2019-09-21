@@ -2300,7 +2300,7 @@ function getBanList(){
 
 function banLinkHouse(BanID,BanAddress,type){
     if(type == 3){
-        var get_url = '/ph/Api/get_all_house/BanID/'+BanID;
+        var get_url = '/ph/Api/get_all_house/BanID/'+BanID+'/ChangeType/'+type;
     }else if(type == 15 || type == 16 || type == 17){
         var get_url = '/ph/Api/get_house_diff?BanID='+BanID+'&ChangeType='+type;
     }
@@ -2312,14 +2312,30 @@ function banLinkHouse(BanID,BanAddress,type){
         var house_str = '';
         if(type == 3){
             for(var i = 0;i < res.data.length;i++){
-                house_str += '<tr class="house_check">\
-                    <td style="width:150px;"><input type="checkbox" ></td>\
-                    <td style="width:150px;">'+res.data[i].HouseID+'</td>\
-                    <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
-                    <td style="width:150px;">'+res.data[i].UseNature+'</td>\
-                    <td style="width:150px;">'+res.data[i].TenantName+'</td>\
-                    <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
-                </tr>';
+                //console.log(res.data[i].StatusType);
+                if(res.data[i].StatusType == 0){
+                   house_str += '<tr class="house_check">\
+                        <td style="width:150px;"><input type="checkbox"></td>\
+                        <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                        <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                        <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                        <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                        <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
+                    </tr>';
+                }else if(res.data[i].StatusType == 1){ //暂停计租的
+                    
+                }else if(res.data[i].StatusType == 2){ //欠租的
+                    house_str += '<tr class="house_check" disabled="disabled">\
+                        <td style="width:150px;"></td>\
+                        <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                        <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                        <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                        <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                        <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
+                    </tr>';
+                }
+                
+                
             }
         }else if(type == 15 || type == 16 || type == 17){
             for(var i = 0;i < res.data.length;i++){
