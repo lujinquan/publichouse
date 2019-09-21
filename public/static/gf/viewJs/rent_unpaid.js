@@ -9,17 +9,17 @@ $('#withHolding').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPayable/batchPay',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg('批量操作成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -35,17 +35,17 @@ $('#PressForMoney').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentUnpaid/batchCall',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg('批量操作成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -62,17 +62,17 @@ $('#batchRevocation').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentUnpaid/payBack',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -88,17 +88,17 @@ $('#payAll').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentUnpaid/payAll',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg('批量操作成功！');
+				layer.msg('批量操作成功！',{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -163,11 +163,11 @@ $('.annual_recovery').click(function(){
 				$.post('/ph/RentUnpaid/pay/',{RentOrderID:thisID,cost:money},function(res){
 					res = JSON.parse(res);
 					if(res.retcode == 2000){
-						layer.msg(res.msg);						
+						layer.msg(res.msg,{time:4000});						
 						layer.close(thisIndex);						
 						location.reload();
 						}else{
-							layer.msg(res.msg);							
+							layer.msg(res.msg,{time:4000});							
 						}	
 					
 				});

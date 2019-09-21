@@ -169,10 +169,10 @@ $("table").on('click', '.conf-delete-id4', function(){
 		res = JSON.parse(res);
 		console.log(res);
 		if(res.retcode == '2000'){
-			layer.msg('修改成功!');
+			layer.msg('修改成功!',{time:4000});
 			// location.reload();
 		} else {
-			layer.msg('数据未更改或修改失败');
+			layer.msg('数据未更改或修改失败',{time:4000});
 		}
 		$(".floor_point").attr('disabled', true);
 	})
@@ -228,7 +228,7 @@ $("table").on('click', '.conf-modify', function(){
 								contentDom.prev().prev().text(structureType);
 								layer.close(thisIndex);
 							}else{
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 							}
 						})
 					}
@@ -270,7 +270,7 @@ $("table").on('click', '.conf-modify', function(){
 								contentDom.prev().text(roomTypeName);
 								layer.close(thisIndex);
 							}else{
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 							}
 						})
 					}
@@ -312,7 +312,7 @@ $("table").on('click', '.conf-modify', function(){
 								contentDom.prev().text(item);
 								layer.close(thisIndex);
 							}else{
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 							}
 						})
 					}
@@ -359,7 +359,7 @@ $("table").on('click', '.conf-modify', function(){
 								contentDom.prev().prev().text(item);
 								layer.close(thisIndex);
 							}else{
-								layer.msg(res.msg);
+								layer.msg(res.msg,{time:4000});
 							}
 						})
 					}

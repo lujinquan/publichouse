@@ -287,7 +287,7 @@ $('.addLease').click(function(){
                 contentType: false,
                 success: function(res) {
                     res = JSON.parse(res);
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
                     if(res.retcode == '2000'){
                         location.reload();
                     }
@@ -361,7 +361,7 @@ $('.BtnDel').click(function(){
 	$.get('/ph/LeaseApply/delete/ChangeOrderID/'+ChangeOrderID,function(res){
 		var res = JSON.parse(res);
 		console.log(res);
-		layer.msg(res.msg);
+		layer.msg(res.msg,{time:4000});
 		if(res.retcode == '2000'){
 			location.reload();
 		}

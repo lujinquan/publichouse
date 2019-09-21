@@ -13,14 +13,14 @@ $("#addPost").click(function(){
 			$.post('/ph/PostManage/add',data,function(result){
 				result = JSON.parse(result);
 				if(result.retcode == 2000){
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 					layer.close(thisIndex);
 					location.reload();
 				}else{
 					// layer.msg(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 					// 	layer.close(conIndex);
 					// });
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 				}
 			});
 		}
@@ -39,7 +39,7 @@ $("#revisePost").click(function(){
 	console.log(PostID);
 
 	if(PostID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		$.get('/ph/PostManage/edit/PostID/'+PostID,function(res){
 			res = JSON.parse(res);
@@ -65,14 +65,14 @@ $("#revisePost").click(function(){
 							// layer.msg(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 							// 	layer.close(conIndex);
 							// });
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 							layer.close(thisIndex);
 							location.reload();
 						}else{
 							// layer.msg(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 							// 	layer.close(conIndex);
 							// });
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 					});
 				}
@@ -92,16 +92,16 @@ $("#deletePost").click(function(){
 		}
 	}
 	if(PostID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.confirm('确定删除职务信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 			$.get('/ph/PostManage/delete/PostID/'+ PostID,function(result){
 				result = JSON.parse(result);
 				if(result.retcode  == '2000' ){
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 					location.reload();
 				}else{
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 				}
 			});
 			layer.close(index);

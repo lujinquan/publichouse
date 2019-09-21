@@ -20,14 +20,14 @@ $("#addOrg").click(function(){
 						// 	layer.close(conIndex);
 						// 	location.reload();
 						// });
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 						layer.close(thisIndex);
 						location.reload();
 					}else{
 						// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 						// 	layer.close(conIndex);
 						// });
-						layer.msg(result.msg);
+						layer.msg(result.msg,{time:4000});
 					}
 				});
 			}
@@ -51,7 +51,7 @@ $("#reviseOrg").click(function(){
 	// 		path:'/public/static/gf/layer/'
 	// 	});
 		if(OrgID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			$.get('/ph/OrgManage/edit/id/'+OrgID,function(res){
 				res = JSON.parse(res);
@@ -80,14 +80,14 @@ $("#reviseOrg").click(function(){
 								// 	layer.close(conIndex);
 								// 	location.reload();
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								layer.close(thisIndex);
 								location.reload();
 							}else{
 								// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 								// 	layer.close(conIndex);
 								// });
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					}
@@ -107,17 +107,17 @@ $("#deleteOrg").click(function(){
 		}
 	}
 	if(OrgID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.confirm('确定删除机构信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 
 					$.get('/ph/OrgManage/delete/id/'+ OrgID,function(result){
 						result = JSON.parse(result);
 						if(result.retcode  == '2000' ){
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 							location.reload();
 						}else{
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 					});
 

@@ -14,11 +14,11 @@ $("#addRole").click(function(){
 			$.post('/ph/RoleManage/add',data,function(result){
 				result = JSON.parse(result);
 				if(result.retcode == 2000){
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 					layer.close(thisIndex);
 					location.reload();
 				}else{
-					layer.msg(result.msg);
+					layer.msg(result.msg,{time:4000});
 				}
 			});
 		}
@@ -36,7 +36,7 @@ $("#reviseRole").click(function(){
 	}
 	console.log(RoleID);
 		if(RoleID == undefined){
-			layer.msg('请先选择要修改的信息');
+			layer.msg('请先选择要修改的信息',{time:4000});
 		}else{
 			$.get('/ph/RoleManage/edit/id/'+RoleID,function(res){
 				res = JSON.parse(res);
@@ -62,11 +62,11 @@ $("#reviseRole").click(function(){
 							result = JSON.parse(result);
 							console.log(result);
 							if(result.retcode == 2000){
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 								layer.close(thisIndex);
 								location.reload();
 							}else{
-								layer.msg(result.msg);
+								layer.msg(result.msg,{time:4000});
 							}
 						});
 					}
@@ -85,17 +85,17 @@ $("#deleteRole").click(function(){
 		}
 	}
 	if(RoleID == undefined){
-		layer.msg('请先选择要修改的信息');
+		layer.msg('请先选择要修改的信息',{time:4000});
 	}else{
 		layer.confirm('确定删除角色信息',{title:'提示信息',icon:'2',skin:'lan_class'},function(index){
 
 					$.get('/ph/RoleManage/delete/id/'+RoleID,function(result){
 						result = JSON.parse(result);
 						if(result.retcode  == '2000' ){
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 							location.reload();
 						}else{
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 					});
 
@@ -114,7 +114,7 @@ $("#permission").click(function(){
 		}
 	}
 	if(RoleID == undefined){
-		layer.msg('请先选择角色');
+		layer.msg('请先选择角色',{time:4000});
 	}else{
 		$.get('/ph/RoleManage/roleToMenu/id/'+RoleID,function(res){
 			res = JSON.parse(res);
@@ -146,13 +146,13 @@ $("#permission").click(function(){
 							// 	layer.close(thisIndex);
 							// 	layer.close(conIndex);
 							// });
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 							layer.close(thisIndex);
 						}else{
 							// layer.confirm(result.msg,{title:'提示信息',icon:'1',skin:'lan_class'},function(conIndex){
 							// 	layer.close(conIndex);
 							// });
-							layer.msg(result.msg);
+							layer.msg(result.msg,{time:4000});
 						}
 					});
 				}

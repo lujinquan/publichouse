@@ -14,7 +14,7 @@ $('#cutOldButton').click(function(){
                 $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                     res = JSON.parse(res);
                     console.log(res);
-                    layer.msg(res.msg);
+                    layer.msg(res.msg,{time:4000});
                     $("#BanID").text(res.data.BanID);
                     $("#BanAddress").text(res.data.BanAddress);
                     $("#CreateTime").text(res.data.CreateTime);
@@ -54,11 +54,11 @@ $('#cutOldButton').click(function(){
 			}
 			postData.PayMonth = monthString.join(',');
 			if(postData.HouseID == ''){
-				layer.msg('请填入房间编号');
+				layer.msg('请填入房间编号',{time:4000});
 				return false;
 			}
 			if(postData.PayYear == ''){
-				layer.msg('请填入欠租年份');
+				layer.msg('请填入欠租年份',{time:4000});
 				return false;
 			}
 			// if(postData.PayMonth == ''){
@@ -66,14 +66,14 @@ $('#cutOldButton').click(function(){
 			// 	return false;
 			// }
 			if(postData.PayRent == ''){
-				layer.msg('请填入缴纳欠款');
+				layer.msg('请填入缴纳欠款',{time:4000});
 				return false;
 			}
 			console.log(postData);
 			$.post('/ph/OldCutRent/add',postData,function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				if(res.retcode == '2000'){
 					location.reload();
 				}
@@ -85,7 +85,7 @@ $('#cutdeleteOldButton').click(function(){
 	var id = $(".radioclass").attr('checked','checked').val();
 	console.log(id);
     if(id == null || id == ''){
-        layer.msg('选择要删除的选项');
+        layer.msg('选择要删除的选项',{time:4000});
         return ;
     }
     var data = 'id='+id;
@@ -94,7 +94,7 @@ $('#cutdeleteOldButton').click(function(){
             res = JSON.parse(res);
             console.log(res);
             if(res.data){
-                layer.msg('删除成功!');
+                layer.msg('删除成功!',{time:4000});
                 $(location).attr('href', '');
             }
         })

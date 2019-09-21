@@ -15,7 +15,7 @@ $("#addAttachment").click(function(){
 $('#deletefile').click(function(){
     var id = $('input:radio:checked').val();
     if(id == null || id == ''){
-        layer.msg('选择要删除的公告');
+        layer.msg('选择要删除的公告',{time:4000});
         return ;
     }
     var data = 'id='+id;
@@ -23,7 +23,7 @@ $('#deletefile').click(function(){
         res = JSON.parse(res);
         console.log(res);
         if(res.data){
-            layer.msg('删除成功!');
+            layer.msg('删除成功!',{time:4000});
             $(location).attr('href', '');
         }
     })

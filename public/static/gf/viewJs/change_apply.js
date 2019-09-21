@@ -139,7 +139,7 @@ $('#addApply').click(function() {
                 },
                 yes: function(thisIndex) {
                     if ($('#getInfo_1').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
+                        layer.msg('房屋编号存在问题呢！！！',{time:4000});
                     } else {
                         var formData = fileTotall.getArrayFormdata();
                         formData.append("CutType", $('#CutType').val());
@@ -160,7 +160,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 if(res.retcode == '2000'){
                                     layer.close(thisIndex);
                                     location.reload();
@@ -296,7 +296,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             if(res.retcode == '2000'){
                                 layer.close(thisIndex);
                                 location.reload();
@@ -329,7 +329,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#oldCancelBanID").text(res.data.BanID);
                             $("#oldCancelBanAddress").text(res.data.BanAddress);
                             $("#oldCanceluseNature").text(res.data.UseNature);
@@ -404,7 +404,7 @@ $('#addApply').click(function() {
                 },
                 yes: function(thisIndex){
                     if ($('#oldCancelHouseID').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
+                        layer.msg('房屋编号存在问题呢！！！',{time:4000});
                     } else {
                         var formData = new FormData();
                         var oldCancelMonthBefore = [];
@@ -427,7 +427,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 layer.close(thisIndex);
                                 location.reload();
                             }
@@ -465,7 +465,7 @@ $('#addApply').click(function() {
                     $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                         res = JSON.parse(res);
                         console.log(res);
-                        layer.msg(res.msg);
+                        layer.msg(res.msg,{time:4000});
                         $(".CHouseId").text(HouseID);
                         $(".CBanID").text(res.data.BanID);
                         $(".CHouseAddress").text(res.data.BanAddress);
@@ -822,7 +822,7 @@ $('#addApply').click(function() {
                         success: function() {},
                         yes: function(thisIndex) {
                             if ($('.CHouseId').text() == "" || $(".CBanID").text() == "") {
-                                layer.msg('房屋编号存在问题呢！！！');
+                                layer.msg('房屋编号存在问题呢！！！',{time:4000});
                             } else {
                                 var formData = fileTotall.getArrayFormdata();
                                 formData.append("HouseID", $('.CHouseId').text());
@@ -835,7 +835,7 @@ $('#addApply').click(function() {
                                     contentType: false,
                                     success: function(res) {
                                         res = JSON.parse(res);
-                                        layer.msg(res.msg);
+                                        layer.msg(res.msg,{time:4000});
                                         layer.close(thisIndex);
                                         location.reload();
                                     }
@@ -870,7 +870,7 @@ $('#addApply').click(function() {
                         var BanID = $("#houseID").val();
                         $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#RCBanAddress").text(res.data.BanAddress);
                             $("#RCStructureType").text(res.data.StructureType);
                             $("#RCDamageGrade").text(res.data.DamageGrade);
@@ -911,7 +911,7 @@ $('#addApply').click(function() {
                 },
                 yes: function(thisIndex) {
                     if ($('#houseID').val() == "") {
-                        layer.msg('房屋编号不能为空！！！');
+                        layer.msg('房屋编号不能为空！！！',{time:4000});
                     } else {
                         var picData = fileTotall.getArrayFormdata();
                         var formData = new FormData($('#repairChange')[0]);
@@ -938,7 +938,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 layer.close(thisIndex);
                                 location.reload();
                             }
@@ -985,7 +985,7 @@ $('#addApply').click(function() {
                 },
                 yes: function(thisIndex) {
                     if ($('#newRentHouseID').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
+                        layer.msg('房屋编号存在问题呢！！！',{time:4000});
                     }else{
                         var formData = new FormData();
                         formData.append("HouseID", $('#newRentHouseID').val());
@@ -1008,7 +1008,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 if(res.retcode == "2000"){
                                     layer.close(thisIndex);
                                     location.reload();
@@ -1043,7 +1043,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/check_house_cancel_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             if(res.retcode == '4002'){
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                             }
 							else{
                                 //console.log(res);
@@ -1116,7 +1116,7 @@ $('#addApply').click(function() {
                 },
                 yes:function(thisIndex){
                     if ($('#getcancel').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
+                        layer.msg('房屋编号存在问题呢！！！',{time:4000});
                     } else {
                         var formData = fileTotall.getArrayFormdata() || new FormData();
                         var BanArray = [];
@@ -1141,7 +1141,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 if(res.retcode == '2000'){
                                     layer.close(thisIndex);
                                     location.reload();
@@ -1275,13 +1275,13 @@ $('#addApply').click(function() {
                                     $('.HAAfterPrice').eq(this_index).val(numberMethod(number_1,number_2,'+'));
                                  }
                             });
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                         });
                     });
                 },
                 yes: function(thisIndex) {
                     if ($('#houseAdjustHouse').val() == "") {
-                        layer.msg('房屋编号存在问题呢！！！');
+                        layer.msg('房屋编号存在问题呢！！！',{time:4000});
                     } else {
                         var formData = fileTotall.getArrayFormdata() ||  new FormData();
                         formData.append("HouseID", $('#houseAdjustHouse').val());
@@ -1311,7 +1311,7 @@ $('#addApply').click(function() {
                             contentType: false,
                             success: function(res) {
                                 res = JSON.parse(res);
-                                layer.msg(res.msg);
+                                layer.msg(res.msg,{time:4000});
                                 if(res.retcode == "2000"){
                                     layer.close(thisIndex);
                                     location.reload();
@@ -1365,7 +1365,7 @@ $('#addApply').click(function() {
                                         $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
                                             res = JSON.parse(res);
                                             console.log(res);
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg,{time:4000});
                                             $("#PipeBanAddress").text(res.data.BanAddress);
                                             $("#NLUseNature").text(res.data.UseNature);
                                             $("#NLFloorID").text(res.data.FloorID);
@@ -1408,7 +1408,7 @@ $('#addApply').click(function() {
                                         contentType: false,
                                         success: function(res) {
                                             res = JSON.parse(res);
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg,{time:4000});
                                             layer.close(thisIndex);
                                             location.reload();
                                         }
@@ -1445,7 +1445,7 @@ $('#addApply').click(function() {
                                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                                             res = JSON.parse(res);
                                             console.log(res);
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg,{time:4000});
                                             $("#PipeBanNumd").text(res.data.BanID);
                                             $("#PipeHouseAddressd").text(res.data.BanAddress);
                                             $("#PipeLayerd").text(res.data.FloorID);
@@ -1482,7 +1482,7 @@ $('#addApply').click(function() {
                                         contentType: false,
                                         success: function(res) {
                                             res = JSON.parse(res);
-                                            layer.msg(res.msg);
+                                            layer.msg(res.msg,{time:4000});
                                             layer.close(thisIndex);
                                             location.reload();
                                         }
@@ -1529,7 +1529,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#RentAddBanID").text(res.data.BanID);
                             $("#RentAddAddress").text(res.data.BanAddress);
                             $("#RentAddTenantName").text(res.data.TenantName);
@@ -1559,7 +1559,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             layer.close(thisIndex);
                             location.reload();
                         }
@@ -1593,7 +1593,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#RentUseNature").text(res.data.UseNature);
                             $("#RentDamageGrade").text(res.data.DamageGrade);
                             $("#RentOwnerType").text(res.data.OwnerType);
@@ -1633,7 +1633,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             layer.close(thisIndex);
                             location.reload();
                         }
@@ -1667,7 +1667,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#SplitBanID").text(res.data.BanID);
                             $("#SplitBanAddress").text(res.data.BanAddress);
                             $("#SplitFloorID").text(res.data.FloorID);
@@ -1732,7 +1732,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_house_info/HouseID/' + HouseID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#SplitAddID").text(res.data.BanID);
                             $("#SplitAddAddress").text(res.data.BanAddress);
                             $("#SplitAddFloor").text(res.data.FloorID);
@@ -1816,7 +1816,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             layer.close(thisIndex);
                             location.reload();
                         }
@@ -1870,7 +1870,7 @@ $('#addApply').click(function() {
                         $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
                             res = JSON.parse(res);
                             console.log(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             $("#buildingAdjustAddress").text(res.data.BanAddress);
                             $("#buildingAdjustOwnerType").text(res.data.OwnerType);
                             $("#buildingAdjustBanUnitNum").text(res.data.BanUnitNum);
@@ -1895,7 +1895,7 @@ $('#addApply').click(function() {
 					//console.log($("#buildingPropertyShow").length);
 					if($("#buildingPropertyShow").html()=="")
 						{
-							layer.msg("产权证必填！");
+							layer.msg("产权证必填！",{time:4000});
 							return false;
 							
 						}
@@ -1907,7 +1907,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             if(res.retcode == '2000'){
                                 layer.close(thisIndex);
                                 location.reload();
@@ -2022,7 +2022,7 @@ $('#addApply').click(function() {
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg);
+                            layer.msg(res.msg,{time:4000});
                             if(res.retcode == '2000'){
                                 layer.close(thisIndex);
                                 location.reload();
@@ -2134,7 +2134,7 @@ $('#addApply').click(function() {
 			                contentType: false,
 			                success: function(res) {
 			                    res = JSON.parse(res);
-			                    layer.msg(res.msg);
+			                    layer.msg(res.msg,{time:4000});
 			                    if(res.retcode == '2000'){
 			                        layer.close(thisIndex);
 			                        location.reload();
@@ -2152,7 +2152,7 @@ $('#addApply').click(function() {
 			    });
 			    break;
         default:
-            layer.msg('请选择选项！');
+            layer.msg('请选择选项！',{time:4000});
     }
 });
 //流程配置函数
@@ -2193,7 +2193,7 @@ $('#DQTenant').click(function() {
             $('#TenantNameO').text(res.data.TenantName);
             $('#TenantTelO').text(res.data.TenantTel);
         } else {
-            layer.msg(res.msg);
+            layer.msg(res.msg,{time:4000});
         }
     });
 });
@@ -2356,7 +2356,7 @@ function banLinkHouse(BanID,BanAddress,type){
         $('#pauseHouseAdd .house_check').click(function(){
             if($(this).find("input[type='checkbox']").prop('checked')){
                 $(this).find("input[type='checkbox']").prop('checked',false);
-                layer.msg('已经添加！');
+                layer.msg('已经添加！',{time:4000});
             }else{
                 $(this).find("input[type='checkbox']").prop('checked',true);
                 tr_add($(this),$(this).find("td").eq(1).text());
@@ -2400,7 +2400,7 @@ function tr_add(dom,houseID){
     if(!flag){
         $('#pauseHouseChoose').append(dom.clone());
     }else{
-        layer.msg('已经添加！');
+        layer.msg('已经添加！',{time:4000});
     }
 }
 
@@ -2556,7 +2556,7 @@ function addEmptyRent(){
         },
         yes: function(thisIndex) {
             if ($('#emptyRentHouse').val() == "") {
-                layer.msg('房屋编号存在问题呢！！！');
+                layer.msg('房屋编号存在问题呢！！！',{time:4000});
             } else {
                 var formData = new FormData();
                 formData.append("type", 2);
@@ -2571,7 +2571,7 @@ function addEmptyRent(){
                     contentType: false,
                     success: function(res) {
                         res = JSON.parse(res);
-                        layer.msg(res.msg);
+                        layer.msg(res.msg,{time:4000});
                         if(res.retcode == '2000'){
                             layer.close(thisIndex);
                             location.reload();
@@ -2630,7 +2630,7 @@ function cancelEmptyRent(){
         },
         yes: function(thisIndex) {
             if ($('#emptyRentHouse').val() == "") {
-                layer.msg('房屋编号存在问题呢！！！');
+                layer.msg('房屋编号存在问题呢！！！',{time:4000});
             } else {
                 var formData = new FormData();
                 formData.append("type", 2);
@@ -2646,7 +2646,7 @@ function cancelEmptyRent(){
                     contentType: false,
                     success: function(res) {
                         res = JSON.parse(res);
-                        layer.msg(res.msg);
+                        layer.msg(res.msg,{time:4000});
                         layer.close(thisIndex);
                         location.reload();
                     }

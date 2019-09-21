@@ -357,7 +357,7 @@ $('.waitProcessing').click(function(){
 				$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value},function(res){
 					res = JSON.parse(res);
 					console.log(res);
-					layer.msg(res.msg);
+					layer.msg(res.msg,{time:4000});
 				});
 				layer.close(thisIndex);
 			},
@@ -376,7 +376,7 @@ $('.waitProcessing').click(function(){
 						$.post('/ph/ChangeAudit/process/',{ChangeOrderID:value,reson:reasonMsg},function(res){
 							res = JSON.parse(res);
 							console.log(res);
-							layer.msg(res.msg);
+							layer.msg(res.msg,{time:4000});
 						});
 						layer.close(msgIndex);
 					}

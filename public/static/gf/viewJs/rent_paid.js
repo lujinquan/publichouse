@@ -9,7 +9,7 @@ $('#withHolding').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPaid/batchSign',{value:Orders},function(res){
@@ -21,7 +21,7 @@ $('#withHolding').click(function(){
 				});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}
@@ -37,17 +37,17 @@ $('#batchRevocation').click(function(){
 		}
 	}
 	if(Orders.length == 0){
-		layer.msg('请选择批量操作对象！');
+		layer.msg('请选择批量操作对象！',{time:4000});
 	}else{
 		console.log(Orders);
 		$.post('/ph/RentPaid/payBack',{value:Orders},function(res){
 			res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "2000"){
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				location.reload();
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 		});
 	}

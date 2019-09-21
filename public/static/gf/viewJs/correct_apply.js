@@ -108,7 +108,7 @@ $("#addTransfer").click(function(){
 				    contentType: false,
 				    success: function(res) {
 				        res = JSON.parse(res);
-				        layer.msg(res.msg);
+				        layer.msg(res.msg,{time:4000});
 				        if(res.retcode == '2000'){
 				            layer.close(thisIndex);
 				            location.reload();
@@ -143,7 +143,7 @@ $('.BtnChange').click(function(){
 		res = JSON.parse(res);
 			console.log(res);
 			if(res.retcode == "4005"){
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}else{
 				revise_2(res,ID);
 			}
@@ -160,7 +160,7 @@ $('.BtnDel').click(function(){
 			$.get('/ph/CorrectApply/delete/ChangeOrderID/'+ID,function(res){
 				res = JSON.parse(res);
 				console.log(res);
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 				layer.close(conIndex);
 				location.reload();
 			});
@@ -178,7 +178,7 @@ $('#queryAction').click(function(){
 			$('.tenantTel').text(res.data.TenantTel);
 			$('.tenantName').text(res.data.TenantName);
 		}else{
-			layer.msg(res.msg);
+			layer.msg(res.msg,{time:4000});
 		}
 	});
 });
@@ -195,7 +195,7 @@ tenantQuery.action('IdIput','','0,1',
 				$('#newTel').text(res.data.TenantNumber);
 				$('#newNam').text(res.data.TenantName);
 			}else{
-				layer.msg(res.msg);
+				layer.msg(res.msg,{time:4000});
 			}
 			
 		});
@@ -296,7 +296,7 @@ function revise_2(res,id){
 				    contentType: false,
 				    success: function(res) {
 				        res = JSON.parse(res);
-				        layer.msg(res.msg);
+				        layer.msg(res.msg,{time:4000});
 				        if(res.retcode == '2000'){
 				            layer.close(thisIndex);
 				            location.reload();

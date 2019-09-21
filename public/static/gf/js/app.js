@@ -102,7 +102,7 @@ var queryData = {
             this.postData();
             $('#pageNum').val(this.pageNum);
           }else{
-            layer.msg('已经是首页了！！');
+            layer.msg('已经是首页了！！',{time:4000});
           }
         },
       pageNext:function(){
@@ -113,7 +113,7 @@ var queryData = {
           this.postData();
           $('#pageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageNumChange:function(){
@@ -282,7 +282,7 @@ var tenantQuery = {
             this.postData();
             $('#tenantPageNum').val(this.pageNum);
           }else{
-            layer.msg('已经是首页了！！');
+            layer.msg('已经是首页了！！',{time:4000});
           }
         },
       pageNext:function(){
@@ -293,7 +293,7 @@ var tenantQuery = {
           this.postData();
           $('#tenantPageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageGo:function(){
@@ -302,7 +302,7 @@ var tenantQuery = {
           this.postData();
           $('#tenantPageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageNumChange:function(){
@@ -440,7 +440,7 @@ var banQuery = {
             this.postData();
             $('#banPageNum').val(this.pageNum);
           }else{
-            layer.msg('已经是首页了！！');
+            layer.msg('已经是首页了！！',{time:4000});
           }
         },
       pageNext:function(){
@@ -451,7 +451,7 @@ var banQuery = {
           this.postData();
           $('#banPageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageGo:function(){
@@ -460,7 +460,7 @@ var banQuery = {
           this.postData();
           $('#banPageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageNumChange:function(){
@@ -615,7 +615,7 @@ var houseQuery = {
             this.postData();
             $('#housePageNum').val(this.pageNum);
           }else{
-            layer.msg('已经是首页了！！');
+            layer.msg('已经是首页了！！',{time:4000});
           }
         },
       pageNext:function(){
@@ -626,7 +626,7 @@ var houseQuery = {
           this.postData();
           $('#housePageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageGo:function(){
@@ -635,7 +635,7 @@ var houseQuery = {
           this.postData();
           $('#housePageNum').val(this.pageNum);
         }else{
-          layer.msg('已经是最后页了！！');
+          layer.msg('已经是最后页了！！',{time:4000});
         }
       },
       pageNumChange:function(){
