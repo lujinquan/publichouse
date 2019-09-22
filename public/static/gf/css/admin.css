@@ -1049,3 +1049,6 @@ text-decoration: underline;
 .j-upload .img_close{background: url(../icons/delete.png) no-repeat; width:20px;height: 20px; position:absolute;top:33px;right:8px;cursor:pointer;/* box-shadow: 0 0 5px #ccc; */border-radius: 50%;z-index: 999;}
 .am-u-md-12.j-upload .img_close{top:43px;right:12px;}
 .j-upload .am-form-file{ font-size: 15px;margin-top: 3px;}
+/* 暂停计租 */
+.j-arrears td{ color: #FF0000!important;}
+.j-suspend td{ color: #999!important;}

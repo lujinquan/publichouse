@@ -2323,10 +2323,17 @@ function banLinkHouse(BanID,BanAddress,type){
                         <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
                     </tr>';
                 }else if(res.data[i].StatusType == 1){ //暂停计租的
-                    
+                    house_str += '<tr class="j-suspend" disabled="disabled">\
+                        <td style="width:150px;"><input type="checkbox" disabled="disabled"></td>\
+                        <td style="width:150px;">'+res.data[i].HouseID+'</td>\
+                        <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
+                        <td style="width:150px;">'+res.data[i].UseNature+'</td>\
+                        <td style="width:150px;">'+res.data[i].TenantName+'</td>\
+                        <td style="width:350px;">'+res.data[i].HousePrerent+'</td>\
+                    </tr>';
                 }else if(res.data[i].StatusType == 2){ //欠租的
-                    house_str += '<tr class="house_check" disabled="disabled">\
-                        <td style="width:150px;"></td>\
+                    house_str += '<tr class="j-arrears" disabled="disabled">\
+                        <td style="width:150px;"><input type="checkbox" disabled="disabled"></td>\
                         <td style="width:150px;">'+res.data[i].HouseID+'</td>\
                         <td style="width:150px;">'+res.data[i].OwnerType+'</td>\
                         <td style="width:150px;">'+res.data[i].UseNature+'</td>\
@@ -2353,6 +2360,7 @@ function banLinkHouse(BanID,BanAddress,type){
         $('.allChoose').prop('checked',false);
         $('#pauseHouseAdd').empty();
         $('#pauseHouseAdd').append($(house_str));
+		
         $('#pauseHouseAdd .house_check').click(function(){
             if($(this).find("input[type='checkbox']").prop('checked')){
                 $(this).find("input[type='checkbox']").prop('checked',false);
@@ -2362,6 +2370,13 @@ function banLinkHouse(BanID,BanAddress,type){
                 tr_add($(this),$(this).find("td").eq(1).text());
             }
         })
+		//添加不能选中代码
+		/* $('#pauseHouseAdd .house_check.j-arrears,#pauseHouseAdd .house_check.j-suspend').click(function(){
+			 $(this).find("input[type='checkbox']").prop('checked',false);
+			 layer.msg('当前状态不可点击！',{time:4000});
+			 tr_remove($(this),$(this).find("td").eq(1).text());
+		})	 */
+		$('#pauseHouseAdd .house_check.j-arrears,#pauseHouseAdd .house_check.j-suspend').unbind(); 
         $("#pauseHouseAdd .house_check input[type='checkbox']").click(function(event){
             event.stopPropagation();
             if($(this).prop('checked')){
@@ -2375,6 +2390,8 @@ function banLinkHouse(BanID,BanAddress,type){
 $('.allChoose').click(function(){
     if($(this).prop('checked')){
         $("#pauseHouseAdd .house_check input[type='checkbox']").prop('checked',true);
+		//添加不能选中代码
+		 $("#pauseHouseAdd .house_check.j-arrears input[type='checkbox'],#pauseHouseAdd .house_check.j-suspend input[type='checkbox']").prop('checked',false);
         for(var j = 0;j < $("#pauseHouseAdd .house_check").length;j++){
             console.log(j);
             var dom = $("#pauseHouseAdd .house_check").eq(j);
