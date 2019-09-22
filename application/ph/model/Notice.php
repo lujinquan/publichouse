@@ -51,14 +51,20 @@ class Notice extends Model
         $update['id'] = $data['id'];
         $totalTops = Db::name('notice')->where('IsTop',1)->count();
         $row = Db::name('notice')->where('id',$data['id'])->find();
-        if($totalTops > 2 && $data['IsTop'] == 1){
-            if($istop != 1){
-                return jsons('4000', '置顶数不能超过3条');die;
+        if($totalTops > 2 && $data['IsTop'] == 1 && $row['IsTop'] != 1){
+            
+                return jsons('4000', '置顶数不能超过3条');
+            
+        }
+        
+        if(isset($data['title'])){
+            if($data['title'] != $row['Title'] || $data['institution'] != $row['Institution'] || $data['content'] != $row['Content'] ){
+                $update['UpdateTime'] = date('Y-m-d H:i:s',time());
             }
         }
-        if($data['title'] != $row['Title'] || $data['institution'] != $row['Institution'] || $data['content'] != $row['Content']){
-            $update['UpdateTime'] = date('Y-m-d H:i:s',time());
-        }
+        
+            
+        
         if(isset($data['title'])){
             $update['Title'] = $data['title'];
             $update['Institution'] = $data['institution'];

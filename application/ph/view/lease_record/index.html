@@ -1,5 +1,5 @@
 {extend name="layout" /}
-{block name="title"}<title>租约申请</title>{/block}
+{block name="title"}<title>租约记录</title>{/block}
 {block name="content"}
   <link rel="stylesheet" href="/public/static/gf/css/iconfont.css?v={$version}">
   <link rel="stylesheet" href="/public/static/gf/css/viewer.min.css?v={$version}">
@@ -185,7 +185,7 @@
         </form>
     <!---查询-->
         <?php foreach($leaseLst as $k => $v){; ?>
-            <tr class="check001" {if condition="$v['HouseStatus'] > 1"}style="color:#9b9b9b;"{/if}>
+            <tr class="check001" {if condition="($v['HouseStatus'] > 1) || ($v['Status'] == '失败')"}style="color:#9b9b9b;"{/if}>
                 <td>
                   <span class="piaochecked">
                     <input class="checkId radioclass" type="radio" value="<?php echo $v['ChangeOrderID']; ?>" />
@@ -201,7 +201,12 @@
                 <td class="am-hide-sm-only"><?php echo $v['StructureType']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['CreateTime']; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['TenantName']; ?></td>
-                <td><a href="#"><?php echo $v['Status']; ?></a></td>
+                {if condition="$v['Status'] == '失败'"}
+                <td class="am-hide-sm-only"><?php echo $v['Status']; ?></td>
+                {else /}
+                <td class="am-hide-sm-only"><a href="javascript:;"><?php echo $v['Status']; ?></a></td>
+                {/if}
+                
                 <td>
                     <div class="am-btn-group am-btn-group-xs">
                         <?php if(in_array(560,$threeMenu) && $v['Status'] == '成功'){ ; ?>

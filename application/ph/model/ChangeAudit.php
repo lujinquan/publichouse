@@ -109,9 +109,9 @@ class ChangeAudit extends Model
 
         $where['Status'] = array('not in', [0, 1]);
 
-        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime asc')->paginate(config('paginate.list_rows'));
 
-        $arr = self::field('id')->where($where)->order('CreateTime desc')->select();
+        $arr = self::field('id')->where($where)->order('CreateTime asc')->select();
         $s = $sr = [];
         foreach($arr as $d){
             $reone = self::get_one_change_info($d['id']);
