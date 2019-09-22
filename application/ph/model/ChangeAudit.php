@@ -110,7 +110,7 @@ class ChangeAudit extends Model
         $where['Status'] = array('not in', [0, 1]);
 
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime asc')->paginate(config('paginate.list_rows'));
-
+        $ChangeList['InflRentSum'] = self::field('id')->where($where)->sum('InflRent');
         $arr = self::field('id')->where($where)->order('CreateTime asc')->select();
         $s = $sr = [];
         foreach($arr as $d){
