@@ -1052,3 +1052,4 @@ text-decoration: underline;
 /* 暂停计租 */
 .j-arrears td{ color: #FF0000!important;}
 .j-suspend td{ color: #999!important;}
+.label_title .j-tips{color:red;}
