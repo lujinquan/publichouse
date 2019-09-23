@@ -85,9 +85,10 @@ class LeaseRecord extends Model
 
         }
 
+        $fields = 'id,ChangeOrderID ,ProcessConfigType,HouseID ,TenantName,BanAddress, OwnerType,FloorNum,FloorID, StructureType, InstitutionID ,PrintTimes,PrintTime,CreateTime ,Status';
         
 //halt($where);
-        $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
+        $ChangeList['obj'] = self::field($fields)->where($where)->order('CreateTime desc')->paginate(config('paginate.list_rows'));
 
         $arr = $ChangeList['obj']->all();
 
@@ -95,38 +96,59 @@ class LeaseRecord extends Model
 
             $ChangeList['arr'] = array();
         }
+        //$datas = $ChangeList['obj']->toArray();
+        //halt($ChangeList['obj']->toArray());
+        $datas = [];
+        foreach($arr as &$v){
+            $row = Db::name('house')->field('TenantName,Status')->where('HouseID','eq',$v['HouseID'])->find();
+            if($row){
+                if($row['TenantName'] != $v['TenantName']){
+                    $v['HouseStatus'] = 100;
+                }else{
+                    $v['HouseStatus'] = $row['Status'];
+                }
+                
 
-        //halt($arr);
-
-        foreach($arr as $v){
-
-            $ChangeList['arr'][] = self::get_one_change_info($v['id']);
-
+            }
+            $v['InstitutionID'] = config('insts')[$v['InstitutionID']];
+        
+            $v['Status'] = $v['Status']?'成功':'失败';
+     
+            $v['OwnerType'] = config('owners')[$v['OwnerType']];
+            $v['StructureType'] = config('structs')[$v['StructureType']];
+            $v['PrintTime'] =  $v['PrintTime']?date('Y-m-d H:i:s' ,$v['PrintTime']):'';
+            $v['CreateTime'] = date('Y-m-d' ,$v['CreateTime']);
+            
         }
+       
+
+        $ChangeList['arr'] = $arr;
+        //self::get_one_change_info($datas);
+        //halt($datas);
 
         //halt($ChangeList['option']);
         return $ChangeList;
     }
 
-    public function get_one_change_info($id = '' ,$map=''){
+//     public function get_one_change_info($id = '' ,$map=''){
+// //halt(config('owners')[1]);
+//         if(!$map) $map='a.ChangeOrderID ,a.ProcessConfigType,a.HouseID ,a.TenantName,a.BanAddress, a.OwnerType,a.FloorNum,a.FloorID, a.StructureType, a.InstitutionID ,a.PrintTimes,a.PrintTime,a.CreateTime ,a.Status,b.Status as HouseStatus';
+//         $data = Db::name('lease_change_order')->alias('a')->join('house b','a.HouseID = b.HouseID','left')->field($map)->where('id','in',$id)->select();
+// //halt($data);
+//         if(!$data){
+//             return array();
+//         }
 
-        if(!$map) $map='a.ChangeOrderID ,a.ProcessConfigType,a.HouseID ,a.TenantName,a.BanAddress, a.OwnerType,a.FloorNum,a.FloorID, a.StructureType, a.InstitutionID ,a.PrintTimes,a.PrintTime,a.CreateTime ,a.Status,b.Status as HouseStatus';
-        $data = Db::name('lease_change_order')->alias('a')->join('house b','a.HouseID = b.HouseID','left')->field($map)->where('id','eq',$id)->find();
-
-        if(!$data){
-            return array();
-        }
-
-        $data['InstitutionID'] = Db::name('institution')->where('id' ,'eq' ,$data['InstitutionID'])->value('Institution');
+//         $data['InstitutionID'] = config('insts')[$data['InstitutionID']];
         
-        $data['Status'] = $data['Status']?'成功':'失败';
+//         $data['Status'] = $data['Status']?'成功':'失败';
  
-        $data['OwnerType'] = get_owner($data['OwnerType']);
-        $data['StructureType'] = get_structure($data['StructureType']);
-        $data['PrintTime'] =  $data['PrintTime']?date('Y-m-d H:i:s' ,$data['PrintTime']):'';
-        $data['CreateTime'] = date('Y-m-d' ,$data['CreateTime']);
-//halt($data);
-        return $data;
-    }
+//         $data['OwnerType'] = config('owners')[$data['OwnerType']];
+//         $data['StructureType'] = config('structs')[$data['StructureType']];
+//         $data['PrintTime'] =  $data['PrintTime']?date('Y-m-d H:i:s' ,$data['PrintTime']):'';
+//         $data['CreateTime'] = date('Y-m-d' ,$data['CreateTime']);
+// //halt($data);
+//         return $data;
+//     }
 
 }
