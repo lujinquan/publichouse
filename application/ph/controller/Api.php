@@ -823,11 +823,17 @@ class Api extends Controller
         $where['HouseChangeStatus'] = array('eq', 0);
         if($changeType == 3){
             //halt($changeType);
-            $houseids = Db::name('change_order')->where(['ChangeType'=>['eq',3],'Status'=>['>',1],'BanID'=>['eq',$banID]])->value('HouseID');
-            //halt($houseids);
+            $houseids = Db::name('change_order')->where(['ChangeType'=>['eq',3],'Status'=>['>',1],'BanID'=>['eq',$banID]])->column('HouseID');
+            
+            $houseidstr = '';
             if($houseids){
-                $houseidArr = explode(',',$houseids);
+                foreach($houseids as $h){
+                    $houseidstr .= ','.$h;
+                }
+                //halt($houseidstr);
+                $houseidArr = explode(',',trim($houseidstr,','));
             }
+            //halt($houseidArr);
         }
         
 
