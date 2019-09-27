@@ -170,7 +170,7 @@ function settime(obj){
 //校验手机号是否合法
 function isPhoneNum(num){
     var phonenum = num;
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
     if(!myreg.test(phonenum)){ 
         return false; 
     }else{
