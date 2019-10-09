@@ -40,7 +40,7 @@ class RentCut extends Model
         foreach ($searchForm as &$val) { //去首尾空格
             $val = trim($val);
         }
-        if (count($searchForm) > 4 && isset($searchForm['CutType'])) {
+        if (isset($searchForm['CutType'])) {
 
             $RentCutList['option'] = $searchForm;
 
@@ -54,23 +54,23 @@ class RentCut extends Model
             //         $where['InstitutionID'] = array('eq', $searchForm['TubulationID']);
             //     }
             // }
-            if ($searchForm['CutType']) {   //检索产别
+            if (isset($searchForm['CutType']) && $searchForm['CutType']) {   //检索产别
                 $where['a.CutType'] = array('eq', $searchForm['CutType']);
             }
-            if ($searchForm['MuchMonth']) {   //检索产别
+            if (isset($searchForm['MuchMonth']) && $searchForm['MuchMonth']) {   //检索产别
                 $where['b.MuchMonth'] = array('eq', $searchForm['MuchMonth']);
             }
 
-            if ($searchForm['TenantName']) {  //模糊检索租户编号
+            if (isset($searchForm['TenantName']) && $searchForm['TenantName']) {  //模糊检索租户编号
                 $where['c.TenantName'] = array('like', '%' . $searchForm['TenantName'] . '%');
             }
-            if ($searchForm['HouseID']) {  //模糊检索租户编号
+            if (isset($searchForm['HouseID']) && $searchForm['HouseID']) {  //模糊检索租户编号
                 $where['a.HouseID'] = array('like', '%' . $searchForm['HouseID'] . '%');
             }
             // if ($searchForm['BanAddress']) {  //模糊检索楼栋地址
             //     $where['BanAddress'] = array('like', '%'.$searchForm['BanAddress'].'%');
             // }
-            if ($searchForm['IDnumber']) {  //减免证件号码
+            if (isset($searchForm['IDnumber']) && $searchForm['IDnumber']) {  //减免证件号码
                 $where['b.IDnumber'] = array('like', '%' . $searchForm['IDnumber'] . '%');
             }
 
