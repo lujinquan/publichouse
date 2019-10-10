@@ -61,8 +61,9 @@ $('.cancelRentCut').click(function(){
 	layer.confirm('注意，一旦取消减免;将必须重新申请再减免。无法恢复！！！',{title:'取消减免',icon:'1',skin:'lan_class'},function(conIndex){
 		$.get('/ph/RentCount/cancelCut?id='+id,function(res){
 			res = JSON.parse(res);
-			layer.msg(res.msg,{time:4000});
-			location.reload();
+			layer.msg(res.msg,{time:4000},function(){
+				location.reload();
+			});
 		});
 		layer.close(conIndex);
 
