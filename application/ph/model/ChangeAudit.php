@@ -681,9 +681,9 @@ class ChangeAudit extends Model
                 //删除之前过期的减免统计
                 Db::name('rent_table')->where(['ChangeType'=>['eq',1],'HouseID'=>$one['HouseID']])->delete();
 
-                $str = "( 1,'". $one['ChangeOrderID'] . "','" .$one['HouseID']. "','" .$one['BanID'] . "',".$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
+                $str = "( 1,'". $one['ChangeOrderID'] . "','" .$one['HouseID']. "','" .$one['BanID'] . "',".$one['InstitutionID'] . "," . $one['InstitutionPID'] . "," . $one['InflRent']. ", " . $one['CutType'] . ", " . $one['OwnerType'] . "," . $one['UseNature'] . "," . date('Ym',time()). "," . $one['DateEnd'] .")";
 
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,HouseID,BanID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,HouseID,BanID,InstitutionID,InstitutionPID,InflRent,CutType,OwnerType,UseNature,OrderDate,DateEnd) values " . rtrim($str, ','));
 
                 break;
             case 2:  //空租异动完成后的，系统处理
@@ -729,6 +729,12 @@ class ChangeAudit extends Model
                 // 5、删除该房屋本月订单
                 Db::name('rent_order')->where(['HouseID'=> ['in', $arr],'OrderDate'=>['eq',date('Ym')]])->delete();
                 
+                // 6、自动取消减免
+                Db::name('rent_table')->where(['HouseID'=>['in',$changeFind['HouseID']],'ChangeType'=>1,'InflRent'=>['>',0]])->update(['InflRent'=>0,'DateEnd'=>date('Ym')]);
+
+                // 7、自动取消减免
+                Db::name('change_order')->where(['HouseID'=>['in',$changeFind['HouseID']],'ChangeType'=>1,'InflRent'=>['>',0]])->update(['DateEnd'=>date('Ym')]);
+
                 break;
 
             case 4:  //陈欠核销异动完成后的，系统处理 （待完善，将所有满足条件的账抹平）

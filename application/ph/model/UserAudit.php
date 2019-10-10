@@ -172,6 +172,10 @@ class UserAudit extends Model
                 Db::name('house')->where('HouseID',$changeOrderDetail['HouseID'])->update(['TenantID'=>$changeOrderDetail['NewTenantID'],'TenantName'=>$changeOrderDetail['NewTenantName']]);
 
                 Db::name('tenant')->where('TenantID',$changeOrderDetail['NewTenantID'])->setField('Status',1);
+
+                //原租户如果有减免则取消减免
+                Db::name('rent_table')->where(['TenantID'=>$changeOrderDetail['OldTenantID'],'ChangeType'=>1,'InflRent'=>['>',0]])->update(['InflRent'=>0,'DateEnd'=>date('Ym')]);
+                Db::name('change_order')->where(['TenantID'=>$changeOrderDetail['OldTenantID'],'ChangeType'=>1,'InflRent'=>['>',0]])->update(['DateEnd'=>date('Ym')]);
             }
             
             $qrcodeUrl = Db::name('lease_change_order')->where(['HouseID'=>$changeOrderDetail['HouseID'],'TenantID'=>$changeOrderDetail['OldTenantID']])->value('QrcodeUrl');

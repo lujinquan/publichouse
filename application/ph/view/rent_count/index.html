@@ -360,11 +360,15 @@
                     <td class="am-hide-sm-only"><?php echo $v['HistoryUnpaidRent']; ?></td>
                     <td>
                         <div class="am-btn-toolbar">
-                            <?php if(in_array(250,$threeMenu)){ ; ?>
-                            <button class="am-btn am-btn-default am-btn-xs am-text-primary details rentApply" value="">租差申请
+                            <!-- <button class="am-btn am-btn-default am-btn-xs am-text-primary details rentApply" value="">租差申请
+                            </button> -->
+                            <?php if(($v['CutRent'] > 0) && in_array(580,$threeMenu)){ ; ?>
+                            <button class="am-btn am-btn-default am-btn-xs am-text-primary details cancelRentCut" value="{$v['HouseID']}">取消减免
+                            </button>
+                            <?php }else{; ?>
+                            <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
                             </button>
                             <?php }; ?>
-
                         </div>
                     </td>
                 </tr>

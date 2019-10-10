@@ -56,6 +56,20 @@ class RentCount extends Base
     }
 
     /**
+     *  取消减免
+     */
+    public function cancelCut(){
+        $id = input('id/s');
+        //原租户如果有减免则取消减免
+        Db::name('rent_table')->where(['HouseID'=>$id,'ChangeType'=>1,'InflRent'=>['>',0]])->update(['InflRent'=>0,'DateEnd'=>date('Ym')]);
+        Db::name('change_order')->where(['HouseID'=>$id,'ChangeType'=>1,'InflRent'=>['>',0]])->update(['DateEnd'=>date('Ym')]);
+        //是否使用规定租金作为租金基准
+        Db::name('rent_config')->where(['HouseID'=>$id])->update(['CutType'=>0,'CutRent'=>0,'ReceiveRent'=>['exp','HousePrerent+DiffRent+PumpCost'],'UnpaidRent'=>['exp','HousePrerent+DiffRent+PumpCost']]);
+        
+        return jsons('2000','取消成功');
+    }
+
+    /**
      *  计算租差
      */
     public function diff(){
