@@ -31,7 +31,7 @@ define('WEB_VERSION','v1.5.14');
 define('DATA_DEBUG',false);
 
 // 【更新资源文件请修改下面的版本号】
-define('VERSION','v1.5.13_1');
+define('VERSION','v1.5.14_1');
 
 set_time_limit(800);
 

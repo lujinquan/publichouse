@@ -218,11 +218,14 @@ $('.cancelRentCut').click(function(){
                         contentType: false,
                         success: function(res) {
                             res = JSON.parse(res);
-                            layer.msg(res.msg,{time:4000});
-                            if(res.retcode == '2000'){
-                                layer.close(thisIndex);
-                                location.reload();
-                            }
+                            layer.msg(res.msg,{time:4000},function(){
+                            	//location.reload();
+                            	if(res.retcode == '2000'){
+	                                layer.close(thisIndex);
+	                                location.reload();
+	                            }
+                            });
+                            
                         }
                     });
                 //}
