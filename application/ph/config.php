@@ -103,6 +103,8 @@ return [
     'IDCardFace' => '身份证正面',
     'IDCardReverse' => '身份证反面',
 
+    'cancelapprove' => '取消减免报告', //取消减免
+
     //新增空租
     'descriptionReport' => '空租情况说明报告',
     'personalCheckApplication' => '个人退房申请',

@@ -1,4 +1,4 @@
-<form id="approveForm" style="margin-top:1.6rem;display:none;">
+<form id="approveFormCancel" style="margin-top:1.6rem;display:none;">
  
   <div class="am-form-group am-u-md-4">
     <div class="am-u-md-6">
@@ -77,21 +77,29 @@
   <div class="am-u-md-12" style="padding-left:0;">
     <div class="am-form-group am-u-md-12">
       <div class="am-u-md-6">
-        <label>减免报告：</label>
+        <label>查看附件：</label>
       </div>
-      <div id="layer-photos-demo" class="am-u-md-12">
+      <div id="layer-photos-demo-cancel" class="am-u-md-12">
 
       </div>
     </div>
-
 
     <div class="am-form-group am-u-md-12">
       <div class="am-u-md-6">
         <label>审批状态：</label>
       </div>
     </div>
-    <div id="approveState" class="am-u-md-12" style="padding-left:3rem;">
+    <div id="approveStateCancel" class="am-u-md-12" style="padding-left:3rem;">
 
     </div>
+    <div class="am-form-group am-u-sm-12">
+        <label class="label_style">取消减免报告：</label>
+          <div class="am-form-group am-form-file am-u-md-5">
+                <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+                <input id="cancelapprove" type="file" name="cancelapprove" multiple>
+          </div>
+          <div id="cancelapproveShow" class="am-u-md-12 img_content"></div>
+    </div>
 
+  </div>
 </form>

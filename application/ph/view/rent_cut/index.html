@@ -28,7 +28,7 @@
                 <th class="table-set">减免类型</th>
                 <th class="table-set">低保证号</th>
                 <th class="table-set">房屋</th>
-                <!-- <th class="table-set">减免时长</th> -->
+                <th class="table-set">减免金额</th>
                 <th class="table-set">减免到期</th>
                 <th class="table-set">操作</th>
               </tr>
@@ -102,7 +102,7 @@
                   </div>
               </td>
                 
-
+              <td></td> 
               <td></td> 
               <td>
                 <div class="am-btn-group am-btn-group-xs">
@@ -121,12 +121,25 @@
                 <td class="am-hide-sm-only"><?php echo $cutTypes[$v['CutType']] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['IDnumber'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HouseID'] ; ?></td>
-                
-              
-                <td class="am-hide-sm-only"><?php if($v['DateEnd'] == date('Ym')){; ?><font color="red"><?php }; ?><?php echo $v['DateEnd'] ; ?></font></td>
+                <td class="am-hide-sm-only"><?php echo $v['InflRent'] ; ?></td>
+                <td class="am-hide-sm-only">
+                  
+                  {if condition="$v['DateEnd'] == date('Y-m')"}
+                  <font style="color:red">{$v['DateEnd']}</font>
+                  {else /}{$v['DateEnd']}
+                  {/if}
+                  
+                </td>
       				  <td>
       					<div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-primary details details_btn" value="{$v['ChangeOrderID']}">明细</button>
+                    <?php if(($v['InflRent'] > 0) && (str_replace('-','',$v['DateEnd']) > date('Ym')) && in_array(580,$threeMenu)){ ; ?>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-primary cancelRentCut" value="{$v['ChangeOrderID']}">取消减免
+                    </button>
+                    <?php }else{; ?>
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
+                    </button>
+                    <?php }; ?>
       					</div>
       				  </td>
             </tr>
@@ -147,6 +160,7 @@
   <!-- content end -->
   {include file="application/ph/view/rent_cut/detail.html" /}
   {include file="application/ph/view/rent_cut/approveForm.html" /}
+  {include file="application/ph/view/rent_cut/approveFormCancel.html" /}
 {/block}
 {block name="JsFile"}
 <script type="text/javascript" src="/public/static/gf/js/DFileUpload.js?v={$version}"></script>
