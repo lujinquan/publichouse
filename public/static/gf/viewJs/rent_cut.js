@@ -154,25 +154,26 @@ $('.details').click(function(){
 
 $('.cancelRentCut').click(function(){
 	var thisID = $(this).val();
-	console.log(thisID);
+	//console.log(thisID);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
 		res = JSON.parse(res);
-		console.log(res);
+		//console.log(res);
 		$('.APhouseId').text(res.data.detail.HouseID);
-			$('.APBanID').text(res.data.detail.BanID);
-			$('.APhouseAddress').text(res.data.detail.BanAddress);
-			$('.APFloorID').text(res.data.detail.FloorID);
-			$('.APtenantName').text(res.data.detail.TenantName);
-			$('.APtenantTel').text(res.data.detail.TenantTel);
-			$('.APtenantNumber').text(res.data.detail.TenantNumber);
-			$('.APcreateTime').text(res.data.detail.CreateTime);
-			$('.APhouseArea').text(res.data.detail.HouseArea);
-			$('.APleasedArea').text(res.data.detail.LeasedArea);
-			$('#breakTyped').text(res.data.detail.CutName);
-			$('#IDNumberd').text(res.data.detail.IDnumber);
-			$('#validityd').text(res.data.detail.MuchMonth);
-			processState('#approveStateCancel',res);
-			metailShow('#layer-photos-demo-cancel',res);
+		$('.APBanID').text(res.data.detail.BanID);
+		$('.APhouseAddress').text(res.data.detail.BanAddress);
+		$('.APFloorID').text(res.data.detail.FloorID);
+		$('.APtenantName').text(res.data.detail.TenantName);
+		$('.APtenantTel').text(res.data.detail.TenantTel);
+		$('.APtenantNumber').text(res.data.detail.TenantNumber);
+		$('.APcreateTime').text(res.data.detail.CreateTime);
+		$('.APhouseArea').text(res.data.detail.HouseArea);
+		$('.APleasedArea').text(res.data.detail.LeasedArea);
+		$('#breakTyped').text(res.data.detail.CutName);
+		$('#IDNumberd').text(res.data.detail.IDnumber);
+		$('#validityd').text(res.data.detail.MuchMonth);
+		processState('#approveStateCancel',res);
+		metailShow('#layer-photos-demo-cancel',res);
+		//return false;
 		//res = JSON.parse(res);
 		layer.open({
 			type:1,
