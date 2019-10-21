@@ -100,7 +100,7 @@ class RentCut extends Model
         $where['a.ChangeType'] = array('eq', 1);
         //halt($where);
 
-        $result = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','inner')->join('tenant c','a.TenantID = c.TenantID','inner')->field('a.ChangeOrderID,a.CutType,c.TenantName,a.InflRent,a.HouseID,b.IDnumber,b.MuchMonth,a.DateEnd')->where($where)->select();
+        $result = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','left')->join('tenant c','a.TenantID = c.TenantID','inner')->field('a.ChangeOrderID,a.CutType,c.TenantName,a.InflRent,a.HouseID,b.IDnumber,b.MuchMonth,a.DateEnd')->where($where)->select();
         $sresult = [];
         foreach($result as $v){
             if($v['DateEnd'] == date('Ym')){
