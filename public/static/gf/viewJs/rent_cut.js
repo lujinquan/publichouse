@@ -143,7 +143,7 @@ $('.details').click(function(){
 		//res = JSON.parse(res);
 		layer.open({
 			type:1,
-			area:['950px','800px'],
+			area:['950px','600px'],
 			resize:false,
 			zIndex:100,
 			title:['查看明细','color:#FFF;font-size:1.6rem;font-weight:600;'],
@@ -177,7 +177,7 @@ $('.cancelRentCut').click(function(){
 		//res = JSON.parse(res);
 		layer.open({
 			type:1,
-			area:['950px','800px'],
+			area:['950px','600px'],
 			resize:false,
 			zIndex:100,
 			title:['取消减免','color:#FFF;font-size:1.6rem;font-weight:600;'],
