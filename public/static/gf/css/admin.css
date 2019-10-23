@@ -489,7 +489,7 @@ label{
 	margin-top: 10px;
 }
 .label_style{
-	width:70px;
+	width:90px;
   font-size: 12px;
   line-height:28px;
   color: #333333;
@@ -628,6 +628,7 @@ label{
 }
 .p_style{
   font-weight:500;
+  width: 50%;
 }
 .process_style{
   /*width:6.5rem;*/
