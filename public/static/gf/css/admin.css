@@ -629,6 +629,7 @@ label{
 .p_style{
   font-weight:500;
   width: 50%;
+  white-space: nowrap;
 }
 .process_style{
   /*width:6.5rem;*/

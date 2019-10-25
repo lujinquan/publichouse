@@ -157,7 +157,7 @@ $('.cancelRentCut').click(function(){
 	//console.log(thisID);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
 		res = JSON.parse(res);
-		//console.log(res);
+		console.log(res);
 		$('.APhouseId').text(res.data.detail.HouseID);
 		$('.APBanID').text(res.data.detail.BanID);
 		$('.APhouseAddress').text(res.data.detail.BanAddress);
@@ -168,9 +168,9 @@ $('.cancelRentCut').click(function(){
 		$('.APcreateTime').text(res.data.detail.CreateTime);
 		$('.APhouseArea').text(res.data.detail.HouseArea);
 		$('.APleasedArea').text(res.data.detail.LeasedArea);
-		$('#breakTyped').text(res.data.detail.CutName);
-		$('#IDNumberd').text(res.data.detail.IDnumber);
-		$('#validityd').text(res.data.detail.MuchMonth);
+		$('#breakTypeds').text(res.data.detail.CutName);
+		$('#IDNumberds').text(res.data.detail.IDnumber);
+		$('#validityds').text(res.data.detail.MuchMonth);
 		processState('#approveStateCancel',res);
 		metailShow('#layer-photos-demo-cancel',res);
 		//return false;

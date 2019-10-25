@@ -59,21 +59,21 @@
     <div class="am-u-md-6">
       <label class="label_style">减免类型：</label>
     </div>
-     <label id="breakTyped"></label>
+    <label class="p_style" id="breakTypeds"></label>
   </div>
 
   <div class="am-form-group am-u-md-4" id="IDNumber">
     <div class="am-u-md-6">
       <label class="label_style">证件号：</label>
     </div>
-     <label  class="p_style" id="IDNumberd"></label>
+     <label class="p_style" id="IDNumberds"></label>
   </div>
 
   <div class="am-form-group am-u-md-4" id="validity">
     <div class="am-u-md-6">
       <label class="label_style">证件有效期：</label>
     </div>
-     <label  class="p_style" id="validityd"></label>
+     <label  class="p_style" id="validityds"></label>
   </div>
 
   
@@ -99,15 +99,28 @@
     </div>
 
     <div id="approveStateCancel" class="am-u-md-12" style="padding-left:3rem;"></div>
-
+	
+	
+	<div class="am-u-md-12" style="padding-left:0;">
+	  	<div class="am-form-group am-u-md-12">
+			<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>
+	  		<div class="am-u-md-6">
+	  		  <label>取消减免：</label>
+	  		</div>
+	  	</div>
+	</div>
     <div class="am-form-group am-u-sm-12">
-      <label class="label_style">取消减免报告：</label>
-        <div class="am-form-group am-form-file am-u-md-5">
-              <i class="am-icon-cloud-upload"></i> 选择要上传的文件
-              <input id="cancelapprove" type="file" name="cancelapprove" multiple>
-        </div>
-        <div id="cancelapproveShow" class="am-u-md-12 img_content"></div>
-      </div>
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">取消减免报告：</label>
+			  <div class="am-form-group am-form-file am-u-md-6">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input id="cancelapprove" type="file" name="cancelapprove" multiple>
+			  </div>
+			</div>
+		</div>
+		<div id="cancelapproveShow" class="am-u-md-12 img_content"></div>
+    </div>
 
 
     </div>
