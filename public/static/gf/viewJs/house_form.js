@@ -838,6 +838,7 @@ $('.RentForm').click(function() {
                 }
 				$(".ModifyDetail.11 .exRoom").each(function(){
 				  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick").css('background-color','#f6f6f6');
+				  $(this).find('li:gt(1):lt(12) .fontS1').removeClass("QueryCut");
 				});
             });
             layer.open({
@@ -926,9 +927,6 @@ for (var p = 0; p < aImg2.length; p++) {
     });
 }
 //增加点击
-$(".ModifyDetail.11 .exRoom").each(function(){
-	  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick").css('background-color','#f6f6f6');
-	});
 $(document).on('click', '.addRoom', function() {
     $('.QueryCut').blur();
     $(this).parent().siblings().css('display', 'block');
