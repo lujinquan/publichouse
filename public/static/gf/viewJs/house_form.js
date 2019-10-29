@@ -698,7 +698,6 @@ $('.RentForm').click(function() {
                                
                     $('.Mnum').eq(num).css('display', 'block');
                     $('.addRoom').eq(num).parent().before(RentHtml2);
-
                     //$("#MownT option[value='"+res.data.roomDetail[num][j].OwnerType+"']").attr("select","selected"); 
                     RentHtml2 = '';
                     $('.RoomStyle').click(function() {
@@ -837,6 +836,9 @@ $('.RentForm').click(function() {
                         $('.exRoom').eq(n).children().eq(9).children().eq(1).prop('disabled', true);
                     }
                 }
+				$(".ModifyDetail.11 .exRoom").each(function(){
+				  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick").css('background-color','#f6f6f6');
+				});
             });
             layer.open({
                 type: 1,
@@ -879,6 +881,7 @@ $('.RentForm').click(function() {
                             layer.msg(result.msg,{time:4000});
                         }
                     });
+					
                 }, //保存提交
                 end: function() {
                     layer.close(thisIndex);
@@ -923,7 +926,9 @@ for (var p = 0; p < aImg2.length; p++) {
     });
 }
 //增加点击
-
+$(".ModifyDetail.11 .exRoom").each(function(){
+	  $(this).find('li:gt(1):lt(12) .fontS1').attr('readonly','readonly').unbind("dblclick").css('background-color','#f6f6f6');
+	});
 $(document).on('click', '.addRoom', function() {
     $('.QueryCut').blur();
     $(this).parent().siblings().css('display', 'block');
