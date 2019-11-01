@@ -100,8 +100,31 @@ class RentCut extends Base
     }
 
     public function changeCutYearProcess(){
+
         $data = $this->request->param();
-        halt($data);
+        $reson = isset($data['reson'])?$data['reson']:'';
+        $isfail = isset($data['isfail'])?$data['isfail']:2;
+        $where = ['ChangeOrderID'=>$data['ChangeOrderID']];
+        //halt($data);
+        if ($isfail == 0) {
+            //终审不通过则状态改为 0
+            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0]);
+        //若审核不通过
+        } elseif ($reson != '' && $isfail == 1) {
+            //终审不通过则状态改为 0
+            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0, 'FinishTime' => time()]);
+        // 若终审通过
+        } elseif ($reson == '' && $isfail != 0) {
+            //终审通过则状态改为  1,并写入最终通过时间
+           $re = Db::name('change_cut_year')->where($where)->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
+        }
+
+        if ($re) {
+            return jsons('2000','审核成功');
+        } else {
+            return jsons('4000','审核失败');
+        }
+
         //$row = Db::name('change_cut_year')->where(['ChangeOrderID'=>$data['ChangeOrderID'],'Status'=>['>',0]])->find();
     }
     

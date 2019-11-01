@@ -341,6 +341,16 @@ $(".HouseDetailBtn").click(function() {
                 // $('.add_2').html(htmlC1);
             }
         }
+        var Bans = res.data.bans;
+        var BansHtml = '';
+        if (Bans && Bans.length != 0) {
+            for (var i = 0; i < Bans.length; i++) {          
+                BansHtml += '<li><span class="j-size">'+Bans[i].AreaFour+'</span><span>'+Bans[i].BanID+'</span></li>'; 
+            }
+            $('#j-storied').append(BansHtml);
+            BansHtml = '';
+        }
+
         var ARecord = res.data.change_record;
         var aHtml = '';
         if (ARecord && ARecord.length != 0) {

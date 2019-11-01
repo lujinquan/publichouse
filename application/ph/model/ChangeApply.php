@@ -315,13 +315,13 @@ class ChangeApply extends Model
                     if(!$data['Ban']){
                         return jsons('4001','请完善异动信息');
                     }
-                    if(!$data['Ban'][0]['houseArea']){
+                    if($data['Ban'][0]['houseArea'] <= 0){
                         return jsons('4001','请完善建筑面积');
                     }
-                    if(!$data['Ban'][0]['housePrice']){
+                    if($data['Ban'][0]['housePrice'] <= 0){
                         return jsons('4001','请完善房屋原价');
                     }
-                    if(!$data['Ban'][0]['cancelPrent']){
+                    if($data['Ban'][0]['cancelPrent'] <= 0){
                         return jsons('4001','请完善规租');
                     }
                     if(!$data['Ban'][0]['cancelHouseUsearea']){
@@ -506,7 +506,7 @@ class ChangeApply extends Model
                         'Status'=>1,
                     ];
 
-                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature,TotalOprice,PreRent,TotalArea')
+                    $finds = $banModel->field('TubulationID,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature,TotalOprice,PreRent,TotalArea')
                                       ->where($findwhere)
                                       ->find();
                     if(!$finds){

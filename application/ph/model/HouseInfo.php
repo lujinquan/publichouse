@@ -208,11 +208,9 @@ class HouseInfo extends Model
             ->field('BanID,RoomID,UnitID,FloorID,RoomNumber,BanAddress,RoomTypeName,UseArea,LeasedArea,RoomPublicStatus')
             ->where($wheres)
             ->select();
-        //halt($data);
-
+        //halt($datass);
+        $tempBan = [$data['BanID']];
         foreach ($datass as $keys => $values) {
-
-
             if ($values['RoomPublicStatus'] == 1) {
                 $values['RoomPublicStatus'] = '私有';
             } elseif ($values['RoomPublicStatus'] == 2) {
@@ -220,7 +218,7 @@ class HouseInfo extends Model
             } else {
                 $values['RoomPublicStatus'] = '三户及三户以上共用';
             }
-
+            $tempBan[] = $values['BanID'];
             $data['RoomDetail'][$keys][0][] = $values['BanID'];
             $data['RoomDetail'][$keys][0][] = $values['UnitID'];
             $data['RoomDetail'][$keys][0][] = $values['FloorID'];
@@ -232,7 +230,8 @@ class HouseInfo extends Model
             $data['RoomDetail'][$keys][1][] = $values['LeasedArea'];
             $data['RoomDetail'][$keys][1][] = $values['RoomNumber'];
         }
-        //halt($data);
+        //halt(array_unique($tempBan));
+        $data['bans'] = Db::name('ban')->field('BanID ,AreaFour')->where('BanID', 'in', array_unique($tempBan))->select();
         if (!$data) {
             return array();
         }
