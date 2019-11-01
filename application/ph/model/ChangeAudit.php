@@ -273,7 +273,9 @@ class ChangeAudit extends Model
             ->find();
 
         $CutYearRecord = Db::name('change_cut_year')->where(['ChangeOrderID'=>$changeOrderID])->field('CutType,CutNumber,CutRent,Status,CreateTime,FinishTime,ChangeImageIDS')->select();
-        //halt($cutYearRow);
+        foreach($CutYearRecord as &$v){
+            $v['urls'] = Db::name('upload_file')->where('id', 'in', $v['ChangeImageIDS'])->field('FileUrl ,FileTitle')->select();
+        }
         $data['CutYearRecord'] = $CutYearRecord;
         $data['Remark'] = $oneData['Remark'];
         $data['InflRent'] = $oneData['InflRent'];
@@ -282,6 +284,15 @@ class ChangeAudit extends Model
         $data['MuchMonth'] = $datas['MuchMonth'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 1;
+
+        // $IDS = Db::name('change_order')->where($where)->value('ChangeImageIDS');
+        // $images = explode(',', $IDS);
+
+        // if (!$images) {
+        //     jsons('4004', '请先上传相关图片');
+        // }
+        // $urls = Db::name('upload_file')->where('id', 'in', $images)->field('FileUrl ,FileTitle')->select();
+
 
         return $data;
     }
@@ -563,6 +574,8 @@ class ChangeAudit extends Model
         $data['Remark'] = $oneData['Remark'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['type'] = 18;
+
+
         return $data;
     }
 

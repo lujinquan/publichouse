@@ -2317,9 +2317,9 @@ $('#addApply').click(function() {
 				       },
 				       yes: function(thisIndex, layero) {
 						   
-				           var formData = fileTotall.getArrayFormdata() || new FormData();
-				           formData.append("type", 18);
-						   formData.append('cause',$('#buildingcancelReason').val())//事由
+				     //       var formData = fileTotall.getArrayFormdata() || new FormData();
+				     //       formData.append("type", 18);
+						   // formData.append('cause',$('#buildingcancelReason').val())//事由
 						  /* formData.append('floor_number',$('#floor_number').text())//楼栋编号
 						   formData.append('floor_prescribed',$('#floor_prescribed label').text())//异动前规定租金
 						   formData.append('cancel_change_1',$('.cancel_change_1 label').text())//异动规定租金
@@ -2333,11 +2333,19 @@ $('#addApply').click(function() {
 						   formData.append('floor_builtuparea',$('#floor_original').text())//异动前房屋原价
 						   formData.append('cancel_change_4',$('.cancel_change_4 label').text())//异动房屋原价
 						   formData.append('changes_floor_original',$('#changes_floor_original label').text())//异动后房屋原价 */
-						   console.log($('#buildingcancel').serializeArray());
+						   var formdatas = $('#buildingcancel').serialize();
+                           var cancelReason = $('#buildingcancelReason').val();
+                           var banID = $('#floor_number').text();
+
+                           formdatas += '&type=18&cancelReason='+cancelReason+'&banID='+banID;
+                           
+                           
+                           //console.log(formdatas);
+                            //var jsondata = eval('(' + formdatas + ')');
 				           $.ajax({
-				               type: "post",
+				               type: "get",
 				               url: "/ph/ChangeApply/add",
-				               data: formData,
+				               data: formdatas,
 				               processData: false,
 				               contentType: false,
 				               success: function(res) {

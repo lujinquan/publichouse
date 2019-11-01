@@ -41,8 +41,8 @@ class ChangeApply extends Base
      */
     public function add(){
 
-        if ($this->request->isPost()) {
-            $data = $this->request->post();
+        if ($this->request->isAjax()) {
+            $data = $this->request->param();
 
             if(DATA_DEBUG){
                 return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
@@ -51,7 +51,7 @@ class ChangeApply extends Base
             // if(!in_array($data['type'],[1,2,3,4,7,8,11,14])){
             //     return jsons('4001','开放时间：2019年1月7日，等待年报表确认！');
             // }
-
+//halt($data);
             $one = model('ph/ChangeApply')->check_apply_table($data);
             //halt($one);
             if (isset($_FILES) && $_FILES) {   //文件上传
@@ -630,35 +630,44 @@ class ChangeApply extends Base
                     
                     break;   
                 case 18:  // 楼栋注销
-halt($data);
+
                     $arr = [];
-                    foreach($data['Ban'] as $k => $b){
-                        // $row = Db::name('ban')->where('BanID',$b['banID'])->field('TotalArea,TotalOprice,PreRent,BanUsearea')->find();
-                        // $arr[$k][0]['BanID'] = $b['banID'];
-                        // $arr[$k][0]['TotalArea'] = $row['TotalArea'];
-                        // $arr[$k][0]['TotalOprice'] = $row['TotalOprice'];
-                        // $arr[$k][0]['PreRent'] = $row['PreRent'];
-                        // $arr[$k][0]['BanUsearea'] = $row['BanUsearea'];
-                        // $arr[$k][1]['cancelPrent'] = $b['cancelPrent'];
-                        // $arr[$k][1]['cancelHouseUsearea'] = $b['cancelHouseUsearea'];
-                        // $arr[$k][1]['cancelArea'] = isset($b['cancelArea'])?$b['cancelArea']:0;
-                        // $arr[$k][1]['cancelOprice'] = isset($b['cancelOprice'])?$b['cancelOprice']:0;
-                        // $arr[$k][2]['TotalArea'] = $row['TotalArea'] - $arr[$k][1]['cancelArea'] ;
-                        // $arr[$k][2]['TotalOprice'] = $row['TotalOprice'] - $arr[$k][1]['cancelOprice'];
-                        // $arr[$k][2]['PreRent'] = $row['PreRent'] - $arr[$k][1]['cancelPrent'];
-                        // $arr[$k][2]['BanUsearea'] = $row['BanUsearea'] - $arr[$k][1]['cancelHouseUsearea'];
+                    $count = count($data['house_id']);
+                    for ($i=0; $i < $count; $i++) { 
+                        $arr['houses'][$i] = [
+                            'house_id' => $data['house_id'][$i],
+                            'TenantName' => $data['TenantName'][$i],
+                            'house_original' => $data['house_original'][$i],
+                            'house_builtuparea' => $data['house_builtuparea'][$i],
+                            'HousePrerent' => $data['HousePrerent'][$i],
+                            'LeasedArea' => $data['LeasedArea'][$i],
+                        ];
                     }
-                    $datas['Deadline'] = json_encode($data['Ban']);
+                    $arr['changes'] = [
+                        'floor_prescribed' => $data['floor_prescribed'],
+                        'floor_areaofuse' => $data['floor_areaofuse'],
+                        'floor_builtuparea' => $data['floor_builtuparea'],
+                        'floor_original' => $data['floor_original'],
+                        'cancel_change_1' => $data['cancel_change_1'],
+                        'cancel_change_2' => $data['cancel_change_2'],
+                        'cancel_change_3' => $data['cancel_change_3'],
+                        'cancel_change_4' => $data['cancel_change_4'],
+                        'changes_floor_prescribed' => $data['changes_floor_prescribed'],
+                        'changes_floor_areaofuse' => $data['changes_floor_areaofuse'],
+                        'changes_floor_builtuparea' => $data['changes_floor_builtuparea'],
+                        'changes_floor_original' => $data['changes_floor_original'],
+                    ];
+                    $datas['Deadline'] = json_encode($arr);
                     //halt($arr);
                     //$datas['HouseID'] = $data['HouseID'];  //房屋编号
-                    $datas['BanID'] = $one['BanID']; //当前楼栋
+                    $datas['BanID'] = $data['banID']; //当前楼栋
                     //$datas['TenantID'] = $one['TenantID'];
-                    $datas['InstitutionID'] = $one['InstitutionID'];
-                    $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['InstitutionID'] = $one['TubulationID'];
+                    $datas['InstitutionPID'] = $one['InstitutionID'];
                     $datas['OrderDate'] = date('Ym', time());  //订单期
-                    $datas['InflRent'] = $one['HousePrerent'] + $one['DiffRent'] + $one['PumpCost'];
+                    $datas['InflRent'] = $one['PreRent'];
                     $datas['OwnerType'] = $one['OwnerType'];
-                    $datas['UseNature'] = $one['UseNature'];
+                    //$datas['UseNature'] = $one['UseNature'];
                     //$datas['CancelType'] = $data['cancelType'];  //注销类型
                     $datas['Remark'] = $data['cancelReason'];  //异动缘由
                     $datas['ChangeType'] = $data['type'];  //异动类型
