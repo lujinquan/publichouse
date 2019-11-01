@@ -341,6 +341,7 @@ $('.reviewRentCut').click(function(){
                     //     formData.append("ARemitRent", $('#ARemitRent').val());
                     // }
                     // formData.append("type", 1);
+					// changeCutYearProcess 审核
                     $.ajax({
                         type: "post",
                         url: "/ph/RentCut/changeCutYearAdd?ChangeOrderID="+thisID,
@@ -376,7 +377,215 @@ $('.reviewRentCut').click(function(){
 
 	// });
 });
+//租金减免年审审核
+$('.examineRentCut').click(function(){
+	var thisID = $(this).val();
+	//console.log(thisID);
+	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
+		res = JSON.parse(res);
+		console.log(res);
+		$('.APhouseId').text(res.data.detail.HouseID);
+		$('.APBanID').text(res.data.detail.BanID);
+		$('.APhouseAddress').text(res.data.detail.BanAddress);
+		$('.APFloorID').text(res.data.detail.FloorID);
+		$('.APtenantName').text(res.data.detail.TenantName);
+		$('.APtenantTel').text(res.data.detail.TenantTel);
+		$('.APtenantNumber').text(res.data.detail.TenantNumber);
+		$('.APcreateTime').text(res.data.detail.CreateTime);
+		$('.APhouseArea').text(res.data.detail.HouseArea);
+		$('.APleasedArea').text(res.data.detail.LeasedArea);
+		$('#breakTyped4').text(res.data.detail.CutName);
+		$('#IDNumberd4').text(res.data.detail.IDnumber);
+		$('#validityd4').text(res.data.detail.MuchMonth);
+		$("#transferReasons").val(res.data.detail.CutYearRecord[0].CutNumber);//减免证号
+		$("#transferMoneys").val(res.data.detail.CutYearRecord[0].CutRent);//减免金额
+		$("#transferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
+		processState('#approveStatereviews',res);
+		metailShow('#layer-photos-demo-reviews',res);
+		layerBox(thisID,'derate','租金减免审批',1,res.data.config.status);
+		//return false;
+		//res = JSON.parse(res);
+/* 		layer.open({
+			type:1,
+			area:['950px','600px'],
+			resize:false,
+			zIndex:100,
+			title:['租金减免年审','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			content:$("#changeCutYearProcess"),
+			btn:['保存','取消'],
+            success: function(){
+            	
+            },
+            yes: function(thisIndex) {
+                //if ($('#getInfo_1').val() == "") {
+                    //layer.msg('房屋编号存在问题呢！！！',{time:4000});
+                //} else {
+                 var formData = fileTotall.getArrayFormdata() || new FormData();
 
+					//formData.append('ChangeOrderID',changeorderid);
+                    // formData.append("CutType", $('#CutType').val());
+                    // formData.append("IDnumber", $('#IDnumber').val());
+                    // formData.append("validity", $('#validity').val());
+                    // formData.append("HouseID", $('#getInfo_1').val());
+                    // formData.append("RemitRent", $('#RemitRent').val());
+                   
+                    // if($('.CutHide').css('display')=='block'){
+                    //     formData.append("ARemitRent", $('#ARemitRent').val());
+                    // }
+                    // formData.append("type", 1);
+					// changeCutYearProcess 审核
+                    $.ajax({
+                        type: "post",
+                        url: "/ph/RentCut/changeCutYearProcess?ChangeOrderID="+thisID,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            layer.msg(res.msg,{time:4000},function(){
+                            	//location.reload();
+                            	if(res.retcode == '2000'){
+	                                layer.close(thisIndex);
+	                                location.reload();
+	                            }
+                            });
+                            
+                        }
+                    });
+                //}
+            },
+		}); */
+		
+		function layerBox(value,id,name,operation,status){
+			var this_index = layer.open({
+		        type: 1,
+		        area: ['990px','780px'],
+		        resize: false,
+		        zIndex: 100,
+		        title: [name, 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+		        content: $("#changeCutYearProcess"),
+		        btn:operation==1?['通过','不通过','打回']:'',
+		        success: function(){
+		
+		        },
+		        yes:function(){
+		        	if(status == '1'){
+		        		var formData = fileTotall.getArrayFormdata() || new FormData();
+		                formData.append('deteleImg',delete_img_array.join(','));
+		        	}else{
+		        		var formData = new FormData();
+		        	}
+					formData.append('ChangeOrderID',value);
+		        	processPass(formData,this_index);
+		        },
+		        btn2:function(){
+					noPass(value);
+				},
+		        btn3:function(){
+		            goBack(value);
+		        }
+		    })
+		}
+		// 审批通过事件
+		function processPass(formData,this_index){
+			$.ajax({
+		        type:"post",
+		        url:"/ph/RentCut/changeCutYearProcess?ChangeOrderID="+thisID,
+		        data:formData,
+		        processData:false,
+		        contentType:false,
+		        success:function(res){
+		            res = JSON.parse(res);
+		               console.log(res);
+		            layer.msg(res.msg,{time:4000});
+		            layer.close(this_index);
+		            location.reload();
+		        }
+			})
+		}
+		// 审批不通过事件
+		function noPass(value,reason){
+			layer.open({
+				type:1,
+				area:['400px','400px'],
+				resize:false,
+				zIndex:100,
+				title:['不通过原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+				content:'<textarea id="reason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+				btn:['确认'],
+		        success:function(){
+		            console.log(reason);
+		            $('#reason').val(reason||'');
+		        },
+				yes:function(msgIndex){
+					var reasonMsg = $('#reason').val();
+					if (reasonMsg=='') {
+						reasonMsg='空';
+					}else{
+						reasonMsg=$('#reason').val();
+					}
+					console.log(reasonMsg);
+					$.post("/ph/RentCut/changeCutYearProcess?ChangeOrderID="+thisID,{ChangeOrderID:value,reson:reasonMsg,isfail:1},function(res){
+						res = JSON.parse(res);
+						console.log(res);
+						layer.msg(res.msg,{time:4000});
+						if(res.retcode == "2000"){
+							layer.close(msgIndex);
+							location.reload();
+						}
+					});
+				}
+			})
+		}
+		
+		// 审批不通过事件
+		function goBack(value,reason){
+		    layer.open({
+		        type:1,
+		        area:['400px','400px'],
+		        resize:false,
+		        zIndex:100,
+		        title:['打回原因','color:#FFF;font-size:1.6rem;font-weight:600;'],
+		        content:'<textarea id="backReason" style="width:350px;height:290px;margin-top:10px;border:1px solid #c1c1c1;resize: none;margin-left: 25px;"></textarea>',
+		        btn:['确认'],
+		        success:function(){
+		            console.log(reason);
+		            $('#backReason').val(reason||'');
+		        },
+		        yes:function(msgIndex){
+		            var reasonMsg = $('#backReason').val();
+		            if (reasonMsg=='') {
+		                reasonMsg='空';
+		            }else{
+		                reasonMsg=$('#backReason').val();
+		            }
+		            // console.log(reasonMsg);
+		            $.post("/ph/RentCut/changeCutYearProcess?ChangeOrderID="+thisID,{ChangeOrderID:value,reson:reasonMsg,isfail:0},function(res){
+		                res = JSON.parse(res);
+		                console.log(res);
+		                layer.msg(res.msg,{time:4000});
+		                if(res.retcode == "2000"){
+		                    layer.close(msgIndex);
+		                    location.reload();
+		                }
+		            });
+		        }
+		    })
+		}
+	});
+	// var id = $(this).val();
+	// console.log(id);
+	// layer.confirm('注意，一旦取消减免;将必须重新申请再减免。无法恢复！！！',{title:'取消减免',icon:'1',skin:'lan_class'},function(conIndex){
+	// 	$.get('/ph/RentCount/cancelCut?id='+id,function(res){
+	// 		res = JSON.parse(res);
+	// 		layer.msg(res.msg,{time:4000},function(){
+	// 			location.reload();
+	// 		});
+	// 	});
+	// 	layer.close(conIndex);
+
+	// });
+});
 //流程配置函数
 function metailShow(id,res){
 	var ImgLength = res.data.urls.length;
