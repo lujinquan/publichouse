@@ -494,8 +494,26 @@ class ChangeApply extends Model
                     }
                     return $finds;
                 break;
+                case 18:
+                    $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>18,'Status'=>['>',1]])->find();
+                    if($ifin){
+                        return jsons('4001','该楼栋已在楼栋注销异动单中……');
+                    }
+                    $banModel = new BanModel;
 
+                    $findwhere = [
+                        'BanID'=>$data['banID'],
+                        'Status'=>1,
+                    ];
 
+                    $finds = $banModel->field('TubulationID ,InstitutionID,DamageGrade,StructureType,OwnerType,UseNature,TotalOprice,PreRent,TotalArea')
+                                      ->where($findwhere)
+                                      ->find();
+                    if(!$finds){
+                        return jsons('4002','楼栋状态异常');
+                    }
+                    return $finds;
+                break;
 
                 default:
         }

@@ -65,6 +65,44 @@ class RentCut extends Base
         return jsons('2000','取消成功');
     }
 
+    /**
+     *  减免年审申请
+     */
+    public function changeCutYearAdd(){
+        $data = $this->request->param();
+        $row = Db::name('change_cut_year')->where(['ChangeOrderID'=>$data['ChangeOrderID'],'Status'=>['>',0]])->find();
+        if($row){
+            return jsons('4000','请勿重复申请！');
+        }
+        //halt($data);
+        if (isset($_FILES) && $_FILES) {   //文件上传
+            foreach ($_FILES as $k => $v) {
+                $ChangeImageIDS[] = model('RentCut')->uploads($v, $k);
+            }
+            $ChangeImageIDS = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
+        }else{
+            return jsons('4000','请上传租金年审报告！');
+        }
 
+        
 
+        $finlData = [
+            'ChangeOrderID' => $data['ChangeOrderID'],
+            'CutType' => $data['CutType'],
+            'CutRent' => $data['CutRent'],
+            'CutNumber' => $data['CutNumber'],
+            'ChangeImageIDS' => $ChangeImageIDS,
+            'Status' => 2,
+            'CreateTime' => time(),
+        ];
+        $res = Db::name('change_cut_year')->insert($finlData);
+        return $res?jsons('2000','申请成功'):jsons('4000','申请失败');
+    }
+
+    public function changeCutYearProcess(){
+        $data = $this->request->param();
+        halt($data);
+        //$row = Db::name('change_cut_year')->where(['ChangeOrderID'=>$data['ChangeOrderID'],'Status'=>['>',0]])->find();
+    }
+    
 }

@@ -246,7 +246,10 @@ class Api extends Controller
         $data['TubulationID'] = get_institution($data['TubulationID']);
         $data['StructureType'] = get_structure($data['StructureType']);
         $data['CreateTime'] = date('Y-m-d H:i:s', $data['CreateTime']);
-//halt($data);
+        $changeType = input('ChangeType');
+        if($changeType && $changeType == 18){
+            $data['HouseInfo'] = Db::name('house')->where(['BanID'=>['eq', $banID],'Status'=>1])->field('HouseID,TenantName,OldOprice,HousePrerent,HouseArea,LeasedArea,HouseUsearea')->select();
+        }
 
         return jsons('2000', '获取成功', $data);
     }

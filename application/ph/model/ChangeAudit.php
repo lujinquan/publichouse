@@ -268,6 +268,10 @@ class ChangeAudit extends Model
             ->join('cut_rent_type b', 'a.CutType = b.id', 'left')->where('ChangeOrderID', 'eq', $changeOrderID)
             ->field('b.CutName ,a.IDnumber,a.MuchMonth')
             ->find();
+
+        $CutYearRecord = Db::name('change_cut_year')->where(['ChangeOrderID'=>$changeOrderID])->field('CutType,CutNumber,CutRent,Status,CreateTime,FinishTime,ChangeImageIDS')->select();
+        //halt($cutYearRow);
+        $data['CutYearRecord'] = $CutYearRecord;
         $data['Remark'] = $oneData['Remark'];
         $data['InflRent'] = $oneData['InflRent'];
         $data['CutName'] = $datas['CutName'];

@@ -142,7 +142,16 @@
                     <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
                     </button>
                     <?php }; ?>
-					<button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审</button>
+                    {if condition="!$v['Status'] && in_array(581,$threeMenu)"}
+					           <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审</button>
+                    {else /}
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">年审</button>
+                    {/if}
+                    {if condition="$v['Status'] == 2 && in_array(582,$threeMenu)"}
+                     <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审审核</button>
+                    {else /}
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">年审审核</button>
+                    {/if}
       					</div>
       				  </td>
             </tr>

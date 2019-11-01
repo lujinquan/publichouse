@@ -2202,21 +2202,22 @@ $('#addApply').click(function() {
 				           $('#buildingcancelQuery').on('click', function() {
 				               var BanID = $("#buildingcancelQueryBan").val();
 				               console.log(BanID);
-				               $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
+				               $.get('/ph/Api/get_ban_info/ChangeType/18/BanID/' + BanID, function(res) {
 				                   res = JSON.parse(res);
 				                   console.log(res);
 				                   layer.msg(res.msg,{time:4000});
 				                   $("#buildingcancelAddress").text(res.data.BanAddress);
 								   $('.j-house-box tbody').html('');
 								  if(res){ 
-									  for(var i=0;i<4;i++) {
+                                      var HouseInfo = res.data.HouseInfo;
+									  for(var i=0;i<HouseInfo.length;i++) {
 											var trData ='<tr>\
-														<td class="house_number">10020050010001</td>\
-														<td class="house_lessee">杨文胜</td>\
-														<td class="house_original"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_original['+i+']" value="0.00"></td>\
-														<td class="house_builtuparea"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea['+i+']" value="0.00"></td>\
-														<td class="house_prescribed">61.60</td>\
-														<td class="house_rentalarea">41.06</td>\
+														<td class="house_number">'+HouseInfo[i].HouseID+'</td>\
+														<td class="house_lessee">'+HouseInfo[i].TenantName+'</td>\
+														<td class="house_original"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+HouseInfo[i].OldOprice+'"></td>\
+														<td class="house_builtuparea"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea['+i+']" value="'+HouseInfo[i].HouseArea+'"></td>\
+														<td class="house_prescribed">'+HouseInfo[i].HousePrerent+'</td>\
+														<td class="house_rentalarea">'+HouseInfo[i].LeasedArea+'</td>\
 													</tr>';
 										  initialvalue();
 										  $('.j-house-box tbody').append(trData);
@@ -2230,14 +2231,14 @@ $('#addApply').click(function() {
 								           sumbuildingsold =0;//建筑面积异动后面积
 								       var sumoriginal =0,//房屋原价异动初始面积
 								           sumoriginalold =0;//房屋原价异动后面积
-								      $("#floor_prescribed label").text(100);//获取表格规定租金
-								      $("#floor_prescribed input").val(100);//获取隐藏域的值
-								      $("#floor_areaofuse label").text(200);//获取表格使用面积
-								      $("#floor_areaofuse input").val(200);//获取隐藏域的值
-								      $("#floor_builtuparea label").text(300);//获取表格建筑面积
-								      $("#floor_builtuparea input").val(300);//获取隐藏域的值
-								      $("#floor_original label").text(400);//获取表格房屋原价
-								      $("#floor_original input").val(400);//获取隐藏域的值						   
+								      $("#floor_prescribed label").text(res.data.PreRent);//获取表格规定租金
+								      $("#floor_prescribed input").val(res.data.PreRent);//获取隐藏域的值
+								      $("#floor_areaofuse label").text(res.data.BanUsearea);//获取表格使用面积
+								      $("#floor_areaofuse input").val(res.data.BanUsearea);//获取隐藏域的值
+								      $("#floor_builtuparea label").text(res.data.TotalArea);//获取表格建筑面积
+								      $("#floor_builtuparea input").val(res.data.TotalArea);//获取隐藏域的值
+								      $("#floor_original label").text(res.data.TotalOprice);//获取表格房屋原价
+								      $("#floor_original input").val(res.data.TotalOprice);//获取隐藏域的值						   
 								  //基数异动c初始值
 								   var trList = $(".j-house-box tbody").children("tr");
 								   for (var k=0;k<trList.length;k++) {

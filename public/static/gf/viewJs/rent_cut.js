@@ -323,13 +323,14 @@ $('.reviewRentCut').click(function(){
                 //if ($('#getInfo_1').val() == "") {
                     //layer.msg('房屋编号存在问题呢！！！',{time:4000});
                 //} else {
-					var transferReason = $("#transferReason").val();//减免证号
-					var transferWay = $("#transferWay").val();//减免类型
-					var transferMoney = $("#transferMoney").val();//减免金额
+					var CutNumber = $("#transferReason").val();//减免证号
+					var CutRent = $("#transferMoney").val();//减免金额
+					var CutType = $("#transferWay").val();//减免类型
                     var formData = fileTotall.getArrayFormdata() || new FormData();
-					formData.append('transferType',transferWay);
-					formData.append('transferRent',transferMoney);
-					formData.append('transferReason',transferReason);
+					formData.append('CutType',CutType);
+					formData.append('CutRent',CutRent);
+					formData.append('CutNumber',CutNumber);
+					//formData.append('ChangeOrderID',changeorderid);
                     // formData.append("CutType", $('#CutType').val());
                     // formData.append("IDnumber", $('#IDnumber').val());
                     // formData.append("validity", $('#validity').val());
@@ -342,7 +343,7 @@ $('.reviewRentCut').click(function(){
                     // formData.append("type", 1);
                     $.ajax({
                         type: "post",
-                        url: "/ph/RentCut/cancelCut?ChangeOrderID="+thisID,
+                        url: "/ph/RentCut/changeCutYearAdd?ChangeOrderID="+thisID,
                         data: formData,
                         processData: false,
                         contentType: false,

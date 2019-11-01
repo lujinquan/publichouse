@@ -629,6 +629,49 @@ class ChangeApply extends Base
                     $res = Db::name('change_order')->insert($datas);
                     
                     break;   
+                case 18:  // 楼栋注销
+                
+                    // $arr = [];
+                    // foreach($data['Ban'] as $k => $b){
+                    //     $row = Db::name('ban')->where('BanID',$b['banID'])->field('TotalArea,TotalOprice,PreRent,BanUsearea')->find();
+                    //     $arr[$k][0]['BanID'] = $b['banID'];
+                    //     $arr[$k][0]['TotalArea'] = $row['TotalArea'];
+                    //     $arr[$k][0]['TotalOprice'] = $row['TotalOprice'];
+                    //     $arr[$k][0]['PreRent'] = $row['PreRent'];
+                    //     $arr[$k][0]['BanUsearea'] = $row['BanUsearea'];
+                    //     $arr[$k][1]['cancelPrent'] = $b['cancelPrent'];
+                    //     $arr[$k][1]['cancelHouseUsearea'] = $b['cancelHouseUsearea'];
+                    //     $arr[$k][1]['cancelArea'] = isset($b['cancelArea'])?$b['cancelArea']:0;
+                    //     $arr[$k][1]['cancelOprice'] = isset($b['cancelOprice'])?$b['cancelOprice']:0;
+                    //     $arr[$k][2]['TotalArea'] = $row['TotalArea'] - $arr[$k][1]['cancelArea'] ;
+                    //     $arr[$k][2]['TotalOprice'] = $row['TotalOprice'] - $arr[$k][1]['cancelOprice'];
+                    //     $arr[$k][2]['PreRent'] = $row['PreRent'] - $arr[$k][1]['cancelPrent'];
+                    //     $arr[$k][2]['BanUsearea'] = $row['BanUsearea'] - $arr[$k][1]['cancelHouseUsearea'];
+                    // }
+                    $datas['Deadline'] = json_encode($data['Ban']);
+                    //halt($arr);
+                    $datas['HouseID'] = $data['HouseID'];  //房屋编号
+                    $datas['BanID'] = $one['BanID']; //当前楼栋
+                    $datas['TenantID'] = $one['TenantID'];
+                    $datas['InstitutionID'] = $one['InstitutionID'];
+                    $datas['InstitutionPID'] = $one['InstitutionPID'];
+                    $datas['OrderDate'] = date('Ym', time());  //订单期
+                    $datas['InflRent'] = $one['HousePrerent'] + $one['DiffRent'] + $one['PumpCost'];
+                    $datas['OwnerType'] = $one['OwnerType'];
+                    $datas['UseNature'] = $one['UseNature'];
+                    $datas['CancelType'] = $data['cancelType'];  //注销类型
+                    $datas['Remark'] = $data['cancelReason'];  //异动缘由
+                    $datas['ChangeType'] = $data['type'];  //异动类型
+                    $datas['ProcessConfigName'] = $changeTypes[8];  //异动名称
+                    $datas['ChangeImageIDS'] = isset($ChangeImageIDS)?$ChangeImageIDS:'';  //附件集
+                    $datas['ProcessConfigType'] = Db::name('process_config')->where(['Status'=>1,'Type'=>8])->order('id desc')->value('id');        //流程控制线路
+                    if(!$datas['ProcessConfigType']){
+                        return jsons('4001','请先联系超级管理员配置异动流程');
+                    }
+                    $datas['ChangeOrderID'] = date('YmdHis', time()).'08'.$suffix;   //08代表注销
+                    //halt($datas);
+                    $res = Db::name('change_order')->insert($datas);
+                    break;
 
                 default:
             }
