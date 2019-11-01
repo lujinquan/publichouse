@@ -1303,3 +1303,161 @@
   </div>
 </form>
 <!--- 租金调整（批量） -->
+
+<!-- 楼栋注销 S -->
+<form id="buildingcancel" style="display:none;margin-top:20px;">
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基础信息：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+	<div class="am-u-sm-12">
+	    <div class="am-form-group am-u-md-12">
+	      <label class="label_style">楼栋编号：</label>
+	      <input type="number" id="buildingcancelQueryBan" class="label_input" placeholder="双击选择房屋">
+	      <a class="am-btn am-btn-primary am-btn-sm" id="buildingcancelQuery">查询</a>
+	    </div>
+	</div>
+	<div class="am-u-sm-12">
+	    <div class="am-form-group am-u-sm-12">
+	      <label class="label_style">楼栋地址：</label>
+	      <label id="buildingcancelAddress" class="label_p_style" style="width:470px;"></label>
+	    </div>
+	  </div>
+      <div class="am-u-sm-12">
+          <div class="am-form-group am-u-sm-12">
+            <label class="label_style">异动事由：</label>
+            <input id="buildingcancelReason" class="label_input" style="width:470px;">
+          </div>    
+       </div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">基数异动：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <table class="am-table am-table-bordered  am-table-hover">
+	  <thead>
+		  <tr>
+			<th>楼栋编号</th>
+			<th>异动状态</th>
+			<th class="cancels">规定租金</th>
+			<th class="cancels">使用面积</th>
+			<th class="cancels">建筑面积</th>
+			<th class="cancels">房屋原价</th>
+		  </tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td id="floor_number">1002005001</td>
+		  <td>异动前</td>
+		  <td class="cancel_before_1" id="floor_prescribed"><input type="hidden" name="floor_prescribed" value="306.70"><label>306.70</label></td>
+		  <td class="cancel_before_2" id="floor_areaofuse"><input type="hidden" name="floor_areaofuse" value="204.41"><label>204.41</label></td>
+		  <td class="cancel_before_3" id="floor_builtuparea"><input type="hidden" name="floor_builtuparea" value="234.45"><label>234.45</label></td>
+		  <td class="cancel_before_4" id="floor_original"><input type="hidden" name="floor_original" value="351675.00"><label>351675.00</label></td>
+		</tr>
+		<tr>
+		  <td></td>
+		  <td>异动</td>
+		  <td class="cancel_change_1"><input type="hidden" name="cancel_change_1" value="306.7"><label>306.7</label></td>
+		  <td class="cancel_change_2"><input type="hidden" name="cancel_change_2" value="204.41"><label>204.41</label></td>
+		  <td class="cancel_change_3"><input type="hidden" name="cancel_change_3" value="0"><label>0</label></td>
+		  <td class="cancel_change_4"><input type="hidden" name="cancel_change_4" value="0"><label>0</label></td>
+		</tr>
+		<tr>
+		  <td></td>
+		  <td>异动后</td>
+		  <td class="cancel_after_1" id="changes_floor_prescribed"><input type="hidden" name="changes_floor_prescribed" value="0"><label>0</label></td>
+		  <td class="cancel_after_2" id="changes_floor_areaofuse"><input type="hidden" name="changes_floor_areaofuse" value="0"><label>0</label></td>
+		  <td class="cancel_after_3" id="changes_floor_builtuparea"><input type="hidden" name="changes_floor_builtuparea" value="234.45"><label>234.45</label></td>
+		  <td class="cancel_after_4" id="changes_floor_original"><input type="hidden" name="changes_floor_original" value="351675"><label>351675</label></td>
+		</tr>
+	  </tbody>
+	</table>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">注销明细：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+	 <table class="am-table am-table-bordered  am-table-hover j-house-box">
+	 	  <thead>
+	 		  <tr>
+	 		    <th>房屋编号</th>
+	 		    <th>承租人</th>
+	 		    <th>房屋原价</th>
+	 		    <th>建筑面积</th>
+	 		    <th>规定租金</th>
+	 		    <th>计租面积</th>
+	 		  </tr>
+	 	  </thead>
+	 	  <tbody>
+			  <tr>	
+				  <td class="house_number">
+					  10020050010001
+				  </td>
+				  <td class="house_lessee">
+					  杨文胜
+				  </td>											
+				  <td class="house_original">
+					  <input type="number" min="0" class="layui-input" lay-verify="required" name="house_original[0]" value="0.00">
+				  </td>											
+				  <td class="house_builtuparea">
+					  <input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea[0]" value="0.00">
+				  </td>											
+				  <td class="house_prescribed">
+					  61.60
+				  </td>
+				  <td class="house_rentalarea">
+					  41.06
+				  </td>										
+			  </tr>
+			  <tr>
+				  <td class="house_number">
+					  10020050010001
+				  </td>
+				  <td class="house_lessee">
+					  杨文胜
+				  </td>											
+				  <td class="house_original">
+					  <input type="number" min="0" class="layui-input" lay-verify="required" name="house_original[1]" value="0.00">
+				  </td>											
+				  <td class="house_builtuparea">
+					  <input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea[1]" value="0.00">
+				  </td>											
+				  <td class="house_prescribed">
+					  61.60
+				  </td>
+				  <td class="house_rentalarea">
+					  41.06
+				  </td>										
+			  </tr>
+		  </tbody>
+	 	</table>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+    <h2 class="label_title">补充附件：</h2>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+  	<div class="am-form-group am-u-md-8">
+  		<div class="am-u-md-12">
+  		  <label class="label_style">注销报告：</label>
+  		  <div class="am-form-group am-form-file am-u-md-8">
+  			  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+  			  <input id="cancelUploadReport" type="file" name="cancelUploadReport" multiple>
+  		  </div>
+  		</div>
+  	</div>
+  	<div id="cancelUploadReportShow" class="am-u-md-12 img_content"></div>
+  </div>
+  <div class="am-form-group am-u-sm-12">
+  	<div class="am-form-group am-u-md-8">
+  		<div class="am-u-md-12">
+  		  <label class="label_style">征收明细表：</label>
+  		  <div class="am-form-group am-form-file am-u-md-8">
+  			  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+  			  <input id="CollectionDetails" type="file" name="CollectionDetails" multiple>
+  		  </div>
+  		</div>
+  	</div>
+  	<div id="CollectionDetailsShow" class="am-u-md-12 img_content"></div>
+  </div>
+</form>
+<!--- 楼栋注销 E -->

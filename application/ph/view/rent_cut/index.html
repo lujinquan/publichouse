@@ -142,6 +142,7 @@
                     <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
                     </button>
                     <?php }; ?>
+					<button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审</button>
       					</div>
       				  </td>
             </tr>
@@ -163,6 +164,7 @@
   {include file="application/ph/view/rent_cut/detail.html" /}
   {include file="application/ph/view/rent_cut/approveForm.html" /}
   {include file="application/ph/view/rent_cut/approveFormCancel.html" /}
+  {include file="application/ph/view/rent_cut/approveFormReview.html" /}
 {/block}
 {block name="JsFile"}
 <script type="text/javascript" src="/public/static/gf/js/DFileUpload.js?v={$version}"></script>

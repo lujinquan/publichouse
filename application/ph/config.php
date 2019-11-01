@@ -122,6 +122,7 @@ return [
     'housingApprovalForm' => '武昌区房地局出售直管公有住房审批表',
     'housingApprovalFormOther' => '其他',
     'cancelUploadReport' => '注销报告',
+	'CollectionDetails' => '征收明细表',
     //新增房屋调整
 	'housingReadjust' => '调整附件报告',
 /* 	'housingApprovalChart' => '武昌区房地局出售直管公有住房审批表1', */

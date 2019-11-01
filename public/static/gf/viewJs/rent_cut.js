@@ -180,7 +180,7 @@ $('.cancelRentCut').click(function(){
 			area:['950px','600px'],
 			resize:false,
 			zIndex:100,
-			title:['取消减免','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			title:['减免年审','color:#FFF;font-size:1.6rem;font-weight:600;'],
 			content:$("#approveFormCancel"),
 			btn:['保存','取消'],
             success: function(){
@@ -200,6 +200,136 @@ $('.cancelRentCut').click(function(){
                     //layer.msg('房屋编号存在问题呢！！！',{time:4000});
                 //} else {
                     var formData = fileTotall.getArrayFormdata();
+                    // formData.append("CutType", $('#CutType').val());
+                    // formData.append("IDnumber", $('#IDnumber').val());
+                    // formData.append("validity", $('#validity').val());
+                    // formData.append("HouseID", $('#getInfo_1').val());
+                    // formData.append("RemitRent", $('#RemitRent').val());
+                   
+                    // if($('.CutHide').css('display')=='block'){
+                    //     formData.append("ARemitRent", $('#ARemitRent').val());
+                    // }
+                    // formData.append("type", 1);
+                    $.ajax({
+                        type: "post",
+                        url: "/ph/RentCut/cancelCut?ChangeOrderID="+thisID,
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(res) {
+                            res = JSON.parse(res);
+                            layer.msg(res.msg,{time:4000},function(){
+                            	//location.reload();
+                            	if(res.retcode == '2000'){
+	                                layer.close(thisIndex);
+	                                location.reload();
+	                            }
+                            });
+                            
+                        }
+                    });
+                //}
+            },
+		});
+	});
+	// var id = $(this).val();
+	// console.log(id);
+	// layer.confirm('注意，一旦取消减免;将必须重新申请再减免。无法恢复！！！',{title:'取消减免',icon:'1',skin:'lan_class'},function(conIndex){
+	// 	$.get('/ph/RentCount/cancelCut?id='+id,function(res){
+	// 		res = JSON.parse(res);
+	// 		layer.msg(res.msg,{time:4000},function(){
+	// 			location.reload();
+	// 		});
+	// 	});
+	// 	layer.close(conIndex);
+
+	// });
+});
+//租金减免年审
+$('.reviewRentCut').click(function(){
+	var thisID = $(this).val();
+	//console.log(thisID);
+	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
+		res = JSON.parse(res);
+		console.log(res);
+		$('.APhouseId').text(res.data.detail.HouseID);
+		$('.APBanID').text(res.data.detail.BanID);
+		$('.APhouseAddress').text(res.data.detail.BanAddress);
+		$('.APFloorID').text(res.data.detail.FloorID);
+		$('.APtenantName').text(res.data.detail.TenantName);
+		$('.APtenantTel').text(res.data.detail.TenantTel);
+		$('.APtenantNumber').text(res.data.detail.TenantNumber);
+		$('.APcreateTime').text(res.data.detail.CreateTime);
+		$('.APhouseArea').text(res.data.detail.HouseArea);
+		$('.APleasedArea').text(res.data.detail.LeasedArea);
+		$('#breakTyped3').text(res.data.detail.CutName);
+		$('#IDNumberd3').text(res.data.detail.IDnumber);
+		$('#validityd3').text(res.data.detail.MuchMonth);
+		processState('#approveStatereview',res);
+		metailShow('#layer-photos-demo-review',res);
+		//return false;
+		//res = JSON.parse(res);
+		layer.open({
+			type:1,
+			area:['950px','600px'],
+			resize:false,
+			zIndex:100,
+			title:['租金减免年审','color:#FFF;font-size:1.6rem;font-weight:600;'],
+			content:$("#approveFormReview"),
+			btn:['保存','取消'],
+            success: function(){
+            	var one = new file({
+					button:"#TrApIDCard",
+					show:"#TrApIDCardShow",
+					upButton:"#TrApIDCard",
+					size:1024,
+					url:"/ph/RentCut/cancelCut",
+					ChangeOrderID:'',
+					Type:1,
+					title:"身份证"
+				});
+				var two = new file({
+					button:"#household",
+					show:"#householdShow",
+					upButton:"#household",
+					size:1024,
+					url:"/ph/RentCut/cancelCut",
+					ChangeOrderID:'',
+					Type:1,
+					title:"户口本"
+				});
+				var three = new file({
+					button:"#tenantLease",
+					show:"#tenantLeaseShow",
+					upButton:"#tenantLease",
+					size:1024,
+					url:"/ph/RentCut/cancelCut",
+					ChangeOrderID:'',
+					Type:1,
+					title:"租约"
+				});
+				var four = new file({
+					button:"#basic",
+					show:"#basicShow",
+					upButton:"#basic",
+					size:1024,
+					url:"/ph/RentCut/cancelCut",
+					ChangeOrderID:'',
+					Type:1,
+					title:"低保证"
+				});
+            },
+            yes: function(thisIndex) {
+                //if ($('#getInfo_1').val() == "") {
+                    //layer.msg('房屋编号存在问题呢！！！',{time:4000});
+                //} else {
+					var transferReason = $("#transferReason").val();//减免证号
+					var transferWay = $("#transferWay").val();//减免类型
+					var transferMoney = $("#transferMoney").val();//减免金额
+                    var formData = fileTotall.getArrayFormdata() || new FormData();
+					formData.append('transferType',transferWay);
+					formData.append('transferRent',transferMoney);
+					formData.append('transferReason',transferReason);
                     // formData.append("CutType", $('#CutType').val());
                     // formData.append("IDnumber", $('#IDnumber').val());
                     // formData.append("validity", $('#validity').val());

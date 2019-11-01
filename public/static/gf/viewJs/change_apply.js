@@ -2151,6 +2151,166 @@ $('#addApply').click(function() {
 			        }
 			    });
 			    break;
+				case '18':
+				//输入框不能为空
+				function initialvalue(){
+					$(".j-house-box tbody tr").each( function(){
+						if($(this).find(".house_original input").val()==""){
+							$(this).find(".house_original input").val(0);
+						}
+						if($(this).find(".house_builtuparea input").val()==""){
+							$(this).find(".house_builtuparea input").val(0);
+						}
+					})	
+				}
+				   layer.open({
+				       type: 1,
+				       area: ['700px', '750px'],
+				       resize: false,
+				       zIndex: 100,
+				       title: ['楼栋注销', 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
+				       content: $('#buildingcancel'),
+				       btn: ['确定', '取消'],
+				       success: function() {
+				           banQuery.action('buildingcancelQueryBan','1');
+				   		new file({
+				   		    button: "#cancelUploadReport",
+				   		    show: "#cancelUploadReportShow",
+				   		    upButton: "#cancelUploadReportUp",
+				   		    size: 102400,
+				   		    url: "/ph/ChangeApply/add",
+				   		    ChangeOrderID: '',
+				   		    Type: 1,
+				   		    title: "注销报告"
+				   		});
+				   		new file({
+				   		    button: "#CollectionDetails",
+				   		    show: "#CollectionDetailsShow",
+				   		    upButton: "#CollectionDetails",
+				   		    size: 102400,
+				   		    url: "/ph/ChangeApply/add",
+				   		    ChangeOrderID: '',
+				   		    Type: 1,
+				   		    title: "征收明细表"
+				   		});
+				           $('#buildingcancelQuery').off('click');
+				           $('#buildingcancelQuery').on('click', function() {
+				               var BanID = $("#buildingcancelQueryBan").val();
+				               console.log(BanID);
+				               $.get('/ph/Api/get_ban_info/BanID/' + BanID, function(res) {
+				                   res = JSON.parse(res);
+				                   console.log(res);
+				                   layer.msg(res.msg,{time:4000});
+				                   $("#buildingcancelAddress").text(res.data.BanAddress);
+				               });
+							   
+							   var sumrule =0,//规定租金异动初始金额
+							          sumruleold =0;//规定租金异动后金额
+							      var sumuse =0,//使用面积异动初始面积
+							          sumuseold =0;//使用面积异动后面积
+							      var sumbuildings =0,//建筑面积异动初始面积
+							          sumbuildingsold =0;//建筑面积异动后面积
+							      var sumoriginal =0,//房屋原价异动初始面积
+							          sumoriginalold =0;//房屋原价异动后面积
+							      							   
+							   //规定租金计算
+							   sumrule += parseFloat().toFixed(2)*100;
+							   $(".cancel_change_1 label").text(sumrule.toFixed(2) / 100);
+							   $(".cancel_change_1 input").val(sumrule.toFixed(2) / 100)//获取隐藏域的值
+							   sumruleold = parseFloat($('.cancel_before_1 label').text()).toFixed(2)*100 -sumrule ;
+							   $('.cancel_after_1 label').text(sumruleold.toFixed(2) / 100);
+							   $('.cancel_after_1 input').val(sumruleold.toFixed(2) / 100);//获取隐藏域的值
+							   //使用面积计算
+							   sumuse += parseFloat().toFixed(2)*100;
+							   $(".cancel_change_2 label").text(sumuse.toFixed(2) / 100);
+							   $(".cancel_change_2 input").val(sumuse.toFixed(2) / 100);//获取隐藏域的值
+							   sumuseold = parseFloat($('.cancel_before_2 label').text()).toFixed(2)*100 -sumuse ;
+							   $('.cancel_after_2 label').text(sumuseold.toFixed(2) / 100);
+							   $('.cancel_after_2 input').val(sumuseold.toFixed(2) / 100);//获取隐藏域的值
+							   //建筑面积
+							   
+							   	sumbuildings += parseFloat().toFixed(2)*100;
+							   	$(".cancel_change_3 label").text(sumbuildings.toFixed(2) / 100);
+							   	$(".cancel_change_3 input").val(sumbuildings.toFixed(2) / 100);//获取隐藏域的值
+							   	sumbuildingsold = parseFloat($('.cancel_before_3 label').text()).toFixed(2)*100 -sumbuildings ;
+							   	$('.cancel_after_3 label').text(sumbuildingsold.toFixed(2) / 100);
+							   	$('.cancel_after_3 input').val(sumbuildingsold.toFixed(2) / 100);//获取隐藏域的值
+							   						
+							   
+							   //房屋原价
+							   	sumoriginal += parseFloat().toFixed(2)*100;
+							   	$(".cancel_change_4 label").text(sumoriginal.toFixed(2) / 100);
+							   	$(".cancel_change_4 input").val(sumoriginal.toFixed(2) / 100);//获取隐藏域的值
+							   	sumoriginalold = parseFloat($('.cancel_before_4 label').text()).toFixed(2)*100 -sumoriginal ;
+							   	$('.cancel_after_4 label').text(sumoriginalold.toFixed(2) / 100);
+							   	$('.cancel_after_4 input').val(sumoriginalold.toFixed(2) / 100);//获取隐藏域的值
+							      //输入框建筑面积改变重新计算
+							      $(".house_builtuparea").bind("input propertychange",function(){
+							      	initialvalue();
+							      	sumbuildings = 0;
+							      	var trList = $(".j-house-box tbody").children("tr");
+							      	for (var j=0;j<trList.length;j++) {
+							      		var tdArr = trList.eq(j).find("td"); //遍历td  
+							      			sumbuildings += parseFloat(tdArr.eq(3).find("input").val()).toFixed(2)*100;//输入框改变建筑面积
+							      			$(".cancel_change_3 label").text(sumbuildings.toFixed(2) / 100);
+							      			$(".cancel_change_3 input").val(sumbuildings.toFixed(2) / 100);//获取隐藏域的值
+							      			sumbuildingsold = parseFloat($('.cancel_before_3 label').text()).toFixed(2)*100 -sumbuildings ;
+							      			$('.cancel_after_3 label').text(sumbuildingsold.toFixed(2) / 100);
+							      			$('.cancel_after_3 input').val(sumbuildingsold.toFixed(2) / 100);//获取隐藏域的值
+							      		
+							      	}
+							      });
+							      //输入框房屋原价改变重新计算
+							      $(".house_original").bind("input propertychange",function(){
+							      	initialvalue();
+							      	sumoriginal = 0;
+							      	var trList = $(".j-house-box tbody").children("tr");
+							      	for (var j=0;j<trList.length;j++) {
+							      		var tdArr = trList.eq(j).find("td"); //遍历td  
+							      			sumoriginal += parseFloat(tdArr.eq(2).find("input").val()).toFixed(2)*100;
+							      			$(".cancel_change_4 label").text(sumoriginal.toFixed(2) / 100);
+							      			$(".cancel_change_4 input").val(sumoriginal.toFixed(2) / 100);//获取隐藏域的值
+							      			sumoriginalold = parseFloat($('.cancel_before_4 label').text()).toFixed(2)*100 -sumoriginal ;
+							      			$('.cancel_after_4 label').text(sumoriginalold.toFixed(2) / 100);
+							      			$('.cancel_after_4 input').val(sumoriginalold.toFixed(2) / 100);//获取隐藏域的值
+							      	}
+							      });
+							   
+				           });
+				       },
+				       yes: function(thisIndex, layero) {
+						   
+				            var formData = fileTotall.getArrayFormdata() || new FormData();
+				           formData.append("type", 18);
+						   formData.append('cause',$('#buildingcancelReason').val())//事由
+				           $.ajax({
+				               type: "post",
+				               url: "/ph/ChangeApply/add",
+				               data: formData,
+				               processData: false,
+				               contentType: false,
+				               success: function(res) {
+				                   res = JSON.parse(res);
+				                   layer.msg(res.msg,{time:4000});
+				                   if(res.retcode == '2000'){
+				                       layer.close(thisIndex);
+				                       location.reload();
+				                   }
+				               }
+				           });
+				   
+				       },
+				       end: function() {
+				           $("input[type='text']").val('');
+				           $("input[type='number']").val('');
+				           $(".label_content").text('');
+				           $(".img_content").text('');
+				           $("select").val('');
+				           location.reload();
+				       }
+				   	
+				   });
+				    break;
         default:
             layer.msg('请选择选项！',{time:4000});
     }
