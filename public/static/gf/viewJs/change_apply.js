@@ -222,6 +222,11 @@ $('#addApply').click(function() {
                     $('#banLinkSearch').click(function(){
                         fun.search($('#banLinkInput').val());
                     })
+					$('#banLinkInput').bind('keypress', function (event) { 
+					   if (event.keyCode == "13") { 
+					    $("#banLinkSearch").click();
+					   }
+					 })
                     // var seven = new file({
                     //     show: "#pauseMaterialShow",
                     //     upButton: "#pauseMaterialUp",
