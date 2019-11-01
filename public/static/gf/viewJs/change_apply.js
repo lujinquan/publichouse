@@ -2212,12 +2212,12 @@ $('#addApply').click(function() {
                                       var HouseInfo = res.data.HouseInfo;
 									  for(var i=0;i<HouseInfo.length;i++) {
 											var trData ='<tr>\
-														<td class="house_number">'+HouseInfo[i].HouseID+'</td>\
-														<td class="house_lessee">'+HouseInfo[i].TenantName+'</td>\
+														<td class="house_number"><input type="hidden" name="house_id['+i+']" value="'+HouseInfo[i].HouseID+'">'+HouseInfo[i].HouseID+'</td>\
+														<td class="house_lessee"><input type="hidden" name="TenantName['+i+']" value="'+HouseInfo[i].TenantName+'">'+HouseInfo[i].TenantName+'</td>\
 														<td class="house_original"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+HouseInfo[i].OldOprice+'"></td>\
 														<td class="house_builtuparea"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea['+i+']" value="'+HouseInfo[i].HouseArea+'"></td>\
-														<td class="house_prescribed">'+HouseInfo[i].HousePrerent+'</td>\
-														<td class="house_rentalarea">'+HouseInfo[i].LeasedArea+'</td>\
+														<td class="house_prescribed"><input type="hidden" name="HousePrerent['+i+']" value="'+HouseInfo[i].HousePrerent+'">'+HouseInfo[i].HousePrerent+'</td>\
+														<td class="house_rentalarea"><input type="hidden" name="LeasedArea['+i+']" value="'+HouseInfo[i].LeasedArea+'">'+HouseInfo[i].LeasedArea+'</td>\
 													</tr>';
 										  initialvalue();
 										  $('.j-house-box tbody').append(trData);
@@ -2317,9 +2317,23 @@ $('#addApply').click(function() {
 				       },
 				       yes: function(thisIndex, layero) {
 						   
-				            var formData = fileTotall.getArrayFormdata() || new FormData();
+				           var formData = fileTotall.getArrayFormdata() || new FormData();
 				           formData.append("type", 18);
 						   formData.append('cause',$('#buildingcancelReason').val())//事由
+						  /* formData.append('floor_number',$('#floor_number').text())//楼栋编号
+						   formData.append('floor_prescribed',$('#floor_prescribed label').text())//异动前规定租金
+						   formData.append('cancel_change_1',$('.cancel_change_1 label').text())//异动规定租金
+						   formData.append('changes_floor_prescribed',$('#changes_floor_prescribed label').text())//异动后规定租金
+						   formData.append('floor_areaofuse',$('#floor_areaofuse').text())//异动前使用面积
+						   formData.append('cancel_change_2',$('.cancel_change_2 label').text())//异动使用面积
+						   formData.append('changes_floor_areaofuse',$('#changes_floor_areaofuse label').text())//异动后使用面积
+						   formData.append('floor_builtuparea',$('#floor_builtuparea').text())//异动前建筑面积
+						   formData.append('cancel_change_3',$('.cancel_change_3 label').text())//异动建筑面积
+						   formData.append('changes_floor_builtuparea',$('#changes_floor_builtuparea label').text())//异动后建筑面积
+						   formData.append('floor_builtuparea',$('#floor_original').text())//异动前房屋原价
+						   formData.append('cancel_change_4',$('.cancel_change_4 label').text())//异动房屋原价
+						   formData.append('changes_floor_original',$('#changes_floor_original label').text())//异动后房屋原价 */
+						   console.log($('#buildingcancel').serializeArray());
 				           $.ajax({
 				               type: "post",
 				               url: "/ph/ChangeApply/add",
