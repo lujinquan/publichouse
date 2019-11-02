@@ -546,7 +546,7 @@ $('.BtnApprove').click(function(){
 				$("#changes_floor_original label").text(res.data.detail.House.changes.changes_floor_original);
 				var house_str = '';
 				for(var i=0;i<res.data.detail.House.houses.length;i++) {
-						house_str ='<tr>\
+						house_str += '<tr>\
 									<td class="house_number"><input type="hidden" name="house_id['+i+']" value="'+res.data.detail.House.houses[i].house_id+'">'+res.data.detail.House.houses[i].house_id+'</td>\
 									<td class="house_lessee"><input type="hidden" name="TenantName['+i+']" value="'+res.data.detail.House.houses[i].TenantName+'">'+res.data.detail.House.houses[i].TenantName+'</td>\
 									<td class="house_original"><input type="number" min="0" readonly rentcancel class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+res.data.detail.House.houses[i].house_original+'"></td>\
@@ -896,7 +896,7 @@ $('.BtnDetail').click(function(){
 			$("#changes_floor_original label").text(res.data.detail.House.changes.changes_floor_original);
 			var house_str = '';
 			for(var i=0;i<res.data.detail.House.houses.length;i++) {
-					house_str ='<tr>\
+					house_str += '<tr>\
 								<td class="house_number"><input type="hidden" name="house_id['+i+']" value="'+res.data.detail.House.houses[i].house_id+'">'+res.data.detail.House.houses[i].house_id+'</td>\
 								<td class="house_lessee"><input type="hidden" name="TenantName['+i+']" value="'+res.data.detail.House.houses[i].TenantName+'">'+res.data.detail.House.houses[i].TenantName+'</td>\
 								<td class="house_original"><input type="number" min="0" readonly class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+res.data.detail.House.houses[i].house_original+'"></td>\
