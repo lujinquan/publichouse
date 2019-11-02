@@ -138,8 +138,22 @@ $('.details').click(function(){
 			$('#breakTyped').text(res.data.detail.CutName);
 			$('#IDNumberd').text(res.data.detail.IDnumber);
 			$('#validityd').text(res.data.detail.MuchMonth);
+			if(res.data.detail.CutYearRecord.length){
+				$(".j-annual-box").show();
+				$("#jtransferReasons").val(res.data.detail.CutYearRecord[0].CutNumber);//减免证号
+				$("#jtransferMoneys").val(res.data.detail.CutYearRecord[0].CutRent);//减免金额
+				$("#jtransferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
+				metailShows('#jlayer-photos-demo-annual',res);
+			}
+			else{
+				$(".j-annual-box").hide();
+			}
+			
 			processState('#approveState',res);
 			metailShow('#layer-photos-demo',res);
+			
+			
+			
 		//res = JSON.parse(res);
 		layer.open({
 			type:1,
