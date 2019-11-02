@@ -402,7 +402,8 @@ $('.examineRentCut').click(function(){
 		$("#transferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
 		processState('#approveStatereviews',res);
 		metailShow('#layer-photos-demo-reviews',res);
-		layerBox(thisID,'derate','租金减免审批',1,res.data.config.status);
+		metailShows('#layer-photos-demo-annual',res);
+		layerBox(thisID,'derate','租金减免年审审核',1,res.data.config.status);
 		//return false;
 		//res = JSON.parse(res);
 /* 		layer.open({
@@ -594,6 +595,20 @@ function metailShow(id,res){
 	for(var i = 0; i < ImgLength; i++){
 		var ImgDom = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.urls[i].FileUrl+" src="+res.data.urls[i].FileUrl+" alt="+res.data.urls[i].FileTitle+"/>");
 		FatherDom.append(ImgDom);
+	}
+	console.log(id);
+	layer.photos({
+	  photos: id
+	  ,anim: 5
+	});
+}
+function metailShows(id,res){
+	var ImgLengths = res.data.detail.CutYearRecord[0].urls.length;
+	var FatherDoms = $(id);
+	FatherDoms.empty();
+	for(var i = 0; i < ImgLengths; i++){
+		var ImgDoms = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" alt="+res.data.detail.CutYearRecord[0].urls[i].FileTitle+"/>");
+		FatherDoms.append(ImgDoms);
 	}
 	console.log(id);
 	layer.photos({
