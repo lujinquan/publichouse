@@ -529,7 +529,7 @@ $('.BtnApprove').click(function(){
 			// return false;
 			$("#rentcancelQueryBan").val(res.data.detail.BanID);
 			$("#rentcancelAddress").text(res.data.detail.BanAddress);
-			$("#rentcancelReason").val(res.data.detail.DamageGrade);
+			$("#rentcancelReason").val(res.data.detail.Remark);
 			$("#floor_number_rentcancel").text(res.data.detail.BanID);
 			if(res.data.detail.House){
 				$("#floor_prescribed label").text(res.data.detail.House.changes.floor_prescribed);//获取表格规定租金
@@ -554,9 +554,9 @@ $('.BtnApprove').click(function(){
 									<td class="house_prescribed"><input type="hidden" name="HousePrerent['+i+']" value="'+res.data.detail.House.houses[i].HousePrerent+'">'+res.data.detail.House.houses[i].HousePrerent+'</td>\
 									<td class="house_rentalarea"><input type="hidden" name="LeasedArea['+i+']" value="'+res.data.detail.House.houses[i].LeasedArea+'">'+res.data.detail.House.houses[i].LeasedArea+'</td>\
 								</tr>';
-					  
-					  $('.j-house-box tbody').append($(house_str));
 				};
+				$('.j-house-box tbody').empty();
+				$('.j-house-box tbody').append($(house_str));
 			}
 			
 			
@@ -879,7 +879,7 @@ $('.BtnDetail').click(function(){
 			
 			$("#buildingcancelQueryBan").val(res.data.detail.BanID);
 			$("#buildingcancelAddress").text(res.data.detail.BanAddress);
-			$("#buildingcancelReason").val(res.data.detail.DamageGrade);
+			$("#buildingcancelReason").val(res.data.detail.Remark);
 			$("#floor_number").text(res.data.detail.BanID);
 		if(res.data.detail.House){
 			$("#floor_prescribed label").text(res.data.detail.House.changes.floor_prescribed);//获取表格规定租金
