@@ -24,6 +24,10 @@ class RentCut extends Base
             'rentOption' => $rentLst['option'],
             'cutTypes' => $cutTypes,
         ]);
+
+        // $this->assign('startTime',$startTime);
+        // $this->assign('endTime',$endTime);
+
         return $this->fetch();
     }
 

@@ -101,8 +101,18 @@ class RentCut extends Model
         //halt($where);
 
         $result = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','left')->join('tenant c','a.TenantID = c.TenantID','inner')->join('change_cut_year d','a.ChangeOrderID = d.ChangeOrderID','left')->field('a.ChangeOrderID,a.CutType,c.TenantName,a.InflRent,a.HouseID,b.IDnumber,b.MuchMonth,a.DateEnd,d.Status,d.FinishTime')->where($where)->select();
+
+        $startTime = strtotime(date('Y'.'-12-01'));
+        $endTime = strtotime(date('Y'.'-12-20'));
+
         $sresult = [];
+
         foreach($result as $v){
+            if(time() > $startTime && time() < $endTime){
+                $v['is_process_year_cut'] = 1;
+            }else{
+                $v['is_process_year_cut'] = 0;
+            }
             if($v['DateEnd'] == date('Ym')){
                 $v['DateEnd'] = substr($v['DateEnd'],0,4).'-'.substr($v['DateEnd'],-2);
                 array_unshift($sresult,$v);
@@ -110,6 +120,10 @@ class RentCut extends Model
                 $v['DateEnd'] = substr($v['DateEnd'],0,4).'-'.substr($v['DateEnd'],-2);
                 $sresult[] = $v;
             }
+            
+            
+            //halt($v);
+
         }
         //halt($sresult);
         $curpage = input('page') ? input('page') : 1;//当前第x页，有效值为：1,2,3,4,5...
