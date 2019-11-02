@@ -524,7 +524,7 @@ $('.BtnApprove').click(function(){
         }
 		else if(type==18){
 			$('.status_2').hide();
-			$('#rentcancel').show();
+			//$('#rentcancel').show();
 			// console.log(res.data.detail.House);
 			// return false;
 			$("#rentcancelQueryBan").val(res.data.detail.BanID);
