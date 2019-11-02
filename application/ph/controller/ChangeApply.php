@@ -632,32 +632,35 @@ class ChangeApply extends Base
                 case 18:  // 楼栋注销
 
                     $arr = [];
-                    $count = count($data['house_id']);
-                    for ($i=0; $i < $count; $i++) { 
-                        $arr['houses'][$i] = [
-                            'house_id' => $data['house_id'][$i],
-                            'TenantName' => $data['TenantName'][$i],
-                            'house_original' => $data['house_original'][$i],
-                            'house_builtuparea' => $data['house_builtuparea'][$i],
-                            'HousePrerent' => $data['HousePrerent'][$i],
-                            'LeasedArea' => $data['LeasedArea'][$i],
+                    if(isset($data['house_id'])){
+                        $count = count($data['house_id']);
+                        for ($i=0; $i < $count; $i++) { 
+                            $arr['houses'][$i] = [
+                                'house_id' => $data['house_id'][$i],
+                                'TenantName' => $data['TenantName'][$i],
+                                'house_original' => $data['house_original'][$i],
+                                'house_builtuparea' => $data['house_builtuparea'][$i],
+                                'HousePrerent' => $data['HousePrerent'][$i],
+                                'LeasedArea' => $data['LeasedArea'][$i],
+                            ];
+                        }
+                        $arr['changes'] = [
+                            'floor_prescribed' => $data['floor_prescribed'],
+                            'floor_areaofuse' => $data['floor_areaofuse'],
+                            'floor_builtuparea' => $data['floor_builtuparea'],
+                            'floor_original' => $data['floor_original'],
+                            'cancel_change_1' => $data['cancel_change_1'],
+                            'cancel_change_2' => $data['cancel_change_2'],
+                            'cancel_change_3' => $data['cancel_change_3'],
+                            'cancel_change_4' => $data['cancel_change_4'],
+                            'changes_floor_prescribed' => $data['changes_floor_prescribed'],
+                            'changes_floor_areaofuse' => $data['changes_floor_areaofuse'],
+                            'changes_floor_builtuparea' => $data['changes_floor_builtuparea'],
+                            'changes_floor_original' => $data['changes_floor_original'],
                         ];
+                        $datas['Deadline'] = json_encode($arr);
                     }
-                    $arr['changes'] = [
-                        'floor_prescribed' => $data['floor_prescribed'],
-                        'floor_areaofuse' => $data['floor_areaofuse'],
-                        'floor_builtuparea' => $data['floor_builtuparea'],
-                        'floor_original' => $data['floor_original'],
-                        'cancel_change_1' => $data['cancel_change_1'],
-                        'cancel_change_2' => $data['cancel_change_2'],
-                        'cancel_change_3' => $data['cancel_change_3'],
-                        'cancel_change_4' => $data['cancel_change_4'],
-                        'changes_floor_prescribed' => $data['changes_floor_prescribed'],
-                        'changes_floor_areaofuse' => $data['changes_floor_areaofuse'],
-                        'changes_floor_builtuparea' => $data['changes_floor_builtuparea'],
-                        'changes_floor_original' => $data['changes_floor_original'],
-                    ];
-                    $datas['Deadline'] = json_encode($arr);
+
                     //halt($arr);
                     //$datas['HouseID'] = $data['HouseID'];  //房屋编号
                     $datas['BanID'] = $data['banID']; //当前楼栋

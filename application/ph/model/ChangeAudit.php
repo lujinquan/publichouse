@@ -653,14 +653,14 @@ class ChangeAudit extends Model
         } elseif ($status == $total && $reson == '' && $isfail != 0) {
 
             $changeType = self::where($where)->value('ChangeType');
-
-        try {
-            //终审通过后，系统直接将对应的数据修改为异动后的数据
-            model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);  //终审通过后，系统直接更改相关的
-        } catch (\Exception $e) {
-            // 这是进行异常捕获
-            return jsons('4001','未知错误！');
-        }
+model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
+        // try {
+        //     //终审通过后，系统直接将对应的数据修改为异动后的数据
+        //     model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);  //终审通过后，系统直接更改相关的
+        // } catch (\Exception $e) {
+        //     // 这是进行异常捕获
+        //     return jsons('4001','未知错误！');
+        // }
             
 
             //终审通过则状态改为  1,并写入最终通过时间
@@ -1216,48 +1216,16 @@ class ChangeAudit extends Model
                 //$nextMonthDate = date('Y', time());
 
                 $changeFind = Db::name('change_order')->where('ChangeOrderID', 'eq', $changeOrderID)->find(); 
-                $deadline = json_decode($changeFind['Deadline'],true);
+                
 
                 // 1、处理对楼栋的影响
-                foreach($deadline as $v){
-                    // switch($changeFind['UseNature']){
-                    //     case 1:
-                    //         Db::name('ban')->where('BanID',$v['banID'])->update(
-                    //             [
-                    //                 'CivilArea' => ['exp','CivilArea-'.$v['houseArea']],
-                    //                 'CivilOprice' => ['exp','CivilOprice-'.$v['housePrice']],
-                    //                 'CivilRent' => ['exp','CivilRent-'.$v['cancelPrent']],
-                    //                 'BanUsearea' => ['exp','BanUsearea-'.$v['cancelHouseUsearea']],
-                    //             ]
-                    //         );
-                    //     break;
-                           
-                    //     case 2:
-                         
-                    //         Db::name('ban')->where('BanID',$v['banID'])->update(
-                    //             [
-                    //                 'EnterpriseArea' => ['exp','EnterpriseArea-'.$v['houseArea']],
-                    //                 'EnterpriseOprice' => ['exp','EnterpriseOprice-'.$v['housePrice']],
-                    //                 'EnterpriseRent' => ['exp','EnterpriseRent-'.$v['cancelPrent']],
-                    //             ]
-                    //         );
-                    //     break;
-            
-                    //     case 3:
-                            
-                    //         Db::name('ban')->where('BanID',$v['banID'])->update(
-                    //             [
-                    //                 'PartyArea' => ['exp','PartyArea-'.$v['houseArea']],
-                    //                 'PartyOprice' => ['exp','PartyOprice-'.$v['housePrice']],
-                    //                 'PartyRent' => ['exp','PartyRent-'.$v['cancelPrent']],
-                    //             ]
-                    //         );
-                    //     break;
-
-                    // }
-                    Db::name('house')->where('HouseID',$v['HouseID'])->update(['Status' => 10]);
-                    
+                if($changeFind['Deadline']){
+                    $deadline = json_decode($changeFind['Deadline'],true);
+                    foreach($deadline['houses'] as $v){
+                        Db::name('house')->where('HouseID',$v['house_id'])->update(['Status' => 10]);           
+                    }
                 }
+                
 
                 // 2、修改对应的楼栋底下的房屋的状态为注销
                 $row = Db::name('ban')->where('BanID', 'eq', $changeFind['BanID'])->find();
@@ -1265,25 +1233,25 @@ class ChangeAudit extends Model
                 $str = '';
 
                 if($row['CivilArea'] > 0 || $row['CivilOprice'] > 0 || $row['CivilRent'] > 0 || $row['BanUsearea'] > 0){
-                    $str .= "( 8,'".$changeFind['ChangeOrderID']."','','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['CivilRent'] . ", ". $row['CivilArea'] . ", ". $row['BanUsearea'] . ", ". $row['CivilOprice'] . ", " . $changeFind['OwnerType'] . ",  1 ," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
+                    $str .= "(8,'".$changeFind['ChangeOrderID']."','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['CivilRent'] . ",". $row['CivilArea'] . ",". $row['BanUsearea'] . ",". $row['CivilOprice'] . "," . $changeFind['OwnerType'] . ",1," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
                     //$str .= "( 8,'".$changeFind['ChangeOrderID'] . "','','" .$changeFind['BanID']             ."')";
                 }
 
                 if($row['EnterpriseArea'] > 0 || $row['EnterpriseOprice'] > 0 || $row['EnterpriseRent'] > 0){
-                    $str .= "( 8,'".$changeFind['ChangeOrderID']."','','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['EnterpriseRent'] . ", ". $row['EnterpriseArea'] . ", '', ". $row['EnterpriseOprice'] . ", " . $changeFind['OwnerType'] . ",2 ," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
+                    $str .= "( 8,'".$changeFind['ChangeOrderID']."','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['EnterpriseRent'] . ",". $row['EnterpriseArea'] . ",0,". $row['EnterpriseOprice'] . "," . $changeFind['OwnerType'] . ",2," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
                 }
 
                 if($row['PartyArea'] > 0 || $row['PartyOprice'] > 0 || $row['PartyRent'] > 0){
-                    $str .= "( 8,'".$changeFind['ChangeOrderID']."','','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['PartyRent'] . ", ". $row['PartyArea'] . ", '', ". $row['PartyOprice'] . ", " . $changeFind['OwnerType'] . ", 3 ," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
+                    $str .= "( 8,'".$changeFind['ChangeOrderID']."','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $row['PartyRent'] . ",". $row['PartyArea'] . ",0, ". $row['PartyOprice'] . "," . $changeFind['OwnerType'] . ",3," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
                 }
 
 
                 Db::name('ban')->where('BanID', 'eq', $changeFind['BanID'])->setField('Status', 10);
                 Db::name('room')->where('BanID', 'eq', $changeFind['BanID'])->setField('Status',10);
                 // $str .= "( 8,'".$changeFind['ChangeOrderID']."','".$changeFind['HouseID']."','".$changeFind['BanID']."',".$changeFind['InstitutionID'] . "," . $changeFind['InstitutionPID'] . "," . $changeFind['InflRent'] . ", ". $deadline[0]['houseArea'] . ", ". $deadline[0]['cancelHouseUsearea'] . ", ". $deadline[0]['housePrice'] . ", " . $changeFind['OwnerType'] . "," . $changeFind['UseNature'] . "," . date('Ym',time()). "," . $changeFind['CancelType'] .")";
-
+//halt($str);
                 Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,BanID,InstitutionID,InstitutionPID,InflRent,Area,UseArea,Oprice,OwnerType,UseNature,OrderDate,CancelType) values " . rtrim($str, ','));
-
+//exit;
                 // // 3、修改租金配置表,删除不可用状态房屋对应的租金配置记录
                 // Db::name('rent_config')->where('HouseID', 'eq', $changeFind['HouseID'])->delete();
                 
