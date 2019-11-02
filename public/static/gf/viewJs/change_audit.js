@@ -522,6 +522,58 @@ $('.BtnApprove').click(function(){
             // layerBox(value,'batch','租金调整(批量)',1,res.data.config.status);
             batchPrint(res.data,value,1);
         }
+		else if(type==18){
+			$('.status_2').hide();
+			$('#rentcancel').show();
+			
+			$("#rentcancelQueryBan").val(res.data.detail.BanID);
+			$("#rentcancelAddress").text(res.data.detail.BanAddress);
+			$("#rentcancelReason").val(res.data.detail.DamageGrade);
+			$("#floor_number_rentcancel").text(res.data.detail.BanID);
+			$("#floor_prescribed label").text(res.data.detail.House.changes.floor_prescribed);//获取表格规定租金
+			$("#floor_areaofuse label").text(res.data.detail.House.changes.floor_areaofuse);//获取表格使用面积
+			$("#floor_builtuparea label").text(res.data.detail.House.changes.floor_builtuparea);//获取表格建筑面积
+			$("#floor_original label").text(res.data.detail.House.changes.floor_original);//获取表格房屋原价
+			$(".cancel_change_1 label").text(res.data.detail.House.changes.cancel_change_1);
+			$(".cancel_change_2 label").text(res.data.detail.House.changes.cancel_change_2);
+			$(".cancel_change_3 label").text(res.data.detail.House.changes.cancel_change_3);
+			$(".cancel_change_4 label").text(res.data.detail.House.changes.cancel_change_4);
+			$("#changes_floor_prescribed label").text(res.data.detail.House.changes.changes_floor_prescribed);
+			$("#changes_floor_areaofuse label").text(res.data.detail.House.changes.changes_floor_areaofuse);
+			$("#changes_floor_builtuparea label").text(res.data.detail.House.changes.changes_floor_builtuparea);
+			$("#changes_floor_original label").text(res.data.detail.House.changes.changes_floor_original);
+			var house_str = '';
+			for(var i=0;i<res.data.detail.House.houses.length;i++) {
+					house_str ='<tr>\
+								<td class="house_number"><input type="hidden" name="house_id['+i+']" value="'+res.data.detail.House.houses[i].house_id+'">'+res.data.detail.House.houses[i].house_id+'</td>\
+								<td class="house_lessee"><input type="hidden" name="TenantName['+i+']" value="'+res.data.detail.House.houses[i].TenantName+'">'+res.data.detail.House.houses[i].TenantName+'</td>\
+								<td class="house_original"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+res.data.detail.House.houses[i].house_original+'"></td>\
+								<td class="house_builtuparea"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea['+i+']" value="'+res.data.detail.House.houses[i].house_builtuparea+'"></td>\
+								<td class="house_prescribed"><input type="hidden" name="HousePrerent['+i+']" value="'+res.data.detail.House.houses[i].HousePrerent+'">'+res.data.detail.House.houses[i].HousePrerent+'</td>\
+								<td class="house_rentalarea"><input type="hidden" name="LeasedArea['+i+']" value="'+res.data.detail.House.houses[i].LeasedArea+'">'+res.data.detail.House.houses[i].LeasedArea+'</td>\
+							</tr>';
+				  
+				  $('.j-house-box tbody').append($(house_str));
+			};
+			processState('#rentcancelState',res);
+			metailShow('#rentcancelPhotos',res,1);
+			/* if(res.data.config.status == '1'){
+				$('.status_2').show();
+				new file({
+		            show: "#rentUploadReportShow",
+		            upButton: "#rentUploadReportUp",
+		            size: 10240,
+		            url: "/ph/ChangeApply/add",
+		            button: "#rentUploadReport",
+		            ChangeOrderID: '',
+		            Type: 1,
+		            title: "规定租金调整说明"
+		        });
+			}else{
+				$('.status_2').hide();
+			} */
+			layerBox(value,'rentcancel','楼栋注销审批',1,res.data.config.status);
+		}
 	});
 });
 
@@ -817,6 +869,40 @@ $('.BtnDetail').click(function(){
             // layerBox(value,'batch','租金调整(批量)',2);
             batchPrint(res.data,value,2);
         }
+		else if(type == 18){
+			$("#buildingcancelQueryBan").val(res.data.detail.BanID);
+			$("#buildingcancelAddress").text(res.data.detail.BanAddress);
+			$("#buildingcancelReason").val(res.data.detail.DamageGrade);
+			$("#floor_number").text(res.data.detail.BanID);
+			$("#floor_prescribed label").text(res.data.detail.House.changes.floor_prescribed);//获取表格规定租金
+			$("#floor_areaofuse label").text(res.data.detail.House.changes.floor_areaofuse);//获取表格使用面积
+			$("#floor_builtuparea label").text(res.data.detail.House.changes.floor_builtuparea);//获取表格建筑面积
+			$("#floor_original label").text(res.data.detail.House.changes.floor_original);//获取表格房屋原价
+			$(".cancel_change_1 label").text(res.data.detail.House.changes.cancel_change_1);
+			$(".cancel_change_2 label").text(res.data.detail.House.changes.cancel_change_2);
+			$(".cancel_change_3 label").text(res.data.detail.House.changes.cancel_change_3);
+			$(".cancel_change_4 label").text(res.data.detail.House.changes.cancel_change_4);
+			$("#changes_floor_prescribed label").text(res.data.detail.House.changes.changes_floor_prescribed);
+			$("#changes_floor_areaofuse label").text(res.data.detail.House.changes.changes_floor_areaofuse);
+			$("#changes_floor_builtuparea label").text(res.data.detail.House.changes.changes_floor_builtuparea);
+			$("#changes_floor_original label").text(res.data.detail.House.changes.changes_floor_original);
+			var house_str = '';
+			for(var i=0;i<res.data.detail.House.houses.length;i++) {
+					house_str ='<tr>\
+								<td class="house_number"><input type="hidden" name="house_id['+i+']" value="'+res.data.detail.House.houses[i].house_id+'">'+res.data.detail.House.houses[i].house_id+'</td>\
+								<td class="house_lessee"><input type="hidden" name="TenantName['+i+']" value="'+res.data.detail.House.houses[i].TenantName+'">'+res.data.detail.House.houses[i].TenantName+'</td>\
+								<td class="house_original"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_original['+i+']" value="'+res.data.detail.House.houses[i].house_original+'"></td>\
+								<td class="house_builtuparea"><input type="number" min="0" class="layui-input" lay-verify="required" name="house_builtuparea['+i+']" value="'+res.data.detail.House.houses[i].house_builtuparea+'"></td>\
+								<td class="house_prescribed"><input type="hidden" name="HousePrerent['+i+']" value="'+res.data.detail.House.houses[i].HousePrerent+'">'+res.data.detail.House.houses[i].HousePrerent+'</td>\
+								<td class="house_rentalarea"><input type="hidden" name="LeasedArea['+i+']" value="'+res.data.detail.House.houses[i].LeasedArea+'">'+res.data.detail.House.houses[i].LeasedArea+'</td>\
+							</tr>';
+				  
+				  $('.j-house-box tbody').append($(house_str));
+			};
+			processState('#buildingcancelState',res);
+			metailShow('#buildingcancelPhotos',res);
+			layerBox(value,'buildingcancel','楼栋注销',2);
+		}
 	});
 });
 $('.BtnDelete').click(function(){
