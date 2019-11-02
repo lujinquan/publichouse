@@ -106,7 +106,7 @@ class ChangeAudit extends Model
             }
 
         }
-
+//halt($where);
         $where['Status'] = array('not in', [0, 1]);
 
         $ChangeList['obj'] = self::field('id')->where($where)->order('CreateTime asc')->paginate(config('paginate.list_rows'));

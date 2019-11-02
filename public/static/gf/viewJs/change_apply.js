@@ -2206,7 +2206,8 @@ $('#addApply').click(function() {
 				                   res = JSON.parse(res);
 				                   console.log(res);
 				                   layer.msg(res.msg,{time:4000});
-				                   $("#buildingcancelAddress").text(res.data.BanAddress);
+                                   $("#buildingcancelAddress").text(res.data.BanAddress);
+				                   $("#floor_number").text(res.data.BanID);
 								   $('.j-house-box tbody').html('');
 								  if(res){ 
                                       var HouseInfo = res.data.HouseInfo;

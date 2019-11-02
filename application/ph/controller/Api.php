@@ -465,6 +465,7 @@ class Api extends Controller
             $where['InstitutionID'] = array('eq', $currentUserInstitutionID);
         } else {    //用户为公司级别，则获取所有子管段
         }
+
         $where['Status'] = array('eq', 1);
 
         //检索查询条件
@@ -497,7 +498,7 @@ class Api extends Controller
         if (isset($map['Status']) && $map['Status']) {  //检索楼栋状态
             $where['Status'] = array('in', $map['Status']);
         }
-
+//halt($where);
         $data = Db::name('ban')->where($where)
             ->field('BanID ,DamageGrade ,StructureType ,OwnerType ,UseNature,BanAddress')
             ->paginate(config('paginate.list_rows'))

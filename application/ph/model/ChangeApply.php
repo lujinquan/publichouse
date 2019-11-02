@@ -496,6 +496,7 @@ class ChangeApply extends Model
                 break;
                 case 18:
                     $ifin = Db::name('change_order')->where(['BanID' =>['eq' ,$data['banID']],'ChangeType'=>18,'Status'=>['>',1]])->find();
+                    //halt($ifin);
                     if($ifin){
                         return jsons('4001','该楼栋已在楼栋注销异动单中……');
                     }
