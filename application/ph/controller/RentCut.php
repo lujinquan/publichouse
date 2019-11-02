@@ -24,6 +24,10 @@ class RentCut extends Base
             'rentOption' => $rentLst['option'],
             'cutTypes' => $cutTypes,
         ]);
+
+        // $this->assign('startTime',$startTime);
+        // $this->assign('endTime',$endTime);
+
         return $this->fetch();
     }
 
@@ -117,6 +121,8 @@ class RentCut extends Base
         } elseif ($reson == '' && $isfail != 0) {
             //终审通过则状态改为  1,并写入最终通过时间
            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
+           Db::name('change_order')->where($where)->setInc('DateEnd',100);
+           Db::name('rent_table')->where($where)->setInc('DateEnd',100);
         }
 
         if ($re) {
