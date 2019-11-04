@@ -343,11 +343,12 @@ $(".HouseDetailBtn").click(function() {
         }
         var Bans = res.data.bans;
         var BansHtml = '';
+		$('#j-storied').html();
         if (Bans && Bans.length != 0) {
             for (var i = 0; i < Bans.length; i++) {          
                 BansHtml += '<li><span class="j-size">'+Bans[i].AreaFour+'</span><span>'+Bans[i].BanID+'</span></li>'; 
             }
-            $('#j-storied').append(BansHtml);
+            $('#j-storied').html(BansHtml);
             BansHtml = '';
         }
 
