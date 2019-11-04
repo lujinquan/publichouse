@@ -42,7 +42,7 @@ class ChangeApply extends Base
     public function add(){
 
         if ($this->request->isAjax()) {
-            $data = $this->request->param();
+            $data = $this->request->post();
 
             if(DATA_DEBUG){
                 return jsons('3000' ,'数据调试中，暂时无法进行相关业务');

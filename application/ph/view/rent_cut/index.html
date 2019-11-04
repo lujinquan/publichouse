@@ -135,15 +135,15 @@
       				  <td>
       					<div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-primary details details_btn" value="{$v['ChangeOrderID']}">明细</button>
-                    <?php if(($v['InflRent'] > 0) && (str_replace('-','',$v['DateEnd']) > date('Ym')) && in_array(580,$threeMenu)){ ; ?>
+                    <?php if(($v['InflRent'] > 0) && (str_replace('-','',$v['DateEnd']) > date('Ym')) && in_array(580,$threeMenu) && $v['Status'] != 2){ ; ?>
                     <button class="am-btn am-btn-default am-btn-xs am-text-primary cancelRentCut" value="{$v['ChangeOrderID']}">取消减免
                     </button>
                     <?php }else{; ?>
                     <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
                     </button>
                     <?php }; ?>
-                    {if condition="!$v['Status'] && in_array(581,$threeMenu)"}
-					           <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审</button> {//  && $v['is_process_year_cut']}
+                    {if condition="!$v['Status'] && in_array(581,$threeMenu) && $v['is_process_year_cut']"}
+					           <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="{$v['ChangeOrderID']}">年审</button>
                     {else /}
                     <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">年审</button>
                     {/if}
