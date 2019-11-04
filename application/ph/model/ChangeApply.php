@@ -322,10 +322,10 @@ class ChangeApply extends Model
                         return jsons('4001','请完善房屋原价');
                     }
                     if($data['Ban'][0]['cancelPrent'] <= 0){
-                        return jsons('4001','请完善规租');
+                        return jsons('4001','请完善注销租金');
                     }
                     if(!$data['Ban'][0]['cancelHouseUsearea']){
-                        return jsons('4001','请完善使用面积');
+                        return jsons('4001','请完善计租面积');
                     }
                     return $finds;
                 break;
