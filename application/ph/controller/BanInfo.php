@@ -108,11 +108,11 @@ class BanInfo extends Base
 
             
             $tempdatas = Db::name('ban')->where('BanID', 'eq', $banID)->find();
-            $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
-            $data['TotalNum'] = $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum'];
-            $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent'];
-            $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
-            $data['TotalArea'] = $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea'];
+            // $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
+            // $data['TotalNum'] = $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum'];
+            // $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent'];
+            // $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
+            // $data['TotalArea'] = $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea'];
             if ($_FILES) {
                 foreach ($_FILES as $k => $v) {
                     if($v['error'] == 0){
@@ -130,12 +130,12 @@ class BanInfo extends Base
             unset($data['xy']);
             $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
             $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
-            $result = $this->validate($data,'BanInfo');
-            if(true !== $result){
-                return jsons('4001' ,$result);
-            }
+            //$result = $this->validate($data,'BanInfo');
+            // if(true !== $result){
+            //     return jsons('4001' ,$result);
+            // }
             //等联动修改好了后，需要加上去   AreaTwo,AreaThree,
-            $fields = 'BanNumber,AreaFour,TubulationID,BanPropertyID,DamageGrade,BanLandID,BanFreeholdID,CoveredArea,ActualArea,OwnerType,BanYear,UseNature,BanUnitNum,BanFloorNum,BanFloorStart,HistoryIf,ReformIf,ProtectculturalIf,CutIf,BanGpsX,BanGpsY';
+            $fields = 'BanFloorNum';
             $oldOneData = Db::name('ban')->field($fields)->where('BanID', 'eq', $banID)->find();
             $oldBanFloorNum = $newBanFloorNum = 0;
             foreach($oldOneData as $k1=>$v1){
@@ -152,21 +152,21 @@ class BanInfo extends Base
             }
             //halt($data);
             if ($banInfo = BanInfoModel::update($data)) {
-                if($tempdatas['Status'] == 1){
-                    Db::name('ban')->where('BanID', 'eq', $data['BanID'])->update(['Status' => 1]);
-                }
-                Db::name('house')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
-                Db::name('room')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
-                if ($data['OwnerType']) {
-                    Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('OwnerType',$data['OwnerType']);
-                }
-                if ($data['BanAddress']){
-                    Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
-                    Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
-                }
-                if(!isset($allData)){$allData = array(); }
-                // 记录行为
-                action_log('BanInfo_edit', UID, 1, '编号为:' . $data['BanID'],json_encode($allData));
+                // if($tempdatas['Status'] == 1){
+                //     Db::name('ban')->where('BanID', 'eq', $data['BanID'])->update(['Status' => 1]);
+                // }
+                // Db::name('house')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
+                // Db::name('room')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
+                // if ($data['OwnerType']) {
+                //     Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('OwnerType',$data['OwnerType']);
+                // }
+                // if ($data['BanAddress']){
+                //     Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
+                //     Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
+                // }
+                // if(!isset($allData)){$allData = array(); }
+                // // 记录行为
+                // action_log('BanInfo_edit', UID, 1, '编号为:' . $data['BanID'],json_encode($allData));
 
                 if($oldBanFloorNum && $newBanFloorNum){
                     Db::name('ban_change')->insert([
@@ -195,6 +195,105 @@ class BanInfo extends Base
         $data['BanImageIDS'] = Db::name('upload_file')->where('id' ,'in' ,explode(',',$data['BanImageIDS']))->field('FileTitle ,FileUrl')->select();
         return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
     }
+
+    // public function edit()
+    // {
+    //     $banID = input('BanID');
+    //     if ($this->request->isPost()) {
+    //         if(DATA_DEBUG){
+    //             return jsons('3000' ,'数据调试中，暂时无法进行相关业务');
+    //         }
+    //         $data = array_no_space_str($this->request->post());
+
+            
+    //         $tempdatas = Db::name('ban')->where('BanID', 'eq', $banID)->find();
+    //         $data['BanAddress'] = get_area($data['AreaTwo']).get_area($data['AreaThree']).$data['AreaFour'];
+    //         $data['TotalNum'] = $data['CivilNum'] + $data['PartyNum'] + $data['EnterpriseNum'];
+    //         $data['PreRent'] = $data['CivilRent'] + $data['PartyRent'] + $data['EnterpriseRent'];
+    //         $data['TotalOprice'] = $data['CivilOprice'] + $data['PartyOprice'] + $data['EnterpriseOprice'];
+    //         $data['TotalArea'] = $data['CivilArea'] + $data['PartyArea'] + $data['EnterpriseArea'];
+    //         if ($_FILES) {
+    //             foreach ($_FILES as $k => $v) {
+    //                 if($v['error'] == 0){
+    //                     $ChangeImageIDS[] = model('BanInfo')->uploads($v, $k);
+    //                 }
+    //             }
+    //             if(isset($ChangeImageIDS)){
+    //                 $data['BanImageIDS'] = implode(',', $ChangeImageIDS);   //返回的是使用权变更的影像资料id(多个以逗号隔开)
+    //             }
+    //         }
+    //         // 验证
+    //         $arr = explode(',', $data['xy']);
+    //         $data['BanGpsX'] = $arr[0];
+    //         $data['BanGpsY'] = $arr[1];
+    //         unset($data['xy']);
+    //         $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
+    //         $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
+    //         $result = $this->validate($data,'BanInfo');
+    //         if(true !== $result){
+    //             return jsons('4001' ,$result);
+    //         }
+    //         //等联动修改好了后，需要加上去   AreaTwo,AreaThree,
+    //         $fields = 'BanNumber,AreaFour,TubulationID,BanPropertyID,DamageGrade,BanLandID,BanFreeholdID,CoveredArea,ActualArea,OwnerType,BanYear,UseNature,BanUnitNum,BanFloorNum,BanFloorStart,HistoryIf,ReformIf,ProtectculturalIf,CutIf,BanGpsX,BanGpsY';
+    //         $oldOneData = Db::name('ban')->field($fields)->where('BanID', 'eq', $banID)->find();
+    //         $oldBanFloorNum = $newBanFloorNum = 0;
+    //         foreach($oldOneData as $k1=>$v1){
+    //             if($data[$k1] != $v1){
+    //                 if($k1 == 'BanFloorNum'){
+    //                     $oldBanFloorNum = $v1;
+    //                     $newBanFloorNum = $data[$k1];
+    //                 }
+    //                 $allData[$k1]['old'] = $v1;
+    //                 $allData[$k1]['new'] = $data[$k1];
+    //                 $allData[$k1]['name'] = config($k1);
+    //             }
+
+    //         }
+    //         //halt($data);
+    //         if ($banInfo = BanInfoModel::update($data)) {
+    //             if($tempdatas['Status'] == 1){
+    //                 Db::name('ban')->where('BanID', 'eq', $data['BanID'])->update(['Status' => 1]);
+    //             }
+    //             Db::name('house')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
+    //             Db::name('room')->where('BanID', 'eq', $data['BanID'])->update(['InstitutionID'=> $data['TubulationID'],'InstitutionPID'=> $data['InstitutionID']]);
+    //             if ($data['OwnerType']) {
+    //                 Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('OwnerType',$data['OwnerType']);
+    //             }
+    //             if ($data['BanAddress']){
+    //                 Db::name('house')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
+    //                 Db::name('room')->where('BanID', 'eq', $data['BanID'])->setField('BanAddress',$data['AreaFour']);
+    //             }
+    //             if(!isset($allData)){$allData = array(); }
+    //             // 记录行为
+    //             action_log('BanInfo_edit', UID, 1, '编号为:' . $data['BanID'],json_encode($allData));
+
+    //             if($oldBanFloorNum && $newBanFloorNum){
+    //                 Db::name('ban_change')->insert([
+    //                     'BanID' => $data['BanID'],
+    //                     'TubulationID' => $data['TubulationID'],
+    //                     'InstitutionID' => $data['InstitutionID'],
+    //                     'OldFloorNum' => $oldBanFloorNum,
+    //                     'NewFloorNum' => $newBanFloorNum,
+    //                     'CreateTime' => time()
+    //                 ]);
+    //                 $roomids = Db::name('room')->where('BanID','eq', $data['BanID'])->column('RoomID');
+    //                 if($roomids){
+    //                    foreach($roomids as $r){
+    //                         $roomRents = count_room_rent($r);
+    //                         Db::name('room')->where('RoomID', 'eq', $r)->setField('RoomRentMonth',$roomRents);
+    //                    } 
+    //                 }
+    //             }
+    //             return jsons('2000', '修改成功');
+    //         } else {
+    //             return jsons('4000', '修改失败');
+    //         }
+    //     }
+    //     $data = Db::name('ban')->where('BanID', 'eq', $banID)->find();
+    //     $data['BanRatio'] += 0;
+    //     $data['BanImageIDS'] = Db::name('upload_file')->where('id' ,'in' ,explode(',',$data['BanImageIDS']))->field('FileTitle ,FileUrl')->select();
+    //     return $data?jsons('2000', '获取成功', $data):jsons('4000', '获取失败');
+    // }
 
 
     public function detail()
