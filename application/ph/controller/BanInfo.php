@@ -128,22 +128,22 @@ class BanInfo extends Base
             $data['BanGpsX'] = $arr[0];
             $data['BanGpsY'] = $arr[1];
             unset($data['xy']);
-            $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
-            $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
+            // $data['TubulationID'] = isset($data['TubulationID'])?$data['TubulationID']:session('user_base_info.institution_id');
+            // $data['InstitutionID'] = Db::name('institution')->where('id', 'eq', $data['TubulationID'])->value('pid');
             //$result = $this->validate($data,'BanInfo');
             // if(true !== $result){
             //     return jsons('4001' ,$result);
             // }
             //等联动修改好了后，需要加上去   AreaTwo,AreaThree,
-            $fields = 'BanFloorNum';
+            $fields = 'BanFloorNum,TubulationID,InstitutionID';
             $oldOneData = Db::name('ban')->field($fields)->where('BanID', 'eq', $banID)->find();
             $oldBanFloorNum = $newBanFloorNum = 0;
             foreach($oldOneData as $k1=>$v1){
-                if($data[$k1] != $v1){
-                    if($k1 == 'BanFloorNum'){
+                if($k1 == 'BanFloorNum' && $data[$k1] != $v1){
+                    //if($k1 == 'BanFloorNum'){
                         $oldBanFloorNum = $v1;
                         $newBanFloorNum = $data[$k1];
-                    }
+                    //}
                     $allData[$k1]['old'] = $v1;
                     $allData[$k1]['new'] = $data[$k1];
                     $allData[$k1]['name'] = config($k1);
@@ -171,8 +171,8 @@ class BanInfo extends Base
                 if($oldBanFloorNum && $newBanFloorNum){
                     Db::name('ban_change')->insert([
                         'BanID' => $data['BanID'],
-                        'TubulationID' => $data['TubulationID'],
-                        'InstitutionID' => $data['InstitutionID'],
+                        'TubulationID' => $oldOneData['TubulationID'],
+                        'InstitutionID' => $oldOneData['InstitutionID'],
                         'OldFloorNum' => $oldBanFloorNum,
                         'NewFloorNum' => $newBanFloorNum,
                         'CreateTime' => time()
