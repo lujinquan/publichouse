@@ -2123,7 +2123,7 @@ EOF;
 
             $result['house']['TotalUseArea'] = $i;
             $result['house']['TotalLeaseArea'] = $j;
-            $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k + $result['house']['BelowFiveNumRent'] + $result['house']['MoreFiveNumRent'];
+            $s = $result['house']['HallRent'] + $result['house']['ToiletRent'] + $result['house']['InnerAisleRent'] + $result['house']['KitchenRent'] + $k + $result['house']['BelowFiveNumRent'] + $result['house']['MoreFiveNumRent'] + $result['house']['PlusRent'];
             $result['house']['TotalRoomMonth'] = round($s,1);
             $result['house']['HeDingRoomMonth'] = round($s,1);
         }
