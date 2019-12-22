@@ -967,7 +967,7 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
                 
                 // 4、如果注销的房屋之前有暂停计租，就把暂停计租的金额归0
                 $changeorderid = Db::name('change_order')->where(['ChangeType'=>3,'HouseID'=>['like','%'.$changeFind['HouseID'].'%']])->value('ChangeOrderID');
-                Db::name('rent_table')->where(['ChangeOrderID'=>$changeorderid,'InflRent'=>$changeFind['InflRent']])->update(['InflRent'=>0]);
+                Db::name('rent_table')->where(['ChangeOrderID'=>$changeorderid,'HouseID'=>['like','%'.$changeFind['HouseID'].'%']])->update(['InflRent'=>0]);
       
                 //5、删除该房屋本月订单
                 Db::name('rent_order')->where(['HouseID'=> ['eq', $changeFind['HouseID']],'OrderDate'=>['eq',date('Ym',time())]])->delete();
