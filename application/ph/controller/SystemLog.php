@@ -45,7 +45,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowmonth = $this->nowmonth;
-        //$nowmonth = '201909';
+        //$nowmonth = '201910';
         $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
@@ -105,7 +105,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201909';
+        //$month = '201910';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [
@@ -174,7 +174,6 @@ class SystemLog extends Base
                 } else {   //用户为公司级别，则获取所有子管段
                 }
 
-
                 $counts = Db::name('rent_order')->where($whereRent)->count('id');
 
                 $whereRent['type'] = 1;
@@ -200,7 +199,7 @@ class SystemLog extends Base
 
 
         $date = $this->nowmonth;
-        //$date = 201907;
+        //$date = 201911;
         set_time_limit(0);
         Debug::remark('begin');
         //halt($date);
