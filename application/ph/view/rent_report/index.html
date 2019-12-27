@@ -87,19 +87,19 @@
 {/block}
 {block name="JsFile"}
 <script type="text/javascript">
-    // $('#TubulationID').change(function(){
-    //     var tubulationID = $(this).val();
-    //     var ownerid = $('#OwnerType').val();
+    $('#TubulationID').change(function(){
+        var tubulationID = $(this).val();
+        var ownerid = $('#OwnerType').val();
 
-    //     if(tubulationID > 3){
-    //         $('.show').hide();
-    //         if(ownerid > 7){
-    //             $('#OwnerType').val(1);
-    //         }
-    //     }else{
-    //         $('.show').show();
-    //     }
-    // });
+        if(tubulationID > 3){
+            $('.show').hide();
+            if(ownerid > 7){
+                $('#OwnerType').val(1);
+            }
+        }else{
+            $('.show').show();
+        }
+    });
     $('#printForm').click(function () {
         window.print();
     });
