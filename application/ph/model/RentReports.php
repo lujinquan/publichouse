@@ -849,20 +849,20 @@ class RentReports extends Model
         }
 
         //第一步：将所有管段加上市代托、市区代托、全部
-        // $ownertype = [10,11,12]; //市、区、代、自、托、市代托、市区代托、全部
-        // foreach ($ownertype as $ow) {
-        //     for ($d = 33; $d >3; $d--) { //公司和所，从1到3（1公司，2紫阳，3粮道），注意顺序公司的数据由所加和得来，所以是3、2、1的顺序
-        //         if($ow == 10){
-        //             $result[$ow][$d] = array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]);
-        //         } 
-        //         if($ow == 11 && $d > 3){
-        //             $result[$ow][$d] = array_merge_add(array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]),$result[2][$d]);
-        //         }     
-        //         if($ow == 12 && $d > 3){
-        //             $result[$ow][$d] = array_merge_add(array_merge_add(array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]),$result[2][$d]),$result[5][$d]);
-        //         }
-        //     }
-        // }
+        $ownertype = [10,11,12]; //市、区、代、自、托、市代托、市区代托、全部
+        foreach ($ownertype as $ow) {
+            for ($d = 33; $d >3; $d--) { //公司和所，从1到3（1公司，2紫阳，3粮道），注意顺序公司的数据由所加和得来，所以是3、2、1的顺序
+                if($ow == 10){
+                    $result[$ow][$d] = array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]);
+                } 
+                if($ow == 11 && $d > 3){
+                    $result[$ow][$d] = array_merge_add(array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]),$result[2][$d]);
+                }     
+                if($ow == 12 && $d > 3){
+                    $result[$ow][$d] = array_merge_add(array_merge_add(array_merge_add(array_merge_add($result[1][$d] ,$result[3][$d]),$result[7][$d]),$result[2][$d]),$result[5][$d]);
+                }
+            }
+        }
 
         //第一步：处理市代托，市区代托，全部下的公司，紫阳，粮道的数据（注意只有所和公司才有市代托、市区代托、全部）
         $ownertypess = [1,2,3,5,7,10,11,12]; //市、区、代、自、托、市代托、市区代托、全部
