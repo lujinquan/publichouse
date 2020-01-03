@@ -108,11 +108,11 @@ class RentCut extends Model
         $sresult = [];
 
         foreach($result as $v){
-            if(time() > $startTime && time() < $endTime){
+            //if(time() > $startTime && time() < $endTime){
                 $v['is_process_year_cut'] = 1;
-            }else{
-                $v['is_process_year_cut'] = 0;
-            }
+            // }else{
+            //     $v['is_process_year_cut'] = 0;
+            // }
             if($v['DateEnd'] == date('Ym')){
                 $v['DateEnd'] = substr($v['DateEnd'],0,4).'-'.substr($v['DateEnd'],-2);
                 array_unshift($sresult,$v);
