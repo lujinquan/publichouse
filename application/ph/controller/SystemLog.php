@@ -45,7 +45,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowmonth = $this->nowmonth;
-        //$nowmonth = '201910';
+        //$nowmonth = '201912';
         $HouseReportdata = model('ph/PropertyReport')->index($nowmonth);
         Debug::remark('end');
         $where = [
@@ -75,7 +75,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $nowyear = $this->nowyear;
-        //$nowmonth = '201906';
+        //$nowyear = '2019';
         $HouseReportdata = model('ph/PropertyReportYear')->index($nowyear);
         Debug::remark('end');
         $where = [
@@ -105,7 +105,7 @@ class SystemLog extends Base
         set_time_limit(0);
         Debug::remark('begin');
         $month = $this->nowmonth;
-        //$month = '201910';
+        //$month = '201912';
         $HouseReportdata = model('ph/HouseReports')->runCache();
         //$s = Cache::store('file')->get('HouseReport' . $month);
         $where = [

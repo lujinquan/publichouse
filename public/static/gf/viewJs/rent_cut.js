@@ -279,6 +279,9 @@ $('.reviewRentCut').click(function(){
 		$('#breakTyped3').text(res.data.detail.CutName);
 		$('#IDNumberd3').text(res.data.detail.IDnumber);
 		$('#validityd3').text(res.data.detail.MuchMonth);
+		$('#transferWayHidden').val(res.data.detail.CutName);
+		$('#transferWay').val(res.data.detail.CutType);
+		$('#transferMoney').val(res.data.detail.InflRent);
 		processState('#approveStatereview',res);
 		metailShow('#layer-photos-demo-review',res);
 		//return false;
@@ -479,7 +482,7 @@ $('.examineRentCut').click(function(){
 		        zIndex: 100,
 		        title: [name, 'background:#2E77EF;text-align:center;color:#FFF;font-size:1.6rem;font-weight:600;'],
 		        content: $("#changeCutYearProcess"),
-		        btn:operation==1?['通过','不通过','打回']:'',
+		        btn:operation==1?['通过','不通过']:'',
 		        success: function(){
 		
 		        },
@@ -496,9 +499,9 @@ $('.examineRentCut').click(function(){
 		        btn2:function(){
 					noPass(value);
 				},
-		        btn3:function(){
-		            goBack(value);
-		        }
+		        // btn3:function(){
+		        //     goBack(value);
+		        // }
 		    })
 		}
 		// 审批通过事件

@@ -269,7 +269,7 @@ class ChangeAudit extends Model
 
         $datas = Db::name('rent_cut_order')->alias('a')
             ->join('cut_rent_type b', 'a.CutType = b.id', 'left')->where('ChangeOrderID', 'eq', $changeOrderID)
-            ->field('b.CutName ,a.IDnumber,a.MuchMonth')
+            ->field('b.CutName ,a.IDnumber,a.MuchMonth,a.CutType')
             ->find();
         $cuttypes = Db::name('cut_rent_type')->column('id,CutName');
         $CutYearRecord = Db::name('change_cut_year')->where(['ChangeOrderID'=>$changeOrderID])->field('CutType,CutNumber,CutRent,Status,CreateTime,FinishTime,ChangeImageIDS')->select();
@@ -277,10 +277,12 @@ class ChangeAudit extends Model
             $v['urls'] = Db::name('upload_file')->where('id', 'in', $v['ChangeImageIDS'])->field('FileUrl ,FileTitle')->select();
             $v['CutType'] = $cuttypes[$v['CutType']];
         }
+
         $data['CutYearRecord'] = $CutYearRecord;
         $data['Remark'] = $oneData['Remark'];
         $data['InflRent'] = $oneData['InflRent'];
         $data['CutName'] = $datas['CutName'];
+        $data['CutType'] = $datas['CutType'];
         $data['IDnumber'] = $datas['IDnumber'];
         $data['MuchMonth'] = $datas['MuchMonth'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);

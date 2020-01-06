@@ -113,17 +113,19 @@
 	<div class="am-form-group am-u-sm-12">
 		<div class="am-u-md-4" style="margin:20px auto 30px;">
 		    <label class="label_style">减免类型：</label>
-		    <select class="label_select" id="transferWay">
+        <input class="label_input" id="transferWayHidden" readonly />
+        <input type="hidden" id="transferWay" readonly />
+		    <!-- <select class="label_select" id="transferWay">
 		        <option value="1">低保户</option>
 		        <option value="2">老红军</option>
 		        <option value="3">社区孤寡老人</option>
 				<option value="4">廉租房</option>
 				<option value="5">政策折减</option>
-		    </select>
+		    </select> -->
 		</div>
 		<div class="am-u-md-4 transfer_money" style="padding-left:0;margin:20px auto 30px;">
 		    <label class="label_style">减免金额：</label>
-		    <input class="label_input" id="transferMoney" require />
+		    <input class="label_input" id="transferMoney" readonly />
 		</div>
 		<div class="am-u-md-4 transfer_reason" style="padding-left:0;margin:20px auto 30px;">
 		    <label>减免证号：</label>
