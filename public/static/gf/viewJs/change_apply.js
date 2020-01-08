@@ -2910,6 +2910,8 @@ function cancelEmptyRent(){
 }
 
 // 目前只适用于加减法 浮点小数加减法
+var  number1=0;
+var  number2=0;
 function numberMethod(number1,number2,method){
     var array_1 = number1.split('.');
     var array_2 = number2.split('.');
