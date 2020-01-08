@@ -100,7 +100,7 @@ class RentCut extends Base
         //     'CreateTime' => time(),
         // ];
         $sql = "insert into ".config('database.prefix')."change_cut_year (ChangeOrderID , CutType , CutRent , CutNumber , ChangeImageIDS , Status , CreateTime) values ('".$data['ChangeOrderID']."' , ".$data['CutType']." , ".$data['CutRent']." , '".$data['CutNumber']."' , '".$ChangeImageIDS."' , 2 , ".time().")";
-        Db::execute($sql);
+        $res = Db::execute($sql);
         //$res = Db::name('change_cut_year_copy')->insert($finlData);
         //halt(Db::name('change_cut_year')->getLastSql());
         return $res?jsons('2000','申请成功'):jsons('4000','申请失败');
