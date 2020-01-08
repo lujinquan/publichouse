@@ -103,7 +103,9 @@ class RentCut extends Model
         //halt($where);
 
         $result = Db::name('change_order')->alias('a')->join('rent_cut_order b','a.ChangeOrderID = b.ChangeOrderID','left')->join('tenant c','a.TenantID = c.TenantID','inner')->join('house e','a.HouseID = e.HouseID','left')->field('a.ChangeOrderID,a.CutType,c.TenantName,a.InflRent,a.HouseID,b.IDnumber,b.MuchMonth,a.DateEnd,e.IfSuspend,e.Status as HouseStatus')->where($where)->select();
-
+        
+        $usechanges = Db::name('use_change_order')->where(['CreateTime'=>['between time',[1577808000,1580486400]],'ChangeType'=>['neq',2],'Status'=>['eq',1]])->column('HouseID');
+        //halt($usechanges);
         $startTime = strtotime(date('Y'.'-01-01'));
         $endTime = strtotime(date('Y'.'-01-17'));
 //halt($result);
@@ -119,7 +121,7 @@ class RentCut extends Model
                $v['Status'] = null;  
                $v['FinishTime'] = 0;  
             }
-            if(time() > $startTime && time() < $endTime && $v['DateEnd'] == 202001 && $v['IfSuspend'] == 0 && $v['HouseStatus'] == 1){
+            if(time() > $startTime && time() < $endTime && $v['DateEnd'] == 202001 && $v['IfSuspend'] == 0 && $v['HouseStatus'] == 1 && !in_array($v['HouseID'],$usechanges)){
                 $v['is_process_year_cut'] = 1;
             }else{
                 $v['is_process_year_cut'] = 0;
