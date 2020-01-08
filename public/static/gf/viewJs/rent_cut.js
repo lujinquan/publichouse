@@ -140,10 +140,36 @@ $('.details').click(function(){
 			$('#validityd').text(res.data.detail.MuchMonth);
 			if(res.data.detail.CutYearRecord.length){
 				$(".j-annual-box").show();
-				$("#jtransferReasons").val(res.data.detail.CutYearRecord[0].CutNumber);//减免证号
-				$("#jtransferMoneys").val(res.data.detail.CutYearRecord[0].CutRent);//减免金额
-				$("#jtransferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
-				metailShows('#jlayer-photos-demo-annual',res);
+				for(var i = 0; i < res.data.detail.CutYearRecord.length; i++){
+					// $(".j-annual-box").show();
+					// $("#jtransferReasons").val(res.data.detail.CutYearRecord[i].CutNumber);//减免证号
+					// $("#jtransferMoneys").val(res.data.detail.CutYearRecord[i].CutRent);//减免金额
+					// $("#jtransferClasss").val(res.data.detail.CutYearRecord[i].CutType);//减免类型
+					// metailShows('#jlayer-photos-demo-annual',res);
+					var htmls ='<div class="am-form-group am-u-sm-12">\
+									<div class="am-u-md-4" style="margin:20px auto 30px;">\
+										<label class="label_style">减免类型：</label>\
+										<input class="label_input" readonly id="jtransferClasss'+i+'" require value="'+ res.data.detail.CutYearRecord[i].CutType +'" />\
+									</div>\
+									<div class="am-u-md-4 transfer_money" style="padding-left:0;margin:20px auto 30px;">\
+										<label class="label_style">减免金额：</label>\
+										<input class="label_input" readonly id="jtransferMoneys'+i+'" require value="'+ res.data.detail.CutYearRecord[i].CutRent +'" />\
+									</div>\
+									<div class="am-u-md-4 transfer_reason" style="padding-left:0;margin:20px auto 30px;">\
+										<label>减免证号：</label>\
+										<input class="label_input" readonly id="jtransferReasons'+i+'" value="'+ res.data.detail.CutYearRecord[i].CutNumber +'" />\
+									</div>\
+								</div>\
+								<div class="am-form-group am-u-md-12">\
+								  <div class="am-u-md-6">\
+									<label>年审信息：</label>\
+								  </div>\
+								  <div id="jlayer-photos-demo-annual'+i+'" class="am-u-md-12">\
+								  </div>\
+								</div>';
+								$('#services-box').append(htmls);
+								metailShows("#jlayer-photos-demo-annual"+i,res,1,i);
+				}
 			}
 			else{
 				$(".j-annual-box").hide();
@@ -619,20 +645,73 @@ function metailShow(id,res){
 	  photos: id
 	  ,anim: 5
 	});
-}
-function metailShows(id,res){
-	var ImgLengths = res.data.detail.CutYearRecord[0].urls.length;
+};
+function metailShows(id,res,ctrl_status = 1,loopkey = 0){
+	// var ImgLengths = res.data.detail.CutYearRecord[0].urls.length;
+	// var FatherDoms = $(id);
+	// FatherDoms.empty();
+	// for(var i = 0; i < ImgLengths; i++){
+	// 	var ImgDoms = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" alt="+res.data.detail.CutYearRecord[0].urls[i].FileTitle+"/>");
+	// 	FatherDoms.append(ImgDoms);
+	// }
+	// console.log(id);
+	// layer.photos({
+	//   photos: id
+	//   ,anim: 5
+	// });
+	
+ var img_title = [];
+ var img_array = [];
+ res.data.detail.CutYearRecord[loopkey].urls.forEach(function(data){
+ 	var index = img_title.indexOf(data.FileTitle);
+ 	if(index < 0){
+ 		img_title.push(data.FileTitle);
+ 		img_array[img_array.length] = [];
+ 		img_array[img_array.length - 1].push(data.FileUrl);
+ 	}else{
+ 		img_array[index].push(data.FileUrl);
+ 	}
+ });
+	console.log('img_array:',img_array);
 	var FatherDoms = $(id);
 	FatherDoms.empty();
-	for(var i = 0; i < ImgLengths; i++){
-		var ImgDoms = $("<img style='width:100px;display:inline-block;' layer-pid="+i+" layer-src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" src="+res.data.detail.CutYearRecord[0].urls[i].FileUrl+" alt="+res.data.detail.CutYearRecord[0].urls[i].FileTitle+"/>");
-		FatherDoms.append(ImgDoms);
+	for(var i = 0; i < img_title.length; i++){
+		var title_dom = $("<p style='margin:5px auto;font-size:14px;'>" + img_title[i] + "</p>");
+		FatherDoms.append(title_dom);
+		for(var j = 0;j < img_array[i].length;j++){
+	        if(res.data.config.status == '1' && ctrl_status == 1){
+	            var ImgDoms = $("<li style='display:inline-block;position:relative;'>\
+	                <img style='height:100px;padding:0 10px 10px 0;' layer-pid="+i+" data-original="+img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>\
+	                <img style='width:20px;position:absolute;top:0;right:-2px;cursor:pointer;box-shadow: 0 0 5px #ccc;border-radius: 50%;' src='/public/static/gf/icons/delete.png' class='img_states2_close'>\
+	                </li>");
+	        }else{
+	            var ImgDoms = $("<li style='display:inline-block;position:relative;'>\
+	                <img style='height:100px;padding:0 10px 10px 0;' layer-pid="+i+" data-original="+img_array[i][j]+" src="+img_array[i][j] + " alt="+img_title[i]+"/>\
+	                </li>");
+	        }
+			FatherDoms.append(ImgDoms);
+		}
 	}
-	console.log(id);
-	layer.photos({
-	  photos: id
-	  ,anim: 5
+	// layer.photos({
+	//   photos: id
+	//   ,anim: 5
+	// });
+	$(id+' img[layer-pid]').click(function(){
+		var viewer = new Viewer($(id)[0],{
+				hidden:function(){
+					viewer.destroy();
+				}
+			}
+		);
 	});
+	$(id+' .img_states2_close').click(function(){
+	    var this_index = $(this).index(id+' .img_states2_close');
+	    var img_src = $(id+' img[layer-pid]').eq(this_index).attr('data-original');
+	    console.log(img_src);
+	    delete_img_array.push(img_src);
+	    $(id+' li').eq(this_index).remove();
+	    console.log(delete_img_array);
+	})
 }
 //流程配置函数
 function processState(id,res){
