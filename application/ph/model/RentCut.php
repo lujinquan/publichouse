@@ -139,8 +139,9 @@ class RentCut extends Model
 
         foreach ($sresult as $key => $value) {
             if($level == 3){
-                if(!$value['Status'] && in_array(581,session('three_menu_status')) && $v['is_process_year_cut']){
+                if(!$value['Status'] && in_array(581,session('three_menu_status')) && $value['is_process_year_cut']){
                     array_unshift($re,$value); 
+                    //dump($re);
                 }else{
                     array_push($re,$value); 
                 }
