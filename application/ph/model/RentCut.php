@@ -138,9 +138,9 @@ class RentCut extends Model
                 }else{
                     array_push($re,$value); 
                 }
-            }
-        
+            }        
         }
+        
         //halt($re);
         $curpage = input('page') ? input('page') : 1;//当前第x页，有效值为：1,2,3,4,5...
         $listRow = 15;//每页215行记录

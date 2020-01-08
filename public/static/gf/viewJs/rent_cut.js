@@ -282,6 +282,7 @@ $('.reviewRentCut').click(function(){
 		$('#transferWayHidden').val(res.data.detail.CutName);
 		$('#transferWay').val(res.data.detail.CutType);
 		$('#transferMoney').val(res.data.detail.InflRent);
+		$('#transferReason').val(res.data.detail.IDnumber);
 		processState('#approveStatereview',res);
 		metailShow('#layer-photos-demo-review',res);
 		//return false;
