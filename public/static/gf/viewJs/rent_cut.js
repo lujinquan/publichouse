@@ -120,6 +120,7 @@ $('#derateApply').click(function(){
 });
 //查看明细
 $('.details').click(function(){
+	$('#services-box').html("");  
 	var thisID = $(this).val();
 	console.log(thisID);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
@@ -138,6 +139,7 @@ $('.details').click(function(){
 			$('#breakTyped').text(res.data.detail.CutName);
 			$('#IDNumberd').text(res.data.detail.IDnumber);
 			$('#validityd').text(res.data.detail.MuchMonth);
+			
 			if(res.data.detail.CutYearRecord.length){
 				$(".j-annual-box").show();
 				for(var i = 0; i < res.data.detail.CutYearRecord.length; i++){
