@@ -199,7 +199,7 @@ class SystemLog extends Base
 
 
         $date = $this->nowmonth;
-        //$date = 201911;
+        //$date = 201912;
         set_time_limit(0);
         Debug::remark('begin');
         //halt($date);

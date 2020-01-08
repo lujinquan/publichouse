@@ -109,7 +109,7 @@ class RentCut extends Base
         $reson = isset($data['reson'])?$data['reson']:'';
         $isfail = isset($data['isfail'])?$data['isfail']:2;
         $where = ['ChangeOrderID'=>$data['ChangeOrderID']];
-        $status = Db::name('change_cut_year')->where($where)->value('Status');
+        $status = Db::name('change_cut_year')->where($where)->order('id desc')->value('Status');
         if(in_array($status,[0,1])){
             return jsons('2000','请勿重复审核！');
         }
