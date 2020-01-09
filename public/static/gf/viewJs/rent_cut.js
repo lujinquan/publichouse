@@ -148,7 +148,25 @@ $('.details').click(function(){
 					// $("#jtransferMoneys").val(res.data.detail.CutYearRecord[i].CutRent);//减免金额
 					// $("#jtransferClasss").val(res.data.detail.CutYearRecord[i].CutType);//减免类型
 					// metailShows('#jlayer-photos-demo-annual',res);
-					var htmls ='<div class="am-form-group am-u-sm-12">\
+					if(res.data.detail.CutYearRecord[i].Status == 0){
+						if(!res.data.detail.CutYearRecord[i].Reson){
+							res.data.detail.CutYearRecord[i].Reson = '空';
+						}
+						var statuMsg = '年审不通过!,原因:'+ res.data.detail.CutYearRecord[i].Reson;
+					}else if(res.data.detail.CutYearRecord[i].Status == 1){
+						var statuMsg = '年审通过!';
+					}else{
+						var statuMsg = '年审中!';
+					}
+					var htmls ='<div class="am-u-md-12" style="padding-left:0;">\
+								<div class="am-form-group am-u-md-12">\
+									<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>\
+									<div class="am-u-md-6">\
+									  <label>年审信息：<span style="color:red">'+statuMsg +'</span></label>\
+									</div>\
+								</div>\
+							  </div>\
+					          <div class="am-form-group am-u-sm-12">\
 									<div class="am-u-md-4" style="margin:20px auto 30px;">\
 										<label class="label_style">减免类型：</label>\
 										<input class="label_input" readonly id="jtransferClasss'+i+'" require value="'+ res.data.detail.CutYearRecord[i].CutType +'" />\
@@ -425,6 +443,7 @@ $('.reviewRentCut').click(function(){
 });
 //租金减免年审审核
 $('.examineRentCut').click(function(){
+	$('#services-box-year').html("");
 	var thisID = $(this).val();
 	//console.log(thisID);
 	$.get('/ph/ChangeAudit/detail/ChangeOrderID/'+thisID,function(res){
@@ -443,13 +462,56 @@ $('.examineRentCut').click(function(){
 		$('#breakTyped4').text(res.data.detail.CutName);
 		$('#IDNumberd4').text(res.data.detail.IDnumber);
 		$('#validityd4').text(res.data.detail.MuchMonth);
-		$("#transferReasons").val(res.data.detail.CutYearRecord[0].CutNumber);//减免证号
-		$("#transferMoneys").val(res.data.detail.CutYearRecord[0].CutRent);//减免金额
-		$("#transferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
-		processState('#approveStatereviews',res);
+		// $("#transferReasons").val(res.data.detail.CutYearRecord[0].CutNumber);//减免证号
+		// $("#transferMoneys").val(res.data.detail.CutYearRecord[0].CutRent);//减免金额
+		// $("#transferClasss").val(res.data.detail.CutYearRecord[0].CutType);//减免类型
+		 processState('#approveStatereviews',res);
 		metailShow('#layer-photos-demo-reviews',res);
-		metailShows('#layer-photos-demo-annual',res);
-		layerBox(thisID,'derate','租金减免年审审核',1,res.data.config.status);
+		// metailShows('#layer-photos-demo-annual',res);
+		 layerBox(thisID,'derate','租金减免年审审核',1,res.data.config.status);
+		for(var i = 0; i < res.data.detail.CutYearRecord.length; i++){
+				if(res.data.detail.CutYearRecord[i].Status == 0){
+					if(!res.data.detail.CutYearRecord[i].Reson){
+						res.data.detail.CutYearRecord[i].Reson = '空';
+					}
+					var statuMsg = '年审不通过!,原因:'+ res.data.detail.CutYearRecord[i].Reson;
+				}else if(res.data.detail.CutYearRecord[i].Status == 1){
+					var statuMsg = '年审通过!';
+				}else{
+					var statuMsg = '年审中!';
+				}
+				var htmlyear ='<div class="am-u-md-12" style="padding-left:0;">\
+						<div class="am-form-group am-u-md-12">\
+							<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>\
+							<div class="am-u-md-6">\
+							  <label>年审信息：<span style="color:red">'+statuMsg +'</span></label>\
+							</div>\
+						</div>\
+					</div>\
+					<div class="am-form-group am-u-sm-12">\
+						<div class="am-u-md-4" style="margin:20px auto 30px;">\
+							<label class="label_style">减免类型：</label>\
+							<input class="label_input" readonly id="transferClasss'+i+'" require value="'+ res.data.detail.CutYearRecord[i].CutType +'"  />\
+						</div>\
+						<div class="am-u-md-4 transfer_money" style="padding-left:0;margin:20px auto 30px;">\
+							<label class="label_style">减免金额：</label>\
+							<input class="label_input" readonly id="transferMoneys'+i+'" require value="'+ res.data.detail.CutYearRecord[i].CutRent +'" />\
+						</div>\
+						<div class="am-u-md-4 transfer_reason" style="padding-left:0;margin:20px auto 30px;">\
+							<label>减免证号：</label>\
+							<input class="label_input" readonly id="transferReasons'+i+'" value="'+ res.data.detail.CutYearRecord[i].CutNumber +'"  />\
+						</div>\
+					</div>\
+					<div class="am-form-group am-u-md-12">\
+					  <div class="am-u-md-6">\
+						<label>年审信息：</label>\
+					  </div>\
+					  <div id="layer-photos-demo-annual'+i+'" class="am-u-md-12">\
+					  </div>\
+					</div>';
+			     $('#services-box-year').append(htmlyear);
+			 	 metailShows("#layer-photos-demo-annual"+i,res,1,i);
+		}
 		//return false;
 		//res = JSON.parse(res);
 /* 		layer.open({
