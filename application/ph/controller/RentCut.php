@@ -13,6 +13,21 @@ class RentCut extends Base
      */
     public function index(){
 
+        // $finlData = [
+        //     'ChangeOrderID' => 'af234234',
+        //     'CutType' => 1,
+        //     'CutRent' => 12.12,
+        //     'CutNumber' => '1234',
+        //     'ChangeImageIDS' => '',
+        //     'Status' => 2,
+        //     'CreateTime' => time(),
+        // ];
+        //$sql = "insert into ".config('database.prefix')."change_cut_year (ChangeOrderID , CutType , CutRent , CutNumber , ChangeImageIDS , Status , CreateTime) values ('".$data['ChangeOrderID']."' , ".$data['CutType']." , ".$data['CutRent']." , '".$data['CutNumber']."' , '".$ChangeImageIDS."' , 2 , ".time().")";
+        //$res = Db::execute($sql);
+        // $res = Db::name('change_cut_year_copy')->insert($finlData);
+        // halt($res);
+        // exit;
+        
         //条件：类型为租金减免异动 ，且为已通过状态
         $rentLst = model('ph/RentCut') ->get_all_cut_lst();
 
@@ -112,7 +127,7 @@ class RentCut extends Base
         $reson = isset($data['reson'])?$data['reson']:'';
         $isfail = isset($data['isfail'])?$data['isfail']:2;
         $where = ['ChangeOrderID'=>$data['ChangeOrderID']];
-        $row = Db::name('change_cut_year')->where($where)->order('id desc')->field('id,Status')->find();
+        $row = Db::name('change_cut_year')->where($where)->order('id desc')->field('id,Status,CutNumber')->find();
         if(in_array($row['Status'],[0,1])){
             return jsons('2000','请勿重复审核！');
         }
@@ -129,6 +144,7 @@ class RentCut extends Base
             //终审通过则状态改为  1,并写入最终通过时间
            $re = Db::name('change_cut_year')->where(['id'=>$row['id']])->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
            Db::name('change_order')->where($where)->setInc('DateEnd',100);
+           Db::name('rent_cut_order')->where($where)->update(['IDnumber'=>$row['CutNumber']]);
            Db::name('rent_table')->where($where)->setInc('DateEnd',100);
         }
 
