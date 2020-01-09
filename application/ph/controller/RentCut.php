@@ -144,7 +144,7 @@ class RentCut extends Base
             //终审通过则状态改为  1,并写入最终通过时间
            $re = Db::name('change_cut_year')->where(['id'=>$row['id']])->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
            Db::name('change_order')->where($where)->setInc('DateEnd',100);
-           Db::name('rent_cut_order')->where($where)->update(['IDnumber'=>$row['CutNumber']]);
+           //Db::name('rent_cut_order')->where($where)->update(['IDnumber'=>$row['CutNumber']]);
            Db::name('rent_table')->where($where)->setInc('DateEnd',100);
         }
 
