@@ -287,13 +287,13 @@ class ChangeAudit extends Model
         $data['MuchMonth'] = $datas['MuchMonth'];
         $data['OrderCreateTime'] = date('Y-m-d H:i:s',$oneData['CreateTime']);
         $data['TenantID'] = $oneData['TenantID'];
-        $tenantInfo = Db::name('tenant')->where(['TenantID'=>['eq',$oneData['TenantID']]])->find();
-        if($tenantInfo){
-           $data['TenantName'] = $tenantInfo['TenantName']; 
-           $data['TenantTel'] = $tenantInfo['TenantTel']; 
-           $data['TenantNumber'] = $tenantInfo['TenantNumber']; 
-           //$data['TenantName'] = $tenantInfo['TenantName']; 
-        }
+        // $tenantInfo = Db::name('tenant')->where(['TenantID'=>['eq',$oneData['TenantID']]])->find();
+        // if($tenantInfo){
+        //    $data['TenantName'] = $tenantInfo['TenantName']; 
+        //    $data['TenantTel'] = $tenantInfo['TenantTel']; 
+        //    $data['TenantNumber'] = $tenantInfo['TenantNumber']; 
+        //    //$data['TenantName'] = $tenantInfo['TenantName']; 
+        // }
         
         $data['type'] = 1;
 
