@@ -123,7 +123,7 @@ class RentCut extends Base
         //若审核不通过
         } elseif ($reson != '' && $isfail == 1) {
             //终审不通过则状态改为 0
-            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0, 'FinishTime' => time()]);
+            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0, 'Reson' => $reson,'FinishTime' => time()]);
         // 若终审通过
         } elseif ($reson == '' && $isfail != 0) {
             //终审通过则状态改为  1,并写入最终通过时间

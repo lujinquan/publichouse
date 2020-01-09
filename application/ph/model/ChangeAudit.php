@@ -272,7 +272,7 @@ class ChangeAudit extends Model
             ->field('b.CutName ,a.IDnumber,a.MuchMonth,a.CutType')
             ->find();
         $cuttypes = Db::name('cut_rent_type')->column('id,CutName');
-        $CutYearRecord = Db::name('change_cut_year')->where(['ChangeOrderID'=>$changeOrderID])->field('CutType,CutNumber,CutRent,Status,CreateTime,FinishTime,ChangeImageIDS')->select();
+        $CutYearRecord = Db::name('change_cut_year')->where(['ChangeOrderID'=>$changeOrderID])->select();
         foreach($CutYearRecord as &$v){
             $v['urls'] = Db::name('upload_file')->where('id', 'in', $v['ChangeImageIDS'])->field('FileUrl ,FileTitle')->select();
             $v['CutType'] = $cuttypes[$v['CutType']];
