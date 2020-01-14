@@ -25,13 +25,13 @@ define('__TEMPLATES__',__DIR__.'/templates/');
 // 定义session文件目录
 define('SESSION_PATH',__DIR__.'/runtime/session/');
 // 定义系统版本
-define('WEB_VERSION','v1.5.16');
+define('WEB_VERSION','v1.6.01');
 
 // 开启数据调试模式时，锁定业务无法操作
 define('DATA_DEBUG',false);
 
 // 【更新资源文件请修改下面的版本号】
-define('VERSION','v1.5.16_1');
+define('VERSION','v1.6.01_1');
 
 set_time_limit(800);
 

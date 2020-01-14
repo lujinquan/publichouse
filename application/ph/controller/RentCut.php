@@ -13,6 +13,21 @@ class RentCut extends Base
      */
     public function index(){
 
+        // $finlData = [
+        //     'ChangeOrderID' => 'af234234',
+        //     'CutType' => 1,
+        //     'CutRent' => 12.12,
+        //     'CutNumber' => '1234',
+        //     'ChangeImageIDS' => '',
+        //     'Status' => 2,
+        //     'CreateTime' => time(),
+        // ];
+        //$sql = "insert into ".config('database.prefix')."change_cut_year (ChangeOrderID , CutType , CutRent , CutNumber , ChangeImageIDS , Status , CreateTime) values ('".$data['ChangeOrderID']."' , ".$data['CutType']." , ".$data['CutRent']." , '".$data['CutNumber']."' , '".$ChangeImageIDS."' , 2 , ".time().")";
+        //$res = Db::execute($sql);
+        // $res = Db::name('change_cut_year_copy')->insert($finlData);
+        // halt($res);
+        // exit;
+        
         //条件：类型为租金减免异动 ，且为已通过状态
         $rentLst = model('ph/RentCut') ->get_all_cut_lst();
 
@@ -112,23 +127,24 @@ class RentCut extends Base
         $reson = isset($data['reson'])?$data['reson']:'';
         $isfail = isset($data['isfail'])?$data['isfail']:2;
         $where = ['ChangeOrderID'=>$data['ChangeOrderID']];
-        $status = Db::name('change_cut_year')->where($where)->order('id desc')->value('Status');
-        if(in_array($status,[0,1])){
+        $row = Db::name('change_cut_year')->where($where)->order('id desc')->field('id,Status,CutNumber')->find();
+        if(in_array($row['Status'],[0,1])){
             return jsons('2000','请勿重复审核！');
         }
         //halt($data);
         if ($isfail == 0) {
             //终审不通过则状态改为 0
-            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0]);
+            $re = Db::name('change_cut_year')->where(['id'=>$row['id']])->update(['Status' => 0]);
         //若审核不通过
         } elseif ($reson != '' && $isfail == 1) {
             //终审不通过则状态改为 0
-            $re = Db::name('change_cut_year')->where($where)->update(['Status' => 0, 'Reson' => $reson,'FinishTime' => time()]);
+            $re = Db::name('change_cut_year')->where(['id'=>$row['id']])->update(['Status' => 0, 'Reson' => $reson,'FinishTime' => time()]);
         // 若终审通过
         } elseif ($reson == '' && $isfail != 0) {
             //终审通过则状态改为  1,并写入最终通过时间
-           $re = Db::name('change_cut_year')->where($where)->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
+           $re = Db::name('change_cut_year')->where(['id'=>$row['id']])->update(['Status' => 1, 'FinishTime' => time(),'OrderDate'=> date('Ym')]);
            Db::name('change_order')->where($where)->setInc('DateEnd',100);
+           //Db::name('rent_cut_order')->where($where)->update(['IDnumber'=>$row['CutNumber']]);
            Db::name('rent_table')->where($where)->setInc('DateEnd',100);
         }
 
