@@ -18,7 +18,16 @@ use think\Debug;
  */
 class Api extends Controller
 {
-
+    public function change_all_house_cou_rent()
+    {
+        $houses = Db::name('house')->where(['Status'=>['eq', 1],'UseNature'=>['eq',1],'Extra'=>['neq',100]])->column('HouseID');
+        foreach ($houses as $h) {
+            $house_cou_rent = count_house_rent($h);
+            Db::name('house')->where(['HouseID'=>['eq', $h]])->update(['ApprovedRent'=>$house_cou_rent,'Extra'=>100]);
+            //halt($h);
+        }
+        //halt($houses);
+    }
     /**
      * @title 获取房屋对应的租户信息 ：注意，需要检测是否允许查询当前房屋信息（房管员只能查询自己所处管段的房屋）
      * @author Mr.Lu

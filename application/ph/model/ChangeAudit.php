@@ -1376,7 +1376,8 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
             ->field('Status ,Step ,Reson ,UserNumber ,CreateTime')
             ->order('CreateTime asc')
             ->select();
-
+        $count = count($record);
+        $i = 1;
         foreach ($record as $k3 => &$v3) {
 
             $map['pid'] = array('eq', $process['id']);
@@ -1385,12 +1386,18 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
             if ($v3['Status'] == 3) {
                 $v3['Status'] = '发回';
             }
+            if ($process['Status'] == 0 && $i == $count) {
+                $v3['Status'] = '不通过';
+            }
+
             $userRow = Db::name('admin_user')->where('Number', 'eq', $v3['UserNumber'])->field('UserName,Role')->find();
             $roleArr = json_decode($userRow['Role'],true);
             $v3['Step'] = Db::name('process_config')->where($map)->value('Title');  //操作内容
             $v3['RoleName'] = Db::name('admin_role')->where('id', 'eq', $roleArr[0])->value('RoleName');  //角色名称
             $v3['UserNumber'] = $userRow['UserName']; //操作人
             $v3['CreateTime'] = date('Y-m-d H:i:s', $v3['CreateTime']);
+
+            $i++;
         }
         //halt($record);
         array_unshift($record, $first);
