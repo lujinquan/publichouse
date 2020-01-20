@@ -1060,9 +1060,9 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
                 }
                
                 //房屋调整合并到 调整里面，所以是12
-                $str = "( 12,'".$oneData['ChangeOrderID']."','".$oneData['HouseID']."','".$oneData['BanID'] ."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] . ", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
+                $str = "( 12,'".$oneData['ChangeOrderID']."','".$oneData['HouseID']."','".$oneData['BanID'] ."',".$oneData['InstitutionID'] . "," . $oneData['InstitutionPID'] . "," . $oneData['InflRent'] ."," . $arr[0]['TotalAreaChange'] .", " . $oneData['OwnerType'] . "," . $oneData['UseNature'] . "," . date('Ym',time()) .")";
 
-                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,HouseID,BanID,InstitutionID,InstitutionPID,InflRent,OwnerType,UseNature,OrderDate) values " . $str);
+                Db::execute("insert into ".config('database.prefix')."rent_table (ChangeType,ChangeOrderID,HouseID,BanID,InstitutionID,InstitutionPID,InflRent,Area,OwnerType,UseNature,OrderDate) values " . $str);
 
                 break;
             case 10:  //管段调整异动完成后的，系统处理 （待完善）

@@ -58,7 +58,7 @@ class PropertyReport extends Model
 
         $tiaozhengWhere = [  //租金调整，上调的部分
             'OwnerType' => array('in',[1,2,3,5,6,7]),
-            'ChangeType' => array('eq',9),
+            'ChangeType' => array('eq',12),
             'Status' => array('eq',1),
             //'Area' => array('>',0),
             //'OrderDate' => array('between', [$year . '01', $year . '12']),
