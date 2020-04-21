@@ -1550,25 +1550,31 @@ $('#addApply').click(function() {
                     });
                 },
                 yes: function(thisIndex) {
-                    var formData = fileTotall.getArrayFormdata();
-                    formData.append("HouseID",$('#getRentAdd').val());
-                    formData.append("RentAddYear",$('#RentAddYear').val());
-                    formData.append("RentAddMonth",$('#RentAddMonth').val());
-                    formData.append("RentAddReason",$('.RentAddReason').val());
-                    formData.append("type", 11);
-                    $.ajax({
-                        type: "post",
-                        url: "/ph/ChangeApply/add",
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(res) {
-                            res = JSON.parse(res);
-                            layer.msg(res.msg,{time:4000});
-                            layer.close(thisIndex);
-                            location.reload();
-                        }
-                    });
+						if($("#otherBillsShow").html()==""){
+							layer.msg('请上传相应附件！',{time:4000});
+						}else{
+							var formData = fileTotall.getArrayFormdata();
+							formData.append("HouseID",$('#getRentAdd').val());
+							formData.append("RentAddYear",$('#RentAddYear').val());
+							formData.append("RentAddMonth",$('#RentAddMonth').val());
+							formData.append("RentAddReason",$('.RentAddReason').val());
+							formData.append("IfTakeBack",$('input[name="IfTakeBack"]:checked').val());
+							formData.append("type", 11);
+							$.ajax({
+							    type: "post",
+							    url: "/ph/ChangeApply/add",
+							    data: formData,
+							    processData: false,
+							    contentType: false,
+							    success: function(res) {
+							        res = JSON.parse(res);
+							        layer.msg(res.msg,{time:4000});
+							        layer.close(thisIndex);
+							        location.reload();
+							    }
+							});
+						}
+                    
                 },
                 end: function() {
                     $("input[type='text']").val('');
