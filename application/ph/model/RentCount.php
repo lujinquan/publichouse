@@ -376,7 +376,7 @@ class RentCount extends Model
         //Db::query("insert into ph_rent_config (HouseID ,TenantID ,InstitutionID) values ('12','13',1),('23','14',2)");
         $res = Db::execute("insert into ".config('database.prefix')."rent_config (HouseID ,TenantID ,InstitutionID,InstitutionPID,HousePrerent,DiffRent,PumpCost,CutType,CutRent,TenantName,BanAddress,OwnerType,UseNature,IfPre,ReceiveRent,UnpaidRent,HistoryUnpaidRent,CreateUserID,CreateTime) values " . rtrim($str, ','));
 
-        Db::name('order_config')->where(['ReceiveRent'=>0])->delete();
+        Db::name('rent_config')->where(['ReceiveRent'=>0])->delete();
 
         return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
@@ -559,6 +559,78 @@ class RentCount extends Model
             if($flag){
 
                 $sql1 = 'update ph_rent_order set OrderDate = "' . $nextDate . '" , CreateTime = '.time().', CreateUserID = '.UID.',Type = 1, RentOrderID = concat(HouseID ,OwnerType, ' . '"' . $nextDate . '")  where Type =0 and InstitutionID = ' . $institutionID;  //变成科学计算了
+   
+                Db::execute($sql1);
+                return true;
+            }else{
+                return false;
+            }
+
+            
+
+
+//            //添加后置操作，如果有扣缴的，执行扣缴操作
+//
+//            $data = Db::name('rent_order')->where($where)->field('HouseID ,TenantID ,ReceiveRent')->select();
+//
+//            foreach($data as $k1 => $v1){
+//
+//                $balance = Db::name('tenant')->where('TenantID' ,'eq' ,$v1['TenantID'])->value('TenantBalance');  //查询账户余额
+//
+//                if($balance > $v1['ReceiveRent']){
+//
+//                   $res = Db::name('tenant')->where('TenantID' ,'eq' ,$v1['TenantID'])->setDec('TenantBalance',$v1['ReceiveRent']);
+//
+//                   if($res){
+//
+//                       $where['HouseID'] = array('eq' ,$v1['HouseID']);
+//
+//                       Db::name('rent_order')->where($where)->setField('IfPaidable' ,1);
+//                   }
+//                }
+//            }
+
+
+        }
+    }
+
+        /**
+     *  租金订单生成，注意由所机构统一生成
+     */
+    public function add11()
+    {
+
+        $institutionID = session('user_base_info.institution_id');
+
+        //验证合法性
+        
+        //由于房管员有时候不会主动更新配置，主动更新配置
+        //$this->config11(1,false);
+
+        $nextDate = date('Ym');
+        $nextDate = '202002';
+
+        $where['OrderDate'] = $nextDate; //获取当月日期
+        //$where['InstitutionID'] = $institutionID;
+        $result = Db::name('rent_order')->where($where)->field('Type')->find();
+        //$findOne = Db::name('rent_config')->find();
+
+        
+        // if (!$findOne) {
+        //     return jsons('4004', '请先生成租金配置');
+        // }
+        if ($result) {
+            return jsons('4003', '租金已生成，请勿重复操作……');
+        } else {  //生成下月租金
+
+            //然后再生成下月租金订单
+            $sql = "insert into ph_rent_order (HouseID ,BanAddress,InstitutionPID,InstitutionID ,OwnerType, UseNature,IfPre,TenantID,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent) (select HouseID ,BanAddress,InstitutionPID,InstitutionID,OwnerType, UseNature,IfPre,TenantID ,TenantName,CutType,CutNumber,CutRent,HousePrerent,DiffRent,PumpCost,ReceiveRent,LateRent,UnpaidRent,HistoryUnpaidRent from ph_rent_config)";
+
+            $flag = Db::execute($sql);
+
+            if($flag){
+
+                $sql1 = 'update ph_rent_order set OrderDate = "' . $nextDate . '" , CreateTime = '.time().', CreateUserID = '.UID.',Type = 1, RentOrderID = concat(HouseID ,OwnerType, ' . '"' . $nextDate . '")  where Type =0';  //变成科学计算了
    
                 Db::execute($sql1);
                 return true;

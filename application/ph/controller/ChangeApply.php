@@ -403,6 +403,7 @@ class ChangeApply extends Base
                     $datas['OrderDate'] = date('Ym',time());
                     $datas['OldYearRent'] = $data['RentAddYear'];  
                     $datas['OldMonthRent'] = $data['RentAddMonth'];  
+                    $datas['IfTakeBack'] = $data['IfTakeBack']; //是否已收回
                     $datas['ChangeOrderID'] = date('YmdHis', time()).'11'.$suffix;   //09代表房屋调整
                     //$one = Db::name('house')->where('HouseID', 'eq', $data['HouseID'])->field('InstitutionPID ,InstitutionID,OwnerType,UseNature')->find();
                     $datas['BanID'] = $one['BanID']; //当前楼栋
