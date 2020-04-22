@@ -537,7 +537,7 @@ class RentCount extends Model
         $this->config(1,false);
 
         $nextDate = date('Ym');
-
+//$nextDate = '202002';
         $where['OrderDate'] = $nextDate; //获取当月日期
         $where['InstitutionID'] = $institutionID;
         $result = Db::name('rent_order')->where($where)->field('Type')->find();

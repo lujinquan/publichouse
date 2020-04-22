@@ -17,7 +17,7 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => false,
     // 应用Trace
     'app_trace'              => false,
     // 应用模式状态
@@ -152,7 +152,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 异常页面的模板文件,上线的时候去掉该注释
-    // 'exception_tmpl'         => __TEMPLATES__.'404.html',
+    'exception_tmpl'         => __TEMPLATES__.'404.html',
 
     // 错误显示信息,非调试模式有效
     'error_message'          => '页面错误！请稍后再试～',

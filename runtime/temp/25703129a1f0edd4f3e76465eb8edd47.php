@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:68:"/usr/share/nginx/publichouse/application/ph/view/rent_cut/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:40:"application/ph/view/rent_cut/detail.html";i:1528342025;s:45:"application/ph/view/rent_cut/approveForm.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1533542784;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:10:{s:68:"/usr/share/nginx/publichouse/application/ph/view/rent_cut/index.html";i:1578585649;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:40:"application/ph/view/rent_cut/detail.html";i:1566211566;s:45:"application/ph/view/rent_cut/approveForm.html";i:1578585649;s:51:"application/ph/view/rent_cut/approveFormCancel.html";i:1572706546;s:51:"application/ph/view/rent_cut/approveFormReview.html";i:1578585649;s:54:"application/ph/view/rent_cut/changeCutYearProcess.html";i:1578585649;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -13,9 +13,9 @@
   <link rel="icon" type="image/png" href="/public/static/gf/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="/public/static/gf/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="" />
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/admin.css">
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v=<?php echo $version; ?>">
   <style>
     .am-topbar-nav>li>a:after{display:none;}
     body .ddd-class .layui-layer-title{background:#FFF;font-size:20px;}
@@ -26,11 +26,16 @@
     #offCanvas{margin-left: 44px;}
 
     #userName{color:#FFF;}
+    .indexhover>a:hover {
+      color: #fff;
+      opacity:0.78;
+    }
+    
   </style>
   
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/public/static/gf/js/jquery.min.js"></script>
-<script src="/public/static/gf/layer/layer.js"></script>
+<script src="/public/static/gf/js/jquery.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/layer/layer.js?v=<?php echo $version; ?>"></script>
 
 <!--<![endif]-->
 </head>
@@ -42,7 +47,7 @@
 
 <header class="am-topbar admin-header am-print-hide">
   <div class="am-topbar-brand">
-    <strong>武房网公房管理系统</strong>
+    <strong><span class="indexhover"><a href="/">武房网公房管理系统</a></span></strong>
     <button class="am-btn am-btn-xs am-btn-secondary am-icon-bars" id="offCanvas" data-value="false"></button>
   </div>
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -50,7 +55,7 @@
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-<!--       <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
+      <?php if(false): ?> <li><a href="javascript:;" class="olineOrder"><span class="am-icon-envelope-o"></span> 工单 <span class="am-badge am-badge-warning"></span></a></li> <?php endif; ?>
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle name_style" data-am-dropdown-toggle href="javascript:;">
           <span class="am-icon-users" id="userName">
@@ -111,17 +116,20 @@
 <div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
+<link rel="stylesheet" href="/public/static/gf/css/viewer.min.css">
   <!-- content start -->
   <div class="admin-content">
     <div class="am-cf am-padding">
-      <div class="am-fl am-cf"><small class="am-text-sm">租金管理</small> > <small class="am-text-primary">租金减免</small></div>
+      <div class="am-fl am-cf"><small class="am-text-sm">租金管理</small> > <small class="am-text-primary">租金减免</small>&nbsp;&nbsp;<span style="font-size:14px;"><i style="font-style:normal;color:red;">标红数据为本月减免失效的租户，如有异议请联系相关运营人员</i></span></div>
     </div>
 
     <div class="am-g">
       <div class="am-u-sm-12 am-u-md-6">
         <div class="am-btn-toolbar">
           <div class="am-btn-group-xs">
-            <button type="button" id="derateApply" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增租金减免</button>
+            <?php if(in_array(268,$threeMenu)){ ; ?>
+            <!-- <button type="button" id="derateApply" class="am-btn d-btn-1188F0 am-radius"><span class="am-icon-plus"></span> 新增租金减免</button> -->
+            <?php }; ?>
           </div>
         </div>
       </div>
@@ -134,11 +142,12 @@
               <tr>
                 <th class="table-check"></th>
                 <th class="table-title">#</th>
-                <th class="table-date am-hide-sm-only">租户ID</th>
+                <th class="table-date am-hide-sm-only">租户</th>
                 <th class="table-set">减免类型</th>
                 <th class="table-set">低保证号</th>
                 <th class="table-set">房屋</th>
-                <th class="table-set">减免时长</th>
+                <th class="table-set">减免金额</th>
+                <th class="table-set">减免失效</th>
                 <th class="table-set">操作</th>
               </tr>
           </thead>
@@ -152,12 +161,12 @@
                   <div class="am-input-group am-input-group-sm">
                       <?php
                         if($rentOption != array()){
-                            $TenantID = $rentOption['TenantID'];
+                            $TenantName = $rentOption['TenantName'];
                         }else{
-                            $TenantID = '';
+                            $TenantName = '';
                         }
                      ?>
-                      <input name="TenantID" type="text" class="am-form-field" value="<?php echo $TenantID; ?>">
+                      <input name="TenantName" type="text" class="am-form-field" value="<?php echo $TenantName; ?>">
                   </div>
               </td>
               <td>
@@ -208,17 +217,9 @@
                       <input name="HouseID" type="text" class="am-form-field" value="<?php echo $HouseID; ?>">
                   </div>
               </td>
-                <td><div class="am-input-group am-input-group-sm">
-                    <?php
-                        if($rentOption != array()){
-                            $MuchMonth = $rentOption['MuchMonth'];
-                        }else{
-                            $MuchMonth = '';
-                        }
-                     ?>
-                     <input name="MuchMonth" type="text" class="am-form-field" value="<?php echo $MuchMonth; ?>">
-                </div></td>
                 
+              <td></td> 
+              <td></td> 
               <td>
                 <div class="am-btn-group am-btn-group-xs">
                   <button type="submit" class="am-btn am-btn-xs am-text-primary" id="queryBtn"><span class="DqueryIcon"></span>查询</button>
@@ -232,15 +233,36 @@
             <tr>
                 <td><!-- <input class="checkId" type="checkbox" name='choose' value="1111"/> --></td>
                 <td><?php echo ++$k; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['TenantID'] ; ?></td>
+                <td class="am-hide-sm-only"><?php echo $v['TenantName'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $cutTypes[$v['CutType']] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['IDnumber'] ; ?></td>
                 <td class="am-hide-sm-only"><?php echo $v['HouseID'] ; ?></td>
-                <td class="am-hide-sm-only"><?php echo $v['MuchMonth'].'个月' ; ?></td>
-
+                <td class="am-hide-sm-only"><?php echo $v['InflRent'] ; ?></td>
+                <td class="am-hide-sm-only">
+                  
+                  <?php if($v['DateEnd'] == date('Y-m')): ?>
+                  <font style="color:red"><?php echo $v['DateEnd']; ?></font>
+                  <?php else: ?><?php echo $v['DateEnd']; endif; ?>
+                  
+                </td>
       				  <td>
       					<div class="am-btn-group am-btn-group-xs">
                     <button class="am-btn am-btn-default am-btn-xs am-text-primary details details_btn" value="<?php echo $v['ChangeOrderID']; ?>">明细</button>
+                    <?php if(($v['InflRent'] > 0) && (str_replace('-','',$v['DateEnd']) > date('Ym')) && in_array(580,$threeMenu) && $v['Status'] != 2){ ; ?>
+                    <button class="am-btn am-btn-default am-btn-xs am-text-primary cancelRentCut" value="<?php echo $v['ChangeOrderID']; ?>">取消减免
+                    </button>
+                    <?php }else{; ?>
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">取消减免
+                    </button>
+                    <?php }; if(!$v['Status'] && in_array(581,$threeMenu) && $v['is_process_year_cut']): ?>
+					           <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example reviewRentCut" value="<?php echo $v['ChangeOrderID']; ?>">年审</button>
+                    <?php else: ?>
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">年审</button>
+                    <?php endif; if($v['Status'] == 2 && in_array(582,$threeMenu)): ?>
+                     <button  class="am-btn am-btn-primary am-btn-xs btn-loading-example examineRentCut" value="<?php echo $v['ChangeOrderID']; ?>">年审审核</button>
+                    <?php else: ?>
+                    <button disabled class="am-btn am-btn-default am-btn-xs am-text-primary details">年审审核</button>
+                    <?php endif; ?>
       					</div>
       				  </td>
             </tr>
@@ -276,7 +298,7 @@
       <label>楼栋编号：</label><label id="BanID"></label>
     </div>
     <div class="am-form-group am-u-sm-8">
-      <label>房屋地址：</label><label id="BanAddress"></label>
+      <label>楼栋地址：</label><label id="BanAddress"></label>
     </div>
     <div class="am-form-group am-u-sm-4">
       <label>楼层：</label><label id="FloorID"></label>
@@ -414,11 +436,20 @@
   </div>
 </form>
 
-  <form id="approveForm" style="margin-top:1.6rem;display:none;">
- 
+  <style>
+	body{font-size: 1.4rem;}
+</style>
+<form id="approveForm" style="margin-top:1.6rem;display:none;">
+  <div class="am-u-md-12" style="padding-left:0;">
+	<div class="am-form-group am-u-md-12">
+		<div class="am-u-md-6">
+		  <label>基础信息：</label>
+		</div>
+	</div>
+  </div>
   <div class="am-form-group am-u-md-4">
     <div class="am-u-md-6">
-      <label class="label_style">房屋地址：</label>
+      <label class="label_style">楼栋地址：</label>
     </div>
      <label class="p_style APhouseAddress"></label>
   </div>
@@ -465,25 +496,25 @@
      <label class="p_style APleasedArea"></label>
   </div>
 
-  <div class="am-form-group am-u-md-12" id="breakType">
-    <div class="am-u-md-2">
+  <div class="am-form-group am-u-md-4" id="breakType">
+    <div class="am-u-md-6">
       <label class="label_style">减免类型：</label>
     </div>
-     <label id="breakTyped"></label>
+     <label class="p_style" id="breakTyped"></label>
   </div>
 
-  <div class="am-form-group am-u-md-12" id="IDNumber">
-    <div class="am-u-md-2">
+  <div class="am-form-group am-u-md-4" id="IDNumber">
+    <div class="am-u-md-6">
       <label class="label_style">证件号：</label>
     </div>
-     <label id="IDNumberd"></label>
+     <label class="p_style" id="IDNumberd"></label>
   </div>
 
-  <div class="am-form-group am-u-md-12" id="validity">
-    <div class="am-u-md-2">
+  <div class="am-form-group am-u-md-4" id="validity">
+    <div class="am-u-md-6">
       <label class="label_style">证件有效期：</label>
     </div>
-     <label id="validityd"></label>
+     <label class="p_style" id="validityd"></label>
   </div>
 
   
@@ -493,12 +524,13 @@
   <div class="am-u-md-12" style="padding-left:0;">
     <div class="am-form-group am-u-md-12">
       <div class="am-u-md-6">
-        <label>查看附件：</label>
+        <label>减免报告：</label>
       </div>
       <div id="layer-photos-demo" class="am-u-md-12">
 
       </div>
     </div>
+
 
     <div class="am-form-group am-u-md-12">
       <div class="am-u-md-6">
@@ -508,8 +540,515 @@
     <div id="approveState" class="am-u-md-12" style="padding-left:3rem;">
 
     </div>
-
+	
+<div class="j-annual-box">
+	<!-- <div id="japproveStatereviews" class="am-u-md-12" style="padding-left:3rem;"></div> -->
+		<div id="services-box">
+			
+		</div>
+		
+	</div>
+	
+	
+</div>
+</form>
+  <style>
+	body{font-size: 1.4rem;}
+</style>
+<form id="approveFormCancel" style="margin-top:1.6rem;display:none;">
+  <div class="am-u-md-12" style="padding-left:0;">
+  	<div class="am-form-group am-u-md-12">
+  		<div class="am-u-md-6">
+  		  <label>基础信息：</label>
+  		</div>
+  	</div>
   </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋地址：</label>
+    </div>
+     <label class="p_style APhouseAddress"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼层：</label>
+    </div>
+     <label class="p_style"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">承租人：</label>
+    </div>
+     <label class="p_style APtenantName"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">联系电话：</label>
+    </div>
+     <label class="p_style APtenantTel"></label>
+  </div>
+    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">身份证号：</label>
+    </div>
+     <label class="p_style APtenantNumber"></label>
+ </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">备案时间：</label>
+    </div>
+     <label class="p_style APcreateTime"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">使用面积：</label>
+    </div>
+     <label class="p_style APhouseArea"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">计租面积：</label>
+    </div>
+     <label class="p_style APleasedArea"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="breakType">
+    <div class="am-u-md-6">
+      <label class="label_style">减免类型：</label>
+    </div>
+    <label class="p_style" id="breakTypeds"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="IDNumber">
+    <div class="am-u-md-6">
+      <label class="label_style">证件号：</label>
+    </div>
+     <label class="p_style" id="IDNumberds"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="validity">
+    <div class="am-u-md-6">
+      <label class="label_style">证件有效期：</label>
+    </div>
+     <label  class="p_style" id="validityds"></label>
+  </div>
+
+  
+
+ 
+
+  <div class="am-u-md-12" style="padding-left:0;">
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>减免报告：</label>
+      </div>
+      <div id="layer-photos-demo-cancel" class="am-u-md-12">
+
+      </div>
+    </div>
+
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+
+    <div id="approveStateCancel" class="am-u-md-12" style="padding-left:3rem;"></div>
+	
+	
+	<div class="am-u-md-12" style="padding-left:0;">
+	  	<div class="am-form-group am-u-md-12">
+			<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>
+	  		<div class="am-u-md-6">
+	  		  <label>取消减免：</label>
+	  		</div>
+	  	</div>
+	</div>
+    <div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">取消减免报告：</label>
+			  <div class="am-form-group am-form-file am-u-md-6">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input id="cancelapprove" type="file" name="cancelapprove" multiple>
+			  </div>
+			</div>
+		</div>
+		<div id="cancelapproveShow" class="am-u-md-12 img_content"></div>
+    </div>
+
+
+    </div>
+
+</div>
+</form>
+  <style>
+	body{font-size: 1.4rem;}
+</style>
+<form id="approveFormReview" style="margin-top:1.6rem;display:none;">
+  <div class="am-u-md-12" style="padding-left:0;">
+  	<div class="am-form-group am-u-md-12">
+  		<div class="am-u-md-6">
+  		  <label>基础信息：</label>
+  		</div>
+  	</div>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋地址：</label>
+    </div>
+     <label class="p_style APhouseAddress"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼层：</label>
+    </div>
+     <label class="p_style"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">承租人：</label>
+    </div>
+     <label class="p_style APtenantName"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">联系电话：</label>
+    </div>
+     <label class="p_style APtenantTel"></label>
+  </div>
+    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">身份证号：</label>
+    </div>
+     <label class="p_style APtenantNumber"></label>
+ </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">备案时间：</label>
+    </div>
+     <label class="p_style APcreateTime"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">使用面积：</label>
+    </div>
+     <label class="p_style APhouseArea"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">计租面积：</label>
+    </div>
+     <label class="p_style APleasedArea"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="breakType">
+    <div class="am-u-md-6">
+      <label class="label_style">减免类型：</label>
+    </div>
+    <label class="p_style" id="breakTyped3">&nbsp;</label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="IDNumber">
+    <div class="am-u-md-6">
+      <label class="label_style">证件号：</label>
+    </div>
+     <label class="p_style" id="IDNumberd3">&nbsp;</label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="validity">
+    <div class="am-u-md-6">
+      <label class="label_style">证件有效期：</label>
+    </div>
+     <label  class="p_style" id="validityd3">&nbsp;</label>
+  </div>
+
+  
+
+ 
+
+  <div class="am-u-md-12" style="padding-left:0;">
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>减免报告：</label>
+      </div>
+      <div id="layer-photos-demo-review" class="am-u-md-12">
+
+      </div>
+    </div>
+
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+
+    <div id="approveStatereview" class="am-u-md-12" style="padding-left:3rem;"></div>
+    <div class="am-u-md-12" style="padding-left:0;">
+      	<div class="am-form-group am-u-md-12">
+    		<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>
+      		<div class="am-u-md-6">
+      		  <label>年审信息：</label>
+      		</div>
+      	</div>
+    </div>
+	<div class="am-form-group am-u-sm-12">
+		<div class="am-u-md-4" style="margin:20px auto 30px;">
+		    <label class="label_style">减免类型：</label>
+        <input class="label_input" id="transferWayHidden" readonly />
+        <input type="hidden" id="transferWay" readonly />
+		    <!-- <select class="label_select" id="transferWay">
+		        <option value="1">低保户</option>
+		        <option value="2">老红军</option>
+		        <option value="3">社区孤寡老人</option>
+				<option value="4">廉租房</option>
+				<option value="5">政策折减</option>
+		    </select> -->
+		</div>
+		<div class="am-u-md-4 transfer_money" style="padding-left:0;margin:20px auto 30px;">
+		    <label class="label_style">减免金额：</label>
+		    <input class="label_input" id="transferMoney" readonly />
+		</div>
+		<div class="am-u-md-4 transfer_reason" style="padding-left:0;margin:20px auto 30px;">
+		    <label>减免证号：</label>
+		    <input class="label_input" id="transferReason" />
+		</div>
+	</div>
+	<div class="am-u-md-12" style="padding-left:0;">
+	  	<div class="am-form-group am-u-md-12">
+			<div style="border-top: #ccc 1px solid; padding-bottom: 10px;  margin-left: 16px;"></div>
+	  		<div class="am-u-md-6">
+	  		  <label>年审信息：</label>
+	  		</div>
+	  	</div>
+	</div>
+    <div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">身份证：</label>
+			  <div class="am-form-group am-form-file am-u-md-6">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input id="TrApIDCard" type="file" name="TrApIDCard" multiple>
+			  </div>
+			</div>
+		</div>
+		<div id="TrApIDCardShow" class="am-u-md-12 img_content"></div>
+    </div>
+	<div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">户口本：</label>
+			  <div class="am-form-group am-form-file am-u-md-6">
+				  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+				  <input id="household" type="file" name="household" multiple>
+			  </div>
+			</div>
+		</div>
+		<div id="householdShow" class="am-u-md-12 img_content"></div>
+	</div>
+    <div class="am-form-group am-u-sm-12">
+    	<div class="am-form-group am-u-md-8">
+    		<div class="am-u-md-12">
+    		  <label class="label_style">租约：</label>
+    		  <div class="am-form-group am-form-file am-u-md-6">
+    			  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+    			  <input id="tenantLease" type="file" name="tenantLease" multiple>
+    		  </div>
+    		</div>
+    	</div>
+    	<div id="tenantLeaseShow" class="am-u-md-12 img_content"></div>
+    </div>
+    <div class="am-form-group am-u-sm-12">
+    	<div class="am-form-group am-u-md-8">
+    		<div class="am-u-md-12">
+    		  <label class="label_style">低保证：</label>
+    		  <div class="am-form-group am-form-file am-u-md-6">
+    			  <i class="am-icon-cloud-upload"></i> 选择要上传的文件
+    			  <input id="basic" type="file" name="basic" multiple>
+    		  </div>
+    		</div>
+    	</div>
+    	<div id="basicShow" class="am-u-md-12 img_content"></div>
+    </div>
+    </div>
+
+</div>
+</form>
+  <style>
+	body{font-size: 1.4rem;}
+</style>
+<form id="changeCutYearProcess" style="margin-top:1.6rem;display:none;">
+  <div class="am-u-md-12" style="padding-left:0;">
+  	<div class="am-form-group am-u-md-12">
+  		<div class="am-u-md-6">
+  		  <label>基础信息：</label>
+  		</div>
+  	</div>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼栋地址：</label>
+    </div>
+     <label class="p_style APhouseAddress"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">楼层：</label>
+    </div>
+     <label class="p_style"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">承租人：</label>
+    </div>
+     <label class="p_style APtenantName"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">联系电话：</label>
+    </div>
+     <label class="p_style APtenantTel"></label>
+  </div>
+    <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">身份证号：</label>
+    </div>
+     <label class="p_style APtenantNumber"></label>
+ </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">备案时间：</label>
+    </div>
+     <label class="p_style APcreateTime"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">使用面积：</label>
+    </div>
+     <label class="p_style APhouseArea"></label>
+  </div>
+  <div class="am-form-group am-u-md-4">
+    <div class="am-u-md-6">
+      <label class="label_style">计租面积：</label>
+    </div>
+     <label class="p_style APleasedArea"></label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="breakType">
+    <div class="am-u-md-6">
+      <label class="label_style">减免类型：</label>
+    </div>
+    <label class="p_style" id="breakTyped4">&nbsp;</label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="IDNumber">
+    <div class="am-u-md-6">
+      <label class="label_style">证件号：</label>
+    </div>
+     <label class="p_style" id="IDNumberd4">&nbsp;</label>
+  </div>
+
+  <div class="am-form-group am-u-md-4" id="validity">
+    <div class="am-u-md-6">
+      <label class="label_style">证件有效期：</label>
+    </div>
+     <label  class="p_style" id="validityd4">&nbsp;</label>
+  </div>
+
+  
+
+ 
+
+  <div class="am-u-md-12" style="padding-left:0;">
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>减免报告：</label>
+      </div>
+      <div id="layer-photos-demo-reviews" class="am-u-md-12">
+
+      </div>
+    </div>
+
+
+    <div class="am-form-group am-u-md-12">
+      <div class="am-u-md-6">
+        <label>审批状态：</label>
+      </div>
+    </div>
+
+    <div id="approveStatereviews" class="am-u-md-12" style="padding-left:3rem;"></div>
+	<div id="services-box-year">
+		
+	</div>
+    
+
+    <!-- <div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">身份证：</label>
+			</div>
+		</div>
+		<div id="TrApIDCardShow" class="am-u-md-12 j_img_content">
+		  <ul>
+			  <li>
+				  <img src="../../../../favicon.ico" />
+			  </li>
+			  <li>
+			  	<img src="../../../../favicon.ico" />
+			  </li>
+		  </ul>
+		</div>
+    </div> -->
+	<!-- <div class="am-form-group am-u-sm-12">
+		<div class="am-form-group am-u-md-8">
+			<div class="am-u-md-12">
+			  <label class="label_style">户口本：</label>
+			</div>
+		</div>
+		<div id="householdShow" class="am-u-md-12 j_img_content">
+			<ul>
+			  <li>
+				  <img src="../../../../favicon.ico" />
+			  </li>
+			</ul>
+		</div>
+	</div> -->
+   <!-- <div class="am-form-group am-u-sm-12">
+    	<div class="am-form-group am-u-md-8">
+    		<div class="am-u-md-12">
+    		  <label class="label_style">租约：</label>
+    		</div>
+    	</div>
+    	<div id="tenantLeaseShow" class="am-u-md-12 j_img_content">
+			<ul>
+			  <li>
+				  <img src="../../../../favicon.ico" />
+			  </li>
+			</ul>
+		</div>
+    </div> -->
+   <!-- <div class="am-form-group am-u-sm-12">
+    	<div class="am-form-group am-u-md-8">
+    		<div class="am-u-md-12">
+    		  <label class="label_style">低保证：</label>
+    		</div>
+    	</div>
+    	<div id="basicShow" class="am-u-md-12 j_img_content">
+			<ul>
+			  <li>
+				  <img src="../../../../favicon.ico" />
+			  </li>
+			</ul>
+		</div>
+    </div> -->
+    </div>
+
+</div>
 </form>
 
 </div>
@@ -519,7 +1058,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;"><?php echo $web_version; ?></span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -534,7 +1073,7 @@
       <label id="addSelect" for="doc-ipt-pwd-1">所属机构：</label>
     </div>
    <div class="am-form-group">
-      <label for="doc-ipt-pwd-1">房屋地址：</label>
+      <label for="doc-ipt-pwd-1">楼栋地址：</label>
       <input type="text" class="" id="queryTwo" placeholder="">
     </div>
     <div class="am-form-group">
@@ -551,7 +1090,7 @@
           <th style="width:60px;">单元号</th>
           <th style="width:60px;">楼层号</th>
           <th style="width:80px;">租户姓名</th>
-          <th>房屋地址</th>
+          <th>楼栋地址</th>
       </thead>
     </table>
     <a id="pagePrev" style="cursor:pointer;">上一页</a>
@@ -644,7 +1183,7 @@
       </div>
       <div class="am-form-group">
         <label>楼栋地址：</label>
-        <input type="text" id="houseThr" placeholder="">
+        <input type="text" id="houseThr" autocomplete="off">
       </div>
       <button id="houseQueryClick" class="am-btn am-btn-primary am-btn-sm">查询</button>
     </div>
@@ -656,7 +1195,7 @@
             <th>单元号</th>
             <th>楼层号</th>
             <th>租户姓名</th>
-            <th>月租金</th>
+            <th>规定租金</th>
             <th>楼栋地址</th>
         </thead>
       </table>
@@ -763,23 +1302,278 @@
 	</div>
 	<div class="content">
 		<div class="version_time">
+			<h3>2020-01-09</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统<?php echo $web_version; ?>更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.租金减免年审优化：优化租金减免年审申请条件，附件分类显示，多次年审审批记录明细展示</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-12-27</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.16更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.月租金报表：新增12月份及以后月份管段多产别月租金报表统计查询（“市代托”、“市区代托”、“所有产别”）</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-11-04</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.15更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.楼栋注销异动：新增楼栋注销异动类型，能够实现整栋楼的注销</p>
+			<p>2.租金减免年审异动：新增租金减免年审异动，房管员（提交资料）——经租会计（确认年审）</p>
+			<p class="fun_title">优化</p>
+			<p>1.房屋详情页优化：增加字段 “绑定楼栋：XXXXXXXX（楼栋地址） XXXXXX（楼栋编号）”</p>
+			<p>2.注销页面优化：注销申请页面必填项标*：注销租金、计租面积、建筑面积、原价</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-10-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.14更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.租金减免取消：租金管理的租金减免页面新增租金减免取消功能</p>
+			<p class="fun_title">优化</p>
+			<p>1.报表检测：新加“检测”按钮，按查询“管段”，“房管所”，“公司”，“产别”检测</p>
+			<p>2.租金减免自动取消：若原租户有租金减免，使用权变更后，原租户该房屋的租金减免自动取消，且会反映到报表</p>
+			<p>3.弹窗显示时常：系统中所有弹窗提示信息显示时长改为4s（已完成）</p>			
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-9-20</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.13更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.产权统计（年）：新增加按年统计产权</p>
+			<p class="fun_title">优化</p>
+			<p>1.异动审核：异动审核中将需要登录人审核的异动排在上方，并且审核状态字段为蓝色加粗</p>
+			<p>2.租约记录：租约记录页面申请时间搜索精确到月，并且列表中的租约申请时间精确到天</p>
+			<p>3.租约失效：将已做的使用权变更异动的原租户的二维码变为失效</p>		
+			<p>4.注销申请：注销申请填写时建筑面积、原价、计租面积、注销租金必填</p>		
+			<p>5.租约记录：租约记录中，已失效的租约信息置灰显示</p>
+			<p>6.暂停计租：已申请暂停计租的房屋无法再次申请暂停计租，无法选择并且置灰显示，存在欠租的房屋则标红显示</p>
+			<p>7.系统公告时间：公告发布后，只修改置顶，文件发表时间不会改变，只有修改公告内容，发表时间才会发生变化</p>
+			<p>8.使用权变更搜索条件：使用权变更申请、审核、记录列表都可根据原租户、现租户、使面、规租搜索</p>			
+			<p>9.系统角色排序：系统角色按添加时间正序排列</p>		
+			<p>10.异动审核：增加租金统计功能</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-9-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.12更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.陈欠核销页面：显示核销中金额（以前年和以前月之和），年份连选，选择以前月时，选中较大的月份前面的月份自动全部选中</p>	
+			<p>2.使用权变更搜索：增加筛选条件“姓名”，可以输入变更后的租户姓名进行搜索使用权变更记录</p>	
+			<p>3.使用权变更：使用权变更后，原租约二维码自动失效，使用权变更申请页面，红色提示语“使用权变更完成后，原租约自动失效”</p>
+			<p>4.月租金报表检测：点击“缓存报表”，系统自动检测，并弹出提示信息，需要房管员手动点击关闭信息</p>
+			<p>5.租约申请：租约申请页面提示语“租约申请成功后，原租约自动失效”</p>	
+			<p>6.异动记录：异动记录列表新增“完成时间”字段（精确到月），可以根据完成时间搜索</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-30</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.11更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.忘记密码功能：用户忘记密码后，可通过手机接收验证码的方式重置密码</p>
+			<p class="fun_title">优化</p>
+			<p>1.异动记录：异动记录可对状态进行筛选查询</p>	
+			<p>2.年度收欠：年度收欠列表中剔除月度收欠账单</p>	
+			<p>3.租约记录：租约记录中的房屋层、居住层删去，新增租约申请时间字段</p>
+			<p>4.月租金报表：生成月租金报表的时候检测并提示当前有XX条账单未处理</p>
+			<p>5.公告发布时间：公告时间以第一次发布时间为准，后期修改公告，不改变发布时间</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-17</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.10更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.名称字段的统一：系统中的“房屋地址”全部改为“楼栋地址”</p>
+			<p>2.租约打印：租约打印时，若为“老证换新证”，打印出的纸质租约仅显示最新一条“老证换新证”记录</p>
+			<p>3.附件上传：注销业务中，房管员提交申请时，在附件上传中增加一个“其它”附件类型，用于上传其它附件</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-2</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.09更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.增加出证时间：房屋信息列表增加“出证时间”字段，显示最近一次出证时间，未出证则不显示</p>
+			<p>2.租约审核增加失败功能：租约审核时，待审批流程走到最后一步“待房管员提交签字”时，增加房管员点击失败的功能，由房管员判断此条记录是成功还是失败</p>
+			<p>3.楼栋地址调整：楼栋调整中新增楼栋地址调整，需要上传产权证／产权清册（以产权清册为准，必须上传）／经租帐／图卡</p>
+			<p>4.数据自动触发刷新：楼栋层高调整后，计租表相关数据自动刷新</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-26</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.08更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.楼栋地址调整：楼栋调整中新增楼栋地址调整，需要上传产权证／划转清册</p>
+			<p>2.房屋信息里删除“年度欠租”：房屋信息页面列表去掉“年度欠租”字段，查询欠租请到租金管理页面查询</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-19</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.07更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.审批记录：优化审批打回时，审批者的角色名称混乱</p>
+			<p>2.异动名称：去除异动申请中无效和废弃的异动类型</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.06更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.房屋信息及数据确认：修复附件上传、更新、删除</p>
+			<p>2.提示：系统中需要双击查询的都加上提示词</p>
+			<p>3.异动：各异动关联的房屋和楼栋编号同步到异动统计表中便于后期导出</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-5</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.05更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.数据确认增加房管员删除权限</p>
+			<p>2.异动前提条件设置-无欠租</p>
+			<p>3.数据锁定：新发租申请后，数据确认中的楼栋、房屋、租户信息均不可修改</p>
+			<p>4.权限新增：房管员新增数据确认中楼栋、房屋、租户的删除权限</p>
+			<p class="fun_title">优化</p>
+			<p>1.详情页优化：日志、流程配置、租户信息详情显示混乱</p>
+			<p>2.翻页问题：计租表的欠租情况点入中翻页问题优化</p>
+			<p>3.租金字段统一：系统中关于租金的字段命名统一</p>
+			<p>4.数据确认中必填项优化：数据确认中楼栋的产权证号、租户的联系方式和身份证号设置为必填项</p>
+			<p>5.增加营业和杂件类型：数据确认中的计租表增加营业和杂间类型，与房屋信息中保持一致</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-28</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.04更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.租金批量调整（仅针对楼层调整后）：因错层调整引起的租金变化<br>新增同一楼栋下房屋租金批量调整（(仅针对楼层调整后)<br>步骤和租金调整(0.2,0.3,0.4,0.5)一致</p>
+			<p>2.别字更正：别字更正需要填写身份证号，且异动生效后身份证号自动更新至租户信息</p>
+			<p>3.新发租：新发租申请时类型选择“接管／危改还建／新建／合建／加改扩／其他”<br>具体描述填写至“异动事由”</p>
+			<p class="fun_title">优化</p>
+			<p>1.月租金报表：只有房管所和区公司保留复合型产别筛选“市代托／市区代托／所有产别”即选择机构“XX所XX管段”<br>无法查看“市代托／市区代托／所有产别”月租金报表</p>
+			<p>2.异动名称：异动名称按照使用频率排列</p>
+			<p>3.申请租约按钮删除：租约记录中“申请租约”按钮去掉</p>
+			<p>4.租户身份证上传：租户上传身份证页面优化</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-21</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.03更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.新发条件限制：房屋申请新发租必须满足两个条件，否则无法新发租：<br>a) 房屋已绑定租户 <br>b) 房屋已填写规定租金</p>
+			<p>2.房屋信息列表增加“月租金字段”</p>
+			<p class="fun_title">优化</p>
+			<p>1.金额的统计：异动记录中统计“租金”</p>
+			<p>2.泵费处理：<br>a) 泵费不设计计算公式，以后台录入数据为准 <br>b) 租约泵费显示与计租表保持一致 <br>c) 紫阳所部分泵费已上账</p>
+			<p>3.规范租金相关字段：<br>a) 规定租金（房管员数据）= 房间租金之和 + 营业租金/协议租金 <br>b) 计算租金（系统数据）= 房间计算租金之和+营业租金/协议租金 <br>c) 月租金 = 规定租金（计算租金）+ 租差 + 泵费 <br>d) 应收租金 = 月租金 - 减免</p>
+			<p>4.登录自动退出时长：登录误操作7200s（2小时）自动退出</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-14</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.02更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.计算租金统计：所有计算租金标红的房屋租金，在上方显示出统计金额（与规定租金的差值）</p>
+			<p>2.暂停计租筛选：房屋信息中筛选暂停计租的房屋，列表置灰显示</p>
+			<p>3.减免金额统计：租金计算中统计出减免总金额</p>
+			<p>4.租金减免再申请：租金减免过程中减免金额调整，重新申请减免，之前的减免自动失效</p>
+			<p class="fun_title">优化</p>
+			<p>1.减免截止日期：本年度减免截止日期统一顺延至年底12月份</p>
+			<p>2.管段／月份查询：异动记录增加增加管段、月份查询</p>
+			<p>3.营业租金的填写：营业房间在其他房屋类型中显示，且有正常计算租金及面积，多余的租金填写在“营业”中，只需要填写房间号和规定租金</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-10</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.01更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.别字更正异动</p>
+			<p>2.计租表增加杂间和营业类型的房间</p>
+			<p class="fun_title">优化</p>
+			<p>1.租约申请房屋层和居住层变为可修改项</p>
+			<p>2.租金计算中，加入减免金额统计</p>
+			<p>3.房屋调整异动增加房管员上传资料的功能</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
 			<h3>2018-08-06</h3>
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.5更新提醒</h3>
+			<h3>武房公房系统v1.5更新提醒</h3>
 			<p class="fun_title">新增</p>
-			<p>1.房屋调整异动上线</p>
-			<p>2.楼栋调整异动上线</p>
-			<p>3.租金减免异动伤心</p>
-			<p>4.空租异动上线</p>
-			<p>5.暂停计租异动上线</p>
-			<p>6.陈欠核销异动上线</p>
-			<p>7.新发租异动上线</p>
+			<p>1. 注销异动上线</p>
+			<p>2. 租金追加上线</p>
 			<p class="fun_title">优化</p>
-			<p>1.租金追加上传资料</p>
-			<p>2.使用权变更上传资料</p>
-			<p>3.异动与楼栋、房屋和报表的关联</p>
+			<p>1.过户申请弹框改名为使用权变更申请</p>
+			<p>2.扩大图片上传的内存</p>
+			<p>3.修复一些弹框弹不出的问题</p>
 		</div>
 	</div>
 	<div class="content">
@@ -788,7 +1582,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.4更新提醒</h3>
+			<h3>武房公房系统v1.4更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1. 注销异动上线</p>
 			<p>2. 租金追加上线</p>
@@ -804,7 +1598,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.3更新提醒</h3>
+			<h3>武房公房系统v1.3更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.租金管理新增月份收欠版块</p>
 			<p>2.月租金报表中泵费上基数</p>
@@ -822,7 +1616,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.2更新提醒</h3>
+			<h3>武房公房系统v1.2更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.使用权变更上线</p>
 			<p>2.修改密码上线</p>
@@ -838,7 +1632,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.1更新提醒</h3>
+			<h3>武房公房系统v1.1更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.月租金报表1-6月份的数据</p>
 		</div>
@@ -849,7 +1643,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.0更新提醒</h3>
+			<h3>武房公房系统v1.0更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.房屋统计报表、产权报表、月租金报表12月份的数据</p>
 		</div>
@@ -862,9 +1656,9 @@ $('#version_show').click(function(){
 	$('.admin-sidebar').height($('.admin-content:eq(0)').height());
 })
 </script>
-<script src="/public/static/gf/js/amazeui.min.js"></script>
-<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
-<script src="/public/static/gf/js/app.js"></script>
+<script src="/public/static/gf/js/amazeui.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/app.js?v=<?php echo $version; ?>"></script>
 <script type="text/javascript">
   var body_height = $(document.body).height();
   var window_height = $(window).height();
@@ -971,6 +1765,19 @@ $('.am-scrollable-horizontal').scroll(function(){
   window.onpopstate = function(e){
     console.log(e.state);
   }
+  $('.olineOrder').click(function(){
+    var username = "<?php echo session('user_base_info.name'); ?>";
+    $.post('https://pro.ctnmit.com/admin.php/system/publics/index.html',{'username':username,'key':'iwejsdhenskh34kwe'},function(res){
+          //res = JSON.parse(res);
+          console.log(res);
+          if(res.code){
+            window.open(res.url+'?user_id='+res.user_id+'&secret='+res.key);
+          }else{
+            layer.msg(res.msg);
+          }
+          
+        })
+  })
   // header头部点击显示或隐藏 开始
   $('#offCanvas').click(function(){
     var data_value = $(this).attr('data-value');
@@ -991,8 +1798,9 @@ $('.am-scrollable-horizontal').scroll(function(){
 // admin-sidebar-sub左边列表栏样式选择结束
 </script>
 
-<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js"></script>
-<script type="text/javascript" src="/public/static/gf/viewJs/rent_cut.js"></script>
+<script type="text/javascript" src="/public/static/gf/js/DFileUpload.js?v=<?php echo $version; ?>"></script>
+<script type="text/javascript" src="/public/static/gf/js/viewer.min.js?v=<?php echo $version; ?>"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/rent_cut.js?v=<?php echo $version; ?>"></script>
 
 </body>
 </html>

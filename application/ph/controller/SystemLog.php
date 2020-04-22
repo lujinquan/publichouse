@@ -18,7 +18,7 @@ class SystemLog extends Base
         $this->nowmonth = date('Ym',time());
         $this->nowyear = date('Y',time());
         //$this->nowyear = '2018';
-        //$this->nowmonth = '201906';
+        //$this->nowmonth = '202003';
     }
 
     /**

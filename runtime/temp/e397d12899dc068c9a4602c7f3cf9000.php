@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"/usr/share/nginx/publichouse/application/user/view/publics/signin.html";i:1528342025;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"/usr/share/nginx/publichouse/application/user/view/publics/signin.html";i:1567341279;}*/ ?>
 <!--<div style="text-align:center;margin:200px 0px;font-size:20px;">服务器已迁移，请<span style="font-weight:bold;"><a href="http://118.25.128.122" target="_blank">点击此处</a></span>访问……</div>-->
 <!DOCTYPE html>
 <html>
@@ -6,8 +6,8 @@
     <title>武昌区公房管理系统v1.0</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link href="/public/static/user/css/signin.css" rel="stylesheet" type="text/css" media="all">
-    <script src="/public/static/user/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <link href="/public/static/user/css/signin.css?v=<?php echo $version; ?>" rel="stylesheet" type="text/css" media="all">
+    <script src="/public/static/user/js/jquery-1.10.2.min.js?v=<?php echo $version; ?>" type="text/javascript"></script>
 
 </head>
 <body onkeydown="getkeyup(event)">
@@ -47,7 +47,7 @@
                     <img id="vertical-bar-code2" class="img-margin" src="/public/static/user/images/code.png"><span class="vertical-bar">|</span><input id="yzm" placeholder="验证码" maxlength="6" class="edging code2" type="text" name="" style="width:170px;">
                     <img id="ImageCheck" src="<?php echo captcha_src(); ?>" class="yzm-img" onclick="this.src='<?php echo captcha_src(); ?>?d='+Math.random();" title="点击刷新" alt="captcha" /><div class="tel-hr hr-super-dog"></div>
                 </div>
-                <div id="super-dog-div"><span id="super-dog">未检测到安全控件</span></div>
+                <div id="super-dog-div"><span class="j-fl" id="super-dog">未检测到安全控件</span><span class="j-forget j-fr"><a href="<?php echo url('forgetpass'); ?>">忘记密码?</a></span></div>
                 <div id="name-div-login">
                     <button id="name-btn-login" onclick="btnClick()" class="btn-login">登  录</button>
                 </div>
@@ -57,6 +57,6 @@
     </div>
     <footer>楚天新媒科技（武汉）有限公司</footer>
 </body>
-<script type="text/javascript" src="/public/static/user/js/signin.js"></script>
- <script src="/public/static/user/js/superdog.js" type="text/javascript"></script>
+<script type="text/javascript" src="/public/static/user/js/signin.js?v=<?php echo $version; ?>"></script>
+ <script src="/public/static/user/js/superdog.js?v=<?php echo $version; ?>" type="text/javascript"></script>
 </html>

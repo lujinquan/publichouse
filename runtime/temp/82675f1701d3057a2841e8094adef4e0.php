@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1534760328;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1537405974;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -13,9 +13,9 @@
   <link rel="icon" type="image/png" href="/public/static/gf/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="/public/static/gf/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="" />
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/admin.css">
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v=<?php echo $version; ?>">
   <style>
     .am-topbar-nav>li>a:after{display:none;}
     body .ddd-class .layui-layer-title{background:#FFF;font-size:20px;}
@@ -26,11 +26,16 @@
     #offCanvas{margin-left: 44px;}
 
     #userName{color:#FFF;}
+    .indexhover>a:hover {
+      color: #fff;
+      opacity:0.78;
+    }
+    
   </style>
   
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/public/static/gf/js/jquery.min.js"></script>
-<script src="/public/static/gf/layer/layer.js"></script>
+<script src="/public/static/gf/js/jquery.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/layer/layer.js?v=<?php echo $version; ?>"></script>
 
 <!--<![endif]-->
 </head>
@@ -42,7 +47,7 @@
 
 <header class="am-topbar admin-header am-print-hide">
   <div class="am-topbar-brand">
-    <strong>武房网公房管理系统</strong>
+    <strong><span class="indexhover"><a href="/">武房网公房管理系统</a></span></strong>
     <button class="am-btn am-btn-xs am-btn-secondary am-icon-bars" id="offCanvas" data-value="false"></button>
   </div>
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -50,7 +55,7 @@
   <div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 
     <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list">
-<!--       <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
+      <?php if(false): ?> <li><a href="javascript:;" class="olineOrder"><span class="am-icon-envelope-o"></span> 工单 <span class="am-badge am-badge-warning"></span></a></li> <?php endif; ?>
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle name_style" data-am-dropdown-toggle href="javascript:;">
           <span class="am-icon-users" id="userName">
@@ -237,6 +242,8 @@
           foreach($wait_processing['list'] as $wait_k => $wait_v){
               if($wait_v['type'] == 1){
                 $href = '/ph/UserAudit/index';
+              }else if($wait_v['type'] == 3){
+                $href = '/ph/CorrectAudit/index';
               }else{
                 $href = '/ph/ChangeAudit/index';
               }
@@ -286,11 +293,18 @@
                     <?php
                     if(isset($upload_file_list)){
                       foreach($upload_file_list['list'] as $info){
+                        if($info['IsTop']){
+                          $fontweight = 'bold';
+                          $fontsize = '1.5rem';
+                        }else{
+                          $fontweight = 'normal';
+                          $fontsize = '1.25rem';
+                        }
                         echo '
                       <tr>
-                        <td style="width:50%;padding-left:20px;">'. $info['Title'] .'</td>
+                        <td style="width:50%;padding-left:20px;font-size:'.$fontsize.';font-weight:'.$fontweight.'">'. $info['Title'] .'</td>
                         <td style="width:20%;"><a class="index-file-download" href="downloadFile?file='. $info['Url'] .'" style="color:#4C84FF;">下载</a></td>
-                        <td>'. $info['Time'] .'</td>
+                        <td>'. $info['CreateTime'] .'</td>
                       </tr>';
                       }
                     }
@@ -320,12 +334,19 @@
           </div>
           <div class="am-panel-bd am-collapse am-in" id="collapse-panel-3" style="padding-top:6px;">
             <table class="am-table am-table-bd am-table-striped admin-content-table" style="border: 1px solid #D6E2F6;">
-              <thead><tr><th style="padding-left:20px;">标题</th><th>更新时间</th></tr></thead>
+              <thead><tr><th style="padding-left:20px;">标题</th><th>创建时间</th></tr></thead>
               <tbody id="index_notice_list_content">
                   <?php 
                   if(isset($notice_list)){
                     foreach($notice_list['list'] as $info){
-                      echo '<tr><td style="width:70%;padding-left:20px;"><a class="notice_info" id="'. $info['id'] .'" href="javascript:void(0)">' . $info['Title'] . '</a></td><td>'. $info['UpdateTime'] .'</td></tr>';
+                      if($info['IsTop']){
+                        $fontweight = 'bold';
+                        $fontsize = '1.5rem';
+                      }else{
+                        $fontweight = 'normal';
+                        $fontsize = '1.25rem';
+                      }
+                      echo '<tr><td style="width:70%;padding-left:20px;font-size:'.$fontsize.';font-weight:'.$fontweight.'"><span style="cursor:pointer;" class="notice_info" id="'. $info['id'] .'">' . $info['Title'] . '</span></td><td>'. $info['CreateTime'] .'</td></tr>';
                     }
                   }
                   ?>
@@ -356,7 +377,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.5</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;"><?php echo $web_version; ?></span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -371,7 +392,7 @@
       <label id="addSelect" for="doc-ipt-pwd-1">所属机构：</label>
     </div>
    <div class="am-form-group">
-      <label for="doc-ipt-pwd-1">房屋地址：</label>
+      <label for="doc-ipt-pwd-1">楼栋地址：</label>
       <input type="text" class="" id="queryTwo" placeholder="">
     </div>
     <div class="am-form-group">
@@ -388,7 +409,7 @@
           <th style="width:60px;">单元号</th>
           <th style="width:60px;">楼层号</th>
           <th style="width:80px;">租户姓名</th>
-          <th>房屋地址</th>
+          <th>楼栋地址</th>
       </thead>
     </table>
     <a id="pagePrev" style="cursor:pointer;">上一页</a>
@@ -481,7 +502,7 @@
       </div>
       <div class="am-form-group">
         <label>楼栋地址：</label>
-        <input type="text" id="houseThr" placeholder="">
+        <input type="text" id="houseThr" autocomplete="off">
       </div>
       <button id="houseQueryClick" class="am-btn am-btn-primary am-btn-sm">查询</button>
     </div>
@@ -493,7 +514,7 @@
             <th>单元号</th>
             <th>楼层号</th>
             <th>租户姓名</th>
-            <th>月租金</th>
+            <th>规定租金</th>
             <th>楼栋地址</th>
         </thead>
       </table>
@@ -600,23 +621,278 @@
 	</div>
 	<div class="content">
 		<div class="version_time">
+			<h3>2020-01-09</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统<?php echo $web_version; ?>更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.租金减免年审优化：优化租金减免年审申请条件，附件分类显示，多次年审审批记录明细展示</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-12-27</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.16更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.月租金报表：新增12月份及以后月份管段多产别月租金报表统计查询（“市代托”、“市区代托”、“所有产别”）</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-11-04</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.15更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.楼栋注销异动：新增楼栋注销异动类型，能够实现整栋楼的注销</p>
+			<p>2.租金减免年审异动：新增租金减免年审异动，房管员（提交资料）——经租会计（确认年审）</p>
+			<p class="fun_title">优化</p>
+			<p>1.房屋详情页优化：增加字段 “绑定楼栋：XXXXXXXX（楼栋地址） XXXXXX（楼栋编号）”</p>
+			<p>2.注销页面优化：注销申请页面必填项标*：注销租金、计租面积、建筑面积、原价</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-10-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.14更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.租金减免取消：租金管理的租金减免页面新增租金减免取消功能</p>
+			<p class="fun_title">优化</p>
+			<p>1.报表检测：新加“检测”按钮，按查询“管段”，“房管所”，“公司”，“产别”检测</p>
+			<p>2.租金减免自动取消：若原租户有租金减免，使用权变更后，原租户该房屋的租金减免自动取消，且会反映到报表</p>
+			<p>3.弹窗显示时常：系统中所有弹窗提示信息显示时长改为4s（已完成）</p>			
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-9-20</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.13更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.产权统计（年）：新增加按年统计产权</p>
+			<p class="fun_title">优化</p>
+			<p>1.异动审核：异动审核中将需要登录人审核的异动排在上方，并且审核状态字段为蓝色加粗</p>
+			<p>2.租约记录：租约记录页面申请时间搜索精确到月，并且列表中的租约申请时间精确到天</p>
+			<p>3.租约失效：将已做的使用权变更异动的原租户的二维码变为失效</p>		
+			<p>4.注销申请：注销申请填写时建筑面积、原价、计租面积、注销租金必填</p>		
+			<p>5.租约记录：租约记录中，已失效的租约信息置灰显示</p>
+			<p>6.暂停计租：已申请暂停计租的房屋无法再次申请暂停计租，无法选择并且置灰显示，存在欠租的房屋则标红显示</p>
+			<p>7.系统公告时间：公告发布后，只修改置顶，文件发表时间不会改变，只有修改公告内容，发表时间才会发生变化</p>
+			<p>8.使用权变更搜索条件：使用权变更申请、审核、记录列表都可根据原租户、现租户、使面、规租搜索</p>			
+			<p>9.系统角色排序：系统角色按添加时间正序排列</p>		
+			<p>10.异动审核：增加租金统计功能</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-9-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.12更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.陈欠核销页面：显示核销中金额（以前年和以前月之和），年份连选，选择以前月时，选中较大的月份前面的月份自动全部选中</p>	
+			<p>2.使用权变更搜索：增加筛选条件“姓名”，可以输入变更后的租户姓名进行搜索使用权变更记录</p>	
+			<p>3.使用权变更：使用权变更后，原租约二维码自动失效，使用权变更申请页面，红色提示语“使用权变更完成后，原租约自动失效”</p>
+			<p>4.月租金报表检测：点击“缓存报表”，系统自动检测，并弹出提示信息，需要房管员手动点击关闭信息</p>
+			<p>5.租约申请：租约申请页面提示语“租约申请成功后，原租约自动失效”</p>	
+			<p>6.异动记录：异动记录列表新增“完成时间”字段（精确到月），可以根据完成时间搜索</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-30</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.11更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.忘记密码功能：用户忘记密码后，可通过手机接收验证码的方式重置密码</p>
+			<p class="fun_title">优化</p>
+			<p>1.异动记录：异动记录可对状态进行筛选查询</p>	
+			<p>2.年度收欠：年度收欠列表中剔除月度收欠账单</p>	
+			<p>3.租约记录：租约记录中的房屋层、居住层删去，新增租约申请时间字段</p>
+			<p>4.月租金报表：生成月租金报表的时候检测并提示当前有XX条账单未处理</p>
+			<p>5.公告发布时间：公告时间以第一次发布时间为准，后期修改公告，不改变发布时间</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-17</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.10更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.名称字段的统一：系统中的“房屋地址”全部改为“楼栋地址”</p>
+			<p>2.租约打印：租约打印时，若为“老证换新证”，打印出的纸质租约仅显示最新一条“老证换新证”记录</p>
+			<p>3.附件上传：注销业务中，房管员提交申请时，在附件上传中增加一个“其它”附件类型，用于上传其它附件</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-8-2</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.09更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.增加出证时间：房屋信息列表增加“出证时间”字段，显示最近一次出证时间，未出证则不显示</p>
+			<p>2.租约审核增加失败功能：租约审核时，待审批流程走到最后一步“待房管员提交签字”时，增加房管员点击失败的功能，由房管员判断此条记录是成功还是失败</p>
+			<p>3.楼栋地址调整：楼栋调整中新增楼栋地址调整，需要上传产权证／产权清册（以产权清册为准，必须上传）／经租帐／图卡</p>
+			<p>4.数据自动触发刷新：楼栋层高调整后，计租表相关数据自动刷新</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-26</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.08更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.楼栋地址调整：楼栋调整中新增楼栋地址调整，需要上传产权证／划转清册</p>
+			<p>2.房屋信息里删除“年度欠租”：房屋信息页面列表去掉“年度欠租”字段，查询欠租请到租金管理页面查询</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-19</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.07更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.审批记录：优化审批打回时，审批者的角色名称混乱</p>
+			<p>2.异动名称：去除异动申请中无效和废弃的异动类型</p>	
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-12</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.06更新提醒</h3>
+			<p class="fun_title">优化</p>
+			<p>1.房屋信息及数据确认：修复附件上传、更新、删除</p>
+			<p>2.提示：系统中需要双击查询的都加上提示词</p>
+			<p>3.异动：各异动关联的房屋和楼栋编号同步到异动统计表中便于后期导出</p>		
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-7-5</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.05更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.数据确认增加房管员删除权限</p>
+			<p>2.异动前提条件设置-无欠租</p>
+			<p>3.数据锁定：新发租申请后，数据确认中的楼栋、房屋、租户信息均不可修改</p>
+			<p>4.权限新增：房管员新增数据确认中楼栋、房屋、租户的删除权限</p>
+			<p class="fun_title">优化</p>
+			<p>1.详情页优化：日志、流程配置、租户信息详情显示混乱</p>
+			<p>2.翻页问题：计租表的欠租情况点入中翻页问题优化</p>
+			<p>3.租金字段统一：系统中关于租金的字段命名统一</p>
+			<p>4.数据确认中必填项优化：数据确认中楼栋的产权证号、租户的联系方式和身份证号设置为必填项</p>
+			<p>5.增加营业和杂件类型：数据确认中的计租表增加营业和杂间类型，与房屋信息中保持一致</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-28</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.04更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.租金批量调整（仅针对楼层调整后）：因错层调整引起的租金变化<br>新增同一楼栋下房屋租金批量调整（(仅针对楼层调整后)<br>步骤和租金调整(0.2,0.3,0.4,0.5)一致</p>
+			<p>2.别字更正：别字更正需要填写身份证号，且异动生效后身份证号自动更新至租户信息</p>
+			<p>3.新发租：新发租申请时类型选择“接管／危改还建／新建／合建／加改扩／其他”<br>具体描述填写至“异动事由”</p>
+			<p class="fun_title">优化</p>
+			<p>1.月租金报表：只有房管所和区公司保留复合型产别筛选“市代托／市区代托／所有产别”即选择机构“XX所XX管段”<br>无法查看“市代托／市区代托／所有产别”月租金报表</p>
+			<p>2.异动名称：异动名称按照使用频率排列</p>
+			<p>3.申请租约按钮删除：租约记录中“申请租约”按钮去掉</p>
+			<p>4.租户身份证上传：租户上传身份证页面优化</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-21</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.03更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.新发条件限制：房屋申请新发租必须满足两个条件，否则无法新发租：<br>a) 房屋已绑定租户 <br>b) 房屋已填写规定租金</p>
+			<p>2.房屋信息列表增加“月租金字段”</p>
+			<p class="fun_title">优化</p>
+			<p>1.金额的统计：异动记录中统计“租金”</p>
+			<p>2.泵费处理：<br>a) 泵费不设计计算公式，以后台录入数据为准 <br>b) 租约泵费显示与计租表保持一致 <br>c) 紫阳所部分泵费已上账</p>
+			<p>3.规范租金相关字段：<br>a) 规定租金（房管员数据）= 房间租金之和 + 营业租金/协议租金 <br>b) 计算租金（系统数据）= 房间计算租金之和+营业租金/协议租金 <br>c) 月租金 = 规定租金（计算租金）+ 租差 + 泵费 <br>d) 应收租金 = 月租金 - 减免</p>
+			<p>4.登录自动退出时长：登录误操作7200s（2小时）自动退出</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-14</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.02更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.计算租金统计：所有计算租金标红的房屋租金，在上方显示出统计金额（与规定租金的差值）</p>
+			<p>2.暂停计租筛选：房屋信息中筛选暂停计租的房屋，列表置灰显示</p>
+			<p>3.减免金额统计：租金计算中统计出减免总金额</p>
+			<p>4.租金减免再申请：租金减免过程中减免金额调整，重新申请减免，之前的减免自动失效</p>
+			<p class="fun_title">优化</p>
+			<p>1.减免截止日期：本年度减免截止日期统一顺延至年底12月份</p>
+			<p>2.管段／月份查询：异动记录增加增加管段、月份查询</p>
+			<p>3.营业租金的填写：营业房间在其他房屋类型中显示，且有正常计算租金及面积，多余的租金填写在“营业”中，只需要填写房间号和规定租金</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-10</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统v1.5.01更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.别字更正异动</p>
+			<p>2.计租表增加杂间和营业类型的房间</p>
+			<p class="fun_title">优化</p>
+			<p>1.租约申请房屋层和居住层变为可修改项</p>
+			<p>2.租金计算中，加入减免金额统计</p>
+			<p>3.房屋调整异动增加房管员上传资料的功能</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
 			<h3>2018-08-06</h3>
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.5更新提醒</h3>
+			<h3>武房公房系统v1.5更新提醒</h3>
 			<p class="fun_title">新增</p>
-			<p>1.房屋调整异动上线</p>
-			<p>2.楼栋调整异动上线</p>
-			<p>3.租金减免异动上线</p>
-			<p>4.空租异动上线</p>
-			<p>5.暂停计租异动上线</p>
-			<p>6.陈欠核销异动上线</p>
-			<p>7.新发租异动上线</p>
+			<p>1. 注销异动上线</p>
+			<p>2. 租金追加上线</p>
 			<p class="fun_title">优化</p>
-			<p>1.租金追加上传资料</p>
-			<p>2.使用权变更上传资料</p>
-			<p>3.异动与楼栋、房屋和报表的关联</p>
+			<p>1.过户申请弹框改名为使用权变更申请</p>
+			<p>2.扩大图片上传的内存</p>
+			<p>3.修复一些弹框弹不出的问题</p>
 		</div>
 	</div>
 	<div class="content">
@@ -625,7 +901,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.4更新提醒</h3>
+			<h3>武房公房系统v1.4更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1. 注销异动上线</p>
 			<p>2. 租金追加上线</p>
@@ -641,7 +917,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.3更新提醒</h3>
+			<h3>武房公房系统v1.3更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.租金管理新增月份收欠版块</p>
 			<p>2.月租金报表中泵费上基数</p>
@@ -659,7 +935,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.2更新提醒</h3>
+			<h3>武房公房系统v1.2更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.使用权变更上线</p>
 			<p>2.修改密码上线</p>
@@ -675,7 +951,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.1更新提醒</h3>
+			<h3>武房公房系统v1.1更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.月租金报表1-6月份的数据</p>
 		</div>
@@ -686,7 +962,7 @@
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
-			<h3>武房公房系统V1.0更新提醒</h3>
+			<h3>武房公房系统v1.0更新提醒</h3>
 			<p class="fun_title">新增</p>
 			<p>1.房屋统计报表、产权报表、月租金报表12月份的数据</p>
 		</div>
@@ -699,9 +975,9 @@ $('#version_show').click(function(){
 	$('.admin-sidebar').height($('.admin-content:eq(0)').height());
 })
 </script>
-<script src="/public/static/gf/js/amazeui.min.js"></script>
-<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
-<script src="/public/static/gf/js/app.js"></script>
+<script src="/public/static/gf/js/amazeui.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/app.js?v=<?php echo $version; ?>"></script>
 <script type="text/javascript">
   var body_height = $(document.body).height();
   var window_height = $(window).height();
@@ -808,6 +1084,19 @@ $('.am-scrollable-horizontal').scroll(function(){
   window.onpopstate = function(e){
     console.log(e.state);
   }
+  $('.olineOrder').click(function(){
+    var username = "<?php echo session('user_base_info.name'); ?>";
+    $.post('https://pro.ctnmit.com/admin.php/system/publics/index.html',{'username':username,'key':'iwejsdhenskh34kwe'},function(res){
+          //res = JSON.parse(res);
+          console.log(res);
+          if(res.code){
+            window.open(res.url+'?user_id='+res.user_id+'&secret='+res.key);
+          }else{
+            layer.msg(res.msg);
+          }
+          
+        })
+  })
   // header头部点击显示或隐藏 开始
   $('#offCanvas').click(function(){
     var data_value = $(this).attr('data-value');
@@ -828,7 +1117,7 @@ $('.am-scrollable-horizontal').scroll(function(){
 // admin-sidebar-sub左边列表栏样式选择结束
 </script>
 
-<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js"></script>
+<script type="text/javascript" src="/public/static/gf/viewJs/index_notice_page.js?v=<?php echo $version; ?>"></script>
 
 </body>
 </html>

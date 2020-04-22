@@ -37,7 +37,8 @@ class HouseReport extends Base
     
 
     public function index(){
-
+        $date = date('Ym',time());
+        //$date = '202003';
         //主页面默认数据
         $where['Status'] = 1;
         $currentUserInstitutionID = session('user_base_info.institution_id');
@@ -56,7 +57,7 @@ class HouseReport extends Base
         
         $where = isset($where)?$where:0;
         //halt($where);
-        $data = Db::name('report')->where(['type'=>'HouseReport','date'=>date('Ym')])->value('data');
+        $data = Db::name('report')->where(['type'=>'HouseReport','date'=>$date])->value('data');
         $sdata = json_decode($data,true);
         $result = $sdata[5][$where['OwnerType']][$currentUserInstitutionID]; 
         if(!$result){
