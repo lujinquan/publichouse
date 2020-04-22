@@ -88,6 +88,7 @@
                             $month = $propertyOption['month'];
                         }else{
                             $month =date('Y-m',time());
+                            //$month ='2020-03';
                         }
                     ?>
                     <input type="text" id="timeYear" name="month" value="{$month}" class="am-u-md-8" data-am-datepicker="{format: 'yyyy-mm', viewMode: 'months',minViewMode: 'months'}" placeholder="日历组件" data-am-datepicker readonly/>
