@@ -393,6 +393,7 @@ $('.BtnApprove').click(function(){
         	$('.rentAddYear').text(res.data.detail.OldYearRent);
         	$('.rentAddMonth').text(res.data.detail.OldMonthRent);
         	$('.rentAddReason').text(res.data.detail.Remark);
+			$("input[name='IfTakeBack'][value='"+res.data.detail.IfTakeBack+"']").attr("checked","checked");   //是的回收
         	processState('#rentAddState',res);
         	metailShow('#rentAddPhotos',res,1);
 			var this_index = layer.open({
