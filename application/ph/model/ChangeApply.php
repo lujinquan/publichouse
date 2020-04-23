@@ -266,7 +266,7 @@ class ChangeApply extends Model
                         return jsons('4002','房屋状态需为异动状态');
                     }
                     if($finds['HousePrerent'] == '0.00'){
-                        return jsons('4002','请完善该房屋的规租信息');
+                        //return jsons('4002','请完善该房屋的规租信息');
                     }
                     if(!$finds['TenantID']){
                         return jsons('4002','请完善该房屋的租户信息');
