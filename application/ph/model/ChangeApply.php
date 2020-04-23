@@ -266,7 +266,7 @@ class ChangeApply extends Model
                         return jsons('4002','房屋状态需为异动状态');
                     }
                     if($finds['HousePrerent'] == '0.00'){
-                        //return jsons('4002','请完善该房屋的规租信息');
+                        return jsons('4002','请完善该房屋的规租信息');
                     }
                     if(!$finds['TenantID']){
                         return jsons('4002','请完善该房屋的租户信息');
@@ -322,7 +322,7 @@ class ChangeApply extends Model
                         return jsons('4001','请完善房屋原价');
                     }
                     if($data['Ban'][0]['cancelPrent'] <= 0){
-                        return jsons('4001','请完善注销租金');
+                        //return jsons('4001','请完善注销租金');
                     }
                     if(!$data['Ban'][0]['cancelHouseUsearea']){
                         return jsons('4001','请完善计租面积');
