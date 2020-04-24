@@ -266,7 +266,7 @@ class ConfirmHouseInfo extends Base
                         'RoomName' => $one['RoomTypeName'],
                         'RentPointIDS' => $rentPointIDS,
                     ];
-//halt($datas);
+                    //halt($datas);
                     if ($datas['RoomID']) {  //如果房间编号存在，则为修改
                         //halt($datas['RoomID']);
                         $datas['UpdateTime'] = time();
@@ -309,7 +309,8 @@ class ConfirmHouseInfo extends Base
                             if ($diffHouses) {
                                 foreach ($diffHouses as $diff) {
                                     $houseTemps = count_house_rent($diff);
-                                    Db::name('house')->where('HouseID',$diff)->setField('ApprovedRent',$houseTemps);
+                                    $find = count_house_area($diff);
+                                    Db::name('house')->where('HouseID',$diff)->update(['ApprovedRent'=>$houseTemps,'LeasedArea'=>$find['LeaseArea']]);
                                 }
                             }
                         }   
