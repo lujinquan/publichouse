@@ -303,7 +303,7 @@ class RentCount extends Model
     /**
      *  测试模式，一次帮整个公司全部配置一遍
      */
-    public function config11($ifPre)
+    public function config_all($ifPre)
     {
 
 
@@ -378,7 +378,7 @@ class RentCount extends Model
 
         Db::name('rent_config')->where(['ReceiveRent'=>0])->delete();
 
-        return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
+        //return $res?jsons('2000' ,'租金计算成功'):jsons('4001' ,'租金计算失败');
     }
 
     /**
@@ -597,28 +597,19 @@ class RentCount extends Model
         /**
      *  租金订单生成，注意由所机构统一生成
      */
-    public function add11()
+    public function add_all()
     {
 
-        $institutionID = session('user_base_info.institution_id');
 
-        //验证合法性
-        
-        //由于房管员有时候不会主动更新配置，主动更新配置
-        //$this->config11(1,false);
+        $this->config_all(1,false);
 
         $nextDate = date('Ym');
-        $nextDate = '202002';
+        
 
         $where['OrderDate'] = $nextDate; //获取当月日期
         //$where['InstitutionID'] = $institutionID;
         $result = Db::name('rent_order')->where($where)->field('Type')->find();
-        //$findOne = Db::name('rent_config')->find();
 
-        
-        // if (!$findOne) {
-        //     return jsons('4004', '请先生成租金配置');
-        // }
         if ($result) {
             return jsons('4003', '租金已生成，请勿重复操作……');
         } else {  //生成下月租金
