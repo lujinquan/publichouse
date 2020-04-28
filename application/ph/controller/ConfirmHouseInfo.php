@@ -309,7 +309,9 @@ class ConfirmHouseInfo extends Base
                             if ($diffHouses) {
                                 foreach ($diffHouses as $diff) {
                                     $houseTemps = count_house_rent($diff);
-                                    Db::name('house')->where('HouseID',$diff)->setField('ApprovedRent',$houseTemps);
+                                    $find = count_house_area($diff);
+                                    Db::name('house')->where('HouseID',$diff)->update(['ApprovedRent'=>$houseTemps,'LeasedArea'=>$find['LeaseArea']]);
+                                    //Db::name('house')->where('HouseID',$diff)->setField('ApprovedRent',$houseTemps);
                                 }
                             }
                         }   

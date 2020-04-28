@@ -80,7 +80,7 @@ class RentPayable extends Base
             return jsons('4000', '该功能暂时只对房管员开放');
         }
         
-        $bool = Db::name('rent_order')->where(['OrderDate'=>'202002','Type'=>1,'InstitutionID'=>$institutionID])->update(['Type'=> 3 ,'PaidRent'=> ['exp','ReceiveRent'],'UnpaidRent'=>0]);
+        $bool = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'Type'=>1,'InstitutionID'=>$institutionID])->update(['Type'=> 3 ,'PaidRent'=> ['exp','ReceiveRent'],'UnpaidRent'=>0]);
 
         return $bool?jsons('2000' ,'操作成功'):jsons('4000' ,'操作失败');
     }
@@ -90,8 +90,8 @@ class RentPayable extends Base
      */
     public function dealAsLast(){
 
-        //$lastDate = getlastMonthDays(date('Ym',time()));
-        $lastDate = getlastMonthDays('202002');
+        $lastDate = getlastMonthDays(date('Ym',time()));
+        //$lastDate = getlastMonthDays('202002');
 
         //halt($lastDate);
         $institutionID = session('user_base_info.institution_id');
@@ -103,7 +103,7 @@ class RentPayable extends Base
 
         $oldDatas = Db::name('rent_order')->where(['OrderDate'=>$lastDate,'InstitutionID'=>$institutionID,'Type'=>2])->field('HouseID,Type,PaidRent,UnpaidRent,HousePrerent,OwnerType')->select();
 
-        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>'202002','InstitutionID'=>$institutionID,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,ReceiveRent,HousePrerent,OwnerType')->select();
+        $nowDatas = Db::name('rent_order')->where(['OrderDate'=>date('Ym',time()),'InstitutionID'=>$institutionID,'Type'=>1])->field('id,HouseID,Type,UnpaidRent,ReceiveRent,HousePrerent,OwnerType')->select();
 
         foreach($nowDatas as $n){
             $nowData[$n['HouseID']][$n['OwnerType']] = $n;
