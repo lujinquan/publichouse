@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:74:"/usr/share/nginx/publichouse/application/ph/view/repair_examine/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1532308676;s:46:"application/ph/view/repair_examine/detail.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1533542784;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:74:"/usr/share/nginx/publichouse/application/ph/view/repair_examine/index.html";i:1528342025;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1560686457;s:46:"application/ph/view/repair_examine/detail.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1560739318;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -13,9 +13,9 @@
   <link rel="icon" type="image/png" href="/public/static/gf/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="/public/static/gf/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="" />
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css"/>
-  <link rel="stylesheet" href="/public/static/gf/css/admin.css">
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.min.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/amazeui.datetimepicker.css?v=<?php echo $version; ?>"/>
+  <link rel="stylesheet" href="/public/static/gf/css/admin.css?v=<?php echo $version; ?>">
   <style>
     .am-topbar-nav>li>a:after{display:none;}
     body .ddd-class .layui-layer-title{background:#FFF;font-size:20px;}
@@ -26,11 +26,16 @@
     #offCanvas{margin-left: 44px;}
 
     #userName{color:#FFF;}
+    .indexhover>a:hover {
+      color: #fff;
+      opacity:0.78;
+    }
+    
   </style>
   
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script src="/public/static/gf/js/jquery.min.js"></script>
-<script src="/public/static/gf/layer/layer.js"></script>
+<script src="/public/static/gf/js/jquery.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/layer/layer.js?v=<?php echo $version; ?>"></script>
 
 <!--<![endif]-->
 </head>
@@ -42,7 +47,7 @@
 
 <header class="am-topbar admin-header am-print-hide">
   <div class="am-topbar-brand">
-    <strong>武房网公房管理系统</strong>
+    <strong><span class="indexhover"><a href="/">武房网公房管理系统</a></span></strong>
     <button class="am-btn am-btn-xs am-btn-secondary am-icon-bars" id="offCanvas" data-value="false"></button>
   </div>
   <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
@@ -108,7 +113,7 @@
   </div>
   <!-- sidebar end -->
 <!-- 版本version显示 -->
-<div class="admin-content" style="display:none;"></div>
+<div class="admin-content am-print-hide" style="display:none;"></div>
   <!-- content start -->
   
   <!-- content start -->
@@ -443,7 +448,7 @@
 </a>
 
 <footer class="am-print-hide">
-  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;">V1.4</span></p>
+  <p id="version_show" style="text-align:center;margin:0;padding:1rem 0;background:#EDEDED;color:#999;cursor:pointer;">© 2017 CTNM 楚天新媒技术支持 <span style="color:#1188F0;"><?php echo $version; ?></span></p>
 </footer>
 
 <!-- 查询器HTML文件 -->
@@ -610,6 +615,9 @@
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/public/static/gf/js/amazeui.ie8polyfill.min.js"></script>
 <![endif]-->
+
+
+
 <div id="notice_info_dialog" hidden="hidden">
 	<div>
 	    <span id="title_info"></span><br/>
@@ -684,23 +692,52 @@
 	</div>
 	<div class="content">
 		<div class="version_time">
+			<h3>2019-6-14</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统<?php echo $version; ?>更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.计算租金统计：所有计算租金标红的房屋租金，在上方显示出统计金额（与规定租金的差值）</p>
+			<p>2.暂停计租筛选：房屋信息中筛选暂停计租的房屋，列表置灰显示</p>
+			<p>3.减免金额统计：租金计算中统计出减免总金额</p>
+			<p>4.租金减免再申请：租金减免过程中减免金额调整，重新申请减免，之前的减免自动失效</p>
+			<p class="fun_title">优化</p>
+			<p>1.减免截止日期：本年度减免截止日期统一顺延至年底12月份</p>
+			<p>2.管段／月份查询：异动记录增加增加管段、月份查询</p>
+			<p>3.营业租金的填写：营业房间在其他房屋类型中显示，且有正常计算租金及面积，多余的租金填写在“营业”中，只需要填写房间号和规定租金</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
+			<h3>2019-6-10</h3>
+		</div>
+		<div class="dot"></div>
+		<div class="version_content">
+			<h3>武房公房系统V1.5.01更新提醒</h3>
+			<p class="fun_title">新增</p>
+			<p>1.别字更正异动</p>
+			<p>2.计租表增加杂间和营业类型的房间</p>
+			<p class="fun_title">优化</p>
+			<p>1.租约申请房屋层和居住层变为可修改项</p>
+			<p>2.租金计算中，加入减免金额统计</p>
+			<p>3.房屋调整异动增加房管员上传资料的功能</p>
+		</div>
+	</div>
+	<div class="content">
+		<div class="version_time">
 			<h3>2018-08-06</h3>
 		</div>
 		<div class="dot"></div>
 		<div class="version_content">
 			<h3>武房公房系统V1.5更新提醒</h3>
 			<p class="fun_title">新增</p>
-			<p>1.房屋调整异动上线</p>
-			<p>2.楼栋调整异动上线</p>
-			<p>3.租金减免异动伤心</p>
-			<p>4.空租异动上线</p>
-			<p>5.暂停计租异动上线</p>
-			<p>6.陈欠核销异动上线</p>
-			<p>7.新发租异动上线</p>
+			<p>1. 注销异动上线</p>
+			<p>2. 租金追加上线</p>
 			<p class="fun_title">优化</p>
-			<p>1.租金追加上传资料</p>
-			<p>2.使用权变更上传资料</p>
-			<p>3.异动与楼栋、房屋和报表的关联</p>
+			<p>1.过户申请弹框改名为使用权变更申请</p>
+			<p>2.扩大图片上传的内存</p>
+			<p>3.修复一些弹框弹不出的问题</p>
 		</div>
 	</div>
 	<div class="content">
@@ -783,9 +820,9 @@ $('#version_show').click(function(){
 	$('.admin-sidebar').height($('.admin-content:eq(0)').height());
 })
 </script>
-<script src="/public/static/gf/js/amazeui.min.js"></script>
-<script src="/public/static/gf/js/amazeui.datetimepicker.min.js"></script>
-<script src="/public/static/gf/js/app.js"></script>
+<script src="/public/static/gf/js/amazeui.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/amazeui.datetimepicker.min.js?v=<?php echo $version; ?>"></script>
+<script src="/public/static/gf/js/app.js?v=<?php echo $version; ?>"></script>
 <script type="text/javascript">
   var body_height = $(document.body).height();
   var window_height = $(window).height();

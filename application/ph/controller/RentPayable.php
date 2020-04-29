@@ -91,6 +91,7 @@ class RentPayable extends Base
     public function dealAsLast(){
 
         $lastDate = getlastMonthDays(date('Ym',time()));
+        //$lastDate = getlastMonthDays('202002');
 
         //halt($lastDate);
         $institutionID = session('user_base_info.institution_id');

@@ -13,7 +13,7 @@ class RentReport extends Base
         $institutionid = session('user_base_info.institution_id');
         $ownerType = 1;               //默认查询产别为市属的数据
         $date = date('Ym',time());//默认查询时间为当前月的数据
-
+        //$date = '202003';
         //提交检索条件处理
         $rentReportOption = array();
         if ($searchForm = input('post.')) {
@@ -40,6 +40,7 @@ class RentReport extends Base
             12 => '所有产别',
         ];
         $month = isset($rentReportOption['month'])?$rentReportOption['month']:date('Y-m',time());
+        //$month = isset($rentReportOption['month'])?$rentReportOption['month']:'2020-03';
         //halt($date);
         //$month = isset($date)?$date:date('Ym',time());
 // $find = Db::name('report')->where('id',20)->value('data');

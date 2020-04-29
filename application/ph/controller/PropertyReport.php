@@ -30,6 +30,7 @@ class PropertyReport extends Base
         $institutionid = session('user_base_info.institution_id');
         $ownerType = 11;
         $date = date('Y-m',time());
+        //$date = '2020-03';
         //$propertyOption['TubulationID'] = $institutionid;
 
         /*搜索条件*/
