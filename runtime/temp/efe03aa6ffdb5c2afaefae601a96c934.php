@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:23:{s:72:"/usr/share/nginx/publichouse/application/ph/view/change_audit/index.html";i:1572706546;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:44:"application/ph/view/change_audit/derate.html";i:1566211566;s:47:"application/ph/view/change_audit/emptyRent.html";i:1566211566;s:49:"application/ph/view/change_audit/approveForm.html";i:1566211566;s:43:"application/ph/view/change_audit/pause.html";i:1566211566;s:44:"application/ph/view/change_audit/cancel.html";i:1566211566;s:47:"application/ph/view/change_audit/oldCancel.html";i:1566211566;s:52:"application/ph/view/change_audit/rentAdjustment.html";i:1566211566;s:45:"application/ph/view/change_audit/rentAdd.html";i:1566211566;s:50:"application/ph/view/change_audit/AdjustDetail.html";i:1528342025;s:56:"application/ph/view/change_audit/buildingAdjustment.html";i:1566211566;s:48:"application/ph/view/change_audit/RoomDetail.html";i:1528342025;s:49:"application/ph/view/change_audit/houseAdjust.html";i:1566211566;s:45:"application/ph/view/change_audit/newRent.html";i:1561375216;s:49:"application/ph/view/change_audit/batchAdjust.html";i:1566211566;s:52:"application/ph/view/change_audit/buildingcancel.html";i:1572706546;s:48:"application/ph/view/change_audit/rentcancel.html";i:1572706546;s:40:"application/ph/view/ban_info/detail.html";i:1533511343;s:44:"application/ph/view/house_info/RentForm.html";i:1566211566;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:23:{s:72:"/usr/share/nginx/publichouse/application/ph/view/change_audit/index.html";i:1572706546;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:44:"application/ph/view/change_audit/derate.html";i:1566211566;s:47:"application/ph/view/change_audit/emptyRent.html";i:1566211566;s:49:"application/ph/view/change_audit/approveForm.html";i:1566211566;s:43:"application/ph/view/change_audit/pause.html";i:1566211566;s:44:"application/ph/view/change_audit/cancel.html";i:1566211566;s:47:"application/ph/view/change_audit/oldCancel.html";i:1566211566;s:52:"application/ph/view/change_audit/rentAdjustment.html";i:1566211566;s:45:"application/ph/view/change_audit/rentAdd.html";i:1587556719;s:50:"application/ph/view/change_audit/AdjustDetail.html";i:1528342025;s:56:"application/ph/view/change_audit/buildingAdjustment.html";i:1566211566;s:48:"application/ph/view/change_audit/RoomDetail.html";i:1528342025;s:49:"application/ph/view/change_audit/houseAdjust.html";i:1566211566;s:45:"application/ph/view/change_audit/newRent.html";i:1561375216;s:49:"application/ph/view/change_audit/batchAdjust.html";i:1566211566;s:52:"application/ph/view/change_audit/buildingcancel.html";i:1572706546;s:48:"application/ph/view/change_audit/rentcancel.html";i:1572706546;s:40:"application/ph/view/ban_info/detail.html";i:1533511343;s:44:"application/ph/view/house_info/RentForm.html";i:1566211566;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -1300,10 +1300,23 @@
           <label class="label_style">以前年：</label>
           <label class="label_content rentAddYear"></label>
         </div>
-        <div class="am-u-sm-8">
+        <div class="am-u-sm-4">
           <label class="label_style">以前月：</label>
           <label class="label_content rentAddMonth"></label>
         </div>
+		<div class="am-u-sm-4">
+				  <div class="am-form-group">
+				  <label class="label_style">是否收回：</label>
+					<div class="am-u-md-8">
+						<label class="am-radio-inline">
+							<input type="radio"  value="1" name="IfTakeBack" disabled="disabled"> 是
+						</label>
+						<label class="am-radio-inline">
+							<input type="radio" value="0" name="IfTakeBack" disabled="disabled"> 否
+						</label>
+					</div>
+				</div>
+		    </div>
     </div>
 
     <div class="am-form-group am-u-sm-12">

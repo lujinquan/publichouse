@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:70:"/usr/share/nginx/publichouse/application/ph/view/rent_count/index.html";i:1586439121;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:50:"application/ph/view/rent_count/RentAllocation.html";i:1528342025;s:45:"application/ph/view/rent_count/RentApply.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:7:{s:70:"/usr/share/nginx/publichouse/application/ph/view/rent_count/index.html";i:1587973216;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:50:"application/ph/view/rent_count/RentAllocation.html";i:1528342025;s:45:"application/ph/view/rent_count/RentApply.html";i:1528342025;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -140,6 +140,10 @@
                     <!-- <button type="button" id="generateRent" class="am-btn d-btn-1188F0 am-radius">
                         <span class="am-icon-tasks"></span> 生成本月租金
                     </button> -->
+                    <?php }; if(session('user_base_info.uid') == 10000){ ; ?>
+                    <button type="button" id="generateRent" class="am-btn d-btn-1188F0 am-radius">
+                        <span class="am-icon-tasks"></span> 一键生成本月所有管段租金
+                    </button>
                     <?php }; ?>
                 </div>
             </div>
