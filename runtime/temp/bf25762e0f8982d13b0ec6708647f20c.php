@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:11:{s:72:"/usr/share/nginx/publichouse/application/ph/view/change_apply/index.html";i:1560686457;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:42:"application/ph/view/change_apply/form.html";i:1572846182;s:53:"application/ph/view/change_apply/HouseChangeForm.html";i:1566211566;s:44:"application/ph/view/change_apply/detail.html";i:1528342025;s:56:"application/ph/view/change_apply/pause_choose_house.html";i:1569206370;s:44:"application/ph/view/house_info/RentForm.html";i:1566211566;s:40:"application/ph/view/ban_info/detail.html";i:1533511343;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:11:{s:72:"/usr/share/nginx/publichouse/application/ph/view/change_apply/index.html";i:1560686457;s:60:"/usr/share/nginx/publichouse/application/ph/view/layout.html";i:1573559825;s:42:"application/ph/view/change_apply/form.html";i:1587556719;s:53:"application/ph/view/change_apply/HouseChangeForm.html";i:1566211566;s:44:"application/ph/view/change_apply/detail.html";i:1528342025;s:56:"application/ph/view/change_apply/pause_choose_house.html";i:1569206370;s:44:"application/ph/view/house_info/RentForm.html";i:1566211566;s:40:"application/ph/view/ban_info/detail.html";i:1533511343;s:43:"application/ph/view/notice/notice_info.html";i:1528342025;s:42:"application/ph/view/index/second_menu.html";i:1531059200;s:38:"application/ph/view/index/version.html";i:1578586810;}*/ ?>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -817,10 +817,23 @@
       <label class="label_style">以前年：</label>
       <input type="number" class="label_input" id="RentAddYear" style="margin-right:10px;" />元
     </div>
-    <div class="am-form-group am-u-sm-8">
+    <div class="am-form-group am-u-sm-4">
       <label class="label_style">以前月：</label>
       <input type="number" class="label_input" id="RentAddMonth" style="margin-right:10px;" />元
     </div>
+	<div class="am-form-group am-u-sm-4">
+		  <div class="am-form-group">
+		      <label class="label_style">是否收回：</label>
+			<div class="am-u-md-8">
+				<label class="am-radio-inline">
+					<input type="radio"  value="1" name="IfTakeBack" checked="checked" required> 是
+				</label>
+				<label class="am-radio-inline">
+					<input type="radio" value="0" name="IfTakeBack"> 否
+				</label>
+			</div>
+		</div>
+	  </div>
   </div>
   <div class="am-u-sm-12">
     <div class="am-form-group am-u-sm-12">
