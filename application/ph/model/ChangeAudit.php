@@ -1125,7 +1125,7 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
 
                     Db::execute("insert into ".config('database.prefix')."old_rent (HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,TenantID,TenantName,BanAddress,HousePrerent,PayRent,PayMonth,PayYear,OldPayMonth,CreateUserID,CreateTime) values " . rtrim($st, ','));
                 }else{ //没有收回就创建租金欠缴订单
-                    if($one['OldMonthRent']){
+                    if($one['OldMonthRent'] > 0){
                         $order_date = getlastMonthDays($one['OrderDate']);
                         //$order_date = '202003';
                         $rent_order_id = $one['HouseID'].$one['OwnerType'].$order_date;
@@ -1135,7 +1135,7 @@ model('ph/ChangeAudit')->after_process($changeOrderID, $changeType);
                         $stt = "('". $rent_order_id . "','". $one['HouseID'] . "'," .$one['OwnerType'] . "," . $one['InstitutionID'] . "," . $one['InstitutionPID'] . ", " .$one['UseNature'] . ", " . $houseInfo['TenantID'] . ",'" . $houseInfo['TenantName'] . "','" . $houseInfo['BanAddress']."',". $HousePrerent . "," . $HousePrerent . "," . $HousePrerent. ",2," .$order_date . "," . $one['UserNumber'] . "," . time() . "),";
                         Db::execute("insert into ".config('database.prefix')."rent_order (RentOrderID,HouseID,OwnerType,InstitutionID,InstitutionPID,UseNature,TenantID,TenantName,BanAddress,HousePrerent,ReceiveRent,UnpaidRent,Type,OrderDate,CreateUserID,CreateTime) values " . rtrim($stt, ','));
                     }
-                    if($one['OldYearRent']){
+                    if($one['OldYearRent'] > 0){
                         $order_date = (substr($one['OrderDate'],0,4) - 1).'12';
                         //halt($order_date);
                         //$order_date = '202003';

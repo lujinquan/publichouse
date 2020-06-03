@@ -52,7 +52,7 @@
                     <th class="table-set">是否空租</th>
                     <th class="table-set">规定租金</th>
                     <th class="table-title">计算租金</th>
-                    <th class="table-set">月租金</th>
+                    <!-- <th class="table-set">月租金</th> -->
                     <th class="table-set dong_none">单元号</th>
                     <th class="table-set dong_none">楼层号</th>
                     <th class="table-set">计租面积</th>
@@ -263,9 +263,9 @@
                         <td>
                             <div style="width:50px;">{$ApprovedRentSum}</div>
                         </td>
-                        <td>
+                        <!-- <td>
                             <div style="width:50px;"></div>
-                        </td>
+                        </td> -->
                         <td class="dong_none">
                             <div style="width:40px;"></div>
                         </td>
@@ -322,7 +322,7 @@
                     <td class="am-hide-sm-only"><?php echo $v1['IfEmpty']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['HousePrerent']; ?></td>
                     <td class="am-hide-sm-only" {if condition="$v1['IfSuspend'] === '是'"}style="color:#9b9b9b;"{elseif condition="($v1['UseNature'] == '住宅') && $v1['HousePrerent'] != $v1['ApprovedRent']"/}style="color:red;" {/if}><?php echo $v1['ApprovedRent']; ?></td>
-                    <td class="dong_none"><?php echo ($v1['HousePrerent'] + $v1['PumpCost'] + $v1['DiffRent']); ?></td>
+                    
                     <td class="dong_none"><?php echo $v1['UnitID']; ?></td>
                     <td class="dong_none"><?php echo $v1['FloorID']; ?></td>
                     <td class="am-hide-sm-only"><?php echo $v1['LeasedArea']; ?></td>
