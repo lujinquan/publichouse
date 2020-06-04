@@ -436,21 +436,21 @@ class HouseReports extends Model
 
                 if ($i == 1) {
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(CivilNum) as BanIDS ,sum(CivilHolds) as TotalHouseholds, sum(CivilArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(CivilNum) as BanIDS ,sum(CivilHolds) as TotalHouseholds, sum(CivilArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(CivilRent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
                         ->find();
                 } elseif($i == 2){
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(EnterpriseNum) as BanIDS ,sum(EnterpriseHolds) as TotalHouseholds, sum(EnterpriseArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(EnterpriseNum) as BanIDS ,sum(EnterpriseHolds) as TotalHouseholds, sum(EnterpriseArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(EnterpriseRent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
                         ->find();
                 }elseif($i == 3){
                     $datas[$k1][$i] = Db::name('ban')//根据使用性质和结构类型分类
-                    ->field('sum(PartyNum) as BanIDS ,sum(PartyHolds) as TotalHouseholds, sum(PartyArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(Prerent) as BanPrerents')
+                    ->field('sum(PartyNum) as BanIDS ,sum(PartyHolds) as TotalHouseholds, sum(PartyArea) as TotalAreas,sum(BanUsearea) as BanUseareas,sum(PartyRent) as BanPrerents')
                         ->where($where)
                         //->where(['UseNature' => $i])
                         ->where($wheres)
